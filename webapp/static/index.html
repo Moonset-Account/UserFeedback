@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IIIF 数字标本清单采集器</title>
+  <link rel="stylesheet" href="/static/app.css" />
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <span class="logo">ⅢF</span>
+    <div>
+      <h1>数字标本 IIIF Presentation 3 清单采集器</h1>
+      <p class="subtitle">多 Canvas · 多绘制标注 · Choice 资源 · 层级 Range · 来源证据与错误路径</p>
+    </div>
+  </div>
+  <div class="topbar-actions">
+    <button id="run-demo" class="btn btn-primary" type="button">▶ 运行示例（正常 + 边界）</button>
+  </div>
+</header>
+
+<main class="layout">
+  <!-- 左栏：输入与任务 -->
+  <section class="panel panel-left">
+    <h2>1. 选择输入</h2>
+    <div class="source-list" id="source-list">
+      <p class="muted">正在加载本地样例源…</p>
+    </div>
+
+    <h2>2. 自定义输入</h2>
+    <label class="field-label" for="source-input">清单 URL（http/https）或本地文件路径</label>
+    <input id="source-input" type="text" placeholder="例如 http://127.0.0.1:5000/sample/manifest/demo-normal/manifest.json" />
+    <div class="btn-row">
+      <button id="run-custom" class="btn btn-primary" type="button">运行采集</button>
+      <button id="run-full" class="btn" type="button">运行完整验收场景</button>
+    </div>
+
+    <h2>3. 运行记录 <button id="clear-runs" class="btn btn-small" type="button">清空</button></h2>
+    <ul class="run-list" id="run-list"></ul>
+
+    <details class="subset">
+      <summary>支持的 IIIF Presentation 3 协议子集</summary>
+      <ul id="subset-list"></ul>
+    </details>
+  </section>
+
+  <!-- 右栏：结果 -->
+  <section class="panel panel-right">
+    <div id="status-banner" class="banner hidden"></div>
+
+    <div id="result-empty" class="empty">
+      <p>尚未运行任务。点击右上角<strong>「运行示例」</strong>，或在左侧选择样例 / 输入清单地址。</p>
+      <p class="muted">所有结果来自对本地样例源的真实采集，页面不预填任何成功数据。</p>
+    </div>
+
+    <div id="result-view" class="hidden">
+      <div class="result-head">
+        <div>
+          <h2 id="manifest-title"></h2>
+          <p class="source-line" id="manifest-source"></p>
+        </div>
+        <div class="stats" id="stats-grid"></div>
+      </div>
+
+      <div class="result-columns">
+        <div class="col-canvas">
+          <h3>标本页面（Canvas）与图像资源</h3>
+          <div id="canvas-list" class="canvas-list"></div>
+        </div>
+        <div class="col-range">
+          <h3>章节树（Range）</h3>
+          <div id="range-tree" class="range-tree"></div>
+        </div>
+      </div>
+
+      <details class="evidence" open>
+        <summary>采集问题与来源证据（含 JSON 路径）</summary>
+        <div class="table-wrap">
+          <table id="issues-table">
+            <thead>
+              <tr><th>级别</th><th>代码</th><th>说明</th><th>清单内路径</th><th>引用 ID</th></tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </details>
+    </div>
+  </section>
+</main>
+
+<div id="toast" class="toast hidden"></div>
+<script src="/static/app.js"></script>
+</body>
+</html>

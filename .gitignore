@@ -9,3 +9,7 @@ node_modules/
 .venv/
 __pycache__/
 .DS_Store
+
+# 运行期生成：样例源站产物与任务记录
+/data/
+/pytest.log
