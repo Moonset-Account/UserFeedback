@@ -1,0 +1,42 @@
+{
+  "schema_version": "curve-task/v1",
+  "task_id": "accept-order",
+  "title": "完整验收｜两点不可交叉约束",
+  "group": "acceptance",
+  "scenario_note": "目标点 x=[60,40] 相对初始顺序 [25,70] 发生交叉，页面强制保持 x 严格递增。",
+  "domain": {
+    "x_min": 0.0,
+    "x_max": 100.0,
+    "y_min": 0.0,
+    "y_max": 100.0,
+    "x_grid": 5.0,
+    "y_grid": 5.0,
+    "inverted_y": false,
+    "zoom": 1.2,
+    "pan_x": 5.0,
+    "pan_y": 5.0
+  },
+  "initial_points": [
+    [
+      25.0,
+      20.0
+    ],
+    [
+      70.0,
+      60.0
+    ]
+  ],
+  "target_points": [
+    [
+      60.0,
+      35.0
+    ],
+    [
+      40.0,
+      80.0
+    ]
+  ],
+  "max_attempts_per_point": 12,
+  "tolerance_x": 3.0,
+  "tolerance_y": 3.0
+}

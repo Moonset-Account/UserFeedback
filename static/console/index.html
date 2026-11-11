@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=1280, initial-scale=1" />
+<title>曲线校准 RPA 控制台</title>
+<style>
+  :root {
+    --bg: #0e1521;
+    --panel: #172231;
+    --panel2: #1d2b3e;
+    --line: #2a3a52;
+    --text: #e6edf6;
+    --muted: #8fa3bd;
+    --blue: #4da3ff;
+    --green: #38d39f;
+    --red: #ff6b6b;
+    --amber: #ffb020;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    min-width: 1280px;
+    background: var(--bg);
+    color: var(--text);
+    font: 14px/1.55 "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+    height: 100vh;
+    overflow: hidden;
+  }
+  header {
+    height: 58px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 0 22px;
+    background: var(--panel);
+    border-bottom: 1px solid var(--line);
+  }
+  header h1 { font-size: 17px; margin: 0; }
+  header .sub { color: var(--muted); font-size: 12.5px; }
+  .layout {
+    display: grid;
+    grid-template-columns: 380px 1fr;
+    gap: 14px;
+    padding: 14px 18px;
+    height: calc(100vh - 58px);
+  }
+  .col { display: flex; flex-direction: column; gap: 12px; min-height: 0; }
+  .card {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 12px 14px;
+  }
+  .card h2 { font-size: 14px; margin: 0 0 10px; }
+  label { display: block; font-size: 12.5px; color: var(--muted); margin: 8px 0 4px; }
+  select, input[type="text"] {
+    width: 100%;
+    background: var(--panel2);
+    color: var(--text);
+    border: 1px solid var(--line);
+    border-radius: 7px;
+    padding: 8px 10px;
+    font-size: 13.5px;
+  }
+  button {
+    border: 1px solid var(--line);
+    background: var(--panel2);
+    color: var(--text);
+    border-radius: 8px;
+    padding: 9px 14px;
+    font-size: 13.5px;
+    cursor: pointer;
+  }
+  button:hover { border-color: var(--blue); }
+  button.primary { background: #1c5da8; border-color: #2f7fd6; }
+  button.demo { background: #14532d; border-color: #2f9e63; }
+  button:disabled { opacity: .5; cursor: not-allowed; }
+  .btn-row { display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap; }
+  .status-line { font-size: 13px; min-height: 22px; }
+  .pill {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 999px;
+    font-size: 12.5px;
+    font-weight: 600;
+  }
+  .pill.SUCCESS { background: rgba(56,211,159,.16); color: var(--green); }
+  .pill.FAIL_OUT_OF_BOUNDS, .pill.FAIL_ORDER, .pill.FAIL_TOLERANCE_UNREACHABLE,
+  .pill.ERROR { background: rgba(255,107,107,.16); color: var(--red); }
+  .pill.RUNNING, .pill.QUEUED { background: rgba(77,163,255,.16); color: var(--blue); }
+  .scroll { overflow: auto; min-height: 0; flex: 1; }
+  table { border-collapse: collapse; width: 100%; font-size: 12.5px; font-variant-numeric: tabular-nums; }
+  th, td { padding: 6px 8px; border-bottom: 1px solid var(--line); text-align: right; }
+  th:first-child, td:first-child { text-align: left; }
+  th { color: var(--muted); position: sticky; top: 0; background: var(--panel); }
+  .ok { color: var(--green); }
+  .bad { color: var(--red); }
+  .muted { color: var(--muted); }
+  .mono { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 12px; }
+  details { border-top: 1px solid var(--line); padding-top: 8px; margin-top: 8px; }
+  details summary { cursor: pointer; color: var(--blue); font-size: 13px; }
+  pre {
+    background: #0b1220;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 10px;
+    font-size: 11.5px;
+    overflow: auto;
+    max-height: 260px;
+    white-space: pre-wrap;
+  }
+  img.shot { max-width: 100%; border: 1px solid var(--line); border-radius: 8px; margin-top: 8px; }
+  .job-item {
+    padding: 8px 10px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    font-size: 12.5px;
+    background: var(--panel2);
+  }
+  .job-item:hover { border-color: var(--blue); }
+  .job-item.active { border-color: var(--blue); box-shadow: 0 0 0 1px var(--blue) inset; }
+  .note { color: var(--muted); font-size: 12px; }
+  .warn { color: var(--amber); }
+</style>
+</head>
+<body>
+<header>
+  <h1>曲线校准 RPA 控制台</h1>
+  <span class="sub">Playwright 操作受控曲线编辑器 · 依据公开刻度建立映射 · 读页面数值迭代修正</span>
+</header>
+
+<div class="layout">
+  <!-- 左栏：配置与运行（首屏可见） -->
+  <div class="col">
+    <div class="card">
+      <h2>1. 输入配置</h2>
+      <label for="task-select">校准任务（来自本地源站公开接口 /api/tasks）</label>
+      <select id="task-select"></select>
+      <label for="headless">浏览器模式</label>
+      <select id="headless">
+        <option value="true" selected>无头模式（推荐）</option>
+        <option value="false">有头模式（可观察拖动过程）</option>
+      </select>
+      <div class="btn-row">
+        <button class="primary" id="run-selected">运行所选任务</button>
+        <button class="demo" id="run-demo">运行示例</button>
+      </div>
+      <p class="note" id="demo-note">“运行示例”将依次执行一个正常场景与一个边界（越界失败）场景，目标 15 秒内完成，结果保留在下方。</p>
+      <div class="status-line" id="run-status"></div>
+    </div>
+
+    <div class="card" style="flex:1; min-height:0; display:flex; flex-direction:column;">
+      <h2>2. 执行记录</h2>
+      <div class="scroll" id="job-list"><p class="note">暂无执行记录。结果来自真实浏览器执行，不预填成功状态。</p></div>
+    </div>
+  </div>
+
+  <!-- 右栏：结果与证据 -->
+  <div class="col">
+    <div class="card" style="flex:1; min-height:0; display:flex; flex-direction:column;">
+      <h2>3. 结果与来源证据</h2>
+      <div class="scroll" id="detail">
+        <p class="note">选择左侧任务并运行后，此处展示：裁决状态、逐点目标/实际/误差、迭代明细、坐标映射、来源证据与具体错误。</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+"use strict";
+const $ = (id) => document.getElementById(id);
+let tasks = [];
+const jobs = new Map();
+let activeJob = null;
+let demoRunning = false;
+
+function esc(s) {
+  return String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+}
+function pill(status) { return `<span class="pill ${esc(status)}">${esc(status)}</span>`; }
+
+async function loadTasks() {
+  const resp = await fetch("/api/tasks");
+  const data = await resp.json();
+  tasks = data.tasks || [];
+  const sel = $("task-select");
+  sel.innerHTML = "";
+  const groups = { quick: "快速演示场景", acceptance: "完整验收场景" };
+  for (const [g, label] of Object.entries(groups)) {
+    const og = document.createElement("optgroup");
+    og.label = label;
+    tasks.filter((t) => t.group === g).forEach((t) => {
+      const o = document.createElement("option");
+      o.value = t.task_id;
+      o.textContent = `${t.task_id} — ${t.title}`;
+      og.appendChild(o);
+    });
+    sel.appendChild(og);
+  }
+}
+
+async function startRun(taskId, headless) {
+  const resp = await fetch("/api/run", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ task_id: taskId, headless }),
+  });
+  if (!resp.ok) {
+    const err = await resp.json().catch(() => ({}));
+    throw new Error(err.error || `HTTP ${resp.status}`);
+  }
+  return (await resp.json()).job_id;
+}
+
+async function pollJob(jobId) {
+  return new Promise((resolve, reject) => {
+    const timer = setInterval(async () => {
+      try {
+        const resp = await fetch(`/api/jobs/${jobId}`);
+        const job = await resp.json();
+        jobs.set(jobId, job);
+        renderJobList();
+        if (job.status === "DONE" || job.status === "ERROR") {
+          clearInterval(timer);
+          activeJob = jobId;
+          renderDetail(job);
+          resolve(job);
+        }
+      } catch (e) {
+        clearInterval(timer);
+        reject(e);
+      }
+    }, 600);
+  });
+}
+
+function renderJobList() {
+  const box = $("job-list");
+  if (jobs.size === 0) return;
+  box.innerHTML = "";
+  [...jobs.values()].reverse().forEach((j) => {
+    const div = document.createElement("div");
+    div.className = "job-item" + (j.job_id === activeJob ? " active" : "");
+    const label = tasks.find((t) => t.task_id === j.task_id)?.title || j.task_id;
+    div.innerHTML = `<div>${pill(j.status)} <b>${esc(j.task_id)}</b></div><div class="muted">${esc(label)}</div>`;
+    div.onclick = () => { activeJob = j.job_id; renderJobList(); renderDetail(j); };
+    box.appendChild(div);
+  });
+}
+
+function renderDetail(job) {
+  const box = $("detail");
+  if (job.status === "RUNNING" || job.status === "QUEUED") {
+    box.innerHTML = `<p>${pill(job.status)} 正在通过 Playwright 真实执行，请稍候…</p>`;
+    return;
+  }
+  if (job.status === "ERROR") {
+    const e = job.error || {};
+    box.innerHTML = `<h3>${pill("ERROR")} 执行异常</h3>
+      <p><b>类型：</b>${esc(e.type || "")}</p>
+      <p><b>信息：</b>${esc(e.message || "")}</p>
+      <details open><summary>具体错误堆栈</summary><pre>${esc(e.trace || "")}</pre></details>`;
+    return;
+  }
+  const r = job.result;
+  const rows = r.point_results.map((p) => {
+    const cls = p.within_tolerance ? "ok" : "bad";
+    return `<tr>
+      <td>P${p.index + 1}</td>
+      <td>${esc(p.target.join(", "))}</td>
+      <td>${esc(p.final_actual.join(", "))}</td>
+      <td class="${cls}">${esc(p.final_error.map((v) => v.toFixed(2)).join(", "))}</td>
+      <td class="${cls}">${p.within_tolerance ? "达标" : "未达标"}${p.stalled ? "（停滞）" : ""}</td>
+      <td>${p.attempts.length}</td>
+    </tr>`;
+  }).join("");
+
+  const preRows = r.preflight.points.map((p) => `<tr>
+      <td>P${p.index + 1}</td>
+      <td>${esc(p.target.join(", "))}</td>
+      <td>${(p.out_of_bounds.x || p.out_of_bounds.y) ? '<span class="bad">是</span>' : '<span class="ok">否</span>'}</td>
+      <td>${esc(p.best_snap.join(", "))}</td>
+      <td>${esc(p.snap_error.map((v) => v.toFixed(2)).join(", "))}</td>
+      <td>${p.reachable ? '<span class="ok">可达</span>' : '<span class="bad">不可达</span>'}</td>
+    </tr>`).join("");
+
+  const attemptBlocks = r.point_results.map((p) => {
+    const lines = p.attempts.map((a) =>
+      `#${a.iteration} [${a.phase}/${a.action}] 实际=(${a.actual.map((v) => v.toFixed(2)).join(", ")}) ` +
+      `误差=(${a.error.map((v) => v.toFixed(2)).join(", ")})`).join("\n");
+    return `<details><summary>P${p.index + 1} 迭代明细（${p.attempts.length} 次尝试）</summary><pre>${esc(lines)}</pre></details>`;
+  }).join("");
+
+  box.innerHTML = `
+    <h3>${pill(r.status)} ${esc(r.task_id)}
+      ${r.failure_reason ? `<span class="bad">（${esc(r.failure_reason)}）</span>` : '<span class="ok">（全部点在容限内）</span>'}
+    </h3>
+    <p class="muted">总迭代次数：${r.iterations_total}　裁决依据为页面显示数值与目标值的真实误差，而非鼠标像素位置。</p>
+
+    <h4>逐点结果</h4>
+    <table><thead><tr><th>点</th><th>目标 (x, y)</th><th>页面实际值</th><th>误差 (Δx, Δy)</th><th>容限判定</th><th>尝试次数</th></tr></thead>
+      <tbody>${rows}</tbody></table>
+
+    <details><summary>结构性预检（越界 / 网格吸附可达性）</summary>
+      <table><thead><tr><th>点</th><th>目标</th><th>越界</th><th>最佳吸附值</th><th>吸附误差</th><th>容限可达</th></tr></thead>
+      <tbody>${preRows}</tbody></table>
+      <p class="note">顺序约束违反：${r.preflight.order_violation ? '<span class="bad">是</span>' : "否"}</p>
+    </details>
+
+    <details><summary>坐标映射（由页面公开刻度最小二乘反解）</summary>
+      <pre>${esc(JSON.stringify(r.mapping, null, 2))}</pre></details>
+
+    ${attemptBlocks}
+
+    <details><summary>来源证据与采集边界</summary>
+      <ul class="mono">${r.evidence.public_sources.map((s) => `<li>${esc(s)}</li>`).join("")}</ul>
+      <p class="note">截图：${esc(r.evidence.screenshot)}（叠加层含红色目标叉、绿色实际点圈与每次误差面板）</p>
+      <img class="shot" src="/${esc(r.evidence.screenshot)}" alt="执行后截图" />
+    </details>`;
+}
+
+async function runSelected() {
+  const taskId = $("task-select").value;
+  const headless = $("headless").value === "true";
+  $("run-status").textContent = `已提交 ${taskId}，等待执行…`;
+  const jobId = await startRun(taskId, headless);
+  $("run-status").textContent = `${taskId} 执行中…`;
+  await pollJob(jobId);
+  const j = jobs.get(jobId);
+  $("run-status").innerHTML = `${taskId} 结束：${pill(j.status)}`;
+}
+
+async function runDemo() {
+  if (demoRunning) return;
+  demoRunning = true;
+  const btn = $("run-demo");
+  btn.disabled = true;
+  const startedAt = performance.now();
+  try {
+    $("run-status").textContent = "示例运行开始：先正常场景，后边界场景…";
+    const headless = true;
+    for (const tid of ["demo-normal", "demo-boundary"]) {
+      $("run-status").textContent = `示例运行中：${tid} …`;
+      const jobId = await startRun(tid, headless);
+      await pollJob(jobId);
+    }
+    const secs = ((performance.now() - startedAt) / 1000).toFixed(1);
+    $("run-status").innerHTML = `示例完成，耗时 ${secs} 秒（要求 15 秒内），两条结果均已保留在执行记录中。`;
+  } catch (e) {
+    $("run-status").innerHTML = `<span class="bad">示例运行失败：${esc(e.message)}</span>`;
+  } finally {
+    demoRunning = false;
+    btn.disabled = false;
+  }
+}
+
+$("run-selected").addEventListener("click", () => { runSelected().catch((e) => { $("run-status").innerHTML = `<span class="bad">${esc(e.message)}</span>`; }); });
+$("run-demo").addEventListener("click", runDemo);
+loadTasks().catch((e) => { $("run-status").innerHTML = `<span class="bad">任务清单加载失败：${esc(e.message)}</span>`; });
+</script>
+</body>
+</html>

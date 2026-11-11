@@ -1,0 +1,50 @@
+{
+  "schema_version": "curve-task/v1",
+  "task_id": "accept-inverted",
+  "title": "完整验收｜反向纵轴综合场景",
+  "group": "acceptance",
+  "scenario_note": "1.5 倍缩放、平移、反向纵轴同时存在，验证依据公开刻度反解映射的正确性。",
+  "domain": {
+    "x_min": 0.0,
+    "x_max": 100.0,
+    "y_min": 0.0,
+    "y_max": 100.0,
+    "x_grid": 5.0,
+    "y_grid": 5.0,
+    "inverted_y": true,
+    "zoom": 1.5,
+    "pan_x": 12.0,
+    "pan_y": -8.0
+  },
+  "initial_points": [
+    [
+      20.0,
+      70.0
+    ],
+    [
+      50.0,
+      50.0
+    ],
+    [
+      80.0,
+      25.0
+    ]
+  ],
+  "target_points": [
+    [
+      22.5,
+      62.5
+    ],
+    [
+      57.5,
+      37.5
+    ],
+    [
+      82.5,
+      12.5
+    ]
+  ],
+  "max_attempts_per_point": 14,
+  "tolerance_x": 3.0,
+  "tolerance_y": 3.0
+}

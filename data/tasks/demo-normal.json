@@ -1,0 +1,42 @@
+{
+  "schema_version": "curve-task/v1",
+  "task_id": "demo-normal",
+  "title": "快速演示｜正常收敛（1.35 倍缩放，目标落在网格中间）",
+  "group": "quick",
+  "scenario_note": "非默认缩放与平移；目标不落在网格线上（最近网格误差 2.5），验证先建映射再迭代修正的闭环。",
+  "domain": {
+    "x_min": 0.0,
+    "x_max": 100.0,
+    "y_min": 0.0,
+    "y_max": 100.0,
+    "x_grid": 5.0,
+    "y_grid": 5.0,
+    "inverted_y": false,
+    "zoom": 1.35,
+    "pan_x": 8.0,
+    "pan_y": -6.0
+  },
+  "initial_points": [
+    [
+      20.0,
+      30.0
+    ],
+    [
+      55.0,
+      20.0
+    ]
+  ],
+  "target_points": [
+    [
+      27.5,
+      42.5
+    ],
+    [
+      62.5,
+      77.5
+    ]
+  ],
+  "max_attempts_per_point": 12,
+  "tolerance_x": 3.0,
+  "tolerance_y": 3.0
+}

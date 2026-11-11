@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=1280, initial-scale=1" />
+<title>本地曲线配置页（RPA 受控编辑器）</title>
+<style>
+  :root {
+    --bg: #0f1622;
+    --panel: #182232;
+    --line: #2a3a52;
+    --text: #e6edf6;
+    --muted: #8fa3bd;
+    --accent: #4da3ff;
+    --grid: #23344c;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    min-width: 1280px;
+    background: var(--bg);
+    color: var(--text);
+    font: 14px/1.5 "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+  }
+  header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 10px 20px;
+    background: var(--panel);
+    border-bottom: 1px solid var(--line);
+  }
+  header h1 { font-size: 17px; margin: 0; }
+  header .meta { color: var(--muted); font-size: 12.5px; }
+  main { padding: 14px 20px; display: flex; gap: 16px; align-items: flex-start; }
+  .card {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 12px 14px;
+  }
+  #stage { position: relative; }
+  svg { display: block; background: #0c1320; border-radius: 8px; }
+  .grid-line { stroke: var(--grid); stroke-width: 1; }
+  .axis-line { stroke: var(--line); stroke-width: 1.5; }
+  .tick-label { fill: var(--muted); font-size: 11px; }
+  .axis-title { fill: var(--muted); font-size: 13px; }
+  .point-handle { cursor: grab; }
+  .point-handle:active { cursor: grabbing; }
+  .point-handle circle {
+    fill: #2f7fd6;
+    stroke: #d7e9ff;
+    stroke-width: 1.5;
+  }
+  .point-handle.selected circle { fill: #ffb020; stroke: #fff3d6; }
+  .point-value { fill: #cfe2ff; font-size: 11.5px; pointer-events: none; }
+  #curve-path { fill: none; stroke: #6fb1ff; stroke-width: 2; }
+  aside { width: 300px; flex: none; display: flex; flex-direction: column; gap: 12px; }
+  table { border-collapse: collapse; width: 100%; font-variant-numeric: tabular-nums; }
+  th, td { padding: 5px 6px; border-bottom: 1px solid var(--line); text-align: right; }
+  th:first-child, td:first-child { text-align: left; }
+  th { color: var(--muted); font-weight: 600; }
+  .hint { color: var(--muted); font-size: 12.5px; }
+  .hint kbd {
+    background: #0c1320;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 0 5px;
+    font-size: 11px;
+  }
+  #view-state {
+    font-family: ui-monospace, Menlo, Consolas, monospace;
+    font-size: 12px;
+    color: var(--muted);
+    white-space: pre-wrap;
+  }
+  .badge {
+    display: inline-block;
+    padding: 1px 8px;
+    border-radius: 999px;
+    background: #12304f;
+    color: #9ccfff;
+    font-size: 12px;
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1>本地曲线配置页</h1>
+  <span class="badge" id="task-badge">未加载任务</span>
+  <span class="meta">受控编辑器：控制点仅支持鼠标拖动与键盘方向键微调，数值自动吸附网格并保持点顺序</span>
+</header>
+<main>
+  <section class="card" id="stage">
+    <svg id="chart" width="900" height="560" viewBox="0 0 900 560" role="img" aria-label="曲线编辑画布"></svg>
+  </section>
+  <aside>
+    <div class="card">
+      <strong>控制点数值（页面显示值）</strong>
+      <table>
+        <thead><tr><th>点</th><th>x</th><th>y</th></tr></thead>
+        <tbody id="point-rows"></tbody>
+      </table>
+    </div>
+    <div class="card">
+      <strong>操作说明</strong>
+      <p class="hint">
+        1. 鼠标拖动圆点，释放时自动吸附到最近网格线；<br />
+        2. 点击选中后用 <kbd>←</kbd><kbd>→</kbd><kbd>↑</kbd><kbd>↓</kbd> 微调，每次移动一个网格单位；<br />
+        3. 控制点 x 坐标严格递增，页面会阻止两点交叉；<br />
+        4. 无法直接输入数值，也没有通用绘图工具。
+      </p>
+    </div>
+    <div class="card">
+      <strong>当前视图状态</strong>
+      <div id="view-state"></div>
+    </div>
+  </aside>
+</main>
+
+<script>
+"use strict";
+// ===== 受控曲线编辑器（非通用绘图引擎，不提供数值输入/任意绘图能力）=====
+const SVG_NS = "http://www.w3.org/2000/svg";
+const PLOT = { left: 64, top: 40, width: 792, height: 456, bottom: 496, right: 856 };
+const GRID_MIN_VIEW_SPAN = 2.5; // 缩放后可视窗口至少保留 2.5 个网格单位，避免刻度不可读
+
+const state = {
+  taskId: new URLSearchParams(location.search).get("task_id") || "",
+  domain: null,
+  points: [],
+  selected: 0,
+};
+
+function el(name, attrs = {}, parent) {
+  const node = document.createElementNS(SVG_NS, name);
+  for (const [k, v] of Object.entries(attrs)) node.setAttribute(k, v);
+  if (parent) parent.appendChild(node);
+  return node;
+}
+function fmt(v) {
+  // 刻度与点值统一两位小数显示（5 的倍数显示为 x.00/x.50）
+  return (Math.round(v * 100) / 100).toFixed(2);
+}
+
+// 数据坐标 -> 屏幕像素（含 zoom/pan；inverted_y 时 y 轴反向）
+function scaleX() {
+  const d = state.domain;
+  return (PLOT.width / (d.x_max - d.x_min)) * d.zoom;
+}
+function scaleY() {
+  const d = state.domain;
+  return (PLOT.height / (d.y_max - d.y_min)) * d.zoom;
+}
+function dataToScreenX(x) {
+  const d = state.domain;
+  const center0 = (d.x_min + d.x_max) / 2;
+  return PLOT.left + PLOT.width / 2 + (x - center0 - d.pan_x) * scaleX();
+}
+function dataToScreenY(y) {
+  const d = state.domain;
+  const center0 = (d.y_min + d.y_max) / 2;
+  const rel = (y - center0 - d.pan_y) * scaleY();
+  return d.inverted_y ? PLOT.top + PLOT.height / 2 + rel
+                      : PLOT.top + PLOT.height / 2 - rel;
+}
+function screenToDataX(px) {
+  const d = state.domain;
+  const center0 = (d.x_min + d.x_max) / 2;
+  return center0 + d.pan_x + (px - (PLOT.left + PLOT.width / 2)) / scaleX();
+}
+function screenToDataY(py) {
+  const d = state.domain;
+  const center0 = (d.y_min + d.y_max) / 2;
+  const rel = py - (PLOT.top + PLOT.height / 2);
+  return center0 + d.pan_y + (d.inverted_y ? rel : -rel) / scaleY();
+}
+function snap(v, step) {
+  // 半值向上吸附；先消除 62.5/5=12.49999999 这类浮点表示误差
+  const k = Math.round(Math.round((v / step) * 1e6) / 1e6);
+  return k * step;
+}
+function clamp(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); }
+
+// 可视数据窗口（受最小跨度约束），用于生成公开刻度
+function viewBounds() {
+  const d = state.domain;
+  const halfX = Math.max((d.x_max - d.x_min) / 2 / d.zoom, GRID_MIN_VIEW_SPAN * d.x_grid);
+  const halfY = Math.max((d.y_max - d.y_min) / 2 / d.zoom, GRID_MIN_VIEW_SPAN * d.y_grid);
+  const cx = (d.x_min + d.x_max) / 2 + d.pan_x;
+  const cy = (d.y_min + d.y_max) / 2 + d.pan_y;
+  return { x0: cx - halfX, x1: cx + halfX, y0: cy - halfY, y1: cy + halfY };
+}
+
+function render() {
+  const svg = document.getElementById("chart");
+  // RPA 叠加层由外部注入，不能被 innerHTML="" 清掉，先摘出再恢复
+  const overlay = document.getElementById("rpa-overlay");
+  if (overlay) svg.removeChild(overlay);
+  const errorPanel = document.getElementById("rpa-error-panel");
+  svg.innerHTML = "";
+  const d = state.domain;
+  const vb = viewBounds();
+
+  // 网格与公开刻度（刻度数值来源于真实数据坐标，RPA 仅读这些公开标签）
+  const xStart = Math.ceil(vb.x0 / d.x_grid) * d.x_grid;
+  for (let v = xStart; v <= vb.x1 + 1e-9; v += d.x_grid) {
+    const px = dataToScreenX(v);
+    if (px < PLOT.left - 1 || px > PLOT.right + 1) continue;
+    el("line", { class: "grid-line", x1: px, y1: PLOT.top, x2: px, y2: PLOT.bottom }, svg);
+    const t = el("text", { class: "tick-label tick-x", x: px, y: PLOT.bottom + 18, "text-anchor": "middle" }, svg);
+    t.textContent = fmt(v);
+  }
+  const yStart = Math.ceil(vb.y0 / d.y_grid) * d.y_grid;
+  for (let v = yStart; v <= vb.y1 + 1e-9; v += d.y_grid) {
+    const py = dataToScreenY(v);
+    if (py < PLOT.top - 1 || py > PLOT.bottom + 1) continue;
+    el("line", { class: "grid-line", x1: PLOT.left, y1: py, x2: PLOT.right, y2: py }, svg);
+    const t = el("text", { class: "tick-label tick-y", x: PLOT.left - 8, y: py + 4, "text-anchor": "end" }, svg);
+    t.textContent = fmt(v);
+  }
+  el("line", { class: "axis-line", x1: PLOT.left, y1: PLOT.bottom, x2: PLOT.right, y2: PLOT.bottom }, svg);
+  el("line", { class: "axis-line", x1: PLOT.left, y1: PLOT.top, x2: PLOT.left, y2: PLOT.bottom }, svg);
+  const xt = el("text", { class: "axis-title", x: PLOT.left + PLOT.width / 2, y: 540, "text-anchor": "middle" }, svg);
+  xt.textContent = "x（公开刻度）";
+  const yt = el("text", { class: "axis-title", x: 20, y: PLOT.top + PLOT.height / 2, "text-anchor": "middle",
+                          transform: `rotate(-90 20 ${PLOT.top + PLOT.height / 2})` }, svg);
+  yt.textContent = d.inverted_y ? "y（反向纵轴）" : "y";
+
+  // 曲线（按顺序连接控制点）
+  const path = el("path", { id: "curve-path" }, svg);
+  path.setAttribute("d", state.points.map((p, i) =>
+    `${i === 0 ? "M" : "L"} ${dataToScreenX(p[0])} ${dataToScreenY(p[1])}`).join(" "));
+
+  // 控制点
+  state.points.forEach((p, i) => {
+    const g = el("g", { class: "point-handle" + (i === state.selected ? " selected" : ""),
+                        "data-index": String(i), tabindex: "0" }, svg);
+    el("circle", { r: 8, cx: dataToScreenX(p[0]), cy: dataToScreenY(p[1]) }, g);
+    const label = el("text", { class: "point-value",
+                               x: dataToScreenX(p[0]) + 12, y: dataToScreenY(p[1]) - 10 }, g);
+    label.textContent = `P${i + 1} (${fmt(p[0])}, ${fmt(p[1])})`;
+    g.addEventListener("pointerdown", onPointerDown(i));
+    g.addEventListener("click", () => { state.selected = i; render(); });
+  });
+
+  // 右侧数值表（页面显示的实际值）
+  const rows = document.getElementById("point-rows");
+  rows.innerHTML = "";
+  state.points.forEach((p, i) => {
+    const tr = document.createElement("tr");
+    tr.id = `point-row-${i}`;
+    tr.innerHTML = `<td>P${i + 1}</td><td class="point-x" data-index="${i}">${fmt(p[0])}</td>` +
+                   `<td class="point-y" data-index="${i}">${fmt(p[1])}</td>`;
+    rows.appendChild(tr);
+  });
+  document.getElementById("view-state").textContent =
+    `zoom=${d.zoom}  pan=(${d.pan_x}, ${d.pan_y})\ninverted_y=${d.inverted_y}\n` +
+    `grid=(${d.x_grid}, ${d.y_grid})  轴域 x[${d.x_min},${d.x_max}] y[${d.y_min},${d.y_max}]`;
+
+  // RPA 叠加层（若存在）重新挂回并保持在最上层，pointer-events:none 不影响控制点拖动
+  if (overlay) {
+    svg.appendChild(overlay);
+    if (window.__rpaOverlay) {
+      window.__rpaOverlay.redrawLast?.();
+    }
+  }
+  if (errorPanel) document.getElementById("stage").appendChild(errorPanel);
+}
+
+// 拖动：页面强制网格吸附、轴域夹取与 x 严格递增（阻止交叉）
+function onPointerDown(index) {
+  return (ev) => {
+    ev.preventDefault();
+    state.selected = index;
+    const svg = document.getElementById("chart");
+    svg.setPointerCapture(ev.pointerId);
+    const move = (me) => {
+      const pt = svgPoint(svg, me);
+      applyDataPosition(index, screenToDataX(pt.x), screenToDataY(pt.y), /*snapOnMove*/ false);
+    };
+    const up = (ue) => {
+      const pt = svgPoint(svg, ue);
+      applyDataPosition(index, screenToDataX(pt.x), screenToDataY(pt.y), /*snapOnMove*/ true);
+      svg.removeEventListener("pointermove", move);
+      svg.removeEventListener("pointerup", up);
+    };
+    svg.addEventListener("pointermove", move);
+    svg.addEventListener("pointerup", up);
+  };
+}
+function svgPoint(svg, ev) {
+  const rect = svg.getBoundingClientRect();
+  return {
+    x: (ev.clientX - rect.left) * (900 / rect.width),
+    y: (ev.clientY - rect.top) * (560 / rect.height),
+  };
+}
+function applyDataPosition(index, rawX, rawY, snapOnMove) {
+  const d = state.domain;
+  let nx = snapOnMove ? snap(rawX, d.x_grid) : rawX;
+  let ny = snapOnMove ? snap(rawY, d.y_grid) : rawY;
+  nx = clamp(nx, d.x_min, d.x_max);
+  ny = clamp(ny, d.y_min, d.y_max);
+  // 顺序约束：与相邻控制点保持一个网格步长的最小间隔，禁止交叉
+  const minGap = d.x_grid;
+  if (index > 0) nx = Math.max(nx, state.points[index - 1][0] + minGap);
+  if (index < state.points.length - 1) nx = Math.min(nx, state.points[index + 1][0] - minGap);
+  nx = clamp(nx, d.x_min, d.x_max);
+  state.points[index] = [nx, ny];
+  render();
+}
+
+// 键盘微调：方向键每次恰好移动一个网格单位，同样受顺序与轴域约束
+document.addEventListener("keydown", (ev) => {
+  if (!state.domain) return;
+  const d = state.domain;
+  const i = state.selected;
+  const [x, y] = state.points[i];
+  let nx = x, ny = y;
+  if (ev.key === "ArrowLeft") nx = x - d.x_grid;
+  else if (ev.key === "ArrowRight") nx = x + d.x_grid;
+  else if (ev.key === "ArrowUp") ny = y + d.y_grid;
+  else if (ev.key === "ArrowDown") ny = y - d.y_grid;
+  else return;
+  ev.preventDefault();
+  applyDataPosition(i, nx, ny, /*snapOnMove*/ false);
+});
+
+async function boot() {
+  if (!state.taskId) {
+    document.getElementById("task-badge").textContent = "缺少 task_id 参数";
+    return;
+  }
+  const resp = await fetch(`/api/editor/${encodeURIComponent(state.taskId)}`);
+  if (!resp.ok) {
+    document.getElementById("task-badge").textContent = `任务加载失败 ${resp.status}`;
+    return;
+  }
+  const cfg = await resp.json();
+  state.domain = cfg.domain;
+  state.points = cfg.initial_points.map((p) => [p[0], p[1]]);
+  state.selected = 0;
+  document.getElementById("task-badge").textContent = `任务 ${cfg.task_id}（编辑器视图，不含目标值）`;
+  render();
+}
+boot();
+</script>
+</body>
+</html>

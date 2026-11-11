@@ -1,0 +1,111 @@
+{
+  "schema_version": "truth/v1",
+  "task_id": "accept-inverted",
+  "expected_status": "SUCCESS",
+  "order_violation": false,
+  "points": [
+    {
+      "index": 0,
+      "target": [
+        22.5,
+        62.5
+      ],
+      "expected_actual": [
+        25.0,
+        65.0
+      ],
+      "nearest_snap_options": [
+        [
+          20.0,
+          25.0
+        ],
+        [
+          60.0,
+          65.0
+        ]
+      ],
+      "expected_error": [
+        2.5,
+        2.5
+      ],
+      "out_of_bounds": {
+        "x": false,
+        "y": false
+      },
+      "mid_grid": {
+        "x": true,
+        "y": true
+      },
+      "snap_reachable_within_tolerance": true
+    },
+    {
+      "index": 1,
+      "target": [
+        57.5,
+        37.5
+      ],
+      "expected_actual": [
+        60.0,
+        40.0
+      ],
+      "nearest_snap_options": [
+        [
+          55.0,
+          60.0
+        ],
+        [
+          35.0,
+          40.0
+        ]
+      ],
+      "expected_error": [
+        2.5,
+        2.5
+      ],
+      "out_of_bounds": {
+        "x": false,
+        "y": false
+      },
+      "mid_grid": {
+        "x": true,
+        "y": true
+      },
+      "snap_reachable_within_tolerance": true
+    },
+    {
+      "index": 2,
+      "target": [
+        82.5,
+        12.5
+      ],
+      "expected_actual": [
+        85.0,
+        15.0
+      ],
+      "nearest_snap_options": [
+        [
+          80.0,
+          85.0
+        ],
+        [
+          10.0,
+          15.0
+        ]
+      ],
+      "expected_error": [
+        2.5,
+        2.5
+      ],
+      "out_of_bounds": {
+        "x": false,
+        "y": false
+      },
+      "mid_grid": {
+        "x": true,
+        "y": true
+      },
+      "snap_reachable_within_tolerance": true
+    }
+  ],
+  "note": "本真值仅由公开领域规则（网格步长、轴域、顺序约束）离线推导，仅供测试断言；采集器禁止读取。"
+}

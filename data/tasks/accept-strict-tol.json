@@ -1,0 +1,34 @@
+{
+  "schema_version": "curve-task/v1",
+  "task_id": "accept-strict-tol",
+  "title": "完整验收｜容限不可达（吸附下界大于容差）",
+  "group": "acceptance",
+  "scenario_note": "目标 32.5 距最近网格线 2.5，而容差仅 0.1，任何拖动/微调都无法达标，必须判失败。",
+  "domain": {
+    "x_min": 0.0,
+    "x_max": 100.0,
+    "y_min": 0.0,
+    "y_max": 100.0,
+    "x_grid": 5.0,
+    "y_grid": 5.0,
+    "inverted_y": false,
+    "zoom": 0.8,
+    "pan_x": -10.0,
+    "pan_y": 4.0
+  },
+  "initial_points": [
+    [
+      10.0,
+      10.0
+    ]
+  ],
+  "target_points": [
+    [
+      32.5,
+      47.5
+    ]
+  ],
+  "max_attempts_per_point": 10,
+  "tolerance_x": 0.1,
+  "tolerance_y": 0.1
+}

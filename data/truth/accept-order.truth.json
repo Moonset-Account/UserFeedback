@@ -1,0 +1,78 @@
+{
+  "schema_version": "truth/v1",
+  "task_id": "accept-order",
+  "expected_status": "FAIL_ORDER",
+  "order_violation": true,
+  "points": [
+    {
+      "index": 0,
+      "target": [
+        60.0,
+        35.0
+      ],
+      "expected_actual": [
+        60.0,
+        35.0
+      ],
+      "nearest_snap_options": [
+        [
+          55.0,
+          60.0
+        ],
+        [
+          30.0,
+          35.0
+        ]
+      ],
+      "expected_error": [
+        0.0,
+        0.0
+      ],
+      "out_of_bounds": {
+        "x": false,
+        "y": false
+      },
+      "mid_grid": {
+        "x": false,
+        "y": false
+      },
+      "snap_reachable_within_tolerance": true
+    },
+    {
+      "index": 1,
+      "target": [
+        40.0,
+        80.0
+      ],
+      "expected_actual": [
+        65.0,
+        80.0
+      ],
+      "nearest_snap_options": [
+        [
+          35.0,
+          40.0,
+          65.0
+        ],
+        [
+          75.0,
+          80.0
+        ]
+      ],
+      "expected_error": [
+        25.0,
+        0.0
+      ],
+      "out_of_bounds": {
+        "x": false,
+        "y": false
+      },
+      "mid_grid": {
+        "x": false,
+        "y": false
+      },
+      "snap_reachable_within_tolerance": false
+    }
+  ],
+  "note": "本真值仅由公开领域规则（网格步长、轴域、顺序约束）离线推导，仅供测试断言；采集器禁止读取。"
+}

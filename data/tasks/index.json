@@ -1,0 +1,30 @@
+{
+  "schema_version": "curve-task/v1",
+  "tasks": [
+    {
+      "task_id": "demo-normal",
+      "title": "快速演示｜正常收敛（1.35 倍缩放，目标落在网格中间）",
+      "group": "quick"
+    },
+    {
+      "task_id": "demo-boundary",
+      "title": "快速演示｜越界失败（反向纵轴，目标超出轴域）",
+      "group": "quick"
+    },
+    {
+      "task_id": "accept-order",
+      "title": "完整验收｜两点不可交叉约束",
+      "group": "acceptance"
+    },
+    {
+      "task_id": "accept-strict-tol",
+      "title": "完整验收｜容限不可达（吸附下界大于容差）",
+      "group": "acceptance"
+    },
+    {
+      "task_id": "accept-inverted",
+      "title": "完整验收｜反向纵轴综合场景",
+      "group": "acceptance"
+    }
+  ]
+}

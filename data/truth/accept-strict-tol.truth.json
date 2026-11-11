@@ -1,0 +1,43 @@
+{
+  "schema_version": "truth/v1",
+  "task_id": "accept-strict-tol",
+  "expected_status": "FAIL_TOLERANCE_UNREACHABLE",
+  "order_violation": false,
+  "points": [
+    {
+      "index": 0,
+      "target": [
+        32.5,
+        47.5
+      ],
+      "expected_actual": [
+        35.0,
+        50.0
+      ],
+      "nearest_snap_options": [
+        [
+          30.0,
+          35.0
+        ],
+        [
+          45.0,
+          50.0
+        ]
+      ],
+      "expected_error": [
+        2.5,
+        2.5
+      ],
+      "out_of_bounds": {
+        "x": false,
+        "y": false
+      },
+      "mid_grid": {
+        "x": true,
+        "y": true
+      },
+      "snap_reachable_within_tolerance": false
+    }
+  ],
+  "note": "本真值仅由公开领域规则（网格步长、轴域、顺序约束）离线推导，仅供测试断言；采集器禁止读取。"
+}
