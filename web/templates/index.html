@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=1280" />
+  <title>参数序列化采集请求构造器 · 实验接口练习</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <h1>参数序列化采集请求构造器</h1>
+    <p class="subtitle">限定版 OpenAPI 3.0 · 仅只读 GET · style / explode / deepObject / 保留字符编码</p>
+  </div>
+  <div class="top-actions">
+    <button id="run-demo" class="btn primary" type="button">▶ 运行示例（正常 + 边界）</button>
+    <span id="demo-status" class="demo-status" aria-live="polite"></span>
+  </div>
+</header>
+
+<main class="layout">
+  <!-- 左栏：输入配置 -->
+  <section class="panel input-panel">
+    <h2>① 配置采集输入</h2>
+    <div class="sticky-actions">
+      <button id="btn-preview" class="btn" type="button">生成请求（不发送）</button>
+      <button id="btn-run" class="btn primary" type="button">运行采集任务</button>
+      <button id="btn-clear" class="btn ghost" type="button">清空</button>
+    </div>
+    <label class="field">
+      <span>接口操作（operationId）</span>
+      <select id="operation-select"></select>
+    </label>
+
+    <div id="param-form" class="param-form"></div>
+
+    <details class="json-editor">
+      <summary>高级：直接编辑结构化参数 JSON（与表单双向同步）</summary>
+      <textarea id="params-json" rows="10" spellcheck="false"></textarea>
+      <div class="row">
+        <button id="sync-from-json" class="btn small" type="button">应用 JSON 到表单</button>
+        <button id="sync-to-json" class="btn small" type="button">从表单刷新 JSON</button>
+      </div>
+    </details>
+
+    <details class="scenario-picker">
+      <summary>② 完整验收场景选择（含拒绝场景）</summary>
+      <div class="scenario-groups">
+        <div class="scenario-group">
+          <h3>演示场景</h3>
+          <div id="scenario-demo"></div>
+        </div>
+        <div class="scenario-group">
+          <h3>验收场景</h3>
+          <div id="scenario-acc"></div>
+        </div>
+      </div>
+    </details>
+  </section>
+
+  <!-- 右栏：结果与证据 -->
+  <section class="panel result-panel">
+    <h2>③ 生成的请求与执行结果</h2>
+
+    <div id="reject-box" class="reject hidden">
+      <strong>⛔ 已在发请求前拒绝（未产生任何网络请求）</strong>
+      <p id="reject-reason"></p>
+    </div>
+
+    <div class="result-block">
+      <h3>请求行 / 原始查询串</h3>
+      <pre id="request-line" class="code">尚未生成请求</pre>
+      <table class="kv" id="omitted-table">
+        <caption>省略与编码说明</caption>
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <div class="result-block">
+      <h3>源站回显：语义解析结果</h3>
+      <pre id="echo-view" class="code">等待执行…</pre>
+    </div>
+
+    <div class="result-block">
+      <h3>实际返回的实验条目（真实执行结果）</h3>
+      <div id="result-meta" class="result-meta"></div>
+      <div class="table-wrap">
+        <table id="result-table">
+          <thead></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+
+    <details class="evidence">
+      <summary>来源证据与原始响应（HTTP 状态、响应头、原始 JSON）</summary>
+      <pre id="raw-response" class="code"></pre>
+    </details>
+
+    <details class="evidence">
+      <summary>历史运行记录（含“运行示例”的两个场景）</summary>
+      <div id="history-list"></div>
+    </details>
+  </section>
+</main>
+
+<footer class="footer">
+  <span>全部数据为本地虚构生成 · 采集仅经文档声明的公开只读接口进行 · 不支持的组合在发送前明确拒绝</span>
+</footer>
+
+<script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>

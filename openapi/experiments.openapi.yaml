@@ -1,0 +1,255 @@
+openapi: 3.0.3
+info:
+  title: 星海实验平台 - 公开只读实验接口（限定子集）
+  version: 1.0.0
+  description: >-
+    本文件是一份【限定版】 OpenAPI 3.0 文档，仅描述虚构的公开只读实验条目查询接口，
+    供采集请求构造器练习 query/path 参数序列化（数组、对象、style、explode、
+    deepObject、保留字符编码）使用。所有数据均为虚构，不对应任何真实系统。
+
+    支持的协议子集（构造器仅实现并接受下列组合）：
+      * 方法：仅 GET（文档中没有任何写操作，出现非 GET 即视为越权并拒绝）
+      * in=query 的 style：form（explode=true/false）、spaceDelimited、
+        pipeDelimited、deepObject
+      * in=path 的 style：simple、label、matrix（explode=true/false）
+      * 类型：string / integer / boolean / array（items 为标量）/
+        object（一层标量属性）；deepObject 的值仅允许一层标量对象
+      * 保留字符：allowReserved=true 时，query string 值中的
+        , / ? : @ ! $ & ' ( ) * + ; 保持原样；结构分隔符 = % # 始终编码
+    未列入上表的组合（如 query 的 simple/label/matrix、path 的 form、
+    多层嵌套对象、对象数组等）构造器必须在【发请求之前】明确拒绝，
+    不得静默降级为逗号拼接。
+servers:
+  - url: /v1
+    description: 本地源站（相对路径，采集器运行时拼接 base_url）
+paths:
+  /experiments:
+    get:
+      operationId: listExperiments
+      summary: 查询实验条目列表（只读）
+      description: 按多个筛选条件返回虚构实验条目；源站同时回显原始请求与语义解析结果。
+      parameters:
+        - name: q
+          in: query
+          required: false
+          description: "关键字（字符串，演示保留字符 , / : 等的编码行为）"
+          schema:
+            type: string
+          allowReserved: true
+        - name: tags
+          in: query
+          required: false
+          description: 标签数组，form 风格，explode=true（重复键）
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        - name: codes
+          in: query
+          required: false
+          description: 编号数组，form 风格，explode=false（逗号拼接；值内逗号会被编码）
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: false
+        - name: scores
+          in: query
+          required: false
+          description: 分数数组，空格分隔（spaceDelimited 隐含 explode=false）
+          schema:
+            type: array
+            items:
+              type: integer
+          style: spaceDelimited
+        - name: levels
+          in: query
+          required: false
+          description: 等级数组，竖线分隔（pipeDelimited 隐含 explode=false）
+          schema:
+            type: array
+            items:
+              type: string
+          style: pipeDelimited
+        - name: filter
+          in: query
+          required: false
+          description: 一层对象筛选（deepObject，filter[key]=value），属性均为标量
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              min_score:
+                type: integer
+              archived:
+                type: boolean
+          style: deepObject
+        - name: sort
+          in: query
+          required: false
+          description: 一层对象排序，form 风格 explode=true（sort=field,order）
+          schema:
+            type: object
+            properties:
+              field:
+                type: string
+              order:
+                type: string
+          style: form
+          explode: true
+        - name: page
+          in: query
+          required: false
+          description: 页码（整数）
+          schema:
+            type: integer
+            minimum: 1
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExperimentListEnvelope'
+  /experiments/{exp_id}:
+    get:
+      operationId: getExperiment
+      summary: 按 ID 获取单个实验（只读）
+      description: path 参数 exp_id 使用 simple 风格；值中的 , / 等保留字符按 RFC3986 编码。
+      parameters:
+        - name: exp_id
+          in: path
+          required: true
+          schema:
+            type: string
+          style: simple
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExperimentEnvelope'
+        '404':
+          description: 不存在
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+  /labs/{lab}/experiments/{exp_id}:
+    get:
+      operationId: getLabExperiment
+      summary: 按实验室与 ID 获取实验（只读）
+      description: >-
+        lab 使用 label 风格（点号前缀），exp_id 使用 matrix 风格（分号前缀），
+        均支持数组/对象的 explode 两种取值，用于演示 path 序列化。
+      parameters:
+        - name: lab
+          in: path
+          required: true
+          schema:
+            type: array
+            items:
+              type: string
+          style: label
+          explode: false
+        - name: exp_id
+          in: path
+          required: true
+          schema:
+            type: object
+            properties:
+              id:
+                type: string
+              rev:
+                type: integer
+          style: matrix
+          explode: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExperimentEnvelope'
+        '404':
+          description: 不存在
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+components:
+  schemas:
+    Experiment:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        owner:
+          type: string
+        tags:
+          type: array
+          items:
+            type: string
+        code:
+          type: string
+        score:
+          type: integer
+        level:
+          type: string
+        status:
+          type: string
+        archived:
+          type: boolean
+        ref:
+          type: string
+    ExperimentListEnvelope:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Experiment'
+        echo:
+          $ref: '#/components/schemas/Echo'
+    ExperimentEnvelope:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/Experiment'
+        echo:
+          $ref: '#/components/schemas/Echo'
+    ErrorEnvelope:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+            message:
+              type: string
+        echo:
+          $ref: '#/components/schemas/Echo'
+    Echo:
+      type: object
+      description: 源站回显：收到的原始请求与按 OpenAPI 语义解析后的参数
+      properties:
+        method:
+          type: string
+        raw_path:
+          type: string
+        raw_query_string:
+          type: string
+        path_parameters:
+          type: object
+        query_parameters:
+          type: object
+        headers:
+          type: object

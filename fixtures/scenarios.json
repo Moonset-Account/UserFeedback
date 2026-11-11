@@ -1,0 +1,212 @@
+{
+  "_comment": "验收场景定义。run_demo 两个由页面“运行示例”按钮执行；其余通过“完整验收场景”入口选择。所有数据均为虚构。期望串严格按文档参数声明顺序排列。",
+  "run_demo": [
+    {
+      "id": "demo-normal",
+      "kind": "success",
+      "title": "正常场景：中文关键字 + 重复键 + deepObject + 分页（保留字符编码见 acc-allowreserved）",
+      "operationId": "listExperiments",
+      "params": {
+        "q": "林",
+        "tags": ["材料", "低温"],
+        "filter": {"status": "running", "min_score": 80},
+        "page": 1
+      },
+      "expect": {
+        "method": "GET",
+        "query_string": "q=%E6%9E%97&tags=%E6%9D%90%E6%96%99&tags=%E4%BD%8E%E6%B8%A9&filter%5Bstatus%5D=running&filter%5Bmin_score%5D=80&page=1",
+        "omitted": [],
+        "status_code": 200,
+        "result_ids": ["EXP-004"]
+      }
+    },
+    {
+      "id": "demo-boundary",
+      "kind": "success",
+      "title": "边界场景：含逗号/斜杠的值、空数组与重复键并存",
+      "operationId": "listExperiments",
+      "params": {
+        "tags": ["芯片,微流", "批次/二"],
+        "codes": [],
+        "levels": ["B"]
+      },
+      "expect": {
+        "method": "GET",
+        "query_string": "tags=%E8%8A%AF%E7%89%87%2C%E5%BE%AE%E6%B5%81&tags=%E6%89%B9%E6%AC%A1%2F%E4%BA%8C&levels=B",
+        "omitted": ["codes"],
+        "status_code": 200,
+        "result_ids": ["EXP-013"]
+      }
+    }
+  ],
+  "acceptance": [
+    {
+      "id": "acc-form-array-explode-false",
+      "kind": "success",
+      "title": "form explode=false：逗号拼接，值内逗号必须编码为 %2C、斜杠为 %2F",
+      "operationId": "listExperiments",
+      "params": {
+        "codes": ["TB-21,7", "MB/330"]
+      },
+      "expect": {
+        "query_string": "codes=TB-21%2C7,MB%2F330",
+        "omitted": [],
+        "status_code": 200,
+        "result_ids": ["EXP-002", "EXP-003"]
+      }
+    },
+    {
+      "id": "acc-space-pipe",
+      "kind": "success",
+      "title": "spaceDelimited 整数数组（%20 分隔）+ pipeDelimited 字符串数组（| 分隔）",
+      "operationId": "listExperiments",
+      "params": {
+        "scores": [92, 95]
+      },
+      "expect": {
+        "query_string": "scores=92%2095",
+        "omitted": [],
+        "status_code": 200,
+        "result_ids": ["EXP-001", "EXP-009"]
+      }
+    },
+    {
+      "id": "acc-object-form",
+      "kind": "success",
+      "title": "布尔 deepObject（方括号编码 %5B%5D）+ 对象 form explode=true",
+      "operationId": "listExperiments",
+      "params": {
+        "filter": {"archived": true},
+        "sort": {"field": "score", "order": "desc"}
+      },
+      "expect": {
+        "query_string": "filter%5Barchived%5D=true&field=score&order=desc",
+        "omitted": [],
+        "status_code": 200,
+        "result_ids_ordered": ["EXP-021", "EXP-011", "EXP-005", "EXP-014"],
+        "result_ids": ["EXP-005", "EXP-011", "EXP-014", "EXP-021"]
+      }
+    },
+    {
+      "id": "acc-path-simple",
+      "kind": "success",
+      "title": "path simple：斜杠/逗号在路径值中按 RFC3986 编码（404 也是真实执行结果）",
+      "operationId": "getExperiment",
+      "params": {"exp_id": "EXP/002,next"},
+      "expect": {
+        "path": "/v1/experiments/EXP%2F002%2Cnext",
+        "query_string": "",
+        "status_code": 404,
+        "result_ids": []
+      }
+    },
+    {
+      "id": "acc-path-simple-hit",
+      "kind": "success",
+      "title": "path simple 命中：直接按真实 ID 取单条实验",
+      "operationId": "getExperiment",
+      "params": {"exp_id": "EXP-002"},
+      "expect": {
+        "path": "/v1/experiments/EXP-002",
+        "query_string": "",
+        "status_code": 200,
+        "result_ids": ["EXP-002"]
+      }
+    },
+    {
+      "id": "acc-path-label-matrix",
+      "kind": "success",
+      "title": "path label 数组（逗号/斜杠编码）+ matrix 对象 explode=true",
+      "operationId": "getLabExperiment",
+      "params": {
+        "lab": ["光学,组", "低温/组"],
+        "exp_id": {"id": "EXP-001", "rev": 3}
+      },
+      "expect": {
+        "path": "/v1/labs/.%E5%85%89%E5%AD%A6%2C%E7%BB%84,%E4%BD%8E%E6%B8%A9%2F%E7%BB%84/experiments/;id=EXP-001;rev=3",
+        "query_string": "",
+        "status_code": 200,
+        "result_ids": ["EXP-001"]
+      }
+    },
+    {
+      "id": "acc-allowreserved",
+      "kind": "success",
+      "title": "allowReserved：保留字符 ,/: 原样出现，结构符 = 与 # 仍编码",
+      "operationId": "listExperiments",
+      "params": {"q": "a/b,c:d=e#f"},
+      "expect": {
+        "query_string": "q=a/b,c:d%3De%23f",
+        "omitted": [],
+        "status_code": 200,
+        "result_ids": []
+      }
+    },
+    {
+      "id": "acc-empty-array-object",
+      "kind": "success",
+      "title": "空数组与空对象：query 省略并记录，其余参数照常发送",
+      "operationId": "listExperiments",
+      "params": {
+        "tags": [],
+        "filter": {},
+        "levels": ["A"]
+      },
+      "expect": {
+        "query_string": "levels=A",
+        "omitted": ["tags", "filter"],
+        "status_code": 200
+      }
+    },
+    {
+      "id": "acc-reject-deepobject-array",
+      "kind": "rejection",
+      "title": "拒绝：deepObject 传数组（不得降级为逗号拼接）",
+      "operationId": "listExperiments",
+      "params": {"filter": ["running", "paused"]},
+      "expect": {
+        "error_contains": "期望 object"
+      }
+    },
+    {
+      "id": "acc-reject-unknown-param",
+      "kind": "rejection",
+      "title": "拒绝：文档未声明的参数",
+      "operationId": "listExperiments",
+      "params": {"inject": "1=1"},
+      "expect": {
+        "error_contains": "文档未声明"
+      }
+    },
+    {
+      "id": "acc-reject-type-mismatch",
+      "kind": "rejection",
+      "title": "拒绝：整数参数给字符串且无法通过严格类型校验",
+      "operationId": "listExperiments",
+      "params": {"page": "一"},
+      "expect": {
+        "error_contains": "期望 integer"
+      }
+    },
+    {
+      "id": "acc-reject-nested-object",
+      "kind": "rejection",
+      "title": "拒绝：deepObject 多层嵌套对象",
+      "operationId": "listExperiments",
+      "params": {"filter": {"status": {"deep": "x"}}},
+      "expect": {
+        "error_contains": "期望 string"
+      }
+    },
+    {
+      "id": "acc-reject-path-empty",
+      "kind": "rejection",
+      "title": "拒绝：path 空数组（无法在路径中省略）",
+      "operationId": "getLabExperiment",
+      "params": {"lab": [], "exp_id": {"id": "EXP-001", "rev": 1}},
+      "expect": {
+        "error_contains": "不允许为空数组"
+      }
+    }
+  ]
+}

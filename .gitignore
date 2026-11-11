@@ -9,3 +9,7 @@ node_modules/
 .venv/
 __pycache__/
 .DS_Store
+
+# 生成器产物（可由 generator/generate.py 重新生成）
+data/
+.pytest_cache/
