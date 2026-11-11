@@ -1,0 +1,77 @@
+{
+  "schema_version": "1.0",
+  "description": "解析工厂定义清单。工厂可通过 parent_factory 继承默认值；aliases 中任一名称都必须解析回同一 factory_id。",
+  "factories": [
+    {
+      "factory_id": "F-PUBLIC-COMMON",
+      "kind": "static",
+      "parent_factory": null,
+      "aliases": [
+        "shared.xml.FactoryFactory",
+        "common.XmlFactory",
+        "xml.SecureFactory"
+      ],
+      "defaults": {
+        "feature_disallow_doctype_decl": true,
+        "feature_external_general_entities": false,
+        "feature_external_parameter_entities": false,
+        "feature_load_external_dtd": false,
+        "feature_secure_processing": true
+      },
+      "defined_at": "config/factories/public-common.yaml"
+    },
+    {
+      "factory_id": "F-CUSTOM-CATALOG",
+      "kind": "static",
+      "parent_factory": "F-PUBLIC-COMMON",
+      "aliases": [
+        "imports.catalog.CatalogXmlFactory"
+      ],
+      "defaults": {
+        "feature_secure_processing": true
+      },
+      "defined_at": "config/factories/import-catalog.yaml"
+    },
+    {
+      "factory_id": "F-CUSTOM-INVOICE",
+      "kind": "static",
+      "parent_factory": null,
+      "aliases": [
+        "imports.invoice.InvoiceFactory"
+      ],
+      "defaults": {
+        "feature_secure_processing": true,
+        "feature_load_external_dtd": true
+      },
+      "defined_at": "config/factories/import-invoice.yaml"
+    },
+    {
+      "factory_id": "F-SUPPLIER",
+      "kind": "static",
+      "parent_factory": "F-PUBLIC-COMMON",
+      "aliases": [
+        "imports.supplier.SupplierFactory"
+      ],
+      "defaults": {
+        "feature_disallow_doctype_decl": true
+      },
+      "defined_at": "config/factories/import-supplier.yaml"
+    },
+    {
+      "factory_id": "F-DYN-PRICING",
+      "kind": "dynamic",
+      "parent_factory": null,
+      "aliases": [
+        "imports.pricing.DynamicFactory.create"
+      ],
+      "resolution": {
+        "resolution_type": "classname_from_runtime_config",
+        "config_key": "imports.pricing.factory_class",
+        "offline_resolved_factory_id": null,
+        "resolution_note": "工厂类名来自运行期配置键，离线清单中无解析结果，无法静态绑定到任何 factory_id"
+      },
+      "defaults": {},
+      "defined_at": "config/factories/import-pricing-dynamic.yaml"
+    }
+  ]
+}

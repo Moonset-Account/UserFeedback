@@ -1,0 +1,44 @@
+{
+  "schema_version": "1.0",
+  "description": "修复后的环境覆盖清单：生产环境两条覆盖赋予不同 precedence，消除覆盖顺序冲突，最终有效值保持安全值 false。",
+  "layer_order_for_tiebreak": ["base-defaults", "application-yaml", "deployment-config"],
+  "environments": [
+    {
+      "environment_id": "env-dev",
+      "overrides": [
+        {
+          "override_id": "OV-DEV-001",
+          "factory_id": "F-SUPPLIER",
+          "setting": "feature_external_general_entities",
+          "value": false,
+          "source": "config/application-dev.yaml",
+          "layer": "application-yaml",
+          "precedence": 20
+        }
+      ]
+    },
+    {
+      "environment_id": "env-prod",
+      "overrides": [
+        {
+          "override_id": "OV-PROD-001",
+          "factory_id": "F-SUPPLIER",
+          "setting": "feature_external_general_entities",
+          "value": false,
+          "source": "config/application-prod.yaml",
+          "layer": "application-yaml",
+          "precedence": 30
+        },
+        {
+          "override_id": "OV-PROD-002",
+          "factory_id": "F-SUPPLIER",
+          "setting": "feature_external_general_entities",
+          "value": false,
+          "source": "deployment/prod/security-overrides.properties",
+          "layer": "deployment-config",
+          "precedence": 40
+        }
+      ]
+    }
+  ]
+}

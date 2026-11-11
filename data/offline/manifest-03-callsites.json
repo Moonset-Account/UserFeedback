@@ -1,0 +1,78 @@
+{
+  "schema_version": "1.0",
+  "description": "调用点与导入入口清单。callsites 以 CS-### 编号；entry_points 通过 callsite_chain 表示从导入入口到工厂创建点的离线调用关系，factory_ref 使用别名或 factory_id，分析器必须归一到同一配置定义。",
+  "callsites": [
+    {
+      "callsite_id": "CS-001",
+      "symbol": "imports.catalog.CatalogImport.run",
+      "file": "src/imports/catalog_import.py",
+      "line": 41,
+      "action": "create_parser_factory"
+    },
+    {
+      "callsite_id": "CS-002",
+      "symbol": "imports.invoice.InvoiceImport.run",
+      "file": "src/imports/invoice_import.py",
+      "line": 57,
+      "action": "create_parser_factory"
+    },
+    {
+      "callsite_id": "CS-003",
+      "symbol": "imports.supplier.SupplierImport.run",
+      "file": "src/imports/supplier_import.py",
+      "line": 63,
+      "action": "create_parser_factory"
+    },
+    {
+      "callsite_id": "CS-004",
+      "symbol": "imports.pricing.PricingImport.buildFactory",
+      "file": "src/imports/pricing_import.py",
+      "line": 72,
+      "action": "create_dynamic_factory"
+    },
+    {
+      "callsite_id": "CS-005",
+      "symbol": "imports.shared.SharedImport.run",
+      "file": "src/imports/shared_import.py",
+      "line": 35,
+      "action": "create_parser_factory"
+    }
+  ],
+  "entry_points": [
+    {
+      "entry_id": "EP-CATALOG",
+      "import_name": "商品目录 XML 导入",
+      "callsite_chain": ["CS-001"],
+      "factory_ref": "imports.catalog.CatalogXmlFactory",
+      "fix_location": "src/imports/catalog_import.py:41"
+    },
+    {
+      "entry_id": "EP-INVOICE",
+      "import_name": "发票 XML 导入",
+      "callsite_chain": ["CS-002"],
+      "factory_ref": "imports.invoice.InvoiceFactory",
+      "fix_location": "src/imports/invoice_import.py:57"
+    },
+    {
+      "entry_id": "EP-SUPPLIER",
+      "import_name": "供应商 XML 导入",
+      "callsite_chain": ["CS-003"],
+      "factory_ref": "imports.supplier.SupplierFactory",
+      "fix_location": "src/imports/supplier_import.py:63"
+    },
+    {
+      "entry_id": "EP-PRICING",
+      "import_name": "定价 XML 导入（动态工厂）",
+      "callsite_chain": ["CS-004"],
+      "factory_ref": "imports.pricing.DynamicFactory.create",
+      "fix_location": "src/imports/pricing_import.py:72"
+    },
+    {
+      "entry_id": "EP-SHARED",
+      "import_name": "共享通道 XML 导入（经别名引用公共工厂）",
+      "callsite_chain": ["CS-005"],
+      "factory_ref": "xml.SecureFactory",
+      "fix_location": "src/imports/shared_import.py:35"
+    }
+  ]
+}

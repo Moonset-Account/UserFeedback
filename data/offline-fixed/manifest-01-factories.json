@@ -1,0 +1,77 @@
+{
+  "schema_version": "1.0",
+  "description": "修复后的工厂定义清单：F-CUSTOM-INVOICE 改为继承公共工厂并关闭外部 DTD；F-DYN-PRICING 补齐离线解析结果。",
+  "factories": [
+    {
+      "factory_id": "F-PUBLIC-COMMON",
+      "kind": "static",
+      "parent_factory": null,
+      "aliases": [
+        "shared.xml.FactoryFactory",
+        "common.XmlFactory",
+        "xml.SecureFactory"
+      ],
+      "defaults": {
+        "feature_disallow_doctype_decl": true,
+        "feature_external_general_entities": false,
+        "feature_external_parameter_entities": false,
+        "feature_load_external_dtd": false,
+        "feature_secure_processing": true
+      },
+      "defined_at": "config/factories/public-common.yaml"
+    },
+    {
+      "factory_id": "F-CUSTOM-CATALOG",
+      "kind": "static",
+      "parent_factory": "F-PUBLIC-COMMON",
+      "aliases": [
+        "imports.catalog.CatalogXmlFactory"
+      ],
+      "defaults": {
+        "feature_secure_processing": true
+      },
+      "defined_at": "config/factories/import-catalog.yaml"
+    },
+    {
+      "factory_id": "F-CUSTOM-INVOICE",
+      "kind": "static",
+      "parent_factory": "F-PUBLIC-COMMON",
+      "aliases": [
+        "imports.invoice.InvoiceFactory"
+      ],
+      "defaults": {
+        "feature_secure_processing": true,
+        "feature_load_external_dtd": false
+      },
+      "defined_at": "config/factories/import-invoice.yaml"
+    },
+    {
+      "factory_id": "F-SUPPLIER",
+      "kind": "static",
+      "parent_factory": "F-PUBLIC-COMMON",
+      "aliases": [
+        "imports.supplier.SupplierFactory"
+      ],
+      "defaults": {
+        "feature_disallow_doctype_decl": true
+      },
+      "defined_at": "config/factories/import-supplier.yaml"
+    },
+    {
+      "factory_id": "F-DYN-PRICING",
+      "kind": "dynamic",
+      "parent_factory": null,
+      "aliases": [
+        "imports.pricing.DynamicFactory.create"
+      ],
+      "resolution": {
+        "resolution_type": "classname_from_runtime_config",
+        "config_key": "imports.pricing.factory_class",
+        "offline_resolved_factory_id": "F-PUBLIC-COMMON",
+        "resolution_note": "修复：运行期配置 imports.pricing.factory_class 已固定指向公共安全工厂实现，离线可静态绑定"
+      },
+      "defaults": {},
+      "defined_at": "config/factories/import-pricing-dynamic.yaml"
+    }
+  ]
+}

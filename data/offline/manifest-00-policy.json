@@ -1,0 +1,31 @@
+{
+  "schema_version": "1.0",
+  "description": "离线调用关系与配置清单 —— 安全策略部分。输入全部使用抽象配置字段与调用点编号表示，不含真实源码。",
+  "policy": {
+    "policy_id": "xml-external-resource-hardening",
+    "description": "所有 XML 解析工厂在处理导入数据时必须关闭外部资源解析（外部通用实体、外部参数实体、外部 DTD），并启用安全处理与 DOCTYPE 约束。",
+    "required_settings": {
+      "feature_disallow_doctype_decl": {
+        "required_value": true,
+        "rationale": "禁止 DOCTYPE 声明，阻断实体注入入口"
+      },
+      "feature_external_general_entities": {
+        "required_value": false,
+        "rationale": "关闭外部通用实体解析"
+      },
+      "feature_external_parameter_entities": {
+        "required_value": false,
+        "rationale": "关闭外部参数实体解析"
+      },
+      "feature_load_external_dtd": {
+        "required_value": false,
+        "rationale": "禁止加载外部 DTD"
+      },
+      "feature_secure_processing": {
+        "required_value": true,
+        "rationale": "启用工厂级安全处理模式"
+      }
+    },
+    "environments_in_scope": ["env-dev", "env-prod"]
+  }
+}

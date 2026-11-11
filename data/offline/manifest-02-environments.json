@@ -1,0 +1,44 @@
+{
+  "schema_version": "1.0",
+  "description": "环境覆盖清单。overrides 按 environment 分组，每条覆盖带来源与 precedence；同一 factory+setting 在同一环境出现多条覆盖时，正常应只有唯一最高 precedence，否则构成覆盖顺序冲突。",
+  "layer_order_for_tiebreak": ["base-defaults", "application-yaml", "deployment-config"],
+  "environments": [
+    {
+      "environment_id": "env-dev",
+      "overrides": [
+        {
+          "override_id": "OV-DEV-001",
+          "factory_id": "F-SUPPLIER",
+          "setting": "feature_external_general_entities",
+          "value": false,
+          "source": "config/application-dev.yaml",
+          "layer": "application-yaml",
+          "precedence": 20
+        }
+      ]
+    },
+    {
+      "environment_id": "env-prod",
+      "overrides": [
+        {
+          "override_id": "OV-PROD-001",
+          "factory_id": "F-SUPPLIER",
+          "setting": "feature_external_general_entities",
+          "value": false,
+          "source": "config/application-prod.yaml",
+          "layer": "application-yaml",
+          "precedence": 30
+        },
+        {
+          "override_id": "OV-PROD-002",
+          "factory_id": "F-SUPPLIER",
+          "setting": "feature_external_general_entities",
+          "value": true,
+          "source": "deployment/prod/security-overrides.properties",
+          "layer": "deployment-config",
+          "precedence": 30
+        }
+      ]
+    }
+  ]
+}

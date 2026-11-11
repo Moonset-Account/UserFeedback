@@ -1,0 +1,837 @@
+{
+  "policy_id": "xml-external-resource-hardening",
+  "environments_in_scope": [
+    "env-dev",
+    "env-prod"
+  ],
+  "summary": {
+    "total_entries": 5,
+    "by_verdict": {
+      "compliant": 5,
+      "explicit_deviation": 0,
+      "evidence_missing": 0
+    },
+    "precedence_conflict_count": 0
+  },
+  "precedence_conflicts": [],
+  "entry_reports": [
+    {
+      "entry_id": "EP-CATALOG",
+      "import_name": "商品目录 XML 导入",
+      "callsite_chain": [
+        {
+          "callsite_id": "CS-001",
+          "symbol": "imports.catalog.CatalogImport.run",
+          "file": "src/imports/catalog_import.py",
+          "line": 41,
+          "action": "create_parser_factory"
+        }
+      ],
+      "factory_ref": "imports.catalog.CatalogXmlFactory",
+      "resolved_factory_id": "F-CUSTOM-CATALOG",
+      "alias_normalized": true,
+      "fix_location": "src/imports/catalog_import.py:41",
+      "factory_kind": "static",
+      "environments": [
+        {
+          "environment_id": "env-dev",
+          "verdict": "compliant",
+          "reason": "all_required_settings_meet_policy",
+          "settings": [
+            {
+              "setting": "feature_disallow_doctype_decl",
+              "required_value": true,
+              "effective_value": true,
+              "status": "meets",
+              "origin": {
+                "factory_id": "F-PUBLIC-COMMON",
+                "defined_at": "config/factories/public-common.yaml",
+                "layer": "factory-default"
+              },
+              "rationale": "禁止 DOCTYPE 声明，阻断实体注入入口"
+            },
+            {
+              "setting": "feature_external_general_entities",
+              "required_value": false,
+              "effective_value": false,
+              "status": "meets",
+              "origin": {
+                "factory_id": "F-PUBLIC-COMMON",
+                "defined_at": "config/factories/public-common.yaml",
+                "layer": "factory-default"
+              },
+              "rationale": "关闭外部通用实体解析"
+            },
+            {
+              "setting": "feature_external_parameter_entities",
+              "required_value": false,
+              "effective_value": false,
+              "status": "meets",
+              "origin": {
+                "factory_id": "F-PUBLIC-COMMON",
+                "defined_at": "config/factories/public-common.yaml",
+                "layer": "factory-default"
+              },
+              "rationale": "关闭外部参数实体解析"
+            },
+            {
+              "setting": "feature_load_external_dtd",
+              "required_value": false,
+              "effective_value": false,
+              "status": "meets",
+              "origin": {
+                "factory_id": "F-PUBLIC-COMMON",
+                "defined_at": "config/factories/public-common.yaml",
+                "layer": "factory-default"
+              },
+              "rationale": "禁止加载外部 DTD"
+            },
+            {
+              "setting": "feature_secure_processing",
+              "required_value": true,
+              "effective_value": true,
+              "status": "meets",
+              "origin": {
+                "factory_id": "F-CUSTOM-CATALOG",
+                "defined_at": "config/factories/import-catalog.yaml",
+                "layer": "factory-default"
+              },
+              "rationale": "启用工厂级安全处理模式"
+            }
+          ],
+          "applied_overrides": [],
+          "conflict_notes": []
+        },
+        {
+          "environment_id": "env-prod",
+          "verdict": "compliant",
+          "reason": "all_required_settings_meet_policy",
+          "settings": [
+            {
+              "setting": "feature_disallow_doctype_decl",
+              "required_value": true,
+              "effective_value": true,
+              "status": "meets",
+              "origin": {
+                "factory_id": "F-PUBLIC-COMMON",
+                "defined_at": "config/factories/public-common.yaml",
+                "layer": "factory-default"
+              },
+              "rationale": "禁止 DOCTYPE 声明，阻断实体注入入口"
+            },
+            {
+              "setting": "feature_external_general_entities",
+              "required_value": false,
+              "effective_value": false,
+              "status": "meets",
+              "origin": {
+                "factory_id": "F-PUBLIC-COMMON",
+                "defined_at": "config/factories/public-common.yaml",
+                "layer": "factory-default"
+              },
+              "rationale": "关闭外部通用实体解析"
+            },
+            {
+              "setting": "feature_external_parameter_entities",
+              "required_value": false,
+              "effective_value": false,
+              "status": "meets",
+              "origin": {
+                "factory_id": "F-PUBLIC-COMMON",
+                "defined_at": "config/factories/public-common.yaml",
+                "layer": "factory-default"
+              },
+              "rationale": "关闭外部参数实体解析"
+            },
+            {
+              "setting": "feature_load_external_dtd",
+              "required_value": false,
+              "effective_value": false,
+              "status": "meets",
+              "origin": {
+                "factory_id": "F-PUBLIC-COMMON",
+                "defined_at": "config/factories/public-common.yaml",
+                "layer": "factory-default"
+              },
+              "rationale": "禁止加载外部 DTD"
+            },
+            {
+              "setting": "feature_secure_processing",
+              "required_value": true,
+              "effective_value": true,
+              "status": "meets",
+              "origin": {
+                "factory_id": "F-CUSTOM-CATALOG",
+                "defined_at": "config/factories/import-catalog.yaml",
+                "layer": "factory-default"
+              },
+              "rationale": "启用工厂级安全处理模式"
+            }
+          ],
+          "applied_overrides": [],
+          "conflict_notes": []
+        }
+      ],
+      "entry_verdict": "compliant"
+    },
+    {
+      "entry_id": "EP-INVOICE",
+      "import_name": "发票 XML 导入",
+      "callsite_chain": [
+        {
+          "callsite_id": "CS-002",
+          "symbol": "imports.invoice.InvoiceImport.run",
+          "file": "src/imports/invoice_import.py",
+          "line": 57,
+          "action": "create_parser_factory"
+        }
+      ],
+      "factory_ref": "imports.invoice.InvoiceFactory",
+      "resolved_factory_id": "F-CUSTOM-INVOICE",
+      "alias_normalized": true,
+      "fix_location": "src/imports/invoice_import.py:57",
+      "factory_kind": "static",
+      "environments": [
+        {
+          "environment_id": "env-dev",
+          "verdict": "compliant",
+          "reason": "all_required_settings_meet_policy",
+          "settings": [
+            {
+              "setting": "feature_disallow_doctype_decl",
+              "required_value": true,
+              "effective_value": true,
+              "status": "meets",
+              "origin": {
+                "factory_id": "F-PUBLIC-COMMON",
+                "defined_at": "config/factories/public-common.yaml",
+                "layer": "factory-default"
+              },
+              "rationale": "禁止 DOCTYPE 声明，阻断实体注入入口"
+            },
+            {
+              "setting": "feature_external_general_entities",
+              "required_value": false,
+              "effective_value": false,
+              "status": "meets",
+              "origin": {
+                "factory_id": "F-PUBLIC-COMMON",
+                "defined_at": "config/factories/public-common.yaml",
+                "layer": "factory-default"
+              },
+              "rationale": "关闭外部通用实体解析"
+            },
+            {
+              "setting": "feature_external_parameter_entities",
+              "required_value": false,
+              "effective_value": false,
+              "status": "meets",
+              "origin": {
+                "factory_id": "F-PUBLIC-COMMON",
+                "defined_at": "config/factories/public-common.yaml",
+                "layer": "factory-default"
+              },
+              "rationale": "关闭外部参数实体解析"
+            },
+            {
+              "setting": "feature_load_external_dtd",
+              "required_value": false,
+              "effective_value": false,
+              "status": "meets",
+              "origin": {
+                "factory_id": "F-CUSTOM-INVOICE",
+                "defined_at": "config/factories/import-invoice.yaml",
+                "layer": "factory-default"
+              },
+              "rationale": "禁止加载外部 DTD"
+            },
+            {
+              "setting": "feature_secure_processing",
+              "required_value": true,
+              "effective_value": true,
+              "status": "meets",
+              "origin": {
+                "factory_id": "F-CUSTOM-INVOICE",
+                "defined_at": "config/factories/import-invoice.yaml",
+                "layer": "factory-default"
+              },
+              "rationale": "启用工厂级安全处理模式"
+            }
+          ],
+          "applied_overrides": [],
+          "conflict_notes": []
+        },
+        {
+          "environment_id": "env-prod",
+          "verdict": "compliant",
+          "reason": "all_required_settings_meet_policy",
+          "settings": [
+            {
+              "setting": "feature_disallow_doctype_decl",
+              "required_value": true,
+              "effective_value": true,
+              "status": "meets",
+              "origin": {
+                "factory_id": "F-PUBLIC-COMMON",
+                "defined_at": "config/factories/public-common.yaml",
+                "layer": "factory-default"
+              },
+              "rationale": "禁止 DOCTYPE 声明，阻断实体注入入口"
+            },
+            {
+              "setting": "feature_external_general_entities",
+              "required_value": false,
+              "effective_value": false,
+              "status": "meets",
+              "origin": {
+                "factory_id": "F-PUBLIC-COMMON",
+                "defined_at": "config/factories/public-common.yaml",
+                "layer": "factory-default"
+              },
+              "rationale": "关闭外部通用实体解析"
+            },
+            {
+              "setting": "feature_external_parameter_entities",
+              "required_value": false,
+              "effective_value": false,
+              "status": "meets",
+              "origin": {
+                "factory_id": "F-PUBLIC-COMMON",
+                "defined_at": "config/factories/public-common.yaml",
+                "layer": "factory-default"
+              },
+              "rationale": "关闭外部参数实体解析"
+            },
+            {
+              "setting": "feature_load_external_dtd",
+              "required_value": false,
+              "effective_value": false,
+              "status": "meets",
+              "origin": {
+                "factory_id": "F-CUSTOM-INVOICE",
+                "defined_at": "config/factories/import-invoice.yaml",
+                "layer": "factory-default"
+              },
+              "rationale": "禁止加载外部 DTD"
+            },
+            {
+              "setting": "feature_secure_processing",
+              "required_value": true,
+              "effective_value": true,
+              "status": "meets",
+              "origin": {
+                "factory_id": "F-CUSTOM-INVOICE",
+                "defined_at": "config/factories/import-invoice.yaml",
+                "layer": "factory-default"
+              },
+              "rationale": "启用工厂级安全处理模式"
+            }
+          ],
+          "applied_overrides": [],
+          "conflict_notes": []
+        }
+      ],
+      "entry_verdict": "compliant"
+    },
+    {
+      "entry_id": "EP-SUPPLIER",
+      "import_name": "供应商 XML 导入",
+      "callsite_chain": [
+        {
+          "callsite_id": "CS-003",
+          "symbol": "imports.supplier.SupplierImport.run",
+          "file": "src/imports/supplier_import.py",
+          "line": 63,
+          "action": "create_parser_factory"
+        }
+      ],
+      "factory_ref": "imports.supplier.SupplierFactory",
+      "resolved_factory_id": "F-SUPPLIER",
+      "alias_normalized": true,
+      "fix_location": "src/imports/supplier_import.py:63",
+      "factory_kind": "static",
+      "environments": [
+        {
+          "environment_id": "env-dev",
+          "verdict": "compliant",
+          "reason": "all_required_settings_meet_policy",
+          "settings": [
+            {
+              "setting": "feature_disallow_doctype_decl",
+              "required_value": true,
+              "effective_value": true,
+              "status": "meets",
+              "origin": {
+                "factory_id": "F-SUPPLIER",
+                "defined_at": "config/factories/import-supplier.yaml",
+                "layer": "factory-default"
+              },
+              "rationale": "禁止 DOCTYPE 声明，阻断实体注入入口"
+            },
+            {
+              "setting": "feature_external_general_entities",
+              "required_value": false,
+              "effective_value": false,
+              "status": "meets",
+              "origin": {
+                "factory_id": "F-SUPPLIER",
+                "defined_at": "config/application-dev.yaml",
+                "layer": "application-yaml",
+                "override_id": "OV-DEV-001",
+                "precedence": "20"
+              },
+              "rationale": "关闭外部通用实体解析"
+            },
+            {
+              "setting": "feature_external_parameter_entities",
+              "required_value": false,
+              "effective_value": false,
+              "status": "meets",
+              "origin": {
+                "factory_id": "F-PUBLIC-COMMON",
+                "defined_at": "config/factories/public-common.yaml",
+                "layer": "factory-default"
+              },
+              "rationale": "关闭外部参数实体解析"
+            },
+            {
+              "setting": "feature_load_external_dtd",
+              "required_value": false,
+              "effective_value": false,
+              "status": "meets",
+              "origin": {
+                "factory_id": "F-PUBLIC-COMMON",
+                "defined_at": "config/factories/public-common.yaml",
+                "layer": "factory-default"
+              },
+              "rationale": "禁止加载外部 DTD"
+            },
+            {
+              "setting": "feature_secure_processing",
+              "required_value": true,
+              "effective_value": true,
+              "status": "meets",
+              "origin": {
+                "factory_id": "F-PUBLIC-COMMON",
+                "defined_at": "config/factories/public-common.yaml",
+                "layer": "factory-default"
+              },
+              "rationale": "启用工厂级安全处理模式"
+            }
+          ],
+          "applied_overrides": [
+            {
+              "setting": "feature_external_general_entities",
+              "override_id": "OV-DEV-001",
+              "value": false,
+              "source": "config/application-dev.yaml",
+              "layer": "application-yaml",
+              "precedence": 20
+            }
+          ],
+          "conflict_notes": []
+        },
+        {
+          "environment_id": "env-prod",
+          "verdict": "compliant",
+          "reason": "all_required_settings_meet_policy",
+          "settings": [
+            {
+              "setting": "feature_disallow_doctype_decl",
+              "required_value": true,
+              "effective_value": true,
+              "status": "meets",
+              "origin": {
+                "factory_id": "F-SUPPLIER",
+                "defined_at": "config/factories/import-supplier.yaml",
+                "layer": "factory-default"
+              },
+              "rationale": "禁止 DOCTYPE 声明，阻断实体注入入口"
+            },
+            {
+              "setting": "feature_external_general_entities",
+              "required_value": false,
+              "effective_value": false,
+              "status": "meets",
+              "origin": {
+                "factory_id": "F-SUPPLIER",
+                "defined_at": "deployment/prod/security-overrides.properties",
+                "layer": "deployment-config",
+                "override_id": "OV-PROD-002",
+                "precedence": "40"
+              },
+              "rationale": "关闭外部通用实体解析"
+            },
+            {
+              "setting": "feature_external_parameter_entities",
+              "required_value": false,
+              "effective_value": false,
+              "status": "meets",
+              "origin": {
+                "factory_id": "F-PUBLIC-COMMON",
+                "defined_at": "config/factories/public-common.yaml",
+                "layer": "factory-default"
+              },
+              "rationale": "关闭外部参数实体解析"
+            },
+            {
+              "setting": "feature_load_external_dtd",
+              "required_value": false,
+              "effective_value": false,
+              "status": "meets",
+              "origin": {
+                "factory_id": "F-PUBLIC-COMMON",
+                "defined_at": "config/factories/public-common.yaml",
+                "layer": "factory-default"
+              },
+              "rationale": "禁止加载外部 DTD"
+            },
+            {
+              "setting": "feature_secure_processing",
+              "required_value": true,
+              "effective_value": true,
+              "status": "meets",
+              "origin": {
+                "factory_id": "F-PUBLIC-COMMON",
+                "defined_at": "config/factories/public-common.yaml",
+                "layer": "factory-default"
+              },
+              "rationale": "启用工厂级安全处理模式"
+            }
+          ],
+          "applied_overrides": [
+            {
+              "setting": "feature_external_general_entities",
+              "override_id": "OV-PROD-002",
+              "value": false,
+              "source": "deployment/prod/security-overrides.properties",
+              "layer": "deployment-config",
+              "precedence": 40
+            }
+          ],
+          "conflict_notes": []
+        }
+      ],
+      "entry_verdict": "compliant"
+    },
+    {
+      "entry_id": "EP-PRICING",
+      "import_name": "定价 XML 导入（动态工厂）",
+      "callsite_chain": [
+        {
+          "callsite_id": "CS-004",
+          "symbol": "imports.pricing.PricingImport.buildFactory",
+          "file": "src/imports/pricing_import.py",
+          "line": 72,
+          "action": "create_dynamic_factory"
+        }
+      ],
+      "factory_ref": "imports.pricing.DynamicFactory.create",
+      "resolved_factory_id": "F-DYN-PRICING",
+      "alias_normalized": true,
+      "fix_location": "src/imports/pricing_import.py:72",
+      "factory_kind": "dynamic",
+      "dynamic_resolved_to": "F-PUBLIC-COMMON",
+      "environments": [
+        {
+          "environment_id": "env-dev",
+          "verdict": "compliant",
+          "reason": "all_required_settings_meet_policy",
+          "settings": [
+            {
+              "setting": "feature_disallow_doctype_decl",
+              "required_value": true,
+              "effective_value": true,
+              "status": "meets",
+              "origin": {
+                "factory_id": "F-PUBLIC-COMMON",
+                "defined_at": "config/factories/public-common.yaml",
+                "layer": "factory-default"
+              },
+              "rationale": "禁止 DOCTYPE 声明，阻断实体注入入口"
+            },
+            {
+              "setting": "feature_external_general_entities",
+              "required_value": false,
+              "effective_value": false,
+              "status": "meets",
+              "origin": {
+                "factory_id": "F-PUBLIC-COMMON",
+                "defined_at": "config/factories/public-common.yaml",
+                "layer": "factory-default"
+              },
+              "rationale": "关闭外部通用实体解析"
+            },
+            {
+              "setting": "feature_external_parameter_entities",
+              "required_value": false,
+              "effective_value": false,
+              "status": "meets",
+              "origin": {
+                "factory_id": "F-PUBLIC-COMMON",
+                "defined_at": "config/factories/public-common.yaml",
+                "layer": "factory-default"
+              },
+              "rationale": "关闭外部参数实体解析"
+            },
+            {
+              "setting": "feature_load_external_dtd",
+              "required_value": false,
+              "effective_value": false,
+              "status": "meets",
+              "origin": {
+                "factory_id": "F-PUBLIC-COMMON",
+                "defined_at": "config/factories/public-common.yaml",
+                "layer": "factory-default"
+              },
+              "rationale": "禁止加载外部 DTD"
+            },
+            {
+              "setting": "feature_secure_processing",
+              "required_value": true,
+              "effective_value": true,
+              "status": "meets",
+              "origin": {
+                "factory_id": "F-PUBLIC-COMMON",
+                "defined_at": "config/factories/public-common.yaml",
+                "layer": "factory-default"
+              },
+              "rationale": "启用工厂级安全处理模式"
+            }
+          ],
+          "applied_overrides": [],
+          "conflict_notes": []
+        },
+        {
+          "environment_id": "env-prod",
+          "verdict": "compliant",
+          "reason": "all_required_settings_meet_policy",
+          "settings": [
+            {
+              "setting": "feature_disallow_doctype_decl",
+              "required_value": true,
+              "effective_value": true,
+              "status": "meets",
+              "origin": {
+                "factory_id": "F-PUBLIC-COMMON",
+                "defined_at": "config/factories/public-common.yaml",
+                "layer": "factory-default"
+              },
+              "rationale": "禁止 DOCTYPE 声明，阻断实体注入入口"
+            },
+            {
+              "setting": "feature_external_general_entities",
+              "required_value": false,
+              "effective_value": false,
+              "status": "meets",
+              "origin": {
+                "factory_id": "F-PUBLIC-COMMON",
+                "defined_at": "config/factories/public-common.yaml",
+                "layer": "factory-default"
+              },
+              "rationale": "关闭外部通用实体解析"
+            },
+            {
+              "setting": "feature_external_parameter_entities",
+              "required_value": false,
+              "effective_value": false,
+              "status": "meets",
+              "origin": {
+                "factory_id": "F-PUBLIC-COMMON",
+                "defined_at": "config/factories/public-common.yaml",
+                "layer": "factory-default"
+              },
+              "rationale": "关闭外部参数实体解析"
+            },
+            {
+              "setting": "feature_load_external_dtd",
+              "required_value": false,
+              "effective_value": false,
+              "status": "meets",
+              "origin": {
+                "factory_id": "F-PUBLIC-COMMON",
+                "defined_at": "config/factories/public-common.yaml",
+                "layer": "factory-default"
+              },
+              "rationale": "禁止加载外部 DTD"
+            },
+            {
+              "setting": "feature_secure_processing",
+              "required_value": true,
+              "effective_value": true,
+              "status": "meets",
+              "origin": {
+                "factory_id": "F-PUBLIC-COMMON",
+                "defined_at": "config/factories/public-common.yaml",
+                "layer": "factory-default"
+              },
+              "rationale": "启用工厂级安全处理模式"
+            }
+          ],
+          "applied_overrides": [],
+          "conflict_notes": []
+        }
+      ],
+      "entry_verdict": "compliant"
+    },
+    {
+      "entry_id": "EP-SHARED",
+      "import_name": "共享通道 XML 导入（经别名引用公共工厂）",
+      "callsite_chain": [
+        {
+          "callsite_id": "CS-005",
+          "symbol": "imports.shared.SharedImport.run",
+          "file": "src/imports/shared_import.py",
+          "line": 35,
+          "action": "create_parser_factory"
+        }
+      ],
+      "factory_ref": "xml.SecureFactory",
+      "resolved_factory_id": "F-PUBLIC-COMMON",
+      "alias_normalized": true,
+      "fix_location": "src/imports/shared_import.py:35",
+      "factory_kind": "static",
+      "environments": [
+        {
+          "environment_id": "env-dev",
+          "verdict": "compliant",
+          "reason": "all_required_settings_meet_policy",
+          "settings": [
+            {
+              "setting": "feature_disallow_doctype_decl",
+              "required_value": true,
+              "effective_value": true,
+              "status": "meets",
+              "origin": {
+                "factory_id": "F-PUBLIC-COMMON",
+                "defined_at": "config/factories/public-common.yaml",
+                "layer": "factory-default"
+              },
+              "rationale": "禁止 DOCTYPE 声明，阻断实体注入入口"
+            },
+            {
+              "setting": "feature_external_general_entities",
+              "required_value": false,
+              "effective_value": false,
+              "status": "meets",
+              "origin": {
+                "factory_id": "F-PUBLIC-COMMON",
+                "defined_at": "config/factories/public-common.yaml",
+                "layer": "factory-default"
+              },
+              "rationale": "关闭外部通用实体解析"
+            },
+            {
+              "setting": "feature_external_parameter_entities",
+              "required_value": false,
+              "effective_value": false,
+              "status": "meets",
+              "origin": {
+                "factory_id": "F-PUBLIC-COMMON",
+                "defined_at": "config/factories/public-common.yaml",
+                "layer": "factory-default"
+              },
+              "rationale": "关闭外部参数实体解析"
+            },
+            {
+              "setting": "feature_load_external_dtd",
+              "required_value": false,
+              "effective_value": false,
+              "status": "meets",
+              "origin": {
+                "factory_id": "F-PUBLIC-COMMON",
+                "defined_at": "config/factories/public-common.yaml",
+                "layer": "factory-default"
+              },
+              "rationale": "禁止加载外部 DTD"
+            },
+            {
+              "setting": "feature_secure_processing",
+              "required_value": true,
+              "effective_value": true,
+              "status": "meets",
+              "origin": {
+                "factory_id": "F-PUBLIC-COMMON",
+                "defined_at": "config/factories/public-common.yaml",
+                "layer": "factory-default"
+              },
+              "rationale": "启用工厂级安全处理模式"
+            }
+          ],
+          "applied_overrides": [],
+          "conflict_notes": []
+        },
+        {
+          "environment_id": "env-prod",
+          "verdict": "compliant",
+          "reason": "all_required_settings_meet_policy",
+          "settings": [
+            {
+              "setting": "feature_disallow_doctype_decl",
+              "required_value": true,
+              "effective_value": true,
+              "status": "meets",
+              "origin": {
+                "factory_id": "F-PUBLIC-COMMON",
+                "defined_at": "config/factories/public-common.yaml",
+                "layer": "factory-default"
+              },
+              "rationale": "禁止 DOCTYPE 声明，阻断实体注入入口"
+            },
+            {
+              "setting": "feature_external_general_entities",
+              "required_value": false,
+              "effective_value": false,
+              "status": "meets",
+              "origin": {
+                "factory_id": "F-PUBLIC-COMMON",
+                "defined_at": "config/factories/public-common.yaml",
+                "layer": "factory-default"
+              },
+              "rationale": "关闭外部通用实体解析"
+            },
+            {
+              "setting": "feature_external_parameter_entities",
+              "required_value": false,
+              "effective_value": false,
+              "status": "meets",
+              "origin": {
+                "factory_id": "F-PUBLIC-COMMON",
+                "defined_at": "config/factories/public-common.yaml",
+                "layer": "factory-default"
+              },
+              "rationale": "关闭外部参数实体解析"
+            },
+            {
+              "setting": "feature_load_external_dtd",
+              "required_value": false,
+              "effective_value": false,
+              "status": "meets",
+              "origin": {
+                "factory_id": "F-PUBLIC-COMMON",
+                "defined_at": "config/factories/public-common.yaml",
+                "layer": "factory-default"
+              },
+              "rationale": "禁止加载外部 DTD"
+            },
+            {
+              "setting": "feature_secure_processing",
+              "required_value": true,
+              "effective_value": true,
+              "status": "meets",
+              "origin": {
+                "factory_id": "F-PUBLIC-COMMON",
+                "defined_at": "config/factories/public-common.yaml",
+                "layer": "factory-default"
+              },
+              "rationale": "启用工厂级安全处理模式"
+            }
+          ],
+          "applied_overrides": [],
+          "conflict_notes": []
+        }
+      ],
+      "entry_verdict": "compliant"
+    }
+  ]
+}
