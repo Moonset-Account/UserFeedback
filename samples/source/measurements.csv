@@ -1,0 +1,19 @@
+id,analyte,sample_code,value,locale
+m01,Lead (Pb),FIC-S-001,12.5 mg/L,en_US
+m02,Cadmium (Cd),FIC-S-002,"1,234.56 mg/L",en_US
+m03,Arsenic (As),FIC-S-003,7.8E-3 mg/L,en_US
+m04,Mercury (Hg),FIC-S-004,0.042(7) mg/L,en_US
+m05,Chromium (Cr),FIC-S-005,18.6 ± 0.4 mg/L,en_US
+m06,Nickel (Ni),FIC-S-006,9.81 +0.12 -0.08 mg/L,en_US
+m07,Copper (Cu),FIC-S-007,-,en_US
+m08,Zinc (Zn),FIC-S-008,< 0.01 mg/L,en_US
+m09,pH,FIC-S-009,6.8 – 7.2 pH,en_US
+m10,Nitrate (NO3),FIC-S-010,25.3 zz,en_US
+m11,Lead (Pb),FIC-S-011,"1.234,56 mg/L",en_US
+m12,Cadmium (Cd),FIC-S-012,"0,0078 mg/L",en_US
+m13,Arsenic (As),FIC-S-013,"1,234",en_US
+m14,Mercury (Hg),FIC-S-014,"12,5 ± 0,2 mg/L",en_US
+m15,Chromium (Cr),FIC-S-015,"−3,5 °C",en_US
+m16,Nitrate (NO3),FIC-S-016,"1 234,56 mg/L",en_US
+m17,Nitrite (NO2),FIC-S-017,"7,8e-3 mg/L",en_US
+m18,Sulfate (SO4),FIC-S-018,42 mg/L,en_US

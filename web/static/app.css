@@ -1,0 +1,92 @@
+/* 科研测量数值采集器操作台 —— 适配 1280×720，关键操作与结果首屏可见 */
+* { box-sizing: border-box; }
+html, body {
+  margin: 0; padding: 0;
+  font-family: "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
+  color: #1f2933; background: #f4f6f8; font-size: 13px;
+}
+.topbar {
+  height: 48px; display: flex; align-items: center; justify-content: space-between;
+  padding: 0 20px; background: #12395b; color: #fff;
+}
+.brand { font-size: 17px; font-weight: 700; }
+.badge { font-size: 12px; color: #c7d7e6; }
+.layout {
+  display: grid; grid-template-columns: 430px 1fr; gap: 14px;
+  padding: 12px 16px; height: calc(100vh - 48px - 26px);
+}
+.panel {
+  background: #fff; border: 1px solid #d8dee4; border-radius: 8px;
+  padding: 12px 14px; overflow: auto;
+}
+.panel h2 { font-size: 14px; margin: 0 0 10px; color: #12395b; }
+.field { display: block; margin-bottom: 10px; }
+.field > span { display: block; font-weight: 600; margin-bottom: 4px; }
+select, input, textarea {
+  width: 100%; padding: 6px 8px; border: 1px solid #aab4be; border-radius: 5px;
+  font-size: 13px; font-family: inherit;
+}
+textarea { resize: vertical; font-family: "SF Mono", Menlo, Consolas, monospace; }
+.muted { color: #66788a; font-size: 12px; }
+.hidden { display: none; }
+.btn-row { display: flex; gap: 8px; margin: 8px 0 10px; flex-wrap: wrap; }
+button {
+  padding: 7px 12px; border: 1px solid #12395b; border-radius: 5px;
+  background: #fff; color: #12395b; cursor: pointer; font-size: 13px;
+}
+button:hover { background: #e8f0f8; }
+button.primary { background: #12395b; color: #fff; }
+button.primary:hover { background: #1d4e7c; }
+button:disabled { opacity: .55; cursor: wait; }
+details { margin-top: 8px; }
+summary { cursor: pointer; font-weight: 600; }
+.preset-row { display: flex; gap: 6px; margin-top: 6px; flex-wrap: wrap; }
+.preset-row button { padding: 4px 8px; font-size: 12px; }
+#samples-content { margin-top: 6px; line-height: 1.7; word-break: break-all; }
+code { background: #eef2f6; padding: 1px 4px; border-radius: 3px; }
+
+/* 状态栏与汇总 */
+.status-bar {
+  padding: 8px 10px; border-radius: 5px; background: #eef2f6; margin-bottom: 8px;
+}
+.status-bar.busy { background: #fff4d6; }
+.status-bar.error { background: #fde2e1; color: #8a1f1a; }
+.summary { display: flex; gap: 10px; margin-bottom: 10px; flex-wrap: wrap; }
+.summary .chip {
+  padding: 5px 10px; border-radius: 999px; font-weight: 600; font-size: 12px;
+}
+.chip.total { background: #e3ebf3; }
+.chip.ok { background: #d8f0dd; color: #1d6b35; }
+.chip.err { background: #fbdcd9; color: #8a1f1a; }
+.chip.miss { background: #e6e2f5; color: #463280; }
+
+/* 结果卡片 */
+.scenario-title {
+  font-weight: 700; margin: 12px 0 6px; padding: 6px 10px;
+  background: #12395b; color: #fff; border-radius: 5px;
+}
+table.grid { width: 100%; border-collapse: collapse; margin-bottom: 8px; }
+table.grid th, table.grid td {
+  border: 1px solid #cfd8e0; padding: 5px 7px; text-align: left;
+  vertical-align: top; font-size: 12px;
+}
+table.grid th { background: #eef2f6; position: sticky; top: 0; }
+td.raw { font-family: "SF Mono", Menlo, Consolas, monospace; white-space: pre-wrap; max-width: 230px; }
+.tag { display: inline-block; padding: 1px 7px; border-radius: 999px; font-size: 11px; font-weight: 700; }
+.tag.ok { background: #d8f0dd; color: #1d6b35; }
+.tag.error { background: #fbdcd9; color: #8a1f1a; }
+.tag.missing { background: #e6e2f5; color: #463280; }
+.tag.below_LOD, .tag.above_LOD { background: #fdeecd; color: #8a5a12; }
+.tag.range { background: #d9edf7; color: #1c5673; }
+.err-text { color: #8a1f1a; }
+details.evidence { margin: 2px 0; }
+details.evidence summary { font-weight: 600; color: #12395b; font-size: 12px; }
+ol.steps { margin: 6px 0 4px 18px; padding: 0; font-size: 12px; line-height: 1.6; }
+.src { font-size: 11px; color: #5a6b7c; word-break: break-all; }
+.foot {
+  height: 26px; line-height: 26px; text-align: center; font-size: 11px;
+  color: #7a8a99; background: #e8ecf0;
+}
+@media (max-width: 1100px) {
+  .layout { grid-template-columns: 1fr; height: auto; }
+}

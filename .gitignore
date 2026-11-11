@@ -9,3 +9,8 @@ node_modules/
 .venv/
 __pycache__/
 .DS_Store
+
+# 运行记录与本地测试服务
+runs/
+runs-test/
+.pytest_cache/

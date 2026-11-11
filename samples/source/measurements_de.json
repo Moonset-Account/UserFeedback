@@ -1,0 +1,36 @@
+{
+  "dataset": "FIC-LAB-2026-NONPROD",
+  "locale": "de_DE",
+  "rows": [
+    {
+      "id": "m11",
+      "analyte": "Lead (Pb)",
+      "sample_code": "FIC-S-011",
+      "value": "1.234,56 mg/L"
+    },
+    {
+      "id": "m12",
+      "analyte": "Cadmium (Cd)",
+      "sample_code": "FIC-S-012",
+      "value": "0,0078 mg/L"
+    },
+    {
+      "id": "m13",
+      "analyte": "Arsenic (As)",
+      "sample_code": "FIC-S-013",
+      "value": "1,234"
+    },
+    {
+      "id": "m14",
+      "analyte": "Mercury (Hg)",
+      "sample_code": "FIC-S-014",
+      "value": "12,5 ± 0,2 mg/L"
+    },
+    {
+      "id": "m15",
+      "analyte": "Chromium (Cr)",
+      "sample_code": "FIC-S-015",
+      "value": "−3,5 °C"
+    }
+  ]
+}

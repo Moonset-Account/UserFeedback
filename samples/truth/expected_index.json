@@ -1,0 +1,129 @@
+{
+  "dataset": "FIC-LAB-2026-NONPROD",
+  "warning": "独立预期真值，仅用于测试断言；采集器代码禁止读取本文件",
+  "main_rows": [
+    {
+      "id": "m01",
+      "raw_value": "12.5 mg/L"
+    },
+    {
+      "id": "m02",
+      "raw_value": "1,234.56 mg/L"
+    },
+    {
+      "id": "m03",
+      "raw_value": "7.8E-3 mg/L"
+    },
+    {
+      "id": "m04",
+      "raw_value": "0.042(7) mg/L"
+    },
+    {
+      "id": "m05",
+      "raw_value": "18.6 ± 0.4 mg/L"
+    },
+    {
+      "id": "m06",
+      "raw_value": "9.81 +0.12 -0.08 mg/L"
+    },
+    {
+      "id": "m07",
+      "raw_value": "-"
+    },
+    {
+      "id": "m08",
+      "raw_value": "< 0.01 mg/L"
+    },
+    {
+      "id": "m09",
+      "raw_value": "6.8 – 7.2 pH"
+    },
+    {
+      "id": "m10",
+      "raw_value": "25.3 zz"
+    },
+    {
+      "id": "m11",
+      "raw_value": "1.234,56 mg/L"
+    },
+    {
+      "id": "m12",
+      "raw_value": "0,0078 mg/L"
+    },
+    {
+      "id": "m13",
+      "raw_value": "1,234"
+    },
+    {
+      "id": "m14",
+      "raw_value": "12,5 ± 0,2 mg/L"
+    },
+    {
+      "id": "m15",
+      "raw_value": "−3,5 °C"
+    },
+    {
+      "id": "m16",
+      "raw_value": "1 234,56 mg/L"
+    },
+    {
+      "id": "m17",
+      "raw_value": "7,8e-3 mg/L"
+    },
+    {
+      "id": "m18",
+      "raw_value": "42 mg/L"
+    },
+    {
+      "id": "m19",
+      "raw_value": "12 345,67 mg/L"
+    },
+    {
+      "id": "m20",
+      "raw_value": "N/A"
+    },
+    {
+      "id": "m21",
+      "raw_value": "—"
+    },
+    {
+      "id": "m22",
+      "raw_value": "0.10 ~ 0.15 mg/L"
+    },
+    {
+      "id": "m23",
+      "raw_value": "> 50.0 ppb"
+    },
+    {
+      "id": "m24",
+      "raw_value": "3.7 parsec"
+    }
+  ],
+  "ambiguity_rows": [
+    "1,234",
+    "1.234",
+    "1,234.5",
+    "12.5",
+    "1 234,5"
+  ],
+  "demo": {
+    "normal": [
+      "1,234.56 mg/L",
+      "7.8E-3 mg/L",
+      "18.6 ± 0.4 mg/L"
+    ],
+    "boundary": [
+      "-",
+      "< 0.01 mg/L",
+      "25.3 zz",
+      "1,234"
+    ]
+  },
+  "acceptance_locales": [
+    "en_US",
+    "de_DE",
+    "fr_FR",
+    "sv_SE",
+    "und"
+  ]
+}

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>科研测量数值采集器（虚构数据演示）</title>
+<link rel="stylesheet" href="/static/app.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">科研测量数值采集器</div>
+  <div class="badge">本地虚构数据 · 非生产环境 · 数据集 <span id="dataset-id">加载中…</span></div>
+</header>
+
+<main class="layout">
+  <!-- 左栏：输入与操作（首屏可见） -->
+  <section class="panel panel-left">
+    <h2>1. 输入与采集配置</h2>
+
+    <label class="field">
+      <span>采集方式</span>
+      <select id="mode">
+        <option value="text">手动粘贴文本（每行一条）</option>
+        <option value="file">本地文件（JSON / CSV / TXT，规定文件接口）</option>
+        <option value="http">HTTP 公开接口（JSON / CSV / HTML）</option>
+        <option value="browser">浏览器 DOM（Playwright 读取渲染页面）</option>
+      </select>
+    </label>
+
+    <label class="field" id="locale-field">
+      <span>地区数字规则（必须显式选择；“未定”不猜测，歧义将报错）</span>
+      <select id="locale"></select>
+      <small id="locale-desc" class="muted"></small>
+    </label>
+
+    <label class="field" id="text-field">
+      <span>测量原文（保留原文逐行解析）</span>
+      <textarea id="text-input" rows="7" placeholder="例如：&#10;1,234.56 mg/L&#10;7.8E-3 mg/L&#10;-&#10;&lt; 0.01 mg/L"></textarea>
+    </label>
+
+    <label class="field hidden" id="path-field">
+      <span>文件路径（样例由生成器产出，见下方“可用样例”）</span>
+      <input id="path-input" type="text" placeholder="samples/source/measurements_en.json">
+    </label>
+
+    <label class="field hidden" id="url-field">
+      <span>接口 / 页面地址</span>
+      <input id="url-input" type="text" placeholder="/source/measurements.html">
+    </label>
+
+    <div class="btn-row">
+      <button id="run-task" class="primary">运行采集任务</button>
+      <button id="run-demo">运行示例</button>
+      <button id="run-acceptance">运行完整验收场景</button>
+    </div>
+
+    <details class="samples" id="samples-box">
+      <summary>可用样例与公开接口（虚构）</summary>
+      <div id="samples-content" class="muted">加载中…</div>
+    </details>
+
+    <details class="presets">
+      <summary>快捷填充输入</summary>
+      <div class="preset-row">
+        <button data-preset="ambiguous">歧义数字 1,234</button>
+        <button data-preset="acceptance">多格式混合</button>
+        <button data-preset="locales">各地区格式</button>
+      </div>
+    </details>
+  </section>
+
+  <!-- 右栏：结果（首屏可见汇总，证据可展开） -->
+  <section class="panel panel-right">
+    <h2>2. 采集与解析结果</h2>
+    <div id="status-bar" class="status-bar">尚未运行。结果仅来自真实执行，不预填成功状态。</div>
+    <div id="summary" class="summary hidden"></div>
+    <div id="results"></div>
+  </section>
+</main>
+
+<footer class="foot">
+  采集器与样例生成器分离 · 独立真值仅供测试断言 · 所有数值与机构均为虚构
+</footer>
+
+<script src="/static/app.js"></script>
+</body>
+</html>
