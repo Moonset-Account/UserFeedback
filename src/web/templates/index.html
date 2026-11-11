@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=1280" />
+  <title>RIP/1.0 科研资料增量采集演示</title>
+  <link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <h1>科研资料增量接口采集 <span class="protocol-badge">RIP/1.0</span></h1>
+    <p class="subtitle">初始对象 · 路径补丁 · 列表插入 · 局部错误 · 结束标志（全部为虚构数据）</p>
+  </div>
+  <div class="top-actions">
+    <button id="run-demo" class="btn btn-primary" type="button">▶ 运行示例（正常 + 边界）</button>
+  </div>
+</header>
+
+<main class="layout">
+  <!-- 左栏：配置与任务列表 -->
+  <section class="panel panel-left">
+    <h2>① 配置输入并运行</h2>
+    <label class="field-label" for="scenario-select">选择场景</label>
+    <select id="scenario-select" class="control"></select>
+    <p id="scenario-desc" class="scenario-desc"></p>
+
+    <label class="field-label" for="transport-select">采集接口</label>
+    <select id="transport-select" class="control">
+      <option value="http">HTTP 增量流（GET，NDJSON）</option>
+      <option value="file">本地 NDJSON 文件</option>
+    </select>
+
+    <button id="run-task" class="btn btn-secondary" type="button">运行该场景</button>
+
+    <h2 class="mt">② 任务列表</h2>
+    <div id="task-list" class="task-list">
+      <p class="placeholder">暂无任务，点击“运行示例”开始。</p>
+    </div>
+  </section>
+
+  <!-- 右栏：结果 -->
+  <section class="panel panel-right">
+    <div class="result-head">
+      <h2>③ 结果树与来源证据</h2>
+      <div id="result-summary" class="summary"></div>
+    </div>
+
+    <div id="empty-state" class="empty-state">
+      <p>运行任务后，这里会逐步展示每条补丁如何改变结果树。</p>
+      <ul>
+        <li>绿色：正常接收并应用；蓝色：挂起后重放；红色：拒绝或字段错误。</li>
+        <li>可拖动快照滑块回放补丁到达过程；证据与错误可展开查看原始消息。</li>
+      </ul>
+    </div>
+
+    <div id="result-area" class="hidden">
+      <div class="snapshot-bar">
+        <label for="snapshot-range">快照回放：</label>
+        <input id="snapshot-range" type="range" min="0" value="0" step="1" />
+        <span id="snapshot-label" class="snapshot-label"></span>
+      </div>
+
+      <div class="cards">
+        <div class="card">
+          <h3>发布结果树（不可变快照）</h3>
+          <div id="tree-view" class="tree-view"></div>
+        </div>
+        <div class="card">
+          <h3>状态与错误</h3>
+          <div id="status-view" class="status-view"></div>
+        </div>
+      </div>
+
+      <details class="evidence" open>
+        <summary>来源证据：逐条消息决策（<span id="decision-count">0</span> 条，点击行查看原始消息）</summary>
+        <div id="decision-view" class="decision-view"></div>
+      </details>
+
+      <details class="evidence">
+        <summary>任务运行记录</summary>
+        <div id="history-view" class="history-view"></div>
+      </details>
+    </div>
+  </section>
+</main>
+
+<div id="raw-modal" class="modal hidden" role="dialog" aria-modal="true">
+  <div class="modal-box">
+    <div class="modal-head">
+      <h3>原始消息证据</h3>
+      <button id="modal-close" class="btn btn-small" type="button">关闭</button>
+    </div>
+    <pre id="raw-content"></pre>
+  </div>
+</div>
+
+<footer class="footer">
+  采集器与样例生成器分离 · 采集仅经公开 HTTP/文件接口 · 独立真值仅测试使用 ·
+  协议子集见 <code>docs/PROTOCOL.md</code>
+</footer>
+
+<script src="/static/app.js"></script>
+</body>
+</html>
