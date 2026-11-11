@@ -1,0 +1,41 @@
+{
+  "scenario": "demo-normal",
+  "data_row_count": 3,
+  "columns": [
+    {
+      "key": "实验编号",
+      "kind": "id_text",
+      "hidden": false
+    },
+    {
+      "key": "样本编码",
+      "kind": "id_text",
+      "hidden": false
+    },
+    {
+      "key": "测定值",
+      "kind": "decimal",
+      "hidden": false
+    },
+    {
+      "key": "测定日期",
+      "kind": "date_text",
+      "hidden": false
+    },
+    {
+      "key": "备注",
+      "kind": "text",
+      "hidden": false
+    },
+    {
+      "key": "操作员",
+      "kind": "text",
+      "hidden": true
+    },
+    {
+      "key": "审核状态",
+      "kind": "text",
+      "hidden": false
+    }
+  ]
+}

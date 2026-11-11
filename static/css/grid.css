@@ -1,0 +1,139 @@
+/* 本地电子表格式控件样式 —— 仅为本 RPA 演示实现，不是通用表格管理系统 */
+* { box-sizing: border-box; }
+html, body {
+  margin: 0; padding: 0; height: 100%;
+  font-family: "PingFang SC", "Microsoft YaHei", "Segoe UI", sans-serif;
+  background: #f4f6fa; color: #1f2937;
+}
+.grid-page { display: flex; flex-direction: column; height: 100vh; padding: 10px 14px; }
+.grid-topbar {
+  display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+.grid-topbar h1 { font-size: 16px; margin: 0; flex: 0 0 auto; }
+.grid-topbar .scenario-tag {
+  font-size: 12px; background: #e0e7ff; color: #3730a3;
+  padding: 2px 8px; border-radius: 10px;
+}
+.toolbar {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 12px; background: #fff; border: 1px solid #d6dbe6;
+  border-radius: 6px; padding: 4px 8px;
+}
+.toolbar label { color: #6b7280; }
+.toolbar select {
+  font-size: 12px; padding: 2px 4px; border: 1px solid #c3cad6; border-radius: 4px;
+}
+#grid-status {
+  font-size: 12px; color: #374151; min-height: 18px;
+}
+#grid-status.error { color: #b91c1c; font-weight: 600; }
+#grid-status.ok { color: #047857; }
+
+.grid-scroll {
+  flex: 1; overflow: auto; border: 1px solid #c3cad6;
+  border-radius: 8px; background: #fff; position: relative;
+}
+table.rpa-grid {
+  border-collapse: separate; border-spacing: 0;
+  table-layout: fixed; font-size: 13px;
+}
+.rpa-grid th, .rpa-grid td {
+  border-right: 1px solid #d8dde7; border-bottom: 1px solid #d8dde7;
+  padding: 0; height: 34px; min-width: 132px; max-width: 220px;
+  position: relative; background: #fff;
+}
+.rpa-grid th {
+  background: #eef2f8; font-weight: 600; color: #334155;
+  position: sticky; z-index: 3;
+}
+tr.group-header th { top: 0; height: 30px; text-align: center; }
+tr.col-header th { top: 30px; height: 32px; text-align: center; }
+.col-header .kind-badge {
+  display: block; font-size: 10px; font-weight: 400; color: #6d7a90; margin-top: 1px;
+}
+/* 冻结列：行号列 + 两个标识列 */
+.frozen-col {
+  position: sticky; z-index: 2; background: #f8fafc;
+  box-shadow: 2px 0 5px -2px rgba(15, 23, 42, 0.25);
+}
+tr.col-header th.frozen-col, tr.group-header th.frozen-col { z-index: 4; background: #e6ecf5; }
+.row-head { min-width: 56px; width: 56px; left: 0; text-align: center; color: #64748b; }
+.frozen-1 { left: 56px; }
+.frozen-2 { left: 188px; }
+
+/* 隐藏列：display:none，自动化按可见标题定位时天然找不到 */
+.col-hidden { display: none; }
+
+/* 单元格输入控件 */
+td .cell-input {
+  width: 100%; height: 100%; border: 0; outline: none;
+  padding: 4px 8px; font: inherit; background: transparent; color: inherit;
+  white-space: pre;            /* 保留制表符/换行，不做空白折叠 */
+  overflow: hidden;
+}
+td.cell-readonly { background: #f1f3f7; }
+td.cell-readonly .cell-input {
+  color: #7b8496; cursor: not-allowed; background: repeating-linear-gradient(
+    45deg, transparent, transparent 6px, rgba(148,163,184,0.12) 6px,
+    rgba(148,163,184,0.12) 12px);
+}
+td.cell-readonly .ro-flag {
+  position: absolute; right: 4px; top: 2px; font-size: 9px; color: #94a3b8;
+}
+td.cell-number .cell-input { text-align: right; font-variant-numeric: tabular-nums; }
+td.cell-text { }
+td.cell-empty .cell-input { color: #9ca3af; font-style: italic; }
+td.cell-missing { background: #fcfcfd; }
+td.cell-missing .missing-mark {
+  position: absolute; left: 8px; top: 50%; transform: translateY(-50%);
+  color: #c3cad6; font-size: 11px; pointer-events: none;
+}
+td.cell-focused {
+  outline: 2px solid #4f46e5; outline-offset: -2px; z-index: 1;
+}
+td.cell-danger .danger-dot {
+  position: absolute; left: 3px; top: 3px; width: 8px; height: 8px;
+  border-radius: 50%; background: #dc2626;
+}
+.cell-type-tag {
+  position: absolute; right: 4px; bottom: 1px; font-size: 9px;
+  color: #94a3b8; pointer-events: none;
+}
+
+/* 模态多行编辑器：用于含制表符/换行的文本，真实粘贴保留全部字符 */
+.modal-mask {
+  position: fixed; inset: 0; background: rgba(15, 23, 42, 0.45);
+  display: none; align-items: center; justify-content: center; z-index: 50;
+}
+.modal-mask.open { display: flex; }
+.modal-box {
+  width: 560px; max-width: 92vw; background: #fff; border-radius: 10px;
+  padding: 16px 18px; box-shadow: 0 18px 48px rgba(15, 23, 42, 0.35);
+}
+.modal-box h2 { font-size: 14px; margin: 0 0 8px; }
+.modal-box .modal-meta { font-size: 12px; color: #6b7280; margin-bottom: 8px; }
+.modal-box textarea {
+  width: 100%; height: 150px; resize: vertical; font: inherit;
+  border: 1px solid #c3cad6; border-radius: 6px; padding: 8px;
+  white-space: pre; tab-size: 4;
+}
+.modal-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 10px; }
+.modal-actions button {
+  font-size: 13px; padding: 5px 16px; border-radius: 6px; border: 1px solid #c3cad6;
+  background: #fff; cursor: pointer;
+}
+.modal-actions .primary { background: #4f46e5; color: #fff; border-color: #4f46e5; }
+.modal-hint { font-size: 11px; color: #94a3b8; margin-top: 6px; }
+
+/* 粘贴拦截提示条 */
+.paste-toast {
+  position: fixed; top: 12px; left: 50%; transform: translateX(-50%);
+  background: #b91c1c; color: #fff; padding: 8px 18px; border-radius: 8px;
+  font-size: 13px; z-index: 60; display: none; max-width: 80vw;
+}
+.paste-toast.show { display: block; }
+.paste-toast.ok { background: #047857; }
+
+.legend { display: flex; gap: 14px; font-size: 11px; color: #6b7280; flex-wrap: wrap; }
+.legend span::before { content: "▪ "; }

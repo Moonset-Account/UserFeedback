@@ -1,0 +1,31 @@
+{
+  "title": "演示场景 B：边界与危险输入（小样例）",
+  "frozen_col_count": 2,
+  "hidden_columns": [
+    "操作员"
+  ],
+  "readonly_cells": [
+    {
+      "row": 1,
+      "column": "审核状态"
+    }
+  ],
+  "merged_headers": [
+    {
+      "label": "标识信息",
+      "from": "实验编号",
+      "to": "样本编码"
+    },
+    {
+      "label": "测量结果",
+      "from": "测定值",
+      "to": "测定日期"
+    },
+    {
+      "label": "管理字段",
+      "from": "备注",
+      "to": "审核状态"
+    }
+  ],
+  "row_label_header": "行号"
+}

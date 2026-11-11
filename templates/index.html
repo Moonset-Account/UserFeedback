@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>类型化实验矩阵 RPA 录入系统</title>
+  <link rel="stylesheet" href="/static/css/app.css" />
+</head>
+<body>
+<header class="app-header">
+  <div class="brand">
+    <span class="logo">⌗</span>
+    <div>
+      <h1>类型化实验矩阵 RPA 录入系统</h1>
+      <p class="subtitle">结构化数据 → 本地电子表格式控件 · 保真区分前导零 / 十进制 / 日期文本 / 空串 / 缺失</p>
+    </div>
+  </div>
+  <div class="header-actions">
+    <a class="ghost-link" href="/grid?scenario=demo-edge" target="_blank">打开目标控件（新标签）</a>
+  </div>
+</header>
+
+<main class="layout">
+  <!-- 左栏：配置与运行（首屏可见） -->
+  <section class="panel panel-control">
+    <h2>① 选择场景并运行</h2>
+
+    <div class="demo-block">
+      <button id="run-demo" class="btn btn-primary btn-lg">▶ 运行示例（正常 + 边界，15 秒内）</button>
+      <p class="hint">依次执行 <b>demo-normal</b>（常规保真）与 <b>demo-edge</b>
+        （公式样式 / 制表符换行 / 只读 / 隐藏列），两份结果都会保留。</p>
+      <div id="demo-progress" class="demo-progress" hidden></div>
+    </div>
+
+    <div class="divider"><span>更完整的验收场景</span></div>
+
+    <label class="field-label" for="scenario-select">选择场景</label>
+    <select id="scenario-select" class="input"></select>
+    <p id="scenario-desc" class="hint"></p>
+    <ul id="scenario-traits" class="traits"></ul>
+
+    <label class="check-line">
+      <input type="checkbox" id="headless-toggle" checked />
+      无头模式运行（取消勾选可观察浏览器动作）
+    </label>
+
+    <button id="run-scenario" class="btn btn-secondary">运行所选场景</button>
+
+    <div class="protocol-note">
+      <h3>声明支持的协议子集</h3>
+      <p>输入为 UTF-8 的 TSV（RFC 4180 双引号子集，分隔符为水平制表符；兼容逗号 CSV）。
+        引号内可含制表符、换行、转义引号；不做公式求值与类型推断。
+        采集仅经本机公开接口 <code>/samples/&lt;场景&gt;/matrix.tsv</code>，
+        独立真值 truth.json 不暴露任何接口，仅供测试。</p>
+    </div>
+  </section>
+
+  <!-- 右栏：任务与结果（首屏可见摘要，证据可展开） -->
+  <section class="panel panel-result">
+    <h2>② 任务结果与来源证据</h2>
+    <div class="task-toolbar">
+      <button id="refresh-tasks" class="btn btn-small">刷新列表</button>
+      <span id="live-tip" class="hint">结果来自真实执行，页面不预填任何成功状态。</span>
+    </div>
+    <div id="task-list" class="task-list">
+      <p class="empty-tip">暂无任务，点击左侧「运行示例」开始。</p>
+    </div>
+
+    <div id="task-detail" class="task-detail" hidden>
+      <div class="detail-head">
+        <h3 id="detail-title">任务详情</h3>
+        <button id="close-detail" class="btn btn-small">收起</button>
+      </div>
+
+      <div id="detail-summary" class="summary-grid"></div>
+      <div id="detail-messages" class="msg-log"></div>
+
+      <details class="evidence-block" open>
+        <summary>来源证据</summary>
+        <pre id="detail-evidence" class="code-block"></pre>
+      </details>
+
+      <details class="evidence-block">
+        <summary>逐格结果（成功 / 拒绝 / 失败 / 跳过，失败不被成功掩盖）</summary>
+        <div class="filter-line">
+          <label>筛选：
+            <select id="outcome-filter">
+              <option value="all">全部</option>
+              <option value="failed">仅失败</option>
+              <option value="rejected">仅拒绝</option>
+              <option value="success">仅成功</option>
+              <option value="skipped">仅跳过(缺失)</option>
+            </select>
+          </label>
+        </div>
+        <div class="table-wrap">
+          <table id="outcome-table" class="outcome-table">
+            <thead>
+              <tr><th>行</th><th>列</th><th>期望类型</th><th>期望显示值</th>
+                <th>策略</th><th>状态</th><th>说明 / 差异</th><th>回读值</th></tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </details>
+
+      <details class="evidence-block">
+        <summary>浏览器截图</summary>
+        <img id="detail-screenshot" class="shot" alt="执行后网格截图" />
+      </details>
+    </div>
+  </section>
+</main>
+
+<footer class="app-footer">
+  全部数据为虚构生成 · 不依赖真实账户 / 外部业务服务 / Docker ·
+  启动：<code>python3 app.py --host 127.0.0.1 --port 8765</code>
+</footer>
+
+<script src="/static/js/app.js"></script>
+</body>
+</html>

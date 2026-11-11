@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>本地电子表格式控件 · RPA 录入目标</title>
+  <link rel="stylesheet" href="/static/css/grid.css" />
+</head>
+<body>
+<div class="grid-page">
+  <div class="grid-topbar">
+    <h1 id="grid-title">实验矩阵录入控件</h1>
+    <span class="scenario-tag" id="scenario-tag">—</span>
+    <div class="toolbar">
+      <label for="fmt-select">当前格格式：</label>
+      <select id="fmt-select">
+        <option value="auto">自动</option>
+        <option value="text">文本</option>
+        <option value="number">数值</option>
+      </select>
+      <span id="grid-status" aria-live="polite">就绪：双击或选中后直接输入；含制表符/换行请双击打开多行编辑器。</span>
+    </div>
+    <div class="legend">
+      <span style="color:#7b8496">斜纹=只读</span>
+      <span style="color:#c3cad6">∅=缺失(未写入)</span>
+      <span style="color:#dc2626">●=公式样式(文本锁定)</span>
+      <span style="color:#94a3b8">隐藏列不在 DOM 可见集合中</span>
+    </div>
+  </div>
+
+  <div class="grid-scroll" id="grid-scroll">
+    <table class="rpa-grid" id="rpa-grid">
+      <thead id="grid-thead"></thead>
+      <tbody id="grid-tbody"></tbody>
+    </table>
+  </div>
+</div>
+
+<!-- 多行编辑器（真实粘贴入口，保留制表符与换行） -->
+<div class="modal-mask" id="modal-mask" role="dialog" aria-modal="true">
+  <div class="modal-box">
+    <h2>多行文本编辑器</h2>
+    <div class="modal-meta" id="modal-meta"></div>
+    <textarea id="modal-textarea" spellcheck="false"></textarea>
+    <div class="modal-hint">
+      支持直接粘贴含制表符（⇥）与换行（⏎）的文本；Ctrl/⌘+Enter 确认，Esc 取消。
+      内容原样保存，不做公式求值。
+    </div>
+    <div class="modal-actions">
+      <button id="modal-cancel">取消 (Esc)</button>
+      <button class="primary" id="modal-ok">确认 (⌘/Ctrl+Enter)</button>
+    </div>
+  </div>
+</div>
+
+<div class="paste-toast" id="paste-toast"></div>
+
+<script src="/static/js/grid.js"></script>
+</body>
+</html>

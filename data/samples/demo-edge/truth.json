@@ -1,0 +1,174 @@
+{
+  "scenario": "demo-edge",
+  "note": "独立真值，仅供测试；采集器禁止读取本文件。",
+  "cells": [
+    {
+      "row": 0,
+      "column": "实验编号",
+      "kind": "id_text",
+      "raw_text": "EXP-101",
+      "writable": true,
+      "expect_status": "success"
+    },
+    {
+      "row": 0,
+      "column": "样本编码",
+      "kind": "id_text",
+      "raw_text": "0001",
+      "writable": true,
+      "expect_status": "success"
+    },
+    {
+      "row": 0,
+      "column": "测定值",
+      "kind": "decimal",
+      "raw_text": "3.14",
+      "writable": true,
+      "expect_status": "success"
+    },
+    {
+      "row": 0,
+      "column": "测定日期",
+      "kind": "date_text",
+      "raw_text": "2026-11-05",
+      "writable": true,
+      "expect_status": "success"
+    },
+    {
+      "row": 0,
+      "column": "备注",
+      "kind": "text",
+      "raw_text": "批次A\t第一行\n第二行",
+      "writable": true,
+      "expect_status": "success"
+    },
+    {
+      "row": 0,
+      "column": "操作员",
+      "kind": "text",
+      "raw_text": "虚拟操作员丙",
+      "writable": false,
+      "expect_status": "rejected"
+    },
+    {
+      "row": 0,
+      "column": "审核状态",
+      "kind": "text",
+      "raw_text": "=1+1",
+      "writable": true,
+      "expect_status": "success"
+    },
+    {
+      "row": 1,
+      "column": "实验编号",
+      "kind": "id_text",
+      "raw_text": "EXP-102",
+      "writable": true,
+      "expect_status": "success"
+    },
+    {
+      "row": 1,
+      "column": "样本编码",
+      "kind": "id_text",
+      "raw_text": "0002",
+      "writable": true,
+      "expect_status": "success"
+    },
+    {
+      "row": 1,
+      "column": "测定值",
+      "kind": "decimal",
+      "raw_text": "-2.75",
+      "writable": true,
+      "expect_status": "success"
+    },
+    {
+      "row": 1,
+      "column": "测定日期",
+      "kind": "date_text",
+      "raw_text": "2026-11-06",
+      "writable": true,
+      "expect_status": "success"
+    },
+    {
+      "row": 1,
+      "column": "备注",
+      "kind": "text",
+      "raw_text": "=cmd|' /C notepad'!A1",
+      "writable": true,
+      "expect_status": "success"
+    },
+    {
+      "row": 1,
+      "column": "操作员",
+      "kind": "text",
+      "raw_text": "虚拟操作员丁",
+      "writable": false,
+      "expect_status": "rejected"
+    },
+    {
+      "row": 1,
+      "column": "审核状态",
+      "kind": "text",
+      "raw_text": "@SUM(1,2)",
+      "writable": false,
+      "expect_status": "rejected"
+    },
+    {
+      "row": 2,
+      "column": "实验编号",
+      "kind": "id_text",
+      "raw_text": "EXP-103",
+      "writable": true,
+      "expect_status": "success"
+    },
+    {
+      "row": 2,
+      "column": "样本编码",
+      "kind": "id_text",
+      "raw_text": "0003",
+      "writable": true,
+      "expect_status": "success"
+    },
+    {
+      "row": 2,
+      "column": "测定值",
+      "kind": "decimal",
+      "raw_text": "100.00",
+      "writable": true,
+      "expect_status": "success"
+    },
+    {
+      "row": 2,
+      "column": "测定日期",
+      "kind": "date_text",
+      "raw_text": "2026-11-07",
+      "writable": true,
+      "expect_status": "success"
+    },
+    {
+      "row": 2,
+      "column": "备注",
+      "kind": "text",
+      "raw_text": "含\"引号\"与\r回车的文本",
+      "writable": true,
+      "expect_status": "success"
+    },
+    {
+      "row": 2,
+      "column": "操作员",
+      "kind": "missing",
+      "raw_text": null,
+      "writable": false,
+      "expect_status": "rejected"
+    },
+    {
+      "row": 2,
+      "column": "审核状态",
+      "kind": "text",
+      "raw_text": "+1-2",
+      "writable": true,
+      "expect_status": "success"
+    }
+  ]
+}
