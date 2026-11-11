@@ -1,0 +1,30 @@
+[
+  {
+    "id": "APV-ALPINE-2026-01",
+    "registry": "registry.example.com",
+    "repository": "runtime/alpine",
+    "tag": "3.20",
+    "digest": "sha256:1111111111111111111111111111111111111111111111111111111111111111"
+  },
+  {
+    "id": "APV-BUILDER-V3",
+    "registry": "registry.example.com",
+    "repository": "team/builder",
+    "tag": "v3",
+    "digest": "sha256:2222222222222222222222222222222222222222222222222222222222222222"
+  },
+  {
+    "id": "APV-JQ-17",
+    "registry": "registry.example.com",
+    "repository": "tools/jq",
+    "tag": "1.7",
+    "digest": "sha256:9999999999999999999999999999999999999999999999999999999999999999"
+  },
+  {
+    "id": "APV-CACERTS-MIRROR",
+    "registry": "mirror.corp.internal",
+    "repository": "infra/cacerts",
+    "tag": "2026",
+    "digest": "sha256:3333333333333333333333333333333333333333333333333333333333333333"
+  }
+]

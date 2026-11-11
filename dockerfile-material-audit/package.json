@@ -1,0 +1,17 @@
+{
+  "name": "dockerfile-material-audit",
+  "version": "1.0.0",
+  "description": "简化 Dockerfile 外部材料内容摘要绑定审计器（只读文本审计，不执行构建）",
+  "type": "module",
+  "bin": {
+    "dockerfile-material-audit": "bin/audit.js"
+  },
+  "scripts": {
+    "test": "node --test test/*.test.js",
+    "demo": "node bin/audit.js --dockerfile examples/Dockerfile --target runtime --params examples/build-params.json --approvals examples/approvals.json"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  }
+}

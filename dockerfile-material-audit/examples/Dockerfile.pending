@@ -1,0 +1,4 @@
+# 待核实示例：全局 ARG 无默认值，且构建参数未提供
+ARG RUNTIME_BASE
+FROM ${RUNTIME_BASE}:1.0 AS runtime
+COPY . /srv

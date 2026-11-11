@@ -1,0 +1,5 @@
+{
+  "BASE_REGISTRY": "registry.example.com",
+  "BASE_IMAGE": "team/builder",
+  "BASE_TAG": "v3"
+}
