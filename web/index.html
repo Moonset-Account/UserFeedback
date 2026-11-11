@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1280">
+  <title>公开天文观测窗口 · iCalendar 采集器</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<div class="app">
+  <header class="topbar">
+    <h1>公开天文观测窗口 · iCalendar 采集器</h1>
+    <div class="topbar-actions">
+      <button id="run-demo" type="button">▶ 运行示例（正常 + 边界）</button>
+      <span id="demo-status" class="demo-status"></span>
+    </div>
+  </header>
+
+  <main class="layout">
+    <!-- 左栏：配置与状态 -->
+    <section class="panel config-panel">
+      <h2>采集配置</h2>
+      <label class="field">
+        <span>样例选择（完整验收场景在此切换）</span>
+        <select id="preset-select"></select>
+      </label>
+      <label class="field">
+        <span>来源（公开 HTTP 接口或本地文件路径）</span>
+        <input id="source-input" type="text" spellcheck="false">
+      </label>
+      <div class="field-row">
+        <label class="field">
+          <span>查询范围起</span>
+          <input id="range-start" type="text" placeholder="2026-09-01">
+        </label>
+        <label class="field">
+          <span>查询范围止（不含）</span>
+          <input id="range-end" type="text" placeholder="2026-10-11">
+        </label>
+      </div>
+      <label class="field">
+        <span>展开规模上限（实例数）</span>
+        <input id="max-instances" type="number" value="5000" min="1" max="50000">
+      </label>
+      <label class="field">
+        <span>存储目标名（按目标整体替换，不按开始时间合并）</span>
+        <input id="target-name" type="text" placeholder="可选，例如 my_target">
+      </label>
+      <div class="button-row">
+        <button id="run-collect" class="primary" type="button">运行采集任务</button>
+        <button id="reset-form" type="button">重置</button>
+      </div>
+
+      <div class="subset">
+        <h3>支持的协议子集</h3>
+        <div id="subset-content" class="subset-content">加载中…</div>
+      </div>
+    </section>
+
+    <!-- 右栏：结果 -->
+    <section class="panel result-panel">
+      <div class="result-head">
+        <h2>采集结果</h2>
+        <div id="run-summary" class="run-summary">尚未运行。结果仅来自真实执行，不预填成功。</div>
+      </div>
+
+      <div id="issue-banner" class="issue-banner hidden"></div>
+
+      <h3 class="timeline-title">实例时间轴（点击色块查看实例来源解释）</h3>
+      <div id="timeline" class="timeline">
+        <div class="empty-hint">暂无数据</div>
+      </div>
+
+      <div class="legend">
+        <span class="chip master">主规则</span>
+        <span class="chip rdate">RDATE 加场</span>
+        <span class="chip move">例外移动</span>
+        <span class="chip cancel">例外取消</span>
+        <span class="note">虚线边框 = 浮动时间（源数据未声明时区）</span>
+      </div>
+
+      <details id="detail-box" class="detail-box">
+        <summary>实例详情 / 来源证据</summary>
+        <pre id="detail-content">点击时间轴上的实例查看。</pre>
+      </details>
+
+      <details class="evidence-box">
+        <summary>来源证据与问题清单（展开）</summary>
+        <pre id="evidence-content">暂无。</pre>
+      </details>
+
+      <details class="runs-box">
+        <summary>历史运行记录（展开）</summary>
+        <div id="runs-content"></div>
+      </details>
+    </section>
+  </main>
+</div>
+<script src="/static/app.js"></script>
+</body>
+</html>

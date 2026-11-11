@@ -1,0 +1,5 @@
+# iCalendar 采集器运行依赖（Python 3.11+）
+icalendar==5.0.13
+python-dateutil==2.9.0.post0
+# zoneinfo 在 Windows 上缺少系统时区库，tzdata 提供兜底（macOS/Linux 也会优先使用系统库）
+tzdata==2024.2

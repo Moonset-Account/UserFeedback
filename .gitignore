@@ -9,3 +9,8 @@ node_modules/
 .venv/
 __pycache__/
 .DS_Store
+
+# 本项目运行期产物（样例源与真值可由生成器重建，存储结果不入库）
+generated/
+*.pyc
+.pytest_cache/
