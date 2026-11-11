@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>公开标本目录 · 有界蓄水池抽样采集</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<header class="topbar">
+  <div>
+    <h1>公开标本目录 · 有界蓄水池抽样采集</h1>
+    <p class="sub">虚构数据本地演示 ｜ 目录规模未知、条目跨页重复 ｜ 预算耗尽时仅声明“已观察集合”结论</p>
+  </div>
+  <div class="topbar-right">
+    <button id="run-demo" class="btn btn-primary" type="button">▶ 运行示例（正常 + 预算边界，15 秒内）</button>
+    <span id="demo-timer" class="timer" hidden></span>
+  </div>
+</header>
+
+<main class="grid">
+  <!-- 左栏：配置与任务 -->
+  <section class="panel panel-left">
+    <h2>① 配置并运行任务</h2>
+    <form id="task-form">
+      <label>目录入口（相对源站路径或完整 URL）
+        <input id="start_url" name="start_url" value="/api/catalog" spellcheck="false" required>
+      </label>
+      <div class="row3">
+        <label>随机种子
+          <input id="seed" name="seed" type="number" value="20261111" required>
+        </label>
+        <label>样本量 k
+          <input id="sample_size" name="sample_size" type="number" min="0" value="12" required>
+        </label>
+        <label>请求预算（页请求上限）
+          <input id="request_budget" name="request_budget" type="number" min="1" value="30" required>
+        </label>
+      </div>
+      <div class="row2">
+        <label>采集通道
+          <select id="transport" name="transport">
+            <option value="http">HTTP（requests + 协议解析）</option>
+            <option value="browser">浏览器（Playwright / Chromium，HTML 页）</option>
+          </select>
+        </label>
+        <label>任务备注
+          <input id="label" name="label" value="自定义任务">
+        </label>
+      </div>
+      <div class="actions">
+        <button class="btn btn-primary" type="submit">运行采集任务</button>
+        <select id="scenario-select" title="选择更完整的验收场景"></select>
+        <button class="btn" id="run-scenario" type="button">运行选中验收场景</button>
+      </div>
+      <p class="hint" id="source-hint"></p>
+    </form>
+
+    <h2>② 任务列表与状态</h2>
+    <div id="task-list" class="task-list">
+      <p class="muted">尚无任务。点击“运行示例”或提交配置开始；结果均来自真实执行。</p>
+    </div>
+  </section>
+
+  <!-- 右栏：当前结果 -->
+  <section class="panel panel-right">
+    <div class="panel-head">
+      <h2>③ 当前任务结果</h2>
+      <div id="status-badge" class="badge badge-idle">未运行</div>
+    </div>
+    <div id="result-empty" class="muted">运行任务后在此查看状态、扫描边界、声明与来源证据。</div>
+
+    <div id="result-body" hidden>
+      <div class="stat-grid">
+        <div class="stat"><span class="stat-num" id="st-raw">–</span><span class="stat-label">原始条目（含重复）</span></div>
+        <div class="stat"><span class="stat-num" id="st-dup">–</span><span class="stat-label">重复条目</span></div>
+        <div class="stat"><span class="stat-num" id="st-unique">–</span><span class="stat-label">观察到唯一 ID</span></div>
+        <div class="stat"><span class="stat-num" id="st-sample">–</span><span class="stat-label">最终样本数</span></div>
+        <div class="stat"><span class="stat-num" id="st-requests">–</span><span class="stat-label">请求 / 预算</span></div>
+      </div>
+
+      <div id="declaration" class="declaration"></div>
+      <div id="scan-boundary" class="boundary"></div>
+
+      <h3>最终样本与来源页</h3>
+      <div class="table-wrap">
+        <table id="sample-table">
+          <thead><tr><th>#</th><th>标本 ID</th><th>名称</th><th>来源页</th><th>来源页 URL</th><th>详情证据</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+
+      <details class="evidence">
+        <summary>入样替换过程（Algorithm R 全部事件，含随机数与槽位）</summary>
+        <div class="table-wrap">
+          <table id="events-table">
+            <thead><tr><th>流序号</th><th>ID</th><th>随机数</th><th>动作</th><th>槽位</th><th>被挤出</th><th>事件后蓄水池</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </details>
+
+      <details class="evidence">
+        <summary>逐页扫描证据（每页原始数 / 新增唯一 / 重复 / 累计请求）</summary>
+        <div class="table-wrap">
+          <table id="pages-table">
+            <thead><tr><th>页号</th><th>HTTP</th><th>原始条目</th><th>新增唯一</th><th>重复</th><th>累计请求</th><th>URL</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </details>
+
+      <details class="evidence">
+        <summary>错误信息与原始 JSON</summary>
+        <pre id="raw-json" class="raw"></pre>
+      </details>
+    </div>
+
+    <details class="evidence freq-block">
+      <summary>④ 小总体多种子频率检验（附覆盖性免责声明）</summary>
+      <div class="row3">
+        <label>总体 M<input id="fq-pop" type="number" value="25" min="2" max="200"></label>
+        <label>样本 k<input id="fq-k" type="number" value="5" min="1"></label>
+        <label>试验次数<input id="fq-trials" type="number" value="2000" min="100" max="20000"></label>
+      </div>
+      <button class="btn" id="run-freq" type="button">运行频率检验</button>
+      <div id="freq-result"></div>
+    </details>
+  </section>
+</main>
+
+<footer class="foot">
+  全部数据为虚构生成，不依赖真实账户或外部业务服务 ｜ 采集器仅经公开 HTTP/浏览器接口采集，独立真值仅供测试 ｜
+  支持协议子集见 README
+</footer>
+<script src="/static/app.js"></script>
+</body>
+</html>
