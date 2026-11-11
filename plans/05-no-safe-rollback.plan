@@ -1,0 +1,25 @@
+# 05-no-safe-rollback.plan
+# Two services must run lockstep versions. After both are patched, the only
+# available rollback reverts svc-x into a version incompatible with svc-y,
+# and no rollback action exists for P2 at all. Conflict evidence required.
+service svc-x v1
+service svc-y v1
+
+patch P1 svc-x v1 -> v2
+patch P2 svc-y v1 -> v2 deps=P1
+
+# Lockstep rules, plus the one intermediate state reached while staging.
+compat svc-x v1 svc-y v1
+compat svc-x v2 svc-y v1
+compat svc-x v2 svc-y v2
+# Deliberately missing: svc-x v1 <-> svc-y v2 (the rollback target).
+
+window W1 capacity=2
+
+step 1 P1 window=W1
+step 2 P2 window=W1
+
+# Only P1 has a rollback action; P2 cannot be reverted.
+rollback R1 patch=P1
+
+failure F1 after=2 budget=2

@@ -1,0 +1,24 @@
+# 08-version-mismatch.plan
+# Step 2 puts svc-a v2 next to svc-b v1, which no compat rule allows.
+# The breach must name both services and both involved versions.
+service svc-a v1
+service svc-b v1
+
+patch P1 svc-a v1 -> v2
+patch P2 svc-b v1 -> v2 deps=P1
+
+# Step 1 is allowed via the staging pair; step 2 then violates compat
+# because svc-b v2 is not paired with svc-a v2 in any rule below.
+compat svc-a v1 svc-b v1
+compat svc-a v2 svc-b v1
+# Deliberately missing: svc-a v2 <-> svc-b v2.
+
+window W1 capacity=2
+
+step 1 P1 window=W1
+step 2 P2 window=W1
+
+rollback R1 patch=P1
+rollback R2 patch=P2
+
+failure F1 after=1 budget=1

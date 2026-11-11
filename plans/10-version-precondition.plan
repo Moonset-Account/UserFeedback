@@ -1,0 +1,24 @@
+# 10-version-precondition.plan
+# P3 expects svc-a at v2, but P1 (the v1->v2 change) is not in the order.
+# The earliest breach must be VERSION_PRECONDITION with both versions named.
+service svc-a v1
+service svc-b v1
+
+patch P1 svc-a v1 -> v2
+patch P2 svc-b v1 -> v2
+patch P3 svc-a v2 -> v3 deps=P2
+
+compat svc-a v1 svc-b v1
+compat svc-a v1 svc-b v2
+compat svc-a v2 svc-b v2
+compat svc-a v3 svc-b v2
+
+window W1 capacity=3
+
+step 1 P2 window=W1
+step 2 P3 window=W1
+
+rollback R2 patch=P2
+rollback R3 patch=P3
+
+failure F1 after=1 budget=1

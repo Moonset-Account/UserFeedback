@@ -1,0 +1,44 @@
+# 06-unique-valid-path.plan
+# Three services, six possible rollback orderings, but compatibility allows
+# exactly one: RC -> RB -> RA. The validator must select that single path
+# and the exhaustive cross-check must report 1 safe permutation out of 6.
+service svc-a v1
+service svc-b v1
+service svc-c v1
+
+patch PA svc-a v1 -> v2 deps=PB
+patch PB svc-b v1 -> v2 deps=PC
+patch PC svc-c v1 -> v2
+
+# Forward staging order: PC -> PB -> PA.
+# On rollback the blocked pairs force exactly one order: RA -> RB -> RC
+# (verified exhaustively: 1 safe permutation out of 6).
+#   blocked: (svc-a v2, svc-b v1)  -> RA cannot be followed by RB before RC?
+#   blocked: (svc-b v2, svc-c v1)  -> RC cannot precede RB
+# The asymmetry: forward needs the staging states (a1,b2) and (a1,c2),
+# while rollback must unwind the same chain in reverse application order.
+# svc-a / svc-b pair
+compat svc-a v1 svc-b v1
+compat svc-a v1 svc-b v2
+compat svc-a v2 svc-b v2
+# svc-b / svc-c pair
+compat svc-b v1 svc-c v1
+compat svc-b v1 svc-c v2
+compat svc-b v2 svc-c v2
+# svc-a / svc-c pair
+compat svc-a v1 svc-c v1
+compat svc-a v1 svc-c v2
+compat svc-a v2 svc-c v1
+compat svc-a v2 svc-c v2
+
+window W1 capacity=3
+
+step 1 PC window=W1
+step 2 PB window=W1
+step 3 PA window=W1
+
+rollback RA patch=PA
+rollback RB patch=PB
+rollback RC patch=PC
+
+failure F1 after=3 budget=3

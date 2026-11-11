@@ -1,0 +1,26 @@
+# 03-mutex-patches.plan
+# P1 and P2 are mutually exclusive; applying P2 after P1 must be reported
+# as the earliest breach at step 2.
+service auth-svc  v1
+service cache-svc v1
+
+patch P1 auth-svc  v1 -> v2 mutex=P2
+patch P2 cache-svc v1 -> v2 mutex=P1
+patch P3 auth-svc  v2 -> v3 deps=P1
+
+compat auth-svc v1 cache-svc v1
+compat auth-svc v2 cache-svc v1
+compat auth-svc v3 cache-svc v2
+
+window W1 capacity=2
+window W2 capacity=1
+
+step 1 P1 window=W1
+step 2 P2 window=W1
+step 3 P3 window=W2
+
+rollback R1 patch=P1
+rollback R2 patch=P2
+rollback R3 patch=P3
+
+failure F1 after=1 budget=1

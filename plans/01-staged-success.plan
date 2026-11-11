@@ -1,0 +1,35 @@
+# 01-staged-success.plan
+# Three services patched in two maintenance windows.
+# A failure after the first batch must be rollable-back safely.
+service auth-svc   v1
+service order-svc  v1
+service pay-svc    v1
+
+patch P1 auth-svc  v1 -> v2 deps=
+patch P2 order-svc v1 -> v2 deps=P1
+patch P3 pay-svc   v1 -> v2 deps=P2
+
+# Cross-service compatibility rules (only constrained pairs listed).
+compat auth-svc  v1 order-svc v1
+compat auth-svc  v2 order-svc v1
+compat auth-svc  v2 order-svc v2
+compat order-svc v1 pay-svc   v1
+compat order-svc v2 pay-svc   v1
+compat order-svc v2 pay-svc   v2
+compat auth-svc  v1 pay-svc   v1
+compat auth-svc  v2 pay-svc   v1
+compat auth-svc  v2 pay-svc   v2
+
+window W1 capacity=1
+window W2 capacity=2
+
+step 1 P1 window=W1
+step 2 P2 window=W2
+step 3 P3 window=W2
+
+rollback R1 patch=P1
+rollback R2 patch=P2
+rollback R3 patch=P3
+
+# Failure right after the first batch (P1 applied, W2 not started yet).
+failure F1 after=1 budget=1

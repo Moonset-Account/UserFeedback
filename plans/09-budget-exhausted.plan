@@ -1,0 +1,25 @@
+# 09-budget-exhausted.plan
+# All rollback transitions are compatibility-safe, but the failure's
+# rollback budget only allows 2 of the 3 required actions. The validator
+# must report ROLLBACK_BUDGET_EXHAUSTED evidence and no safe sequence.
+service svc-a v1
+service svc-b v1
+service svc-c v1
+
+patch PA svc-a v1 -> v2
+patch PB svc-b v1 -> v2
+patch PC svc-c v1 -> v2
+
+# No compat rules: no transition is blocked by compatibility.
+
+window W1 capacity=3
+
+step 1 PA window=W1
+step 2 PB window=W1
+step 3 PC window=W1
+
+rollback RA patch=PA
+rollback RB patch=PB
+rollback RC patch=PC
+
+failure F1 after=3 budget=2
