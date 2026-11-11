@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block title %}{{ experiment_id }} · 动态导出页{% endblock %}
+{% block content %}
+<article class="experiment-card">
+  <h1>实验数据导出（动态页面）</h1>
+  <dl class="meta-list">
+    <dt>实验编号</dt><dd id="experiment-id" class="mono">{{ experiment_id }}</dd>
+    <dt>稳定业务版本</dt><dd id="business-version" class="mono">加载中…</dd>
+    <dt>链接有效期</dt><dd id="ttl-line">加载中…</dd>
+  </dl>
+
+  <section class="download-box">
+    <p class="hint">本页面下载地址由 JavaScript 渲染注入，纯 HTTP 抓取看不到链接。</p>
+    <div id="link-slot">
+      <p class="small muted">正在向源站申请短时链接…</p>
+    </div>
+  </section>
+</article>
+<script>
+// 模拟前端渲染：向同源引导接口取数，再把锚点注入 DOM。
+(async function () {
+  try {
+    const resp = await fetch('/api/bootstrap/{{ spec.id }}');
+    if (!resp.ok) throw new Error('bootstrap http ' + resp.status);
+    const data = await resp.json();
+    document.getElementById('business-version').textContent = data.version;
+    document.getElementById('ttl-line').textContent =
+      data.expires_in + ' 秒（一次性链接，过期或使用后失效）';
+    const slot = document.getElementById('link-slot');
+    slot.innerHTML = '';
+    const a = document.createElement('a');
+    a.id = 'download-link';
+    a.className = 'btn-primary';
+    a.href = data.download_url;
+    a.dataset.expires = String(data.expires_in);
+    a.textContent = '下载实验导出包（ZIP）';
+    slot.appendChild(a);
+    const p = document.createElement('p');
+    p.className = 'mono small';
+    p.id = 'link-url';
+    p.textContent = data.download_url;
+    slot.appendChild(p);
+  } catch (err) {
+    document.getElementById('link-slot').innerHTML =
+      '<p class="small error-text">链接加载失败：' + err.message + '</p>';
+  }
+})();
+</script>
+{% endblock %}

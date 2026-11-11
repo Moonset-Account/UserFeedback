@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>公开实验导出链接采集器</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='app.css') }}">
+</head>
+<body>
+<div class="app-shell">
+  <header class="topbar">
+    <div class="title-block">
+      <h1>公开实验导出链接采集器</h1>
+      <p class="subtitle">短时链接 · 失效识别 · 有限刷新 · 三层内容校验（虚构数据本地演练，无需登录/付费）</p>
+    </div>
+    <div class="topbar-right">
+      <span class="source-pill" title="采集器只访问该公开源站">源站：<span class="mono">{{ source_base_url }}</span></span>
+    </div>
+  </header>
+
+  <main class="layout">
+    <!-- 左栏：配置与操作（首屏可见） -->
+    <section class="panel panel-config">
+      <h2>① 配置输入并运行</h2>
+      <label class="field">
+        <span class="field-label">实验场景（采集对象）</span>
+        <select id="scenario-select"></select>
+      </label>
+      <p class="field-desc" id="scenario-desc"></p>
+
+      <label class="field">
+        <span class="field-label">采集协议子集</span>
+        <select id="backend-select">
+          <option value="http">HTTP 子集（requests + BeautifulSoup，不执行 JS）</option>
+          <option value="playwright">Playwright 浏览器子集（Chromium，等待 JS 渲染）</option>
+        </select>
+      </label>
+
+      <label class="field field-inline">
+        <span class="field-label">刷新上限</span>
+        <input id="max-refreshes" type="number" min="0" max="10" value="{{ default_max_refreshes }}">
+        <span class="field-hint">达到上限即停止，不会无限重试</span>
+      </label>
+
+      <label class="field field-check">
+        <input id="reset-first" type="checkbox" checked>
+        <span>运行前重置源站链接状态（保证演示确定性）</span>
+      </label>
+
+      <div class="action-row">
+        <button id="run-btn" class="btn btn-primary">运行采集</button>
+        <button id="run-demo" class="btn btn-accent">运行示例</button>
+      </div>
+      <p class="field-hint" id="demo-hint">“运行示例”将依次执行 1 个正常场景 + 1 个边界场景，目标 15 秒内完成，两个结果均保留。</p>
+
+      <div class="protocol-note">
+        <h3>支持的协议子集</h3>
+        <ul>
+          <li>HTTP/1.1：HTML 锚点解析、同源 JSON 清单、application/zip 下载</li>
+          <li>浏览器：Chromium 无头渲染、DOM 锚点读取、浏览器上下文下载</li>
+          <li>不支持：登录/付费、站外跳转、表单写入类交互</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 右栏：结果与证据（首屏可见摘要，细节可展开） -->
+    <section class="panel panel-result">
+      <div class="result-head">
+        <h2>② 运行结果与来源证据</h2>
+        <button id="clear-btn" class="btn btn-ghost btn-small">清空记录</button>
+      </div>
+      <div id="status-banner" class="status-banner status-idle">尚未运行——结果来自真实执行，页面不预填成功。</div>
+      <div id="runs-list" class="runs-list"></div>
+    </section>
+  </main>
+</div>
+
+<script>
+  window.__INITIAL__ = {
+    demoScenarios: {{ demo_scenarios | tojson }}
+  };
+</script>
+<script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>

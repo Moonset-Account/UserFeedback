@@ -1,11 +1,6 @@
-
-# Domain runner: credentials and local build caches
-.env
-.env.*
-!.env.example
-!.env.sample
-!.env.template
-node_modules/
+# 运行期数据（由 generator 生成、下载物、运行记录），不纳入版本库
+runtime_data/
+.pytest_cache/
 .venv/
 __pycache__/
 .DS_Store

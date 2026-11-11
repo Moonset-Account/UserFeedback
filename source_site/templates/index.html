@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}实验索引 · 虚构源站{% endblock %}
+{% block content %}
+<h1>公开实验导出索引</h1>
+<p class="hint">下列实验均提供短时有效的导出链接，链接可能过期或仅可使用一次。</p>
+<table class="data-table">
+  <thead><tr><th>实验编号</th><th>场景</th><th>页面类型</th><th>操作</th></tr></thead>
+  <tbody>
+  {% for item in items %}
+    <tr>
+      <td class="mono">{{ item.experiment_id }}</td>
+      <td>{{ item.title }}</td>
+      <td>{% if item.js_rendered %}<span class="tag tag-js">JavaScript 渲染</span>{% else %}<span class="tag tag-html">服务端渲染</span>{% endif %}</td>
+      <td><a class="btn-link" href="/experiment/{{ item.id }}">查看导出页</a></td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

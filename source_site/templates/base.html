@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}虚构实验数据公开源站{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='source.css') }}">
+</head>
+<body>
+<header class="site-header">
+  <div class="brand">🧪 虚构实验数据公开源站</div>
+  <nav><a href="/">实验索引</a></nav>
+</header>
+<main class="container">
+  {% block content %}{% endblock %}
+</main>
+<footer class="site-footer">本页面由本地源站生成，数据全部为虚构，仅用于采集演练，无需登录或付费。</footer>
+</body>
+</html>

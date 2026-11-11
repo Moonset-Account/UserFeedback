@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}{{ experiment_id }} · 导出页{% endblock %}
+{% block content %}
+<article class="experiment-card">
+  <h1>实验数据导出</h1>
+  <dl class="meta-list">
+    <dt>实验编号</dt><dd id="experiment-id" class="mono">{{ experiment_id }}</dd>
+    <dt>稳定业务版本</dt><dd id="business-version" class="mono">{{ version }}</dd>
+    <dt>链接有效期</dt><dd>{{ token.ttl_seconds }} 秒（一次性链接，过期或使用后失效）</dd>
+  </dl>
+
+  <section class="download-box">
+    <p class="hint">请在链接有效期内完成下载；失效后需重新从本页面获取地址。</p>
+    <!-- 采集器解析此锚点取得短时链接；data-expires 为声明有效期 -->
+    <a id="download-link"
+       class="btn-primary"
+       href="/download/{{ token.token }}"
+       data-expires="{{ token.ttl_seconds }}"
+       data-token-state="{{ token.state }}">下载实验导出包（ZIP）</a>
+    <p class="mono small" id="link-url">/download/{{ token.token }}</p>
+  </section>
+
+  <section class="manifest-box">
+    <p class="hint">同源 JSON 清单（采集器可选的机器可读入口）：</p>
+    <p class="mono small">GET /api/manifest/{{ spec.id }}</p>
+  </section>
+</article>
+{% endblock %}
