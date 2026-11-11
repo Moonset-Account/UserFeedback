@@ -1,0 +1,4 @@
+100% done: 50% of the 99%
+second %s %d line
+buffer % contents
+100% done: 50% of the 99%
