@@ -1,0 +1,26 @@
+[
+  {
+    "record_id": "REC-3001",
+    "release_id": "prod-alpha-3.0",
+    "bom_snapshot_id": "snap-alpha-2026-09-01",
+    "ecosystem": "maven",
+    "namespace": "org.example",
+    "name": "libz",
+    "version": "2.0.1",
+    "vuln_id": "CVE-2026-1001",
+    "verdict": "not_affected",
+    "reason": "旧清单快照下签发的人工豁免；当前快照已变更，记录过期，不得采信"
+  },
+  {
+    "record_id": "REC-3002",
+    "release_id": "prod-alpha-3.0",
+    "bom_snapshot_id": "snap-alpha-2026-11-01",
+    "ecosystem": "rpm",
+    "namespace": "rocky",
+    "name": "safe",
+    "version": "5.0.0",
+    "vuln_id": "CVE-2026-1011",
+    "verdict": "not_affected",
+    "reason": "与当前快照匹配的厂商适用性记录，与公告豁免互相印证"
+  }
+]

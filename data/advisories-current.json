@@ -1,0 +1,202 @@
+[
+  {
+    "advisory_id": "ADV-2026-1001",
+    "vuln_id": "CVE-2026-1001",
+    "revised": "2026-11-05T00:00:00Z",
+    "withdrawn": false,
+    "note": "更新后公告：1.6.x 也被确认受影响，修复版本推迟到 2.1.0（同名组件不同变体必须分别裁决）",
+    "statements": [
+      {
+        "statement_id": "STMT-1001-A1",
+        "ecosystem": "maven",
+        "namespace": "org.example",
+        "name": "libz",
+        "kind": "affected",
+        "affected_intervals": [
+          {"lower": "1.4.0", "upper": "2.1.0", "lower_inclusive": true, "upper_inclusive": false}
+        ]
+      }
+    ]
+  },
+  {
+    "advisory_id": "ADV-2026-1002",
+    "vuln_id": "CVE-2026-1002",
+    "revised": "2026-10-05T00:00:00Z",
+    "withdrawn": false,
+    "note": "仅 npm 生态的 acme/widget 受影响，pypi 同名包不适用",
+    "statements": [
+      {
+        "statement_id": "STMT-1002-A1",
+        "ecosystem": "npm",
+        "namespace": "acme",
+        "name": "widget",
+        "kind": "affected",
+        "affected_intervals": [
+          {"lower": "3.0.0", "upper": "3.2.0", "lower_inclusive": true, "upper_inclusive": false}
+        ]
+      }
+    ]
+  },
+  {
+    "advisory_id": "ADV-2026-1003",
+    "vuln_id": "CVE-2026-1003",
+    "revised": "2026-10-10T00:00:00Z",
+    "withdrawn": false,
+    "statements": [
+      {
+        "statement_id": "STMT-1003-A1",
+        "ecosystem": "pypi",
+        "namespace": "",
+        "name": "util",
+        "kind": "affected",
+        "affected_intervals": [
+          {"lower": "1.2.0", "upper": "1.2.7", "lower_inclusive": true, "upper_inclusive": false}
+        ]
+      }
+    ]
+  },
+  {
+    "advisory_id": "ADV-2026-1004",
+    "vuln_id": "CVE-2026-1004",
+    "revised": "2026-10-12T00:00:00Z",
+    "withdrawn": false,
+    "statements": [
+      {
+        "statement_id": "STMT-1004-A1",
+        "ecosystem": "pypi",
+        "namespace": "",
+        "name": "util",
+        "kind": "affected",
+        "affected_intervals": [
+          {"lower": "1.2.7", "upper": "1.2.10", "lower_inclusive": true, "upper_inclusive": true}
+        ]
+      }
+    ]
+  },
+  {
+    "advisory_id": "ADV-2026-1005",
+    "vuln_id": "CVE-2026-1005",
+    "revised": "2026-10-15T00:00:00Z",
+    "withdrawn": false,
+    "statements": [
+      {
+        "statement_id": "STMT-1005-A1",
+        "ecosystem": "generic",
+        "namespace": "vendor",
+        "name": "edge",
+        "kind": "affected",
+        "affected_intervals": [
+          {"lower": null, "upper": "2.0.0", "lower_inclusive": true, "upper_inclusive": false}
+        ]
+      }
+    ]
+  },
+  {
+    "advisory_id": "ADV-2026-1006",
+    "vuln_id": "CVE-2026-1006",
+    "revised": "2026-10-18T00:00:00Z",
+    "withdrawn": false,
+    "statements": [
+      {
+        "statement_id": "STMT-1006-A1",
+        "ecosystem": "deb",
+        "namespace": "debian",
+        "name": "legacy",
+        "kind": "affected",
+        "affected_intervals": [
+          {"lower": null, "upper": null}
+        ]
+      }
+    ]
+  },
+  {
+    "advisory_id": "ADV-2026-1007A",
+    "vuln_id": "CVE-2026-1007",
+    "revised": "2026-10-20T00:00:00Z",
+    "withdrawn": false,
+    "note": "公告 A：认定 contra 1.0.0 受影响",
+    "statements": [
+      {
+        "statement_id": "STMT-1007A-A1",
+        "ecosystem": "maven",
+        "namespace": "org.example",
+        "name": "contra",
+        "kind": "affected",
+        "affected_intervals": [
+          {"lower": "1.0.0", "upper": "2.0.0", "lower_inclusive": true, "upper_inclusive": false}
+        ]
+      }
+    ]
+  },
+  {
+    "advisory_id": "ADV-2026-1007B",
+    "vuln_id": "CVE-2026-1007",
+    "revised": "2026-10-21T00:00:00Z",
+    "withdrawn": false,
+    "note": "公告 B：同一漏洞认定 contra 1.0.0 不受影响，与公告 A 互相矛盾",
+    "statements": [
+      {
+        "statement_id": "STMT-1007B-N1",
+        "ecosystem": "maven",
+        "namespace": "org.example",
+        "name": "contra",
+        "kind": "not_affected",
+        "not_affected_versions": ["1.0.0"]
+      }
+    ]
+  },
+  {
+    "advisory_id": "ADV-2026-1008",
+    "vuln_id": "CVE-2026-1008",
+    "revised": "2026-10-22T00:00:00Z",
+    "withdrawn": false,
+    "note": "区间端点本身不可解析，任何组件版本都无法据此裁决",
+    "statements": [
+      {
+        "statement_id": "STMT-1008-A1",
+        "ecosystem": "custom",
+        "namespace": "x",
+        "name": "weird",
+        "kind": "affected",
+        "affected_intervals": [
+          {"lower": "1.0", "upper": "2.0"}
+        ]
+      }
+    ]
+  },
+  {
+    "advisory_id": "ADV-2026-1009",
+    "vuln_id": "CVE-2026-1009",
+    "revised": "2026-11-08T00:00:00Z",
+    "withdrawn": false,
+    "note": "撤回后重新打开：ghost 4.x 确认受影响，修复版本 5.0.0",
+    "statements": [
+      {
+        "statement_id": "STMT-1009-A2",
+        "ecosystem": "gem",
+        "namespace": "",
+        "name": "ghost",
+        "kind": "affected",
+        "affected_intervals": [
+          {"lower": "4.0.0", "upper": "5.0.0", "lower_inclusive": true, "upper_inclusive": false}
+        ]
+      }
+    ]
+  },
+  {
+    "advisory_id": "ADV-2026-1011",
+    "vuln_id": "CVE-2026-1011",
+    "revised": "2026-10-25T00:00:00Z",
+    "withdrawn": false,
+    "statements": [
+      {
+        "statement_id": "STMT-1011-N1",
+        "ecosystem": "rpm",
+        "namespace": "rocky",
+        "name": "safe",
+        "kind": "not_affected",
+        "not_affected_versions": ["5.0.0"]
+      }
+    ]
+  }
+]

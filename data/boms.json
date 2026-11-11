@@ -1,0 +1,31 @@
+[
+  {
+    "release_id": "prod-alpha-3.0",
+    "snapshot_id": "snap-alpha-2026-11-01",
+    "components": [
+      {"ref": "A-LIBZ-OLD", "ecosystem": "maven", "namespace": "org.example", "name": "libz", "version": "1.4.0"},
+      {"ref": "A-LIBZ-NEW", "ecosystem": "maven", "namespace": "org.example", "name": "libz", "version": "2.0.1"},
+      {"ref": "A-WIDGET", "ecosystem": "npm", "namespace": "acme", "name": "widget", "version": "3.1.0"},
+      {"ref": "A-UTIL-OLD", "ecosystem": "pypi", "namespace": "", "name": "util", "version": "1.2.0"},
+      {"ref": "A-UTIL-NEW", "ecosystem": "pypi", "namespace": "", "name": "util", "version": "1.2.7"},
+      {"ref": "A-EDGE-PRE", "ecosystem": "generic", "namespace": "vendor", "name": "edge", "version": "2.0.0-rc.1"},
+      {"ref": "A-EDGE-RC", "ecosystem": "generic", "namespace": "vendor", "name": "edge", "version": "2.0.0"},
+      {"ref": "A-LEGACY", "ecosystem": "deb", "namespace": "debian", "name": "legacy", "version": "0.9.9"},
+      {"ref": "A-CONTRA", "ecosystem": "maven", "namespace": "org.example", "name": "contra", "version": "1.0.0"},
+      {"ref": "A-WEIRD", "ecosystem": "custom", "namespace": "x", "name": "weird", "version": "20261109-r1"},
+      {"ref": "A-GHOST", "ecosystem": "gem", "namespace": "", "name": "ghost", "version": "4.0.0"},
+      {"ref": "A-SAFE", "ecosystem": "rpm", "namespace": "rocky", "name": "safe", "version": "5.0.0"}
+    ]
+  },
+  {
+    "release_id": "prod-beta-3.0",
+    "snapshot_id": "snap-beta-2026-11-01",
+    "components": [
+      {"ref": "B-LIBZ", "ecosystem": "maven", "namespace": "org.example", "name": "libz", "version": "1.6.0"},
+      {"ref": "B-WIDGET-PY", "ecosystem": "pypi", "namespace": "acme", "name": "widget", "version": "3.1.0"},
+      {"ref": "B-UTIL", "ecosystem": "pypi", "namespace": "", "name": "util", "version": "1.2.10"},
+      {"ref": "B-EDGE", "ecosystem": "generic", "namespace": "vendor", "name": "edge", "version": "3.0.0-beta.2"},
+      {"ref": "B-GHOST", "ecosystem": "gem", "namespace": "", "name": "ghost", "version": "4.0.0"}
+    ]
+  }
+]
