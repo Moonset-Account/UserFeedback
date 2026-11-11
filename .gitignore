@@ -9,3 +9,8 @@ node_modules/
 .venv/
 __pycache__/
 .DS_Store
+
+# 本项目运行产物（样例邮件、运行记录均可重新生成）
+generated/
+instance/
+.pytest_cache/

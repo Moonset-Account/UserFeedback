@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>实验通知只读采集器 · 本地邮箱模拟</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="app">
+  <header class="topbar">
+    <div class="title">
+      <h1>实验通知只读采集器</h1>
+      <p class="subtitle">本地最小 IMAP 模拟 · 全部虚构数据 · 不连接真实邮箱 · 不发送邮件</p>
+    </div>
+    <div class="conn">
+      <span class="conn-label">模拟邮箱</span>
+      <span class="conn-value">{{ username }}</span>
+      <span class="conn-tag">只读</span>
+    </div>
+  </header>
+
+  <section class="panel config-panel">
+    <div class="panel-head">
+      <h2>1. 输入配置</h2>
+      <span class="hint">协议子集：{{ protocol_subset }}</span>
+    </div>
+    <div class="config-row">
+      <label>验收场景
+        <select id="scenario-select"></select>
+      </label>
+      <button id="run-scene" class="btn primary">运行所选场景</button>
+      <button id="run-demo" class="btn accent">运行示例（正常 + 边界小样例）</button>
+      <button id="run-all" class="btn">运行全部验收场景（5 个）</button>
+      <span id="run-status" class="run-status" role="status"></span>
+    </div>
+  </section>
+
+  <section class="panel summary-panel">
+    <div class="panel-head"><h2>2. 运行结果总览</h2><span class="hint">点击任意一行查看证据</span></div>
+    <div class="table-wrap">
+      <table id="runs-table">
+        <thead>
+        <tr>
+          <th>运行 ID</th><th>场景</th><th>状态</th><th>邮件数</th>
+          <th>耗时(ms)</th><th>错误</th><th>警告</th><th>时间</th>
+        </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="panel detail-panel">
+    <div class="panel-head">
+      <h2>3. 来源证据与错误详情</h2>
+      <span class="hint" id="detail-title">尚未选择运行记录</span>
+    </div>
+    <div id="detail-empty" class="empty">运行任务后，在此查看原邮件 MIME 结构、提取字段来源（part_id）与具体错误。</div>
+    <div id="detail-body" class="detail-body" hidden></div>
+  </section>
+
+  <footer class="footer">
+    身份标识规则：UIDVALIDITY/UID 为唯一键，Message-ID 仅作辅助 ·
+    提取字段均标注来源 MIME part · 独立真值仅测试使用，采集器不读取
+  </footer>
+</div>
+<script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
