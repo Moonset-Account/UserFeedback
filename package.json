@@ -1,0 +1,14 @@
+{
+  "name": "form-validator-regression",
+  "version": "1.0.0",
+  "private": true,
+  "description": "内存表单校验器（会话/动作绑定 + 代际宽限期）回归套件",
+  "type": "module",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "test": "node test/regression.test.js"
+  },
+  "license": "UNLICENSED"
+}
