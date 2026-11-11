@@ -1,0 +1,22 @@
+[
+  {
+    "event_id": "m1", "type": "HANDLE_CREATE",
+    "thread": "T3", "seq": 1, "task": "task-F", "handle": "H5"
+  },
+  {
+    "event_id": "m2", "type": "BIND",
+    "thread": "T3", "seq": 2, "task": "task-F", "handle": "H5",
+    "object_no": "O5", "object_gen": 1
+  },
+  {
+    "event_id": "m3", "type": "VALIDATE_OK",
+    "thread": "T3", "seq": 3, "task": "task-F", "handle": "H5",
+    "object_no": "O5", "object_gen": 1
+  },
+  {
+    "event_id": "m4", "type": "WRITE_COMMIT",
+    "thread": "T4", "seq": 1, "task": "task-F", "handle": "H5",
+    "object_no": "O5", "object_gen": 1,
+    "depends_on": ["evt-validation-ack-that-was-never-shipped"]
+  }
+]

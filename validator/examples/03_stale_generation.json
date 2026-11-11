@@ -1,0 +1,31 @@
+[
+  {
+    "event_id": "s1", "type": "HANDLE_CREATE",
+    "thread": "T1", "seq": 1, "task": "task-E", "handle": "H4"
+  },
+  {
+    "event_id": "s2", "type": "BIND",
+    "thread": "T1", "seq": 2, "task": "task-E", "handle": "H4",
+    "object_no": "O4", "object_gen": 1
+  },
+  {
+    "event_id": "s3", "type": "VALIDATE_OK",
+    "thread": "T1", "seq": 3, "task": "task-E", "handle": "H4",
+    "object_no": "O4", "object_gen": 1
+  },
+  {
+    "event_id": "s4", "type": "BIND",
+    "thread": "T1", "seq": 4, "task": "task-E", "handle": "H4",
+    "object_no": "O4", "object_gen": 2
+  },
+  {
+    "event_id": "s5", "type": "VALIDATE_OK",
+    "thread": "T1", "seq": 5, "task": "task-E", "handle": "H4",
+    "object_no": "O4", "object_gen": 2
+  },
+  {
+    "event_id": "s6", "type": "WRITE_COMMIT",
+    "thread": "T1", "seq": 6, "task": "task-E", "handle": "H4",
+    "object_no": "O4", "object_gen": 1
+  }
+]

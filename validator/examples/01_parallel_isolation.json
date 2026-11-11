@@ -1,0 +1,48 @@
+[
+  {
+    "event_id": "a1", "type": "HANDLE_CREATE",
+    "thread": "T1", "seq": 1, "task": "task-A", "handle": "H1"
+  },
+  {
+    "event_id": "a2", "type": "BIND",
+    "thread": "T1", "seq": 2, "task": "task-A", "handle": "H1",
+    "object_no": "O1", "object_gen": 1
+  },
+  {
+    "event_id": "a3", "type": "VALIDATE_OK",
+    "thread": "T1", "seq": 3, "task": "task-A", "handle": "H1",
+    "object_no": "O1", "object_gen": 1
+  },
+  {
+    "event_id": "a4", "type": "SYNC",
+    "thread": "T1", "seq": 4, "sync_id": "point-1", "sync_op": "signal"
+  },
+  {
+    "event_id": "b1", "type": "HANDLE_CREATE",
+    "thread": "T2", "seq": 1, "task": "task-B", "handle": "H2"
+  },
+  {
+    "event_id": "b2", "type": "BIND",
+    "thread": "T2", "seq": 2, "task": "task-B", "handle": "H2",
+    "object_no": "O2", "object_gen": 1
+  },
+  {
+    "event_id": "b3", "type": "SYNC",
+    "thread": "T2", "seq": 3, "sync_id": "point-1", "sync_op": "wait"
+  },
+  {
+    "event_id": "b4", "type": "VALIDATE_OK",
+    "thread": "T2", "seq": 4, "task": "task-B", "handle": "H2",
+    "object_no": "O2", "object_gen": 1
+  },
+  {
+    "event_id": "b5", "type": "WRITE_COMMIT",
+    "thread": "T2", "seq": 5, "task": "task-B", "handle": "H2",
+    "object_no": "O2", "object_gen": 1
+  },
+  {
+    "event_id": "a5", "type": "WRITE_COMMIT",
+    "thread": "T1", "seq": 5, "task": "task-A", "handle": "H1",
+    "object_no": "O1", "object_gen": 1
+  }
+]
