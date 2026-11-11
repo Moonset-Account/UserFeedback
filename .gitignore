@@ -9,3 +9,10 @@ node_modules/
 .venv/
 __pycache__/
 .DS_Store
+
+# 运行时生成的虚构样例、任务产物与日志（可由 app.py 重新生成）
+/data/objects/
+/data/manifest.json
+/data/tasks/
+*.log
+.pytest_cache/

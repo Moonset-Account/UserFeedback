@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=1280">
+<title>实验数据对象分段采集演示</title>
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <span class="logo">EXPB</span>
+    <div>
+      <h1>大型公开实验数据对象 · 分段采集</h1>
+      <p class="sub">强校验器 + If-Range 维护区间覆盖图 · 仅经本地 HTTP 公开接口取数</p>
+    </div>
+  </div>
+  <div class="top-actions">
+    <button id="run-demo" class="btn btn-primary" type="button">▶ 运行示例</button>
+    <span id="demo-status" class="demo-status" aria-live="polite"></span>
+  </div>
+</header>
+
+<main class="layout">
+  <!-- 左栏：配置与任务列表（首屏可见） -->
+  <section class="panel panel-left">
+    <h2>采集配置</h2>
+    <div class="form-row">
+      <label for="scenario-select">验收场景</label>
+      <select id="scenario-select"></select>
+      <p id="scenario-desc" class="hint"></p>
+    </div>
+    <div class="form-row inline">
+      <div>
+        <label for="object-input">对象名</label>
+        <input id="object-input" type="text" spellcheck="false">
+      </div>
+      <div>
+        <label for="chunk-input">分块字节</label>
+        <input id="chunk-input" type="number" min="64" step="64" value="2048">
+      </div>
+    </div>
+    <div class="form-row">
+      <label for="replacement-input">替换对象（可选）</label>
+      <input id="replacement-input" type="text" spellcheck="false" placeholder="留空表示不替换">
+    </div>
+    <div class="form-row btn-row">
+      <button id="create-task" class="btn btn-primary" type="button">创建并运行任务</button>
+      <button id="refresh-tasks" class="btn" type="button">刷新列表</button>
+    </div>
+
+    <h2 class="mt">任务列表</h2>
+    <div id="task-list" class="task-list">
+      <p class="hint">暂无任务，点击“运行示例”或创建任务。</p>
+    </div>
+  </section>
+
+  <!-- 右栏：当前任务详情（首屏可见摘要，证据可展开） -->
+  <section class="panel panel-right">
+    <div class="detail-head">
+      <h2 id="detail-title">任务详情</h2>
+      <div class="detail-actions">
+        <button id="btn-pause" class="btn btn-small" type="button" disabled>暂停</button>
+        <button id="btn-resume" class="btn btn-small" type="button" disabled>继续</button>
+        <button id="btn-stop" class="btn btn-small btn-danger" type="button" disabled>停止</button>
+      </div>
+    </div>
+    <p id="detail-empty" class="hint">从左侧选择一个任务查看区间、缺口、对象版本与解析结果。</p>
+
+    <div id="detail-body" class="detail-body" hidden>
+      <div class="status-line">
+        <span id="badge-status" class="badge">—</span>
+        <span id="detail-label" class="detail-label"></span>
+        <span id="detail-id" class="mono dim"></span>
+      </div>
+
+      <div class="stat-grid">
+        <div class="stat"><span class="stat-k">对象长度</span><span id="stat-length" class="stat-v">—</span></div>
+        <div class="stat"><span class="stat-k">已覆盖</span><span id="stat-covered" class="stat-v">—</span></div>
+        <div class="stat"><span class="stat-k">缺口数</span><span id="stat-gaps" class="stat-v">—</span></div>
+        <div class="stat"><span class="stat-k">已拒绝响应</span><span id="stat-rejected" class="stat-v">—</span></div>
+        <div class="stat"><span class="stat-k">HTTP 请求数</span><span id="stat-requests" class="stat-v">—</span></div>
+        <div class="stat"><span class="stat-k">覆盖区间数</span><span id="stat-spans" class="stat-v">—</span></div>
+      </div>
+
+      <h3>区间覆盖图</h3>
+      <div id="coverage-bar" class="coverage-bar" title="绿色=已覆盖，灰色=缺口"></div>
+      <div class="two-col">
+        <div>
+          <h4>已覆盖区间</h4>
+          <ul id="spans-list" class="interval-list"></ul>
+        </div>
+        <div>
+          <h4>缺口区间</h4>
+          <ul id="gaps-list" class="interval-list"></ul>
+        </div>
+      </div>
+
+      <h3>对象版本链（强校验器 ETag）</h3>
+      <ol id="version-list" class="version-list"></ol>
+
+      <div id="error-box" class="error-box" hidden>
+        <h4>具体错误</h4>
+        <p id="error-text" class="mono"></p>
+      </div>
+
+      <div id="result-box" class="result-box" hidden>
+        <h3>真实解析结果（EXPB 完整对象）</h3>
+        <div id="result-grid" class="result-grid"></div>
+      </div>
+
+      <details class="evidence">
+        <summary>来源证据与事件（HTTP 请求/响应、拒绝原因，点击展开）</summary>
+        <div class="evidence-actions">
+          <button id="btn-reload-events" class="btn btn-small" type="button">重新加载证据</button>
+          <label class="hint"><input id="auto-refresh" type="checkbox" checked> 自动刷新</label>
+        </div>
+        <div id="event-log" class="event-log"></div>
+      </details>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <span>协议子集：HTTP/1.1 · GET/HEAD · Range / If-Range · 状态 200/206/416/5xx（仅回环源站，无重定向/压缩/代理）</span>
+  <span class="dim">所有数据均为虚构，样例由生成器产出，真值清单仅供测试断言</span>
+</footer>
+
+<script src="/app.js"></script>
+</body>
+</html>
