@@ -1,0 +1,13 @@
+{
+  "components": [
+    {"id": {"name": "app", "version": "1.0"}, "buildTarget": "//app:app", "team": "core-team", "abiVersion": 3},
+    {"id": {"name": "billing", "version": "4.2"}, "buildTarget": "//plugins/billing:billing", "team": "payments-team", "abiVersion": 3}
+  ],
+  "edges": [
+    {"source": {"name": "app", "version": "1.0"}, "target": {"name": "billing", "version": "4.2"}, "interface": "Billing.charge"}
+  ],
+  "coverageClaims": [
+    {"component": {"name": "billing", "version": "4.2"}, "coveredInterfaces": ["Billing.charge"]}
+  ],
+  "exemptions": []
+}

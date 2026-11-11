@@ -1,0 +1,25 @@
+{
+  "components": [
+    {"id": {"name": "app", "version": "1.0"}, "buildTarget": "//app:app", "team": "core-team", "abiVersion": 3},
+    {"id": {"name": "auth", "version": "2.1"}, "buildTarget": "//plugins/auth:auth-2_1", "team": "identity-team", "abiVersion": 3},
+    {"id": {"name": "auth", "version": "3.0"}, "buildTarget": "//plugins/auth:auth-3_0", "team": "identity-team", "abiVersion": 3},
+    {"id": {"name": "cache", "version": "1.5"}, "buildTarget": "//plugins/cache:cache", "team": "infra-team", "abiVersion": 3},
+    {"id": {"name": "legacy", "version": "0.9"}, "buildTarget": "//plugins/legacy:legacy", "team": "legacy-team", "abiVersion": 2}
+  ],
+  "edges": [
+    {"source": {"name": "app", "version": "1.0"}, "target": {"name": "auth", "version": "2.1"}, "interface": "AuthV2.login"},
+    {"source": {"name": "app", "version": "1.0"}, "target": {"name": "auth", "version": "3.0"}, "interface": "AuthV2.login"},
+    {"source": {"name": "app", "version": "1.0"}, "target": {"name": "cache", "version": "1.5"}, "interface": "Cache.flush"},
+    {"source": {"name": "app", "version": "1.0"}, "target": {"name": "cache", "version": "1.5"}, "interface": "Cache.snapshot"},
+    {"source": {"name": "app", "version": "1.0"}, "target": {"name": "legacy", "version": "0.9"}, "interface": "Legacy.hook"},
+    {"source": {"name": "auth", "version": "3.0"}, "target": {"name": "app", "version": "1.0"}, "interface": "App.callback"}
+  ],
+  "coverageClaims": [
+    {"component": {"name": "auth", "version": "2.1"}, "coveredInterfaces": ["AuthV2.login"]},
+    {"component": {"name": "app", "version": "1.0"}, "coveredInterfaces": ["App.callback"]}
+  ],
+  "exemptions": [
+    {"id": "EX-2026-001", "component": {"name": "cache", "version": "1.5"}, "interface": "Cache.flush", "expiresAt": "2026-12-31"},
+    {"id": "EX-2025-OLD", "component": {"name": "cache", "version": "1.5"}, "interface": "Cache.snapshot", "expiresAt": "2026-10-01"}
+  ]
+}
