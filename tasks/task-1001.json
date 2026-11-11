@@ -1,0 +1,15 @@
+{
+  "taskId": "TASK-1001",
+  "program": "batch-worker",
+  "workdir": "workdirs/alpha",
+  "args": [
+    { "name": "--input", "value": "daily report 2026-11-11.csv" },
+    { "name": "--note", "value": "" },
+    { "name": "--optional-comment", "value": null }
+  ],
+  "env": {
+    "BATCH_PROFILE": "nightly",
+    "BATCH_REGION": "cn-north-1",
+    "DEBUG_DUMP": "1"
+  }
+}

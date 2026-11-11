@@ -1,0 +1,9 @@
+{
+  "name": "subprocess-interface-regression",
+  "version": "1.0.0",
+  "private": true,
+  "description": "批处理服务子进程接口回归套件（内存适配器模拟调用）",
+  "scripts": {
+    "test": "node test/regression.js"
+  }
+}

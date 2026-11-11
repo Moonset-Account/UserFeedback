@@ -1,0 +1,11 @@
+{
+  "taskId": "TASK-1002",
+  "program": "batch-worker",
+  "workdir": "../outside-workdir",
+  "args": [
+    { "name": "--input", "value": "escape-attempt.csv" }
+  ],
+  "env": {
+    "BATCH_PROFILE": "nightly"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "taskId": "TASK-1003",
+  "program": "batch-worker",
+  "workdir": "workdirs/beta",
+  "args": [
+    { "name": "--format", "value": "csv" },
+    { "name": "--input", "value": "override-attempt.csv" }
+  ],
+  "env": {
+    "BATCH_PROFILE": "nightly"
+  }
+}

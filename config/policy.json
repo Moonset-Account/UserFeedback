@@ -1,0 +1,7 @@
+{
+  "description": "子进程调用策略：目录限制、不可变参数、批准的环境变量",
+  "allowedWorkdirRoots": ["workdirs"],
+  "immutableArgs": ["--format", "json"],
+  "immutableFlags": ["--format"],
+  "approvedEnvVars": ["BATCH_PROFILE", "BATCH_REGION", "BATCH_TIMEOUT_MS"]
+}
