@@ -1,0 +1,192 @@
+{
+  "schema_version": "1.0",
+  "description": "脱敏崩溃报告样例：地址与内联帧随构建变化，字段已匿名化处理",
+  "reports": [
+    {
+      "report_id": "R01",
+      "module_build_id": "build-b100",
+      "fault_category": "use-after-free",
+      "crash_thread": {
+        "thread_id": 12,
+        "frames": [
+          {"frame_index": 0, "module": "libc.so", "address": "0x9e210", "is_app_frame": false, "candidate_symbols": ["abort"]},
+          {"frame_index": 1, "module": "libxul.so", "address": "0x10a34f20", "is_app_frame": true,
+           "candidate_symbols": ["mozilla::net::detail::ReleaseBuffer", "mozilla::net::detail::ConsumeChunk"],
+           "inline_hierarchy": [
+             {"inline_depth": 0, "symbol": "mozilla::net::SocketReader::Drain"},
+             {"inline_depth": 1, "symbol": "mozilla::net::detail::ConsumeChunk"},
+             {"inline_depth": 2, "symbol": "mozilla::net::detail::ReleaseBuffer"}
+           ]},
+          {"frame_index": 2, "module": "libxul.so", "address": "0x10a33901", "is_app_frame": true,
+           "candidate_symbols": ["mozilla::net::HttpSession::Pump"], "inline_hierarchy": []}
+        ]
+      }
+    },
+    {
+      "report_id": "R02",
+      "module_build_id": "build-b101",
+      "fault_category": "use-after-free",
+      "crash_thread": {
+        "thread_id": 7,
+        "frames": [
+          {"frame_index": 0, "module": "libc.so", "address": "0x9e244", "is_app_frame": false, "candidate_symbols": ["abort"]},
+          {"frame_index": 1, "module": "libxul.so", "address": "0x7f8a22c41a08", "is_app_frame": true,
+           "candidate_symbols": ["mozilla::net::detail::ReleaseBuffer"],
+           "inline_hierarchy": [
+             {"inline_depth": 0, "symbol": "mozilla::net::SocketReader::Drain"},
+             {"inline_depth": 1, "symbol": "mozilla::net::detail::ConsumeChunk"},
+             {"inline_depth": 2, "symbol": "mozilla::net::detail::ReleaseBuffer"}
+           ]}
+        ]
+      }
+    },
+    {
+      "report_id": "R03",
+      "module_build_id": "build-b102",
+      "fault_category": "use-after-free",
+      "crash_thread": {
+        "thread_id": 3,
+        "frames": [
+          {"frame_index": 0, "module": "libxul.so", "address": "0x55f0d1aa70e4", "is_app_frame": true,
+           "candidate_symbols": ["mozilla::net::detail::ReleaseBuffer", "mozilla::net::detail::FlushQueue"],
+           "inline_hierarchy": [
+             {"inline_depth": 0, "symbol": "mozilla::net::SocketReader::Drain"},
+             {"inline_depth": 1, "symbol": "mozilla::net::detail::FlushQueue"},
+             {"inline_depth": 2, "symbol": "mozilla::net::detail::ReleaseBuffer"}
+           ]}
+        ]
+      }
+    },
+    {
+      "report_id": "R04",
+      "module_build_id": "build-b100",
+      "fault_category": "heap-buffer-overflow",
+      "crash_thread": {
+        "thread_id": 5,
+        "frames": [
+          {"frame_index": 0, "module": "libc.so", "address": "0x9e244", "is_app_frame": false, "candidate_symbols": ["__asan_report"]},
+          {"frame_index": 1, "module": "libxul.so", "address": "0x10c01140", "is_app_frame": true,
+           "candidate_symbols": ["mozilla::media::detail::CopyPlane", "mozilla::media::FrameBuffer::Append"],
+           "inline_hierarchy": [
+             {"inline_depth": 0, "symbol": "mozilla::media::FrameBuffer::Append"},
+             {"inline_depth": 1, "symbol": "mozilla::media::detail::CopyPlane"}
+           ]}
+        ]
+      }
+    },
+    {
+      "report_id": "R05",
+      "module_build_id": "build-b101",
+      "fault_category": "heap-buffer-overflow",
+      "crash_thread": {
+        "thread_id": 9,
+        "frames": [
+          {"frame_index": 0, "module": "libxul.so", "address": "0x7f8a22c90010", "is_app_frame": true,
+           "candidate_symbols": ["mozilla::media::detail::CopyPlane"],
+           "inline_hierarchy": [
+             {"inline_depth": 0, "symbol": "mozilla::media::FrameBuffer::Append"},
+             {"inline_depth": 1, "symbol": "mozilla::media::detail::CopyPlane"}
+           ]}
+        ]
+      }
+    },
+    {
+      "report_id": "R06",
+      "module_build_id": "build-b100",
+      "fault_category": "use-after-free",
+      "crash_thread": {
+        "thread_id": 15,
+        "frames": [
+          {"frame_index": 0, "module": "libxul.so", "address": "0x10a34f20", "is_app_frame": true,
+           "candidate_symbols": ["mozilla::net::detail::ReleaseBuffer"],
+           "inline_hierarchy": []}
+        ]
+      }
+    },
+    {
+      "report_id": "R07",
+      "module_build_id": "build-b100",
+      "fault_category": "stack-buffer-overflow",
+      "crash_thread": {
+        "thread_id": 21,
+        "frames": [
+          {"frame_index": 0, "module": "libxul.so", "address": "0x10c01260", "is_app_frame": true,
+           "candidate_symbols": ["mozilla::media::detail::CopyPlane", "mozilla::media::FrameBuffer::Append"],
+           "inline_hierarchy": [
+             {"inline_depth": 0, "symbol": "mozilla::media::FrameBuffer::Append"},
+             {"inline_depth": 1, "symbol": "mozilla::media::detail::CopyPlane"}
+           ]}
+        ]
+      }
+    },
+    {
+      "report_id": "R08",
+      "module_build_id": "build-b101",
+      "fault_category": "stack-buffer-overflow",
+      "crash_thread": {
+        "thread_id": 22,
+        "frames": [
+          {"frame_index": 0, "module": "libxul.so", "address": "0x7f8a22c90010", "is_app_frame": true,
+           "candidate_symbols": ["mozilla::media::FrameBuffer::Append"],
+           "inline_hierarchy": [
+             {"inline_depth": 0, "symbol": "mozilla::media::FrameBuffer::Append"},
+             {"inline_depth": 1, "symbol": "mozilla::media::detail::CopyPlane"}
+           ]}
+        ]
+      }
+    },
+    {
+      "report_id": "R09",
+      "module_build_id": "build-b100",
+      "fault_category": "use-after-free",
+      "crash_thread": {
+        "thread_id": 31,
+        "frames": [
+          {"frame_index": 0, "module": "libc.so", "address": "0x9e210", "is_app_frame": false, "candidate_symbols": ["abort"]},
+          {"frame_index": 1, "module": "libc.so", "address": "0x9e358", "is_app_frame": false, "candidate_symbols": ["pthread_kill"]}
+        ]
+      }
+    },
+    {
+      "report_id": "R10",
+      "module_build_id": "build-b999-unknown",
+      "fault_category": "use-after-free",
+      "crash_thread": {
+        "thread_id": 32,
+        "frames": [
+          {"frame_index": 0, "module": "libxul.so", "address": "0x20aa70e4", "is_app_frame": true,
+           "candidate_symbols": ["mozilla::net::detail::ReleaseBuffer"],
+           "inline_hierarchy": []}
+        ]
+      }
+    },
+    {
+      "report_id": "R11",
+      "module_build_id": "build-b100",
+      "fault_category": "use-after-free",
+      "crash_thread": {
+        "thread_id": 33,
+        "frames": [
+          {"frame_index": 0, "module": "libxul.so", "address": "0x10b99010", "is_app_frame": true,
+           "candidate_symbols": ["mozilla::net::detail::ReleaseBuffer"],
+           "inline_hierarchy": [
+             {"inline_depth": 1, "symbol": "mozilla::net::detail::ReleaseBuffer"}
+           ]}
+        ]
+      }
+    },
+    {
+      "report_id": "R12",
+      "module_build_id": "build-b102",
+      "fault_category": "heap-buffer-overflow",
+      "crash_thread": {
+        "thread_id": 40,
+        "frames": [
+          {"frame_index": 0, "module": "libxul.so", "address": "0x55f0deadbeef", "is_app_frame": true,
+           "candidate_symbols": ["mozilla::media::detail::CopyPlane"],
+           "inline_hierarchy": []}
+        ]
+      }
+    }
+  ]
+}

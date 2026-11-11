@@ -9,3 +9,6 @@ node_modules/
 .venv/
 __pycache__/
 .DS_Store
+
+# 本地归并输出
+/out/

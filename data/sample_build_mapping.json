@@ -1,0 +1,98 @@
+{
+  "schema_version": "1.0",
+  "description": "脱敏的构建映射样例：模块构建标识 -> 地址 -> 内联展开链",
+  "builds": [
+    {
+      "module_build_id": "build-b100",
+      "source_revision": "git-9f31ac2",
+      "modules": [
+        {
+          "module": "libxul.so",
+          "frames": [
+            {
+              "address": "0x10a34f20",
+              "inline_chain": [
+                {"inline_depth": 0, "symbol": "mozilla::net::SocketReader::Drain", "source": {"file": "net/socket_reader.cc", "line": 140}},
+                {"inline_depth": 1, "symbol": "mozilla::net::detail::ConsumeChunk", "source": {"file": "net/socket_reader.cc", "line": 188}},
+                {"inline_depth": 2, "symbol": "mozilla::net::detail::ReleaseBuffer", "source": {"file": "net/socket_reader.cc", "line": 212}}
+              ]
+            },
+            {
+              "address": "0x10c01140",
+              "inline_chain": [
+                {"inline_depth": 0, "symbol": "mozilla::media::FrameBuffer::Append", "source": {"file": "media/frame_buffer.cc", "line": 50}},
+                {"inline_depth": 1, "symbol": "mozilla::media::detail::CopyPlane", "source": {"file": "media/frame_buffer.cc", "line": 88}}
+              ]
+            },
+            {
+              "address": "0x10c01260",
+              "inline_chain": [
+                {"inline_depth": 0, "symbol": "mozilla::media::FrameBuffer::Append", "source": {"file": "media/frame_buffer.cc", "line": 50}},
+                {"inline_depth": 1, "symbol": "mozilla::media::detail::CopyPlane", "source": {"file": "media/frame_buffer.cc", "line": 88}}
+              ]
+            },
+            {
+              "address": "0x10b99010",
+              "inline_chain": [
+                {"inline_depth": 0, "symbol": "mozilla::net::SocketReader::Drain", "source": {"file": "net/socket_reader.cc", "line": 140}},
+                {"inline_depth": 1, "symbol": "mozilla::net::detail::ReleaseBuffer", "source": {"file": "net/socket_reader.cc", "line": 212}}
+              ]
+            },
+            {
+              "address": "0x10b99010",
+              "inline_chain": [
+                {"inline_depth": 0, "symbol": "mozilla::net::HttpTransaction::Read", "source": {"file": "net/http_transaction.cc", "line": 76}},
+                {"inline_depth": 1, "symbol": "mozilla::net::detail::ReleaseBuffer", "source": {"file": "net/http_transaction.cc", "line": 93}}
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "module_build_id": "build-b101",
+      "source_revision": "git-47be81d",
+      "modules": [
+        {
+          "module": "libxul.so",
+          "frames": [
+            {
+              "address": "0x7f8a22c41a08",
+              "inline_chain": [
+                {"inline_depth": 0, "symbol": "mozilla::net::SocketReader::Drain", "source": {"file": "net/socket_reader.cc", "line": 140}},
+                {"inline_depth": 1, "symbol": "mozilla::net::detail::ConsumeChunk", "source": {"file": "net/socket_reader.cc", "line": 188}},
+                {"inline_depth": 2, "symbol": "mozilla::net::detail::ReleaseBuffer", "source": {"file": "net/socket_reader.cc", "line": 212}}
+              ]
+            },
+            {
+              "address": "0x7f8a22c90010",
+              "inline_chain": [
+                {"inline_depth": 0, "symbol": "mozilla::media::FrameBuffer::Append", "source": {"file": "media/frame_buffer.cc", "line": 50}},
+                {"inline_depth": 1, "symbol": "mozilla::media::detail::CopyPlane", "source": {"file": "media/frame_buffer.cc", "line": 88}}
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "module_build_id": "build-b102",
+      "source_revision": "git-c029f77",
+      "modules": [
+        {
+          "module": "libxul.so",
+          "frames": [
+            {
+              "address": "0x55f0d1aa70e4",
+              "inline_chain": [
+                {"inline_depth": 0, "symbol": "mozilla::net::SocketReader::Drain", "source": {"file": "net/socket_reader.cc", "line": 140}},
+                {"inline_depth": 1, "symbol": "mozilla::net::detail::FlushQueue", "source": {"file": "net/socket_reader.cc", "line": 195}},
+                {"inline_depth": 2, "symbol": "mozilla::net::detail::ReleaseBuffer", "source": {"file": "net/socket_reader.cc", "line": 212}}
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
