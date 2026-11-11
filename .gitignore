@@ -9,3 +9,8 @@ node_modules/
 .venv/
 __pycache__/
 .DS_Store
+.pytest_cache/
+uploads/*
+!uploads/.gitkeep
+sample_outputs/*
+!sample_outputs/.gitkeep
