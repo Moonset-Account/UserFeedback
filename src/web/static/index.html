@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=1280" />
+  <title>公开实验 ZIP 选择性采集系统</title>
+  <link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body>
+<div class="page">
+  <header class="topbar">
+    <h1>公开实验 ZIP 选择性采集系统</h1>
+    <div class="subset" id="protocol-subset">协议子集加载中……</div>
+  </header>
+
+  <main class="layout">
+    <!-- 左栏：配置与操作（首屏可见） -->
+    <section class="panel config-panel">
+      <h2>① 配置采集任务</h2>
+      <label class="field">
+        <span>ZIP 公开地址（仅通过 HTTP Range 访问）</span>
+        <input id="zip-url" type="text" spellcheck="false" placeholder="http://127.0.0.1:端口/packages/normal_small.zip" />
+      </label>
+      <label class="field">
+        <span>实验 ID（记录级一致性校验）</span>
+        <input id="experiment-id" type="text" spellcheck="false" />
+      </label>
+      <label class="field">
+        <span>指定采集成员（每行一个成员名，只取这些成员）</span>
+        <textarea id="wanted-members" rows="4" spellcheck="false"></textarea>
+      </label>
+      <div class="button-row">
+        <button id="run-task" class="primary">运行采集任务</button>
+        <button id="run-demo" class="demo">运行示例（正常 + 边界）</button>
+      </div>
+      <p id="demo-status" class="demo-status"></p>
+
+      <h2 class="scenario-title">② 选择完整验收场景</h2>
+      <div class="scenario-list" id="scenario-list"></div>
+    </section>
+
+    <!-- 右栏：结果（首屏可见摘要，证据可展开） -->
+    <section class="panel result-panel">
+      <h2>③ 任务结果与来源证据</h2>
+      <div id="summary" class="summary empty">尚未运行任务。点击"运行示例"可依次执行一个正常场景与一个边界场景。</div>
+      <div id="task-tabs" class="task-tabs"></div>
+      <div id="task-detail" class="task-detail"></div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    虚构数据 · 仅支持单卷未加密 ZIP/ZIP64（stored/deflate，提取版本 ≤ 4.5）· 拒绝加密与分卷 · 不提供通用解压能力
+  </footer>
+</div>
+<script src="/static/app.js"></script>
+</body>
+</html>

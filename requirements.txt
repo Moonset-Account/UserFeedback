@@ -1,0 +1,5 @@
+# 运行期依赖
+#
+# 采集器、源站与 Web 应用全部基于 Python 3.11+ 标准库实现
+# （urllib / http.server / struct / zlib / json / threading），
+# 因此运行期不需要任何第三方包。此文件保留用于满足统一安装流程。
