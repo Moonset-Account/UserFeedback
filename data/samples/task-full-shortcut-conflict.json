@@ -1,0 +1,21 @@
+{
+  "protocol": "rpa.command-menu.v1",
+  "name": "完整-快捷键冲突：冲突可见且路径执行不受影响",
+  "steps": [
+    {
+      "action": "switch_context",
+      "context": "ALPHA"
+    },
+    {
+      "action": "snapshot_menu"
+    },
+    {
+      "action": "open_path",
+      "menu_path": [
+        "视图",
+        "刷新布局"
+      ],
+      "scope": "view"
+    }
+  ]
+}

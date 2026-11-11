@@ -1,0 +1,28 @@
+{
+  "protocol": "rpa.command-menu.v1",
+  "name": "示例-边界：禁用目标必须停止",
+  "steps": [
+    {
+      "action": "switch_context",
+      "context": "BETA"
+    },
+    {
+      "action": "snapshot_menu"
+    },
+    {
+      "action": "open_path",
+      "menu_path": [
+        "实验",
+        "设备",
+        "真空泵",
+        "启动"
+      ],
+      "scope": "device"
+    },
+    {
+      "action": "expect_state",
+      "target": "device:真空泵",
+      "equals": "运行"
+    }
+  ]
+}

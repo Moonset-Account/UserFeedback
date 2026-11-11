@@ -1,0 +1,24 @@
+{
+  "protocol": "rpa.command-menu.v1",
+  "name": "完整-搜索重排：同一查询在两种上下文排序不同",
+  "steps": [
+    {
+      "action": "switch_context",
+      "context": "ALPHA"
+    },
+    {
+      "action": "search_commands",
+      "query": "启动",
+      "limit": 5
+    },
+    {
+      "action": "switch_context",
+      "context": "BETA"
+    },
+    {
+      "action": "search_commands",
+      "query": "启动",
+      "limit": 5
+    }
+  ]
+}

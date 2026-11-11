@@ -1,0 +1,14 @@
+{
+  "task_file": "task-full-ambiguous.json",
+  "note": "独立真值，仅供 tests 断言；采集器/执行器禁止读取本目录",
+  "expectations": {
+    "expect_status": "failed",
+    "expect_error_code": "AMBIGUOUS_COMMAND",
+    "ambiguous_candidate_ids": [
+      "thermal.start",
+      "pump.start",
+      "light.on"
+    ],
+    "no_click_allowed": true
+  }
+}

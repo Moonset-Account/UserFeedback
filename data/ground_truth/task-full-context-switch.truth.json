@@ -1,0 +1,15 @@
+{
+  "task_file": "task-full-context-switch.json",
+  "note": "独立真值，仅供 tests 断言；采集器/执行器禁止读取本目录",
+  "expectations": {
+    "expect_status": "success",
+    "must_click_node_ids": [
+      "thermal.start",
+      "view.refresh"
+    ],
+    "must_observe": {
+      "context": "BETA 极限实验",
+      "device:温控台": "加热中"
+    }
+  }
+}

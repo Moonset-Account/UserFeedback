@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=1280" />
+  <title>命令面板 RPA 实验控制台</title>
+  <link rel="stylesheet" href="/console-static/console.css" />
+</head>
+<body>
+<div class="app">
+  <header class="topbar">
+    <h1>命令面板 RPA 实验控制台</h1>
+    <div class="top-actions">
+      <label class="headless-switch">
+        <input type="checkbox" id="headless-toggle" checked /> 无头模式
+      </label>
+      <button id="run-demo" type="button">▶ 运行示例（正常 + 边界，15 秒内）</button>
+      <a class="lab-link" href="/lab/" target="_blank">打开被测模拟实验台 ↗</a>
+    </div>
+  </header>
+
+  <main class="layout">
+    <!-- 左栏：任务配置 -->
+    <section class="col config-col">
+      <div class="card">
+        <h2>① 选择验收场景</h2>
+        <div id="scenario-groups"></div>
+      </div>
+      <div class="card">
+        <h2>② 自定义任务（协议 rpa.command-menu.v1）</h2>
+        <textarea id="custom-task" spellcheck="false" placeholder='{"protocol": "rpa.command-menu.v1", "name": "...", "steps": [...]}'></textarea>
+        <div class="row">
+          <button id="run-custom" type="button">运行自定义任务</button>
+          <button id="load-selected" type="button" class="secondary">把所选样例载入编辑框</button>
+        </div>
+        <p class="protocol-hint">
+          支持子集：open_path / search_commands / switch_context / snapshot_menu /
+          expect_state / wait_visible；不含变量、循环、表达式。
+        </p>
+      </div>
+    </section>
+
+    <!-- 右栏：运行与结果 -->
+    <section class="col result-col">
+      <div class="card">
+        <h2>③ 运行结果（来自真实 Playwright 执行，无预填）</h2>
+        <div id="run-summary" class="run-summary">
+          <div class="pill idle">尚未运行</div>
+          <div id="run-timing" class="timing"></div>
+        </div>
+        <ul id="run-list" class="run-list"></ul>
+      </div>
+      <div class="card">
+        <h2>④ 来源证据与具体错误（可展开）</h2>
+        <div id="evidence-box" class="evidence-box">
+          <p class="muted">选择上方某次运行后，在此查看逐步决策理由、DOM 观测值与截图。</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    全部数据为虚构模拟，不连接真实设备；采集仅经 /lab/ 页面与 /lab/api/* 公开接口进行。
+  </footer>
+</div>
+<script src="/console-static/console.js"></script>
+</body>
+</html>

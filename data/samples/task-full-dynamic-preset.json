@@ -1,0 +1,24 @@
+{
+  "protocol": "rpa.command-menu.v1",
+  "name": "完整-动态子菜单：展开后选择 BETA 预设",
+  "steps": [
+    {
+      "action": "switch_context",
+      "context": "BETA"
+    },
+    {
+      "action": "open_path",
+      "menu_path": [
+        "实验",
+        "实验预设",
+        "压力循环"
+      ],
+      "scope": "preset"
+    },
+    {
+      "action": "expect_state",
+      "target": "preset",
+      "equals": "BETA-压力"
+    }
+  ]
+}

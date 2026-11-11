@@ -9,3 +9,11 @@ node_modules/
 .venv/
 __pycache__/
 .DS_Store
+
+# 运行期生成的数据（样例与真值可由生成器重建，运行证据不入库）
+/data/runs/
+/data/server.log
+/data/server.pid
+/data/test.port
+.pytest_cache/
+*.pyc

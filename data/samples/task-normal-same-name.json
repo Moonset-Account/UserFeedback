@@ -1,0 +1,33 @@
+{
+  "protocol": "rpa.command-menu.v1",
+  "name": "示例-正常：同名命令的完整路径消歧",
+  "steps": [
+    {
+      "action": "switch_context",
+      "context": "ALPHA"
+    },
+    {
+      "action": "snapshot_menu"
+    },
+    {
+      "action": "open_path",
+      "menu_path": [
+        "实验",
+        "设备",
+        "温控台",
+        "启动"
+      ],
+      "scope": "device"
+    },
+    {
+      "action": "expect_state",
+      "target": "device:温控台",
+      "equals": "加热中"
+    },
+    {
+      "action": "wait_visible",
+      "target": "device:温控台",
+      "timeout_ms": 3000
+    }
+  ]
+}

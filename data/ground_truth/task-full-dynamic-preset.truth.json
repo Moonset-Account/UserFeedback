@@ -1,0 +1,11 @@
+{
+  "task_file": "task-full-dynamic-preset.json",
+  "note": "独立真值，仅供 tests 断言；采集器/执行器禁止读取本目录",
+  "expectations": {
+    "expect_status": "success",
+    "must_click_node_id": "preset.beta.stress",
+    "must_observe": {
+      "preset": "BETA-压力"
+    }
+  }
+}

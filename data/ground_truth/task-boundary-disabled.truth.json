@@ -1,0 +1,13 @@
+{
+  "task_file": "task-boundary-disabled.json",
+  "note": "独立真值，仅供 tests 断言；采集器/执行器禁止读取本目录",
+  "expectations": {
+    "expect_status": "failed",
+    "expect_error_code": "COMMAND_DISABLED",
+    "blocked_node_id": "pump.start",
+    "must_not_observe": {
+      "device:真空泵": "运行"
+    },
+    "no_click_allowed": true
+  }
+}

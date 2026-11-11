@@ -1,0 +1,45 @@
+{
+  "protocol": "rpa.command-menu.v1",
+  "name": "完整-上下文切换：状态与可用性随上下文变化",
+  "steps": [
+    {
+      "action": "switch_context",
+      "context": "ALPHA"
+    },
+    {
+      "action": "open_path",
+      "menu_path": [
+        "实验",
+        "设备",
+        "温控台",
+        "启动"
+      ],
+      "scope": "device"
+    },
+    {
+      "action": "expect_state",
+      "target": "device:温控台",
+      "equals": "加热中"
+    },
+    {
+      "action": "switch_context",
+      "context": "BETA"
+    },
+    {
+      "action": "snapshot_menu"
+    },
+    {
+      "action": "open_path",
+      "menu_path": [
+        "视图",
+        "刷新布局"
+      ],
+      "scope": "view"
+    },
+    {
+      "action": "expect_state",
+      "target": "context",
+      "equals": "BETA 极限实验"
+    }
+  ]
+}

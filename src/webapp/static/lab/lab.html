@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=1280" />
+  <title>模拟实验控制台（被测系统，仅虚构数据）</title>
+  <link rel="stylesheet" href="/lab/static/lab.css" />
+</head>
+<body>
+<div id="lab-app">
+  <header class="lab-header">
+    <div class="title">模拟实验控制台 <span class="tag">仅模拟 · 不连接真实设备</span></div>
+    <div class="context-box">
+      <label for="context-switcher">实验上下文</label>
+      <select id="context-switcher" aria-label="切换实验上下文">
+        <option value="ALPHA">ALPHA 标准实验</option>
+        <option value="BETA">BETA 极限实验</option>
+      </select>
+      <span class="current">当前：<strong id="current-context">ALPHA 标准实验</strong></span>
+    </div>
+    <button id="open-palette" type="button">命令面板 (Ctrl+Shift+P)</button>
+  </header>
+
+  <nav id="menubar" aria-label="主菜单"></nav>
+
+  <main class="lab-main">
+    <section class="panel devices-panel">
+      <h2>设备状态（可见状态区）</h2>
+      <div id="device-cards">
+        <article class="device-card" id="device-card-温控台">
+          <h3>温控台</h3>
+          <p class="device-state">待机</p>
+        </article>
+        <article class="device-card" id="device-card-真空泵">
+          <h3>真空泵</h3>
+          <p class="device-state">停机</p>
+        </article>
+        <article class="device-card" id="device-card-光源">
+          <h3>光源</h3>
+          <p class="device-state">关闭</p>
+        </article>
+      </div>
+      <div class="preset-box">
+        当前预设：<strong id="current-preset">未选择</strong>
+      </div>
+    </section>
+
+    <section class="panel log-panel">
+      <h2>操作事件日志</h2>
+      <ul id="event-log" class="event-log"></ul>
+    </section>
+  </main>
+
+  <footer class="lab-footer">
+    <div id="shortcut-conflict" class="conflict-banner" hidden></div>
+    <div class="hint">提示：同名命令（如三个“启动”）需按完整菜单路径区分；禁用项灰显且不可点击。</div>
+  </footer>
+
+  <!-- 命令面板（搜索） -->
+  <div id="palette-overlay" class="palette-overlay" hidden>
+    <div class="palette-dialog" role="dialog" aria-label="命令面板">
+      <input id="palette-input" type="text" placeholder="输入命令名称搜索，排序随实验上下文变化" autocomplete="off" />
+      <ul id="palette-results" class="palette-results"></ul>
+      <div class="palette-footer">回车执行第一条可用命令 · Esc 关闭 · 仅按 id/路径识别，不按序号</div>
+    </div>
+  </div>
+
+  <!-- 菜单弹出层容器 -->
+  <div id="menu-layer"></div>
+</div>
+<script src="/lab/static/lab.js"></script>
+</body>
+</html>

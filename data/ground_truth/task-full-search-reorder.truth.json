@@ -1,0 +1,11 @@
+{
+  "task_file": "task-full-search-reorder.json",
+  "note": "独立真值，仅供 tests 断言；采集器/执行器禁止读取本目录",
+  "expectations": {
+    "expect_status": "success",
+    "search_step_count": 2,
+    "alpha_top_id": "thermal.start",
+    "beta_top_id": "light.on",
+    "orders_must_differ": true
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "protocol": "rpa.command-menu.v1",
+  "name": "完整-歧义：同名后缀无作用域时停止",
+  "steps": [
+    {
+      "action": "switch_context",
+      "context": "ALPHA"
+    },
+    {
+      "action": "snapshot_menu"
+    },
+    {
+      "action": "open_path",
+      "menu_path": [
+        "启动"
+      ]
+    }
+  ]
+}
