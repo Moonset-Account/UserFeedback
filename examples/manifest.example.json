@@ -1,0 +1,74 @@
+{
+  "defaults": { "budgetMinutes": 30, "exhaustiveLimit": 20 },
+  "builds": [
+    { "id": "linux-x64", "budgetMinutes": 30, "requiredFixes": ["FIX-A", "FIX-B", "FIX-C"] },
+    { "id": "arm64", "budgetMinutes": 25, "requiredFixes": ["FIX-A", "FIX-B"] },
+    { "id": "windows-x64", "budgetMinutes": 5, "requiredFixes": ["FIX-A"] }
+  ],
+  "cases": [
+    {
+      "id": "SEC-001",
+      "durationMinutes": 5,
+      "builds": ["linux-x64", "windows-x64"],
+      "fixes": ["FIX-A"],
+      "mandatory": true,
+      "dependencies": ["SEC-008"]
+    },
+    {
+      "id": "SEC-001",
+      "durationMinutes": 6,
+      "builds": ["arm64"],
+      "fixes": ["FIX-A"],
+      "mandatory": true,
+      "dependencies": ["SEC-008"]
+    },
+    {
+      "id": "SEC-002",
+      "durationMinutes": 6,
+      "builds": ["linux-x64", "arm64"],
+      "fixes": ["FIX-B"],
+      "mandatory": false,
+      "dependencies": []
+    },
+    {
+      "id": "SEC-003",
+      "durationMinutes": 11,
+      "builds": ["linux-x64"],
+      "fixes": ["FIX-B", "FIX-C"],
+      "mandatory": false,
+      "dependencies": []
+    },
+    {
+      "id": "SEC-005",
+      "durationMinutes": 8,
+      "builds": ["arm64"],
+      "fixes": ["FIX-B", "FIX-C"],
+      "mandatory": false,
+      "dependencies": []
+    },
+    {
+      "id": "SEC-008",
+      "durationMinutes": 3,
+      "builds": ["linux-x64", "arm64", "windows-x64"],
+      "fixes": [],
+      "mandatory": false,
+      "dependencies": []
+    },
+    {
+      "id": "SEC-010",
+      "durationMinutes": 4,
+      "builds": ["linux-x64"],
+      "fixes": ["FIX-C"],
+      "mandatory": false,
+      "dependencies": ["SEC-011"]
+    },
+    {
+      "id": "SEC-011",
+      "durationMinutes": 4,
+      "builds": ["linux-x64"],
+      "fixes": [],
+      "mandatory": false,
+      "dependencies": ["SEC-010"]
+    }
+  ]
+}
