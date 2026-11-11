@@ -9,3 +9,7 @@ node_modules/
 .venv/
 __pycache__/
 .DS_Store
+
+# Swift 构建产物与本工具生成的报告
+.build/
+Reports/

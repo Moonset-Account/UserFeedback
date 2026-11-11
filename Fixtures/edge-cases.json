@@ -1,0 +1,41 @@
+{
+  "evaluationTime": 1000,
+  "sync": { "watermark": 900, "periodSeconds": 100 },
+  "users": [
+    { "id": "U-T1", "displayName": "边界内：撤权 900，截止 1000，评估 1000（t<=截止 为暂态）" },
+    { "id": "U-T2", "displayName": "边界外：撤权 899，截止 999，评估 1000（超期 1 秒为残留）" },
+    { "id": "U-LOOP", "displayName": "自环组成员" },
+    { "id": "U-GHOST", "displayName": "观察引用了未登记快照" }
+  ],
+  "groups": [
+    { "id": "G-T1", "displayName": "边界组1" },
+    { "id": "G-T2", "displayName": "边界组2" },
+    { "id": "G-SELF", "displayName": "自环组" }
+  ],
+  "memberships": [
+    { "id": "EM-1", "parentGroup": "G-T1",   "member": "U-T1" },
+    { "id": "EM-2", "parentGroup": "G-T2",   "member": "U-T2" },
+    { "id": "EM-3", "parentGroup": "G-SELF", "member": "U-LOOP" },
+    { "id": "EM-4", "parentGroup": "G-SELF", "member": "G-SELF" }
+  ],
+  "grants": [
+    { "id": "EG-1", "subject": "G-T1",   "resource": "R-X", "action": "read", "effect": "allow", "validFrom": 0, "validUntil": null },
+    { "id": "EG-2", "subject": "G-T2",   "resource": "R-X", "action": "read", "effect": "allow", "validFrom": 0, "validUntil": null },
+    { "id": "EG-3", "subject": "G-SELF", "resource": "R-X", "action": "read", "effect": "allow", "validFrom": 0, "validUntil": null },
+    { "id": "EG-4", "subject": "G-T1",   "resource": "R-Y", "action": "read", "effect": "allow", "validFrom": 0, "validUntil": null }
+  ],
+  "revocations": [
+    { "id": "ERV-1", "grantId": "EG-1", "revokedAt": 900 },
+    { "id": "ERV-2", "grantId": "EG-2", "revokedAt": 899 },
+    { "id": "ERV-3", "grantId": "EG-3", "revokedAt": 950 }
+  ],
+  "observations": [
+    { "id": "EO-1", "user": "U-T1",    "resource": "R-X", "action": "read", "observed": "allow",   "snapshotId": "ES-1", "snapshotTime": 980 },
+    { "id": "EO-2", "user": "U-T2",    "resource": "R-X", "action": "read", "observed": "allow",   "snapshotId": "ES-1", "snapshotTime": 980 },
+    { "id": "EO-3", "user": "U-LOOP",  "resource": "R-X", "action": "read", "observed": "allow",   "snapshotId": "ES-1", "snapshotTime": 980 },
+    { "id": "EO-4", "user": "U-GHOST", "resource": "R-Y", "action": "read", "observed": "allow",   "snapshotId": "SNAP-DOES-NOT-EXIST", "snapshotTime": 980 }
+  ],
+  "snapshots": [
+    { "id": "ES-1", "recordedAt": 980, "present": true }
+  ]
+}

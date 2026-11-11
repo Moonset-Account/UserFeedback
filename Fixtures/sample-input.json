@@ -1,0 +1,86 @@
+{
+  "evaluationTime": 1000,
+  "sync": {
+    "watermark": 900,
+    "periodSeconds": 200
+  },
+  "users": [
+    { "id": "U-ALICE",   "displayName": "Alice（两条来源，组来源被撤、个人授权保留）" },
+    { "id": "U-BOB",     "displayName": "Bob（撤权仍在同步期限内：暂态）" },
+    { "id": "U-CAROL",   "displayName": "Carol（撤权超期：残留）" },
+    { "id": "U-DAN",     "displayName": "Dan（观察记录早于同步水位）" },
+    { "id": "U-EVE",     "displayName": "Eve（祖先组成环）" },
+    { "id": "U-FRANK",   "displayName": "Frank（快照缺失）" },
+    { "id": "U-GRACE",   "displayName": "Grace（显式拒绝覆盖允许）" },
+    { "id": "U-HEIDI",   "displayName": "Heidi（授权已过期，无撤权事件）" },
+    { "id": "U-IVAN",    "displayName": "Ivan（组来源撤销但个人授权保留：独立来源对照）" },
+    { "id": "U-JUDY",    "displayName": "Judy（无差异对照：继承未撤销的组授权）" }
+  ],
+  "groups": [
+    { "id": "G-ENG",         "displayName": "工程组" },
+    { "id": "G-ADMIN",       "displayName": "管理员组" },
+    { "id": "G-AUDIT",       "displayName": "审计组" },
+    { "id": "G-CONTRACTORS", "displayName": "外包组（撤权更早，已超同步期限）" },
+    { "id": "G-LEGACY",      "displayName": "遗留组（组上无授权，仅成员持有过期个人授权）" },
+    { "id": "G-X",           "displayName": "环组 X" },
+    { "id": "G-Y",           "displayName": "环组 Y" }
+  ],
+  "memberships": [
+    { "id": "M-1", "parentGroup": "G-ENG",         "member": "U-ALICE" },
+    { "id": "M-2", "parentGroup": "G-ENG",         "member": "U-BOB" },
+    { "id": "M-3", "parentGroup": "G-CONTRACTORS", "member": "U-CAROL" },
+    { "id": "M-4", "parentGroup": "G-ENG",         "member": "U-DAN" },
+    { "id": "M-5", "parentGroup": "G-ADMIN",       "member": "G-ENG" },
+    { "id": "M-6", "parentGroup": "G-AUDIT",       "member": "U-FRANK" },
+    { "id": "M-7", "parentGroup": "G-X",           "member": "U-EVE" },
+    { "id": "M-8", "parentGroup": "G-Y",           "member": "G-X" },
+    { "id": "M-9", "parentGroup": "G-X",           "member": "G-Y" },
+    { "id": "M-10", "parentGroup": "G-ENG",        "member": "U-GRACE" },
+    { "id": "M-11", "parentGroup": "G-LEGACY", "member": "U-HEIDI" },
+    { "id": "M-12", "parentGroup": "G-ENG",        "member": "U-IVAN" },
+    { "id": "M-13", "parentGroup": "G-AUDIT",      "member": "U-JUDY" }
+  ],
+  "grants": [
+    { "id": "GR-ENG-REPO",  "subject": "G-ENG",         "resource": "R-REPO",  "action": "read",   "effect": "allow", "validFrom": 100, "validUntil": null },
+    { "id": "GR-ADM-REPO",  "subject": "G-ADMIN",       "resource": "R-REPO",  "action": "admin",  "effect": "allow", "validFrom": 100, "validUntil": null },
+    { "id": "GR-CT-REPO",   "subject": "G-CONTRACTORS", "resource": "R-REPO",  "action": "read",   "effect": "allow", "validFrom": 100, "validUntil": null },
+    { "id": "GR-ALICE-REPO","subject": "U-ALICE",       "resource": "R-REPO",  "action": "read",   "effect": "allow", "validFrom": 100, "validUntil": null },
+    { "id": "GR-X-REPO",    "subject": "G-X",           "resource": "R-REPO",  "action": "read",   "effect": "allow", "validFrom": 100, "validUntil": null },
+    { "id": "GR-AUDIT-LOG", "subject": "G-AUDIT",       "resource": "R-LOGS",  "action": "read",   "effect": "allow", "validFrom": 100, "validUntil": null },
+    { "id": "GR-GRACE-DENY","subject": "U-GRACE",       "resource": "R-REPO",  "action": "read",   "effect": "deny",  "validFrom": 100, "validUntil": null },
+    { "id": "GR-HEIDI-OLD", "subject": "U-HEIDI",       "resource": "R-REPO",  "action": "read",   "effect": "allow", "validFrom": 100, "validUntil": 500 },
+    { "id": "GR-IVAN-REPO", "subject": "U-IVAN",        "resource": "R-REPO",  "action": "read",   "effect": "allow", "validFrom": 100, "validUntil": null },
+    { "id": "GR-AUDIT-REPO","subject": "G-AUDIT",       "resource": "R-REPO",  "action": "read",   "effect": "allow", "validFrom": 100, "validUntil": null }
+  ],
+  "revocations": [
+    { "id": "REV-1", "grantId": "GR-ENG-REPO", "revokedAt": 850 },
+    { "id": "REV-2", "grantId": "GR-ADM-REPO", "revokedAt": 700 },
+    { "id": "REV-3", "grantId": "GR-X-REPO",   "revokedAt": 950 },
+    { "id": "REV-4", "grantId": "GR-AUDIT-LOG","revokedAt": 600 },
+    { "id": "REV-5", "grantId": "GR-CT-REPO",  "revokedAt": 700 }
+  ],
+  "observations": [
+    { "id": "OBS-1", "user": "U-ALICE", "resource": "R-REPO", "action": "read",  "observed": "allow",   "snapshotId": "SNAP-A", "snapshotTime": 950 },
+    { "id": "OBS-2", "user": "U-BOB",   "resource": "R-REPO", "action": "read",  "observed": "allow",   "snapshotId": "SNAP-B", "snapshotTime": 960 },
+    { "id": "OBS-3", "user": "U-CAROL", "resource": "R-REPO", "action": "read",  "observed": "allow",   "snapshotId": "SNAP-C", "snapshotTime": 980 },
+    { "id": "OBS-4", "user": "U-DAN",   "resource": "R-REPO", "action": "read",  "observed": "allow",   "snapshotId": "SNAP-D", "snapshotTime": 800 },
+    { "id": "OBS-5", "user": "U-EVE",   "resource": "R-REPO", "action": "read",  "observed": "allow",   "snapshotId": "SNAP-E", "snapshotTime": 970 },
+    { "id": "OBS-6", "user": "U-FRANK", "resource": "R-LOGS", "action": "read",  "observed": "missing", "snapshotId": "SNAP-F", "snapshotTime": 990 },
+    { "id": "OBS-7", "user": "U-GRACE", "resource": "R-REPO", "action": "read",  "observed": "deny",    "snapshotId": "SNAP-G", "snapshotTime": 950 },
+    { "id": "OBS-8", "user": "U-HEIDI", "resource": "R-REPO", "action": "read",  "observed": "allow",   "snapshotId": "SNAP-H", "snapshotTime": 950 },
+    { "id": "OBS-9", "user": "U-IVAN",  "resource": "R-REPO", "action": "read",  "observed": "allow",   "snapshotId": "SNAP-I", "snapshotTime": 950 },
+    { "id": "OBS-10","user": "U-JUDY",  "resource": "R-REPO", "action": "read",  "observed": "allow",   "snapshotId": "SNAP-J", "snapshotTime": 950 }
+  ],
+  "snapshots": [
+    { "id": "SNAP-A", "recordedAt": 950, "present": true },
+    { "id": "SNAP-B", "recordedAt": 960, "present": true },
+    { "id": "SNAP-C", "recordedAt": 980, "present": true },
+    { "id": "SNAP-D", "recordedAt": 800, "present": true },
+    { "id": "SNAP-E", "recordedAt": 970, "present": true },
+    { "id": "SNAP-F", "recordedAt": 990, "present": false },
+    { "id": "SNAP-G", "recordedAt": 950, "present": true },
+    { "id": "SNAP-H", "recordedAt": 950, "present": true },
+    { "id": "SNAP-I", "recordedAt": 950, "present": true },
+    { "id": "SNAP-J", "recordedAt": 950, "present": true }
+  ]
+}
