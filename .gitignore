@@ -9,3 +9,7 @@ node_modules/
 .venv/
 __pycache__/
 .DS_Store
+
+# RPA 运行证据与生成样例（可由 sample_generator 重新生成）
+runs/
+samples/

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=1280">
+<title>RPA 实验步骤重排平台</title>
+<link rel="stylesheet" href="/static/app.css">
+</head>
+<body>
+<header class="topbar">
+  <div>
+    <h1>RPA 实验步骤依赖重排平台</h1>
+    <p class="sub">协议 rpa-order/v1 ｜ 先判定约束可满足，再生成最少移动确定性计划，浏览器真实拖拽并逐步回读</p>
+  </div>
+  <div class="top-actions">
+    <button id="run-demo" class="btn primary">▶ 运行示例（正常 + 边界）</button>
+  </div>
+</header>
+
+<main class="grid">
+  <!-- 左栏：配置与场景 -->
+  <section class="card col-left">
+    <h2>① 选择输入场景</h2>
+    <select id="scenario-select"></select>
+    <div class="row">
+      <label class="chk"><input type="checkbox" id="mode-check"> 仅约束检查（不启动浏览器）</label>
+    </div>
+    <div class="row btns">
+      <button id="btn-run" class="btn">运行该场景</button>
+      <button id="btn-open-source" class="btn ghost">打开源站编辑页</button>
+    </div>
+    <div id="scenario-meta" class="meta-box"></div>
+
+    <h2 style="margin-top:14px">② 依赖图与约束</h2>
+    <div id="graph-box"><svg id="dep-graph" width="100%" height="250" viewBox="0 0 460 250"></svg></div>
+    <div id="constraint-text" class="meta-box small"></div>
+
+    <details style="margin-top:10px">
+      <summary style="cursor:pointer;font-weight:600">自定义输入（粘贴 rpa-order/v1 JSON）</summary>
+      <textarea id="custom-json" rows="8" style="width:100%;margin-top:6px;font-family:ui-monospace,Menlo,monospace;font-size:11px;border:1px solid #d1d5db;border-radius:7px;padding:8px"
+        placeholder='{"protocol":"rpa-order/v1", ...}'></textarea>
+      <div class="row btns">
+        <button id="btn-run-custom" class="btn ghost">运行自定义输入（浏览器）</button>
+        <button id="btn-check-custom" class="btn ghost">仅检查自定义输入</button>
+      </div>
+    </details>
+  </section>
+
+  <!-- 中栏：计划与实时结果 -->
+  <section class="card col-mid">
+    <h2>③ 规划结果与实际移动</h2>
+    <div id="status-line" class="status idle">尚未运行</div>
+    <div id="plan-box" class="meta-box small"></div>
+    <h3>每次实际移动（含回读顺序）</h3>
+    <div id="moves-box" class="scroll-box"><p class="hint">运行后在此展示每一步拖拽与回读证据。</p></div>
+    <h3>独立验证结论</h3>
+    <div id="verify-box" class="meta-box small"></div>
+  </section>
+
+  <!-- 右栏：历史与错误 -->
+  <section class="card col-right">
+    <h2>④ 任务记录与错误</h2>
+    <div id="demo-summary" class="meta-box small hidden"></div>
+    <div id="runs-box" class="scroll-box tall"></div>
+    <h3>具体错误 / 冲突链</h3>
+    <div id="error-box" class="scroll-box error-box"><p class="hint">无错误。</p></div>
+  </section>
+</main>
+
+<!-- 可展开证据 -->
+<details class="evidence">
+  <summary>展开查看完整来源证据（每轮回读、重规划事件、手动换位、落盘文件）</summary>
+  <pre id="evidence-pre">暂无</pre>
+</details>
+
+<script src="/static/app.js"></script>
+</body>
+</html>

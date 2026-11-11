@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>本地源站 · {{ scenario.title }}</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: #f4f6fa; color: #1f2937; padding: 20px;
+  }
+  .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+  h1 { font-size: 18px; margin: 0; }
+  .meta { font-size: 12px; color: #6b7280; }
+  .layout { display: flex; gap: 20px; align-items: flex-start; }
+  .panel {
+    background: #fff; border: 1px solid #e5e7eb; border-radius: 10px;
+    padding: 14px; box-shadow: 0 1px 3px rgba(0,0,0,.06);
+  }
+  #list-panel { width: 420px; }
+  #graph-panel { flex: 1; min-height: 360px; }
+  ul#step-list { list-style: none; margin: 0; padding: 0; }
+  li.card {
+    display: flex; align-items: center; gap: 10px;
+    padding: 10px 12px; margin-bottom: 8px;
+    border: 1px solid #d1d5db; border-radius: 8px; background: #fafafa;
+    cursor: grab; user-select: none; transition: box-shadow .12s, border-color .12s;
+  }
+  li.card:active { cursor: grabbing; }
+  li.card.dragging { opacity: .45; border-style: dashed; }
+  li.card.drag-over { border-color: #2563eb; box-shadow: 0 0 0 2px rgba(37,99,235,.25); }
+  li.card.fixed { border-left: 4px solid #d97706; background: #fffbeb; }
+  .slot {
+    width: 34px; height: 24px; border-radius: 5px; background: #e5e7eb;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 12px; font-variant-numeric: tabular-nums;
+  }
+  li.card.fixed .slot { background: #f59e0b; color: #fff; font-weight: 600; }
+  .sid { font-weight: 700; font-size: 13px; }
+  .sname { font-size: 13px; color: #374151; }
+  .badge {
+    margin-left: auto; font-size: 11px; padding: 2px 7px; border-radius: 999px;
+  }
+  .badge.fixed-badge { background: #fef3c7; color: #92400e; }
+  .badge.group-badge { background: #dbeafe; color: #1e40af; }
+  #drop-zone-end {
+    height: 34px; border: 1px dashed #9ca3af; border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    color: #6b7280; font-size: 12px;
+  }
+  #drop-zone-end.drag-over { border-color: #2563eb; background: #eff6ff; color: #2563eb; }
+  svg text { font-size: 11px; fill: #374151; }
+  .legend { font-size: 12px; color: #6b7280; margin-top: 8px; }
+  .legend span { margin-right: 14px; }
+  .dot { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 4px; }
+</style>
+</head>
+<body>
+  <div class="topbar">
+    <h1>本地源站 · 流程编辑页（{{ scenario.scenario_id }}）</h1>
+    <div class="meta">协议 rpa-order/v1 ｜ 卡片可手动拖动，RPA 通过公开 DOM 回读顺序</div>
+  </div>
+  <div class="layout">
+    <div class="panel" id="list-panel">
+      <ul id="step-list" data-scenario="{{ scenario.scenario_id }}">
+        {% for c in cards %}
+        <li class="card {{ 'fixed' if c.fixed }}" draggable="true"
+            data-step-id="{{ c.id }}" data-fixed="{{ '1' if c.fixed else '0' }}">
+          <span class="slot">{{ loop.index0 }}</span>
+          <span class="sid">{{ c.id }}</span>
+          <span class="sname">{{ c.name }}</span>
+          {% if c.group %}<span class="badge group-badge">组:{{ c.group }}</span>{% endif %}
+          {% if c.fixed %}<span class="badge fixed-badge">固定槽位 {{ c.fixed_slot }}</span>{% endif %}
+        </li>
+        {% endfor %}
+      </ul>
+      <div id="drop-zone-end">拖到此处 = 放到列表末尾</div>
+      <div class="legend">
+        <span><i class="dot" style="background:#f59e0b"></i>固定锚点步骤</span>
+        <span><i class="dot" style="background:#dbeafe"></i>同组步骤（须保持原相对顺序）</span>
+      </div>
+    </div>
+    <div class="panel" id="graph-panel">
+      <h2 style="font-size:14px;margin:0 0 8px">依赖图（depends_on 与同组边）</h2>
+      <svg id="dep-graph" width="100%" height="340" viewBox="0 0 760 340" preserveAspectRatio="xMidYMid meet"></svg>
+      <div class="legend">实线 = 显式 depends_on；虚线 = 同组相对顺序约束；橙色节点 = 固定锚点</div>
+    </div>
+  </div>
+
+<script>
+// ---------- 数据 ----------
+const STEPS = {{ cards | tojson }};
+const EDGES = {{ edges | tojson }};
+const listEl = document.getElementById('step-list');
+const endZone = document.getElementById('drop-zone-end');
+
+// ---------- 工具：读取当前 DOM 顺序（RPA 采集器走同一公开结构）----------
+function readOrder() {
+  return Array.from(document.querySelectorAll('#step-list li[data-step-id]'))
+    .map(li => li.getAttribute('data-step-id'));
+}
+function refreshSlots() {
+  listEl.querySelectorAll('li.card').forEach((li, i) => {
+    li.querySelector('.slot').textContent = i;
+  });
+}
+
+// ---------- 公开操作：把 srcId 卡片移动到 anchorId 之后（anchorId=null 放首位）----------
+// 页面自身的用户拖放最终也调用该函数；RPA 测试干扰通过它模拟“用户手动换位”。
+function moveCard(srcId, anchorId) {
+  const src = listEl.querySelector(`li[data-step-id="${srcId}"]`);
+  if (!src) return false;
+  if (anchorId === null) {
+    listEl.insertBefore(src, listEl.firstElementChild);
+  } else {
+    const anchor = listEl.querySelector(`li[data-step-id="${anchorId}"]`);
+    if (!anchor) return false;
+    anchor.after(src);
+  }
+  refreshSlots();
+  return true;
+}
+// 便捷换位：把 a 移到 b 当前位置之后（模拟用户把两张卡对调的效果）
+function swapCards(a, b) {
+  const order = readOrder();
+  const ia = order.indexOf(a), ib = order.indexOf(b);
+  if (ia < 0 || ib < 0) return false;
+  if (ia < ib) moveCard(a, b); else moveCard(b, a);
+  return true;
+}
+window.moveCard = moveCard;
+window.swapCards = swapCards;
+window.readOrder = readOrder;
+
+// ---------- HTML5 原生拖拽（真人操作路径）----------
+let dragSrc = null;
+listEl.addEventListener('dragstart', e => {
+  const li = e.target.closest('li.card');
+  if (!li) return;
+  dragSrc = li;
+  li.classList.add('dragging');
+  e.dataTransfer.effectAllowed = 'move';
+  e.dataTransfer.setData('text/plain', li.dataset.stepId);
+});
+listEl.addEventListener('dragover', e => {
+  e.preventDefault();
+  const li = e.target.closest('li.card');
+  listEl.querySelectorAll('.drag-over').forEach(x => x.classList.remove('drag-over'));
+  if (li && li !== dragSrc) li.classList.add('drag-over');
+});
+listEl.addEventListener('drop', e => {
+  e.preventDefault();
+  const li = e.target.closest('li.card');
+  listEl.querySelectorAll('.drag-over').forEach(x => x.classList.remove('drag-over'));
+  if (!li || !dragSrc || li === dragSrc) return;
+  moveCard(dragSrc.dataset.stepId, li.dataset.stepId);
+});
+listEl.addEventListener('dragend', () => {
+  if (dragSrc) dragSrc.classList.remove('dragging');
+  dragSrc = null;
+  listEl.querySelectorAll('.drag-over').forEach(x => x.classList.remove('drag-over'));
+});
+endZone.addEventListener('dragover', e => { e.preventDefault(); endZone.classList.add('drag-over'); });
+endZone.addEventListener('dragleave', () => endZone.classList.remove('drag-over'));
+endZone.addEventListener('drop', e => {
+  e.preventDefault();
+  endZone.classList.remove('drag-over');
+  if (dragSrc) listEl.appendChild(dragSrc);
+  refreshSlots();
+});
+
+// ---------- 极简分层依赖图（无第三方库）----------
+(function drawGraph() {
+  const svg = document.getElementById('dep-graph');
+  const ids = STEPS.map(s => s.id);
+  const indeg = Object.fromEntries(ids.map(i => [i, 0]));
+  const adj = Object.fromEntries(ids.map(i => [i, []]));
+  EDGES.forEach(e => { adj[e.from].push(e.to); indeg[e.to]++; });
+  const layer = {};
+  const queue = ids.filter(i => indeg[i] === 0).map(i => [i, 0]);
+  const seen = new Set();
+  while (queue.length) {
+    const [u, d] = queue.shift();
+    if (seen.has(u)) continue;
+    seen.add(u); layer[u] = Math.max(layer[u] ?? 0, d);
+    adj[u].forEach(v => { indeg[v]--; if (indeg[v] <= 0) queue.push([v, layer[u] + 1]); });
+  }
+  ids.forEach(i => { if (!(i in layer)) layer[i] = 0; });  // 有环时兜底
+  const byLayer = {};
+  ids.forEach(i => (byLayer[layer[i]] ??= []).push(i));
+  const layerCount = Object.keys(byLayer).length;
+  const maxRows = Math.max(...Object.values(byLayer).map(v => v.length));
+  // 按层数/行数自适应间距，保证整图落在 760×340 的 viewBox 内
+  const gapX = Math.min(150, Math.floor(700 / Math.max(1, layerCount)));
+  const gapY = Math.min(64, Math.floor(280 / Math.max(1, maxRows)));
+  const startX = Math.min(50, Math.floor(gapX / 2) + 8);
+  const pos = {};
+  Object.keys(byLayer).sort((a,b)=>a-b).forEach((L, ci) => {
+    byLayer[L].forEach((id, ri) => { pos[id] = {x: startX + ci * gapX, y: 36 + ri * gapY}; });
+  });
+  const NS = 'http://www.w3.org/2000/svg';
+  EDGES.forEach(e => {
+    const a = pos[e.from], b = pos[e.to];
+    if (!a || !b) return;
+    const line = document.createElementNS(NS, 'line');
+    line.setAttribute('x1', a.x + 38); line.setAttribute('y1', a.y);
+    line.setAttribute('x2', b.x - 42); line.setAttribute('y2', b.y);
+    line.setAttribute('stroke', e.group_edge ? '#93c5fd' : '#6b7280');
+    line.setAttribute('stroke-width', 1.4);
+    if (e.group_edge) line.setAttribute('stroke-dasharray', '5 4');
+    svg.appendChild(line);
+  });
+  STEPS.forEach(s => {
+    const p = pos[s.id];
+    const g = document.createElementNS(NS, 'g');
+    const rect = document.createElementNS(NS, 'rect');
+    rect.setAttribute('x', p.x - 42); rect.setAttribute('y', p.y - 16);
+    rect.setAttribute('width', 84); rect.setAttribute('height', 26); rect.setAttribute('rx', 6);
+    rect.setAttribute('fill', s.fixed ? '#fef3c7' : '#eff6ff');
+    rect.setAttribute('stroke', s.fixed ? '#d97706' : '#60a5fa');
+    const t = document.createElementNS(NS, 'text');
+    t.setAttribute('x', p.x); t.setAttribute('y', p.y + 1);
+    t.setAttribute('text-anchor', 'middle'); t.setAttribute('dominant-baseline', 'middle');
+    t.textContent = s.id;
+    g.appendChild(rect); g.appendChild(t); svg.appendChild(g);
+  });
+})();
+</script>
+</body>
+</html>
