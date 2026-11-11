@@ -1,0 +1,10 @@
+{
+  "description": "合法小图：32x32 调色板索引 1-bit（子字节像素，行内需打包、展开后按字节对齐）",
+  "width": 32,
+  "height": 32,
+  "bitDepth": 1,
+  "colorType": 3,
+  "interlaceMethod": 0,
+  "stage": "header",
+  "compressedBytes": 118
+}

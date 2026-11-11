@@ -1,0 +1,9 @@
+{
+  "description": "非法组合：RGB 真彩色不允许 12 位深（允许 8/16）",
+  "width": 8,
+  "height": 8,
+  "bitDepth": 12,
+  "colorType": 2,
+  "interlaceMethod": 0,
+  "stage": "header"
+}

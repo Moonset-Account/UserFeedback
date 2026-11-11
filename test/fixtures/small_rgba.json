@@ -1,0 +1,10 @@
+{
+  "description": "合法小图：16x16 RGBA 8-bit 非交错。compressedBytes 仅作背景信息，预算推导不使用压缩后大小。",
+  "width": 16,
+  "height": 16,
+  "bitDepth": 8,
+  "colorType": 6,
+  "interlaceMethod": 0,
+  "stage": "header",
+  "compressedBytes": 247
+}

@@ -1,0 +1,9 @@
+{
+  "description": "非法解码阶段：stage 不在 header/inflate/scanline/unfilter/convert/output 之中",
+  "width": 8,
+  "height": 8,
+  "bitDepth": 8,
+  "colorType": 6,
+  "interlaceMethod": 0,
+  "stage": "frobnicate"
+}

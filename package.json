@@ -1,0 +1,10 @@
+{
+  "name": "png-memory-budget",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "PNG 解码峰值内存预算校验（单图上限 + 并发总预算）",
+  "scripts": {
+    "test": "node --test test/pngMemoryBudget.test.js"
+  }
+}

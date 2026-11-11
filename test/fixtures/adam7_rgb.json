@@ -1,0 +1,10 @@
+{
+  "description": "合法图：64x48 RGB 8-bit Adam7 交错，行缓冲按七趟子帧最大宽度计算",
+  "width": 64,
+  "height": 48,
+  "bitDepth": 8,
+  "colorType": 2,
+  "interlaceMethod": 1,
+  "stage": "header",
+  "compressedBytes": 1820
+}

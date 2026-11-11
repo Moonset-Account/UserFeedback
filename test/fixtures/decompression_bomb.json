@@ -1,0 +1,10 @@
+{
+  "description": "解压炸弹：压缩包很小但解码后为 20000x20000 灰度 8-bit。仅核对压缩文件大小无法发现其峰值内存风险。",
+  "width": 20000,
+  "height": 20000,
+  "bitDepth": 8,
+  "colorType": 0,
+  "interlaceMethod": 0,
+  "stage": "header",
+  "compressedBytes": 4096
+}
