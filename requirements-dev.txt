@@ -1,0 +1,4 @@
+# 测试依赖（pip install -r requirements-dev.txt）
+-r requirements.txt
+pytest==8.3.4
+playwright==1.58.0

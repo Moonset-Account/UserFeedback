@@ -1,0 +1,18 @@
+[
+  {
+    "code": "rule-busy-example",
+    "name": "忙碌/未就绪页面识别示例",
+    "phrase": "正在为您检索相关资料",
+    "region_contains": "pending-tip",
+    "category": "BROKEN_TEMPLATE",
+    "weight": 0.6
+  },
+  {
+    "code": "rule-maint-vote-example",
+    "name": "维护误判反对票示例（负权重）",
+    "phrase": "系统维护中",
+    "region_contains": "doc-card",
+    "category": "MAINTENANCE",
+    "weight": -0.4
+  }
+]

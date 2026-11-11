@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=1280">
+<title>响应语义判定器 · 采集前分类控制台</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <h1>响应语义判定器</h1>
+    <span class="subtitle">采集前分类 · 结构契约 / 明确标记 / 内容特征 / 导航来源</span>
+  </div>
+  <div class="top-actions">
+    <button id="run-demo" class="btn btn-primary" type="button">▶ 运行示例（正常 + 边界）</button>
+    <button id="run-full" class="btn" type="button">运行完整验收（22 场景）</button>
+  </div>
+</header>
+
+<main class="layout">
+  <!-- 左栏：输入配置 -->
+  <section class="panel panel-input">
+    <h2>① 配置采集输入</h2>
+    <label class="field">
+      <span>采集模式</span>
+      <select id="mode">
+        <option value="http">HTTP（requests，GET 文本响应）</option>
+        <option value="browser">浏览器（Playwright 无头 Chromium）</option>
+        <option value="file">本地文件（样例导出的 HTML）</option>
+      </select>
+    </label>
+    <label class="field">
+      <span>目标 URL / 文件路径</span>
+      <input id="target" type="text" placeholder="http://127.0.0.1:8000/scenarios/normal">
+    </label>
+    <label class="field">
+      <span>Referer（可选，导航来源）</span>
+      <input id="referer" type="text" placeholder="留空则不携带">
+    </label>
+    <label class="field">
+      <span>任务备注（可选）</span>
+      <input id="label" type="text" placeholder="例如：手工复验维护页">
+    </label>
+    <div class="quick-scenarios">
+      <span class="hint">快速填入源站场景：</span>
+      <select id="scenario-picker"></select>
+    </div>
+    <button id="run-one" class="btn btn-primary" type="button">运行单次任务</button>
+    <p id="input-error" class="error-text" hidden></p>
+
+    <h2 class="rules-title">② 补充规则（隔离项复判用）</h2>
+    <p class="hint">JSON 数组，保存后对隔离任务点“复判”即可以旧快照 + 新依据重新判定，历史判断保留。</p>
+    <textarea id="rules-editor" rows="7" placeholder='[&#10;  {&#10;    "code": "rule-001",&#10;    "name": "忙碌页补充识别",&#10;    "phrase": "正在为您检索",&#10;    "region_contains": "pending-tip",&#10;    "category": "BROKEN_TEMPLATE",&#10;    "weight": 0.5&#10;  }&#10;]'></textarea>
+    <div class="rules-actions">
+      <button id="rules-save" class="btn" type="button">保存规则</button>
+      <button id="rules-reset" class="btn btn-ghost" type="button">清空</button>
+      <span id="rules-status" class="hint"></span>
+    </div>
+  </section>
+
+  <!-- 右栏：结果 -->
+  <section class="panel panel-result">
+    <div class="result-head">
+      <h2>③ 判定结果与证据</h2>
+      <span id="run-status" class="run-status"></span>
+    </div>
+
+    <div class="suite-bar" id="suite-bar" hidden>
+      <div id="suite-summary" class="suite-summary"></div>
+    </div>
+
+    <div class="job-list-wrap">
+      <table class="job-table">
+        <thead>
+          <tr>
+            <th>任务</th><th>模式</th><th>分类</th><th>置信度</th>
+            <th>边界</th><th>状态</th><th>操作</th>
+          </tr>
+        </thead>
+        <tbody id="job-tbody">
+          <tr class="empty-row"><td colspan="7">尚未运行任务 —— 点击“运行示例”或配置输入后运行。</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div id="job-detail" class="job-detail" hidden>
+      <div class="detail-head">
+        <h3 id="detail-title">任务详情</h3>
+        <div class="detail-actions">
+          <button id="btn-reclassify" class="btn" type="button">用当前规则复判</button>
+        </div>
+      </div>
+      <div id="detail-meta" class="detail-meta"></div>
+      <div id="detail-history" class="history-chain"></div>
+      <h4>证据链（最新判定）</h4>
+      <div id="detail-evidence" class="evidence-list"></div>
+      <h4>采集快照</h4>
+      <details class="snapshot-details">
+        <summary>展开采集元信息与 HTML 快照</summary>
+        <pre id="detail-snapshot" class="snapshot"></pre>
+      </details>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  全部数据为虚构演示内容 · 判定不依赖单一状态码 / 正文长度 / 关键词 ·
+  不确定响应自动隔离，等待补充规则后复判
+</footer>
+
+<script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
