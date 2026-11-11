@@ -1,0 +1,18 @@
+{
+  "name": "multipart-attribution-checker",
+  "version": "1.0.0",
+  "description": "离线归属检查器：核对网关与业务层对 Multipart 请求的解析、内容摘要与安全校验记录",
+  "type": "module",
+  "main": "src/index.js",
+  "bin": {
+    "attribution-check": "src/cli.js"
+  },
+  "scripts": {
+    "test": "node --test test/inspector.test.js",
+    "start": "node src/cli.js"
+  },
+  "license": "UNLICENSED",
+  "engines": {
+    "node": ">=20"
+  }
+}

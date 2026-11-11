@@ -1,0 +1,43 @@
+{
+  "side": "business",
+  "fragments": [
+    {
+      "recordId": "BIZ-F-001",
+      "requestId": "REQ-7788",
+      "fieldName": "attachment",
+      "fieldInstance": 1,
+      "fragmentIndex": 0,
+      "parseStatus": "ok",
+      "contentDigest": "098a46a7e232106f8166ba850a6a351a067db4dba918a1103f84c23f6cbccf29",
+      "byteLength": 1024
+    },
+    {
+      "recordId": "BIZ-F-002",
+      "requestId": "REQ-7788",
+      "fieldName": "attachment",
+      "fieldInstance": 2,
+      "fragmentIndex": 0,
+      "parseStatus": "ok",
+      "contentDigest": "2aae0b2307817c0a42790311958ec5aa37353b5e28ef1e242dda86eb50f1cf1b",
+      "byteLength": 2048
+    }
+  ],
+  "checks": [
+    {
+      "recordId": "BIZ-S-001",
+      "requestId": "REQ-7788",
+      "fieldName": "attachment",
+      "fieldInstance": 1,
+      "verdict": "block",
+      "contentDigest": "74c967914500cd450bf9a6e8411f1b515748b49ecad3a851d30cfe9cbb386b79"
+    },
+    {
+      "recordId": "BIZ-S-002",
+      "requestId": "REQ-7788",
+      "fieldName": "attachment",
+      "fieldInstance": 2,
+      "verdict": "allow",
+      "contentDigest": "7131bdf421eae094c491b506e6886894959bb22e0f17d78dcbfe185d354f4f80"
+    }
+  ]
+}
