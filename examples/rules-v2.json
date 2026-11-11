@@ -1,0 +1,14 @@
+{
+  "version": "2026.10",
+  "sanitizers": {
+    "log_redactor": {
+      "categories": ["log", "html", "shell"]
+    },
+    "html_escaper": {
+      "categories": []
+    },
+    "shell_quoter": {
+      "categories": ["shell"]
+    }
+  }
+}

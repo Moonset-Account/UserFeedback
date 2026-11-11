@@ -1,0 +1,132 @@
+{
+  "graph_id": "payment-service-dfg",
+  "assumptions": [
+    "external audit service binary is not available; its call edge is unmodelled"
+  ],
+  "functions": [
+    {"id": "main.handle_request", "entry": "n_entry", "returns": ["n_ret"]},
+    {"id": "helper.cleanup", "entry": "h_entry", "returns": ["h_ret"]},
+    {"id": "loops.retry_loop", "entry": "l_entry", "returns": ["l_ret"]},
+    {"id": "fields.two_fields", "entry": "f_entry", "returns": ["f_ret"]}
+  ],
+  "nodes": [
+    {"id": "n_entry", "kind": "entry", "function": "main.handle_request"},
+
+    {"id": "n_src", "kind": "source", "function": "main.handle_request",
+     "field": "req", "source_label": "SRC_USER_INPUT"},
+
+    {"id": "n_branch", "kind": "branch", "function": "main.handle_request"},
+    {"id": "n_log_only", "kind": "stmt", "function": "main.handle_request",
+     "field": "req", "sanitizers": ["log_redactor"]},
+    {"id": "n_merge", "kind": "merge", "function": "main.handle_request"},
+
+    {"id": "n_html_esc", "kind": "stmt", "function": "main.handle_request",
+     "field": "req", "sanitizers": ["html_escaper"]},
+    {"id": "n_both_esc", "kind": "stmt", "function": "main.handle_request",
+     "field": "req", "sanitizers": ["html_escaper", "log_redactor"]},
+    {"id": "n_log_redact_always", "kind": "stmt", "function": "main.handle_request",
+     "field": "req", "sanitizers": ["log_redactor"]},
+    {"id": "n_sink_logged_html", "kind": "sink", "function": "main.handle_request",
+     "field": "req", "category": "html", "sink_label": "SINK_LOGGED_HTML"},
+
+    {"id": "n_call_cleanup", "kind": "call", "function": "main.handle_request",
+     "callee": "helper.cleanup", "bindings": [["p", "req"]], "ret_field": "cleaned"},
+    {"id": "n_sink_cleaned_shell", "kind": "sink", "function": "main.handle_request",
+     "field": "cleaned", "category": "shell", "sink_label": "SINK_CLEANED_SHELL"},
+
+    {"id": "n_call_audit", "kind": "call", "function": "main.handle_request",
+     "callee": "audit.extern", "bindings": [["p", "req"]], "ret_field": "audit_result"},
+    {"id": "n_unknown", "kind": "unmodeled", "function": "main.handle_request",
+     "field": "audit_result", "reason": "response of external audit service"},
+
+    {"id": "n_sink_log", "kind": "sink", "function": "main.handle_request",
+     "field": "req", "category": "log", "sink_label": "SINK_LOG"},
+    {"id": "n_sink_html", "kind": "sink", "function": "main.handle_request",
+     "field": "req", "category": "html", "sink_label": "SINK_HTML_PAGE"},
+    {"id": "n_sink_shell", "kind": "sink", "function": "main.handle_request",
+     "field": "req", "category": "shell", "sink_label": "SINK_SHELL_EXEC"},
+    {"id": "n_sink_unknown", "kind": "sink", "function": "main.handle_request",
+     "field": "audit_result", "category": "html", "sink_label": "SINK_AUDIT_HTML"},
+    {"id": "n_ret", "kind": "return", "function": "main.handle_request"},
+
+    {"id": "h_entry", "kind": "entry", "function": "helper.cleanup", "field": "p"},
+    {"id": "h_shell_quote", "kind": "stmt", "function": "helper.cleanup",
+     "field": "p", "sanitizers": ["shell_quoter"]},
+    {"id": "h_ret", "kind": "return", "function": "helper.cleanup", "field": "p"},
+
+    {"id": "l_entry", "kind": "entry", "function": "loops.retry_loop"},
+    {"id": "l_src", "kind": "source", "function": "loops.retry_loop",
+     "field": "v", "source_label": "SRC_LOOP_INPUT"},
+    {"id": "l_branch", "kind": "branch", "function": "loops.retry_loop"},
+    {"id": "l_san", "kind": "stmt", "function": "loops.retry_loop",
+     "field": "v", "sanitizers": ["shell_quoter"]},
+    {"id": "l_merge", "kind": "merge", "function": "loops.retry_loop"},
+    {"id": "l_sink", "kind": "sink", "function": "loops.retry_loop",
+     "field": "v", "category": "shell", "sink_label": "SINK_LOOP_SHELL"},
+    {"id": "l_ret", "kind": "return", "function": "loops.retry_loop"},
+
+    {"id": "f_entry", "kind": "entry", "function": "fields.two_fields"},
+    {"id": "f_src_a", "kind": "source", "function": "fields.two_fields",
+     "field": "user", "source_label": "SRC_USER"},
+    {"id": "f_src_b", "kind": "source", "function": "fields.two_fields",
+     "field": "amount", "source_label": "SRC_AMOUNT"},
+    {"id": "f_san_user", "kind": "stmt", "function": "fields.two_fields",
+     "field": "user", "sanitizers": ["html_escaper"]},
+    {"id": "f_sink_user", "kind": "sink", "function": "fields.two_fields",
+     "field": "user", "category": "html", "sink_label": "SINK_FIELD_USER"},
+    {"id": "f_sink_amount", "kind": "sink", "function": "fields.two_fields",
+     "field": "amount", "category": "html", "sink_label": "SINK_FIELD_AMOUNT"},
+    {"id": "f_ret", "kind": "return", "function": "fields.two_fields"}
+  ],
+  "edges": [
+    {"src": "n_entry", "dst": "n_src"},
+    {"src": "n_src", "dst": "n_branch"},
+    {"src": "n_branch", "dst": "n_log_only"},
+    {"src": "n_branch", "dst": "n_merge"},
+    {"src": "n_log_only", "dst": "n_merge"},
+    {"src": "n_merge", "dst": "n_sink_log"},
+    {"src": "n_merge", "dst": "n_sink_html"},
+    {"src": "n_merge", "dst": "n_html_esc"},
+    {"src": "n_html_esc", "dst": "n_sink_shell"},
+    {"src": "n_merge", "dst": "n_both_esc"},
+    {"src": "n_merge", "dst": "n_log_redact_always"},
+    {"src": "n_log_redact_always", "dst": "n_sink_logged_html"},
+    {"src": "n_merge", "dst": "n_call_cleanup"},
+    {"src": "n_call_cleanup", "dst": "n_sink_cleaned_shell"},
+    {"src": "n_both_esc", "dst": "n_call_audit"},
+    {"src": "n_call_audit", "dst": "n_unknown"},
+    {"src": "n_unknown", "dst": "n_sink_unknown"},
+    {"src": "n_sink_unknown", "dst": "n_ret"},
+
+    {"src": "h_entry", "dst": "h_shell_quote"},
+    {"src": "h_shell_quote", "dst": "h_ret"},
+
+    {"src": "l_entry", "dst": "l_src"},
+    {"src": "l_src", "dst": "l_branch"},
+    {"src": "l_branch", "dst": "l_san"},
+    {"src": "l_branch", "dst": "l_merge"},
+    {"src": "l_san", "dst": "l_merge"},
+    {"src": "l_merge", "dst": "l_branch"},
+    {"src": "l_merge", "dst": "l_sink"},
+    {"src": "l_sink", "dst": "l_ret"},
+
+    {"src": "f_entry", "dst": "f_src_a"},
+    {"src": "f_entry", "dst": "f_src_b"},
+    {"src": "f_src_a", "dst": "f_san_user"},
+    {"src": "f_san_user", "dst": "f_sink_user"},
+    {"src": "f_src_b", "dst": "f_sink_amount"},
+    {"src": "f_sink_user", "dst": "f_ret"},
+    {"src": "f_sink_amount", "dst": "f_ret"}
+  ],
+  "watch": [
+    {"name": "log output of request", "sink": "n_sink_log", "field": "req"},
+    {"name": "html output of request", "sink": "n_sink_html", "field": "req"},
+    {"name": "shell exec of request", "sink": "n_sink_shell", "field": "req"},
+    {"name": "logged-only html fragment", "sink": "n_sink_logged_html", "field": "req"},
+    {"name": "cleaned shell exec", "sink": "n_sink_cleaned_shell", "field": "cleaned"},
+    {"name": "audit html fragment", "sink": "n_sink_unknown", "field": "audit_result"},
+    {"name": "loop shell sink", "sink": "l_sink", "field": "v"},
+    {"name": "two fields: user", "sink": "f_sink_user", "field": "user"},
+    {"name": "two fields: amount", "sink": "f_sink_amount", "field": "amount"}
+  ]
+}
