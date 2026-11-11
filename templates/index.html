@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>科研测量页面语义契约采集器</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <span class="logo">契</span>
+    <div>
+      <h1>科研测量页面语义契约采集器</h1>
+      <p class="subtitle">标签 · 单位 · 限定说明 · 数据类型 四维语义检查 ｜ 选择器命中不等于契约通过</p>
+    </div>
+  </div>
+  <div class="server-state">
+    <span id="health-dot" class="dot dot-unknown"></span>
+    <span id="health-text">连接中…</span>
+  </div>
+</header>
+
+<main>
+  <!-- 首屏：操作区 + 运行结果总览 -->
+  <section class="panel panel-toolbar" aria-label="任务操作">
+    <div class="toolbar-row">
+      <button id="run-demo" class="btn btn-primary" type="button">▶ 运行示例（正常 + 边界，15 秒内）</button>
+      <span class="toolbar-divider"></span>
+      <label class="field">
+        <span>验收场景</span>
+        <select id="scenario-select"></select>
+      </label>
+      <button id="run-scenario" class="btn" type="button">运行所选场景</button>
+      <span class="toolbar-divider"></span>
+      <label class="field field-grow">
+        <span>自定义页面 URL（留空则使用所选场景）</span>
+        <input id="custom-url" type="text" placeholder="http://127.0.0.1:端口/samples/label/index.html">
+      </label>
+      <button id="run-custom" class="btn" type="button">采集该 URL</button>
+    </div>
+    <p id="scenario-desc" class="scenario-desc"></p>
+    <p id="action-message" class="action-message" role="status"></p>
+  </section>
+
+  <section class="panel panel-runs" aria-label="运行结果总览">
+    <div class="panel-head">
+      <h2>运行结果总览</h2>
+      <button id="refresh-runs" class="btn btn-small" type="button">刷新</button>
+    </div>
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>运行 ID</th><th>场景</th><th>状态</th><th>契约版本</th>
+            <th>语义差异</th><th>正式记录</th><th>隔离记录</th><th>操作</th>
+          </tr>
+        </thead>
+        <tbody id="runs-tbody">
+          <tr><td colspan="8" class="empty">暂无运行记录</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- 详情区（可展开） -->
+  <section id="detail" class="panel panel-detail hidden" aria-label="运行详情">
+    <div class="panel-head">
+      <h2>运行详情 <span id="detail-run-id" class="mono"></span></h2>
+      <div>
+        <button id="toggle-detail" class="btn btn-small" type="button">收起 ▲</button>
+      </div>
+    </div>
+
+    <div class="tabs" role="tablist">
+      <button class="tab active" data-tab="diffs" type="button">契约差异</button>
+      <button class="tab" data-tab="evidence" type="button">原始证据</button>
+      <button class="tab" data-tab="quarantine" type="button">隔离记录</button>
+      <button class="tab" data-tab="published" type="button">正式结果</button>
+      <button class="tab" data-tab="approve" type="button">批准与重采</button>
+      <button class="tab" data-tab="versions" type="button">契约版本 / 批准记录</button>
+    </div>
+
+    <div class="tab-pane active" id="pane-diffs">
+      <div id="diff-list" class="diff-list"></div>
+    </div>
+
+    <div class="tab-pane" id="pane-evidence">
+      <div class="evidence-grid">
+        <div>
+          <h3>浏览器整页截图</h3>
+          <img id="evidence-shot" alt="浏览器采集截图" class="evidence-shot">
+        </div>
+        <div>
+          <h3>采集元信息</h3>
+          <pre id="evidence-meta" class="code-block"></pre>
+          <h3>表格 HTML 原始片段（可展开）</h3>
+          <details>
+            <summary>查看 table.html 原始内容</summary>
+            <pre id="evidence-html" class="code-block code-scroll"></pre>
+          </details>
+        </div>
+      </div>
+    </div>
+
+    <div class="tab-pane" id="pane-quarantine">
+      <div id="quarantine-list" class="record-list"></div>
+    </div>
+
+    <div class="tab-pane" id="pane-published">
+      <div id="published-list" class="record-list"></div>
+    </div>
+
+    <div class="tab-pane" id="pane-approve">
+      <div class="approve-bar">
+        <label class="field"><span>审核人</span>
+          <input id="approver" type="text" value="审核员-张" placeholder="审核人姓名">
+        </label>
+        <label class="field field-grow"><span>批准理由</span>
+          <input id="approve-reason" type="text" placeholder="例如：确认页面已切换为湿重口径，更新字段映射">
+        </label>
+        <button id="approve-btn" class="btn btn-primary" type="button">批准所选字段的新映射</button>
+        <button id="rerun-btn" class="btn" type="button">用最新契约版本重采本场景</button>
+      </div>
+      <p class="hint">批准会生成不可变的新契约版本，旧规则与受影响记录范围写入 data/approvals/ 永久保留；未批准的语义变化不会进入正式结果。</p>
+      <div id="suggestion-list" class="diff-list"></div>
+    </div>
+
+    <div class="tab-pane" id="pane-versions">
+      <h3>契约版本链</h3>
+      <pre id="contract-versions" class="code-block code-scroll"></pre>
+      <h3>批准记录（含旧规则与受影响记录范围）</h3>
+      <pre id="approval-records" class="code-block code-scroll"></pre>
+    </div>
+  </section>
+</main>
+
+<script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>

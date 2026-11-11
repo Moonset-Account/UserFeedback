@@ -9,3 +9,8 @@ node_modules/
 .venv/
 __pycache__/
 .DS_Store
+
+# 本项目运行产物：采集数据、生成的样例站点（含独立真值）、pytest 缓存
+data/
+generated/
+.pytest_cache/
