@@ -1,0 +1,11 @@
+{
+  "generated_at": "2026-11-12T00:00:00Z",
+  "deployments": [
+    { "release_id": "REL-S1",       "lifecycle": "active",  "deploy_count": 1200 },
+    { "release_id": "REL-S2",       "lifecycle": "active",  "deploy_count": 1500 },
+    { "release_id": "REL-S3",       "lifecycle": "active",  "deploy_count": 1500 },
+    { "release_id": "REL-S4",       "lifecycle": "active",  "deploy_count": null },
+    { "release_id": "REL-EOL-9",    "lifecycle": "retired", "deploy_count": 60 },
+    { "release_id": "REL-EOL-10",   "lifecycle": "retired", "deploy_count": 20 }
+  ]
+}

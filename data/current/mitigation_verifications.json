@@ -1,0 +1,47 @@
+{
+  "generated_at": "2026-11-12T00:00:00Z",
+  "mitigations": [
+    {
+      "mitigation_id": "MIT-2001",
+      "defect_id": "MEM-1002",
+      "release_id": "REL-S2",
+      "verification_status": "verified_effective",
+      "evidence_note": "重启守护进程并打热补丁，复测 200 次未复现"
+    },
+    {
+      "mitigation_id": "MIT-2002",
+      "defect_id": "MEM-1002",
+      "release_id": "REL-S3",
+      "verification_status": "pending",
+      "evidence_note": "补丁已下发，验证窗口未排期"
+    },
+    {
+      "mitigation_id": "MIT-2003",
+      "defect_id": "MEM-1003",
+      "release_id": "REL-S1",
+      "verification_status": "verified_effective",
+      "evidence_note": "配置开关规避，灰度验证有效"
+    },
+    {
+      "mitigation_id": "MIT-2004",
+      "defect_id": "MEM-1003",
+      "release_id": "REL-S2",
+      "verification_status": "verified_effective",
+      "evidence_note": "热补丁复测有效，争议已闭环"
+    },
+    {
+      "mitigation_id": "MIT-2005",
+      "defect_id": "MEM-1005",
+      "release_id": "REL-S1",
+      "verification_status": "inconclusive",
+      "evidence_note": "样本不足，无法确认泄漏是否被阻断"
+    },
+    {
+      "mitigation_id": "MIT-2006",
+      "defect_id": "MEM-1005",
+      "release_id": "REL-S3",
+      "verification_status": "ineffective",
+      "evidence_note": "限流措施未消除泄漏路径"
+    }
+  ]
+}

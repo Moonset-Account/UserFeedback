@@ -1,0 +1,50 @@
+{
+  "generated_at": "2026-10-15T00:00:00Z",
+  "defects": [
+    {
+      "defect_id": "MEM-1001",
+      "title": "退役版本上的堆块越界写（告警次数最高）",
+      "impact_level": "service_degradation",
+      "alert_count": 4820,
+      "evidence_confirmed": true,
+      "evidence_source": "fuzzing-cluster-A",
+      "affected_releases": ["REL-EOL-9", "REL-EOL-10"]
+    },
+    {
+      "defect_id": "MEM-1002",
+      "title": "活跃发行版上的释放后使用，中止关键进程",
+      "impact_level": "critical_process_abort",
+      "alert_count": 21,
+      "evidence_confirmed": true,
+      "evidence_source": "crloop-correlator",
+      "affected_releases": ["REL-S2", "REL-S3", "REL-S4"]
+    },
+    {
+      "defect_id": "MEM-1003",
+      "title": "业务中断型空指针解引用，缓解只覆盖部分发行版",
+      "impact_level": "business_interruption",
+      "alert_count": 156,
+      "evidence_confirmed": true,
+      "evidence_source": "sentinel-rollup",
+      "affected_releases": ["REL-S1", "REL-S2", "REL-S3"]
+    },
+    {
+      "defect_id": "MEM-1004",
+      "title": "未知部署范围发行版上的未初始化读取",
+      "impact_level": "service_degradation",
+      "alert_count": 12,
+      "evidence_confirmed": false,
+      "evidence_source": "batch-scan-2026-10",
+      "affected_releases": ["REL-S4", "REL-UNMAPPED"]
+    },
+    {
+      "defect_id": "MEM-1005",
+      "title": "缓解验证未通过的轻微内存泄漏",
+      "impact_level": "minor_degradation",
+      "alert_count": 88,
+      "evidence_confirmed": true,
+      "evidence_source": "leak-detector",
+      "affected_releases": ["REL-S1", "REL-S3"]
+    }
+  ]
+}

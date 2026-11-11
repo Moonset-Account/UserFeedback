@@ -9,3 +9,9 @@ node_modules/
 .venv/
 __pycache__/
 .DS_Store
+
+# C++ 构建产物
+build/
+*.o
+*.obj
+*.exe
