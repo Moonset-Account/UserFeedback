@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1280">
+<title>研究讲座音频目录采集器</title>
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <h1>研究讲座音频目录采集器</h1>
+    <span class="subtitle">仅采集订阅元数据与 enclosure 可用性 · 不含播放器 · RSS 2.0 / Atom 1.0 子集</span>
+  </div>
+  <div class="server-status" id="server-status">正在连接本地服务…</div>
+</header>
+
+<section class="toolbar">
+  <div class="toolbar-row">
+    <div class="btn-group">
+      <button id="run-demo" class="btn btn-primary" title="依次运行正常场景与边界场景，目标 15 秒内完成">▶ 运行示例（正常 + 边界）</button>
+      <button id="run-full" class="btn">运行完整验收场景</button>
+      <button id="refresh-runs" class="btn btn-ghost">刷新任务列表</button>
+    </div>
+    <div class="progress" id="progress" hidden><span class="spinner"></span><span id="progress-text"></span></div>
+  </div>
+  <div class="toolbar-row custom-row">
+    <details class="custom-panel">
+      <summary>自定义输入（每行一个来源：URL 后可加空格写版本标签；支持 http(s) 与 file 路径）</summary>
+      <div class="custom-body">
+        <textarea id="custom-sources" rows="2"
+          placeholder="http://127.0.0.1:端口/feeds/normal-rss-v1.xml RSS快照一&#10;http://127.0.0.1:端口/feeds/normal-rss-v2.xml RSS快照二"></textarea>
+        <div class="custom-controls">
+          <label>超时(秒) <input id="custom-timeout" type="number" value="5" min="0.5" max="30" step="0.5"></label>
+          <label class="check"><input id="custom-probe" type="checkbox" checked> 探测 enclosure 可用性</label>
+          <button id="run-custom" class="btn btn-primary">运行自定义任务</button>
+        </div>
+      </div>
+    </details>
+  </div>
+</section>
+
+<section class="alert-strip" id="alert-strip" hidden></section>
+
+<main class="workspace">
+  <aside class="run-list" id="run-list-panel">
+    <h2>任务列表</h2>
+    <ul id="run-list"><li class="muted">暂无任务，结果均来自真实执行</li></ul>
+  </aside>
+
+  <section class="pane pane-feed">
+    <div class="pane-head">
+      <h2>① 订阅源片段（原始 XML 证据）</h2>
+      <select id="snapshot-select" title="选择快照版本"></select>
+    </div>
+    <div class="pane-body" id="feed-pane"><p class="muted">运行任务后在此查看原始订阅源与条目 XML 片段。</p></div>
+  </section>
+
+  <section class="pane pane-catalog">
+    <div class="pane-head"><h2>② 采集条目（按身份优先级归并，不按标题/媒体 URL 唯一化）</h2></div>
+    <div class="pane-body" id="catalog-pane"><p class="muted">目录条目、修订版本与媒体换址证据将显示在此。</p></div>
+  </section>
+
+  <section class="pane pane-links">
+    <div class="pane-head"><h2>③ 各链接用途（rel 关系与解析依据）</h2></div>
+    <div class="pane-body" id="links-pane"><p class="muted">每条链接的关系、xml:base 链与解析后地址显示在此。</p></div>
+  </section>
+</main>
+
+<footer class="footer">
+  <span>虚构数据 · 本地源站 · 冲突与错误一律显式展示，不静默覆盖</span>
+  <span id="footer-meta"></span>
+</footer>
+
+<script src="/app.js"></script>
+</body>
+</html>

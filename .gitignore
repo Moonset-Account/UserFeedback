@@ -9,3 +9,7 @@ node_modules/
 .venv/
 __pycache__/
 .DS_Store
+
+# 运行时生成的样例夹具与任务结果（由 app.py / 测试自动重建）
+/data/
+
