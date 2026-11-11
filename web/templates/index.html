@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1280">
+  <title>实验仪器 SOAP/MTOM 响应采集台</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <span class="logo">LAB</span>
+    <div>
+      <h1>实验仪器 SOAP/MTOM 响应采集台</h1>
+      <p class="subtitle">虚构协议 LabInstr SOAP/MTOM v1 · Content-ID 关联 · 外部实体解析已禁用</p>
+    </div>
+  </div>
+  <div class="topbar-meta">
+    <span class="pill">源站：{{ base_url }}</span>
+    <span class="pill ok" id="source-pill">源站未检测</span>
+  </div>
+</header>
+
+<main class="layout">
+  <section class="panel config-panel">
+    <h2>① 采集配置</h2>
+    <div class="form-row">
+      <label>输入来源</label>
+      <div class="radio-group" id="mode-group">
+        <label><input type="radio" name="mode" value="http" checked> 内置服务 HTTP 接口（/soap）</label>
+        <label><input type="radio" name="mode" value="file"> 项目生成的样例文件（samples/*.mime）</label>
+      </div>
+    </div>
+    <div class="form-row">
+      <label for="scenario-select">场景选择</label>
+      <select id="scenario-select">
+        {% for s in scenarios %}
+        <option value="{{ s }}">{{ s }} — {{ titles[s] }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="form-row actions">
+      <button id="run-single" class="btn primary">运行单个场景</button>
+      <button id="run-demo" class="btn accent">运行示例（正常 + 边界，15 秒内）</button>
+      <button id="run-all" class="btn">完整验收场景（全部 6 个）</button>
+    </div>
+    <p class="hint" id="progress-hint">结果来自真实执行，页面不预填任何成功数据。</p>
+    <details class="subset-details">
+      <summary>支持的协议子集</summary>
+      <p>{{ supported_subset }}</p>
+    </details>
+  </section>
+
+  <section class="panel result-panel">
+    <div class="result-head">
+      <h2>② 采集结果</h2>
+      <div id="batch-summary" class="summary-chips" hidden></div>
+    </div>
+    <div id="results" class="results">
+      <div class="empty-state">尚未运行任务。点击「运行示例」可依次执行一个正常场景与一个边界场景。</div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <span>全部数据为虚构生成 · 采集器与样例生成器分离 · 关联仅按 Content-ID，不按附件出现顺序猜测</span>
+</footer>
+
+<script>
+  window.APP_BOOTSTRAP = {
+    scenarios: {{ scenarios|tojson }},
+    demoScenarios: {{ demo|tojson }},
+    titles: {{ titles|tojson }}
+  };
+</script>
+<script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>

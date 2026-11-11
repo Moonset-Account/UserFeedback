@@ -9,3 +9,9 @@ node_modules/
 .venv/
 __pycache__/
 .DS_Store
+
+# 项目生成的样例与缓存
+samples/
+.pytest_cache/
+playwright-report/
+test-results/

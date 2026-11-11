@@ -1,0 +1,11 @@
+# 运行采集台与测试所需依赖（Python 3.11+）
+flask>=2.3
+requests>=2.31
+defusedxml>=0.7.1
+
+# 测试依赖
+pytest>=7.4
+
+# 可选：浏览器端到端验证（未安装时 tests/e2e 自动跳过）
+# 安装后还需执行一次：python -m playwright install chromium
+playwright>=1.40
