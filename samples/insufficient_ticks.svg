@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="600">
+  <text x="480" y="34" text-anchor="middle" font-family="sans-serif" font-size="18" fill="#111">场景9 刻度不足（虚构）</text>
+  <line x1="110" y1="510" x2="870" y2="510" stroke="#333" stroke-width="1.5"/>
+  <line x1="110" y1="70" x2="110" y2="510" stroke="#333" stroke-width="1.5"/>
+  <line x1="110" y1="510" x2="110" y2="518" stroke="#333" stroke-width="1.2"/>
+  <text x="110" y="536" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#222">0</text>
+  <line x1="102" y1="510" x2="110" y2="510" stroke="#333" stroke-width="1.2"/>
+  <text x="98" y="514" text-anchor="end" font-family="sans-serif" font-size="13" fill="#222">0</text>
+  <line x1="102" y1="400" x2="110" y2="400" stroke="#333" stroke-width="1.2"/>
+  <text x="98" y="404" text-anchor="end" font-family="sans-serif" font-size="13" fill="#222">10</text>
+  <line x1="102" y1="290" x2="110" y2="290" stroke="#333" stroke-width="1.2"/>
+  <text x="98" y="294" text-anchor="end" font-family="sans-serif" font-size="13" fill="#222">20</text>
+  <line x1="102" y1="180" x2="110" y2="180" stroke="#333" stroke-width="1.2"/>
+  <text x="98" y="184" text-anchor="end" font-family="sans-serif" font-size="13" fill="#222">30</text>
+  <line x1="102" y1="70" x2="110" y2="70" stroke="#333" stroke-width="1.2"/>
+  <text x="98" y="74" text-anchor="end" font-family="sans-serif" font-size="13" fill="#222">40</text>
+  <polyline points="190,420 270,360 350,300 430,240 510,180 590,120" fill="none" stroke="#1f6feb" stroke-width="2.4"/>
+  <circle cx="190" cy="420" r="4.5" fill="#e11d48" stroke="#fff" stroke-width="1"/>
+  <circle cx="270" cy="360" r="4.5" fill="#e11d48" stroke="#fff" stroke-width="1"/>
+  <circle cx="350" cy="300" r="4.5" fill="#e11d48" stroke="#fff" stroke-width="1"/>
+  <circle cx="430" cy="240" r="4.5" fill="#e11d48" stroke="#fff" stroke-width="1"/>
+  <circle cx="510" cy="180" r="4.5" fill="#e11d48" stroke="#fff" stroke-width="1"/>
+  <circle cx="590" cy="120" r="4.5" fill="#e11d48" stroke="#fff" stroke-width="1"/>
+</svg>

@@ -1,0 +1,159 @@
+{
+  "scenario": "hidden_decoys",
+  "title": "场景8 隐藏诱饵",
+  "axis": {
+    "x": {
+      "scale": "linear",
+      "reversed": false
+    },
+    "y": {
+      "scale": "linear",
+      "reversed": true
+    }
+  },
+  "points": [
+    {
+      "x": 5,
+      "y": 20.036,
+      "canvas": {
+        "x": 148.0,
+        "y": 246.317
+      },
+      "visible": true,
+      "segment": 0
+    },
+    {
+      "x": 15,
+      "y": 20.333,
+      "canvas": {
+        "x": 224.0,
+        "y": 248.93
+      },
+      "visible": true,
+      "segment": 0
+    },
+    {
+      "x": 25,
+      "y": 23.886,
+      "canvas": {
+        "x": 300.0,
+        "y": 280.197
+      },
+      "visible": true,
+      "segment": 0
+    },
+    {
+      "x": 35,
+      "y": 25.98,
+      "canvas": {
+        "x": 376.0,
+        "y": 298.624
+      },
+      "visible": true,
+      "segment": 0
+    },
+    {
+      "x": 45,
+      "y": 28.534,
+      "canvas": {
+        "x": 452.0,
+        "y": 321.099
+      },
+      "visible": true,
+      "segment": 0
+    },
+    {
+      "x": 55,
+      "y": 28.95,
+      "canvas": {
+        "x": 528.0,
+        "y": 324.76
+      },
+      "visible": true,
+      "segment": 0
+    },
+    {
+      "x": 65,
+      "y": 32.442,
+      "canvas": {
+        "x": 604.0,
+        "y": 355.49
+      },
+      "visible": true,
+      "segment": 0
+    },
+    {
+      "x": 75,
+      "y": 33.852,
+      "canvas": {
+        "x": 680.0,
+        "y": 367.898
+      },
+      "visible": true,
+      "segment": 0
+    },
+    {
+      "x": 85,
+      "y": 36.482,
+      "canvas": {
+        "x": 756.0,
+        "y": 391.042
+      },
+      "visible": true,
+      "segment": 0
+    },
+    {
+      "x": 95,
+      "y": 37.627,
+      "canvas": {
+        "x": 832.0,
+        "y": 401.118
+      },
+      "visible": true,
+      "segment": 0
+    }
+  ],
+  "hidden_decoys": [
+    {
+      "x": 5,
+      "y": 48.0
+    },
+    {
+      "x": 15,
+      "y": 48.0
+    },
+    {
+      "x": 25,
+      "y": 48.0
+    },
+    {
+      "x": 35,
+      "y": 48.0
+    },
+    {
+      "x": 45,
+      "y": 48.0
+    },
+    {
+      "x": 55,
+      "y": 48.0
+    },
+    {
+      "x": 65,
+      "y": 48.0
+    },
+    {
+      "x": 75,
+      "y": 48.0
+    },
+    {
+      "x": 85,
+      "y": 48.0
+    },
+    {
+      "x": 95,
+      "y": 48.0
+    }
+  ],
+  "expect_ignored_hidden_points": 10
+}

@@ -1,0 +1,57 @@
+{
+  "scenario": "illegal_log",
+  "title": "场景10 非法对数位置",
+  "axis": {
+    "x": {
+      "scale": "linear",
+      "reversed": false
+    },
+    "y": {
+      "scale": "log",
+      "reversed": true
+    }
+  },
+  "points": [
+    {
+      "x": 10,
+      "y": 3.548133892335755,
+      "canvas": {
+        "x": 205.0,
+        "y": 150.667
+      },
+      "visible": true,
+      "segment": 0
+    },
+    {
+      "x": 25,
+      "y": 11.88502227437019,
+      "canvas": {
+        "x": 347.5,
+        "y": 227.667
+      },
+      "visible": true,
+      "segment": 0
+    },
+    {
+      "x": 40,
+      "y": 39.810717055349734,
+      "canvas": {
+        "x": 490.0,
+        "y": 304.667
+      },
+      "visible": true,
+      "segment": 0
+    },
+    {
+      "x": null,
+      "y": null,
+      "canvas": {
+        "x": 630,
+        "y": 544
+      },
+      "visible": true,
+      "note": "对数轴零基线以下，应报告非法对数值并拒绝给数",
+      "expected_error_keyword": "对数"
+    }
+  ]
+}

@@ -1,0 +1,89 @@
+{
+  "scenario": "nested_transform",
+  "title": "场景5 嵌套transform",
+  "axis": {
+    "x": {
+      "scale": "linear",
+      "reversed": false
+    },
+    "y": {
+      "scale": "linear",
+      "reversed": true
+    }
+  },
+  "points": [
+    {
+      "x": 10,
+      "y": 13.564,
+      "canvas": {
+        "x": 185.92,
+        "y": 196.708
+      },
+      "visible": true,
+      "segment": 0
+    },
+    {
+      "x": 25,
+      "y": 16.916,
+      "canvas": {
+        "x": 290.8,
+        "y": 230.63
+      },
+      "visible": true,
+      "segment": 0
+    },
+    {
+      "x": 40,
+      "y": 20.876,
+      "canvas": {
+        "x": 395.68,
+        "y": 270.705
+      },
+      "visible": true,
+      "segment": 0
+    },
+    {
+      "x": 55,
+      "y": 23.847,
+      "canvas": {
+        "x": 500.56,
+        "y": 300.772
+      },
+      "visible": true,
+      "segment": 0
+    },
+    {
+      "x": 70,
+      "y": 26.59,
+      "canvas": {
+        "x": 605.44,
+        "y": 328.531
+      },
+      "visible": true,
+      "segment": 0
+    },
+    {
+      "x": 85,
+      "y": 29.509,
+      "canvas": {
+        "x": 710.32,
+        "y": 358.071
+      },
+      "visible": true,
+      "segment": 0
+    }
+  ],
+  "transform_chain": [
+    "translate(24,-16)",
+    "scale(0.92)",
+    "translate(-10,12)"
+  ],
+  "transform_matrix": [
+    0.92,
+    0.0,
+    0.0,
+    0.92,
+    14.799999999999999,
+    -4.959999999999999
+  ]
+}

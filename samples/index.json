@@ -1,0 +1,68 @@
+[
+  {
+    "key": "linear_basic",
+    "title": "场景1 线性轴基线",
+    "svg": "linear_basic.svg",
+    "truth": "truth/linear_basic.json"
+  },
+  {
+    "key": "log_y",
+    "title": "场景2 Y对数轴",
+    "svg": "log_y.svg",
+    "truth": "truth/log_y.json"
+  },
+  {
+    "key": "log_log",
+    "title": "场景3 双对数轴",
+    "svg": "log_log.svg",
+    "truth": "truth/log_log.json"
+  },
+  {
+    "key": "reversed_x",
+    "title": "场景4 X反向轴",
+    "svg": "reversed_x.svg",
+    "truth": "truth/reversed_x.json"
+  },
+  {
+    "key": "nested_transform",
+    "title": "场景5 嵌套transform",
+    "svg": "nested_transform.svg",
+    "truth": "truth/nested_transform.json"
+  },
+  {
+    "key": "broken_line",
+    "title": "场景6 折线断点",
+    "svg": "broken_line.svg",
+    "truth": "truth/broken_line.json"
+  },
+  {
+    "key": "clipped",
+    "title": "场景7 裁剪区域",
+    "svg": "clipped.svg",
+    "truth": "truth/clipped.json"
+  },
+  {
+    "key": "hidden_decoys",
+    "title": "场景8 隐藏诱饵",
+    "svg": "hidden_decoys.svg",
+    "truth": "truth/hidden_decoys.json"
+  },
+  {
+    "key": "insufficient_ticks",
+    "title": "场景9 刻度不足",
+    "svg": "insufficient_ticks.svg",
+    "truth": "truth/insufficient_ticks.json"
+  },
+  {
+    "key": "illegal_log",
+    "title": "场景10 非法对数位置",
+    "svg": "illegal_log.svg",
+    "truth": "truth/illegal_log.json"
+  },
+  {
+    "key": "viewbox_rotated",
+    "title": "场景11 viewBox旋转标签",
+    "svg": "viewbox_rotated.svg",
+    "truth": "truth/viewbox_rotated.json"
+  }
+]

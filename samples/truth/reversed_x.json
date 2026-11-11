@@ -1,0 +1,86 @@
+{
+  "scenario": "reversed_x",
+  "title": "场景4 X反向轴",
+  "axis": {
+    "x": {
+      "scale": "linear",
+      "reversed": true
+    },
+    "y": {
+      "scale": "linear",
+      "reversed": true
+    }
+  },
+  "points": [
+    {
+      "x": 0,
+      "y": 5.964,
+      "canvas": {
+        "x": 870.0,
+        "y": 157.472
+      },
+      "visible": true,
+      "segment": 0
+    },
+    {
+      "x": 10,
+      "y": 9.52,
+      "canvas": {
+        "x": 743.333,
+        "y": 209.627
+      },
+      "visible": true,
+      "segment": 0
+    },
+    {
+      "x": 20,
+      "y": 11.918,
+      "canvas": {
+        "x": 616.667,
+        "y": 244.797
+      },
+      "visible": true,
+      "segment": 0
+    },
+    {
+      "x": 30,
+      "y": 14.119,
+      "canvas": {
+        "x": 490.0,
+        "y": 277.079
+      },
+      "visible": true,
+      "segment": 0
+    },
+    {
+      "x": 40,
+      "y": 18.518,
+      "canvas": {
+        "x": 363.333,
+        "y": 341.597
+      },
+      "visible": true,
+      "segment": 0
+    },
+    {
+      "x": 50,
+      "y": 20.286,
+      "canvas": {
+        "x": 236.667,
+        "y": 367.528
+      },
+      "visible": true,
+      "segment": 0
+    },
+    {
+      "x": 60,
+      "y": 23.199,
+      "canvas": {
+        "x": 110.0,
+        "y": 410.252
+      },
+      "visible": true,
+      "segment": 0
+    }
+  ]
+}

@@ -9,3 +9,7 @@ node_modules/
 .venv/
 __pycache__/
 .DS_Store
+
+# 运行期产物（任务结果与上传副本，可随时重新生成）
+runs/
+.pytest_cache/

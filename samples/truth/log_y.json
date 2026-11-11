@@ -1,0 +1,96 @@
+{
+  "scenario": "log_y",
+  "title": "场景2 Y对数轴",
+  "axis": {
+    "x": {
+      "scale": "linear",
+      "reversed": false
+    },
+    "y": {
+      "scale": "log",
+      "reversed": true
+    }
+  },
+  "points": [
+    {
+      "x": 5,
+      "y": 1.4593,
+      "canvas": {
+        "x": 157.5,
+        "y": 88.056
+      },
+      "visible": true,
+      "segment": 0
+    },
+    {
+      "x": 15,
+      "y": 3.791,
+      "canvas": {
+        "x": 252.5,
+        "y": 133.663
+      },
+      "visible": true,
+      "segment": 0
+    },
+    {
+      "x": 25,
+      "y": 9.1559,
+      "canvas": {
+        "x": 347.5,
+        "y": 175.787
+      },
+      "visible": true,
+      "segment": 0
+    },
+    {
+      "x": 35,
+      "y": 25.7784,
+      "canvas": {
+        "x": 442.5,
+        "y": 225.238
+      },
+      "visible": true,
+      "segment": 0
+    },
+    {
+      "x": 45,
+      "y": 63.9044,
+      "canvas": {
+        "x": 537.5,
+        "y": 268.608
+      },
+      "visible": true,
+      "segment": 0
+    },
+    {
+      "x": 55,
+      "y": 143.7345,
+      "canvas": {
+        "x": 632.5,
+        "y": 307.332
+      },
+      "visible": true,
+      "segment": 0
+    },
+    {
+      "x": 65,
+      "y": 371.4654,
+      "canvas": {
+        "x": 727.5,
+        "y": 352.691
+      },
+      "visible": true,
+      "segment": 0
+    },
+    {
+      "x": 75,
+      "y": 908.0132,
+      "canvas": {
+        "x": 822.5,
+        "y": 395.39
+      },
+      "visible": true,
+      "segment": 0
+    }
+  ]
+}

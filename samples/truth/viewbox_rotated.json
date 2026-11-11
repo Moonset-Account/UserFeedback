@@ -1,0 +1,97 @@
+{
+  "scenario": "viewbox_rotated",
+  "title": "场景11 viewBox旋转标签",
+  "axis": {
+    "x": {
+      "scale": "linear",
+      "reversed": false
+    },
+    "y": {
+      "scale": "linear",
+      "reversed": true
+    }
+  },
+  "points": [
+    {
+      "x": 10,
+      "y": 22.789,
+      "canvas": {
+        "x": 196.0,
+        "y": 272.544
+      },
+      "visible": true,
+      "segment": 0
+    },
+    {
+      "x": 22,
+      "y": 26.785,
+      "canvas": {
+        "x": 287.2,
+        "y": 307.708
+      },
+      "visible": true,
+      "segment": 0
+    },
+    {
+      "x": 34,
+      "y": 29.998,
+      "canvas": {
+        "x": 378.4,
+        "y": 335.982
+      },
+      "visible": true,
+      "segment": 0
+    },
+    {
+      "x": 46,
+      "y": 32.581,
+      "canvas": {
+        "x": 469.6,
+        "y": 358.712
+      },
+      "visible": true,
+      "segment": 0
+    },
+    {
+      "x": 58,
+      "y": 32.458,
+      "canvas": {
+        "x": 560.8,
+        "y": 357.63
+      },
+      "visible": true,
+      "segment": 0
+    },
+    {
+      "x": 70,
+      "y": 36.949,
+      "canvas": {
+        "x": 652.0,
+        "y": 397.152
+      },
+      "visible": true,
+      "segment": 0
+    },
+    {
+      "x": 82,
+      "y": 39.048,
+      "canvas": {
+        "x": 743.2,
+        "y": 415.622
+      },
+      "visible": true,
+      "segment": 0
+    },
+    {
+      "x": 94,
+      "y": 40.122,
+      "canvas": {
+        "x": 834.4,
+        "y": 425.074
+      },
+      "visible": true,
+      "segment": 0
+    }
+  ],
+  "viewBox_scale": 2.0
+}

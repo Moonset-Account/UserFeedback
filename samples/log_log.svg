@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="600">
+  <text x="480" y="34" text-anchor="middle" font-family="sans-serif" font-size="18" fill="#111">场景3 双对数轴（虚构）</text>
+  <line x1="110" y1="70" x2="110" y2="510" stroke="#ddd" stroke-width="0.8"/>
+  <line x1="363.333" y1="70" x2="363.333" y2="510" stroke="#ddd" stroke-width="0.8"/>
+  <line x1="616.667" y1="70" x2="616.667" y2="510" stroke="#ddd" stroke-width="0.8"/>
+  <line x1="870" y1="70" x2="870" y2="510" stroke="#ddd" stroke-width="0.8"/>
+  <line x1="110" y1="70" x2="870" y2="70" stroke="#ddd" stroke-width="0.8"/>
+  <line x1="110" y1="180" x2="870" y2="180" stroke="#ddd" stroke-width="0.8"/>
+  <line x1="110" y1="290" x2="870" y2="290" stroke="#ddd" stroke-width="0.8"/>
+  <line x1="110" y1="400" x2="870" y2="400" stroke="#ddd" stroke-width="0.8"/>
+  <line x1="110" y1="510" x2="870" y2="510" stroke="#ddd" stroke-width="0.8"/>
+  <line x1="110" y1="510" x2="870" y2="510" stroke="#333" stroke-width="1.5"/>
+  <line x1="110" y1="70" x2="110" y2="510" stroke="#333" stroke-width="1.5"/>
+  <line x1="110" y1="510" x2="110" y2="518" stroke="#333" stroke-width="1.2"/>
+  <text x="110" y="536" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#222">1</text>
+  <line x1="363.333" y1="510" x2="363.333" y2="518" stroke="#333" stroke-width="1.2"/>
+  <text x="363.333" y="536" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#222">10</text>
+  <line x1="616.667" y1="510" x2="616.667" y2="518" stroke="#333" stroke-width="1.2"/>
+  <text x="616.667" y="536" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#222">100</text>
+  <line x1="870" y1="510" x2="870" y2="518" stroke="#333" stroke-width="1.2"/>
+  <text x="870" y="536" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#222">1000</text>
+  <line x1="102" y1="70" x2="110" y2="70" stroke="#333" stroke-width="1.2"/>
+  <text x="98" y="74" text-anchor="end" font-family="sans-serif" font-size="13" fill="#222">1</text>
+  <line x1="102" y1="180" x2="110" y2="180" stroke="#333" stroke-width="1.2"/>
+  <text x="98" y="184" text-anchor="end" font-family="sans-serif" font-size="13" fill="#222">10</text>
+  <line x1="102" y1="290" x2="110" y2="290" stroke="#333" stroke-width="1.2"/>
+  <text x="98" y="294" text-anchor="end" font-family="sans-serif" font-size="13" fill="#222">100</text>
+  <line x1="102" y1="400" x2="110" y2="400" stroke="#333" stroke-width="1.2"/>
+  <text x="98" y="404" text-anchor="end" font-family="sans-serif" font-size="13" fill="#222">1000</text>
+  <line x1="102" y1="510" x2="110" y2="510" stroke="#333" stroke-width="1.2"/>
+  <text x="98" y="514" text-anchor="end" font-family="sans-serif" font-size="13" fill="#222">10000</text>
+  <polyline points="186,91.7433 211.333,139.393 236.667,182.776 262,233.555 287.333,281.003 312.667,322.34 338,370.316 363.333,413.206 388.667,464.793" fill="none" stroke="#1f6feb" stroke-width="2.4"/>
+  <circle cx="186" cy="91.7433" r="4.5" fill="#e11d48" stroke="#fff" stroke-width="1"/>
+  <circle cx="211.333" cy="139.393" r="4.5" fill="#e11d48" stroke="#fff" stroke-width="1"/>
+  <circle cx="236.667" cy="182.776" r="4.5" fill="#e11d48" stroke="#fff" stroke-width="1"/>
+  <circle cx="262" cy="233.555" r="4.5" fill="#e11d48" stroke="#fff" stroke-width="1"/>
+  <circle cx="287.333" cy="281.003" r="4.5" fill="#e11d48" stroke="#fff" stroke-width="1"/>
+  <circle cx="312.667" cy="322.34" r="4.5" fill="#e11d48" stroke="#fff" stroke-width="1"/>
+  <circle cx="338" cy="370.316" r="4.5" fill="#e11d48" stroke="#fff" stroke-width="1"/>
+  <circle cx="363.333" cy="413.206" r="4.5" fill="#e11d48" stroke="#fff" stroke-width="1"/>
+  <circle cx="388.667" cy="464.793" r="4.5" fill="#e11d48" stroke="#fff" stroke-width="1"/>
+</svg>

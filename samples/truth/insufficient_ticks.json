@@ -1,0 +1,65 @@
+{
+  "scenario": "insufficient_ticks",
+  "title": "场景9 刻度不足",
+  "axis": {
+    "x": {
+      "scale": "unknown",
+      "reversed": false
+    },
+    "y": {
+      "scale": "linear",
+      "reversed": true
+    }
+  },
+  "points": [
+    {
+      "canvas": {
+        "x": 190,
+        "y": 420
+      },
+      "x": null,
+      "visible": true
+    },
+    {
+      "canvas": {
+        "x": 270,
+        "y": 360
+      },
+      "x": null,
+      "visible": true
+    },
+    {
+      "canvas": {
+        "x": 350,
+        "y": 300
+      },
+      "x": null,
+      "visible": true
+    },
+    {
+      "canvas": {
+        "x": 430,
+        "y": 240
+      },
+      "x": null,
+      "visible": true
+    },
+    {
+      "canvas": {
+        "x": 510,
+        "y": 180
+      },
+      "x": null,
+      "visible": true
+    },
+    {
+      "canvas": {
+        "x": 590,
+        "y": 120
+      },
+      "x": null,
+      "visible": true
+    }
+  ],
+  "expected_error_keyword": "至少需要 2 个"
+}

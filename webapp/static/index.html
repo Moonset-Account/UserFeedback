@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=1280" />
+  <title>SVG 实验图数值采集器</title>
+  <link rel="stylesheet" href="/static/app.css" />
+</head>
+<body>
+<div id="app">
+  <header class="topbar">
+    <div class="brand">
+      <h1>SVG 实验图数值采集器</h1>
+      <span class="subtitle">只依据可见图形、坐标轴刻度与文本 · 不读取隐藏数据 · 尺度不足时拒绝假精确</span>
+    </div>
+    <div class="top-actions">
+      <button id="run-demo" class="btn primary">▶ 运行示例（正常 + 边界）</button>
+      <button id="btn-protocol" class="btn">协议子集</button>
+    </div>
+  </header>
+
+  <main class="layout">
+    <!-- 左栏：配置与任务 -->
+    <section class="panel left-panel">
+      <div class="panel-block">
+        <h2>1 · 选择输入</h2>
+        <label class="field-label">完整验收场景（11 类虚构实验图）</label>
+        <select id="scenario-select"></select>
+        <div class="btn-row">
+          <button id="btn-run-sample" class="btn">采集该场景</button>
+        </div>
+        <div class="divider"><span>或上传本地 SVG</span></div>
+        <input type="file" id="file-input" accept=".svg,image/svg+xml" />
+        <button id="btn-upload" class="btn" disabled>采集上传图</button>
+        <p class="hint">上传的 SVG 保存在本地 runs/ 目录；可在外部修改后点“重新采集”。</p>
+        <button id="btn-rerun" class="btn" disabled>↻ 修改后重新采集当前图</button>
+      </div>
+
+      <div class="panel-block grow">
+        <h2>2 · 任务结果</h2>
+        <div id="run-meta" class="run-meta empty">尚未运行，结果不预填</div>
+        <div id="status-banner" class="status-banner hidden"></div>
+        <ul id="run-history" class="run-history"></ul>
+      </div>
+    </section>
+
+    <!-- 右栏：图与叠加 -->
+    <section class="panel right-panel">
+      <div class="viewer-head">
+        <h2>3 · 来源图与采集叠加</h2>
+        <div class="legend">
+          <span class="dot ok"></span>可恢复观测点
+          <span class="dot blocked"></span>拒绝给值
+          <span class="dot clipped"></span>被裁剪（仅登记）
+          <span class="dot break"></span>断点
+        </div>
+      </div>
+      <div id="viewer" class="viewer">
+        <div id="svg-host" class="svg-host"></div>
+        <div id="overlay" class="overlay"></div>
+        <div id="empty-tip" class="empty-tip">运行任务后，这里显示实验图与采集点叠加</div>
+      </div>
+
+      <div class="evidence">
+        <div class="evidence-tabs">
+          <button class="tab active" data-tab="points">观测点 <em id="cnt-points">0</em></button>
+          <button class="tab" data-tab="clipped">裁剪点 <em id="cnt-clipped">0</em></button>
+          <button class="tab" data-tab="axes">轴标定证据</button>
+          <button class="tab" data-tab="errors">错误与警告 <em id="cnt-errors">0</em></button>
+          <button class="tab" data-tab="breaks">断点/跳过 <em id="cnt-breaks">0</em></button>
+        </div>
+        <div id="tab-points" class="tab-body active"></div>
+        <div id="tab-clipped" class="tab-body"></div>
+        <div id="tab-axes" class="tab-body"></div>
+        <div id="tab-errors" class="tab-body"></div>
+        <div id="tab-breaks" class="tab-body"></div>
+      </div>
+    </section>
+  </main>
+
+  <!-- 点击点后的换算过程弹窗 -->
+  <div id="modal-mask" class="modal-mask hidden">
+    <div class="modal">
+      <div class="modal-head">
+        <h3>坐标换算过程</h3>
+        <button id="modal-close" class="btn small">关闭</button>
+      </div>
+      <div id="modal-body" class="modal-body"></div>
+    </div>
+  </div>
+
+  <!-- 协议子集弹窗 -->
+  <div id="protocol-mask" class="modal-mask hidden">
+    <div class="modal wide">
+      <div class="modal-head">
+        <h3>支持的 SVG 协议子集</h3>
+        <button id="protocol-close" class="btn small">关闭</button>
+      </div>
+      <div id="protocol-body" class="modal-body"></div>
+    </div>
+  </div>
+</div>
+<script src="/static/app.js"></script>
+</body>
+</html>

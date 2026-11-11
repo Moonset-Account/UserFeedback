@@ -1,0 +1,116 @@
+{
+  "scenario": "linear_basic",
+  "title": "场景1 线性轴基线",
+  "axis": {
+    "x": {
+      "scale": "linear",
+      "reversed": false
+    },
+    "y": {
+      "scale": "linear",
+      "reversed": true
+    }
+  },
+  "points": [
+    {
+      "x": 5,
+      "y": 21.028,
+      "canvas": {
+        "x": 148.0,
+        "y": 255.046
+      },
+      "visible": true,
+      "segment": 0
+    },
+    {
+      "x": 15,
+      "y": 25.624,
+      "canvas": {
+        "x": 224.0,
+        "y": 295.491
+      },
+      "visible": true,
+      "segment": 0
+    },
+    {
+      "x": 25,
+      "y": 25.632,
+      "canvas": {
+        "x": 300.0,
+        "y": 295.562
+      },
+      "visible": true,
+      "segment": 0
+    },
+    {
+      "x": 35,
+      "y": 28.583,
+      "canvas": {
+        "x": 376.0,
+        "y": 321.53
+      },
+      "visible": true,
+      "segment": 0
+    },
+    {
+      "x": 45,
+      "y": 32.455,
+      "canvas": {
+        "x": 452.0,
+        "y": 355.604
+      },
+      "visible": true,
+      "segment": 0
+    },
+    {
+      "x": 55,
+      "y": 35.275,
+      "canvas": {
+        "x": 528.0,
+        "y": 380.42
+      },
+      "visible": true,
+      "segment": 0
+    },
+    {
+      "x": 65,
+      "y": 34.692,
+      "canvas": {
+        "x": 604.0,
+        "y": 375.29
+      },
+      "visible": true,
+      "segment": 0
+    },
+    {
+      "x": 75,
+      "y": 39.763,
+      "canvas": {
+        "x": 680.0,
+        "y": 419.914
+      },
+      "visible": true,
+      "segment": 0
+    },
+    {
+      "x": 85,
+      "y": 39.421,
+      "canvas": {
+        "x": 756.0,
+        "y": 416.905
+      },
+      "visible": true,
+      "segment": 0
+    },
+    {
+      "x": 95,
+      "y": 43.661,
+      "canvas": {
+        "x": 832.0,
+        "y": 454.217
+      },
+      "visible": true,
+      "segment": 0
+    }
+  ]
+}

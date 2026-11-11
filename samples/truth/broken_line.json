@@ -1,0 +1,147 @@
+{
+  "scenario": "broken_line",
+  "title": "场景6 折线断点",
+  "axis": {
+    "x": {
+      "scale": "linear",
+      "reversed": false
+    },
+    "y": {
+      "scale": "linear",
+      "reversed": true
+    }
+  },
+  "points": [
+    {
+      "x": 0,
+      "y": 16.313,
+      "canvas": {
+        "x": 110.0,
+        "y": 189.629
+      },
+      "visible": true,
+      "segment": 0
+    },
+    {
+      "x": 10,
+      "y": 16.752,
+      "canvas": {
+        "x": 173.333,
+        "y": 192.848
+      },
+      "visible": true,
+      "segment": 0
+    },
+    {
+      "x": 20,
+      "y": 20.477,
+      "canvas": {
+        "x": 236.667,
+        "y": 220.165
+      },
+      "visible": true,
+      "segment": 0
+    },
+    {
+      "x": 30,
+      "y": 24.211,
+      "canvas": {
+        "x": 300.0,
+        "y": 247.547
+      },
+      "visible": true,
+      "segment": 0
+    },
+    {
+      "x": 40,
+      "y": 29.583,
+      "canvas": {
+        "x": 363.333,
+        "y": 286.942
+      },
+      "visible": true,
+      "segment": 0
+    },
+    {
+      "x": 50,
+      "y": 30.069,
+      "canvas": {
+        "x": 426.667,
+        "y": 290.506
+      },
+      "visible": true,
+      "segment": 1
+    },
+    {
+      "x": 60,
+      "y": 32.321,
+      "canvas": {
+        "x": 490.0,
+        "y": 307.021
+      },
+      "visible": true,
+      "segment": 1
+    },
+    {
+      "x": 70,
+      "y": 36.921,
+      "canvas": {
+        "x": 553.333,
+        "y": 340.754
+      },
+      "visible": true,
+      "segment": 1
+    },
+    {
+      "x": 80,
+      "y": 41.406,
+      "canvas": {
+        "x": 616.667,
+        "y": 373.644
+      },
+      "visible": true,
+      "segment": 2
+    },
+    {
+      "x": 90,
+      "y": 42.065,
+      "canvas": {
+        "x": 680.0,
+        "y": 378.477
+      },
+      "visible": true,
+      "segment": 2
+    },
+    {
+      "x": 100,
+      "y": 48.533,
+      "canvas": {
+        "x": 743.333,
+        "y": 425.909
+      },
+      "visible": true,
+      "segment": 2
+    },
+    {
+      "x": 110,
+      "y": 50.376,
+      "canvas": {
+        "x": 806.667,
+        "y": 439.424
+      },
+      "visible": true,
+      "segment": 2
+    },
+    {
+      "x": 120,
+      "y": 53.997,
+      "canvas": {
+        "x": 870.0,
+        "y": 465.978
+      },
+      "visible": true,
+      "segment": 2
+    }
+  ],
+  "expected_break_count": 2
+}

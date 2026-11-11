@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="600">
+  <text x="480" y="34" text-anchor="middle" font-family="sans-serif" font-size="18" fill="#111">场景5 嵌套 transform（虚构，三层 g 平移+缩放）</text>
+  <g transform="translate(24,-16)">
+  <g transform="scale(0.92)">
+  <g transform="translate(-10,12)">
+  <text x="480" y="34" text-anchor="middle" font-family="sans-serif" font-size="18" fill="#111"></text>
+  <line x1="110" y1="70" x2="110" y2="510" stroke="#ddd" stroke-width="0.8"/>
+  <line x1="262" y1="70" x2="262" y2="510" stroke="#ddd" stroke-width="0.8"/>
+  <line x1="414" y1="70" x2="414" y2="510" stroke="#ddd" stroke-width="0.8"/>
+  <line x1="566" y1="70" x2="566" y2="510" stroke="#ddd" stroke-width="0.8"/>
+  <line x1="718" y1="70" x2="718" y2="510" stroke="#ddd" stroke-width="0.8"/>
+  <line x1="870" y1="70" x2="870" y2="510" stroke="#ddd" stroke-width="0.8"/>
+  <line x1="110" y1="70" x2="870" y2="70" stroke="#ddd" stroke-width="0.8"/>
+  <line x1="110" y1="180" x2="870" y2="180" stroke="#ddd" stroke-width="0.8"/>
+  <line x1="110" y1="290" x2="870" y2="290" stroke="#ddd" stroke-width="0.8"/>
+  <line x1="110" y1="400" x2="870" y2="400" stroke="#ddd" stroke-width="0.8"/>
+  <line x1="110" y1="510" x2="870" y2="510" stroke="#ddd" stroke-width="0.8"/>
+  <line x1="110" y1="510" x2="870" y2="510" stroke="#333" stroke-width="1.5"/>
+  <line x1="110" y1="70" x2="110" y2="510" stroke="#333" stroke-width="1.5"/>
+  <line x1="110" y1="510" x2="110" y2="518" stroke="#333" stroke-width="1.2"/>
+  <text x="110" y="536" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#222">0</text>
+  <line x1="262" y1="510" x2="262" y2="518" stroke="#333" stroke-width="1.2"/>
+  <text x="262" y="536" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#222">20</text>
+  <line x1="414" y1="510" x2="414" y2="518" stroke="#333" stroke-width="1.2"/>
+  <text x="414" y="536" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#222">40</text>
+  <line x1="566" y1="510" x2="566" y2="518" stroke="#333" stroke-width="1.2"/>
+  <text x="566" y="536" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#222">60</text>
+  <line x1="718" y1="510" x2="718" y2="518" stroke="#333" stroke-width="1.2"/>
+  <text x="718" y="536" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#222">80</text>
+  <line x1="870" y1="510" x2="870" y2="518" stroke="#333" stroke-width="1.2"/>
+  <text x="870" y="536" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#222">100</text>
+  <line x1="102" y1="70" x2="110" y2="70" stroke="#333" stroke-width="1.2"/>
+  <text x="98" y="74" text-anchor="end" font-family="sans-serif" font-size="13" fill="#222">0</text>
+  <line x1="102" y1="180" x2="110" y2="180" stroke="#333" stroke-width="1.2"/>
+  <text x="98" y="184" text-anchor="end" font-family="sans-serif" font-size="13" fill="#222">10</text>
+  <line x1="102" y1="290" x2="110" y2="290" stroke="#333" stroke-width="1.2"/>
+  <text x="98" y="294" text-anchor="end" font-family="sans-serif" font-size="13" fill="#222">20</text>
+  <line x1="102" y1="400" x2="110" y2="400" stroke="#333" stroke-width="1.2"/>
+  <text x="98" y="404" text-anchor="end" font-family="sans-serif" font-size="13" fill="#222">30</text>
+  <line x1="102" y1="510" x2="110" y2="510" stroke="#333" stroke-width="1.2"/>
+  <text x="98" y="514" text-anchor="end" font-family="sans-serif" font-size="13" fill="#222">40</text>
+  <polyline points="186,219.204 300,256.076 414,299.636 528,332.317 642,362.49 756,394.599" fill="none" stroke="#1f6feb" stroke-width="2.4"/>
+  <circle cx="186" cy="219.204" r="4.5" fill="#e11d48" stroke="#fff" stroke-width="1"/>
+  <circle cx="300" cy="256.076" r="4.5" fill="#e11d48" stroke="#fff" stroke-width="1"/>
+  <circle cx="414" cy="299.636" r="4.5" fill="#e11d48" stroke="#fff" stroke-width="1"/>
+  <circle cx="528" cy="332.317" r="4.5" fill="#e11d48" stroke="#fff" stroke-width="1"/>
+  <circle cx="642" cy="362.49" r="4.5" fill="#e11d48" stroke="#fff" stroke-width="1"/>
+  <circle cx="756" cy="394.599" r="4.5" fill="#e11d48" stroke="#fff" stroke-width="1"/>
+  </g>
+  </g>
+  </g>
+</svg>
