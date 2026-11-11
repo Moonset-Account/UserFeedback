@@ -1,0 +1,72 @@
+{
+  "manifest_id": "FIX-MANIFEST-2026-11-12-001",
+  "snapshot_id": "snap-7f3a9c21",
+  "rule_version": "rules-v2.4.0",
+  "generated_at": "2026-11-12T08:00:00Z",
+  "requirements": [
+    {
+      "risk_id": "RISK-001",
+      "title": "SQL 注入：订单查询参数未参数化",
+      "assertions": [
+        {
+          "test_name": "test_sql_injection_blocked",
+          "object": "svc-order/dao/order_query.py"
+        }
+      ]
+    },
+    {
+      "risk_id": "RISK-002",
+      "title": "越权访问：用户可读取他人发票",
+      "assertions": [
+        {
+          "test_name": "test_horizontal_privilege_denied",
+          "object": "svc-billing/api/invoice.py"
+        }
+      ]
+    },
+    {
+      "risk_id": "RISK-003",
+      "title": "敏感字段日志泄露",
+      "assertions": [
+        {
+          "test_name": "test_secret_redaction",
+          "object": "lib-common/logging/redactor.py"
+        }
+      ]
+    },
+    {
+      "risk_id": "RISK-004",
+      "title": "反序列化不可信数据导致 RCE",
+      "assertions": [
+        {
+          "test_name": "test_pickle_rejected",
+          "object": "svc-job/worker/task_loader.py"
+        }
+      ]
+    },
+    {
+      "risk_id": "RISK-005",
+      "title": "重放攻击：回调缺少幂等校验",
+      "assertions": [
+        {
+          "test_name": "test_replay_callback_rejected",
+          "object": "svc-gateway/callback/handler.py"
+        },
+        {
+          "test_name": "test_idempotency_key_enforced",
+          "object": "svc-gateway/callback/handler.py"
+        }
+      ]
+    },
+    {
+      "risk_id": "RISK-006",
+      "title": "上传文件类型校验绕过",
+      "assertions": [
+        {
+          "test_name": "test_upload_magic_byte_check",
+          "object": "svc-asset/upload/validator.py"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,116 @@
+{
+  "exported_at": "2026-11-12T11:00:00Z",
+  "note": "完整证据集：所有必需断言在当前快照/规则版本下均有通过记录；旧记录保留但仅作对照，不应被采信为当前证据。",
+  "results": [
+    {
+      "result_id": "R-1001",
+      "run_id": "run-20261112-02",
+      "test_name": "test_sql_injection_blocked",
+      "object": "svc-order/dao/order_query.py",
+      "snapshot_id": "snap-7f3a9c21",
+      "rule_version": "rules-v2.4.0",
+      "status": "passed",
+      "recorded_at": "2026-11-12T10:30:00Z"
+    },
+    {
+      "result_id": "R-1101",
+      "run_id": "run-20261112-02",
+      "test_name": "test_horizontal_privilege_denied",
+      "object": "svc-billing/api/invoice.py",
+      "snapshot_id": "snap-7f3a9c21",
+      "rule_version": "rules-v2.4.0",
+      "status": "passed",
+      "recorded_at": "2026-11-12T10:31:00Z"
+    },
+    {
+      "result_id": "R-1102",
+      "run_id": "run-20261112-02",
+      "test_name": "test_secret_redaction",
+      "object": "lib-common/logging/redactor.py",
+      "snapshot_id": "snap-7f3a9c21",
+      "rule_version": "rules-v2.4.0",
+      "status": "passed",
+      "recorded_at": "2026-11-12T10:32:00Z"
+    },
+    {
+      "result_id": "R-1103",
+      "run_id": "run-20261112-02",
+      "test_name": "test_pickle_rejected",
+      "object": "svc-job/worker/task_loader.py",
+      "snapshot_id": "snap-7f3a9c21",
+      "rule_version": "rules-v2.4.0",
+      "status": "passed",
+      "recorded_at": "2026-11-12T10:33:00Z"
+    },
+    {
+      "result_id": "R-1104",
+      "run_id": "run-20261112-02",
+      "test_name": "test_replay_callback_rejected",
+      "object": "svc-gateway/callback/handler.py",
+      "snapshot_id": "snap-7f3a9c21",
+      "rule_version": "rules-v2.4.0",
+      "status": "passed",
+      "recorded_at": "2026-11-12T10:34:00Z"
+    },
+    {
+      "result_id": "R-1105",
+      "run_id": "run-20261112-02",
+      "test_name": "test_idempotency_key_enforced",
+      "object": "svc-gateway/callback/handler.py",
+      "snapshot_id": "snap-7f3a9c21",
+      "rule_version": "rules-v2.4.0",
+      "status": "passed",
+      "recorded_at": "2026-11-12T10:35:00Z"
+    },
+    {
+      "result_id": "R-1106",
+      "run_id": "run-20261112-02",
+      "test_name": "test_upload_magic_byte_check",
+      "object": "svc-asset/upload/validator.py",
+      "snapshot_id": "snap-7f3a9c21",
+      "rule_version": "rules-v2.4.0",
+      "status": "passed",
+      "recorded_at": "2026-11-12T10:36:00Z"
+    },
+    {
+      "result_id": "R-1107",
+      "run_id": "run-20261112-02",
+      "test_name": "test_sql_injection_blocked",
+      "object": "svc-order/dao/order_query.py",
+      "snapshot_id": "snap-7f3a9c21",
+      "rule_version": "rules-v2.4.0",
+      "status": "passed",
+      "recorded_at": "2026-11-12T10:40:00Z"
+    },
+    {
+      "result_id": "R-1108",
+      "run_id": "run-20261112-02",
+      "test_name": "test_sql_injection_blocked",
+      "object": "svc-order/dao/legacy_billing_view.py",
+      "snapshot_id": "snap-7f3a9c21",
+      "rule_version": "rules-v2.4.0",
+      "status": "passed",
+      "recorded_at": "2026-11-12T10:41:00Z"
+    },
+    {
+      "result_id": "R-0901",
+      "run_id": "run-20261110-04",
+      "test_name": "test_pickle_rejected",
+      "object": "svc-job/worker/task_loader.py",
+      "snapshot_id": "snap-5b1d8e07",
+      "rule_version": "rules-v2.4.0",
+      "status": "passed",
+      "recorded_at": "2026-11-10T17:40:00Z"
+    },
+    {
+      "result_id": "R-0903",
+      "run_id": "run-20261110-04",
+      "test_name": "test_upload_magic_byte_check",
+      "object": "svc-asset/upload/validator.py",
+      "snapshot_id": "snap-5b1d8e07",
+      "rule_version": "rules-v2.3.1",
+      "status": "passed",
+      "recorded_at": "2026-11-10T17:45:00Z"
+    }
+  ]
+}
