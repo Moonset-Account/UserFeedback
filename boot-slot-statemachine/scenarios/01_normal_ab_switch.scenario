@@ -1,0 +1,26 @@
+# 场景 1：正常双槽切换
+# A 为当前已确认槽 v10；更新 B 到 v12（包内安全下限 12），
+# B 启动成功并确认，断电重启后仍应选择已确认的 B。
+[manifest]
+floor 10
+max_retries 3
+active A
+pending -
+slot A 10 valid confirmed 0
+slot B 0 unknown empty 0
+
+[events]
+update B 12 12 valid
+boot ok
+confirm
+power-loss
+boot ok
+
+[expect]
+state RUNNING
+floor 12
+active B
+pending -
+candidate B
+slot A 10 confirmed 0
+slot B 12 confirmed 0

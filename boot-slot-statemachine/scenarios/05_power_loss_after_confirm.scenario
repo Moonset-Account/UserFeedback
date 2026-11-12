@@ -1,0 +1,27 @@
+# 场景 5：写入更新确认记录之后断电
+# 确认事务（B=confirmed、active=B、pending 清除、floor=12）已提交，
+# 重启后必须直接把 B 作为已确认活动槽启动，不再消耗未确认重试。
+[manifest]
+floor 10
+max_retries 3
+active A
+pending -
+slot A 10 valid confirmed 0
+slot B 0 unknown empty 0
+
+[events]
+update B 12 12 valid
+boot ok
+confirm
+# 确认记录已落盘 -> 断电
+power-loss
+boot ok
+
+[expect]
+state RUNNING
+floor 12
+active B
+pending -
+candidate B
+slot A 10 confirmed 0
+slot B 12 confirmed 0

@@ -1,0 +1,25 @@
+# 场景 6：边界拒绝——签名无效的更新、低于下限的回滚更新都必须零写入；
+# 持久化状态完全不变，后续启动仍走当前已确认槽 A。
+[manifest]
+floor 10
+max_retries 3
+active A
+pending -
+slot A 10 valid confirmed 0
+slot B 0 unknown empty 0
+
+[events]
+# 签名无效：拒绝，不触碰任何持久化字段
+update B 13 9 invalid
+# 签名有效但版本 9 < floor 10：回滚攻击，拒绝，零写入
+update B 9 9 valid
+boot ok
+
+[expect]
+state RUNNING
+floor 10
+active A
+pending -
+candidate A
+slot A 10 confirmed 0
+slot B 0 empty 0

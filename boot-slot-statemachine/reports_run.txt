@@ -1,0 +1,255 @@
+============================================================
+SELFTEST: torn journal / crash-amid-transaction durability
+============================================================
+power loss before commit; journal tail contains TXN_BEGIN without TXN_COMMIT
+  [ok] floor rolled back to committed value => 10
+  [ok] pending pointer absent => -
+  [ok] target slot untouched => empty
+  [ok] active slot preserved => A
+  [ok] committed transaction survives power loss => floor=12 pending=B
+RESULT: PASS
+
+============================================================
+SCENARIO: 01_normal_ab_switch
+============================================================
+state machine (re)started; rebuilding decisions purely from persisted state
+  [persist] txn#1 [factory-record] committed: floor=10 active=A pending=-
+event: UPDATE target=B v12 min_version=12 sig=valid
+  => install committed: slot B unconfirmed; floor 10 -> 12; next boot must select it via persisted pending pointer
+  [persist] txn#2 [update-install-commit B] committed: floor=12 active=A pending=B
+event: BOOT ok
+[select:boot] floor=12 active=A pending=B
+    slot A v10 sig=valid state=confirmed -> rejected: version 10 below security floor 12
+    slot B v12 sig=valid state=unconfirmed retries=3 -> eligible
+  => candidate = B (v12, pending unconfirmed update)
+  retries decremented before attempt -> 2 left
+  boot ok on unconfirmed slot B; awaiting update-confirmation record (not yet committed)
+  [persist] txn#3 [boot-attempt B] committed: floor=12 active=A pending=B
+event: CONFIRM (write update-confirmation record)
+  => slot B confirmed; active pointer updated; pending cleared
+  [persist] txn#4 [update-confirmation B] committed: floor=12 active=B pending=-
+event: POWER-LOSS (RAM lost; durable journal survives)
+state machine (re)started; rebuilding decisions purely from persisted state
+  [persist] replay: txn#1 [factory-record] restored (floor=10 active=A pending=-)
+  [persist] replay: txn#2 [update-install-commit B] restored (floor=12 active=A pending=B)
+  [persist] replay: txn#3 [boot-attempt B] restored (floor=12 active=A pending=B)
+  [persist] replay: txn#4 [update-confirmation B] restored (floor=12 active=B pending=-)
+event: BOOT ok
+[select:boot] floor=12 active=B pending=-
+    slot A v10 sig=valid state=confirmed -> rejected: version 10 below security floor 12
+    slot B v12 sig=valid state=confirmed -> eligible
+  => candidate = B (v12, active confirmed slot)
+  boot ok on confirmed slot B; running
+  final snapshot: floor=12 active=B pending=-
+    slot A: v10 sig=valid state=confirmed retries=0
+    slot B: v12 sig=valid state=confirmed retries=0
+RESULT: PASS
+
+============================================================
+SCENARIO: 02_candidate_fails_old_slot_compliant
+============================================================
+state machine (re)started; rebuilding decisions purely from persisted state
+  [persist] txn#1 [factory-record] committed: floor=10 active=A pending=-
+event: UPDATE target=B v12 min_version=10 sig=valid
+  => install committed: slot B unconfirmed; floor 10 -> 10; next boot must select it via persisted pending pointer
+  [persist] txn#2 [update-install-commit B] committed: floor=10 active=A pending=B
+event: BOOT FAIL
+[select:boot] floor=10 active=A pending=B
+    slot A v10 sig=valid state=confirmed -> eligible
+    slot B v12 sig=valid state=unconfirmed retries=3 -> eligible
+  => candidate = B (v12, pending unconfirmed update)
+  retries decremented before attempt -> 2 left
+  boot FAILED on B
+  unconfirmed slot still has retries; retry same candidate on next boot
+  [persist] txn#3 [boot-attempt B] committed: floor=10 active=A pending=B
+event: BOOT FAIL
+[select:boot] floor=10 active=A pending=B
+    slot A v10 sig=valid state=confirmed -> eligible
+    slot B v12 sig=valid state=unconfirmed retries=2 -> eligible
+  => candidate = B (v12, pending unconfirmed update)
+  retries decremented before attempt -> 1 left
+  boot FAILED on B
+  unconfirmed slot still has retries; retry same candidate on next boot
+  [persist] txn#4 [boot-attempt B] committed: floor=10 active=A pending=B
+event: BOOT FAIL
+[select:boot] floor=10 active=A pending=B
+    slot A v10 sig=valid state=confirmed -> eligible
+    slot B v12 sig=valid state=unconfirmed retries=1 -> eligible
+  => candidate = B (v12, pending unconfirmed update)
+  retries decremented before attempt -> 0 left
+  boot FAILED on B
+  slot B marked unbootable; pending cleared
+[select:fallback after failure] floor=10 active=A pending=-
+    slot A v10 sig=valid state=confirmed -> eligible
+    slot B v12 sig=valid state=unbootable -> rejected: previously marked unbootable
+  => candidate = A (v10, active confirmed slot)
+  [persist] txn#5 [boot-attempt B] committed: floor=10 active=A pending=B
+  [persist] txn#6 [mark-unbootable B] committed: floor=10 active=A pending=-
+event: BOOT ok
+[select:boot] floor=10 active=A pending=-
+    slot A v10 sig=valid state=confirmed -> eligible
+    slot B v12 sig=valid state=unbootable -> rejected: previously marked unbootable
+  => candidate = A (v10, active confirmed slot)
+  boot ok on confirmed slot A; running
+  final snapshot: floor=10 active=A pending=-
+    slot A: v10 sig=valid state=confirmed retries=0
+    slot B: v12 sig=valid state=unbootable retries=0
+RESULT: PASS
+
+============================================================
+SCENARIO: 03_old_slot_below_floor_recovery
+============================================================
+state machine (re)started; rebuilding decisions purely from persisted state
+  [persist] txn#1 [factory-record] committed: floor=10 active=A pending=-
+event: UPDATE target=B v15 min_version=14 sig=valid
+  => install committed: slot B unconfirmed; floor 10 -> 14; next boot must select it via persisted pending pointer
+  [persist] txn#2 [update-install-commit B] committed: floor=14 active=A pending=B
+event: BOOT FAIL
+[select:boot] floor=14 active=A pending=B
+    slot A v10 sig=valid state=confirmed -> rejected: version 10 below security floor 14
+    slot B v15 sig=valid state=unconfirmed retries=3 -> eligible
+  => candidate = B (v15, pending unconfirmed update)
+  retries decremented before attempt -> 2 left
+  boot FAILED on B
+  unconfirmed slot still has retries; retry same candidate on next boot
+  [persist] txn#3 [boot-attempt B] committed: floor=14 active=A pending=B
+event: BOOT FAIL
+[select:boot] floor=14 active=A pending=B
+    slot A v10 sig=valid state=confirmed -> rejected: version 10 below security floor 14
+    slot B v15 sig=valid state=unconfirmed retries=2 -> eligible
+  => candidate = B (v15, pending unconfirmed update)
+  retries decremented before attempt -> 1 left
+  boot FAILED on B
+  unconfirmed slot still has retries; retry same candidate on next boot
+  [persist] txn#4 [boot-attempt B] committed: floor=14 active=A pending=B
+event: BOOT FAIL
+[select:boot] floor=14 active=A pending=B
+    slot A v10 sig=valid state=confirmed -> rejected: version 10 below security floor 14
+    slot B v15 sig=valid state=unconfirmed retries=1 -> eligible
+  => candidate = B (v15, pending unconfirmed update)
+  retries decremented before attempt -> 0 left
+  boot FAILED on B
+  slot B marked unbootable; pending cleared
+[select:fallback after failure] floor=14 active=A pending=-
+    slot A v10 sig=valid state=confirmed -> rejected: version 10 below security floor 14
+    slot B v15 sig=valid state=unbootable -> rejected: previously marked unbootable
+  => no eligible slot (floor enforced, no silent rollback) -> ENTER RECOVERY
+  [persist] txn#5 [boot-attempt B] committed: floor=14 active=A pending=B
+  [persist] txn#6 [mark-unbootable B] committed: floor=14 active=A pending=-
+  final snapshot: floor=14 active=A pending=-
+    slot A: v10 sig=valid state=confirmed retries=0
+    slot B: v15 sig=valid state=unbootable retries=0
+RESULT: PASS
+
+============================================================
+SCENARIO: 04_power_loss_before_confirm
+============================================================
+state machine (re)started; rebuilding decisions purely from persisted state
+  [persist] txn#1 [factory-record] committed: floor=10 active=A pending=-
+event: UPDATE target=B v12 min_version=12 sig=valid
+  => install committed: slot B unconfirmed; floor 10 -> 12; next boot must select it via persisted pending pointer
+  [persist] txn#2 [update-install-commit B] committed: floor=12 active=A pending=B
+event: BOOT ok
+[select:boot] floor=12 active=A pending=B
+    slot A v10 sig=valid state=confirmed -> rejected: version 10 below security floor 12
+    slot B v12 sig=valid state=unconfirmed retries=3 -> eligible
+  => candidate = B (v12, pending unconfirmed update)
+  retries decremented before attempt -> 2 left
+  boot ok on unconfirmed slot B; awaiting update-confirmation record (not yet committed)
+  [persist] txn#3 [boot-attempt B] committed: floor=12 active=A pending=B
+event: POWER-LOSS (RAM lost; durable journal survives)
+state machine (re)started; rebuilding decisions purely from persisted state
+  [persist] replay: txn#1 [factory-record] restored (floor=10 active=A pending=-)
+  [persist] replay: txn#2 [update-install-commit B] restored (floor=12 active=A pending=B)
+  [persist] replay: txn#3 [boot-attempt B] restored (floor=12 active=A pending=B)
+event: BOOT ok
+[select:boot] floor=12 active=A pending=B
+    slot A v10 sig=valid state=confirmed -> rejected: version 10 below security floor 12
+    slot B v12 sig=valid state=unconfirmed retries=2 -> eligible
+  => candidate = B (v12, pending unconfirmed update)
+  retries decremented before attempt -> 1 left
+  boot ok on unconfirmed slot B; awaiting update-confirmation record (not yet committed)
+  [persist] txn#4 [boot-attempt B] committed: floor=12 active=A pending=B
+event: POWER-LOSS (RAM lost; durable journal survives)
+state machine (re)started; rebuilding decisions purely from persisted state
+  [persist] replay: txn#1 [factory-record] restored (floor=10 active=A pending=-)
+  [persist] replay: txn#2 [update-install-commit B] restored (floor=12 active=A pending=B)
+  [persist] replay: txn#3 [boot-attempt B] restored (floor=12 active=A pending=B)
+  [persist] replay: txn#4 [boot-attempt B] restored (floor=12 active=A pending=B)
+event: BOOT FAIL
+[select:boot] floor=12 active=A pending=B
+    slot A v10 sig=valid state=confirmed -> rejected: version 10 below security floor 12
+    slot B v12 sig=valid state=unconfirmed retries=1 -> eligible
+  => candidate = B (v12, pending unconfirmed update)
+  retries decremented before attempt -> 0 left
+  boot FAILED on B
+  slot B marked unbootable; pending cleared
+[select:fallback after failure] floor=12 active=A pending=-
+    slot A v10 sig=valid state=confirmed -> rejected: version 10 below security floor 12
+    slot B v12 sig=valid state=unbootable -> rejected: previously marked unbootable
+  => no eligible slot (floor enforced, no silent rollback) -> ENTER RECOVERY
+  [persist] txn#5 [boot-attempt B] committed: floor=12 active=A pending=B
+  [persist] txn#6 [mark-unbootable B] committed: floor=12 active=A pending=-
+  final snapshot: floor=12 active=A pending=-
+    slot A: v10 sig=valid state=confirmed retries=0
+    slot B: v12 sig=valid state=unbootable retries=0
+RESULT: PASS
+
+============================================================
+SCENARIO: 05_power_loss_after_confirm
+============================================================
+state machine (re)started; rebuilding decisions purely from persisted state
+  [persist] txn#1 [factory-record] committed: floor=10 active=A pending=-
+event: UPDATE target=B v12 min_version=12 sig=valid
+  => install committed: slot B unconfirmed; floor 10 -> 12; next boot must select it via persisted pending pointer
+  [persist] txn#2 [update-install-commit B] committed: floor=12 active=A pending=B
+event: BOOT ok
+[select:boot] floor=12 active=A pending=B
+    slot A v10 sig=valid state=confirmed -> rejected: version 10 below security floor 12
+    slot B v12 sig=valid state=unconfirmed retries=3 -> eligible
+  => candidate = B (v12, pending unconfirmed update)
+  retries decremented before attempt -> 2 left
+  boot ok on unconfirmed slot B; awaiting update-confirmation record (not yet committed)
+  [persist] txn#3 [boot-attempt B] committed: floor=12 active=A pending=B
+event: CONFIRM (write update-confirmation record)
+  => slot B confirmed; active pointer updated; pending cleared
+  [persist] txn#4 [update-confirmation B] committed: floor=12 active=B pending=-
+event: POWER-LOSS (RAM lost; durable journal survives)
+state machine (re)started; rebuilding decisions purely from persisted state
+  [persist] replay: txn#1 [factory-record] restored (floor=10 active=A pending=-)
+  [persist] replay: txn#2 [update-install-commit B] restored (floor=12 active=A pending=B)
+  [persist] replay: txn#3 [boot-attempt B] restored (floor=12 active=A pending=B)
+  [persist] replay: txn#4 [update-confirmation B] restored (floor=12 active=B pending=-)
+event: BOOT ok
+[select:boot] floor=12 active=B pending=-
+    slot A v10 sig=valid state=confirmed -> rejected: version 10 below security floor 12
+    slot B v12 sig=valid state=confirmed -> eligible
+  => candidate = B (v12, active confirmed slot)
+  boot ok on confirmed slot B; running
+  final snapshot: floor=12 active=B pending=-
+    slot A: v10 sig=valid state=confirmed retries=0
+    slot B: v12 sig=valid state=confirmed retries=0
+RESULT: PASS
+
+============================================================
+SCENARIO: 06_bad_signature_and_rollback_rejected
+============================================================
+state machine (re)started; rebuilding decisions purely from persisted state
+  [persist] txn#1 [factory-record] committed: floor=10 active=A pending=-
+event: UPDATE target=B v13 min_version=9 sig=INVALID
+  => update REJECTED before any write: signature INVALID; floor stays 10
+event: UPDATE target=B v9 min_version=9 sig=valid
+  => update REJECTED before any write: version 9 is below persisted floor 10 (rollback blocked)
+event: BOOT ok
+[select:boot] floor=10 active=A pending=-
+    slot A v10 sig=valid state=confirmed -> eligible
+    slot B v0 sig=unknown state=empty -> rejected: slot empty
+  => candidate = A (v10, active confirmed slot)
+  boot ok on confirmed slot A; running
+  final snapshot: floor=10 active=A pending=-
+    slot A: v10 sig=valid state=confirmed retries=0
+    slot B: v0 sig=unknown state=empty retries=0
+RESULT: PASS
+
+============================================================
+SUMMARY: 7/7 passed, 0 failed

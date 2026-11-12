@@ -1,0 +1,27 @@
+# 场景 2：候选启动失败，旧槽仍合规 -> 回退到旧槽（禁止静默回退到不合规版本，
+# 但这里更新包没有抬高下限，A 的 v10 仍满足 floor=10，属于合法回退）
+[manifest]
+floor 10
+max_retries 3
+active A
+pending -
+slot A 10 valid confirmed 0
+slot B 0 unknown empty 0
+
+[events]
+# min_version=10：下限保持 10，A 仍是合规回退项
+update B 12 10 valid
+boot fail
+boot fail
+boot fail
+# 三次尝试耗尽后，B 标记 unbootable，回退选择 A
+boot ok
+
+[expect]
+state RUNNING
+floor 10
+active A
+pending -
+candidate A
+slot A 10 confirmed 0
+slot B 12 unbootable 0

@@ -1,0 +1,36 @@
+# 场景 4：写入更新确认记录之前断电（含两次断电）
+# 已持久化的内容：floor=12、pending=B、B 为 unconfirmed 且重试计数已递减。
+# 未持久化的内容：确认记录（active 仍指向 A）。
+# 重启后必须按已持久化状态继续：仍选 B 继续尝试，断电不会恢复已消耗的重试；
+# 最终 B 耗尽重试失败，而 A(v10) 低于下限 12 -> RECOVERY。
+[manifest]
+floor 10
+max_retries 3
+active A
+pending -
+slot A 10 valid confirmed 0
+slot B 0 unknown empty 0
+
+[events]
+update B 12 12 valid
+# 第 1 次尝试：成功但尚未确认，retries 3->2 已落盘
+boot ok
+# 确认记录尚未写入 -> 断电
+power-loss
+# 重启：B 仍 unconfirmed，retries=2，pending 仍指向 B
+# 第 2 次尝试：成功但仍未确认，retries 2->1 已落盘
+boot ok
+# 再次断电
+power-loss
+# 第 3 次尝试：失败，retries 1->0 -> B 标记 unbootable；
+# 回退选择时 A 因 v10 < floor12 被拒绝 -> RECOVERY
+boot fail
+
+[expect]
+state RECOVERY
+floor 12
+active A
+pending -
+candidate recovery
+slot A 10 confirmed 0
+slot B 12 unbootable 0

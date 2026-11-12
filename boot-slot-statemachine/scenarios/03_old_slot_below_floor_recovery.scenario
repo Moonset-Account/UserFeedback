@@ -1,0 +1,26 @@
+# 场景 3：安全修复抬高下限到 14，新槽 B 启动耗尽重试；
+# 旧槽 A(v10) 已低于下限，绝不能被当作回退项 -> 进入 RECOVERY。
+# 这正是题目描述的漏洞点：旧槽位选择逻辑若忽略 floor 就会引导到受影响版本。
+[manifest]
+floor 10
+max_retries 3
+active A
+pending -
+slot A 10 valid confirmed 0
+slot B 0 unknown empty 0
+
+[events]
+update B 15 14 valid
+boot fail
+boot fail
+boot fail
+# B 耗尽重试后做回退选择：A 因 v10 < floor14 被拒绝 -> RECOVERY
+
+[expect]
+state RECOVERY
+floor 14
+active A
+pending -
+candidate recovery
+slot A 10 confirmed 0
+slot B 15 unbootable 0
