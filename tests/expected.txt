@@ -1,0 +1,39 @@
+===== 构建目标: app =====
+[OK] fix_crypto_verify  (源: src/crypto.cpp, 修复摘要: dnew_crypto)
+    结论: 提供对象 build/app/crypto.o 的源摘要与修复修订一致
+    依据记录: FIX:F1 SYM:S1 CU:CU1
+[STALE_OBJECT] fix_net_reconnect  (源: src/net.cpp, 修复摘要: dnew_net)
+    结论: 提供对象 build/app/net_old.o 编译自旧修订（摘要 dold_net，期望 dnew_net），发布包仍打包旧对象
+    结论: 归档 libnet.a 的同名成员 net.o 存在新对象 build/app/net_new.o，但链接选中了旧对象（同名成员覆盖）
+    依据记录: FIX:F2 SYM:S2 CU:CU2 AR:A1 AR:A2 CU:CU3
+    处置: 清理缓存对象 build/app/net_old.o 并重建目标 app
+[OK] fix_json_parse  (源: src/json.cpp, 修复摘要: dnew_json)
+    结论: 提供对象 build/app/json.o 的源摘要与修复修订一致
+    依据记录: FIX:F3 SYM:S3 CU:CU4
+[OK] fix_json_parse_alias  (源: src/json.cpp, 修复摘要: dnew_json)
+    结论: 提供对象 build/app/json.o 的源摘要与修复修订一致
+    依据记录: FIX:F3 SYM:S4 CU:CU4
+[OK] fix_util_clamp  (源: src/util.cpp, 修复摘要: dnew_util)
+    结论: 符号由对象 build/app/unity_util.o 提供（对象名与源文件不对应，可能为优化后改由另一对象提供或合并编译产物），其源摘要与修复修订一致
+    依据记录: FIX:F4 SYM:S5 CU:CU5
+[AMBIGUOUS] fix_log_redact  (源: src/log.cpp, 修复摘要: dnew_log)
+    结论: 链接记录给出多个不同的提供对象（build/app/log_a.o, build/app/log_b.o），来源无法唯一确认
+    依据记录: FIX:F5 SYM:S7 SYM:S8
+    处置: 消除重复归属记录后复查目标 app
+
+===== 构建目标: firmware =====
+[MISSING_UNIT] fix_fs_journal  (源: src/fs.cpp, 修复摘要: dnew_fs)
+    结论: 编译单元缺失：目标缺少修复源文件 src/fs.cpp 的编译记录，修复未参与该目标构建
+    依据记录: FIX:F6
+    处置: 核对构建配置后重新构建目标 firmware
+
+===== 构建目标: tools =====
+[OK] fix_net_reconnect  (源: src/net.cpp, 修复摘要: dnew_net)
+    结论: 符号由对象 build/tools/net_new.o 提供（对象名与源文件不对应，可能为优化后改由另一对象提供或合并编译产物），其源摘要与修复修订一致
+    依据记录: FIX:F7 SYM:S6 CU:CU6
+
+===== 汇总 =====
+目标 app: OK=4 STALE_OBJECT=1 MISSING_UNIT=0 AMBIGUOUS=1  -> 待处理: 清理缓存对象并重建 补齐记录后复查
+目标 firmware: OK=0 STALE_OBJECT=0 MISSING_UNIT=1 AMBIGUOUS=0  -> 待处理: 重新构建目标
+目标 tools: OK=1 STALE_OBJECT=0 MISSING_UNIT=0 AMBIGUOUS=0
+总体结论: 存在异常，发版前需按上述记录编号定位处理

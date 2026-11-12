@@ -1,0 +1,9 @@
+# 修复源文件摘要清单
+# FIX <id> <目标> <源文件> <修复后摘要> <符号1,符号2,...>
+FIX F1 app      src/crypto.cpp dnew_crypto fix_crypto_verify
+FIX F2 app      src/net.cpp    dnew_net    fix_net_reconnect
+FIX F3 app      src/json.cpp   dnew_json   fix_json_parse,fix_json_parse_alias
+FIX F4 app      src/util.cpp   dnew_util   fix_util_clamp
+FIX F5 app      src/log.cpp    dnew_log    fix_log_redact
+FIX F6 firmware src/fs.cpp     dnew_fs     fix_fs_journal
+FIX F7 tools    src/net.cpp    dnew_net    fix_net_reconnect

@@ -1,0 +1,9 @@
+# 归档成员
+# AR <id> <目标> <归档> <成员名> <对象文件>
+# 场景：app 与 tools 的 libnet.a 中都有名为 net.o 的成员，但指向不同对象
+AR A1 app   libnet.a net.o        build/app/net_old.o
+AR A2 app   libnet.a net.o        build/app/net_new.o
+AR A3 tools libnet.a net.o        build/tools/net_new.o
+AR A4 app   libapp.a crypto.o     build/app/crypto.o
+AR A5 app   libapp.a json.o       build/app/json.o
+AR A6 app   libapp.a unity_util.o build/app/unity_util.o

@@ -1,0 +1,11 @@
+# 编译单元记录
+# CU <id> <目标> <对象文件> <源文件> <源摘要>
+CU CU1 app      build/app/crypto.o      src/crypto.cpp dnew_crypto
+CU CU2 app      build/app/net_old.o     src/net.cpp    dold_net
+CU CU3 app      build/app/net_new.o     src/net.cpp    dnew_net
+CU CU4 app      build/app/json.o        src/json.cpp   dnew_json
+CU CU5 app      build/app/unity_util.o  src/util.cpp   dnew_util
+CU CU6 tools    build/tools/net_new.o   src/net.cpp    dnew_net
+CU CU7 app      build/app/log_a.o       src/log.cpp    dnew_log
+CU CU8 app      build/app/log_b.o       src/log.cpp    dnew_log
+CU CU9 firmware build/fw/boot.o         src/boot.cpp   d_boot

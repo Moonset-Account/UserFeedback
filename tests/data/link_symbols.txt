@@ -1,0 +1,10 @@
+# 链接符号归属记录
+# SYM <id> <目标> <符号> <提供对象>
+SYM S1 app   fix_crypto_verify     build/app/crypto.o
+SYM S2 app   fix_net_reconnect     build/app/net_old.o
+SYM S3 app   fix_json_parse        build/app/json.o
+SYM S4 app   fix_json_parse_alias  build/app/json.o
+SYM S5 app   fix_util_clamp        build/app/unity_util.o
+SYM S6 tools fix_net_reconnect     build/tools/net_new.o
+SYM S7 app   fix_log_redact        build/app/log_a.o
+SYM S8 app   fix_log_redact        build/app/log_b.o
