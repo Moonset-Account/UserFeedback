@@ -1,0 +1,40 @@
+{
+  "version": "v2",
+  "results": {
+    "C1": {
+      "status": "ok",
+      "duration_ms": 120,
+      "alerts": [
+        {"alert_id": "S1", "family": "sqli", "location": "src/a.py:10"},
+        {"alert_id": "S2", "family": "sqli", "location": "src/a.py:42"}
+      ]
+    },
+    "C2": {
+      "status": "ok",
+      "duration_ms": 120,
+      "alerts": []
+    },
+    "C3": {
+      "status": "ok",
+      "duration_ms": 120,
+      "alerts": []
+    },
+    "C4": {
+      "status": "ok",
+      "duration_ms": 120,
+      "alerts": []
+    },
+    "C5": {
+      "status": "timeout",
+      "duration_ms": null,
+      "alerts": []
+    },
+    "C6": {
+      "status": "ok",
+      "duration_ms": 120,
+      "alerts": [
+        {"alert_id": "S3", "family": "cmdi", "location": "bin/d.sh:5"}
+      ]
+    }
+  }
+}

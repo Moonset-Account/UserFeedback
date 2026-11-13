@@ -1,0 +1,10 @@
+{
+  "cases": [
+    {"case_id": "C1", "difficulty": "normal"},
+    {"case_id": "C2", "difficulty": "normal"},
+    {"case_id": "C3", "difficulty": "normal"},
+    {"case_id": "C4", "difficulty": "normal"},
+    {"case_id": "C5", "difficulty": "hard"},
+    {"case_id": "C6", "difficulty": "normal"}
+  ]
+}

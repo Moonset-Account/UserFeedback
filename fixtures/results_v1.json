@@ -1,0 +1,48 @@
+{
+  "version": "v1",
+  "results": {
+    "C1": {
+      "status": "ok",
+      "duration_ms": 100,
+      "alerts": [
+        {"alert_id": "R1", "family": "sqli", "location": "src/a.py:10"}
+      ]
+    },
+    "C2": {
+      "status": "ok",
+      "duration_ms": 100,
+      "alerts": [
+        {"alert_id": "R2", "family": "sqli", "location": "src/z.py:1"}
+      ]
+    },
+    "C3": {
+      "status": "ok",
+      "duration_ms": 100,
+      "alerts": [
+        {"alert_id": "R3", "family": "xss", "location": "web/b.js:7"}
+      ]
+    },
+    "C4": {
+      "status": "ok",
+      "duration_ms": 100,
+      "alerts": [
+        {"alert_id": "R4", "family": "cmdi", "location": "bin/x.sh:2"}
+      ]
+    },
+    "C5": {
+      "status": "ok",
+      "duration_ms": 100,
+      "alerts": [
+        {"alert_id": "R5", "family": "sqli", "location": "db/c.py:3"}
+      ]
+    },
+    "C6": {
+      "status": "ok",
+      "duration_ms": 100,
+      "alerts": [
+        {"alert_id": "R6", "family": "cmdi", "location": "bin/d.sh:5"},
+        {"alert_id": "R7", "family": "cmdi", "location": "bin/d.sh:5"}
+      ]
+    }
+  }
+}

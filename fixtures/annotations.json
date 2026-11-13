@@ -1,0 +1,18 @@
+{
+  "annotations": {
+    "C1": [
+      {"ann_id": "A1", "family": "sqli", "location": "src/a.py:10"},
+      {"ann_id": "A2", "family": "sqli", "location": "src/a.py:42"}
+    ],
+    "C2": [],
+    "C3": [
+      {"ann_id": "A3", "family": "xss", "location": "web/b.js:7"}
+    ],
+    "C5": [
+      {"ann_id": "A4", "family": "sqli", "location": "db/c.py:3"}
+    ],
+    "C6": [
+      {"ann_id": "A5", "family": "cmdi", "location": "bin/d.sh:5"}
+    ]
+  }
+}
