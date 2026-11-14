@@ -1,0 +1,24 @@
+{
+  "reports": [
+    {"asset_id": "A-001", "batch": "B2026-11", "volume": "C:", "sequence": 5,
+     "observed_at": "2026-11-14T08:00:00Z", "encrypted": true, "key_id": "KEY-A1C-2"},
+    {"asset_id": "A-001", "batch": "B2026-11", "volume": "C:", "sequence": 4,
+     "observed_at": "2026-11-14T07:00:00Z", "encrypted": false, "key_id": "KEY-A1C-1"},
+    {"asset_id": "A-001", "batch": "B2026-10", "volume": "C:", "sequence": 9,
+     "observed_at": "2026-11-14T10:00:00Z", "encrypted": true, "key_id": "KEY-OLD-BATCH"},
+    {"asset_id": "A-001", "batch": "B2026-11", "volume": "D:", "sequence": 2,
+     "observed_at": "2026-11-14T09:00:00Z", "encrypted": false, "key_id": "KEY-A1D-1"},
+    {"asset_id": "A-003", "batch": "B2026-11", "volume": "C:", "sequence": 1,
+     "observed_at": "2026-11-13T10:00:00Z", "encrypted": true, "key_id": "KEY-A3C-1"},
+    {"asset_id": "A-004", "batch": "B2026-11", "volume": "C:", "sequence": 7,
+     "observed_at": "2026-11-14T08:00:00Z", "encrypted": true, "key_id": "KEY-A4C-1"},
+    {"asset_id": "A-004", "batch": "B2026-11", "volume": "C:", "sequence": 7,
+     "observed_at": "2026-11-14T08:00:00Z", "encrypted": false, "key_id": "KEY-A4C-1"},
+    {"asset_id": "A-005", "batch": "B2026-11", "volume": "C:", "sequence": 3,
+     "observed_at": "2026-11-14T10:00:00Z", "encrypted": true, "key_id": "KEY-A5C-NEW"},
+    {"asset_id": "A-006", "batch": "B2026-11", "volume": "C:", "sequence": 1,
+     "observed_at": "2026-11-14T06:00:00Z", "encrypted": true, "key_id": "KEY-A6C-OLD"},
+    {"asset_id": "A-006", "batch": "B2026-11", "volume": "C:", "sequence": 2,
+     "observed_at": "2026-11-14T10:00:00Z", "encrypted": true, "key_id": "KEY-A6C-NEW"}
+  ]
+}

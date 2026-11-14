@@ -1,0 +1,11 @@
+{
+  "batch": "B2026-11",
+  "assets": [
+    {"asset_id": "A-001", "volumes": ["C:", "D:"]},
+    {"asset_id": "A-002", "volumes": ["C:"]},
+    {"asset_id": "A-003", "volumes": ["C:"]},
+    {"asset_id": "A-004", "volumes": ["C:"]},
+    {"asset_id": "A-005", "volumes": ["C:"]},
+    {"asset_id": "A-006", "volumes": ["C:"]}
+  ]
+}

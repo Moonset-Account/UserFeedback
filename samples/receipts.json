@@ -1,0 +1,16 @@
+{
+  "receipts": [
+    {"asset_id": "A-001", "batch": "B2026-11", "volume": "C:", "key_id": "KEY-A1C-2",
+     "received_at": "2026-11-14T08:05:00Z"},
+    {"asset_id": "A-001", "batch": "B2026-11", "volume": "D:", "key_id": "KEY-A1D-1",
+     "received_at": "2026-11-14T09:05:00Z"},
+    {"asset_id": "A-003", "batch": "B2026-11", "volume": "C:", "key_id": "KEY-A3C-1",
+     "received_at": "2026-11-13T10:05:00Z"},
+    {"asset_id": "A-005", "batch": "B2026-11", "volume": "C:", "key_id": "KEY-A5C-OLD",
+     "received_at": "2026-11-10T10:00:00Z"},
+    {"asset_id": "A-006", "batch": "B2026-11", "volume": "C:", "key_id": "KEY-A6C-OLD",
+     "received_at": "2026-11-14T06:05:00Z"},
+    {"asset_id": "A-006", "batch": "B2026-11", "volume": "C:", "key_id": "KEY-A6C-NEW",
+     "received_at": "2026-11-14T10:05:00Z"}
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "check_time": "2026-11-14T12:00:00Z",
+  "volume_cases": [
+    {"case_id": "S1-pass-highest-seq", "asset_id": "A-001", "volume": "C:",
+     "expected_status": "PASS",
+     "note": "seq5 已加密且回执匹配；seq4 未加密被忽略；旧批次 seq9 不参与"},
+    {"case_id": "S2-unencrypted", "asset_id": "A-001", "volume": "D:",
+     "expected_status": "UNENCRYPTED",
+     "note": "最新上报显示未加密"},
+    {"case_id": "S3-missing-report", "asset_id": "A-002", "volume": "C:",
+     "expected_status": "MISSING_REPORT",
+     "note": "当前批次无上报"},
+    {"case_id": "S4-stale-report", "asset_id": "A-003", "volume": "C:",
+     "expected_status": "STALE_REPORT",
+     "note": "观测时间距核对时间 26 小时，超过 24 小时"},
+    {"case_id": "S5-sequence-conflict", "asset_id": "A-004", "volume": "C:",
+     "expected_status": "SEQUENCE_CONFLICT",
+     "note": "同一最高序号 7 的两条上报加密状态冲突，待复核"},
+    {"case_id": "S6-awaiting-escrow-rotation", "asset_id": "A-005", "volume": "C:",
+     "expected_status": "AWAITING_ESCROW",
+     "note": "密钥已轮换为 KEY-A5C-NEW，仅有旧密钥 KEY-A5C-OLD 的回执"},
+    {"case_id": "S7-rotation-recovered", "asset_id": "A-006", "volume": "C:",
+     "expected_status": "PASS",
+     "note": "轮换后收到新密钥 KEY-A6C-NEW 的匹配回执，重新通过"}
+  ],
+  "device_cases": [
+    {"case_id": "D1-device-fail", "asset_id": "A-001", "expected_status": "FAIL",
+     "note": "D: 卷未加密，设备整体不通过"},
+    {"case_id": "D2-device-pass", "asset_id": "A-006", "expected_status": "PASS",
+     "note": "全部卷通过，设备通过"}
+  ]
+}

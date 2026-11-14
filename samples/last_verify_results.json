@@ -1,0 +1,84 @@
+{
+  "check_time": "2026-11-14T12:00:00Z",
+  "cases": [
+    {
+      "case_id": "S1-pass-highest-seq",
+      "level": "volume",
+      "asset_id": "A-001",
+      "volume": "C:",
+      "expected": "PASS",
+      "actual": "PASS",
+      "result": "PASS"
+    },
+    {
+      "case_id": "S2-unencrypted",
+      "level": "volume",
+      "asset_id": "A-001",
+      "volume": "D:",
+      "expected": "UNENCRYPTED",
+      "actual": "UNENCRYPTED",
+      "result": "PASS"
+    },
+    {
+      "case_id": "S3-missing-report",
+      "level": "volume",
+      "asset_id": "A-002",
+      "volume": "C:",
+      "expected": "MISSING_REPORT",
+      "actual": "MISSING_REPORT",
+      "result": "PASS"
+    },
+    {
+      "case_id": "S4-stale-report",
+      "level": "volume",
+      "asset_id": "A-003",
+      "volume": "C:",
+      "expected": "STALE_REPORT",
+      "actual": "STALE_REPORT",
+      "result": "PASS"
+    },
+    {
+      "case_id": "S5-sequence-conflict",
+      "level": "volume",
+      "asset_id": "A-004",
+      "volume": "C:",
+      "expected": "SEQUENCE_CONFLICT",
+      "actual": "SEQUENCE_CONFLICT",
+      "result": "PASS"
+    },
+    {
+      "case_id": "S6-awaiting-escrow-rotation",
+      "level": "volume",
+      "asset_id": "A-005",
+      "volume": "C:",
+      "expected": "AWAITING_ESCROW",
+      "actual": "AWAITING_ESCROW",
+      "result": "PASS"
+    },
+    {
+      "case_id": "S7-rotation-recovered",
+      "level": "volume",
+      "asset_id": "A-006",
+      "volume": "C:",
+      "expected": "PASS",
+      "actual": "PASS",
+      "result": "PASS"
+    },
+    {
+      "case_id": "D1-device-fail",
+      "level": "device",
+      "asset_id": "A-001",
+      "expected": "FAIL",
+      "actual": "FAIL",
+      "result": "PASS"
+    },
+    {
+      "case_id": "D2-device-pass",
+      "level": "device",
+      "asset_id": "A-006",
+      "expected": "PASS",
+      "actual": "PASS",
+      "result": "PASS"
+    }
+  ]
+}
