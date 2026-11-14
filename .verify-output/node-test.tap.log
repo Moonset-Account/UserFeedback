@@ -1,0 +1,168 @@
+TAP version 13
+# Subtest: 豁免审计：基于合成夹具的逐项样例断言（case_id 稳定）
+    # Subtest: CASE-01-valid-exemption
+    ok 1 - CASE-01-valid-exemption
+      ---
+      duration_ms: 0.430958
+      type: 'test'
+      ...
+    # Subtest: CASE-02-same-vuln-different-location
+    ok 2 - CASE-02-same-vuln-different-location
+      ---
+      duration_ms: 0.050083
+      type: 'test'
+      ...
+    # Subtest: CASE-03-rule-version-changed
+    ok 3 - CASE-03-rule-version-changed
+      ---
+      duration_ms: 0.053292
+      type: 'test'
+      ...
+    # Subtest: CASE-04-evidence-withdrawn
+    ok 4 - CASE-04-evidence-withdrawn
+      ---
+      duration_ms: 0.042041
+      type: 'test'
+      ...
+    # Subtest: CASE-05-audit-time-equals-expiry
+    ok 5 - CASE-05-audit-time-equals-expiry
+      ---
+      duration_ms: 0.044542
+      type: 'test'
+      ...
+    # Subtest: CASE-06-exemption-expired
+    ok 6 - CASE-06-exemption-expired
+      ---
+      duration_ms: 0.052209
+      type: 'test'
+      ...
+    # Subtest: CASE-07-evidence-revision-changed
+    ok 7 - CASE-07-evidence-revision-changed
+      ---
+      duration_ms: 0.034041
+      type: 'test'
+      ...
+    # Subtest: CASE-08-rule-version-reconfirmed
+    ok 8 - CASE-08-rule-version-reconfirmed
+      ---
+      duration_ms: 0.039041
+      type: 'test'
+      ...
+    # Subtest: CASE-09-no-exemption-on-record
+    ok 9 - CASE-09-no-exemption-on-record
+      ---
+      duration_ms: 0.55725
+      type: 'test'
+      ...
+    1..9
+ok 1 - 豁免审计：基于合成夹具的逐项样例断言（case_id 稳定）
+  ---
+  duration_ms: 7.26325
+  type: 'test'
+  ...
+# Subtest: CASE-02 细节：漏洞类型相同但位置不同，旧豁免不得隐藏新位置告警
+ok 2 - CASE-02 细节：漏洞类型相同但位置不同，旧豁免不得隐藏新位置告警
+  ---
+  duration_ms: 1.73775
+  type: 'test'
+  ...
+# Subtest: CASE-03 细节：规则版本变化且未重新确认时显式报告失效原因
+ok 3 - CASE-03 细节：规则版本变化且未重新确认时显式报告失效原因
+  ---
+  duration_ms: 0.479625
+  type: 'test'
+  ...
+# Subtest: CASE-04 细节：审查证据被撤回，豁免失去事实基础转人工
+ok 4 - CASE-04 细节：审查证据被撤回，豁免失去事实基础转人工
+  ---
+  duration_ms: 0.409292
+  type: 'test'
+  ...
+# Subtest: CASE-05 边界：核验时间恰好等于 valid_until，豁免仍然有效
+ok 5 - CASE-05 边界：核验时间恰好等于 valid_until，豁免仍然有效
+  ---
+  duration_ms: 0.408208
+  type: 'test'
+  ...
+# Subtest: CASE-07 细节：证据修订号变化即重新打开，即使其他四要素一致
+ok 6 - CASE-07 细节：证据修订号变化即重新打开，即使其他四要素一致
+  ---
+  duration_ms: 0.388459
+  type: 'test'
+  ...
+# Subtest: CASE-08 对照：规则版本变化但已按新版本重新确认，豁免继续沿用
+ok 7 - CASE-08 对照：规则版本变化但已按新版本重新确认，豁免继续沿用
+  ---
+  duration_ms: 1.02525
+  type: 'test'
+  ...
+# Subtest: 三类结果桶完整且汇总计数与明细一致
+ok 8 - 三类结果桶完整且汇总计数与明细一致
+  ---
+  duration_ms: 0.4145
+  type: 'test'
+  ...
+# Subtest: 稳定性：同一输入两次生成的报告字节级一致，且与输入顺序无关
+ok 9 - 稳定性：同一输入两次生成的报告字节级一致，且与输入顺序无关
+  ---
+  duration_ms: 0.8485
+  type: 'test'
+  ...
+# Subtest: 边界补充：豁免尚未到生效时间转人工，不提前隐藏告警
+ok 10 - 边界补充：豁免尚未到生效时间转人工，不提前隐藏告警
+  ---
+  duration_ms: 0.099667
+  type: 'test'
+  ...
+# Subtest: 冲突补充：同一精确范围存在两条豁免时转人工处理
+ok 11 - 冲突补充：同一精确范围存在两条豁免时转人工处理
+  ---
+  duration_ms: 0.080541
+  type: 'test'
+  ...
+# Subtest: 输入校验：缺字段、坏时间、重复 ID、非法证据状态均被拒绝
+ok 12 - 输入校验：缺字段、坏时间、重复 ID、非法证据状态均被拒绝
+  ---
+  duration_ms: 0.983417
+  type: 'test'
+  ...
+# Subtest: CLI-CASE-01：对合成夹具生成完整三类报告，退出码为 0
+ok 13 - CLI-CASE-01：对合成夹具生成完整三类报告，退出码为 0
+  ---
+  duration_ms: 40.917417
+  type: 'test'
+  ...
+# Subtest: CLI-CASE-02：同一输入重复运行，标准输出字节级稳定
+ok 14 - CLI-CASE-02：同一输入重复运行，标准输出字节级稳定
+  ---
+  duration_ms: 68.386708
+  type: 'test'
+  ...
+# Subtest: CLI-CASE-03：--out 写文件与标准输出内容一致
+ok 15 - CLI-CASE-03：--out 写文件与标准输出内容一致
+  ---
+  duration_ms: 71.459334
+  type: 'test'
+  ...
+# Subtest: CLI-CASE-04：缺少必填参数退出码为 2，非法输入退出码为 1
+ok 16 - CLI-CASE-04：缺少必填参数退出码为 2，非法输入退出码为 1
+  ---
+  duration_ms: 68.044
+  type: 'test'
+  ...
+# Subtest: CLI-CASE-05：不读取系统时钟，未传 --at 不会产生静默默认时间
+ok 17 - CLI-CASE-05：不读取系统时钟，未传 --at 不会产生静默默认时间
+  ---
+  duration_ms: 33.561791
+  type: 'test'
+  ...
+1..17
+# tests 26
+# suites 0
+# pass 26
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 337.026916
+

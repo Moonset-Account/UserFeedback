@@ -1,0 +1,493 @@
+{
+  "report_schema": "exemption-audit/v1",
+  "generated_at": "2026-11-14T09:30:00Z",
+  "generated_at_ms": 1794648600000,
+  "summary": {
+    "total": 9,
+    "carried": 3,
+    "reopen": 3,
+    "manual": 3
+  },
+  "results": {
+    "carried": [
+      {
+        "alert_id": "ALRT-001",
+        "project_id": "proj-payments",
+        "rule_id": "RULE-SQLI",
+        "rule_version": "2026.09",
+        "location_id": "src/db/orders.ts:118",
+        "vuln_type": "sql_injection",
+        "evidence_revision": "rev-7f3a",
+        "evidence_status": "active",
+        "decision": "carried",
+        "reason_code": "exemption_valid",
+        "reason": "豁免五要素全部匹配且在有效期内，告警可沿用",
+        "matched_exemptions": [
+          {
+            "exemption_id": "EXM-001",
+            "rule_version": "2026.09",
+            "location_id": "src/db/orders.ts:118",
+            "evidence_revision": "rev-7f3a",
+            "valid_from": "2026-10-01T00:00:00Z",
+            "valid_until": "2026-12-31T23:59:59Z",
+            "reconfirmed_rule_version": null
+          }
+        ],
+        "time_check": {
+          "at_valid_until_boundary": false
+        }
+      },
+      {
+        "alert_id": "ALRT-007",
+        "project_id": "proj-gateway",
+        "rule_id": "RULE-SSRF",
+        "rule_version": "2026.10",
+        "location_id": "src/net/fetch.ts:88",
+        "vuln_type": "ssrf",
+        "evidence_revision": "rev-6b20",
+        "evidence_status": "active",
+        "decision": "carried",
+        "reason_code": "exemption_valid",
+        "reason": "豁免五要素全部匹配且在有效期内，告警可沿用",
+        "matched_exemptions": [
+          {
+            "exemption_id": "EXM-007",
+            "rule_version": "2026.09",
+            "location_id": "src/net/fetch.ts:88",
+            "evidence_revision": "rev-6b20",
+            "valid_from": "2026-10-01T00:00:00Z",
+            "valid_until": "2026-12-31T23:59:59Z",
+            "reconfirmed_rule_version": "2026.10"
+          }
+        ],
+        "time_check": {
+          "at_valid_until_boundary": false
+        }
+      },
+      {
+        "alert_id": "ALRT-008",
+        "project_id": "proj-portal",
+        "rule_id": "RULE-DEPREC",
+        "rule_version": "2026.10",
+        "location_id": "src/ui/legacy.ts:12",
+        "vuln_type": "deprecated_api",
+        "evidence_revision": "rev-1111",
+        "evidence_status": "active",
+        "decision": "carried",
+        "reason_code": "exemption_valid",
+        "reason": "豁免五要素全部匹配且在有效期内，告警可沿用",
+        "matched_exemptions": [
+          {
+            "exemption_id": "EXM-008",
+            "rule_version": "2026.10",
+            "location_id": "src/ui/legacy.ts:12",
+            "evidence_revision": "rev-1111",
+            "valid_from": "2026-09-01T00:00:00Z",
+            "valid_until": "2026-11-14T09:30:00Z",
+            "reconfirmed_rule_version": null
+          }
+        ],
+        "time_check": {
+          "at_valid_until_boundary": true
+        }
+      }
+    ],
+    "reopen": [
+      {
+        "alert_id": "ALRT-002",
+        "project_id": "proj-payments",
+        "rule_id": "RULE-SQLI",
+        "rule_version": "2026.09",
+        "location_id": "src/db/refunds.ts:54",
+        "vuln_type": "sql_injection",
+        "evidence_revision": "rev-2c9d",
+        "evidence_status": "active",
+        "decision": "reopen",
+        "reason_code": "location_mismatch",
+        "reason": "漏洞类型相同但代码位置标识不同，旧豁免不得隐藏新位置的告警，应重新打开",
+        "matched_exemptions": [
+          {
+            "exemption_id": "EXM-001",
+            "rule_version": "2026.09",
+            "location_id": "src/db/orders.ts:118",
+            "evidence_revision": "rev-7f3a",
+            "valid_from": "2026-10-01T00:00:00Z",
+            "valid_until": "2026-12-31T23:59:59Z",
+            "reconfirmed_rule_version": null
+          }
+        ],
+        "scope_check": {
+          "same_project": true,
+          "same_rule": true,
+          "same_location": false
+        }
+      },
+      {
+        "alert_id": "ALRT-006",
+        "project_id": "proj-gateway",
+        "rule_id": "RULE-CMDI",
+        "rule_version": "2026.10",
+        "location_id": "src/job/runner.ts:142",
+        "vuln_type": "command_injection",
+        "evidence_revision": "rev-3e77",
+        "evidence_status": "active",
+        "decision": "reopen",
+        "reason_code": "evidence_revision_changed",
+        "reason": "告警对应的代码证据修订号已变化，旧证据上的豁免失效，应重新打开",
+        "matched_exemptions": [
+          {
+            "exemption_id": "EXM-006",
+            "rule_version": "2026.10",
+            "location_id": "src/job/runner.ts:142",
+            "evidence_revision": "rev-2f00",
+            "valid_from": "2026-10-01T00:00:00Z",
+            "valid_until": "2026-12-31T23:59:59Z",
+            "reconfirmed_rule_version": null
+          }
+        ],
+        "evidence_check": {
+          "exemption_evidence_revision": "rev-2f00",
+          "alert_evidence_revision": "rev-3e77"
+        }
+      },
+      {
+        "alert_id": "ALRT-009",
+        "project_id": "proj-portal",
+        "rule_id": "RULE-HARDCODE",
+        "rule_version": "2026.10",
+        "location_id": "src/config/keys.ts:45",
+        "vuln_type": "hardcoded_secret",
+        "evidence_revision": "rev-8c8c",
+        "evidence_status": "active",
+        "decision": "reopen",
+        "reason_code": "no_matching_exemption",
+        "reason": "没有适用于该项目/规则/位置的豁免记录，告警应进入审核",
+        "matched_exemptions": []
+      }
+    ],
+    "manual": [
+      {
+        "alert_id": "ALRT-003",
+        "project_id": "proj-payments",
+        "rule_id": "RULE-XSS",
+        "rule_version": "2026.11",
+        "location_id": "src/web/checkout.ts:203",
+        "vuln_type": "xss",
+        "evidence_revision": "rev-5b1e",
+        "evidence_status": "active",
+        "decision": "manual",
+        "reason_code": "rule_version_changed_unreconfirmed",
+        "reason": "规则版本已变化且豁免未按新版本重新确认，需要人工处理并显式报告失效原因",
+        "matched_exemptions": [
+          {
+            "exemption_id": "EXM-003",
+            "rule_version": "2026.09",
+            "location_id": "src/web/checkout.ts:203",
+            "evidence_revision": "rev-5b1e",
+            "valid_from": "2026-10-01T00:00:00Z",
+            "valid_until": "2026-12-31T23:59:59Z",
+            "reconfirmed_rule_version": null
+          }
+        ],
+        "rule_version_check": {
+          "exemption_rule_version": "2026.09",
+          "alert_rule_version": "2026.11",
+          "reconfirmed_rule_version": null,
+          "reconfirmed": false
+        }
+      },
+      {
+        "alert_id": "ALRT-004",
+        "project_id": "proj-payments",
+        "rule_id": "RULE-PATHTRAV",
+        "rule_version": "2026.10",
+        "location_id": "src/fs/export.ts:77",
+        "vuln_type": "path_traversal",
+        "evidence_revision": "rev-9aa0",
+        "evidence_status": "withdrawn",
+        "decision": "manual",
+        "reason_code": "evidence_withdrawn",
+        "reason": "审查所依据的证据已被撤回，豁免失去事实基础，需要人工处理",
+        "matched_exemptions": [
+          {
+            "exemption_id": "EXM-004",
+            "rule_version": "2026.10",
+            "location_id": "src/fs/export.ts:77",
+            "evidence_revision": "rev-9aa0",
+            "valid_from": "2026-10-15T00:00:00Z",
+            "valid_until": "2026-12-15T23:59:59Z",
+            "reconfirmed_rule_version": null
+          }
+        ],
+        "evidence_check": {
+          "status": "withdrawn"
+        }
+      },
+      {
+        "alert_id": "ALRT-005",
+        "project_id": "proj-gateway",
+        "rule_id": "RULE-CRYPTO",
+        "rule_version": "2026.10",
+        "location_id": "src/crypto/token.ts:31",
+        "vuln_type": "weak_crypto",
+        "evidence_revision": "rev-0d44",
+        "evidence_status": "active",
+        "decision": "manual",
+        "reason_code": "exemption_expired",
+        "reason": "豁免已过有效期且未续期，需要人工处理",
+        "matched_exemptions": [
+          {
+            "exemption_id": "EXM-005",
+            "rule_version": "2026.10",
+            "location_id": "src/crypto/token.ts:31",
+            "evidence_revision": "rev-0d44",
+            "valid_from": "2026-10-01T00:00:00Z",
+            "valid_until": "2026-11-10T00:00:00Z",
+            "reconfirmed_rule_version": null
+          }
+        ],
+        "time_check": {
+          "audit_after_valid_until": true
+        }
+      }
+    ]
+  },
+  "results_flat": [
+    {
+      "alert_id": "ALRT-001",
+      "project_id": "proj-payments",
+      "rule_id": "RULE-SQLI",
+      "rule_version": "2026.09",
+      "location_id": "src/db/orders.ts:118",
+      "vuln_type": "sql_injection",
+      "evidence_revision": "rev-7f3a",
+      "evidence_status": "active",
+      "decision": "carried",
+      "reason_code": "exemption_valid",
+      "reason": "豁免五要素全部匹配且在有效期内，告警可沿用",
+      "matched_exemptions": [
+        {
+          "exemption_id": "EXM-001",
+          "rule_version": "2026.09",
+          "location_id": "src/db/orders.ts:118",
+          "evidence_revision": "rev-7f3a",
+          "valid_from": "2026-10-01T00:00:00Z",
+          "valid_until": "2026-12-31T23:59:59Z",
+          "reconfirmed_rule_version": null
+        }
+      ],
+      "time_check": {
+        "at_valid_until_boundary": false
+      }
+    },
+    {
+      "alert_id": "ALRT-002",
+      "project_id": "proj-payments",
+      "rule_id": "RULE-SQLI",
+      "rule_version": "2026.09",
+      "location_id": "src/db/refunds.ts:54",
+      "vuln_type": "sql_injection",
+      "evidence_revision": "rev-2c9d",
+      "evidence_status": "active",
+      "decision": "reopen",
+      "reason_code": "location_mismatch",
+      "reason": "漏洞类型相同但代码位置标识不同，旧豁免不得隐藏新位置的告警，应重新打开",
+      "matched_exemptions": [
+        {
+          "exemption_id": "EXM-001",
+          "rule_version": "2026.09",
+          "location_id": "src/db/orders.ts:118",
+          "evidence_revision": "rev-7f3a",
+          "valid_from": "2026-10-01T00:00:00Z",
+          "valid_until": "2026-12-31T23:59:59Z",
+          "reconfirmed_rule_version": null
+        }
+      ],
+      "scope_check": {
+        "same_project": true,
+        "same_rule": true,
+        "same_location": false
+      }
+    },
+    {
+      "alert_id": "ALRT-003",
+      "project_id": "proj-payments",
+      "rule_id": "RULE-XSS",
+      "rule_version": "2026.11",
+      "location_id": "src/web/checkout.ts:203",
+      "vuln_type": "xss",
+      "evidence_revision": "rev-5b1e",
+      "evidence_status": "active",
+      "decision": "manual",
+      "reason_code": "rule_version_changed_unreconfirmed",
+      "reason": "规则版本已变化且豁免未按新版本重新确认，需要人工处理并显式报告失效原因",
+      "matched_exemptions": [
+        {
+          "exemption_id": "EXM-003",
+          "rule_version": "2026.09",
+          "location_id": "src/web/checkout.ts:203",
+          "evidence_revision": "rev-5b1e",
+          "valid_from": "2026-10-01T00:00:00Z",
+          "valid_until": "2026-12-31T23:59:59Z",
+          "reconfirmed_rule_version": null
+        }
+      ],
+      "rule_version_check": {
+        "exemption_rule_version": "2026.09",
+        "alert_rule_version": "2026.11",
+        "reconfirmed_rule_version": null,
+        "reconfirmed": false
+      }
+    },
+    {
+      "alert_id": "ALRT-004",
+      "project_id": "proj-payments",
+      "rule_id": "RULE-PATHTRAV",
+      "rule_version": "2026.10",
+      "location_id": "src/fs/export.ts:77",
+      "vuln_type": "path_traversal",
+      "evidence_revision": "rev-9aa0",
+      "evidence_status": "withdrawn",
+      "decision": "manual",
+      "reason_code": "evidence_withdrawn",
+      "reason": "审查所依据的证据已被撤回，豁免失去事实基础，需要人工处理",
+      "matched_exemptions": [
+        {
+          "exemption_id": "EXM-004",
+          "rule_version": "2026.10",
+          "location_id": "src/fs/export.ts:77",
+          "evidence_revision": "rev-9aa0",
+          "valid_from": "2026-10-15T00:00:00Z",
+          "valid_until": "2026-12-15T23:59:59Z",
+          "reconfirmed_rule_version": null
+        }
+      ],
+      "evidence_check": {
+        "status": "withdrawn"
+      }
+    },
+    {
+      "alert_id": "ALRT-005",
+      "project_id": "proj-gateway",
+      "rule_id": "RULE-CRYPTO",
+      "rule_version": "2026.10",
+      "location_id": "src/crypto/token.ts:31",
+      "vuln_type": "weak_crypto",
+      "evidence_revision": "rev-0d44",
+      "evidence_status": "active",
+      "decision": "manual",
+      "reason_code": "exemption_expired",
+      "reason": "豁免已过有效期且未续期，需要人工处理",
+      "matched_exemptions": [
+        {
+          "exemption_id": "EXM-005",
+          "rule_version": "2026.10",
+          "location_id": "src/crypto/token.ts:31",
+          "evidence_revision": "rev-0d44",
+          "valid_from": "2026-10-01T00:00:00Z",
+          "valid_until": "2026-11-10T00:00:00Z",
+          "reconfirmed_rule_version": null
+        }
+      ],
+      "time_check": {
+        "audit_after_valid_until": true
+      }
+    },
+    {
+      "alert_id": "ALRT-006",
+      "project_id": "proj-gateway",
+      "rule_id": "RULE-CMDI",
+      "rule_version": "2026.10",
+      "location_id": "src/job/runner.ts:142",
+      "vuln_type": "command_injection",
+      "evidence_revision": "rev-3e77",
+      "evidence_status": "active",
+      "decision": "reopen",
+      "reason_code": "evidence_revision_changed",
+      "reason": "告警对应的代码证据修订号已变化，旧证据上的豁免失效，应重新打开",
+      "matched_exemptions": [
+        {
+          "exemption_id": "EXM-006",
+          "rule_version": "2026.10",
+          "location_id": "src/job/runner.ts:142",
+          "evidence_revision": "rev-2f00",
+          "valid_from": "2026-10-01T00:00:00Z",
+          "valid_until": "2026-12-31T23:59:59Z",
+          "reconfirmed_rule_version": null
+        }
+      ],
+      "evidence_check": {
+        "exemption_evidence_revision": "rev-2f00",
+        "alert_evidence_revision": "rev-3e77"
+      }
+    },
+    {
+      "alert_id": "ALRT-007",
+      "project_id": "proj-gateway",
+      "rule_id": "RULE-SSRF",
+      "rule_version": "2026.10",
+      "location_id": "src/net/fetch.ts:88",
+      "vuln_type": "ssrf",
+      "evidence_revision": "rev-6b20",
+      "evidence_status": "active",
+      "decision": "carried",
+      "reason_code": "exemption_valid",
+      "reason": "豁免五要素全部匹配且在有效期内，告警可沿用",
+      "matched_exemptions": [
+        {
+          "exemption_id": "EXM-007",
+          "rule_version": "2026.09",
+          "location_id": "src/net/fetch.ts:88",
+          "evidence_revision": "rev-6b20",
+          "valid_from": "2026-10-01T00:00:00Z",
+          "valid_until": "2026-12-31T23:59:59Z",
+          "reconfirmed_rule_version": "2026.10"
+        }
+      ],
+      "time_check": {
+        "at_valid_until_boundary": false
+      }
+    },
+    {
+      "alert_id": "ALRT-008",
+      "project_id": "proj-portal",
+      "rule_id": "RULE-DEPREC",
+      "rule_version": "2026.10",
+      "location_id": "src/ui/legacy.ts:12",
+      "vuln_type": "deprecated_api",
+      "evidence_revision": "rev-1111",
+      "evidence_status": "active",
+      "decision": "carried",
+      "reason_code": "exemption_valid",
+      "reason": "豁免五要素全部匹配且在有效期内，告警可沿用",
+      "matched_exemptions": [
+        {
+          "exemption_id": "EXM-008",
+          "rule_version": "2026.10",
+          "location_id": "src/ui/legacy.ts:12",
+          "evidence_revision": "rev-1111",
+          "valid_from": "2026-09-01T00:00:00Z",
+          "valid_until": "2026-11-14T09:30:00Z",
+          "reconfirmed_rule_version": null
+        }
+      ],
+      "time_check": {
+        "at_valid_until_boundary": true
+      }
+    },
+    {
+      "alert_id": "ALRT-009",
+      "project_id": "proj-portal",
+      "rule_id": "RULE-HARDCODE",
+      "rule_version": "2026.10",
+      "location_id": "src/config/keys.ts:45",
+      "vuln_type": "hardcoded_secret",
+      "evidence_revision": "rev-8c8c",
+      "evidence_status": "active",
+      "decision": "reopen",
+      "reason_code": "no_matching_exemption",
+      "reason": "没有适用于该项目/规则/位置的豁免记录，告警应进入审核",
+      "matched_exemptions": []
+    }
+  ]
+}

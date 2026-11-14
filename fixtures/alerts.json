@@ -1,0 +1,94 @@
+{
+  "alerts": [
+    {
+      "alert_id": "ALRT-001",
+      "project_id": "proj-payments",
+      "rule_id": "RULE-SQLI",
+      "rule_version": "2026.09",
+      "location_id": "src/db/orders.ts:118",
+      "vuln_type": "sql_injection",
+      "evidence_revision": "rev-7f3a",
+      "evidence_status": "active"
+    },
+    {
+      "alert_id": "ALRT-002",
+      "project_id": "proj-payments",
+      "rule_id": "RULE-SQLI",
+      "rule_version": "2026.09",
+      "location_id": "src/db/refunds.ts:54",
+      "vuln_type": "sql_injection",
+      "evidence_revision": "rev-2c9d",
+      "evidence_status": "active"
+    },
+    {
+      "alert_id": "ALRT-003",
+      "project_id": "proj-payments",
+      "rule_id": "RULE-XSS",
+      "rule_version": "2026.11",
+      "location_id": "src/web/checkout.ts:203",
+      "vuln_type": "xss",
+      "evidence_revision": "rev-5b1e",
+      "evidence_status": "active"
+    },
+    {
+      "alert_id": "ALRT-004",
+      "project_id": "proj-payments",
+      "rule_id": "RULE-PATHTRAV",
+      "rule_version": "2026.10",
+      "location_id": "src/fs/export.ts:77",
+      "vuln_type": "path_traversal",
+      "evidence_revision": "rev-9aa0",
+      "evidence_status": "withdrawn"
+    },
+    {
+      "alert_id": "ALRT-005",
+      "project_id": "proj-gateway",
+      "rule_id": "RULE-CRYPTO",
+      "rule_version": "2026.10",
+      "location_id": "src/crypto/token.ts:31",
+      "vuln_type": "weak_crypto",
+      "evidence_revision": "rev-0d44",
+      "evidence_status": "active"
+    },
+    {
+      "alert_id": "ALRT-006",
+      "project_id": "proj-gateway",
+      "rule_id": "RULE-CMDI",
+      "rule_version": "2026.10",
+      "location_id": "src/job/runner.ts:142",
+      "vuln_type": "command_injection",
+      "evidence_revision": "rev-3e77",
+      "evidence_status": "active"
+    },
+    {
+      "alert_id": "ALRT-007",
+      "project_id": "proj-gateway",
+      "rule_id": "RULE-SSRF",
+      "rule_version": "2026.10",
+      "location_id": "src/net/fetch.ts:88",
+      "vuln_type": "ssrf",
+      "evidence_revision": "rev-6b20",
+      "evidence_status": "active"
+    },
+    {
+      "alert_id": "ALRT-008",
+      "project_id": "proj-portal",
+      "rule_id": "RULE-DEPREC",
+      "rule_version": "2026.10",
+      "location_id": "src/ui/legacy.ts:12",
+      "vuln_type": "deprecated_api",
+      "evidence_revision": "rev-1111",
+      "evidence_status": "active"
+    },
+    {
+      "alert_id": "ALRT-009",
+      "project_id": "proj-portal",
+      "rule_id": "RULE-HARDCODE",
+      "rule_version": "2026.10",
+      "location_id": "src/config/keys.ts:45",
+      "vuln_type": "hardcoded_secret",
+      "evidence_revision": "rev-8c8c",
+      "evidence_status": "active"
+    }
+  ]
+}

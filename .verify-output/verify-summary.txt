@@ -1,0 +1,17 @@
+① 使用运行时：/Users/xingyaolei/.nvm/versions/node/v24.15.0/bin/node
+   node v24.15.0
+② 发现测试文件 2 个：tests/audit.test.mjs, tests/cli.test.mjs
+③ 测试执行结束，退出码=0，耗时=378ms，原始 TAP 已保存：.verify-output/node-test.tap.log
+④ TAP 汇总：{"tests":26,"pass":26,"fail":0,"skipped":0,"todo":0}
+   实际执行并通过 26/26 个测试，无跳过无 TODO
+⑤ CLI 冒烟报告已生成：.verify-output/cli-report.json
+   summary={"total":9,"carried":3,"reopen":3,"manual":3}
+   ✔ 三类桶齐备
+   ✔ 汇总计数一致
+   ✔ 有效豁免可沿用
+   ✔ 同类型不同位置重新打开
+   ✔ 规则版本变化转人工
+   ✔ 证据撤回转人工
+   ✔ 到期时刻边界仍沿用
+   ✔ 同一输入重复运行，报告字节级稳定
+⑥ 全部核验通过。

@@ -1,0 +1,90 @@
+{
+  "exemptions": [
+    {
+      "exemption_id": "EXM-001",
+      "project_id": "proj-payments",
+      "rule_id": "RULE-SQLI",
+      "rule_version": "2026.09",
+      "location_id": "src/db/orders.ts:118",
+      "evidence_revision": "rev-7f3a",
+      "valid_from": "2026-10-01T00:00:00Z",
+      "valid_until": "2026-12-31T23:59:59Z",
+      "granted_by": "sec-reviewer-li",
+      "rationale": "参数化查询改造已排期，误报风险已接受"
+    },
+    {
+      "exemption_id": "EXM-003",
+      "project_id": "proj-payments",
+      "rule_id": "RULE-XSS",
+      "rule_version": "2026.09",
+      "location_id": "src/web/checkout.ts:203",
+      "evidence_revision": "rev-5b1e",
+      "valid_from": "2026-10-01T00:00:00Z",
+      "valid_until": "2026-12-31T23:59:59Z",
+      "granted_by": "sec-reviewer-wang",
+      "rationale": "旧规则版本下确认的输出编码豁免",
+      "reconfirmed_rule_version": null
+    },
+    {
+      "exemption_id": "EXM-004",
+      "project_id": "proj-payments",
+      "rule_id": "RULE-PATHTRAV",
+      "rule_version": "2026.10",
+      "location_id": "src/fs/export.ts:77",
+      "evidence_revision": "rev-9aa0",
+      "valid_from": "2026-10-15T00:00:00Z",
+      "valid_until": "2026-12-15T23:59:59Z",
+      "granted_by": "sec-reviewer-chen",
+      "rationale": "证据撤回前批准的路径白名单豁免"
+    },
+    {
+      "exemption_id": "EXM-005",
+      "project_id": "proj-gateway",
+      "rule_id": "RULE-CRYPTO",
+      "rule_version": "2026.10",
+      "location_id": "src/crypto/token.ts:31",
+      "evidence_revision": "rev-0d44",
+      "valid_from": "2026-10-01T00:00:00Z",
+      "valid_until": "2026-11-10T00:00:00Z",
+      "granted_by": "sec-reviewer-zhao",
+      "rationale": "已过期且未续期的豁免"
+    },
+    {
+      "exemption_id": "EXM-006",
+      "project_id": "proj-gateway",
+      "rule_id": "RULE-CMDI",
+      "rule_version": "2026.10",
+      "location_id": "src/job/runner.ts:142",
+      "evidence_revision": "rev-2f00",
+      "valid_from": "2026-10-01T00:00:00Z",
+      "valid_until": "2026-12-31T23:59:59Z",
+      "granted_by": "sec-reviewer-zhao",
+      "rationale": "豁免基于旧证据修订 rev-2f00，告警证据已更新为 rev-3e77"
+    },
+    {
+      "exemption_id": "EXM-007",
+      "project_id": "proj-gateway",
+      "rule_id": "RULE-SSRF",
+      "rule_version": "2026.09",
+      "location_id": "src/net/fetch.ts:88",
+      "evidence_revision": "rev-6b20",
+      "valid_from": "2026-10-01T00:00:00Z",
+      "valid_until": "2026-12-31T23:59:59Z",
+      "granted_by": "sec-reviewer-sun",
+      "rationale": "规则升级后已按新版本重新确认",
+      "reconfirmed_rule_version": "2026.10"
+    },
+    {
+      "exemption_id": "EXM-008",
+      "project_id": "proj-portal",
+      "rule_id": "RULE-DEPREC",
+      "rule_version": "2026.10",
+      "location_id": "src/ui/legacy.ts:12",
+      "evidence_revision": "rev-1111",
+      "valid_from": "2026-09-01T00:00:00Z",
+      "valid_until": "2026-11-14T09:30:00Z",
+      "granted_by": "sec-reviewer-li",
+      "rationale": "边界用豁免：核验时间恰好等于到期时间"
+    }
+  ]
+}
