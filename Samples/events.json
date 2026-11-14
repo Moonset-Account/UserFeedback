@@ -1,0 +1,101 @@
+{
+  "events": [
+    {
+      "case_id": "sample-compliant",
+      "event_type": "authorization",
+      "request_id": "req-7f3a",
+      "stage": 1,
+      "target_classification": "public-api",
+      "policy_version": "v3",
+      "decision_id": "dec-1001",
+      "event_time": "2026-11-14T08:00:00Z",
+      "decision": "approve",
+      "valid_until": "2026-11-14T18:00:00Z"
+    },
+    {
+      "case_id": "sample-compliant",
+      "event_type": "delivery",
+      "request_id": "req-7f3a",
+      "stage": 1,
+      "target_classification": "public-api",
+      "policy_version": "v3",
+      "decision_id": "dec-1001",
+      "event_time": "2026-11-14T09:15:00Z"
+    },
+    {
+      "case_id": "sample-stage-change",
+      "event_type": "authorization",
+      "request_id": "req-9b1c",
+      "stage": 1,
+      "target_classification": "internal-db",
+      "policy_version": "v3",
+      "decision_id": "dec-2002",
+      "event_time": "2026-11-14T08:05:00Z",
+      "decision": "approve",
+      "valid_until": "2026-11-14T20:00:00Z"
+    },
+    {
+      "case_id": "sample-stage-change",
+      "event_type": "delivery",
+      "request_id": "req-9b1c",
+      "stage": 2,
+      "target_classification": "internal-db",
+      "policy_version": "v3",
+      "decision_id": "dec-2002",
+      "event_time": "2026-11-14T10:30:00Z"
+    },
+    {
+      "case_id": "sample-expired",
+      "event_type": "authorization",
+      "request_id": "req-4d8e",
+      "stage": 1,
+      "target_classification": "partner-feed",
+      "policy_version": "v2",
+      "decision_id": "dec-3003",
+      "event_time": "2026-11-14T07:00:00Z",
+      "decision": "approve",
+      "valid_until": "2026-11-14T09:00:00Z"
+    },
+    {
+      "case_id": "sample-expired",
+      "event_type": "delivery",
+      "request_id": "req-4d8e",
+      "stage": 1,
+      "target_classification": "partner-feed",
+      "policy_version": "v2",
+      "decision_id": "dec-3003",
+      "event_time": "2026-11-14T11:45:00Z"
+    },
+    {
+      "case_id": "sample-denied",
+      "event_type": "authorization",
+      "request_id": "req-2a5f",
+      "stage": 1,
+      "target_classification": "payment-core",
+      "policy_version": "v3",
+      "decision_id": "dec-4004",
+      "event_time": "2026-11-14T08:10:00Z",
+      "decision": "deny"
+    },
+    {
+      "case_id": "sample-denied",
+      "event_type": "delivery",
+      "request_id": "req-2a5f",
+      "stage": 1,
+      "target_classification": "payment-core",
+      "policy_version": "v3",
+      "decision_id": "dec-4004",
+      "event_time": "2026-11-14T09:50:00Z"
+    },
+    {
+      "case_id": "sample-missing",
+      "event_type": "delivery",
+      "request_id": "req-6c0b",
+      "stage": 1,
+      "target_classification": "public-api",
+      "policy_version": "v3",
+      "decision_id": "dec-9999",
+      "event_time": "2026-11-14T12:00:00Z"
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+[
+  {
+    "case_id": "ok-only",
+    "event_type": "authorization",
+    "request_id": "req-clean",
+    "stage": 1,
+    "target_classification": "public-api",
+    "policy_version": "v3",
+    "decision_id": "dec-clean",
+    "event_time": "2026-11-14T08:00:00Z",
+    "decision": "approve",
+    "valid_until": "2026-11-14T18:00:00Z"
+  },
+  {
+    "case_id": "ok-only",
+    "event_type": "delivery",
+    "request_id": "req-clean",
+    "stage": 1,
+    "target_classification": "public-api",
+    "policy_version": "v3",
+    "decision_id": "dec-clean",
+    "event_time": "2026-11-14T09:00:00Z"
+  }
+]
