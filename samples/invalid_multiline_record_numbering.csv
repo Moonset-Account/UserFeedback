@@ -1,0 +1,4 @@
+name,email,note
+Alice,alice@example.com,"line1
+line2"
+Bob,not-an-email,x

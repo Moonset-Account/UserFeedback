@@ -1,0 +1,5 @@
+name,email,phone,note
+Alice,alice@example.com,1,ok
+Too,Many,Fields,Here,Oops
+Bob,not-an-email,,
+Carol,carol@example.net,,
