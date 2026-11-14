@@ -1,0 +1,76 @@
+{
+  "sinks": [
+    {
+      "id": "s1",
+      "module": "ui-core",
+      "sink": "innerHTML",
+      "requiredType": "TrustedHTML",
+      "actualPolicy": "ui-sanitize",
+      "location": { "file": "ui-core/src/dom.js", "line": 42 }
+    },
+    {
+      "id": "s2",
+      "module": "vendor",
+      "sink": "script.src",
+      "requiredType": "TrustedScriptURL",
+      "actualPolicy": "url-guard",
+      "location": { "file": "vendor/lib/load.js", "line": 10 }
+    },
+    {
+      "id": "s3",
+      "module": "home-lazy",
+      "sink": "innerHTML",
+      "requiredType": "TrustedHTML",
+      "actualPolicy": "home-inline",
+      "location": { "file": "home-lazy/src/banner.js", "line": 7 }
+    },
+    {
+      "id": "s4",
+      "module": "promo-widget",
+      "sink": "eval",
+      "requiredType": "TrustedScript",
+      "actualPolicy": "legacy-dom",
+      "location": { "file": "promo-widget/src/run.js", "line": 3 }
+    },
+    {
+      "id": "s5",
+      "module": "checkout-lazy",
+      "sink": "innerHTML",
+      "requiredType": "TrustedHTML",
+      "actualPolicy": "ui-sanitize",
+      "location": { "file": "checkout-lazy/src/cart.js", "line": 21 }
+    },
+    {
+      "id": "s6",
+      "module": "pay-widget",
+      "sink": "outerHTML",
+      "requiredType": "TrustedHTML",
+      "actualPolicy": null,
+      "location": { "file": "pay-widget/src/widget.js", "line": 14 }
+    },
+    {
+      "id": "s7",
+      "module": "home-lazy",
+      "sink": "iframe.srcdoc",
+      "requiredType": null,
+      "actualPolicy": "ui-sanitize",
+      "location": { "file": "home-lazy/src/embed.js", "line": 5 }
+    },
+    {
+      "id": "s8",
+      "module": "stats-widget",
+      "sink": "innerHTML",
+      "requiredType": "TrustedHTML",
+      "actualPolicy": "stats-tt",
+      "location": { "file": "stats-widget/src/board.js", "line": 9 }
+    },
+    {
+      "id": "s9",
+      "module": "promo-widget",
+      "sink": "script.src",
+      "requiredType": "TrustedScriptURL",
+      "actualPolicy": "url-guard",
+      "location": { "file": "promo-widget/src/loader.js", "line": 2 }
+    }
+  ]
+}

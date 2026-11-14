@@ -1,0 +1,7 @@
+{
+  "policies": {
+    "ui-sanitize": { "creates": ["TrustedHTML"] },
+    "url-guard": { "creates": ["TrustedScriptURL"] },
+    "legacy-dom": { "creates": ["TrustedHTML", "TrustedScriptURL"] }
+  }
+}

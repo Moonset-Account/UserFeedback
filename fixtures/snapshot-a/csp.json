@@ -1,0 +1,14 @@
+{
+  "entries": {
+    "home": {
+      "mode": "enforce",
+      "requireTrustedTypesForScript": true,
+      "allowedPolicies": ["ui-sanitize", "url-guard", "legacy-dom"]
+    },
+    "checkout": {
+      "mode": "report-only",
+      "requireTrustedTypesForScript": true,
+      "allowedPolicies": ["ui-sanitize", "legacy-dom"]
+    }
+  }
+}

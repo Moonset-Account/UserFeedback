@@ -1,0 +1,6 @@
+{
+  "deps": {
+    "home-lazy": ["promo-widget"],
+    "checkout-lazy": ["pay-widget"]
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "entries": [
+    {
+      "name": "home",
+      "loadPath": "/home",
+      "sharedModules": ["vendor", "ui-core"],
+      "lazyModules": ["home-lazy"]
+    },
+    {
+      "name": "checkout",
+      "loadPath": "/checkout",
+      "sharedModules": ["vendor", "ui-core"],
+      "lazyModules": ["checkout-lazy"]
+    }
+  ]
+}

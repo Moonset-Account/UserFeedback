@@ -1,0 +1,19 @@
+{
+  "entries": {
+    "home": {
+      "mode": "enforce",
+      "requireTrustedTypesForScript": true,
+      "allowedPolicies": ["ui-sanitize", "url-guard", "legacy-dom"]
+    },
+    "checkout": {
+      "mode": "enforce",
+      "requireTrustedTypesForScript": true,
+      "allowedPolicies": ["ui-sanitize"]
+    },
+    "account": {
+      "mode": "enforce",
+      "requireTrustedTypesForScript": true,
+      "allowedPolicies": ["ui-sanitize"]
+    }
+  }
+}
