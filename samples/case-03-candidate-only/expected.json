@@ -1,0 +1,8 @@
+{
+  "case_id": "case-03-candidate-only",
+  "description": "回归通过只跑了候选产物 build-8800，未覆盖实际部署产物 build-8811，继续显示待部署",
+  "decisions": [
+    {"component": "svc-auth", "environment": "prod", "status": "pending_deploy",
+     "missing_count": 0, "decommissioned_count": 0, "new_instance_count": 0}
+  ]
+}

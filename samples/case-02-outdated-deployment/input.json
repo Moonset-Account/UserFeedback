@@ -1,0 +1,35 @@
+{
+  "fix": {
+    "ticket": "SEC-20261114-039",
+    "fixed_at": "2026-11-10T08:00:00Z",
+    "components": [
+      {"name": "svc-auth", "fixed_artifact": "svc-auth:1.4.2:build-8811"}
+    ]
+  },
+  "deployments": {
+    "instances": [
+      {"instance_id": "i-01", "component": "svc-auth", "environment": "prod",
+       "artifact": "svc-auth:1.4.2:build-8811", "machine_id": "m-01",
+       "state": "active", "commissioned_at": "2026-11-09T09:00:00Z"},
+      {"instance_id": "i-02", "component": "svc-auth", "environment": "prod",
+       "artifact": "svc-auth:1.4.1:build-8700", "machine_id": "m-02",
+       "state": "active", "commissioned_at": "2026-10-15T09:00:00Z"}
+    ]
+  },
+  "regression": {
+    "results": [
+      {"check_id": "CHK-AUTH-01", "component": "svc-auth", "env_category": "prod",
+       "artifact": "svc-auth:1.4.1:build-8700", "phase": "pre_fix", "result": "pass",
+       "run_at": "2026-11-09T10:00:00Z"},
+      {"check_id": "CHK-AUTH-01", "component": "svc-auth", "env_category": "prod",
+       "artifact": "svc-auth:1.4.2:build-8811", "phase": "post_fix", "result": "pass",
+       "run_at": "2026-11-11T10:00:00Z"}
+    ]
+  },
+  "machines": {
+    "machines": [
+      {"machine_id": "m-01", "hostname": "auth-web-01", "environment": "prod", "status": "online"},
+      {"machine_id": "m-02", "hostname": "auth-web-02", "environment": "prod", "status": "online"}
+    ]
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "case_id": "case-04-unpaired-checks",
+  "description": "CHK-AUTH-01 缺修复后结果、CHK-AUTH-02 缺修复前基线，无法配对须列出缺项并保持待验证；staging 仅有单边结果同样待验证",
+  "decisions": [
+    {"component": "svc-auth", "environment": "prod", "status": "pending_verify",
+     "missing_count": 2, "decommissioned_count": 0, "new_instance_count": 0},
+    {"component": "svc-auth", "environment": "staging", "status": "pending_verify",
+     "missing_count": 1, "decommissioned_count": 0, "new_instance_count": 0}
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "case_id": "case-02-outdated-deployment",
+  "description": "在役实例 i-02 仍运行旧产物，即使回归配对通过也必须保持待部署",
+  "decisions": [
+    {"component": "svc-auth", "environment": "prod", "status": "pending_deploy",
+     "missing_count": 0, "decommissioned_count": 0, "new_instance_count": 0}
+  ]
+}

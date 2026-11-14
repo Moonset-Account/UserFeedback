@@ -1,0 +1,8 @@
+{
+  "case_id": "case-01-closable",
+  "description": "全部在役实例运行修复产物，修复前后回归同检查同环境配对通过；已下线实例单独统计",
+  "decisions": [
+    {"component": "svc-auth", "environment": "prod", "status": "closable",
+     "missing_count": 0, "decommissioned_count": 1, "new_instance_count": 0}
+  ]
+}

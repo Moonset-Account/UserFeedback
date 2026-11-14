@@ -1,0 +1,10 @@
+{
+  "case_id": "case-05-decommissioned-and-new-instance",
+  "description": "prod：修复后新上线实例 i-07（11-12 上线）晚于最近一次修复后回归（11-11），缺少覆盖证据须待验证；已下线实例单独统计。staging：全部实例已下线，无在役暴露面，可关闭",
+  "decisions": [
+    {"component": "svc-auth", "environment": "prod", "status": "pending_verify",
+     "missing_count": 1, "decommissioned_count": 1, "new_instance_count": 1},
+    {"component": "svc-auth", "environment": "staging", "status": "closable",
+     "missing_count": 0, "decommissioned_count": 1, "new_instance_count": 0}
+  ]
+}
