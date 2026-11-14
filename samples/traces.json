@@ -1,0 +1,10 @@
+{
+  "traces": [
+    {"test_id": "T1", "build": "B2026-11-14", "entry": "E1", "checkpoints": ["CP1", "CP2"]},
+    {"test_id": "T2", "build": "B2026-11-13", "entry": "E2", "checkpoints": ["CP1"]},
+    {"test_id": "T3", "build": "B2026-11-14", "entry": "E99", "checkpoints": ["CP1"]},
+    {"test_id": "T4", "build": "B2026-11-14", "entry": "E4", "checkpoints": ["CP1"]},
+    {"test_id": "T5", "build": "B2026-11-14", "entry": "E3", "checkpoints": ["CP3"]},
+    {"test_id": "T6", "build": "B2026-11-14", "entry": "E1", "checkpoints": ["CP9"]}
+  ]
+}

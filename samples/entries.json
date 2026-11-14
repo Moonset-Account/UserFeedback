@@ -1,0 +1,10 @@
+{
+  "entries": [
+    {"id": "E1", "name": "ingest-api", "module": "auth.api"},
+    {"id": "E2", "name": "ingest-worker", "module": "parser.shared"},
+    {"id": "E3", "name": "notify-hook", "module": "notify.svc"},
+    {"id": "E4", "name": "admin-console", "module": "admin.console"},
+    {"id": "E5", "name": "report-cron", "module": "report.gen"},
+    {"id": "E6", "name": "cache-inspect", "module": "store.cache"}
+  ]
+}

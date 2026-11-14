@@ -1,0 +1,8 @@
+{
+  "build": "B2026-11-14",
+  "checkpoints": [
+    {"id": "CP1", "module": "parser.shared", "description": "shared parser length check added by the patch"},
+    {"id": "CP2", "module": "parser.util", "description": "decode guard added by the patch"},
+    {"id": "CP3", "module": "store.db", "description": "sanitize-before-insert added by the patch"}
+  ]
+}

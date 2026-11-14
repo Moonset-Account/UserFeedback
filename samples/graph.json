@@ -1,0 +1,23 @@
+{
+  "modules": [
+    "auth.api",
+    "auth.core",
+    "parser.shared",
+    "parser.util",
+    "store.db",
+    "store.cache",
+    "notify.svc",
+    "admin.console",
+    "report.gen"
+  ],
+  "edges": [
+    ["auth.api", "auth.core"],
+    ["auth.core", "parser.shared"],
+    ["parser.shared", "parser.util"],
+    ["parser.util", "parser.shared"],
+    ["parser.shared", "store.db"],
+    ["store.db", "store.cache"],
+    ["store.cache", "parser.shared"],
+    ["notify.svc", "parser.shared"]
+  ]
+}
