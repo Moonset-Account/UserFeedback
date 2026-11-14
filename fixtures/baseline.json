@@ -1,0 +1,149 @@
+{
+  "build_id": "base-2026-11-01",
+  "source": "confirmed-baseline-export",
+  "results": [
+    {
+      "sample_name": "attr-quote",
+      "content": "<a href='x'>",
+      "parse_mode": "lenient",
+      "environment": "linux",
+      "attempt": 1,
+      "status": "failed",
+      "failure_category": "parse:unterminated_attribute"
+    },
+    {
+      "sample_name": "nested-comment",
+      "content": "<!-- a <!-- b -->",
+      "parse_mode": "strict",
+      "environment": "linux",
+      "attempt": 1,
+      "status": "passed"
+    },
+    {
+      "sample_name": "nested-comment",
+      "content": "<!-- a <!-- b -->",
+      "parse_mode": "strict",
+      "environment": "linux",
+      "attempt": 2,
+      "status": "failed",
+      "failure_category": "parse:comment_nesting"
+    },
+    {
+      "sample_name": "utf8-bom",
+      "content": "﻿<a/>",
+      "parse_mode": "strict",
+      "environment": "linux",
+      "attempt": 1,
+      "status": "failed",
+      "failure_category": "timeout:30s"
+    },
+    {
+      "sample_name": "crlf-normalize",
+      "content": "a\r\nb",
+      "parse_mode": "lenient",
+      "environment": "linux",
+      "attempt": 1,
+      "status": "failed",
+      "failure_category": "encoding:crlf"
+    },
+    {
+      "sample_name": "catastrophic-regex",
+      "content": "(a+)+$",
+      "parse_mode": "strict",
+      "environment": "linux",
+      "attempt": 1,
+      "status": "failed",
+      "failure_category": "parse:stack_overflow"
+    },
+    {
+      "sample_name": "old-name-sample",
+      "content": "x<y",
+      "parse_mode": "strict",
+      "environment": "linux",
+      "attempt": 1,
+      "status": "passed"
+    },
+    {
+      "sample_name": "skip-me",
+      "content": "z",
+      "parse_mode": "strict",
+      "environment": "linux",
+      "attempt": 1,
+      "status": "skipped"
+    },
+    {
+      "sample_name": "scope-test",
+      "content": "q&r",
+      "parse_mode": "strict",
+      "environment": "linux",
+      "attempt": 1,
+      "status": "failed",
+      "failure_category": "parse:entity"
+    },
+    {
+      "sample_name": "flaky-net",
+      "content": "http://example.invalid/a",
+      "parse_mode": "lenient",
+      "environment": "linux",
+      "attempt": 1,
+      "status": "passed"
+    },
+    {
+      "sample_name": "stable-sample",
+      "content": "<ok\/>",
+      "parse_mode": "strict",
+      "environment": "darwin",
+      "attempt": 1,
+      "status": "passed"
+    },
+    {
+      "sample_name": "stable-sample",
+      "content": "<ok\/>",
+      "parse_mode": "strict",
+      "environment": "darwin",
+      "attempt": 2,
+      "status": "passed"
+    },
+    {
+      "sample_name": "dup-sample",
+      "content": "duplicate-content",
+      "parse_mode": "strict",
+      "environment": "linux",
+      "attempt": 1,
+      "status": "passed"
+    },
+    {
+      "sample_name": "skip-to-fail",
+      "content": "s2f-content",
+      "parse_mode": "strict",
+      "environment": "linux",
+      "attempt": 1,
+      "status": "skipped"
+    },
+    {
+      "sample_name": "latency-probe",
+      "content": "slow-content",
+      "parse_mode": "lenient",
+      "environment": "linux",
+      "attempt": 1,
+      "status": "passed"
+    },
+    {
+      "sample_name": "removed-sample",
+      "content": "removed-content",
+      "parse_mode": "strict",
+      "environment": "linux",
+      "attempt": 1,
+      "status": "passed"
+    },
+    {
+      "sample_name": "mixed-timeout",
+      "content": "mixed-content",
+      "parse_mode": "lenient",
+      "environment": "linux",
+      "attempt": 1,
+      "status": "failed",
+      "failure_category": "timeout:30s"
+    }
+  ]
+}
