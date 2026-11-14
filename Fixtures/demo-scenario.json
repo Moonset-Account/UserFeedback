@@ -1,0 +1,25 @@
+{
+  "periodLength": 1000,
+  "timeout": 300,
+  "tenants": [
+    { "tenantID": "alpha", "quota": 2 },
+    { "tenantID": "beta", "quota": 2 }
+  ],
+  "events": [
+    { "tenantID": "alpha", "sequence": 1, "requestID": "A-1", "kind": "reserve", "clock": 10 },
+    { "tenantID": "alpha", "sequence": 2, "requestID": "A-2", "kind": "reserve", "clock": 20 },
+    { "tenantID": "alpha", "sequence": 3, "requestID": "A-3", "kind": "reserve", "clock": 30 },
+    { "tenantID": "beta", "sequence": 4, "requestID": "B-1", "kind": "reserve", "clock": 40 },
+    { "tenantID": "beta", "sequence": 5, "requestID": "B-2", "kind": "reserve", "clock": 50 },
+    { "tenantID": "alpha", "sequence": 6, "requestID": "A-1", "kind": "confirm", "clock": 60 },
+    { "tenantID": "beta", "sequence": 7, "requestID": "B-1", "kind": "release", "clock": 70 },
+    { "tenantID": "beta", "sequence": 8, "requestID": "B-1", "kind": "release", "clock": 80 },
+    { "tenantID": "alpha", "sequence": 9, "requestID": "A-1", "kind": "release", "clock": 90 },
+    { "tenantID": "alpha", "sequence": 10, "requestID": "A-1", "kind": "confirm", "clock": 100 },
+    { "tenantID": "alpha", "sequence": 11, "requestID": "A-4", "kind": "reserve", "clock": 1050 },
+    { "tenantID": "alpha", "sequence": 12, "requestID": "A-2", "kind": "confirm", "clock": 1100 },
+    { "tenantID": "alpha", "sequence": 13, "requestID": "A-2", "kind": "release", "clock": 1110 },
+    { "tenantID": "alpha", "sequence": 14, "requestID": "A-5", "kind": "reserve", "clock": 1120 },
+    { "tenantID": "alpha", "sequence": 15, "requestID": "A-5", "kind": "reserve", "clock": 1130 }
+  ]
+}

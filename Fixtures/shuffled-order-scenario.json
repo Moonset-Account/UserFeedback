@@ -1,0 +1,16 @@
+{
+  "periodLength": 100,
+  "timeout": 250,
+  "tenants": [
+    { "tenantID": "alpha", "quota": 1 },
+    { "tenantID": "beta", "quota": 1 }
+  ],
+  "events": [
+    { "tenantID": "alpha", "sequence": 2, "requestID": "A-2", "kind": "reserve", "clock": 200 },
+    { "tenantID": "beta", "sequence": 1, "requestID": "B-1", "kind": "reserve", "clock": 50 },
+    { "tenantID": "alpha", "sequence": 3, "requestID": "A-2", "kind": "confirm", "clock": 210 },
+    { "tenantID": "beta", "sequence": 4, "requestID": "B-1", "kind": "release", "clock": 220 },
+    { "tenantID": "alpha", "sequence": 5, "requestID": "A-3", "kind": "reserve", "clock": 480 },
+    { "tenantID": "alpha", "sequence": 6, "requestID": "A-3", "kind": "confirm", "clock": 490 }
+  ]
+}
