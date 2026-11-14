@@ -1,0 +1,109 @@
+{
+  "comment": "试算样例。input.name 中的 {idna:标签} 会在核验时展开为该标签的 punycode(标准库 idna 编解码器),用于演示国际化域名的 ASCII 表示。expected 只列出会被逐字段比对的字段。",
+  "cases": [
+    {
+      "case_id": "case-override-branch",
+      "comment": "同名后缀:bj-01 的分支专属记录覆盖全局记录",
+      "input": {"branch": "bj-01", "name": "www.corp.example.com"},
+      "expected": {
+        "status": "ok",
+        "normalized": "www.corp.example.com",
+        "matched_suffix": "corp.example.com",
+        "rule_source": "branch",
+        "resolver_id": "internal-bj",
+        "forwarded_to_public": false
+      }
+    },
+    {
+      "case_id": "case-global-suffix-other-branch",
+      "comment": "无分支记录的 sh-02 仍走全局记录",
+      "input": {"branch": "sh-02", "name": "www.corp.example.com"},
+      "expected": {
+        "status": "ok",
+        "normalized": "www.corp.example.com",
+        "matched_suffix": "corp.example.com",
+        "rule_source": "global",
+        "resolver_id": "internal-corp",
+        "forwarded_to_public": false
+      }
+    },
+    {
+      "case_id": "case-longest-suffix",
+      "comment": "最长后缀优先:hr.corp.example.com 胜过 corp.example.com(即使后者被分支覆盖)",
+      "input": {"branch": "bj-01", "name": "app.hr.corp.example.com"},
+      "expected": {
+        "status": "ok",
+        "normalized": "app.hr.corp.example.com",
+        "matched_suffix": "hr.corp.example.com",
+        "rule_source": "global",
+        "resolver_id": "internal-corp",
+        "forwarded_to_public": false
+      }
+    },
+    {
+      "case_id": "case-unrelated-default-egress",
+      "comment": "无关后缀走默认出口(公共解析器)",
+      "input": {"branch": "bj-01", "name": "www.public-site.net"},
+      "expected": {
+        "status": "ok",
+        "normalized": "www.public-site.net",
+        "matched_suffix": null,
+        "rule_source": "default",
+        "resolver_id": "public-default",
+        "forwarded_to_public": true
+      }
+    },
+    {
+      "case_id": "case-internal-disabled-no-public",
+      "comment": "内网解析器停用:返回内部解析失败,查询不得转给公共解析器",
+      "input": {"branch": "sh-02", "name": "db.legacy.example.com"},
+      "expected": {
+        "status": "internal_failure",
+        "normalized": "db.legacy.example.com",
+        "matched_suffix": "legacy.example.com",
+        "rule_source": "global",
+        "resolver_id": "internal-legacy",
+        "forwarded_to_public": false
+      }
+    },
+    {
+      "case_id": "case-trailing-dot-and-case",
+      "comment": "去掉末尾根点、忽略大小写后仍命中分支覆盖记录",
+      "input": {"branch": "bj-01", "name": "WWW.Corp.Example.Com."},
+      "expected": {
+        "status": "ok",
+        "normalized": "www.corp.example.com",
+        "matched_suffix": "corp.example.com",
+        "rule_source": "branch",
+        "resolver_id": "internal-bj",
+        "forwarded_to_public": false
+      }
+    },
+    {
+      "case_id": "case-idn-unicode",
+      "comment": "国际化域名(Unicode 形式)命中内部后缀",
+      "input": {"branch": "sh-02", "name": "mail.内部.example"},
+      "expected": {
+        "status": "ok",
+        "normalized": "mail.内部.example",
+        "matched_suffix": "内部.example",
+        "rule_source": "global",
+        "resolver_id": "internal-corp",
+        "forwarded_to_public": false
+      }
+    },
+    {
+      "case_id": "case-idn-punycode",
+      "comment": "同一国际化域名的 ASCII(punycode)表示与 Unicode 后缀匹配",
+      "input": {"branch": "sh-02", "name": "mail.{idna:内部}.example"},
+      "expected": {
+        "status": "ok",
+        "normalized": "mail.内部.example",
+        "matched_suffix": "内部.example",
+        "rule_source": "global",
+        "resolver_id": "internal-corp",
+        "forwarded_to_public": false
+      }
+    }
+  ]
+}

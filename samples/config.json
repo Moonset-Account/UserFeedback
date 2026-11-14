@@ -1,0 +1,20 @@
+{
+  "branches": [
+    {"id": "bj-01", "name": "北京一分支"},
+    {"id": "sh-02", "name": "上海二分支"}
+  ],
+  "resolvers": [
+    {"id": "internal-corp",   "type": "internal", "address": "10.1.0.53",    "enabled": true},
+    {"id": "internal-bj",     "type": "internal", "address": "10.2.0.53",    "enabled": true},
+    {"id": "internal-legacy", "type": "internal", "address": "10.9.0.53",    "enabled": false},
+    {"id": "public-default",  "type": "public",   "address": "203.0.113.53", "enabled": true}
+  ],
+  "suffix_rules": [
+    {"suffix": "corp.example.com",    "resolver": "internal-corp"},
+    {"suffix": "corp.example.com",    "resolver": "internal-bj", "branch": "bj-01"},
+    {"suffix": "hr.corp.example.com", "resolver": "internal-corp"},
+    {"suffix": "legacy.example.com",  "resolver": "internal-legacy"},
+    {"suffix": "内部.example",        "resolver": "internal-corp"}
+  ],
+  "default_resolver": "public-default"
+}
