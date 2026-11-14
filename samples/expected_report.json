@@ -1,0 +1,65 @@
+{
+  "groups": [
+    {
+      "archive_extras": [
+        {
+          "digest": "sha256:c009",
+          "seq": 9,
+          "status": "persisted"
+        }
+      ],
+      "digest_mismatches": [
+        {
+          "archive_digest": "sha256:c003-corrupted",
+          "archive_status": "persisted",
+          "collection_digest": "sha256:c003",
+          "seq": 3
+        }
+      ],
+      "gaps": [
+        {
+          "end": 5,
+          "start": 4
+        },
+        {
+          "end": 7,
+          "start": 7
+        }
+      ],
+      "retransmit_plan": [
+        {
+          "digest": "sha256:c003",
+          "reason": "digest_mismatch",
+          "seq": 3,
+          "shard": "shard-0",
+          "tenant": "tenant-a"
+        },
+        {
+          "digest": "sha256:c004",
+          "reason": "missing",
+          "seq": 4,
+          "shard": "shard-0",
+          "tenant": "tenant-a"
+        },
+        {
+          "digest": "sha256:c005",
+          "reason": "missing",
+          "seq": 5,
+          "shard": "shard-0",
+          "tenant": "tenant-a"
+        },
+        {
+          "digest": "sha256:c007",
+          "reason": "missing",
+          "seq": 7,
+          "shard": "shard-0",
+          "tenant": "tenant-a"
+        }
+      ],
+      "shard": "shard-0",
+      "start_seq": 1,
+      "tenant": "tenant-a",
+      "watermark": 2
+    }
+  ]
+}

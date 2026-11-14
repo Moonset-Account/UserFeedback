@@ -1,0 +1,12 @@
+{
+  "records": [
+    {"tenant": "tenant-a", "shard": "shard-0", "seq": 1, "digest": "sha256:c001", "status": "received"},
+    {"tenant": "tenant-a", "shard": "shard-0", "seq": 2, "digest": "sha256:c002", "status": "received"},
+    {"tenant": "tenant-a", "shard": "shard-0", "seq": 3, "digest": "sha256:c003", "status": "received"},
+    {"tenant": "tenant-a", "shard": "shard-0", "seq": 4, "digest": "sha256:c004", "status": "received"},
+    {"tenant": "tenant-a", "shard": "shard-0", "seq": 5, "digest": "sha256:c005", "status": "received"},
+    {"tenant": "tenant-a", "shard": "shard-0", "seq": 6, "digest": "sha256:c006", "status": "received"},
+    {"tenant": "tenant-a", "shard": "shard-0", "seq": 7, "digest": "sha256:c007", "status": "received"},
+    {"tenant": "tenant-a", "shard": "shard-0", "seq": 8, "digest": "sha256:c008", "status": "received"}
+  ]
+}
