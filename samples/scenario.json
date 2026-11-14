@@ -1,0 +1,24 @@
+{
+  "description": "样例链路：受管复制 -> 个人粘贴(确认) -> 切换窗口(重新判断) -> 剪贴板变化(降级)",
+  "steps": [
+    {"op": "copy", "workspace": "managed", "kind": "text",
+     "classification": "confidential", "payload": "Q3 roadmap (confidential)"},
+    {"op": "focus", "workspace": "personal"},
+    {"op": "answer", "value": true},
+    {"op": "paste"},
+    {"op": "focus", "workspace": "personal-notes"},
+    {"op": "answer", "value": false},
+    {"op": "paste"},
+    {"op": "copy", "workspace": "managed", "kind": "text",
+     "classification": "internal", "payload": "<b>hello</b>", "text": "hello"},
+    {"op": "focus", "workspace": "personal"},
+    {"op": "paste"},
+    {"op": "copy", "workspace": "managed", "kind": "image",
+     "classification": "internal", "payload": "<png-bytes>"},
+    {"op": "answer", "value": true},
+    {"op": "paste"},
+    {"op": "copy", "workspace": "managed", "kind": "text",
+     "classification": "secret", "payload": "root-credentials"},
+    {"op": "paste"}
+  ]
+}
