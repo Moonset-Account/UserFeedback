@@ -1,0 +1,23 @@
+{
+  "namespace": "payments",
+  "name": "checkout",
+  "defaults": {"runAsUser": 1000},
+  "containers": [
+    {
+      "name": "app",
+      "image": "registry.example.com/checkout@sha256:ccc333",
+      "securityContext": {"privileged": true},
+      "volumeMounts": [{"name": "data", "mountPath": "/data"}]
+    }
+  ],
+  "initContainers": [
+    {
+      "name": "migrate",
+      "image": "registry.example.com/migrate@sha256:ddd444",
+      "securityContext": {"runAsUser": 0}
+    }
+  ],
+  "volumes": [
+    {"name": "data", "hostPath": {"path": "/var/lib/prod-data"}}
+  ]
+}

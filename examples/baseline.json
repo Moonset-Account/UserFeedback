@@ -1,0 +1,9 @@
+{
+  "team": "payments",
+  "rules": {
+    "privileged": {"enforced": true},
+    "run-as-root": {"enforced": true},
+    "host-path": {"enforced": true, "allowedPaths": ["/var/log/readonly-cache"]},
+    "run-identity-unconfirmed": {"enforced": true}
+  }
+}

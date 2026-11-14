@@ -1,0 +1,35 @@
+{
+  "exceptions": [
+    {
+      "id": "EX-2026-001",
+      "namespace": "payments",
+      "workload": "checkout",
+      "container": "app",
+      "imageDigest": "sha256:aaa111",
+      "violation": "privileged",
+      "expiresAt": "2027-01-01T00:00:00Z",
+      "reason": "旧版本临时特权调试，已随镜像轮换失效"
+    },
+    {
+      "id": "EX-2026-002",
+      "namespace": "payments",
+      "workload": "checkout",
+      "container": "app",
+      "imageDigest": "sha256:ccc333",
+      "violation": "host-path",
+      "hostPath": "/var/lib/prod-data",
+      "expiresAt": "2026-12-31T23:59:59Z",
+      "reason": "迁移窗口内允许挂载生产数据目录"
+    },
+    {
+      "id": "EX-2026-003",
+      "namespace": "payments",
+      "workload": "checkout",
+      "container": "migrate",
+      "imageDigest": "sha256:ddd444",
+      "violation": "run-as-root",
+      "expiresAt": "2026-01-01T00:00:00Z",
+      "reason": "已过期的 root 例外，不应再生效"
+    }
+  ]
+}

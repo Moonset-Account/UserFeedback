@@ -1,0 +1,23 @@
+{
+  "namespace": "payments",
+  "name": "checkout",
+  "defaults": {"runAsUser": 1000},
+  "containers": [
+    {
+      "name": "app",
+      "image": "registry.example.com/checkout@sha256:aaa111",
+      "securityContext": {"privileged": false},
+      "volumeMounts": [{"name": "cache", "mountPath": "/cache"}]
+    }
+  ],
+  "initContainers": [
+    {
+      "name": "migrate",
+      "image": "registry.example.com/migrate@sha256:bbb222",
+      "securityContext": {"runAsUser": 1000}
+    }
+  ],
+  "volumes": [
+    {"name": "cache", "hostPath": {"path": "/var/log/readonly-cache/checkout"}}
+  ]
+}
