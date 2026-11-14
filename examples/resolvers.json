@@ -1,0 +1,25 @@
+{
+  "contracts": {
+    "Query.node": {"checks": ["require_auth"]},
+    "Query.user": {"checks": ["require_auth"]},
+    "User.ownerEmail": {"checks": ["require_owner_or_admin"]},
+    "Org.ownerEmail": {"checks": []},
+    "User.email": {"checks": ["require_owner_or_admin"]},
+    "Org.leadEmail": {"checks": ["require_org_admin"]},
+    "Node.internalNote": {"checks": ["require_internal_role"]}
+  },
+  "inheritance": [
+    {
+      "interface_field": "Node.internalNote",
+      "implementation": "User",
+      "resolver_inherits": true,
+      "evidence": "ci://resolver-map/12345"
+    },
+    {
+      "interface_field": "Node.internalNote",
+      "implementation": "Org",
+      "resolver_inherits": true,
+      "evidence": null
+    }
+  ]
+}

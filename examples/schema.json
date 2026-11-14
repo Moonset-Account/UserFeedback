@@ -1,0 +1,48 @@
+{
+  "types": {
+    "Query": {
+      "kind": "object",
+      "fields": {
+        "node": {"type": "Node"},
+        "user": {"type": "User"}
+      }
+    },
+    "Node": {
+      "kind": "interface",
+      "possible_types": ["User", "Org"],
+      "fields": {
+        "id": {"type": "ID"},
+        "ownerEmail": {"type": "String", "sensitive": true},
+        "internalNote": {"type": "String", "sensitive": true}
+      }
+    },
+    "User": {
+      "kind": "object",
+      "interfaces": ["Node"],
+      "fields": {
+        "id": {"type": "ID"},
+        "ownerEmail": {"type": "String", "sensitive": true},
+        "internalNote": {"type": "String", "sensitive": true},
+        "email": {"type": "String", "sensitive": true},
+        "profile": {"type": "Profile"}
+      }
+    },
+    "Org": {
+      "kind": "object",
+      "interfaces": ["Node"],
+      "fields": {
+        "id": {"type": "ID"},
+        "ownerEmail": {"type": "String", "sensitive": true},
+        "internalNote": {"type": "String", "sensitive": true},
+        "leadEmail": {"type": "String", "sensitive": true}
+      }
+    },
+    "Profile": {
+      "kind": "object",
+      "fields": {
+        "bio": {"type": "String"},
+        "ssn": {"type": "String", "sensitive": true}
+      }
+    }
+  }
+}

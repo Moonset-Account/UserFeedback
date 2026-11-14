@@ -1,0 +1,48 @@
+{
+  "operations": [
+    {
+      "name": "GetNode",
+      "root_type": "Query",
+      "selections": [
+        {
+          "kind": "field",
+          "name": "node",
+          "selections": [
+            {"kind": "field", "name": "ownerEmail", "alias": "contact"},
+            {"kind": "field", "name": "internalNote"},
+            {"kind": "fragment_spread", "name": "UserExtras"}
+          ]
+        }
+      ]
+    },
+    {
+      "name": "GetUser",
+      "root_type": "Query",
+      "selections": [
+        {
+          "kind": "field",
+          "name": "user",
+          "selections": [
+            {"kind": "field", "name": "email", "alias": "contact"},
+            {
+              "kind": "field",
+              "name": "profile",
+              "selections": [
+                {"kind": "field", "name": "ssn"}
+              ]
+            },
+            {"kind": "fragment_spread", "name": "UserExtras"}
+          ]
+        }
+      ]
+    }
+  ],
+  "fragments": {
+    "UserExtras": {
+      "type_condition": "User",
+      "selections": [
+        {"kind": "field", "name": "ownerEmail"}
+      ]
+    }
+  }
+}
