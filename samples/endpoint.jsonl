@@ -1,0 +1,3 @@
+{"ts": "2026-11-14T01:05:00Z", "host": "ws-01", "process": {"name": "sshd"}, "identity": {"user": "alice"}, "alerts": [{"rule": "r1", "severity": "high", "owner": "alice", "debug": "internal-note"}, {"rule": "r2", "severity": "low", "owner": "carol"}]}
+{"ts": "2026-11-14T01:06:00Z", "host": "ws-02", "process": {"name": "cron"}, "identity": {"user": "dave"}, "alerts": []}
+{"host": "ws-03", "process": {"name": "bash"}, "identity": {"user": "erin"}}

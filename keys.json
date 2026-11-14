@@ -1,0 +1,9 @@
+{
+  "tenant-a": {
+    "v1": "aa10aa10aa10aa10aa10aa10aa10aa10aa10aa10aa10aa10aa10aa10aa10aa10",
+    "v2": "bb20bb20bb20bb20bb20bb20bb20bb20bb20bb20bb20bb20bb20bb20bb20bb20"
+  },
+  "tenant-b": {
+    "v1": "cc30cc30cc30cc30cc30cc30cc30cc30cc30cc30cc30cc30cc30cc30cc30cc30"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "source": "gateway",
+  "keep": ["ts", "action", "src.ip", "dst.ip", "http.host"],
+  "replace": [
+    {"path": "user.name", "purpose": "account"}
+  ],
+  "required": ["ts", "user.name"]
+}

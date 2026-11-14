@@ -1,0 +1,5 @@
+{"ts": "2026-11-14T01:00:00Z", "action": "deny", "src": {"ip": "10.0.0.5"}, "dst": {"ip": "172.16.0.9"}, "http": {"host": "ex1.example"}, "user": {"name": "alice"}, "session_token": "s3cr3t-token"}
+{"ts": "2026-11-14T01:01:00Z", "action": "allow", "src": {"ip": "10.0.0.6"}, "dst": {"ip": "172.16.0.10"}, "http": {"host": "ex2.example"}, "user": {"name": "bob"}}
+{"ts": "2026-11-14T01:02:00Z", "action": "deny", "src": {"ip": "10.0.0.7"}, "dst": {"ip": "172.16.0.11"}, "http": {"host": "ex3.example"}}
+{"ts": "2026-11-14T01:03:00Z", "action": "deny", "src": {"ip": "10.0.0.8"}, "dst": {"ip": "172.16.0.12"}, "http": {"host": "ex4.example"}, "user": {"name": 42}}
+not json at all

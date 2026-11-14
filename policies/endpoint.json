@@ -1,0 +1,9 @@
+{
+  "source": "endpoint",
+  "keep": ["ts", "host", "process.name", "alerts.rule", "alerts.severity"],
+  "replace": [
+    {"path": "identity.user", "purpose": "account"},
+    {"path": "alerts.owner", "purpose": "account"}
+  ],
+  "required": ["ts", "identity.user"]
+}
