@@ -1,0 +1,17 @@
+{
+  "links": [
+    {"id": "LX", "a": "sw1:e1", "b": "sw2:e1"}
+  ],
+  "collectors": [
+    {"id": "C9", "device": "sw9", "healthy": true}
+  ],
+  "mirrors": [
+    {"id": "MX", "source": "sw1:e1", "direction": "egress", "collector": "C9"}
+  ],
+  "forwarding": {
+    "sw1": "s1",
+    "s1": "s2",
+    "s2": "s3",
+    "s3": "sw9"
+  }
+}

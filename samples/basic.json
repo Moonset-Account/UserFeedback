@@ -1,0 +1,33 @@
+{
+  "links": [
+    {"id": "L1", "a": "sw1:eth1", "b": "sw2:eth1"},
+    {"id": "L2", "a": "sw2:eth2", "b": "sw3:eth1"},
+    {"id": "L3", "a": "sw3:eth2", "b": "sw4:eth9"},
+    {"id": "L4", "a": "sw11:eth1", "b": "sw12:eth1"}
+  ],
+  "collectors": [
+    {"id": "C1", "device": "sw9", "healthy": true},
+    {"id": "C2", "device": "sw8", "healthy": true},
+    {"id": "C3", "device": "sw7", "healthy": false, "status": "offline"}
+  ],
+  "mirrors": [
+    {"id": "M1", "source": "sw1:eth1", "direction": "egress", "collector": "C1"},
+    {"id": "M2", "source": "sw2:eth1", "direction": "ingress", "collector": "C1"},
+    {"id": "M3", "source": "sw2:eth2", "direction": "both", "collector": "C2"},
+    {"id": "M4", "source": "sw3:eth1", "direction": "egress", "collector": "C3"},
+    {"id": "M6", "source": "sw3:eth2", "direction": "egress", "collector": "C3"},
+    {"id": "M7", "source": "sw11:eth1", "direction": "egress", "collector": "C1"},
+    {"id": "M8", "source": "sw2:eth1", "direction": "ingress", "collector": "C2"},
+    {"id": "M9", "source": "sw2:eth1", "direction": "egress", "collector": "C2"}
+  ],
+  "forwarding": {
+    "sw1": "sw4",
+    "sw4": "sw5",
+    "sw5": "sw9",
+    "sw2": "sw6",
+    "sw6": "sw8",
+    "sw3": "sw7",
+    "sw11": "sw13",
+    "sw13": "sw11"
+  }
+}
