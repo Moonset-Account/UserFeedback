@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<catalog xmlns="urn:example:catalog:v1">
+  <supplier id="S-900">
+    <name>Overlong Supplier Name That Exceeds The Configured Sixty-Four Character Field Length Limit</name>
+    <email>over@limit.example</email>
+  </supplier>
+</catalog>

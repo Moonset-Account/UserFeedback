@@ -1,0 +1,7 @@
+{
+  "allowed_namespaces": ["urn:example:catalog:v1"],
+  "allowed_fields": ["name", "email", "phone"],
+  "max_depth": 8,
+  "max_nodes": 1000,
+  "max_field_length": 64
+}

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<c:catalog xmlns:c="urn:example:catalog:v1">
+  <c:supplier id="S-001">
+    <c:name>Acme Parts Ltd</c:name>
+    <c:email>sales@acme.example</c:email>
+    <c:phone>+1-555-0100</c:phone>
+  </c:supplier>
+  <x:supplier xmlns:x="urn:example:catalog:v1" id="S-002">
+    <x:name>北京精工部件</x:name>
+    <x:email>sales@bj-seiko.example</x:email>
+  </x:supplier>
+</c:catalog>
