@@ -1,0 +1,74 @@
+{
+  "budgets": {
+    "platform": 10,
+    "data": 8
+  },
+  "start_time": "2026-11-14T09:00:00+00:00",
+  "events": [
+    {
+      "type": "report",
+      "anomaly_id": "A1",
+      "team": "platform",
+      "environment": "staging",
+      "severity": "high",
+      "estimated_impact_points": 6,
+      "exemption_window": null
+    },
+    {
+      "type": "report",
+      "anomaly_id": "A2",
+      "team": "platform",
+      "environment": "production",
+      "severity": "critical",
+      "estimated_impact_points": 99,
+      "exemption_window": null
+    },
+    {
+      "type": "report",
+      "anomaly_id": "A3",
+      "team": "data",
+      "environment": "dev",
+      "severity": "low",
+      "estimated_impact_points": 0,
+      "exemption_window": null,
+      "actions": [
+        {
+          "resource_id": "r-3a",
+          "team": "data",
+          "environment": "dev",
+          "impact_points": 4,
+          "exemption_window": null
+        },
+        {
+          "resource_id": "r-3b",
+          "team": "data",
+          "environment": "dev",
+          "impact_points": 4,
+          "exemption_window": ["2026-11-14T08:00:00+00:00", "2026-11-14T18:00:00+00:00"]
+        }
+      ]
+    },
+    {
+      "type": "report",
+      "anomaly_id": "A1",
+      "note": "duplicate report reuses the original A1 plan"
+    },
+    {
+      "type": "cancel",
+      "anomaly_id": "A1"
+    },
+    {
+      "type": "advance",
+      "hours": 25
+    },
+    {
+      "type": "report",
+      "anomaly_id": "A4",
+      "team": "platform",
+      "environment": "staging",
+      "severity": "medium",
+      "estimated_impact_points": 9,
+      "exemption_window": null
+    }
+  ]
+}

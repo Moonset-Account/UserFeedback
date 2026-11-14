@@ -1,0 +1,223 @@
+{
+  "generated_at_utc": "2026-11-14T06:41:28.906991+00:00",
+  "unittest": {
+    "discovered_cases": 27,
+    "tests_run": 27,
+    "skipped": 0,
+    "executed_non_skipped": 27,
+    "failures": 0,
+    "errors": 0,
+    "successful": true,
+    "runner_output": "test_tc24_builtin_demo_trace (test_cli.ScenarioDemoTests.test_tc24_builtin_demo_trace) ... ok\ntest_tc25_cli_demo_subprocess (test_cli.ScenarioDemoTests.test_tc25_cli_demo_subprocess) ... ok\ntest_tc26_cli_run_scenario_file (test_cli.ScenarioDemoTests.test_tc26_cli_run_scenario_file) ... ok\ntest_tc27_cli_rejects_bad_scenario (test_cli.ScenarioDemoTests.test_tc27_cli_rejects_bad_scenario) ... ok\ntest_tc01_non_prod_locks_budget (test_engine.EngineRuleTests.test_tc01_non_prod_locks_budget) ... ok\ntest_tc02_budget_exceeded_locks_nothing (test_engine.EngineRuleTests.test_tc02_budget_exceeded_locks_nothing) ... ok\ntest_tc03_exact_fit_uses_full_budget (test_engine.EngineRuleTests.test_tc03_exact_fit_uses_full_budget) ... ok\ntest_tc04_production_goes_to_review_only (test_engine.EngineRuleTests.test_tc04_production_goes_to_review_only) ... ok\ntest_tc05_exemption_window_blocks_lock (test_engine.EngineRuleTests.test_tc05_exemption_window_blocks_lock) ... ok\ntest_tc06_exemption_window_boundaries_inclusive (test_engine.EngineRuleTests.test_tc06_exemption_window_boundaries_inclusive) ... ok\ntest_tc07_atomic_group_one_exempt_blocks_all (test_engine.EngineRuleTests.test_tc07_atomic_group_one_exempt_blocks_all) ... ok\ntest_tc08_atomic_group_one_production_review_all (test_engine.EngineRuleTests.test_tc08_atomic_group_one_production_review_all) ... ok\ntest_tc09_atomic_group_over_budget_locks_nothing (test_engine.EngineRuleTests.test_tc09_atomic_group_over_budget_locks_nothing) ... ok\ntest_tc10_atomic_group_locks_together (test_engine.EngineRuleTests.test_tc10_atomic_group_locks_together) ... ok\ntest_tc11_cancel_same_day_releases_quota (test_engine.EngineRuleTests.test_tc11_cancel_same_day_releases_quota) ... ok\ntest_tc12_cancel_unlocked_plan_nothing_held (test_engine.EngineRuleTests.test_tc12_cancel_unlocked_plan_nothing_held) ... ok\ntest_tc13_duplicate_report_reuses_original_plan (test_engine.EngineRuleTests.test_tc13_duplicate_report_reuses_original_plan) ... ok\ntest_tc14_budget_resets_across_days (test_engine.EngineRuleTests.test_tc14_budget_resets_across_days) ... ok\ntest_tc15_cancel_cross_day_keeps_yesterday_closed (test_engine.EngineRuleTests.test_tc15_cancel_cross_day_keeps_yesterday_closed) ... ok\ntest_tc16_multi_team_group_demand_per_team (test_engine.EngineRuleTests.test_tc16_multi_team_group_demand_per_team) ... ok\ntest_tc17_multi_team_one_short_blocks_all (test_engine.EngineRuleTests.test_tc17_multi_team_one_short_blocks_all) ... ok\ntest_tc18_zero_impact_plan (test_engine.EngineRuleTests.test_tc18_zero_impact_plan) ... ok\ntest_tc19_double_cancel_is_idempotent (test_engine.EngineRuleTests.test_tc19_double_cancel_is_idempotent) ... ok\ntest_tc20_input_validation (test_engine.EngineRuleTests.test_tc20_input_validation) ... ok\ntest_tc21_clock_rewind_rejected (test_engine.EngineRuleTests.test_tc21_clock_rewind_rejected) ... ok\ntest_tc22_production_priority_over_exemption (test_engine.EngineRuleTests.test_tc22_production_priority_over_exemption) ... ok\ntest_tc23_budget_snapshot (test_engine.EngineRuleTests.test_tc23_budget_snapshot) ... ok\n\n----------------------------------------------------------------------\nRan 27 tests in 0.408s\n\nOK\n",
+    "failure_details": [],
+    "skipped_details": []
+  },
+  "sample_boundary_checks": [
+    {
+      "case_id": "SC-01",
+      "description": "non-production report locks points within team daily budget",
+      "input": "budget=10, request=6 points, staging",
+      "expected": {
+        "status": "pending_execution",
+        "locked": 6,
+        "remaining": 4
+      },
+      "actual": {
+        "status": "pending_execution",
+        "locked": 6,
+        "remaining": 4
+      },
+      "passed": true,
+      "traceback": null
+    },
+    {
+      "case_id": "SC-02",
+      "description": "exact-fit request consumes 100% of the daily budget",
+      "input": "budget=10, request=10 points",
+      "expected": {
+        "status": "pending_execution",
+        "locked": 10,
+        "remaining": 0
+      },
+      "actual": {
+        "status": "pending_execution",
+        "locked": 10,
+        "remaining": 0
+      },
+      "passed": true,
+      "traceback": null
+    },
+    {
+      "case_id": "SC-03",
+      "description": "request exceeding remaining budget locks zero points",
+      "input": "budget=10, already locked=6, request=5",
+      "expected": {
+        "status": "budget_exceeded",
+        "locked": 0,
+        "remaining": 4
+      },
+      "actual": {
+        "status": "budget_exceeded",
+        "locked": 0,
+        "remaining": 4
+      },
+      "passed": true,
+      "traceback": null
+    },
+    {
+      "case_id": "SC-04",
+      "description": "production resource enters manual review without locking quota",
+      "input": "production, request=99 points, budget=10",
+      "expected": {
+        "status": "pending_review",
+        "locked": 0,
+        "remaining": 10
+      },
+      "actual": {
+        "status": "pending_review",
+        "locked": 0,
+        "remaining": 10
+      },
+      "passed": true,
+      "traceback": null
+    },
+    {
+      "case_id": "SC-05",
+      "description": "report at exemption window end instant is still exempt",
+      "input": "window 08:00..12:00 inclusive, report at 12:00",
+      "expected": {
+        "status": "exempted",
+        "locked": 0
+      },
+      "actual": {
+        "status": "exempted",
+        "locked": 0
+      },
+      "passed": true,
+      "traceback": null
+    },
+    {
+      "case_id": "SC-06",
+      "description": "one exempt action makes the whole atomic group lock nothing",
+      "input": "group [2 pts non-exempt, 3 pts exempt]",
+      "expected": {
+        "status": "exempted",
+        "locked": 0,
+        "remaining": 10
+      },
+      "actual": {
+        "status": "exempted",
+        "locked": 0,
+        "remaining": 10
+      },
+      "passed": true,
+      "traceback": null
+    },
+    {
+      "case_id": "SC-07",
+      "description": "same-day cancellation releases the locked quota",
+      "input": "lock 6 then cancel on 2026-11-14",
+      "expected": {
+        "status": "cancelled",
+        "released": 6,
+        "remaining": 10
+      },
+      "actual": {
+        "status": "cancelled",
+        "released": 6,
+        "remaining": 10
+      },
+      "passed": true,
+      "traceback": null
+    },
+    {
+      "case_id": "SC-08",
+      "description": "daily budget resets after the controllable clock crosses midnight UTC",
+      "input": "day1 locks 10/10, advance 2h to next day, request 7",
+      "expected": {
+        "day": "2026-11-15",
+        "status": "pending_execution",
+        "locked": 7,
+        "remaining": 3
+      },
+      "actual": {
+        "day": "2026-11-15",
+        "status": "pending_execution",
+        "locked": 7,
+        "remaining": 3
+      },
+      "passed": true,
+      "traceback": null
+    },
+    {
+      "case_id": "SC-09",
+      "description": "duplicate anomaly report reuses the original plan",
+      "input": "same anomaly_id reported twice with 6 points each",
+      "expected": {
+        "same_plan": true,
+        "reused": true,
+        "locked": 6,
+        "remaining": 4
+      },
+      "actual": {
+        "same_plan": true,
+        "reused": true,
+        "locked": 6,
+        "remaining": 4
+      },
+      "passed": true,
+      "traceback": null
+    },
+    {
+      "case_id": "SC-10",
+      "description": "zero-impact remediation becomes a pending plan locking zero points",
+      "input": "request=0 points",
+      "expected": {
+        "status": "pending_execution",
+        "locked": 0,
+        "remaining": 10
+      },
+      "actual": {
+        "status": "pending_execution",
+        "locked": 0,
+        "remaining": 10
+      },
+      "passed": true,
+      "traceback": null
+    },
+    {
+      "case_id": "SC-11",
+      "description": "built-in demo reaches the expected final state for all 7 anomalies",
+      "input": "11-event built-in demo scenario",
+      "expected": {
+        "A1": "cancelled",
+        "A2": "budget_exceeded",
+        "A3": "pending_review",
+        "A4": "exempted",
+        "A5": "pending_execution",
+        "A6": "cancelled",
+        "A7": "pending_execution"
+      },
+      "actual": {
+        "A1": "cancelled",
+        "A2": "budget_exceeded",
+        "A3": "pending_review",
+        "A4": "exempted",
+        "A5": "pending_execution",
+        "A6": "cancelled",
+        "A7": "pending_execution"
+      },
+      "passed": true,
+      "traceback": null
+    },
+    {
+      "case_id": "SC-12",
+      "description": "negative impact points are rejected as invalid input",
+      "input": "impact_points=-1",
+      "expected": "ValueError",
+      "actual": "ValueError",
+      "passed": true,
+      "traceback": null
+    }
+  ]
+}
