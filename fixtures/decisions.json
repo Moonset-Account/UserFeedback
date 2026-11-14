@@ -1,0 +1,22 @@
+{
+  "decisions": [
+    { "case_id": "case_grace_coexist_old", "instance_id": "verifier-1", "cache_version": 2, "decided_at": 6000, "issuer_id": "issuer-a", "kid": "a-old", "result": "accept" },
+    { "case_id": "case_grace_coexist_new", "instance_id": "verifier-1", "cache_version": 2, "decided_at": 6000, "issuer_id": "issuer-a", "kid": "a-new", "result": "accept" },
+    { "case_id": "case_false_reject_stale_cache", "instance_id": "verifier-1", "cache_version": 1, "decided_at": 5050, "issuer_id": "issuer-a", "kid": "a-new", "result": "reject" },
+    { "case_id": "case_grace_boundary_last", "instance_id": "verifier-1", "cache_version": 3, "decided_at": 6999, "issuer_id": "issuer-a", "kid": "a-old", "result": "accept" },
+    { "case_id": "case_grace_boundary_end", "instance_id": "verifier-1", "cache_version": 3, "decided_at": 7000, "issuer_id": "issuer-a", "kid": "a-old", "result": "reject" },
+    { "case_id": "case_false_reject_grace", "instance_id": "verifier-1", "cache_version": 3, "decided_at": 6950, "issuer_id": "issuer-a", "kid": "a-old", "result": "reject" },
+    { "case_id": "case_overtrust_after_retire", "instance_id": "verifier-1", "cache_version": 2, "decided_at": 7500, "issuer_id": "issuer-a", "kid": "a-old", "result": "accept" },
+    { "case_id": "case_cache_recovery_reject", "instance_id": "verifier-1", "cache_version": 3, "decided_at": 7200, "issuer_id": "issuer-a", "kid": "a-old", "result": "reject" },
+    { "case_id": "case_cache_recovery_accept", "instance_id": "verifier-1", "cache_version": 3, "decided_at": 7200, "issuer_id": "issuer-a", "kid": "a-new", "result": "accept" },
+    { "case_id": "case_out_of_order_stale", "instance_id": "verifier-2", "cache_version": 1, "decided_at": 5300, "issuer_id": "issuer-a", "kid": "a-new", "result": "reject" },
+    { "case_id": "case_missing_snapshot", "instance_id": "verifier-3", "cache_version": 2, "decided_at": 6000, "issuer_id": "issuer-a", "kid": "a-old", "result": "reject" },
+    { "case_id": "case_xiss_ok_a", "instance_id": "verifier-4", "cache_version": 1, "decided_at": 3600, "issuer_id": "issuer-a", "kid": "shared-kid", "result": "accept" },
+    { "case_id": "case_xiss_false_reject_b", "instance_id": "verifier-4", "cache_version": 1, "decided_at": 3600, "issuer_id": "issuer-b", "kid": "shared-kid", "result": "reject" },
+    { "case_id": "case_xiss_overtrust_b", "instance_id": "verifier-4", "cache_version": 1, "decided_at": 3600, "issuer_id": "issuer-b", "kid": "a-old", "result": "accept" },
+    { "case_id": "case_zero_grace_boundary_last", "instance_id": "verifier-4", "cache_version": 1, "decided_at": 3999, "issuer_id": "issuer-b", "kid": "b-only", "result": "accept" },
+    { "case_id": "case_zero_grace_boundary_end", "instance_id": "verifier-4", "cache_version": 1, "decided_at": 4000, "issuer_id": "issuer-b", "kid": "b-only", "result": "reject" },
+    { "case_id": "case_sched_anomaly_overtrust", "instance_id": "verifier-5", "cache_version": 1, "decided_at": 1500, "issuer_id": "issuer-c", "kid": "c-bad", "result": "accept" },
+    { "case_id": "case_false_reject_publish_config", "instance_id": "verifier-5", "cache_version": 1, "decided_at": 2000, "issuer_id": "issuer-d", "kid": "d-1", "result": "reject" }
+  ]
+}

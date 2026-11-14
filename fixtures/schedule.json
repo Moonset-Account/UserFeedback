@@ -1,0 +1,31 @@
+{
+  "issuers": [
+    {
+      "issuer_id": "issuer-a",
+      "keys": [
+        { "kid": "a-old", "published_at": 1000, "retired_at": 5000, "grace_ms": 2000 },
+        { "kid": "a-new", "published_at": 5000, "retired_at": null, "grace_ms": 0 },
+        { "kid": "shared-kid", "published_at": 2000, "retired_at": null, "grace_ms": 0 }
+      ]
+    },
+    {
+      "issuer_id": "issuer-b",
+      "keys": [
+        { "kid": "shared-kid", "published_at": 3000, "retired_at": null, "grace_ms": 0 },
+        { "kid": "b-only", "published_at": 1000, "retired_at": 4000, "grace_ms": 0 }
+      ]
+    },
+    {
+      "issuer_id": "issuer-c",
+      "keys": [
+        { "kid": "c-bad", "published_at": 1000, "retired_at": 800, "grace_ms": 100 }
+      ]
+    },
+    {
+      "issuer_id": "issuer-d",
+      "keys": [
+        { "kid": "d-1", "published_at": 1000, "retired_at": null, "grace_ms": 0 }
+      ]
+    }
+  ]
+}

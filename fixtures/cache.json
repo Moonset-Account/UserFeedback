@@ -1,0 +1,74 @@
+{
+  "instances": [
+    {
+      "instance_id": "verifier-1",
+      "snapshots": [
+        { "cache_version": 1, "keys": [ { "issuer_id": "issuer-a", "kid": "a-old" } ] },
+        { "cache_version": 2, "keys": [
+          { "issuer_id": "issuer-a", "kid": "a-old" },
+          { "issuer_id": "issuer-a", "kid": "a-new" },
+          { "issuer_id": "issuer-a", "kid": "shared-kid" }
+        ] },
+        { "cache_version": 3, "keys": [
+          { "issuer_id": "issuer-a", "kid": "a-new" },
+          { "issuer_id": "issuer-a", "kid": "shared-kid" }
+        ] }
+      ],
+      "refresh_events": [
+        { "cache_version": 1, "applied_at": 1500 },
+        { "cache_version": 2, "applied_at": 5100 },
+        { "cache_version": 3, "applied_at": 6900 }
+      ]
+    },
+    {
+      "instance_id": "verifier-2",
+      "snapshots": [
+        { "cache_version": 1, "keys": [ { "issuer_id": "issuer-a", "kid": "a-old" } ] },
+        { "cache_version": 2, "keys": [
+          { "issuer_id": "issuer-a", "kid": "a-old" },
+          { "issuer_id": "issuer-a", "kid": "a-new" },
+          { "issuer_id": "issuer-a", "kid": "shared-kid" }
+        ] }
+      ],
+      "refresh_events": [
+        { "cache_version": 2, "applied_at": 5100 },
+        { "cache_version": 1, "applied_at": 5200 }
+      ]
+    },
+    {
+      "instance_id": "verifier-3",
+      "snapshots": [
+        { "cache_version": 1, "keys": [ { "issuer_id": "issuer-a", "kid": "a-old" } ] }
+      ],
+      "refresh_events": [
+        { "cache_version": 1, "applied_at": 1500 },
+        { "cache_version": 2, "applied_at": 5100 }
+      ]
+    },
+    {
+      "instance_id": "verifier-4",
+      "snapshots": [
+        { "cache_version": 1, "keys": [
+          { "issuer_id": "issuer-a", "kid": "a-old" },
+          { "issuer_id": "issuer-a", "kid": "shared-kid" },
+          { "issuer_id": "issuer-b", "kid": "b-only" }
+        ] }
+      ],
+      "refresh_events": [
+        { "cache_version": 1, "applied_at": 3500 }
+      ]
+    },
+    {
+      "instance_id": "verifier-5",
+      "snapshots": [
+        { "cache_version": 1, "keys": [
+          { "issuer_id": "issuer-c", "kid": "c-bad" },
+          { "issuer_id": "issuer-d", "kid": "d-1" }
+        ] }
+      ],
+      "refresh_events": [
+        { "cache_version": 1, "applied_at": 1500 }
+      ]
+    }
+  ]
+}
