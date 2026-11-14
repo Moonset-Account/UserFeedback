@@ -1,0 +1,10 @@
+# O2 optimized build: abstract stack-protection marks exported by the build tool.
+# Note deliberately the missing/partial/unprotected records that model an
+# optimization-driven stack-protector regression.
+# Fields: config | compiled_function | compilation_unit | mark | protector_kind | mark_id
+O2|parse_packet_header|net/parse.c|protected|ssp-strong|M101
+O2|checksum16|net/checksum.c|unprotected|-|M103
+O2|log_packet_path|net/diag.c|unprotected|-|M104
+O2|build_route_key|net/route.c|protected|ssp-strong|M106
+O2|handle_udp_segment|net/udp.c|unprotected|-|M107
+O2|emit_trace_event|net/trace.c|protected|ssp|M108

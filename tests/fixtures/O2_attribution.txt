@@ -1,0 +1,12 @@
+# O2 optimized build: attribution after inlining decisions.
+# Fields: config | source_function | compiled_function | compilation_unit | relation | attribution_id
+O2|parse_packet_header|parse_packet_header|net/parse.c|self|A101
+O2|decode_length_field|parse_packet_header|net/parse.c|inlined|A102
+O2|checksum16|checksum16|net/checksum.c|self|A103
+O2|log_packet_path|log_packet_path|net/diag.c|self|A104
+O2|byte_swap|parse_packet_header|net/parse.c|inlined|A105a
+O2|byte_swap|checksum16|net/checksum.c|inlined|A105b
+O2|build_route_key|build_route_key|net/route.c|self|A106
+O2|copy_options_block|parse_packet_header|net/parse.c|inlined|A107a
+O2|copy_options_block|handle_udp_segment|net/udp.c|inlined|A107b
+O2|emit_trace_event|emit_trace_event|net/trace.c|self|A108

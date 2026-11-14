@@ -1,0 +1,10 @@
+# O0 baseline build: inlining disabled, every source function survives as itself.
+# Fields: config | source_function | compiled_function | compilation_unit | relation | attribution_id
+O0|parse_packet_header|parse_packet_header|net/parse.c|self|A001
+O0|decode_length_field|decode_length_field|net/parse.c|self|A002
+O0|checksum16|checksum16|net/checksum.c|self|A003
+O0|log_packet_path|log_packet_path|net/diag.c|self|A004
+O0|byte_swap|byte_swap|net/util.c|self|A005
+O0|build_route_key|build_route_key|net/route.c|self|A006
+O0|copy_options_block|copy_options_block|net/options.c|self|A007
+O0|emit_trace_event|emit_trace_event|net/trace.c|self|A008

@@ -1,0 +1,10 @@
+# SEC-VULN-013 synthetic function risk list.
+# Fields: risk_id | source_function | compilation_unit | risk_level | requirement | note
+R001|parse_packet_header|net/parse.c|high|required|bounds-checked parser entry handling attacker input
+R002|decode_length_field|net/parse.c|high|required|decodes untrusted length prefix
+R003|checksum16|net/checksum.c|medium|required|loops over attacker sized buffer
+R004|log_packet_path|net/diag.c|medium|required|formats path strings into a stack buffer
+R005|byte_swap|net/util.c|low|exempt_leaf|pure arithmetic leaf, policy exempts it from stack protection
+R006|build_route_key|net/route.c|high|required|builds variable-length lookup key on the stack
+R007|copy_options_block|net/options.c|high|required|copies a variable option block
+R008|emit_trace_event|net/trace.c|medium|required|writes trace frames used by the fuzz harness

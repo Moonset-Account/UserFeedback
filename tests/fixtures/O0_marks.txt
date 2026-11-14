@@ -1,0 +1,10 @@
+# O0 baseline build: abstract stack-protection marks exported by the build tool.
+# Fields: config | compiled_function | compilation_unit | mark | protector_kind | mark_id
+O0|parse_packet_header|net/parse.c|protected|ssp-strong|M001
+O0|decode_length_field|net/parse.c|protected|ssp-strong|M002
+O0|checksum16|net/checksum.c|protected|ssp|M003
+O0|log_packet_path|net/diag.c|protected|ssp-strong|M004
+O0|byte_swap|net/util.c|protected|ssp|M005
+O0|build_route_key|net/route.c|protected|ssp-strong|M006
+O0|copy_options_block|net/options.c|protected|ssp-strong|M007
+O0|emit_trace_event|net/trace.c|protected|ssp|M008
