@@ -1,0 +1,176 @@
+{
+  "anchors": [
+    "https://docs.example.com/errors/E42?ref=diagnostics&lang=zh",
+    "https://docs.example.com/errors/localized",
+    "https://DOCS.EXAMPLE.COM/errors/E42",
+    "https://docs.example.com./errors/E42"
+  ],
+  "groups": [
+    {
+      "group": "渲染安全 / Rendering Safety",
+      "records": [
+        {
+          "details": "<response status=\"500\">\n  <message>unsafe <b>markup</b> & ampersand</message>\n  <raw>a < b && c > d</raw>\n</response>",
+          "doc": {
+            "host": "docs.example.com",
+            "href": "https://docs.example.com/errors/E42?ref=diagnostics&lang=zh",
+            "kind": "anchor",
+            "rel": "noopener noreferrer",
+            "text": "错误码说明 <E42> & 处理建议"
+          },
+          "highlight": {
+            "details_matches": 0,
+            "summary_matches": 0
+          },
+          "id": "rec-html-angle-brackets",
+          "summary": "设备返回：<error code=\"E42\">缓冲区溢出 & 重试</error>；请检查 <config> 与 'quotes'。"
+        }
+      ]
+    },
+    {
+      "group": "国际文本 / International Text",
+      "records": [
+        {
+          "details": "한국어: 장치 오류 코드 E42\nΕλληνικά: σφάλμα συσκευής\nEmoji: 🛠️ ⚠️ — 引号 “ ” ‘ ’ 均应原样保留",
+          "doc": {
+            "host": "docs.example.com",
+            "href": "https://docs.example.com/errors/localized",
+            "kind": "anchor",
+            "rel": "noopener noreferrer",
+            "text": "多语言错误说明"
+          },
+          "highlight": {
+            "details_matches": 0,
+            "summary_matches": 0
+          },
+          "id": "rec-non-latin",
+          "summary": "日本語の診断: テスト <失敗> を検出。Русский текст: ошибка «Е42». العربية: خطأ في الجهاز."
+        }
+      ]
+    },
+    {
+      "group": "文档链接策略 / Link Policy",
+      "records": [
+        {
+          "details": "url = https://user:pass@docs.example.com/private",
+          "doc": {
+            "kind": "plain-text",
+            "note": "包含凭据（用户名或密码）",
+            "reason": "credentials",
+            "url_text": "https://user:pass@docs.example.com/private"
+          },
+          "highlight": {
+            "details_matches": 0,
+            "summary_matches": 0
+          },
+          "id": "rec-link-userinfo",
+          "summary": "该链接带凭据，必须降级为普通文本，但本记录和相邻记录仍需可见。"
+        },
+        {
+          "details": null,
+          "doc": {
+            "kind": "plain-text",
+            "note": "主机不在文档链接白名单内",
+            "reason": "host_not_allowed",
+            "url_text": "https://docs.example.com.evil.test/errors/E42"
+          },
+          "highlight": {
+            "details_matches": 0,
+            "summary_matches": 0
+          },
+          "id": "rec-link-evil-suffix",
+          "summary": "后缀伪造域名 docs.example.com.evil.test 不在白名单内。"
+        },
+        {
+          "details": null,
+          "doc": {
+            "kind": "plain-text",
+            "note": "不是 HTTPS 地址",
+            "reason": "scheme_not_https",
+            "url_text": "http://docs.example.com/errors/E42"
+          },
+          "highlight": {
+            "details_matches": 0,
+            "summary_matches": 0
+          },
+          "id": "rec-link-http",
+          "summary": "明文 HTTP 地址不允许。"
+        },
+        {
+          "details": null,
+          "doc": {
+            "kind": "plain-text",
+            "note": "主机不在文档链接白名单内",
+            "reason": "host_not_allowed",
+            "url_text": "https://192.0.2.10/errors/E42"
+          },
+          "highlight": {
+            "details_matches": 0,
+            "summary_matches": 0
+          },
+          "id": "rec-link-ip-literal",
+          "summary": "IP 直连地址不在白名单内。"
+        },
+        {
+          "details": null,
+          "doc": {
+            "kind": "plain-text",
+            "note": "包含空白、控制或不可见格式字符",
+            "reason": "control_chars",
+            "url_text": "https://docs.example.com\t.evil.test/errors/E42"
+          },
+          "highlight": {
+            "details_matches": 0,
+            "summary_matches": 0
+          },
+          "id": "rec-link-tab-bypass",
+          "summary": "地址中嵌入 TAB 试图混淆主机名解析。"
+        },
+        {
+          "details": "status=degraded\nretry_after=30s",
+          "doc": null,
+          "highlight": {
+            "details_matches": 0,
+            "summary_matches": 0
+          },
+          "id": "rec-no-doc",
+          "summary": "没有文档链接的记录也必须完整显示。"
+        },
+        {
+          "details": null,
+          "doc": {
+            "host": "docs.example.com",
+            "href": "https://DOCS.EXAMPLE.COM/errors/E42",
+            "kind": "anchor",
+            "rel": "noopener noreferrer",
+            "text": "大写主机"
+          },
+          "highlight": {
+            "details_matches": 0,
+            "summary_matches": 0
+          },
+          "id": "rec-link-uppercase-host",
+          "summary": "主机名大小写不敏感，大写形式仍应命中白名单。"
+        },
+        {
+          "details": null,
+          "doc": {
+            "host": "docs.example.com",
+            "href": "https://docs.example.com./errors/E42",
+            "kind": "anchor",
+            "rel": "noopener noreferrer",
+            "text": "根点主机"
+          },
+          "highlight": {
+            "details_matches": 0,
+            "summary_matches": 0
+          },
+          "id": "rec-link-trailing-dot",
+          "summary": "带根点的主机名按规范化后的主机名验证。"
+        }
+      ]
+    }
+  ],
+  "record_count": 10,
+  "title": "设备错误诊断 / Device Error Diagnostics"
+}

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src &#x27;none&#x27;; style-src &#x27;unsafe-inline&#x27;; base-uri &#x27;none&#x27;; form-action &#x27;self&#x27;; frame-ancestors &#x27;none&#x27;">
+<meta name="referrer" content="no-referrer">
+<title>设备错误诊断 / Device Error Diagnostics</title>
+<style>
+:root { color-scheme: light dark; }
+body { font: 16px/1.55 -apple-system, "Segoe UI", "Noto Sans CJK SC", sans-serif;
+       margin: 0 auto; max-width: 62rem; padding: 1.5rem 1.25rem 4rem; }
+h1 { font-size: 1.5rem; margin: 0 0 .35rem; }
+h2 { font-size: 1.1rem; margin: 2rem 0 .6rem; border-bottom: 1px solid #8884; padding-bottom: .3rem; }
+.policy-note { font-size: .85rem; opacity: .75; margin: 0 0 1rem; }
+.record { border: 1px solid #8884; border-radius: .5rem; padding: .75rem .9rem; margin: .75rem 0; }
+.record-id { font: .75rem/1.2 ui-monospace, monospace; opacity: .6; margin: 0 0 .35rem; }
+.summary { margin: 0 0 .5rem; white-space: pre-wrap; overflow-wrap: anywhere; }
+.details { margin: 0 0 .5rem; padding: .6rem .7rem; background: #8881; border-radius: .35rem;
+           white-space: pre-wrap; overflow-wrap: anywhere; font: .875rem/1.45 ui-monospace, monospace; }
+.doc { margin: 0; font-size: .85rem; overflow-wrap: anywhere; }
+.doc-kind { font-weight: 600; }
+.doc-allowed .doc-url-inline { opacity: .55; font: .78rem ui-monospace, monospace; margin-left: .4rem; }
+.doc-blocked { border-left: 3px solid #d33; padding-left: .55rem; }
+.doc-blocked .doc-url { font: .8rem ui-monospace, monospace; }
+.doc-note { opacity: .75; margin-left: .35rem; }
+.build-note { font-size: .8rem; opacity: .8; margin: 0 0 1rem; }
+.build-note code { font-family: ui-monospace, monospace; background: #8881; padding: .1rem .3rem;
+                   border-radius: .2rem; overflow-wrap: anywhere; }
+mark.hit { background: #ffd54a; color: #111; border-radius: .15rem; }
+.empty { opacity: .7; font-style: italic; }
+</style>
+</head>
+<body>
+<header>
+<h1>设备错误诊断 / Device Error Diagnostics</h1>
+<p class="policy-note">页面内容一律按文本显示；搜索仅做高亮，不改变字符。文档链接仅允许 HTTPS 且主机属于白名单：docs.example.com；含凭据的链接与白名单外链接按普通文本展示。</p>
+</header>
+<p class="build-note">高亮由构建参数生成：<code>python3 app.py --data &lt;json&gt; --allowlist &lt;json&gt; --query &lt;text&gt;</code>（页面为静态文件，不依赖脚本）。</p>
+<main>
+<section class="group" data-group-index="0">
+  <h2>渲染安全 / Rendering Safety</h2>
+<article class="record" id="record-rec-html-angle-brackets" data-record-id="rec-html-angle-brackets"><p class="record-id">rec-html-angle-brackets</p><p class="summary">设备返回：&lt;error code=&quot;E42&quot;&gt;缓冲区溢出 &amp; 重试&lt;/error&gt;；请检查 &lt;config&gt; 与 &#x27;quotes&#x27;。</p><pre class="details">&lt;response status=&quot;500&quot;&gt;
+  &lt;message&gt;unsafe &lt;b&gt;markup&lt;/b&gt; &amp; ampersand&lt;/message&gt;
+  &lt;raw&gt;a &lt; b &amp;&amp; c &gt; d&lt;/raw&gt;
+&lt;/response&gt;</pre><p class="doc doc-allowed"><span class="doc-kind">文档</span> <a class="doc-link" href="https://docs.example.com/errors/E42?ref=diagnostics&amp;lang=zh" rel="noopener noreferrer" data-doc-host="docs.example.com">错误码说明 &lt;E42&gt; &amp; 处理建议</a> <span class="doc-url-inline">https://docs.example.com/errors/E42?ref=diagnostics&amp;lang=zh</span></p></article>
+</section>
+<section class="group" data-group-index="1">
+  <h2>国际文本 / International Text</h2>
+<article class="record" id="record-rec-non-latin" data-record-id="rec-non-latin"><p class="record-id">rec-non-latin</p><p class="summary">日本語の診断: テスト &lt;失敗&gt; を検出。Русский текст: ошибка «Е42». العربية: خطأ في الجهاز.</p><pre class="details">한국어: 장치 오류 코드 E42
+Ελληνικά: σφάλμα συσκευής
+Emoji: 🛠️ ⚠️ — 引号 “ ” ‘ ’ 均应原样保留</pre><p class="doc doc-allowed"><span class="doc-kind">文档</span> <a class="doc-link" href="https://docs.example.com/errors/localized" rel="noopener noreferrer" data-doc-host="docs.example.com">多语言错误说明</a> <span class="doc-url-inline">https://docs.example.com/errors/localized</span></p></article>
+</section>
+<section class="group" data-group-index="2">
+  <h2>文档链接策略 / Link Policy</h2>
+<article class="record" id="record-rec-link-userinfo" data-record-id="rec-link-userinfo"><p class="record-id">rec-link-userinfo</p><p class="summary">该链接带凭据，必须降级为普通文本，但本记录和相邻记录仍需可见。</p><pre class="details">url = https://user:pass@docs.example.com/private</pre><p class="doc doc-blocked" data-doc-reason="credentials"><span class="doc-kind">文档链接不可用</span> <span class="doc-url">https://user:pass@docs.example.com/private</span> <span class="doc-note">包含凭据（用户名或密码）</span></p></article>
+<article class="record" id="record-rec-link-evil-suffix" data-record-id="rec-link-evil-suffix"><p class="record-id">rec-link-evil-suffix</p><p class="summary">后缀伪造域名 docs.example.com.evil.test 不在白名单内。</p><p class="doc doc-blocked" data-doc-reason="host_not_allowed"><span class="doc-kind">文档链接不可用</span> <span class="doc-url">https://docs.example.com.evil.test/errors/E42</span> <span class="doc-note">主机不在文档链接白名单内</span></p></article>
+<article class="record" id="record-rec-link-http" data-record-id="rec-link-http"><p class="record-id">rec-link-http</p><p class="summary">明文 HTTP 地址不允许。</p><p class="doc doc-blocked" data-doc-reason="scheme_not_https"><span class="doc-kind">文档链接不可用</span> <span class="doc-url">http://docs.example.com/errors/E42</span> <span class="doc-note">不是 HTTPS 地址</span></p></article>
+<article class="record" id="record-rec-link-ip-literal" data-record-id="rec-link-ip-literal"><p class="record-id">rec-link-ip-literal</p><p class="summary">IP 直连地址不在白名单内。</p><p class="doc doc-blocked" data-doc-reason="host_not_allowed"><span class="doc-kind">文档链接不可用</span> <span class="doc-url">https://192.0.2.10/errors/E42</span> <span class="doc-note">主机不在文档链接白名单内</span></p></article>
+<article class="record" id="record-rec-link-tab-bypass" data-record-id="rec-link-tab-bypass"><p class="record-id">rec-link-tab-bypass</p><p class="summary">地址中嵌入 TAB 试图混淆主机名解析。</p><p class="doc doc-blocked" data-doc-reason="control_chars"><span class="doc-kind">文档链接不可用</span> <span class="doc-url">https://docs.example.com	.evil.test/errors/E42</span> <span class="doc-note">包含空白、控制或不可见格式字符</span></p></article>
+<article class="record" id="record-rec-no-doc" data-record-id="rec-no-doc"><p class="record-id">rec-no-doc</p><p class="summary">没有文档链接的记录也必须完整显示。</p><pre class="details">status=degraded
+retry_after=30s</pre></article>
+<article class="record" id="record-rec-link-uppercase-host" data-record-id="rec-link-uppercase-host"><p class="record-id">rec-link-uppercase-host</p><p class="summary">主机名大小写不敏感，大写形式仍应命中白名单。</p><p class="doc doc-allowed"><span class="doc-kind">文档</span> <a class="doc-link" href="https://DOCS.EXAMPLE.COM/errors/E42" rel="noopener noreferrer" data-doc-host="docs.example.com">大写主机</a> <span class="doc-url-inline">https://DOCS.EXAMPLE.COM/errors/E42</span></p></article>
+<article class="record" id="record-rec-link-trailing-dot" data-record-id="rec-link-trailing-dot"><p class="record-id">rec-link-trailing-dot</p><p class="summary">带根点的主机名按规范化后的主机名验证。</p><p class="doc doc-allowed"><span class="doc-kind">文档</span> <a class="doc-link" href="https://docs.example.com./errors/E42" rel="noopener noreferrer" data-doc-host="docs.example.com">根点主机</a> <span class="doc-url-inline">https://docs.example.com./errors/E42</span></p></article>
+</section>
+</main>
+</body>
+</html>

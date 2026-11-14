@@ -1,0 +1,408 @@
+{
+  "case_summary": {
+    "failed": 0,
+    "passed": 36,
+    "total": 36
+  },
+  "cases": [
+    {
+      "actual": {
+        "discovered": 0,
+        "ok": false
+      },
+      "case_id": "GUARD-001",
+      "description": "zero-test discovery is rejected (not a pass)",
+      "expected": {
+        "discovered": 0,
+        "ok": false
+      },
+      "passed": true
+    },
+    {
+      "actual": {
+        "discovered": 2,
+        "executed_not_skipped": 0,
+        "ok": false,
+        "tests_run": 2
+      },
+      "case_id": "GUARD-002",
+      "description": "all-skipped suite is rejected (executed == 0)",
+      "expected": {
+        "discovered": 2,
+        "executed_not_skipped": 0,
+        "ok": false,
+        "tests_run": 2
+      },
+      "passed": true
+    },
+    {
+      "actual": {
+        "failures": 1,
+        "ok": false,
+        "tests_run": 1
+      },
+      "case_id": "GUARD-003",
+      "description": "a genuinely failing test is reported as not ok",
+      "expected": {
+        "failures": 1,
+        "ok": false,
+        "tests_run": 1
+      },
+      "passed": true
+    },
+    {
+      "actual": {
+        "exit_code": 3,
+        "status": "unit_tests_failed",
+        "stderr_tail": "FAIL: no non-skipped test actually executed"
+      },
+      "case_id": "PROVE-001",
+      "description": "no test modules -> wrapper exits 3 (zero tests)",
+      "expected": {
+        "exit_code": 3
+      },
+      "passed": true
+    },
+    {
+      "actual": {
+        "exit_code": 3,
+        "status": "unit_tests_failed",
+        "stderr_tail": "FAIL: no non-skipped test actually executed"
+      },
+      "case_id": "PROVE-002",
+      "description": "all tests skipped -> wrapper exits 3 (executed == 0)",
+      "expected": {
+        "exit_code": 3
+      },
+      "passed": true
+    },
+    {
+      "actual": {
+        "exit_code": 6,
+        "status": "unit_tests_failed",
+        "stderr_tail": "FAIL: unit test suite did not pass"
+      },
+      "case_id": "PROVE-003",
+      "description": "real test failure -> wrapper exits 6",
+      "expected": {
+        "exit_code": 6
+      },
+      "passed": true
+    },
+    {
+      "actual": 0,
+      "case_id": "CLI-001",
+      "description": "CLI renders sample data and exits 0",
+      "expected": 0,
+      "passed": true
+    },
+    {
+      "actual": [
+        "rec-html-angle-brackets",
+        "rec-non-latin",
+        "rec-link-userinfo",
+        "rec-link-evil-suffix",
+        "rec-link-http",
+        "rec-link-ip-literal",
+        "rec-link-tab-bypass",
+        "rec-no-doc",
+        "rec-link-uppercase-host",
+        "rec-link-trailing-dot"
+      ],
+      "case_id": "STRUCT-001",
+      "description": "all records rendered in dataset order",
+      "expected": [
+        "rec-html-angle-brackets",
+        "rec-non-latin",
+        "rec-link-userinfo",
+        "rec-link-evil-suffix",
+        "rec-link-http",
+        "rec-link-ip-literal",
+        "rec-link-tab-bypass",
+        "rec-no-doc",
+        "rec-link-uppercase-host",
+        "rec-link-trailing-dot"
+      ],
+      "passed": true
+    },
+    {
+      "actual": [
+        "渲染安全 / Rendering Safety",
+        "国际文本 / International Text",
+        "文档链接策略 / Link Policy"
+      ],
+      "case_id": "STRUCT-002",
+      "description": "group order follows first appearance",
+      "expected": [
+        "渲染安全 / Rendering Safety",
+        "国际文本 / International Text",
+        "文档链接策略 / Link Policy"
+      ],
+      "passed": true
+    },
+    {
+      "actual": [
+        "渲染安全 / Rendering Safety",
+        "国际文本 / International Text",
+        "文档链接策略 / Link Policy"
+      ],
+      "case_id": "STRUCT-003",
+      "description": "one heading element per group, matching group names",
+      "expected": [
+        "渲染安全 / Rendering Safety",
+        "国际文本 / International Text",
+        "文档链接策略 / Link Policy"
+      ],
+      "passed": true
+    },
+    {
+      "actual": true,
+      "case_id": "TEXT-001",
+      "description": "DOM textContent equals dataset text for every record",
+      "expected": true,
+      "passed": true
+    },
+    {
+      "actual": true,
+      "case_id": "TEXT-002",
+      "description": "angle brackets/quotes in device error are visible as literal characters",
+      "expected": true,
+      "passed": true
+    },
+    {
+      "actual": true,
+      "case_id": "TEXT-003",
+      "description": "no element was created from the bracketed error text",
+      "expected": true,
+      "passed": true
+    },
+    {
+      "actual": true,
+      "case_id": "TEXT-004",
+      "description": "non-Latin scripts preserved (Japanese/Russian/Arabic/Korean/Greek/emoji)",
+      "expected": true,
+      "passed": true
+    },
+    {
+      "actual": {
+        "kind": "plain-text",
+        "reason": "credentials"
+      },
+      "case_id": "LINK-rec-link-userinfo",
+      "description": "rec-link-userinfo degrades to plain text (credentials)",
+      "expected": {
+        "kind": "plain-text",
+        "reason": "credentials"
+      },
+      "passed": true
+    },
+    {
+      "actual": {
+        "kind": "plain-text",
+        "reason": "host_not_allowed"
+      },
+      "case_id": "LINK-rec-link-evil-suffix",
+      "description": "rec-link-evil-suffix degrades to plain text (host_not_allowed)",
+      "expected": {
+        "kind": "plain-text",
+        "reason": "host_not_allowed"
+      },
+      "passed": true
+    },
+    {
+      "actual": {
+        "kind": "plain-text",
+        "reason": "scheme_not_https"
+      },
+      "case_id": "LINK-rec-link-http",
+      "description": "rec-link-http degrades to plain text (scheme_not_https)",
+      "expected": {
+        "kind": "plain-text",
+        "reason": "scheme_not_https"
+      },
+      "passed": true
+    },
+    {
+      "actual": {
+        "kind": "plain-text",
+        "reason": "host_not_allowed"
+      },
+      "case_id": "LINK-rec-link-ip-literal",
+      "description": "rec-link-ip-literal degrades to plain text (host_not_allowed)",
+      "expected": {
+        "kind": "plain-text",
+        "reason": "host_not_allowed"
+      },
+      "passed": true
+    },
+    {
+      "actual": {
+        "kind": "plain-text",
+        "reason": "control_chars"
+      },
+      "case_id": "LINK-rec-link-tab-bypass",
+      "description": "rec-link-tab-bypass degrades to plain text (control_chars)",
+      "expected": {
+        "kind": "plain-text",
+        "reason": "control_chars"
+      },
+      "passed": true
+    },
+    {
+      "actual": [
+        "rec-html-angle-brackets",
+        "rec-link-trailing-dot",
+        "rec-link-uppercase-host",
+        "rec-non-latin"
+      ],
+      "case_id": "LINK-ALLOWED",
+      "description": "only allowlisted hosts produce anchors",
+      "expected": [
+        "rec-html-angle-brackets",
+        "rec-link-trailing-dot",
+        "rec-link-uppercase-host",
+        "rec-non-latin"
+      ],
+      "passed": true
+    },
+    {
+      "actual": true,
+      "case_id": "LINK-HOST",
+      "description": "every anchor href revalidates against the allowlist",
+      "expected": true,
+      "passed": true
+    },
+    {
+      "actual": [],
+      "case_id": "LINK-CRED",
+      "description": "no anchor authority contains credentials",
+      "expected": [],
+      "passed": true
+    },
+    {
+      "actual": true,
+      "case_id": "LINK-VISIBLE",
+      "description": "rejected URL text remains visible on the page",
+      "expected": true,
+      "passed": true
+    },
+    {
+      "actual": 10,
+      "case_id": "LINK-COUNT",
+      "description": "all records still rendered alongside invalid links",
+      "expected": 10,
+      "passed": true
+    },
+    {
+      "actual": 0,
+      "case_id": "HILITE-001",
+      "description": "highlight render exits 0",
+      "expected": 0,
+      "passed": true
+    },
+    {
+      "actual": true,
+      "case_id": "HILITE-002",
+      "description": "highlighted DOM text is character-identical to source",
+      "expected": true,
+      "passed": true
+    },
+    {
+      "actual": true,
+      "case_id": "HILITE-003",
+      "description": "search produced at least one <mark> hit",
+      "expected": true,
+      "passed": true
+    },
+    {
+      "actual": true,
+      "case_id": "HILITE-004",
+      "description": "every <mark> content appears verbatim in the source text",
+      "expected": true,
+      "passed": true
+    },
+    {
+      "actual": 2,
+      "case_id": "BOUND-001",
+      "description": "missing data file exits 2",
+      "expected": 2,
+      "passed": true
+    },
+    {
+      "actual": 2,
+      "case_id": "BOUND-002",
+      "description": "empty allowlist exits 2",
+      "expected": 2,
+      "passed": true
+    },
+    {
+      "actual": 2,
+      "case_id": "BOUND-003",
+      "description": "record missing required fields exits 2",
+      "expected": 2,
+      "passed": true
+    },
+    {
+      "actual": 0,
+      "case_id": "BOUND-004",
+      "description": "adversarial dataset renders without error",
+      "expected": 0,
+      "passed": true
+    },
+    {
+      "actual": {
+        "b": 0,
+        "img": 0,
+        "pre_outside_details": 0,
+        "script": 0
+      },
+      "case_id": "BOUND-005",
+      "description": "injected markup produces no script/img/b elements",
+      "expected": {
+        "b": 0,
+        "img": 0,
+        "pre_outside_details": 0,
+        "script": 0
+      },
+      "passed": true
+    },
+    {
+      "actual": 0,
+      "case_id": "BOUND-006",
+      "description": "credentialed adversarial link stays plain text",
+      "expected": 0,
+      "passed": true
+    },
+    {
+      "actual": "<img src=x onerror=alert(1)> & <b>bold</b>",
+      "case_id": "BOUND-007",
+      "description": "adversarial summary text preserved verbatim",
+      "expected": "<img src=x onerror=alert(1)> & <b>bold</b>",
+      "passed": true
+    },
+    {
+      "actual": 4,
+      "case_id": "REPORT-001",
+      "description": "DOM report anchor count matches allowed link count",
+      "expected": 4,
+      "passed": true
+    }
+  ],
+  "elapsed_seconds": 1.002,
+  "python": "3.11.6",
+  "started_at": "2026-11-14T07:14:50",
+  "status": "pass",
+  "unit_tests": {
+    "details": "",
+    "discovered_count": 72,
+    "errors": 0,
+    "executed_not_skipped": 72,
+    "failures": 0,
+    "ok": true,
+    "skipped": 0,
+    "skipped_names": [],
+    "tests_dir": "/Users/xingyaolei/Desktop/feedback-studio/runs/security-20261114/SEC-20261114-031/round-1/attempt-7/workspace/tests",
+    "tests_run": 72,
+    "unexpected_successes": 0
+  }
+}

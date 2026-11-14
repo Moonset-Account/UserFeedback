@@ -1,0 +1,101 @@
+{
+  "title": "设备错误诊断 / Device Error Diagnostics",
+  "records": [
+    {
+      "id": "rec-html-angle-brackets",
+      "group": "渲染安全 / Rendering Safety",
+      "summary": "设备返回：<error code=\"E42\">缓冲区溢出 & 重试</error>；请检查 <config> 与 'quotes'。",
+      "details": "<response status=\"500\">\n  <message>unsafe <b>markup</b> & ampersand</message>\n  <raw>a < b && c > d</raw>\n</response>",
+      "doc": {
+        "label": "错误码说明 <E42> & 处理建议",
+        "url": "https://docs.example.com/errors/E42?ref=diagnostics&lang=zh"
+      }
+    },
+    {
+      "id": "rec-non-latin",
+      "group": "国际文本 / International Text",
+      "summary": "日本語の診断: テスト <失敗> を検出。Русский текст: ошибка «Е42». العربية: خطأ في الجهاز.",
+      "details": "한국어: 장치 오류 코드 E42\nΕλληνικά: σφάλμα συσκευής\nEmoji: 🛠️ ⚠️ — 引号 “ ” ‘ ’ 均应原样保留",
+      "doc": {
+        "label": "多语言错误说明",
+        "url": "https://docs.example.com/errors/localized"
+      }
+    },
+    {
+      "id": "rec-link-userinfo",
+      "group": "文档链接策略 / Link Policy",
+      "summary": "该链接带凭据，必须降级为普通文本，但本记录和相邻记录仍需可见。",
+      "details": "url = https://user:pass@docs.example.com/private",
+      "doc": {
+        "label": "带凭据的链接",
+        "url": "https://user:pass@docs.example.com/private"
+      }
+    },
+    {
+      "id": "rec-link-evil-suffix",
+      "group": "文档链接策略 / Link Policy",
+      "summary": "后缀伪造域名 docs.example.com.evil.test 不在白名单内。",
+      "details": null,
+      "doc": {
+        "label": "仿冒域名链接",
+        "url": "https://docs.example.com.evil.test/errors/E42"
+      }
+    },
+    {
+      "id": "rec-link-http",
+      "group": "文档链接策略 / Link Policy",
+      "summary": "明文 HTTP 地址不允许。",
+      "details": null,
+      "doc": {
+        "label": "明文链接",
+        "url": "http://docs.example.com/errors/E42"
+      }
+    },
+    {
+      "id": "rec-link-ip-literal",
+      "group": "文档链接策略 / Link Policy",
+      "summary": "IP 直连地址不在白名单内。",
+      "details": null,
+      "doc": {
+        "label": "IP 直连",
+        "url": "https://192.0.2.10/errors/E42"
+      }
+    },
+    {
+      "id": "rec-link-tab-bypass",
+      "group": "文档链接策略 / Link Policy",
+      "summary": "地址中嵌入 TAB 试图混淆主机名解析。",
+      "details": null,
+      "doc": {
+        "label": "混淆链接",
+        "url": "https://docs.example.com\t.evil.test/errors/E42"
+      }
+    },
+    {
+      "id": "rec-no-doc",
+      "group": "文档链接策略 / Link Policy",
+      "summary": "没有文档链接的记录也必须完整显示。",
+      "details": "status=degraded\nretry_after=30s"
+    },
+    {
+      "id": "rec-link-uppercase-host",
+      "group": "文档链接策略 / Link Policy",
+      "summary": "主机名大小写不敏感，大写形式仍应命中白名单。",
+      "details": null,
+      "doc": {
+        "label": "大写主机",
+        "url": "https://DOCS.EXAMPLE.COM/errors/E42"
+      }
+    },
+    {
+      "id": "rec-link-trailing-dot",
+      "group": "文档链接策略 / Link Policy",
+      "summary": "带根点的主机名按规范化后的主机名验证。",
+      "details": null,
+      "doc": {
+        "label": "根点主机",
+        "url": "https://docs.example.com./errors/E42"
+      }
+    }
+  ]
+}
