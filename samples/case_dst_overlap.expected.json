@@ -1,0 +1,37 @@
+{
+  "case_id": "dst-overlap-ny-2026-11-01",
+  "now_utc": "2026-11-01T05:45:00Z",
+  "timezone": "America/New_York",
+  "workspaces": [
+    {
+      "basis": {
+        "local_date": "2026-11-01",
+        "local_end": "05:00",
+        "local_start": "01:30",
+        "type": "weekly_shift",
+        "utc_end": "2026-11-01T10:00:00Z",
+        "utc_start": "2026-11-01T05:30:00Z",
+        "weekday": "sun"
+      },
+      "locked": false,
+      "next_state": "locked",
+      "next_transition_utc": "2026-11-01T10:00:00Z",
+      "workspace_id": "ws-nyc-01"
+    },
+    {
+      "basis": {
+        "local_date": "2026-11-01",
+        "local_end": "05:00",
+        "local_start": "01:30",
+        "type": "weekly_shift",
+        "utc_end": "2026-11-01T10:00:00Z",
+        "utc_start": "2026-11-01T05:30:00Z",
+        "weekday": "sun"
+      },
+      "locked": false,
+      "next_state": "locked",
+      "next_transition_utc": "2026-11-01T10:00:00Z",
+      "workspace_id": "ws-nyc-02"
+    }
+  ]
+}

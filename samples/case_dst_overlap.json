@@ -1,0 +1,13 @@
+{
+  "case_id": "dst-overlap-ny-2026-11-01",
+  "timezone": "America/New_York",
+  "now_utc": "2026-11-01T05:45:00Z",
+  "weekly_shifts": [
+    {"weekday": "sun", "start": "01:30", "end": "05:00"}
+  ],
+  "extensions": [],
+  "workspaces": [
+    {"id": "ws-nyc-01"},
+    {"id": "ws-nyc-02"}
+  ]
+}

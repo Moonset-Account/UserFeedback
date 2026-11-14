@@ -1,0 +1,14 @@
+{
+  "case_id": "dst-gap-ny-2026-03-08",
+  "timezone": "America/New_York",
+  "now_utc": "2026-03-08T06:30:00Z",
+  "weekly_shifts": [
+    {"weekday": "sun", "start": "02:30", "end": "06:00"}
+  ],
+  "extensions": [
+    {"start_utc": "2026-03-08T06:00:00Z", "end_utc": "2026-03-08T06:15:00Z", "label": "hotfix-window"}
+  ],
+  "workspaces": [
+    {"id": "ws-nyc-03"}
+  ]
+}
