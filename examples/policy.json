@@ -1,0 +1,20 @@
+{
+  "services": {
+    "svc-a": {
+      "fingerprints": [
+        {
+          "fingerprint": "fp-old",
+          "valid_from": "2026-11-14T00:00:00Z",
+          "valid_until": "2026-11-14T08:30:00Z"
+        },
+        {
+          "fingerprint": "fp-new",
+          "valid_from": "2026-11-14T08:00:00Z",
+          "valid_until": null
+        }
+      ],
+      "min_samples": 5,
+      "anomaly_ratio": 0.3
+    }
+  }
+}

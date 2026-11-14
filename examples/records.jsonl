@@ -1,0 +1,18 @@
+{"ts": "2026-11-14T08:01:00Z", "service": "svc-a", "conn_id": "c-001", "result": "success", "fingerprint": "fp-old"}
+{"ts": "2026-11-14T08:02:00Z", "service": "svc-a", "conn_id": "c-002", "result": "success", "fingerprint": "fp-old"}
+{"ts": "2026-11-14T08:03:00Z", "service": "svc-a", "conn_id": "c-003", "result": "success", "fingerprint": "fp-new"}
+{"ts": "2026-11-14T08:04:00Z", "service": "svc-a", "conn_id": "c-004", "result": "success", "fingerprint": "fp-new"}
+{"ts": "2026-11-14T08:05:00Z", "service": "svc-a", "conn_id": "c-005", "result": "success", "fingerprint": "fp-old"}
+{"ts": "2026-11-14T08:01:00Z", "service": "svc-a", "conn_id": "c-001", "result": "success", "fingerprint": "fp-old"}
+{"ts": "2026-11-14T08:06:00Z", "service": "svc-a", "conn_id": "c-006", "result": "failure", "fingerprint": "fp-new"}
+{"ts": "2026-11-14T08:07:00Z", "service": "svc-a", "conn_id": "c-007", "result": "success", "fingerprint": "fp-old"}
+{"ts": "2026-11-14T08:07:00Z", "service": "svc-a", "conn_id": "c-007", "result": "success", "fingerprint": "fp-new"}
+{"ts": "2026-11-14T08:08:00Z", "service": "svc-a", "conn_id": "c-008", "result": "success"}
+{"ts": "2026-11-14T08:09:00Z", "service": "svc-legacy", "conn_id": "c-009", "result": "success", "fingerprint": "fp-new"}
+{broken json line
+{"ts": "2026-11-14T08:30:00Z", "service": "svc-a", "conn_id": "c-101", "result": "success", "fingerprint": "fp-new"}
+{"ts": "2026-11-14T08:31:00Z", "service": "svc-a", "conn_id": "c-102", "result": "success", "fingerprint": "fp-new"}
+{"ts": "2026-11-14T08:32:00Z", "service": "svc-a", "conn_id": "c-103", "result": "success", "fingerprint": "fp-old"}
+{"ts": "2026-11-14T08:33:00Z", "service": "svc-a", "conn_id": "c-104", "result": "success", "fingerprint": "fp-new"}
+{"ts": "2026-11-14T08:34:00Z", "service": "svc-a", "conn_id": "c-105", "result": "success", "fingerprint": "fp-old"}
+{"ts": "2026-11-14T08:35:00Z", "service": "svc-a", "conn_id": "c-106", "result": "success", "fingerprint": "fp-new"}
