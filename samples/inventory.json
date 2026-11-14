@@ -1,0 +1,50 @@
+{
+  "inventory_time": "2026-11-14T00:00:00Z",
+  "keys": [
+    {"key_id": "K-RETAIN", "signing_stopped_at": "2026-01-15T00:00:00Z"},
+    {"key_id": "K-RETIRED", "signing_stopped_at": "2023-12-31T00:00:00Z"},
+    {"key_id": "K-DERIVE", "signing_stopped_at": "2026-05-01T00:00:00Z"},
+    {"key_id": "K-MANUAL", "signing_stopped_at": "2026-02-01T00:00:00Z"}
+  ],
+  "retention_policies": [
+    {"artifact_type": "firmware", "verify_retention_days": 540},
+    {"artifact_type": "config-bundle", "verify_retention_days": 90},
+    {"artifact_type": "container-image", "verify_retention_days": 365}
+  ],
+  "assets": [
+    {"asset_id": "pipeline-legacy", "kind": "entry_point", "active": false},
+    {"asset_id": "cfg-service", "kind": "entry_point", "active": false},
+    {"asset_id": "old-pipeline", "kind": "entry_point", "active": false},
+    {"asset_id": "ci-release", "kind": "entry_point", "active": true},
+    {"asset_id": "edge-fleet", "kind": "entry_point", "active": false},
+    {"asset_id": "fw-1.0", "kind": "derived", "derives_from": "pipeline-legacy"},
+    {"asset_id": "fw-0.9", "kind": "derived", "derives_from": "pipeline-legacy"},
+    {"asset_id": "fw-1.1", "kind": "derived", "derives_from": "pipeline-legacy"},
+    {"asset_id": "cfg-3", "kind": "derived", "derives_from": "cfg-service"},
+    {"asset_id": "old-fw", "kind": "derived", "derives_from": "old-pipeline"},
+    {"asset_id": "old-cfg", "kind": "derived", "derives_from": "old-pipeline"},
+    {"asset_id": "app-2.x-line", "kind": "derived", "derives_from": "ci-release"},
+    {"asset_id": "app-2.4", "kind": "derived", "derives_from": "app-2.x-line"},
+    {"asset_id": "edge-1.1", "kind": "derived", "derives_from": "edge-fleet"},
+    {"asset_id": "gateway-fleet", "kind": "consumer", "active": true}
+  ],
+  "artifacts": [
+    {"artifact_id": "A-R1", "key_id": "K-RETAIN", "asset_id": "fw-1.0", "artifact_type": "firmware", "issued_at": "2026-01-10T00:00:00Z"},
+    {"artifact_id": "A-R2", "key_id": "K-RETAIN", "asset_id": "fw-0.9", "artifact_type": "firmware", "issued_at": "2024-06-01T00:00:00Z"},
+    {"artifact_id": "A-R3", "key_id": "K-RETAIN", "asset_id": "cfg-3", "artifact_type": "config-bundle", "issued_at": "2026-09-01T00:00:00Z"},
+    {"artifact_id": "A-R4", "key_id": "K-RETAIN", "asset_id": "fw-1.1", "artifact_type": "firmware", "issued_at": "2026-01-12T00:00:00Z"},
+    {"artifact_id": "A-X1", "key_id": "K-RETIRED", "asset_id": "old-fw", "artifact_type": "firmware", "issued_at": "2023-06-01T00:00:00Z"},
+    {"artifact_id": "A-X2", "key_id": "K-RETIRED", "asset_id": "old-cfg", "artifact_type": "config-bundle", "issued_at": "2023-11-01T00:00:00Z"},
+    {"artifact_id": "A-D1", "key_id": "K-DERIVE", "asset_id": "app-2.4", "artifact_type": "container-image", "issued_at": "2026-04-01T00:00:00Z"},
+    {"artifact_id": "A-M1", "key_id": "K-MANUAL", "asset_id": "edge-1.1", "artifact_type": "firmware", "issued_at": "2026-01-20T00:00:00Z"}
+  ],
+  "usage_edges": [
+    {"edge_id": "E-1", "from_asset": "fw-1.0", "to_asset": "gateway-fleet"},
+    {"edge_id": "E-M1", "from_asset": "edge-1.1", "to_asset": null, "destination_known": false}
+  ],
+  "reissues": [
+    {"reissue_id": "RS-1", "artifact_id": "A-R4", "completed_at": "2026-08-01T00:00:00Z"},
+    {"reissue_id": "RS-2", "artifact_id": "A-X2", "completed_at": "2024-06-01T00:00:00Z"},
+    {"reissue_id": "RS-M1", "artifact_id": "A-M1", "completed_at": null}
+  ]
+}
