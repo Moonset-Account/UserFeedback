@@ -1,0 +1,6 @@
+{"evidence_id": "EV-001", "seq": 2, "type": "transfer_init", "transfer_id": "T-100", "from": "alice", "to": "bob", "ts": "2026-11-02T11:00:00Z"}
+{"evidence_id": "EV-002", "seq": 3, "type": "receive_confirm", "transfer_id": "T-200", "by": "bob", "ts": "2026-11-03T08:30:00Z"}
+{"evidence_id": "EV-003", "seq": 4, "type": "receive_confirm", "transfer_id": "T-300", "by": "bob", "ts": "2026-11-03T08:35:00Z"}
+{"evidence_id": "EV-004", "seq": 2, "type": "transfer_init", "transfer_id": "T-400B", "from": "alice", "to": "carol", "ts": "2026-11-02T11:05:00Z"}
+{"evidence_id": "EV-006", "seq": 3, "type": "revoke", "transfer_id": "T-600", "by": "alice", "ts": "2026-11-03T09:00:00Z"}
+{"evidence_id": "EV-005", "seq": 3, "type": "review", "reviewer": "dave", "note": "例行复核", "ts": "2026-11-03T09:30:00Z"}

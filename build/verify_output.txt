@@ -1,0 +1,54 @@
+test_confirm_by_wrong_receiver_rejected (test_ledger.CustodyFlowTests.test_confirm_by_wrong_receiver_rejected) ... ok
+test_confirm_changes_custodian (test_ledger.CustodyFlowTests.test_confirm_changes_custodian) ... ok
+test_confirm_wrong_transfer_rejected (test_ledger.CustodyFlowTests.test_confirm_wrong_transfer_rejected) ... ok
+test_intake_sets_custodian (test_ledger.CustodyFlowTests.test_intake_sets_custodian) ... ok
+test_review_does_not_change_custody (test_ledger.CustodyFlowTests.test_review_does_not_change_custody) ... ok
+test_revoke_by_non_initiator_rejected (test_ledger.CustodyFlowTests.test_revoke_by_non_initiator_rejected) ... ok
+test_revoke_cancels_pending_transfer (test_ledger.CustodyFlowTests.test_revoke_cancels_pending_transfer) ... ok
+test_transfer_by_non_custodian_rejected (test_ledger.CustodyFlowTests.test_transfer_by_non_custodian_rejected) ... ok
+test_unconfirmed_transfer_stays_in_transfer (test_ledger.CustodyFlowTests.test_unconfirmed_transfer_stays_in_transfer) ... ok
+test_identical_duplicate_applied_once (test_ledger.DedupConflictTests.test_identical_duplicate_applied_once) ... ok
+test_out_of_order_events_sorted_by_seq (test_ledger.DedupConflictTests.test_out_of_order_events_sorted_by_seq) ... ok
+test_same_seq_different_content_conflict (test_ledger.DedupConflictTests.test_same_seq_different_content_conflict) ... ok
+test_malformed_event_interrupts (test_ledger.InterruptionTests.test_malformed_event_interrupts) ... ok
+test_missing_first_seq_interrupts_immediately (test_ledger.InterruptionTests.test_missing_first_seq_interrupts_immediately) ... ok
+test_sequence_gap_stops_confirmation (test_ledger.InterruptionTests.test_sequence_gap_stops_confirmation) ... ok
+test_bad_lines_become_invalid_records (test_ledger.LoadRecordsTests.test_bad_lines_become_invalid_records) ... ok
+test_load_batches_and_locations (test_ledger.LoadRecordsTests.test_load_batches_and_locations) ... ok
+test_multi_evidence_grouped_and_sorted (test_ledger.ReportShapeTests.test_multi_evidence_grouped_and_sorted) ... ok
+test_process_evidence_directly (test_ledger.ReportShapeTests.test_process_evidence_directly) ... ok
+
+----------------------------------------------------------------------
+Ran 19 tests in 0.004s
+
+OK
+[verify] 发现测试用例数: 19
+[verify] testsRun=19 skipped=0 executed=19 failures=0 errors=0
+[verify] 单元测试全部通过
+[verify] 运行样例/边界断言 (app.py --input-dir samples/)
+[assert] SMP-EV001-STATUS PASS actual='in_transfer' expected='in_transfer' -- EV-001 借出未确认,状态为交接中
+[assert] SMP-EV001-CUSTODIAN PASS actual='alice' expected='alice' -- EV-001 保管人仍为 alice
+[assert] SMP-EV001-PENDING PASS actual=[('T-100', 'alice', 'bob')] expected=[('T-100', 'alice', 'bob')] -- EV-001 待确认移交为 T-100(alice->bob)
+[assert] SMP-EV001-CONFIRMED-THROUGH PASS actual=3 expected=3 -- EV-001 连续核对到 seq 3
+[assert] SMP-EV002-CUSTODIAN PASS actual='bob' expected='bob' -- EV-002 确认后保管人变为 bob
+[assert] SMP-EV002-STATUS PASS actual='in_custody' expected='in_custody' -- EV-002 状态为在库保管
+[assert] SMP-EV002-DUP-APPLIED-ONCE PASS actual=1 expected=1 -- EV-002 重复确认事件只应用一次
+[assert] SMP-EV002-DUP-LOCATIONS PASS actual=2 expected=2 -- EV-002 重复事件的两个来源位置都保留
+[assert] SMP-EV003-CONFIRMED-THROUGH PASS actual=2 expected=2 -- EV-003 断档,只确认到 seq 2
+[assert] SMP-EV003-INTERRUPT-REASON PASS actual='sequence_gap' expected='sequence_gap' -- EV-003 中断原因为序号断档
+[assert] SMP-EV003-NEEDS-REVIEW PASS actual=[4, 5] expected=[4, 5] -- EV-003 seq 4/5 留待人工复核
+[assert] SMP-EV003-REVIEW-LOCATIONS PASS actual=True expected=True -- EV-003 待复核记录均带原始文件与行号
+[assert] SMP-EV003-CUSTODIAN PASS actual='alice' expected='alice' -- EV-003 断档后确认未应用,保管人仍为 alice
+[assert] SMP-EV003-STATUS PASS actual='in_transfer' expected='in_transfer' -- EV-003 移交仍待确认,状态为交接中
+[assert] SMP-EV004-CONFLICT-SEQS PASS actual=[2] expected=[2] -- EV-004 冲突标在 seq 2
+[assert] SMP-EV004-CONFLICT-VARIANTS PASS actual=2 expected=2 -- EV-004 两种冲突内容都保留
+[assert] SMP-EV004-CONFIRMED-THROUGH PASS actual=1 expected=1 -- EV-004 冲突即中断,只确认到 seq 1
+[assert] SMP-EV004-CUSTODIAN PASS actual='alice' expected='alice' -- EV-004 保管人仍为 alice
+[assert] SMP-EV005-REJECTED PASS actual=[(2, 'initiator_not_current_custodian')] expected=[(2, 'initiator_not_current_custodian')] -- EV-005 非保管人发起的移交被拒绝
+[assert] SMP-EV005-CUSTODIAN PASS actual='alice' expected='alice' -- EV-005 保管人仍为 alice
+[assert] SMP-EV005-CONFIRMED-THROUGH PASS actual=3 expected=3 -- EV-005 连续核对到 seq 3
+[assert] SMP-EV006-PENDING PASS actual=[] expected=[] -- EV-006 撤销后无待确认移交
+[assert] SMP-EV006-CUSTODIAN PASS actual='alice' expected='alice' -- EV-006 保管人仍为 alice
+[assert] SMP-INVALID-RECORDS PASS actual=[] expected=[] -- 样例输入全部可入档
+[verify] 样例断言: 24 项, 失败 0 项
+[verify] 全部核验通过

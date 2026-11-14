@@ -1,0 +1,3 @@
+{"evidence_id": "EV-002", "seq": 3, "type": "receive_confirm", "transfer_id": "T-200", "by": "bob", "ts": "2026-11-03T08:30:00Z"}
+{"evidence_id": "EV-003", "seq": 5, "type": "review", "reviewer": "dave", "note": "补查中", "ts": "2026-11-04T10:00:00Z"}
+{"evidence_id": "EV-001", "seq": 3, "type": "review", "reviewer": "dave", "note": "已借出,等待接收方确认", "ts": "2026-11-04T10:05:00Z"}
