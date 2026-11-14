@@ -1,0 +1,37 @@
+# 演示样例: 告警事件生命周期(延迟到达 / 重新开启 / 事件归属)
+# 时间均为 2026-11-14 UTC; 聚合窗口 600 秒。
+{"op": "advance", "now": "2026-11-14T09:00:00Z"}
+# 1) 首次命中 -> 立即通知, 开启 EVT-0001 (窗口 09:00:00 ~ 09:10:00)
+{"op": "hit", "report_id": "r-0001", "tenant": "acme", "endpoint": "ws-001", "detection": "trojan.x", "occurred_at": "2026-11-14T09:00:00Z", "arrived_at": "2026-11-14T09:00:02Z"}
+# 2) 窗口内重复命中 -> 汇总到 EVT-0001, 不再通知
+{"op": "hit", "report_id": "r-0002", "tenant": "acme", "endpoint": "ws-001", "detection": "trojan.x", "occurred_at": "2026-11-14T09:03:00Z", "arrived_at": "2026-11-14T09:03:01Z"}
+# 3) 重复事件 ID -> 不增加计数
+{"op": "hit", "report_id": "r-0002", "tenant": "acme", "endpoint": "ws-001", "detection": "trojan.x", "occurred_at": "2026-11-14T09:03:00Z", "arrived_at": "2026-11-14T09:03:05Z"}
+# 4) 窗口内再次命中 -> 计数到 3
+{"op": "hit", "report_id": "r-0003", "tenant": "acme", "endpoint": "ws-001", "detection": "trojan.x", "occurred_at": "2026-11-14T09:09:30Z", "arrived_at": "2026-11-14T09:09:31Z"}
+# 5) 另一台终端的相同检测项 -> 独立事件 EVT-0002 (按租户/终端/检测项隔离)
+{"op": "hit", "report_id": "r-0004", "tenant": "acme", "endpoint": "ws-002", "detection": "trojan.x", "occurred_at": "2026-11-14T09:05:00Z", "arrived_at": "2026-11-14T09:05:10Z"}
+# 6) 已确认处置回执 -> 关闭 EVT-0001
+{"op": "receipt", "receipt_id": "rc-0001", "event_id": "EVT-0001", "disposition": "confirmed", "received_at": "2026-11-14T09:09:45Z"}
+# 7) 延迟到达: 09:08 发生(关闭前), 09:10:05 才到达 -> 归回旧事件 EVT-0001, 不重开不通知
+{"op": "hit", "report_id": "r-0005", "tenant": "acme", "endpoint": "ws-001", "detection": "trojan.x", "occurred_at": "2026-11-14T09:08:00Z", "arrived_at": "2026-11-14T09:10:05Z"}
+# 8) 关闭后的新上报 -> 重新开启 EVT-0003 并通知
+{"op": "hit", "report_id": "r-0006", "tenant": "acme", "endpoint": "ws-001", "detection": "trojan.x", "occurred_at": "2026-11-14T09:10:20Z", "arrived_at": "2026-11-14T09:10:21Z"}
+# 9) 显式推进时间 -> EVT-0002(窗口至 09:15)与 EVT-0003(窗口至 09:20:20)到期
+{"op": "advance", "now": "2026-11-14T09:21:00Z"}
+# 10) 到期事件窗口内发生、到期后到达的迟到上报 -> 归回 EVT-0003
+{"op": "hit", "report_id": "r-0007", "tenant": "acme", "endpoint": "ws-001", "detection": "trojan.x", "occurred_at": "2026-11-14T09:19:00Z", "arrived_at": "2026-11-14T09:21:05Z"}
+# 11) 窗口外新上报 -> 开启 EVT-0004
+{"op": "hit", "report_id": "r-0008", "tenant": "acme", "endpoint": "ws-001", "detection": "trojan.x", "occurred_at": "2026-11-14T09:21:30Z", "arrived_at": "2026-11-14T09:21:31Z"}
+# 12) 到期事件仍可被已确认回执关闭 -> EVT-0003 关闭
+{"op": "receipt", "receipt_id": "rc-0002", "event_id": "EVT-0003", "disposition": "confirmed", "received_at": "2026-11-14T09:22:00Z"}
+# 13) 重复回执 -> 忽略
+{"op": "receipt", "receipt_id": "rc-0002", "event_id": "EVT-0003", "disposition": "confirmed", "received_at": "2026-11-14T09:22:10Z"}
+# 14) 已关闭事件的回执 -> 不再变更
+{"op": "receipt", "receipt_id": "rc-0003", "event_id": "EVT-0001", "disposition": "confirmed", "received_at": "2026-11-14T09:23:00Z"}
+# 15) 未确认处置的回执 -> 不关闭 EVT-0004
+{"op": "receipt", "receipt_id": "rc-0004", "event_id": "EVT-0004", "disposition": "investigating", "received_at": "2026-11-14T09:23:30Z"}
+# 16) ws-002 窗口内发生、到期后到达 -> 归回 EVT-0002
+{"op": "hit", "report_id": "r-0009", "tenant": "acme", "endpoint": "ws-002", "detection": "trojan.x", "occurred_at": "2026-11-14T09:14:00Z", "arrived_at": "2026-11-14T09:24:00Z"}
+# 17) 导出最终状态
+{"op": "dump"}
