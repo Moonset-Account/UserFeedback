@@ -1,0 +1,18 @@
+{
+  "case_id": "SEC018-BC-01",
+  "requirement": "SEC018-RQ-01",
+  "description": "同一邮件两名收件人：alice 申诉成功并释放，bob 不受影响的仍为 waiting。",
+  "commands": [
+    {"op": "record_delivery", "email": "m1", "recipient": "alice", "version": "v1", "reasons": ["spam"]},
+    {"op": "record_delivery", "email": "m1", "recipient": "bob", "version": "v1", "reasons": ["spam"]},
+    {"op": "submit_approval", "email": "m1", "recipient": "alice", "approval_id": "ap-1", "version": "v1", "reasons": ["spam"]},
+    {"op": "release", "email": "m1", "recipient": "alice", "request_id": "req-1"},
+    {"op": "status", "email": "m1"}
+  ],
+  "expect": [
+    {"label": "alice 审批覆盖全部原因后进入 releasable", "path": "results.2.result.state", "expected": "releasable"},
+    {"label": "alice 释放请求被执行", "path": "results.3.result.executed", "expected": true},
+    {"label": "alice 状态为 released", "path": "results.4.result.recipients.alice.state", "expected": "released"},
+    {"label": "bob 状态仍为 waiting（未被连带释放）", "path": "results.4.result.recipients.bob.state", "expected": "waiting"}
+  ]
+}

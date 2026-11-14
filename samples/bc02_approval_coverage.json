@@ -1,0 +1,19 @@
+{
+  "case_id": "SEC018-BC-02",
+  "requirement": "SEC018-RQ-03",
+  "description": "审批须同收件人、同版本并覆盖全部仍有效原因：部分覆盖仍 waiting，补齐后 releasable，旧版本或无记录的审批被拒绝。",
+  "commands": [
+    {"op": "record_delivery", "email": "m2", "recipient": "alice", "version": "v1", "reasons": ["spam", "virus"]},
+    {"op": "submit_approval", "email": "m2", "recipient": "alice", "approval_id": "ap-1", "version": "v1", "reasons": ["spam"]},
+    {"op": "submit_approval", "email": "m2", "recipient": "alice", "approval_id": "ap-2", "version": "v1", "reasons": ["virus"]},
+    {"op": "submit_approval", "email": "m2", "recipient": "alice", "approval_id": "ap-3", "version": "v0", "reasons": ["spam"]},
+    {"op": "submit_approval", "email": "m2", "recipient": "bob", "approval_id": "ap-4", "version": "v1", "reasons": ["spam"]}
+  ],
+  "expect": [
+    {"label": "仅覆盖 spam 时仍 waiting", "path": "results.1.result.state", "expected": "waiting"},
+    {"label": "缺失原因恰为 virus", "path": "results.1.result.missing_reasons", "expected": ["virus"]},
+    {"label": "补齐 virus 后进入 releasable", "path": "results.2.result.state", "expected": "releasable"},
+    {"label": "旧版本 v0 的审批被拒绝", "path": "results.3.ok", "expected": false},
+    {"label": "无投递记录的收件人审批被拒绝", "path": "results.4.ok", "expected": false}
+  ]
+}

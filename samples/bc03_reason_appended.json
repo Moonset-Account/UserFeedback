@@ -1,0 +1,17 @@
+{
+  "case_id": "SEC018-BC-03",
+  "requirement": "SEC018-RQ-04",
+  "description": "新隔离原因追加后，已可释放的任务重新等待审查；针对新原因的审批补齐后再次可释放。",
+  "commands": [
+    {"op": "record_delivery", "email": "m3", "recipient": "alice", "version": "v1", "reasons": ["spam"]},
+    {"op": "submit_approval", "email": "m3", "recipient": "alice", "approval_id": "ap-1", "version": "v1", "reasons": ["spam"]},
+    {"op": "record_delivery", "email": "m3", "recipient": "alice", "version": "v1", "reasons": ["spam", "phishing"]},
+    {"op": "submit_approval", "email": "m3", "recipient": "alice", "approval_id": "ap-2", "version": "v1", "reasons": ["phishing"]}
+  ],
+  "expect": [
+    {"label": "初始审批后任务可释放", "path": "results.1.result.state", "expected": "releasable"},
+    {"label": "追加 phishing 原因后任务回到 waiting", "path": "results.2.result.state", "expected": "waiting"},
+    {"label": "追加后缺失原因为 phishing", "path": "results.2.result.reasons", "expected": ["phishing", "spam"]},
+    {"label": "覆盖新原因的审批使任务重新 releasable", "path": "results.3.result.state", "expected": "releasable"}
+  ]
+}

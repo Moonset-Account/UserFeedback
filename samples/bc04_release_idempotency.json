@@ -1,0 +1,27 @@
+{
+  "case_id": "SEC018-BC-04",
+  "requirement": "SEC018-RQ-05",
+  "description": "释放幂等：同一 request_id 重试不产生新的下游确认；第二个独立 request_id 仅登记不重复确认；下游确认回调只记一次。",
+  "commands": [
+    {"op": "record_delivery", "email": "m4", "recipient": "alice", "version": "v1", "reasons": ["spam"]},
+    {"op": "submit_approval", "email": "m4", "recipient": "alice", "approval_id": "ap-1", "version": "v1", "reasons": ["spam"]},
+    {"op": "release", "email": "m4", "recipient": "alice", "request_id": "req-1"},
+    {"op": "release", "email": "m4", "recipient": "alice", "request_id": "req-1"},
+    {"op": "release", "email": "m4", "recipient": "alice", "request_id": "req-2"},
+    {"op": "confirm_downstream", "email": "m4", "recipient": "alice", "confirmation_id": "cfm:m4:alice:v1"},
+    {"op": "confirm_downstream", "email": "m4", "recipient": "alice", "confirmation_id": "cfm:m4:alice:v1"},
+    {"op": "status", "email": "m4"}
+  ],
+  "expect": [
+    {"label": "首次释放执行并发出下游确认", "path": "results.2.result.downstream_confirmation_sent", "expected": true},
+    {"label": "同一 request_id 重试被识别为幂等重放", "path": "results.3.result.idempotent_replay", "expected": true},
+    {"label": "重试不再发送下游确认", "path": "results.3.result.downstream_confirmation_sent", "expected": false},
+    {"label": "第二个独立申请被标记为重复释放", "path": "results.4.result.duplicate_of_prior_release", "expected": true},
+    {"label": "第二个独立申请不重复执行", "path": "results.4.result.executed", "expected": false},
+    {"label": "第二个独立申请不产生新的下游确认", "path": "results.4.result.downstream_confirmation_sent", "expected": false},
+    {"label": "首次下游确认回调被记录", "path": "results.5.result.recorded", "expected": true},
+    {"label": "重复下游确认回调只记一次", "path": "results.6.result.duplicate", "expected": true},
+    {"label": "状态中仅存在一条下游确认记录", "path": "results.7.result.recipients.alice.confirmations", "expected": [{"acknowledged": true, "confirmation_id": "cfm:m4:alice:v1"}]},
+    {"label": "两个释放请求均被登记（req-1 执行、req-2 未执行）", "path": "results.7.result.recipients.alice.release_requests", "expected": [{"executed": true, "request_id": "req-1", "version": "v1"}, {"executed": false, "request_id": "req-2", "version": "v1"}]}
+  ]
+}

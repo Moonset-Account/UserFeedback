@@ -1,0 +1,20 @@
+{
+  "case_id": "SEC018-BC-05",
+  "requirement": "SEC018-RQ-06",
+  "description": "操作员视图：同一邮件下三个收件人分别处于 waiting / releasable / released。",
+  "commands": [
+    {"op": "record_delivery", "email": "m5", "recipient": "alice", "version": "v1", "reasons": ["spam"]},
+    {"op": "record_delivery", "email": "m5", "recipient": "bob", "version": "v1", "reasons": ["spam"]},
+    {"op": "record_delivery", "email": "m5", "recipient": "carol", "version": "v1", "reasons": ["spam"]},
+    {"op": "submit_approval", "email": "m5", "recipient": "bob", "approval_id": "ap-b", "version": "v1", "reasons": ["spam"]},
+    {"op": "submit_approval", "email": "m5", "recipient": "carol", "approval_id": "ap-c", "version": "v1", "reasons": ["spam"]},
+    {"op": "release", "email": "m5", "recipient": "carol", "request_id": "req-c"},
+    {"op": "status", "email": "m5"}
+  ],
+  "expect": [
+    {"label": "alice（无审批）为 waiting", "path": "results.6.result.recipients.alice.state", "expected": "waiting"},
+    {"label": "bob（审批齐全未释放）为 releasable", "path": "results.6.result.recipients.bob.state", "expected": "releasable"},
+    {"label": "carol（已释放）为 released", "path": "results.6.result.recipients.carol.state", "expected": "released"},
+    {"label": "carol 的确认记录存在且未确认", "path": "results.6.result.recipients.carol.confirmations", "expected": [{"acknowledged": false, "confirmation_id": "cfm:m5:carol:v1"}]}
+  ]
+}
