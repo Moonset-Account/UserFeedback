@@ -1,0 +1,105 @@
+{
+  "workspace": "/Users/xingyaolei/Desktop/feedback-studio/runs/security-20261114/SEC-20261114-001/round-1/attempt-8/workspace",
+  "python": "3.11.6 (main, Oct  2 2023, 13:45:54) [Clang 15.0.0 (clang-1500.0.40.1)]",
+  "discovery": {
+    "method": "unittest.defaultTestLoader.discover('tests')",
+    "discovered_test_count": 16
+  },
+  "unit_tests": {
+    "tests_run": 16,
+    "skipped": 0,
+    "executed_not_skipped": 16,
+    "failures": 0,
+    "errors": 0,
+    "output": "test_case_010_cli_emits_three_plans_and_lists_archive (test_cli.CliTests.test_case_010_cli_emits_three_plans_and_lists_archive)\ncase_id TC-010: triage exit 0; list subcommand reads plans back. ... ok\ntest_case_011_blocked_batch_returns_exit_code_3 (test_cli.CliTests.test_case_011_blocked_batch_returns_exit_code_3)\ncase_id TC-011: blocked run still writes every plan, exits 3. ... ok\ntest_case_012_malformed_index_is_fatal_exit_2 (test_cli.CliTests.test_case_012_malformed_index_is_fatal_exit_2)\ncase_id TC-012: unparseable JSON never produces partial plans. ... ok\ntest_case_013_root_index_count_mismatch_is_fatal (test_cli.CliTests.test_case_013_root_index_count_mismatch_is_fatal)\ncase_id TC-013: two indexes need one shared root or two roots. ... ok\ntest_case_014_manifest_lists_what_other_batches_can_publish (test_cli.CliTests.test_case_014_manifest_lists_what_other_batches_can_publish)\ncase_id TC-014: blocked batch held, sibling's files enumerated. ... ok\ntest_case_015_invalid_debug_identifier_blocks_batch (test_cli.CliTests.test_case_015_invalid_debug_identifier_blocks_batch)\ncase_id TC-015: identifiers with path separators are rejected. ... ok\ntest_case_016_parser_requires_a_subcommand (test_cli.ParserTests.test_case_016_parser_requires_a_subcommand)\ncase_id TC-016: running without arguments fails instead of silently ... ok\ntest_case_003_debug_id_mismatch_blocks_only_affected_batch (test_engine.BlockingTests.test_case_003_debug_id_mismatch_blocks_only_affected_batch)\ncase_id TC-003: one bad batch is held, the other still publishes. ... ok\ntest_case_004_missing_artifact_blocks_that_batch_only (test_engine.BlockingTests.test_case_004_missing_artifact_blocks_that_batch_only)\ncase_id TC-004: a declared file that does not exist holds batch. ... ok\ntest_case_005_same_debug_id_different_content_is_conflict (test_engine.BlockingTests.test_case_005_same_debug_id_different_content_is_conflict)\ncase_id TC-005: shared debug id with different bytes blocks both. ... ok\ntest_case_006_conflict_is_scoped_by_architecture (test_engine.BlockingTests.test_case_006_conflict_is_scoped_by_architecture)\ncase_id TC-006: same debug id on different arches is not a clash. ... ok\ntest_case_001_public_plan_excludes_symbols_and_internal_plan_merges (test_engine.EngineHappyPathTests.test_case_001_public_plan_excludes_symbols_and_internal_plan_merges)\ncase_id TC-001: same debug id + identical bytes => merged symbol. ... ok\ntest_case_002_two_architectures_are_organized_separately (test_engine.EngineHappyPathTests.test_case_002_two_architectures_are_organized_separately)\ncase_id TC-002: arch partitions never collide with each other. ... ok\ntest_case_007_parent_traversal_is_rejected_and_batch_blocked (test_engine.SecurityBoundaryTests.test_case_007_parent_traversal_is_rejected_and_batch_blocked)\ncase_id TC-007: ../ paths cannot read outside the artifact root. ... ok\ntest_case_008_symlink_escape_is_rejected (test_engine.SecurityBoundaryTests.test_case_008_symlink_escape_is_rejected)\ncase_id TC-008: a symlink leaving the root blocks the batch. ... ok\ntest_case_009_absolute_path_is_rejected (test_engine.SecurityBoundaryTests.test_case_009_absolute_path_is_rejected)\ncase_id TC-009: absolute artifact paths are refused outright. ... ok\n\n----------------------------------------------------------------------\nRan 16 tests in 0.051s\n\nOK\n"
+  },
+  "sample_assertions": [
+    {
+      "case_id": "S-001",
+      "claim": "public archive plan lists runtime files only",
+      "input": "one arm64 build with main_program, runtime_library, debug_symbol",
+      "expected": [
+        "main_program",
+        "runtime_library"
+      ],
+      "actual": [
+        "main_program",
+        "runtime_library"
+      ],
+      "passed": true
+    },
+    {
+      "case_id": "S-002",
+      "claim": "same architecture+debug_id with identical content merges",
+      "input": "two arm64 builds, one shared debug id, equal symbol bytes",
+      "expected": {
+        "merged": true,
+        "reference_count": 2
+      },
+      "actual": {
+        "merged": true,
+        "reference_count": 2
+      },
+      "passed": true
+    },
+    {
+      "case_id": "S-003",
+      "claim": "same debug id with different content blocks both batches",
+      "input": "two arm64 builds sharing debug id S003-CONFLICT, different symbol bytes",
+      "expected": [
+        "symbol_content_conflict",
+        "symbol_content_conflict"
+      ],
+      "actual": [
+        "symbol_content_conflict",
+        "symbol_content_conflict"
+      ],
+      "passed": true
+    },
+    {
+      "case_id": "S-004",
+      "claim": "mismatched debug identifiers hold only the affected batch",
+      "input": "one healthy build plus one build whose main/symbol ids differ",
+      "expected": {
+        "blocked": [
+          "S004-BAD"
+        ],
+        "reason_in_blocked": true,
+        "publishable": [
+          "S004-GOOD"
+        ]
+      },
+      "actual": {
+        "blocked": [
+          "S004-BAD"
+        ],
+        "reason_in_blocked": true,
+        "publishable": [
+          "S004-GOOD"
+        ]
+      },
+      "passed": true
+    },
+    {
+      "case_id": "S-005",
+      "claim": "artifact paths containing '..' cannot escape the root",
+      "input": "index declaring main_program at ../outside.txt",
+      "expected": [
+        "missing_main_program",
+        "unsafe_path"
+      ],
+      "actual": [
+        "missing_main_program",
+        "unsafe_path"
+      ],
+      "passed": true
+    }
+  ],
+  "sample_summary": {
+    "total": 5,
+    "passed": 5,
+    "failed": 0
+  },
+  "status": "passed",
+  "elapsed_seconds": 0.062
+}

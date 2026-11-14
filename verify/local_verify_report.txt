@@ -1,0 +1,22 @@
+local_verify status: passed
+discovered tests   : 16
+tests run/skipped  : 16/0
+failures/errors    : 0/0
+sample assertions  : 5/5 passed
+
+sample details:
+  [PASS] S-001 public archive plan lists runtime files only
+      expected: ['main_program', 'runtime_library']
+      actual  : ['main_program', 'runtime_library']
+  [PASS] S-002 same architecture+debug_id with identical content merges
+      expected: {'merged': True, 'reference_count': 2}
+      actual  : {'merged': True, 'reference_count': 2}
+  [PASS] S-003 same debug id with different content blocks both batches
+      expected: ['symbol_content_conflict', 'symbol_content_conflict']
+      actual  : ['symbol_content_conflict', 'symbol_content_conflict']
+  [PASS] S-004 mismatched debug identifiers hold only the affected batch
+      expected: {'blocked': ['S004-BAD'], 'reason_in_blocked': True, 'publishable': ['S004-GOOD']}
+      actual  : {'blocked': ['S004-BAD'], 'reason_in_blocked': True, 'publishable': ['S004-GOOD']}
+  [PASS] S-005 artifact paths containing '..' cannot escape the root
+      expected: ['missing_main_program', 'unsafe_path']
+      actual  : ['missing_main_program', 'unsafe_path']
