@@ -1,0 +1,7 @@
+{
+  "modes": {
+    "release": ["app.main:run", "plugin.loader:load"],
+    "test": ["tests.harness:main", "plugin.loader:load"],
+    "dev": ["app.main:run", "tools.repl:main"]
+  }
+}

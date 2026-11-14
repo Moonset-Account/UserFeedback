@@ -1,0 +1,6 @@
+{
+  "affected": [
+    {"symbol": "acme@1.4.0:parse_token", "advisory": "SEC-VULN-004", "severity": "high"},
+    {"symbol": "acme@1.4.0:deserialize", "advisory": "SEC-VULN-004", "severity": "critical"}
+  ]
+}

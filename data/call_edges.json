@@ -1,0 +1,13 @@
+{
+  "edges": [
+    {"caller": "app.main:run", "callee": "acme@2.1.0:parse", "build_mode": "all", "resolution": "resolved"},
+    {"caller": "acme@2.1.0:parse", "callee": "acme@2.1.0:parse_token", "build_mode": "all", "resolution": "resolved"},
+    {"caller": "plugin.loader:load", "callee": "plugkit@0.9.2:handle", "build_mode": "all", "resolution": "resolved"},
+    {"caller": "plugkit@0.9.2:handle", "callee": "plugkit@0.9.2:emit", "build_mode": "all", "resolution": "resolved"},
+    {"caller": "plugkit@0.9.2:emit", "callee": "plugkit@0.9.2:handle", "build_mode": "all", "resolution": "resolved"},
+    {"caller": "plugkit@0.9.2:emit", "callee": "acme@1.4.0:parse_token", "build_mode": "all", "resolution": "resolved"},
+    {"caller": "tests.harness:main", "callee": "testkit@3.0.1:run_case", "build_mode": "test", "resolution": "resolved"},
+    {"caller": "testkit@3.0.1:run_case", "callee": "acme@1.4.0:deserialize", "build_mode": "test", "resolution": "resolved"},
+    {"caller": "tools.repl:main", "callee": "plugins:dynamic_dispatch", "build_mode": "dev", "resolution": "unresolved", "reason": "getattr 动态分发, 构建期无法确定目标"}
+  ]
+}
