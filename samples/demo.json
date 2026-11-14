@@ -1,0 +1,68 @@
+{
+  "symbol_tables": {
+    "build-2026-11-01": {
+      "modules": {
+        "app": [
+          {"rel_start": "0x0000", "rel_end": "0x0100", "function": "main", "source": "src/main.c:12", "is_app": true},
+          {"rel_start": "0x0100", "rel_end": "0x0200", "function": "parse_config", "source": "src/config.c:42", "is_app": true},
+          {"rel_start": "0x0200", "rel_end": "0x0300", "function": "log_write", "source": "src/log.c:8", "is_app": true}
+        ],
+        "libsys": [
+          {"rel_start": "0x0000", "rel_end": "0x0080", "function": "sys_read", "source": "libsys/read.c:5", "is_app": false}
+        ]
+      }
+    },
+    "build-2026-11-08": {
+      "modules": {
+        "app": [
+          {"rel_start": "0x0000", "rel_end": "0x0100", "function": "main", "source": "src/main.c:12", "is_app": true},
+          {"rel_start": "0x0100", "rel_end": "0x0200", "function": "parse_config", "source": "src/config.c:42", "is_app": true},
+          {"rel_start": "0x0200", "rel_end": "0x0300", "function": "log_write", "source": "src/log.c:8", "is_app": true}
+        ],
+        "libsys": [
+          {"rel_start": "0x0000", "rel_end": "0x0080", "function": "sys_read", "source": "libsys/read.c:5", "is_app": false}
+        ]
+      }
+    }
+  },
+  "diagnostics": [
+    {
+      "id": "diag-1",
+      "build": "build-2026-11-01",
+      "category": "SEGV",
+      "modules": [
+        {"name": "app", "base": "0x100000000", "end": "0x100001000"},
+        {"name": "libsys", "base": "0x7fff0000", "end": "0x7fff1000"}
+      ],
+      "stack": ["0x7fff0020", "0x100000140"]
+    },
+    {
+      "id": "diag-2",
+      "build": "build-2026-11-08",
+      "category": "SEGV",
+      "modules": [
+        {"name": "app", "base": "0x200000000", "end": "0x200001000"},
+        {"name": "libsys", "base": "0x7fff0000", "end": "0x7fff1000"}
+      ],
+      "stack": ["0x7fff0020", "0x200000140"]
+    },
+    {
+      "id": "diag-3",
+      "build": "build-2026-11-15",
+      "category": "SEGV",
+      "modules": [
+        {"name": "app", "base": "0x300000000", "end": "0x300001000"}
+      ],
+      "stack": ["0x300000140"]
+    },
+    {
+      "id": "diag-4",
+      "build": "build-2026-11-01",
+      "category": "SEGV",
+      "modules": [
+        {"name": "app", "base": "0x100000000", "end": "0x100001000"}
+      ],
+      "stack": ["0x100000900"]
+    }
+  ]
+}
