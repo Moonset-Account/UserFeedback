@@ -1,0 +1,28 @@
+{
+  "rules_a": {
+    "name": "signature-rules",
+    "version": "sig-1.2",
+    "tenant_aliases": {
+      "tenant-a-legacy": "tenant-a",
+      "tenant-b-legacy": "tenant-b",
+      "tenant-c-legacy": "tenant-c"
+    },
+    "known_tenants": ["tenant-a", "tenant-b", "tenant-c"],
+    "duplicate_version": "first",
+    "missing_version": "default",
+    "default_version": "0",
+    "ignored_query_keys": ["trace_id", "utm_*"]
+  },
+  "rules_b": {
+    "name": "locator-rules",
+    "version": "loc-2.0",
+    "tenant_aliases": {
+      "tenant-a-legacy": "tenant-a",
+      "tenant-b-legacy": "tenant-b"
+    },
+    "known_tenants": ["tenant-a", "tenant-b", "tenant-c"],
+    "duplicate_version": "last",
+    "missing_version": "reject",
+    "ignored_query_keys": ["trace_id", "utm_*"]
+  }
+}

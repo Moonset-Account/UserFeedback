@@ -1,0 +1,51 @@
+[
+  {
+    "record_no": "r-001",
+    "tenant": "tenant-a-legacy",
+    "object_no": "OBJ-1",
+    "version": "v3",
+    "query": {"keep": "1"}
+  },
+  {
+    "record_no": "r-002",
+    "tenant": "tenant-b",
+    "object_no": "OBJ-2",
+    "version": null,
+    "query": {}
+  },
+  {
+    "record_no": "r-003",
+    "tenant": "tenant-a",
+    "object_no": "OBJ-1",
+    "version": "v3",
+    "query": {}
+  },
+  {
+    "record_no": "r-004",
+    "tenant": "tenant-b",
+    "object_no": "OBJ-1",
+    "version": "v3",
+    "query": {}
+  },
+  {
+    "record_no": "r-005",
+    "tenant": "tenant-a",
+    "object_no": "OBJ-9",
+    "version": ["v1", "v2"],
+    "query": {}
+  },
+  {
+    "record_no": "r-006",
+    "tenant": "tenant-b-legacy",
+    "object_no": "OBJ-7",
+    "version": "v1",
+    "query": {"trace_id": "abc-123", "utm_source": "mail", "keep": "x"}
+  },
+  {
+    "record_no": "r-007",
+    "tenant": "tenant-c-legacy",
+    "object_no": "OBJ-3",
+    "version": "v1",
+    "query": {}
+  }
+]
