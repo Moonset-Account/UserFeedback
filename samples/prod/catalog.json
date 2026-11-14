@@ -1,0 +1,17 @@
+{
+  "environment": "prod",
+  "services": ["api", "worker", "billing"],
+  "references": [
+    {"service": "api", "ref": "shared-db-password", "versions": [1, 2, 3, 4], "current": 3},
+    {"service": "api", "ref": "log-sink-key", "versions": [1, 2], "current": 2},
+    {"service": "api", "ref": "api-signing-key", "versions": [1, 2], "current": 2},
+    {"service": "api", "ref": "api-signing-key-v2", "alias_of": {"ref": "api-signing-key"}},
+    {"service": "api", "ref": "api-signing-key-legacy", "alias_of": {"ref": "api-signing-key-v2"}},
+    {"service": "worker", "ref": "shared-db-password", "versions": [1, 2, 3, 4, 5], "current": 3},
+    {"service": "worker", "ref": "log-sink-key", "versions": [1, 2], "current": 1},
+    {"service": "worker", "ref": "queue-key", "versions": [1, 2], "current": 2},
+    {"service": "billing", "ref": "shared-db-password", "versions": [1, 2, 3, 4], "current": 3},
+    {"service": "billing", "ref": "log-sink-key", "versions": [1, 2], "current": 2},
+    {"service": "billing", "ref": "stripe-key", "versions": [1, 2], "current": 2}
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "services": ["api", "worker", "billing"],
+  "service_overrides": {
+    "api": [
+      {"variable": "API_SIGNING_KEY", "ref": "api-signing-key-legacy"}
+    ],
+    "worker": [
+      {"variable": "QUEUE_KEY", "ref": "queue-key"},
+      {"variable": "DB_PASSWORD", "ref": "shared-db-password", "version": 4}
+    ],
+    "billing": [
+      {"variable": "STRIPE_KEY", "ref": "stripe-key"}
+    ]
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "environment": "prod",
+  "common": [
+    {"variable": "DB_PASSWORD", "ref": "shared-db-password"},
+    {"variable": "LOG_SINK_KEY", "ref": "log-sink-key"}
+  ],
+  "environment_overrides": [
+    {"variable": "DB_PASSWORD", "ref": "shared-db-password", "version": 3}
+  ]
+}
