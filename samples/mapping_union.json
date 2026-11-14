@@ -1,0 +1,13 @@
+{
+  "builds": [
+    {
+      "build_id": "demo-union",
+      "page_size": 4096,
+      "merge_rule": "union",
+      "segments": [
+        {"name": "code", "start": "0x1000", "end": "0x1800", "perms": "r-x"},
+        {"name": "data", "start": "0x1800", "end": "0x1c00", "perms": "rw-"}
+      ]
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "builds": [
+    {
+      "build_id": "ok-overlap",
+      "page_size": 4096,
+      "merge_rule": "union",
+      "segments": [
+        {"name": "text", "start": "0x400000", "end": "0x400800", "perms": "r-x"},
+        {"name": "jit", "start": "0x400400", "end": "0x400c00", "perms": "rw-"}
+      ]
+    },
+    {
+      "build_id": "bad-address",
+      "page_size": 4096,
+      "merge_rule": "union",
+      "segments": [
+        {"name": "text", "start": "0x11000000000000000", "end": "0x11000000000001000", "perms": "r-x"}
+      ]
+    },
+    {
+      "build_id": "bad-page-size",
+      "page_size": 1000,
+      "merge_rule": "last_loaded",
+      "segments": [
+        {"name": "text", "start": "0x1000", "end": "0x2000", "perms": "r-x"}
+      ]
+    },
+    {
+      "build_id": "no-mappings",
+      "page_size": 4096,
+      "merge_rule": "union"
+    }
+  ]
+}
