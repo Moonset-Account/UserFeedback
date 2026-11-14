@@ -1,0 +1,115 @@
+{
+  "batch_id": "release-check-2026-11-14",
+  "records": [
+    {
+      "record_id": "gw-conn1-001",
+      "side": "gateway",
+      "config_version": "gw-v2.3.1",
+      "connection_id": "conn-0001",
+      "start_offset": 0,
+      "end_offset": 120,
+      "delimitation": "ok",
+      "reject_reason": null,
+      "connection_closed": false
+    },
+    {
+      "record_id": "app-conn1-001",
+      "side": "app",
+      "config_version": "app-v5.0.2",
+      "connection_id": "conn-0001",
+      "start_offset": 0,
+      "end_offset": 120,
+      "delimitation": "ok",
+      "reject_reason": null,
+      "connection_closed": false
+    },
+    {
+      "record_id": "gw-conn1-002",
+      "side": "gateway",
+      "config_version": "gw-v2.3.1",
+      "connection_id": "conn-0001",
+      "start_offset": 120,
+      "end_offset": 260,
+      "delimitation": "ok",
+      "reject_reason": null,
+      "connection_closed": false
+    },
+    {
+      "record_id": "app-conn1-002",
+      "side": "app",
+      "config_version": "app-v5.0.2",
+      "connection_id": "conn-0001",
+      "start_offset": 120,
+      "end_offset": 260,
+      "delimitation": "ok",
+      "reject_reason": null,
+      "connection_closed": false
+    },
+    {
+      "record_id": "gw-conn1-003",
+      "side": "gateway",
+      "config_version": "gw-v2.3.1",
+      "connection_id": "conn-0001",
+      "start_offset": 260,
+      "end_offset": 390,
+      "delimitation": "ok",
+      "reject_reason": null,
+      "connection_closed": true
+    },
+    {
+      "record_id": "app-conn1-003",
+      "side": "app",
+      "config_version": "app-v5.0.2",
+      "connection_id": "conn-0001",
+      "start_offset": 260,
+      "end_offset": 390,
+      "delimitation": "ok",
+      "reject_reason": null,
+      "connection_closed": true
+    },
+    {
+      "record_id": "gw-conn2-001",
+      "side": "gateway",
+      "config_version": "gw-v2.3.1",
+      "connection_id": "conn-0002",
+      "start_offset": 0,
+      "end_offset": 80,
+      "delimitation": "rejected",
+      "reject_reason": "both Content-Length and Transfer-Encoding present",
+      "connection_closed": null
+    },
+    {
+      "record_id": "gw-conn3-001",
+      "side": "gateway",
+      "config_version": "gw-v2.4.0",
+      "connection_id": "conn-0003",
+      "start_offset": 0,
+      "end_offset": 100,
+      "delimitation": "ok",
+      "reject_reason": null,
+      "connection_closed": false
+    },
+    {
+      "record_id": "app-conn3-001",
+      "side": "app",
+      "config_version": "app-v5.0.2",
+      "connection_id": "conn-0003",
+      "start_offset": 0,
+      "end_offset": 64,
+      "delimitation": "ok",
+      "reject_reason": null,
+      "connection_closed": false
+    },
+    {
+      "record_id": "gw-conn4-001",
+      "side": "gateway",
+      "config_version": "gw-v2.4.0",
+      "connection_id": "conn-0004",
+      "start_offset": 0,
+      "end_offset": 200,
+      "delimitation": "ok",
+      "reject_reason": null,
+      "connection_closed": false
+    }
+  ]
+}

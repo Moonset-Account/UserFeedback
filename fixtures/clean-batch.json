@@ -1,0 +1,60 @@
+{
+  "batch_id": "clean-batch",
+  "records": [
+    {
+      "record_id": "gw-c1-1",
+      "side": "gateway",
+      "config_version": "gw-v2.3.1",
+      "connection_id": "conn-clean-1",
+      "start_offset": 0,
+      "end_offset": 100,
+      "delimitation": "ok",
+      "reject_reason": null,
+      "connection_closed": false
+    },
+    {
+      "record_id": "app-c1-1",
+      "side": "app",
+      "config_version": "app-v5.0.2",
+      "connection_id": "conn-clean-1",
+      "start_offset": 0,
+      "end_offset": 100,
+      "delimitation": "ok",
+      "reject_reason": null,
+      "connection_closed": false
+    },
+    {
+      "record_id": "gw-c1-2",
+      "side": "gateway",
+      "config_version": "gw-v2.3.1",
+      "connection_id": "conn-clean-1",
+      "start_offset": 100,
+      "end_offset": 220,
+      "delimitation": "ok",
+      "reject_reason": null,
+      "connection_closed": true
+    },
+    {
+      "record_id": "app-c1-2",
+      "side": "app",
+      "config_version": "app-v5.0.2",
+      "connection_id": "conn-clean-1",
+      "start_offset": 100,
+      "end_offset": 220,
+      "delimitation": "ok",
+      "reject_reason": null,
+      "connection_closed": true
+    },
+    {
+      "record_id": "gw-c2-1",
+      "side": "gateway",
+      "config_version": "gw-v2.3.1",
+      "connection_id": "conn-clean-2",
+      "start_offset": 0,
+      "end_offset": 60,
+      "delimitation": "rejected",
+      "reject_reason": "invalid header folding",
+      "connection_closed": true
+    }
+  ]
+}
