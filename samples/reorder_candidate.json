@@ -1,0 +1,26 @@
+[
+  {
+    "id": "allow-ops-to-db",
+    "action": "allow",
+    "src": "10.20.7.0/24",
+    "dst": "10.30.8.0/24",
+    "proto": "tcp",
+    "port": "5432"
+  },
+  {
+    "id": "deny-office-to-db",
+    "action": "deny",
+    "src": "10.20.0.0/16",
+    "dst": "10.30.8.0/24",
+    "proto": "tcp",
+    "port": "5432"
+  },
+  {
+    "id": "allow-all-internal",
+    "action": "allow",
+    "src": "10.0.0.0/8",
+    "dst": "10.0.0.0/8",
+    "proto": "any",
+    "port": "any"
+  }
+]

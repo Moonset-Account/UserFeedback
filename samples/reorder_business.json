@@ -1,0 +1,26 @@
+[
+  {
+    "id": "biz-office-to-db",
+    "src": "10.20.0.0/16",
+    "dst": "10.30.8.0/24",
+    "proto": "tcp",
+    "port": "5432",
+    "expect": "deny"
+  },
+  {
+    "id": "biz-ops-to-db",
+    "src": "10.20.7.0/24",
+    "dst": "10.30.8.0/24",
+    "proto": "tcp",
+    "port": "5432",
+    "expect": "allow"
+  },
+  {
+    "id": "biz-partner-to-db",
+    "src": "172.16.9.0/24",
+    "dst": "10.30.8.0/24",
+    "proto": "tcp",
+    "port": "5432",
+    "expect": "allow"
+  }
+]
