@@ -1,0 +1,20 @@
+{
+  "type": "exec",
+  "id": "q_sort",
+  "location": "demo.py:30",
+  "structure": {
+    "type": "concat",
+    "parts": [
+      {"type": "literal", "value": "SELECT * FROM users ORDER BY name "},
+      {
+        "type": "cond",
+        "branches": [
+          {"label": "ascending", "value": {"type": "literal", "value": "asc"}},
+          {"label": "custom", "value": {"type": "var", "name": "sort_key"}}
+        ],
+        "else": {"type": "literal", "value": "desc"}
+      }
+    ]
+  },
+  "bindings": []
+}

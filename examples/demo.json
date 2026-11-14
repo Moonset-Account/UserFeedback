@@ -1,0 +1,32 @@
+{
+  "executions": [
+    {
+      "type": "exec",
+      "id": "q_bind",
+      "location": "demo.py:10",
+      "structure": {
+        "type": "concat",
+        "parts": [
+          {"type": "literal", "value": "SELECT * FROM users WHERE id = "},
+          {"type": "param", "index": 0}
+        ]
+      },
+      "bindings": [
+        {"type": "var", "name": "user_id"}
+      ]
+    },
+    {
+      "type": "exec",
+      "id": "q_struct",
+      "location": "demo.py:20",
+      "structure": {
+        "type": "concat",
+        "parts": [
+          {"type": "literal", "value": "SELECT * FROM users WHERE id = "},
+          {"type": "var", "name": "user_id"}
+        ]
+      },
+      "bindings": []
+    }
+  ]
+}

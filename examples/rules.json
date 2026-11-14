@@ -1,0 +1,4 @@
+{
+  "external_inputs": ["user_id", "sort_key"],
+  "allowed_identifiers": ["asc", "desc", "name", "created_at"]
+}

@@ -1,0 +1,17 @@
+{
+  "type": "exec",
+  "id": "q_mismatch",
+  "location": "demo.py:40",
+  "structure": {
+    "type": "concat",
+    "parts": [
+      {"type": "literal", "value": "SELECT * FROM users WHERE id = "},
+      {"type": "param", "index": 0},
+      {"type": "literal", "value": " AND org = "},
+      {"type": "param", "index": 1}
+    ]
+  },
+  "bindings": [
+    {"type": "var", "name": "user_id"}
+  ]
+}
