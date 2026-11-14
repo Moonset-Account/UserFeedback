@@ -1,0 +1,13 @@
+{
+  "sessions": [
+    {"app": "A", "issuer": "idp-1", "account": "alice", "session_id": "s1", "login_time": 100},
+    {"app": "B", "issuer": "idp-1", "account": "alice", "session_id": "s1", "login_time": 100},
+    {"app": "A", "issuer": "idp-1", "account": "alice", "session_id": "s2", "login_time": 120},
+    {"app": "B", "issuer": "idp-1", "account": "bob",   "session_id": "s9", "login_time": 100},
+    {"app": "A", "issuer": "idp-2", "account": "alice", "session_id": "s1", "login_time": 100}
+  ],
+  "events": [
+    {"event_id": "e1", "issuer": "idp-1", "issued_at": 200, "type": "session", "session_id": "s1"},
+    {"event_id": "e1", "issuer": "idp-1", "issued_at": 200, "type": "session", "session_id": "s1"}
+  ]
+}

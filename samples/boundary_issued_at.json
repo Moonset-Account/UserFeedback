@@ -1,0 +1,10 @@
+{
+  "sessions": [
+    {"app": "A", "issuer": "idp-1", "account": "alice", "session_id": "old", "login_time": 199},
+    {"app": "A", "issuer": "idp-1", "account": "alice", "session_id": "edge", "login_time": 200},
+    {"app": "A", "issuer": "idp-1", "account": "alice", "session_id": "new", "login_time": 201}
+  ],
+  "events": [
+    {"event_id": "e1", "issuer": "idp-1", "issued_at": 200, "type": "account", "account": "alice"}
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "sessions": [
+    {"app": "A", "issuer": "idp-1", "account": "alice", "session_id": "s1", "login_time": 100},
+    {"app": "B", "issuer": "idp-1", "account": "alice", "session_id": "s1", "login_time": 100},
+    {"app": "B", "issuer": "idp-1", "account": "alice", "session_id": "s2", "login_time": 150}
+  ],
+  "events": [
+    {"event_id": "e1", "issuer": "idp-1", "issued_at": 200, "type": "account", "account": "alice"}
+  ],
+  "adapter": {"failures": {"B": 1}},
+  "relogins": [
+    {"app": "B", "issuer": "idp-1", "account": "alice", "session_id": "s3", "login_time": 300}
+  ],
+  "retry": true
+}
