@@ -1,0 +1,14 @@
+{
+  "generic_message": "系统繁忙，请稍后重试",
+  "unknown_code": "INTERNAL_ERROR",
+  "mappings": {
+    "PAYMENT_DECLINED": {
+      "client_code": "PAYMENT_DECLINED",
+      "client_message": "支付未成功，请更换支付方式后重试"
+    },
+    "RATE_LIMITED": {
+      "client_code": "RATE_LIMITED",
+      "client_message": "请求过于频繁，请稍后再试"
+    }
+  }
+}
