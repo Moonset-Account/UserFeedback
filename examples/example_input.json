@@ -1,0 +1,23 @@
+{
+  "commits": [
+    {"id": "r", "parents": [], "fix_ids": [], "reverts": []},
+    {"id": "a1", "parents": ["r"], "fix_ids": ["F1"], "reverts": []},
+    {"id": "b1", "parents": ["r"], "fix_ids": [], "reverts": []},
+    {"id": "m1", "parents": ["a1", "b1"], "fix_ids": [], "reverts": []},
+    {"id": "m2", "parents": ["m1"], "fix_ids": [], "reverts": []},
+    {"id": "rv", "parents": ["m2"], "fix_ids": [], "reverts": ["F1"]},
+    {"id": "rf", "parents": ["rv"], "fix_ids": ["F1"], "reverts": []}
+  ],
+  "maintenance_lines": [
+    {"name": "LTS", "roots": ["r"], "recognized_fix_ids": ["F1"]},
+    {"name": "LTS-RESOLVED", "roots": ["r"], "recognized_fix_ids": ["F1"]}
+  ],
+  "builds": [
+    {"build_id": "B-merge-unresolved", "line": "LTS", "source_commit": "m2"},
+    {"build_id": "B-reaffected", "line": "LTS-RESOLVED", "source_commit": "rv"},
+    {"build_id": "B-restored", "line": "LTS-RESOLVED", "source_commit": "rf"}
+  ],
+  "merge_resolutions": [
+    {"commit": "m1", "fix_id": "F1", "resolved": "fixed", "line": "LTS-RESOLVED"}
+  ]
+}
