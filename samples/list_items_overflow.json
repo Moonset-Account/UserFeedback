@@ -1,0 +1,5 @@
+[
+  {"version": "2", "task_type": "text_classification", "record_id": "keep-5001", "text": "Array framing works too.", "labels": ["a", "b", "c"]},
+  {"version": "2", "task_type": "text_classification", "record_id": "list-5002", "text": "This record has four labels.", "labels": ["a", "b", "c", "d"]},
+  {"version": "2", "task_type": "text_classification", "record_id": "keep-5003", "text": "Independent record after the wide one.", "labels": ["a"]}
+]

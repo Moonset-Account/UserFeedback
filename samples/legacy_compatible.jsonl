@@ -1,0 +1,4 @@
+{"version":"1","task_type":"text_label","task_id":"legacy-1001","content":"Which sentiment does this review express?","answer_labels":["positive","negative","neutral"],"extensions":{"legacy_source":"pipeline-2019","legacy_tags":["sentiment","short-text"]}}
+{"version":"1","task_type":"document_scan","task_id":"legacy-1002","document_title":"Legacy onboarding memo","sections":["Accounts are created by an operator.","Approvals are recorded in the ledger."],"extensions":{"legacy_source":"pipeline-2019"}}
+{"version":"2","task_type":"text_classification","record_id":"modern-2001","text":"Which sentiment does this review express?","labels":["positive","negative","neutral"],"extensions":{"source_system":"v2-ingest","import_batch":"batch-7"}}
+{"version":"2","task_type":"document_analysis","record_id":"modern-2002","document":{"title":"Quarterly operations summary","paragraphs":["Revenue rose.","Costs fell."]},"extensions":{"annotations":{"reviewer":"synthetic","score":3}}}

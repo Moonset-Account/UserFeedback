@@ -1,0 +1,4 @@
+{"version":"2","task_type":"text_classification","record_id":"keep-3001","text":"This record is registered and must still import.","labels":["positive"]}
+{"version":"2","task_type":"text_summarization","record_id":"unknown-3002","text":"No decoder is registered for this task type.","labels":["x"]}
+{"version":"2","task_type":"os.system","record_id":"unknown-3003","text":"A task type is a table key, not a callable name.","labels":["x"]}
+{"version":"2","task_type":"document_analysis","record_id":"keep-3004","document":{"title":"Still imported","paragraphs":["A later independent record continues."]}}

@@ -1,0 +1,3 @@
+{"version":"2","task_type":"text_classification","record_id":"keep-4001","text":"Shallow record imported before the deep one.","labels":["a"]}
+{"version":"2","task_type":"text_classification","record_id":"deep-4002","text":"The annotations object is nested beyond the configured depth.","labels":["a"],"extensions":{"annotations":{"l1":{"l2":{"l3":{"l4":{"l5":{"l6":{"l7":"too deep"}}}}}}}}}
+{"version":"2","task_type":"text_classification","record_id":"keep-4003","text":"Independent record after the deep one.","labels":["a"]}

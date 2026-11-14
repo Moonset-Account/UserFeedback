@@ -1,0 +1,6 @@
+{
+  "max_file_bytes": 65536,
+  "max_record_bytes": 4096,
+  "max_object_depth": 6,
+  "max_list_items": 3
+}
