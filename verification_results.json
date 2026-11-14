@@ -1,0 +1,152 @@
+{
+  "generated_at": "2026-11-14T05:14:21",
+  "unit_tests": {
+    "testsRun": 21,
+    "skipped": 0,
+    "failures": 0,
+    "errors": 0,
+    "wasSuccessful": true
+  },
+  "sample_cases": [
+    {
+      "case_id": "CASE-RETENTION-FRESH",
+      "assertion": "within-retention attachment is not confirmed for deletion",
+      "expected": false,
+      "actual": false,
+      "pass": true
+    },
+    {
+      "case_id": "CASE-EXPIRED-DELETE",
+      "assertion": "expired attachment without holds is deleted",
+      "expected": "deleted",
+      "actual": "deleted",
+      "pass": true
+    },
+    {
+      "case_id": "CASE-EXPIRED-FILE-GONE",
+      "assertion": "deleted attachment file no longer exists on disk",
+      "expected": false,
+      "actual": false,
+      "pass": true
+    },
+    {
+      "case_id": "CASE-RETENTION-BOUNDARY",
+      "assertion": "attachment exactly retention_days old is expired (age >= retention)",
+      "expected": "deleted",
+      "actual": "deleted",
+      "pass": true
+    },
+    {
+      "case_id": "CASE-HOLD-CASE",
+      "assertion": "active case-level hold blocks deletion with reason",
+      "expected": "legal_hold:H-CASE",
+      "actual": "legal_hold:H-CASE",
+      "pass": true
+    },
+    {
+      "case_id": "CASE-HOLD-ANY-ACTIVE",
+      "assertion": "any one of several holds being active blocks (inactive ignored)",
+      "expected": "legal_hold:H-ATT",
+      "actual": "legal_hold:H-ATT",
+      "pass": true
+    },
+    {
+      "case_id": "CASE-HOLD-INACTIVE",
+      "assertion": "inactive hold alone does not block deletion",
+      "expected": "deleted",
+      "actual": "deleted",
+      "pass": true
+    },
+    {
+      "case_id": "CASE-VERSION-REPLACED",
+      "assertion": "attachment replaced after confirmation is skipped",
+      "expected": "version_changed",
+      "actual": "version_changed",
+      "pass": true
+    },
+    {
+      "case_id": "CASE-VERSION-PRESERVED",
+      "assertion": "new version content is preserved (confirmed list not applied)",
+      "expected": "content-v2 of att-replaced",
+      "actual": "content-v2 of att-replaced",
+      "pass": true
+    },
+    {
+      "case_id": "CASE-HOLD-NEW",
+      "assertion": "freeze added after confirmation blocks deletion",
+      "expected": "legal_hold:H-NEW",
+      "actual": "legal_hold:H-NEW",
+      "pass": true
+    },
+    {
+      "case_id": "CASE-RETRY-FIRST-RUN",
+      "assertion": "transient I/O error marks entry pending_retry",
+      "expected": "pending_retry",
+      "actual": "pending_retry",
+      "pass": true
+    },
+    {
+      "case_id": "CASE-RESULT-COUNTS",
+      "assertion": "first run counts deleted/skipped/pending_retry",
+      "expected": {
+        "deleted": 3,
+        "skipped": 4,
+        "pending_retry": 1,
+        "pending": 0
+      },
+      "actual": {
+        "deleted": 3,
+        "skipped": 4,
+        "pending_retry": 1,
+        "pending": 0
+      },
+      "pass": true
+    },
+    {
+      "case_id": "CASE-INDEX-UPDATED",
+      "assertion": "deleted attachments are removed from the file index",
+      "expected": false,
+      "actual": false,
+      "pass": true
+    },
+    {
+      "case_id": "CASE-RETRY-RESUME",
+      "assertion": "pending_retry entry is retried and deleted on rerun",
+      "expected": "deleted",
+      "actual": "deleted",
+      "pass": true
+    },
+    {
+      "case_id": "CASE-RESUME-JOURNAL",
+      "assertion": "previously deleted entry is reported from journal, not reprocessed",
+      "expected": true,
+      "actual": true,
+      "pass": true
+    },
+    {
+      "case_id": "CASE-SKIPPED-TERMINAL",
+      "assertion": "skipped entry stays terminal on rerun (new round needed)",
+      "expected": true,
+      "actual": true,
+      "pass": true
+    },
+    {
+      "case_id": "CASE-RESUME-COUNTS",
+      "assertion": "rerun counts reflect final journal state",
+      "expected": {
+        "deleted": 4,
+        "skipped": 4,
+        "pending_retry": 0,
+        "pending": 0
+      },
+      "actual": {
+        "deleted": 4,
+        "skipped": 4,
+        "pending_retry": 0,
+        "pending": 0
+      },
+      "pass": true
+    }
+  ],
+  "sample_error": null
+}
