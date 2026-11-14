@@ -1,0 +1,20 @@
+{
+  "board": "demo-board",
+  "endianness": "little",
+  "header": {
+    "magic": "46574c47",
+    "count_offset": 4,
+    "count_size": 4
+  },
+  "record": {
+    "fields": [
+      {"name": "type", "size": 4},
+      {"name": "start", "size": 4},
+      {"name": "length", "size": 4},
+      {"name": "perms", "size": 4}
+    ]
+  },
+  "reserved_regions": [
+    {"name": "bootrom", "start": 0, "length": 256}
+  ]
+}
