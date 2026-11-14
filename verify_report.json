@@ -1,0 +1,222 @@
+{
+  "overall_status": "passed",
+  "python": "3.11.6 (main, Oct  2 2023, 13:45:54) [Clang 15.0.0 (clang-1500.0.40.1)]",
+  "workspace": "/Users/xingyaolei/Desktop/feedback-studio/runs/security-20261114/SEC-20261114-038/round-1/attempt-4/workspace",
+  "unittest": {
+    "status": "passed",
+    "reason": null,
+    "discovered": 11,
+    "tests_run": 11,
+    "executed": 11,
+    "skipped": 0,
+    "failures": 0,
+    "errors": 0,
+    "output": "test_cli_bad_usage_exit_two (tests.test_header_precheck.CliTests.test_cli_bad_usage_exit_two) ... ok\ntest_cli_rejection_exit_one (tests.test_header_precheck.CliTests.test_cli_rejection_exit_one) ... ok\ntest_cli_success_exit_zero_and_json (tests.test_header_precheck.CliTests.test_cli_success_exit_zero_and_json) ... ok\ntest_bool_is_rejected_even_though_bool_subclasses_int (tests.test_header_precheck.InvalidArgumentTests.test_bool_is_rejected_even_though_bool_subclasses_int) ... ok\ntest_negative_values_rejected (tests.test_header_precheck.InvalidArgumentTests.test_negative_values_rejected) ... ok\ntest_non_integer_types_rejected (tests.test_header_precheck.InvalidArgumentTests.test_non_integer_types_rejected) ... ok\ntest_astronomical_declared_length_returns_instantly_without_buffer (tests.test_header_precheck.NoLargeAllocationTests.test_astronomical_declared_length_returns_instantly_without_buffer) ... ok\ntest_big_field_overflow_does_not_compute_payload_buffer (tests.test_header_precheck.NoLargeAllocationTests.test_big_field_overflow_does_not_compute_payload_buffer) ... ok\ntest_all_cases (tests.test_header_precheck.TableDrivenPrecheckTests.test_all_cases) ... ok\ntest_case_ids_are_stable_and_unique (tests.test_header_precheck.TableDrivenPrecheckTests.test_case_ids_are_stable_and_unique) ... ok\ntest_failure_codes_are_explicit_and_distinct (tests.test_header_precheck.TableDrivenPrecheckTests.test_failure_codes_are_explicit_and_distinct)\n五类失败原因都至少被一个用例覆盖，且代码互不相同。 ... ok\n\n----------------------------------------------------------------------\nRan 11 tests in 0.008s\n\nOK\n"
+  },
+  "sample_assertions": {
+    "status": "passed",
+    "total": 9,
+    "passed": 9,
+    "failed": 0,
+    "records": [
+      {
+        "case_id": "sample-ok-small",
+        "description": "正常小样例：16 字节头 + 10 条 * 32 字节 = 336",
+        "input": {
+          "record_count": 10,
+          "record_length": 32,
+          "header_length": 16,
+          "actual_file_size": 336,
+          "resource_budget": 4096
+        },
+        "expected": {
+          "code": "OK",
+          "declared_total_length": 336
+        },
+        "actual": {
+          "code": "OK",
+          "ok": true,
+          "declared_total_length": 336,
+          "reason": "预检通过"
+        },
+        "passed": true
+      },
+      {
+        "case_id": "sample-zero-batch",
+        "description": "零批次：条数 0 且记录长度 0，仅头部 24 字节",
+        "input": {
+          "record_count": 0,
+          "record_length": 0,
+          "header_length": 24,
+          "actual_file_size": 24,
+          "resource_budget": 64
+        },
+        "expected": {
+          "code": "OK",
+          "declared_total_length": 24
+        },
+        "actual": {
+          "code": "OK",
+          "ok": true,
+          "declared_total_length": 24,
+          "reason": "预检通过"
+        },
+        "passed": true
+      },
+      {
+        "case_id": "sample-zero-batch-nonzero-record-length",
+        "description": "零批次但记录长度非零：字段越界",
+        "input": {
+          "record_count": 0,
+          "record_length": 8,
+          "header_length": 24,
+          "actual_file_size": 24,
+          "resource_budget": 64
+        },
+        "expected": {
+          "code": "FIELD_OUT_OF_RANGE",
+          "declared_total_length": null
+        },
+        "actual": {
+          "code": "FIELD_OUT_OF_RANGE",
+          "ok": false,
+          "declared_total_length": null,
+          "reason": "字段越界：头字段或调用方参数超出允许范围：记录条数为零时每条记录长度必须为零（载荷长度为零）"
+        },
+        "passed": true
+      },
+      {
+        "case_id": "boundary-total-eq-uint32-max",
+        "description": "声明总长恰好等于 2^32-1：可表示，通过",
+        "input": {
+          "record_count": 2,
+          "record_length": 2000000000,
+          "header_length": 294967295,
+          "actual_file_size": 4294967295,
+          "resource_budget": 4294967295
+        },
+        "expected": {
+          "code": "OK",
+          "declared_total_length": 4294967295
+        },
+        "actual": {
+          "code": "OK",
+          "ok": true,
+          "declared_total_length": 4294967295,
+          "reason": "预检通过"
+        },
+        "passed": true
+      },
+      {
+        "case_id": "boundary-total-uint32-max-plus-one",
+        "description": "声明总长等于 2^32：无法表示",
+        "input": {
+          "record_count": 2,
+          "record_length": 2000000000,
+          "header_length": 294967296,
+          "actual_file_size": 4294967295,
+          "resource_budget": 4294967296
+        },
+        "expected": {
+          "code": "TOTAL_LENGTH_UNREPRESENTABLE",
+          "declared_total_length": 4294967296
+        },
+        "actual": {
+          "code": "TOTAL_LENGTH_UNREPRESENTABLE",
+          "ok": false,
+          "declared_total_length": 4294967296,
+          "reason": "声明总长无法表示：头长度+条数*每条长度超过32位无符号整数上限：声明总长度 4294967296 超过32位无符号整数上限 4294967295"
+        },
+        "passed": true
+      },
+      {
+        "case_id": "sample-field-overflow",
+        "description": "条数字段超过 uint32 上限：字段越界",
+        "input": {
+          "record_count": 4294967296,
+          "record_length": 1,
+          "header_length": 0,
+          "actual_file_size": 0,
+          "resource_budget": 4294967295
+        },
+        "expected": {
+          "code": "FIELD_OUT_OF_RANGE",
+          "declared_total_length": null
+        },
+        "actual": {
+          "code": "FIELD_OUT_OF_RANGE",
+          "ok": false,
+          "declared_total_length": null,
+          "reason": "字段越界：头字段或调用方参数超出允许范围：字段 record_count 超过32位无符号整数上限"
+        },
+        "passed": true
+      },
+      {
+        "case_id": "sample-truncated",
+        "description": "实际文件比声明总长短 1 字节：内容截断",
+        "input": {
+          "record_count": 4,
+          "record_length": 10,
+          "header_length": 8,
+          "actual_file_size": 47,
+          "resource_budget": 4096
+        },
+        "expected": {
+          "code": "CONTENT_TRUNCATED",
+          "declared_total_length": 48
+        },
+        "actual": {
+          "code": "CONTENT_TRUNCATED",
+          "ok": false,
+          "declared_total_length": 48,
+          "reason": "内容截断：实际文件字节数小于声明总长度：实际文件 47 字节，少于声明总长度 48 字节"
+        },
+        "passed": true
+      },
+      {
+        "case_id": "sample-trailing-excess",
+        "description": "实际文件比声明总长长 1 字节：尾部多余",
+        "input": {
+          "record_count": 4,
+          "record_length": 10,
+          "header_length": 8,
+          "actual_file_size": 49,
+          "resource_budget": 4096
+        },
+        "expected": {
+          "code": "TRAILING_EXCESS",
+          "declared_total_length": 48
+        },
+        "actual": {
+          "code": "TRAILING_EXCESS",
+          "ok": false,
+          "declared_total_length": 48,
+          "reason": "尾部多余：实际文件字节数大于声明总长度：实际文件 49 字节，多于声明总长度 48 字节"
+        },
+        "passed": true
+      },
+      {
+        "case_id": "sample-budget-exceeded",
+        "description": "声明总长 48 超过预算 47：预算不足",
+        "input": {
+          "record_count": 4,
+          "record_length": 10,
+          "header_length": 8,
+          "actual_file_size": 48,
+          "resource_budget": 47
+        },
+        "expected": {
+          "code": "BUDGET_EXCEEDED",
+          "declared_total_length": 48
+        },
+        "actual": {
+          "code": "BUDGET_EXCEEDED",
+          "ok": false,
+          "declared_total_length": 48,
+          "reason": "预算不足：声明总长度超过调用方给定的资源预算：声明总长度 48 字节超过资源预算 47 字节"
+        },
+        "passed": true
+      }
+    ]
+  }
+}
