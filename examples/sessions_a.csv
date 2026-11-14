@@ -1,0 +1,4 @@
+source,event_id,event_type,host,boot_id,session_id,user,timestamp
+siem,evt-1,login,web1,boot-100,s-1,alice,2026-11-14T08:00:00
+siem,evt-2,logout,web1,boot-100,s-1,alice,2026-11-14T09:00:00
+siem,evt-3,login,web1,boot-100,s-2,bob,2026-11-14T10:00:00

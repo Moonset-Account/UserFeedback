@@ -1,0 +1,6 @@
+{"source": "edr", "event_id": "p-1", "host": "web1", "boot_id": "boot-100", "session_id": "s-1", "pid": 1001, "process": "sshd", "timestamp": "2026-11-14T08:30:00"}
+{"source": "edr", "event_id": "p-6", "host": "web2", "boot_id": "boot-1", "session_id": "s-1", "pid": 1006, "process": "wget", "timestamp": "2026-11-14T08:20:00"}
+{"source": "edr", "event_id": "p-7", "host": "web1", "boot_id": "boot-100", "session_id": "s-3", "pid": 1007, "process": "nc", "timestamp": "2026-11-14T07:30:00"}
+{"source": "edr", "event_id": "p-8", "host": "db1", "boot_id": "boot-7", "session_id": "s-9", "pid": 1008, "process": "psql", "timestamp": "2026-11-14T08:15:00"}
+{"source": "edr", "event_id": "p-9", "host": "web1", "boot_id": "boot-100", "session_id": "s-1", "pid": 1009, "process": "nginx", "timestamp": "2026-11-14T08:20:00"}
+{"source": "edr", "event_id": "p-9", "host": "web1", "boot_id": "boot-100", "session_id": "s-1", "pid": 1099, "process": "nginx", "timestamp": "2026-11-14T08:20:00"}

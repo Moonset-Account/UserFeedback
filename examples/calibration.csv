@@ -1,0 +1,3 @@
+host,boot_id,offset_seconds,error_seconds
+web1,boot-100,3600,30
+db1,boot-7,-28800,60

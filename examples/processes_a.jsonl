@@ -1,0 +1,3 @@
+{"source": "edr", "event_id": "p-1", "host": "web1", "boot_id": "boot-100", "session_id": "s-1", "pid": 1001, "process": "sshd", "timestamp": "2026-11-14T08:30:00"}
+{"source": "edr", "event_id": "p-2", "host": "web1", "boot_id": "boot-100", "session_id": "s-2", "pid": 1002, "process": "bash", "timestamp": "2026-11-14T10:05:00"}
+{"source": "edr", "event_id": "p-3", "host": "web1", "boot_id": "boot-100", "session_id": "s-1", "pid": 1003, "process": "cron", "timestamp": "2026-11-14T09:00:00"}
