@@ -1,0 +1,5 @@
+# 失败重发样例：隔离命令回执失败后，按原操作序号重发并成功。
+{"type": "send", "device": "dev-02", "action": "isolate"}
+{"type": "receipt", "device": "dev-02", "cmd_id": 1, "result": "failed"}
+{"type": "resend", "device": "dev-02"}
+{"type": "receipt", "device": "dev-02", "cmd_id": 2, "result": "success"}

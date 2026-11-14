@@ -1,0 +1,6 @@
+# 需求演示样例：先隔离再解除，解除回执(cmd 2)先于隔离回执(cmd 1)到达。
+# 期望最终设备状态：期望=released，最后确认=released，待确认=0。
+{"type": "send", "device": "dev-01", "action": "isolate"}
+{"type": "send", "device": "dev-01", "action": "release"}
+{"type": "receipt", "device": "dev-01", "cmd_id": 2, "result": "success"}
+{"type": "receipt", "device": "dev-01", "cmd_id": 1, "result": "success"}
