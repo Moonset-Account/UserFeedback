@@ -1,0 +1,36 @@
+{
+  "levels": ["S1", "S2", "S3", "S4"],
+  "fields": {
+    "users.ssn": {"level": "S4"},
+    "users.name": {"level": "S2"},
+    "orders.amount": {"level": "S2"},
+    "stats.region": {"level": "S1"}
+  },
+  "edges": [
+    {"from": ["users.ssn", "users.name"], "to": "mart.customer_profile"},
+    {"from": ["mart.customer_profile"], "to": "mart.vip_list"},
+    {"from": ["orders.amount"], "to": "mart.daily_revenue"},
+    {"from": ["mart.daily_revenue", "stats.region"], "to": "mart.region_revenue"},
+    {"from": ["feed.q", "users.name"], "to": "feed.p"},
+    {"from": ["feed.p"], "to": "feed.q"},
+    {"from": ["ext.unknown"], "to": "mart.mystery"}
+  ],
+  "downgrades": [
+    {
+      "id": "DG-1",
+      "output": "mart.customer_profile",
+      "inputs": {"users.ssn": "S4"},
+      "target": "S2",
+      "status": "approved",
+      "reason": "ssn 脱敏后输出，批准降至 S2"
+    },
+    {
+      "id": "DG-2",
+      "output": "mart.daily_revenue",
+      "inputs": {"orders.amount": "S3"},
+      "target": "S1",
+      "status": "approved",
+      "reason": "聚合后输出（批准范围与实际输入等级不符，应判为未命中）"
+    }
+  ]
+}
