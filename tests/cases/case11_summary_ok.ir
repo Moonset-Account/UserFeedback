@@ -1,0 +1,18 @@
+# 函数摘要正面对照: 被调函数有摘要(requires/ensures),
+# 调用方实参满足前提, 返回值经 ensures 精化后下游操作安全。
+policy max_len 4096
+func main @ 1:1
+  param len u32 @ 2:1
+  const c64 u32 64 @ 3:1
+  cmp ok len ule c64 @ 4:1
+  check ok @ 5:1
+  call total u32 get_total len @ 6:1
+  alloc buf total @ 7:1
+  read buf total @ 8:1
+  ret _ @ 9:1
+end
+summary get_total
+  requires 0 <= 4096
+  ensures ret <= 4096
+  ensures ret >= 0
+end

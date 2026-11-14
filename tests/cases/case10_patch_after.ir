@@ -1,0 +1,21 @@
+# 补丁后: else 分支补充范围检查(len <= 256), 两条路径均可证明有效。
+policy max_len 4096
+func main @ 1:1
+  param len u32 @ 2:1
+  const c64 u32 64 @ 3:1
+  const c256 u32 256 @ 4:2
+  cmp small len ule c64 @ 5:1
+  br small L_small L_big @ 6:1
+  label L_small
+  alloc buf1 len @ 8:1
+  read buf1 len @ 9:1
+  jmp L_end @ 10:1
+  label L_big
+  cmp le256 len ule c256 @ 12:1
+  check le256 @ 13:1
+  alloc buf2 len @ 14:1
+  read buf2 len @ 15:1
+  jmp L_end @ 16:1
+  label L_end
+  ret _ @ 18:1
+end

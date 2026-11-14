@@ -1,0 +1,13 @@
+# 读取越界: len 被约束在 [100, 4096], 缓冲区只有 64 字节,
+# 读取长度下界超过缓冲区上界, 判定为违规。
+policy max_len 4096
+func main @ 1:1
+  param len u32 @ 2:1
+  const c64 u32 64 @ 3:1
+  const c100 u32 100 @ 4:1
+  cmp lo len uge c100 @ 5:1
+  check lo @ 6:1
+  alloc buf c64 @ 7:1
+  read buf len @ 8:1
+  ret _ @ 9:1
+end

@@ -1,0 +1,20 @@
+# 验收用例2: 仅一条分支缺少范围保证
+# then 分支 len <= 64 安全; else 分支未做任何检查, len ∈ (64, 2^32-1],
+# 该路径上的 alloc/read 无法证明长度有效。
+policy max_len 4096
+func main @ 1:1
+  param len u32 @ 2:1
+  const c64 u32 64 @ 3:1
+  cmp small len ule c64 @ 4:1
+  br small L_small L_big @ 5:1
+  label L_small
+  alloc buf1 len @ 7:1
+  read buf1 len @ 8:1
+  jmp L_end @ 9:1
+  label L_big
+  alloc buf2 len @ 11:1
+  read buf2 len @ 12:1
+  jmp L_end @ 13:1
+  label L_end
+  ret _ @ 15:1
+end

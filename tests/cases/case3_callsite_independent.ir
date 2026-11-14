@@ -1,0 +1,20 @@
+# 验收用例3: 不同调用参数受独立约束
+# 同一被调函数 handle 的两个调用点: a 已检查 <= 64(安全),
+# b 未受任何约束(待确认)。上下文敏感分析必须分别判定。
+policy max_len 4096
+func main @ 1:1
+  param a u32 @ 2:1
+  param b u32 @ 3:1
+  const c64 u32 64 @ 4:1
+  cmp ok a ule c64 @ 5:1
+  check ok @ 6:1
+  call _ _ handle a @ 7:1
+  call _ _ handle b @ 8:1
+  ret _ @ 9:1
+end
+func handle @ 11:1
+  param len u32 @ 12:1
+  alloc buf len @ 13:1
+  read buf len @ 14:1
+  ret _ @ 15:1
+end

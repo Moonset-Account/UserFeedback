@@ -1,0 +1,22 @@
+# 递归收敛规则: countdown 直接递归且无摘要,
+# 返回值按类型全域处理, 下游 alloc 为待确认。
+policy max_len 4096
+func main @ 1:1
+  param n u32 @ 2:1
+  call r u32 countdown n @ 3:1
+  alloc buf r @ 4:1
+  ret _ @ 5:1
+end
+func countdown @ 7:1
+  param k u32 @ 8:1
+  const c0 u32 0 @ 9:1
+  cmp done k ule c0 @ 10:1
+  br done L_ret L_rec @ 11:1
+  label L_ret
+  ret k @ 13:1
+  label L_rec
+  const c1 u32 1 @ 15:1
+  binop k2 u32 sub k c1 @ 16:1
+  call r2 u32 countdown k2 @ 17:1
+  ret r2 @ 18:1
+end

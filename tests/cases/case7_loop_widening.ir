@@ -1,0 +1,19 @@
+# 循环收敛规则: 循环计数器 i 无法静态确定上界,
+# 精确迭代 4 次后 widening 到 u32 全域, 下游 alloc 为待确认。
+policy max_len 4096
+func main @ 1:1
+  param n u32 @ 2:1
+  const c0 u32 0 @ 3:1
+  const c1 u32 1 @ 4:1
+  move i c0 @ 5:1
+  label L_loop
+  cmp more i ult n @ 7:1
+  br more L_body L_done @ 8:1
+  label L_body
+  binop i2 u32 add i c1 @ 10:1
+  move i i2 @ 11:1
+  jmp L_loop @ 12:1
+  label L_done
+  alloc buf i @ 14:1
+  ret _ @ 15:1
+end

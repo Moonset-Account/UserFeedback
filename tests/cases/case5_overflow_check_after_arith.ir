@@ -1,0 +1,20 @@
+# 缺陷模式: 运算后才检查范围
+# hdr/len 各自检查 <= 2^31 后相加, u32 加法数学结果可达 2^32 而回绕;
+# 对 total 的检查作用于回绕后的值, 无法保证真实长度。
+policy max_len 4096
+func main @ 1:1
+  param hdr u32 @ 2:1
+  param len u32 @ 3:1
+  const cmax u32 2147483648 @ 4:1
+  cmp ok1 hdr ule cmax @ 5:1
+  check ok1 @ 6:1
+  cmp ok2 len ule cmax @ 7:1
+  check ok2 @ 8:1
+  binop total u32 add hdr len @ 9:1
+  const c4096 u32 4096 @ 10:1
+  cmp ok3 total ule c4096 @ 11:1
+  check ok3 @ 12:1
+  alloc buf total @ 13:1
+  read buf total @ 14:1
+  ret _ @ 15:1
+end

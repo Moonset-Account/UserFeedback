@@ -1,0 +1,14 @@
+# 缺陷模式: 先缩窄位宽再校验
+# len(u32) 截断为 u16 后检查 <= 100, 但分配/读取使用的是原始宽值 len,
+# 检查不能保护原始值。
+policy max_len 4096
+func main @ 1:1
+  param len u32 @ 2:1
+  trunc t u16 len @ 3:1
+  const c100 u16 100 @ 4:1
+  cmp ok t ule c100 @ 5:1
+  check ok @ 6:1
+  alloc buf len @ 7:1
+  read buf len @ 8:1
+  ret _ @ 9:1
+end
