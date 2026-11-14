@@ -1,0 +1,14 @@
+{
+  "shift_id": "S1",
+  "reserved_slots": 2,
+  "general_slots": 1,
+  "group_caps": {"bulkA": 2},
+  "records": [
+    {"txn_id": "T1", "risk_level": 3, "merchant_group": "bulkA", "enqueued_at": "2026-11-14T08:01:00"},
+    {"txn_id": "T2", "risk_level": 3, "merchant_group": "bulkA", "enqueued_at": "2026-11-14T08:02:00"},
+    {"txn_id": "T3", "risk_level": 3, "merchant_group": "bulkA", "enqueued_at": "2026-11-14T08:03:00"},
+    {"txn_id": "T4", "risk_level": 3, "merchant_group": "bulkB", "enqueued_at": "2026-11-14T08:04:00"},
+    {"txn_id": "T5", "risk_level": 2, "merchant_group": "rare", "enqueued_at": "2026-11-14T08:05:00"},
+    {"txn_id": "T6", "risk_level": 1, "merchant_group": "bulkB", "enqueued_at": "2026-11-14T08:06:00"}
+  ]
+}
