@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feedback>
+  <report_metadata>
+    <org_name>ReporterOne</org_name>
+    <email>noreply@reporter-one.example</email>
+    <report_id>r3</report_id>
+    <date_range><begin>1794528000</begin><end>1794614399</end></date_range>
+  </report_metadata>
+  <policy_published>
+    <domain>example.com</domain>
+    <adkim>r</adkim><aspf>r</aspf>
+    <p>quarantine</p><sp>quarantine</sp><pct>100</pct>
+  </policy_published>
+  <record>
+    <row>
+      <source_ip>192.0.2.55</source_ip>
+      <count>3</count>
+      <policy_evaluated>
+        <disposition>none</disposition>
+        <dkim>pass</dkim>
+        <spf>fail</spf>
+        <reason>
+          <type>forwarded</type>
+          <comment>forwarded by mailing list</comment>
+        </reason>
+      </policy_evaluated>
+    </row>
+    <identifiers><header_from>example.com</header_from></identifiers>
+    <auth_results>
+      <dkim><domain>example.com</domain><selector>s1</selector><result>pass</result></dkim>
+      <spf><domain>mailing.example.net</domain><result>fail</result></spf>
+    </auth_results>
+  </record>
+</feedback>
