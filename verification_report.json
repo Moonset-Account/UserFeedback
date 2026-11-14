@@ -1,0 +1,941 @@
+{
+  "checks": [
+    {
+      "case_id": "unit-suite",
+      "check": "unit_suite",
+      "discovered_test_count": 75,
+      "discovery_root": "tests",
+      "duration_seconds": 4.68,
+      "errors": 0,
+      "executed_not_skipped": 75,
+      "failure_detail": [],
+      "failures": 0,
+      "passed": true,
+      "problems": [],
+      "skipped": 0,
+      "skipped_detail": [],
+      "tests_run": 75
+    },
+    {
+      "actual": {
+        "account": "alice",
+        "allowed": true,
+        "blocked_layers": [],
+        "decided_at": 0.0,
+        "decision": "allow",
+        "deduplicated": false,
+        "first_decided_at": 0.0,
+        "layers": [
+          {
+            "blocked": false,
+            "layer": "account",
+            "limit": 2,
+            "remaining": 1,
+            "retry_at": null,
+            "used": 1,
+            "window_seconds": 10.0
+          },
+          {
+            "blocked": false,
+            "layer": "source",
+            "limit": 3,
+            "remaining": 2,
+            "retry_at": null,
+            "used": 1,
+            "window_seconds": 20.0
+          }
+        ],
+        "reason": "admitted",
+        "request_id": "login-001",
+        "retry_at": null,
+        "source": "203.0.113.7",
+        "tenant": "tenant-a"
+      },
+      "case_id": "cli-allow",
+      "check": "cli_sample",
+      "command": [
+        "app.py",
+        "decide",
+        "--config",
+        "/Users/xingyaolei/Desktop/feedback-studio/runs/security-20261114/SEC-20261114-009/round-1/attempt-6/workspace/fixtures/config.json",
+        "--request",
+        "/Users/xingyaolei/Desktop/feedback-studio/runs/security-20261114/SEC-20261114-009/round-1/attempt-6/workspace/fixtures/request_allow.json"
+      ],
+      "exit_code": 0,
+      "expected": {
+        "exit_code": 0,
+        "fields": {
+          "blocked_layers": [],
+          "decision": "allow",
+          "layers.0.used": 1
+        }
+      },
+      "expected_exit_code": 0,
+      "mismatches": [],
+      "passed": true,
+      "requirement": "a request with room in both layers is admitted"
+    },
+    {
+      "actual": {
+        "allowed": 3,
+        "denied": 3,
+        "errors": 0,
+        "results": [
+          {
+            "account": "alice",
+            "allowed": true,
+            "blocked_layers": [],
+            "decided_at": 0.0,
+            "decision": "allow",
+            "deduplicated": false,
+            "first_decided_at": 0.0,
+            "index": 0,
+            "layers": [
+              {
+                "blocked": false,
+                "layer": "account",
+                "limit": 2,
+                "remaining": 1,
+                "retry_at": null,
+                "used": 1,
+                "window_seconds": 10.0
+              },
+              {
+                "blocked": false,
+                "layer": "source",
+                "limit": 3,
+                "remaining": 2,
+                "retry_at": null,
+                "used": 1,
+                "window_seconds": 20.0
+              }
+            ],
+            "reason": "admitted",
+            "request_id": "r1",
+            "retry_at": null,
+            "source": "203.0.113.7",
+            "tenant": "tenant-a"
+          },
+          {
+            "account": "alice",
+            "allowed": true,
+            "blocked_layers": [],
+            "decided_at": 1.0,
+            "decision": "allow",
+            "deduplicated": false,
+            "first_decided_at": 1.0,
+            "index": 1,
+            "layers": [
+              {
+                "blocked": false,
+                "layer": "account",
+                "limit": 2,
+                "remaining": 0,
+                "retry_at": null,
+                "used": 2,
+                "window_seconds": 10.0
+              },
+              {
+                "blocked": false,
+                "layer": "source",
+                "limit": 3,
+                "remaining": 1,
+                "retry_at": null,
+                "used": 2,
+                "window_seconds": 20.0
+              }
+            ],
+            "reason": "admitted",
+            "request_id": "r2",
+            "retry_at": null,
+            "source": "203.0.113.7",
+            "tenant": "tenant-a"
+          },
+          {
+            "account": "alice",
+            "allowed": false,
+            "blocked_layers": [
+              "account"
+            ],
+            "decided_at": 2.0,
+            "decision": "deny",
+            "deduplicated": false,
+            "first_decided_at": 2.0,
+            "index": 2,
+            "layers": [
+              {
+                "blocked": true,
+                "layer": "account",
+                "limit": 2,
+                "remaining": 0,
+                "retry_at": 10.0,
+                "used": 2,
+                "window_seconds": 10.0
+              },
+              {
+                "blocked": false,
+                "layer": "source",
+                "limit": 3,
+                "remaining": 1,
+                "retry_at": null,
+                "used": 2,
+                "window_seconds": 20.0
+              }
+            ],
+            "reason": "account_rate_limited",
+            "request_id": "r3",
+            "retry_at": 10.0,
+            "source": "203.0.113.7",
+            "tenant": "tenant-a"
+          },
+          {
+            "account": "alice",
+            "allowed": false,
+            "blocked_layers": [
+              "account"
+            ],
+            "decided_at": 2.0,
+            "decision": "deny",
+            "deduplicated": true,
+            "first_decided_at": 2.0,
+            "index": 3,
+            "layers": [
+              {
+                "blocked": true,
+                "layer": "account",
+                "limit": 2,
+                "remaining": 0,
+                "retry_at": 10.0,
+                "used": 2,
+                "window_seconds": 10.0
+              },
+              {
+                "blocked": false,
+                "layer": "source",
+                "limit": 3,
+                "remaining": 1,
+                "retry_at": null,
+                "used": 2,
+                "window_seconds": 20.0
+              }
+            ],
+            "reason": "account_rate_limited",
+            "request_id": "r3",
+            "retry_at": 10.0,
+            "source": "203.0.113.7",
+            "tenant": "tenant-a"
+          },
+          {
+            "account": "alice",
+            "allowed": true,
+            "blocked_layers": [],
+            "decided_at": 10.0,
+            "decision": "allow",
+            "deduplicated": false,
+            "first_decided_at": 10.0,
+            "index": 4,
+            "layers": [
+              {
+                "blocked": false,
+                "layer": "account",
+                "limit": 2,
+                "remaining": 0,
+                "retry_at": null,
+                "used": 2,
+                "window_seconds": 10.0
+              },
+              {
+                "blocked": false,
+                "layer": "source",
+                "limit": 3,
+                "remaining": 0,
+                "retry_at": null,
+                "used": 3,
+                "window_seconds": 20.0
+              }
+            ],
+            "reason": "admitted",
+            "request_id": "r4",
+            "retry_at": null,
+            "source": "203.0.113.7",
+            "tenant": "tenant-a"
+          },
+          {
+            "account": "alice",
+            "allowed": false,
+            "blocked_layers": [
+              "account",
+              "source"
+            ],
+            "decided_at": 10.0,
+            "decision": "deny",
+            "deduplicated": false,
+            "first_decided_at": 10.0,
+            "index": 5,
+            "layers": [
+              {
+                "blocked": true,
+                "layer": "account",
+                "limit": 2,
+                "remaining": 0,
+                "retry_at": 11.0,
+                "used": 2,
+                "window_seconds": 10.0
+              },
+              {
+                "blocked": true,
+                "layer": "source",
+                "limit": 3,
+                "remaining": 0,
+                "retry_at": 20.0,
+                "used": 3,
+                "window_seconds": 20.0
+              }
+            ],
+            "reason": "account_and_source_rate_limited",
+            "request_id": "r1",
+            "retry_at": 20.0,
+            "source": "203.0.113.7",
+            "tenant": "tenant-a"
+          }
+        ]
+      },
+      "case_id": "cli-batch-window-dedup",
+      "check": "cli_sample",
+      "command": [
+        "app.py",
+        "batch",
+        "--config",
+        "/Users/xingyaolei/Desktop/feedback-studio/runs/security-20261114/SEC-20261114-009/round-1/attempt-6/workspace/fixtures/config.json",
+        "--requests",
+        "/Users/xingyaolei/Desktop/feedback-studio/runs/security-20261114/SEC-20261114-009/round-1/attempt-6/workspace/fixtures/batch.json"
+      ],
+      "exit_code": 2,
+      "expected": {
+        "exit_code": 2,
+        "fields": {
+          "allowed": 3,
+          "denied": 3,
+          "errors": 0,
+          "results.2.blocked_layers": [
+            "account"
+          ],
+          "results.2.decision": "deny",
+          "results.2.retry_at": 10.0,
+          "results.3.decided_at": 2.0,
+          "results.3.deduplicated": true,
+          "results.4.decision": "allow",
+          "results.5.decision": "deny",
+          "results.5.retry_at": 20.0
+        }
+      },
+      "expected_exit_code": 2,
+      "mismatches": [],
+      "passed": true,
+      "requirement": "batch order shows denial, dedup replay, window release and TTL expiry"
+    },
+    {
+      "actual": {
+        "failed_scenarios": [],
+        "passed": true,
+        "scenarios": {
+          "demo-dedup-replay": {
+            "case_id": "demo-dedup-replay",
+            "checks": [
+              {
+                "actual": true,
+                "expected": true,
+                "name": "first admitted",
+                "ok": true
+              },
+              {
+                "actual": true,
+                "expected": true,
+                "name": "replay is flagged",
+                "ok": true
+              },
+              {
+                "actual": true,
+                "expected": true,
+                "name": "replay repeats the allow",
+                "ok": true
+              },
+              {
+                "actual": 0.0,
+                "expected": 0.0,
+                "name": "replay keeps the first decision time",
+                "ok": true
+              },
+              {
+                "actual": 1,
+                "expected": 1,
+                "name": "replay charged nothing",
+                "ok": true
+              },
+              {
+                "actual": false,
+                "expected": false,
+                "name": "id reused after the TTL is a fresh decision",
+                "ok": true
+              },
+              {
+                "actual": false,
+                "expected": false,
+                "name": "fresh decision after TTL is denied (budget spent)",
+                "ok": true
+              }
+            ],
+            "passed": true,
+            "requirement": "duplicate request ids reuse the first decision inside the TTL"
+          },
+          "demo-last-unit-race": {
+            "case_id": "demo-last-unit-race",
+            "checks": [
+              {
+                "actual": 0,
+                "expected": 0,
+                "name": "no thread raised",
+                "ok": true
+              },
+              {
+                "actual": 2,
+                "expected": 2,
+                "name": "both threads produced a decision",
+                "ok": true
+              },
+              {
+                "actual": 1,
+                "expected": 1,
+                "name": "exactly one admission",
+                "ok": true
+              },
+              {
+                "actual": 1,
+                "expected": 1,
+                "name": "exactly one denial",
+                "ok": true
+              }
+            ],
+            "passed": true,
+            "requirement": "concurrent callers cannot both spend the final unit of a layer"
+          },
+          "demo-retry-advice": {
+            "case_id": "demo-retry-advice",
+            "checks": [
+              {
+                "actual": true,
+                "expected": true,
+                "name": "first admitted",
+                "ok": true
+              },
+              {
+                "actual": false,
+                "expected": false,
+                "name": "second denied",
+                "ok": true
+              },
+              {
+                "actual": [
+                  "account"
+                ],
+                "expected": [
+                  "account"
+                ],
+                "name": "denial names the account layer",
+                "ok": true
+              },
+              {
+                "actual": "account_rate_limited",
+                "expected": "account_rate_limited",
+                "name": "denial reason",
+                "ok": true
+              },
+              {
+                "actual": 130.0,
+                "expected": 130.0,
+                "name": "earliest retry instant",
+                "ok": true
+              },
+              {
+                "actual": false,
+                "expected": false,
+                "name": "retry half a unit early is denied",
+                "ok": true
+              },
+              {
+                "actual": true,
+                "expected": true,
+                "name": "retry exactly at retry_at is admitted",
+                "ok": true
+              }
+            ],
+            "passed": true,
+            "requirement": "a denial reports the first instant a retry can succeed, and it does"
+          },
+          "demo-tenant-isolation": {
+            "case_id": "demo-tenant-isolation",
+            "checks": [
+              {
+                "actual": true,
+                "expected": true,
+                "name": "tenant-a first admitted",
+                "ok": true
+              },
+              {
+                "actual": false,
+                "expected": false,
+                "name": "tenant-a second denied",
+                "ok": true
+              },
+              {
+                "actual": true,
+                "expected": true,
+                "name": "tenant-b unaffected by tenant-a",
+                "ok": true
+              }
+            ],
+            "passed": true,
+            "requirement": "accounts and sources are counted separately per tenant"
+          },
+          "demo-two-layer-gate": {
+            "case_id": "demo-two-layer-gate",
+            "checks": [
+              {
+                "actual": [
+                  true,
+                  true
+                ],
+                "expected": [
+                  true,
+                  true
+                ],
+                "name": "first two admitted (account has room, source=2)",
+                "ok": true
+              },
+              {
+                "actual": false,
+                "expected": false,
+                "name": "third denied",
+                "ok": true
+              },
+              {
+                "actual": [
+                  "source"
+                ],
+                "expected": [
+                  "source"
+                ],
+                "name": "third blocked layer is source only",
+                "ok": true
+              },
+              {
+                "actual": 60.0,
+                "expected": 60.0,
+                "name": "third retry_at",
+                "ok": true
+              },
+              {
+                "actual": 0,
+                "expected": 0,
+                "name": "denied account was not charged",
+                "ok": true
+              },
+              {
+                "actual": 2,
+                "expected": 2,
+                "name": "denied source stays at limit",
+                "ok": true
+              },
+              {
+                "actual": 1,
+                "expected": 1,
+                "name": "untouched account charged once (denial charged none)",
+                "ok": true
+              }
+            ],
+            "passed": true,
+            "requirement": "admission needs both layers; a blocked layer charges neither"
+          },
+          "demo-window-boundary": {
+            "case_id": "demo-window-boundary",
+            "checks": [
+              {
+                "actual": true,
+                "expected": true,
+                "name": "t=0 admitted",
+                "ok": true
+              },
+              {
+                "actual": true,
+                "expected": true,
+                "name": "t=5 admitted",
+                "ok": true
+              },
+              {
+                "actual": false,
+                "expected": false,
+                "name": "t=9.5 denied (window not yet released)",
+                "ok": true
+              },
+              {
+                "actual": [
+                  "account"
+                ],
+                "expected": [
+                  "account"
+                ],
+                "name": "t=9.5 blocked layer",
+                "ok": true
+              },
+              {
+                "actual": 10.0,
+                "expected": 10.0,
+                "name": "t=9.5 retry_at == first admission + window",
+                "ok": true
+              },
+              {
+                "actual": 2,
+                "expected": 2,
+                "name": "t=9.5 account used",
+                "ok": true
+              },
+              {
+                "actual": true,
+                "expected": true,
+                "name": "t=10.0 admitted (slot freed at the boundary)",
+                "ok": true
+              },
+              {
+                "actual": 2,
+                "expected": 2,
+                "name": "t=10.0 account used == 2 (denial charged nothing)",
+                "ok": true
+              }
+            ],
+            "passed": true,
+            "requirement": "sliding window boundary releases a slot at exactly admitted_at + window"
+          }
+        }
+      },
+      "case_id": "cli-demo-scenarios",
+      "check": "cli_sample",
+      "command": [
+        "app.py",
+        "demo"
+      ],
+      "exit_code": 0,
+      "expected": {
+        "exit_code": 0,
+        "fields": {
+          "failed_scenarios": [],
+          "passed": true,
+          "scenarios.demo-dedup-replay.passed": true,
+          "scenarios.demo-last-unit-race.passed": true,
+          "scenarios.demo-retry-advice.passed": true,
+          "scenarios.demo-tenant-isolation.passed": true,
+          "scenarios.demo-two-layer-gate.passed": true,
+          "scenarios.demo-window-boundary.passed": true
+        }
+      },
+      "expected_exit_code": 0,
+      "mismatches": [],
+      "passed": true,
+      "requirement": "demo reports window boundary, retry, and last-unit race as passing"
+    },
+    {
+      "actual": {
+        "allowed": 1,
+        "denied": 0,
+        "errors": 1,
+        "results": [
+          {
+            "account": "a",
+            "allowed": true,
+            "blocked_layers": [],
+            "decided_at": 0.0,
+            "decision": "allow",
+            "deduplicated": false,
+            "first_decided_at": 0.0,
+            "index": 0,
+            "layers": [
+              {
+                "blocked": false,
+                "layer": "account",
+                "limit": 5,
+                "remaining": 4,
+                "retry_at": null,
+                "used": 1,
+                "window_seconds": 10.0
+              },
+              {
+                "blocked": false,
+                "layer": "source",
+                "limit": 5,
+                "remaining": 4,
+                "retry_at": null,
+                "used": 1,
+                "window_seconds": 10.0
+              }
+            ],
+            "reason": "admitted",
+            "request_id": "rid",
+            "retry_at": null,
+            "source": "192.0.2.1",
+            "tenant": "t"
+          },
+          {
+            "error": "request_id_conflict",
+            "existing": {
+              "account": "a",
+              "decided_at": 0.0,
+              "source": "192.0.2.1"
+            },
+            "incoming": {
+              "account": "b",
+              "source": "192.0.2.1"
+            },
+            "index": 1,
+            "request_id": "rid",
+            "tenant": "t"
+          }
+        ]
+      },
+      "case_id": "cli-request-id-conflict",
+      "check": "cli_sample",
+      "command": [
+        "app.py",
+        "batch",
+        "--config",
+        "/var/folders/lh/7_kw9vx10jq45db2rmzvdcmm0000gn/T/quota-verify-s7xy7pv1/config.json",
+        "--requests",
+        "/var/folders/lh/7_kw9vx10jq45db2rmzvdcmm0000gn/T/quota-verify-s7xy7pv1/requests.json"
+      ],
+      "exit_code": 4,
+      "expected": {
+        "exit_code": 4,
+        "fields": {
+          "errors": 1,
+          "results.1.error": "request_id_conflict",
+          "results.1.existing.account": "a",
+          "results.1.incoming.account": "b"
+        }
+      },
+      "expected_exit_code": 4,
+      "mismatches": [],
+      "passed": true,
+      "requirement": "same request id with a different account reports a conflict"
+    },
+    {
+      "actual": {
+        "allowed": 1,
+        "denied": 0,
+        "errors": 1,
+        "results": [
+          {
+            "account": "a",
+            "allowed": true,
+            "blocked_layers": [],
+            "decided_at": 10.0,
+            "decision": "allow",
+            "deduplicated": false,
+            "first_decided_at": 10.0,
+            "index": 0,
+            "layers": [
+              {
+                "blocked": false,
+                "layer": "account",
+                "limit": 5,
+                "remaining": 4,
+                "retry_at": null,
+                "used": 1,
+                "window_seconds": 10.0
+              },
+              {
+                "blocked": false,
+                "layer": "source",
+                "limit": 5,
+                "remaining": 4,
+                "retry_at": null,
+                "used": 1,
+                "window_seconds": 10.0
+              }
+            ],
+            "reason": "admitted",
+            "request_id": "r1",
+            "retry_at": null,
+            "source": "192.0.2.1",
+            "tenant": "t"
+          },
+          {
+            "error": "clock_regression",
+            "index": 1,
+            "last_seen": 10.0,
+            "received": 9.0,
+            "tenant": "t"
+          }
+        ]
+      },
+      "case_id": "cli-clock-regression",
+      "check": "cli_sample",
+      "command": [
+        "app.py",
+        "batch",
+        "--config",
+        "/var/folders/lh/7_kw9vx10jq45db2rmzvdcmm0000gn/T/quota-verify-3oo8s6om/config.json",
+        "--requests",
+        "/var/folders/lh/7_kw9vx10jq45db2rmzvdcmm0000gn/T/quota-verify-3oo8s6om/requests.json"
+      ],
+      "exit_code": 5,
+      "expected": {
+        "exit_code": 5,
+        "fields": {
+          "errors": 1,
+          "results.1.error": "clock_regression"
+        }
+      },
+      "expected_exit_code": 5,
+      "mismatches": [],
+      "passed": true,
+      "requirement": "a reversed clock reports clock_regression"
+    },
+    {
+      "actual": {
+        "allowed": 1,
+        "denied": 1,
+        "errors": 0,
+        "results": [
+          {
+            "account": "a",
+            "allowed": true,
+            "blocked_layers": [],
+            "decided_at": 0.0,
+            "decision": "allow",
+            "deduplicated": false,
+            "first_decided_at": 0.0,
+            "index": 0,
+            "layers": [
+              {
+                "blocked": false,
+                "layer": "account",
+                "limit": 1,
+                "remaining": 0,
+                "retry_at": null,
+                "used": 1,
+                "window_seconds": 10.0
+              },
+              {
+                "blocked": false,
+                "layer": "source",
+                "limit": 9,
+                "remaining": 8,
+                "retry_at": null,
+                "used": 1,
+                "window_seconds": 10.0
+              }
+            ],
+            "reason": "admitted",
+            "request_id": "r1",
+            "retry_at": null,
+            "source": "192.0.2.1",
+            "tenant": "t"
+          },
+          {
+            "account": "a",
+            "allowed": false,
+            "blocked_layers": [
+              "account"
+            ],
+            "decided_at": 1.0,
+            "decision": "deny",
+            "deduplicated": false,
+            "first_decided_at": 1.0,
+            "index": 1,
+            "layers": [
+              {
+                "blocked": true,
+                "layer": "account",
+                "limit": 1,
+                "remaining": 0,
+                "retry_at": 10.0,
+                "used": 1,
+                "window_seconds": 10.0
+              },
+              {
+                "blocked": false,
+                "layer": "source",
+                "limit": 9,
+                "remaining": 8,
+                "retry_at": null,
+                "used": 1,
+                "window_seconds": 10.0
+              }
+            ],
+            "reason": "account_rate_limited",
+            "request_id": "r2",
+            "retry_at": 10.0,
+            "source": "192.0.2.1",
+            "tenant": "t"
+          }
+        ]
+      },
+      "case_id": "cli-deny-retry-advice",
+      "check": "cli_sample",
+      "command": [
+        "app.py",
+        "batch",
+        "--config",
+        "/var/folders/lh/7_kw9vx10jq45db2rmzvdcmm0000gn/T/quota-verify-tzecpk6q/config.json",
+        "--requests",
+        "/var/folders/lh/7_kw9vx10jq45db2rmzvdcmm0000gn/T/quota-verify-tzecpk6q/requests.json"
+      ],
+      "exit_code": 2,
+      "expected": {
+        "exit_code": 2,
+        "fields": {
+          "results.1.blocked_layers": [
+            "account"
+          ],
+          "results.1.decision": "deny",
+          "results.1.retry_at": 10.0
+        }
+      },
+      "expected_exit_code": 2,
+      "mismatches": [],
+      "passed": true,
+      "requirement": "a denial on the account layer reports the exact retry instant"
+    },
+    {
+      "actual": {
+        "error": "io_error",
+        "message": "[Errno 2] No such file or directory: '/Users/xingyaolei/Desktop/feedback-studio/runs/security-20261114/SEC-20261114-009/round-1/attempt-6/workspace/fixtures/nope.json'"
+      },
+      "case_id": "cli-invalid-input",
+      "check": "cli_sample",
+      "command": [
+        "app.py",
+        "decide",
+        "--config",
+        "/Users/xingyaolei/Desktop/feedback-studio/runs/security-20261114/SEC-20261114-009/round-1/attempt-6/workspace/fixtures/config.json",
+        "--request",
+        "/Users/xingyaolei/Desktop/feedback-studio/runs/security-20261114/SEC-20261114-009/round-1/attempt-6/workspace/fixtures/nope.json"
+      ],
+      "exit_code": 1,
+      "expected": {
+        "exit_code": 1,
+        "fields": {
+          "error": "io_error"
+        }
+      },
+      "expected_exit_code": 1,
+      "mismatches": [],
+      "passed": true,
+      "requirement": "a missing request file is reported as an error with a non-zero exit"
+    }
+  ],
+  "elapsed_seconds": 5.371,
+  "failed_cases": [],
+  "passed": true,
+  "time_budget_seconds": 80.0,
+  "verification": "SEC-20261114-009",
+  "within_time_budget": true
+}

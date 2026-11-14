@@ -1,0 +1,5 @@
+{
+  "account": {"limit": 2, "window_seconds": 10},
+  "source": {"limit": 3, "window_seconds": 20},
+  "dedup_ttl_seconds": 10
+}

@@ -1,0 +1,8 @@
+[
+  {"tenant": "tenant-a", "account": "alice", "source": "203.0.113.7", "request_id": "r1", "now": 0.0},
+  {"tenant": "tenant-a", "account": "alice", "source": "203.0.113.7", "request_id": "r2", "now": 1.0},
+  {"tenant": "tenant-a", "account": "alice", "source": "203.0.113.7", "request_id": "r3", "now": 2.0},
+  {"tenant": "tenant-a", "account": "alice", "source": "203.0.113.7", "request_id": "r3", "now": 3.0},
+  {"tenant": "tenant-a", "account": "alice", "source": "203.0.113.7", "request_id": "r4", "now": 10.0},
+  {"tenant": "tenant-a", "account": "alice", "source": "203.0.113.7", "request_id": "r1", "now": 10.0}
+]
