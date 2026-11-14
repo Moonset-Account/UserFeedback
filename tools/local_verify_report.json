@@ -1,0 +1,129 @@
+{
+  "tool": "SEC-VULN-039-local-verify",
+  "stage": "sample_assertions",
+  "unit_tests": {
+    "discovered": 36,
+    "executed": 36,
+    "skipped": 0,
+    "failures": 0,
+    "errors": 0,
+    "fatal": null
+  },
+  "sample_assertions": [
+    {
+      "case_id": "CASE-01-membership-change",
+      "description": "bob 属于 grp_legacy_share（v1）；v2 移除后不再匹配该组",
+      "input": "examples/scenario_a synthetic fixtures",
+      "expected": {
+        "v1_member_of_legacy_share": true,
+        "v2_member_of_legacy_share": false,
+        "v2_modify_decision": "unverified"
+      },
+      "actual": {
+        "v1_member_of_legacy_share": true,
+        "v2_member_of_legacy_share": false,
+        "v2_modify_decision": "unverified"
+      },
+      "passed": true
+    },
+    {
+      "case_id": "CASE-02-explicit-deny-over-inherited-allow",
+      "description": "carol 对 authd.yaml：继承 allow 被文件上的显式 deny 覆盖；父目录项替换仍为 allow",
+      "input": "examples/scenario_a synthetic fixtures",
+      "expected": {
+        "modify_file": "deny",
+        "replace_entry": "allow"
+      },
+      "actual": {
+        "modify_file": "deny",
+        "replace_entry": "allow"
+      },
+      "passed": true
+    },
+    {
+      "case_id": "CASE-03-readonly-file-replaceable-entry",
+      "description": "alice 不能改 routes.conf 内容，但可通过父目录替换条目",
+      "input": "examples/scenario_a synthetic fixtures",
+      "expected": {
+        "modify_file": "deny",
+        "replace_entry": "allow"
+      },
+      "actual": {
+        "modify_file": "deny",
+        "replace_entry": "allow"
+      },
+      "passed": true
+    },
+    {
+      "case_id": "CASE-04-unexported-directory",
+      "description": "ledger 父目录 exported=false：replace_entry 必须为待核实",
+      "input": "examples/scenario_a synthetic fixtures",
+      "expected": {
+        "modify_file": "allow",
+        "replace_entry": "unverified",
+        "parent_exported": false
+      },
+      "actual": {
+        "modify_file": "allow",
+        "replace_entry": "unverified",
+        "parent_exported": false
+      },
+      "passed": true
+    },
+    {
+      "case_id": "CASE-05-missing-records-stay-unverified",
+      "description": "快照缺失路径、未知主体均判待核实，而不是默认 allow/deny",
+      "input": "examples/scenario_a synthetic fixtures",
+      "expected": {
+        "missing_file_decision": "unverified",
+        "unknown_subject_decision": "unverified",
+        "unknown_subject_resolved": false
+      },
+      "actual": {
+        "missing_file_decision": "unverified",
+        "unknown_subject_decision": "unverified",
+        "unknown_subject_resolved": false
+      },
+      "passed": true
+    },
+    {
+      "case_id": "CASE-06-legacy-vs-new-diff",
+      "description": "新旧结论差异：auth 由 allow 翻转为 deny；router 替换由 deny 翻转为 allow；ledger 替换变为待核实",
+      "input": "examples/scenario_a synthetic fixtures",
+      "expected": {
+        "auth_modify_changed": "deny",
+        "router_replace_changed": "allow",
+        "ledger_replace_new": "unverified",
+        "diff_row_count": 8
+      },
+      "actual": {
+        "auth_modify_changed": "deny",
+        "router_replace_changed": "allow",
+        "ledger_replace_new": "unverified",
+        "diff_row_count": 8
+      },
+      "passed": true
+    },
+    {
+      "case_id": "CASE-07-remediation-and-reverification",
+      "description": "最小整改后普通账号不再有 allow；billing 两项均显式 deny；未导出目录保持待核实",
+      "input": "examples/scenario_a synthetic fixtures",
+      "expected": {
+        "residual_allow_count": 0,
+        "billing_bob_modify": "deny",
+        "billing_bob_replace": "deny",
+        "ledger_bob_replace": "unverified",
+        "unresolved_gaps_recorded": true
+      },
+      "actual": {
+        "residual_allow_count": 0,
+        "billing_bob_modify": "deny",
+        "billing_bob_replace": "deny",
+        "ledger_bob_replace": "unverified",
+        "unresolved_gaps_recorded": true
+      },
+      "passed": true
+    }
+  ],
+  "overall_passed": true
+}

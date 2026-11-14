@@ -1,0 +1,77 @@
+{
+  "version": "synthetic-inventory-v1",
+  "services": [
+    {
+      "service": "svc_billing",
+      "path": "/srv/fictional/billing/billing.conf",
+      "legacy_conclusions": [
+        {
+          "subject_id": "acc_bob",
+          "action": "modify_file",
+          "conclusion": "allow",
+          "basis": "迁移前共享目录 ACL：grp_legacy_share 可写（旧周期检查结论）"
+        },
+        {
+          "subject_id": "acc_bob",
+          "action": "replace_entry",
+          "conclusion": "allow",
+          "basis": "迁移前共享目录 ACL：grp_legacy_share 对父目录可写（旧周期检查结论）"
+        }
+      ]
+    },
+    {
+      "service": "svc_auth",
+      "path": "/srv/fictional/auth/authd.yaml",
+      "legacy_conclusions": [
+        {
+          "subject_id": "acc_carol",
+          "action": "modify_file",
+          "conclusion": "allow",
+          "basis": "旧周期检查报告继承允许未被否决（迁移前快照）"
+        },
+        {
+          "subject_id": "acc_carol",
+          "action": "replace_entry",
+          "conclusion": "unverified",
+          "basis": "旧周期检查未覆盖目录项替换动作"
+        }
+      ]
+    },
+    {
+      "service": "svc_router",
+      "path": "/srv/fictional/router/routes.conf",
+      "legacy_conclusions": [
+        {
+          "subject_id": "acc_alice",
+          "action": "modify_file",
+          "conclusion": "deny",
+          "basis": "旧周期检查：普通文件只读"
+        },
+        {
+          "subject_id": "acc_alice",
+          "action": "replace_entry",
+          "conclusion": "deny",
+          "basis": "旧周期检查未单独评估父目录，沿用文件只读结论"
+        }
+      ]
+    },
+    {
+      "service": "svc_ledger",
+      "path": "/srv/fictional/ledger/ledger.ini",
+      "legacy_conclusions": [
+        {
+          "subject_id": "acc_bob",
+          "action": "modify_file",
+          "conclusion": "allow",
+          "basis": "迁移前共享目录周期检查（父目录权限本次未导出）"
+        },
+        {
+          "subject_id": "acc_bob",
+          "action": "replace_entry",
+          "conclusion": "allow",
+          "basis": "迁移前共享目录周期检查（父目录权限本次未导出）"
+        }
+      ]
+    }
+  ]
+}

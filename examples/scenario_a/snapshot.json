@@ -1,0 +1,93 @@
+{
+  "version": "synthetic-snapshot-v1",
+  "objects": {
+    "/srv/fictional/billing": {
+      "type": "directory",
+      "exported": true,
+      "aces": [],
+      "inheritable_aces": [
+        {
+          "ace_type": "allow",
+          "principal": "grp_legacy_share",
+          "rights": "all",
+          "inherited": false
+        }
+      ]
+    },
+    "/srv/fictional/billing/billing.conf": {
+      "type": "file",
+      "exported": true,
+      "aces": []
+    },
+
+    "/srv/fictional/auth": {
+      "type": "directory",
+      "exported": true,
+      "aces": [],
+      "inheritable_aces": [
+        {
+          "ace_type": "allow",
+          "principal": "grp_oncall",
+          "rights": "all",
+          "inherited": false
+        }
+      ]
+    },
+    "/srv/fictional/auth/authd.yaml": {
+      "type": "file",
+      "exported": true,
+      "aces": [
+        {
+          "ace_type": "deny",
+          "principal": "acc_carol",
+          "rights": ["modify_file"],
+          "inherited": false
+        }
+      ]
+    },
+
+    "/srv/fictional/router": {
+      "type": "directory",
+      "exported": true,
+      "aces": [
+        {
+          "ace_type": "allow",
+          "principal": "acc_alice",
+          "rights": ["replace_entry"],
+          "inherited": false
+        }
+      ],
+      "inheritable_aces": []
+    },
+    "/srv/fictional/router/routes.conf": {
+      "type": "file",
+      "exported": true,
+      "aces": [
+        {
+          "ace_type": "deny",
+          "principal": "acc_alice",
+          "rights": ["modify_file"],
+          "inherited": false
+        }
+      ]
+    },
+
+    "/srv/fictional/ledger": {
+      "type": "directory",
+      "exported": false,
+      "aces": []
+    },
+    "/srv/fictional/ledger/ledger.ini": {
+      "type": "file",
+      "exported": true,
+      "aces": [
+        {
+          "ace_type": "allow",
+          "principal": "acc_bob",
+          "rights": ["modify_file"],
+          "inherited": false
+        }
+      ]
+    }
+  }
+}

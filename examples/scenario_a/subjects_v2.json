@@ -1,0 +1,27 @@
+{
+  "version": "synthetic-subjects-v2-membership-changed",
+  "accounts": {
+    "acc_alice": {"name": "Alice Operator (fictional)", "privileged": false},
+    "acc_bob":   {"name": "Bob Support (fictional)", "privileged": false},
+    "acc_carol": {"name": "Carol Contractor (fictional)", "privileged": false},
+    "acc_rootops": {"name": "RootOps Service Account (fictional)", "privileged": true}
+  },
+  "groups": {
+    "grp_ops_staff": {
+      "name": "Operations Staff (fictional)",
+      "members": ["acc_alice", "grp_oncall"]
+    },
+    "grp_oncall": {
+      "name": "On-call Rotation (fictional)",
+      "members": ["acc_carol"]
+    },
+    "grp_legacy_share": {
+      "name": "Legacy Shared-Drive Writers (fictional)",
+      "members": ["acc_alice", "acc_carol"]
+    },
+    "grp_admins": {
+      "name": "Administrators (fictional)",
+      "members": ["acc_rootops"]
+    }
+  }
+}
