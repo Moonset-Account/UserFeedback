@@ -1,0 +1,100 @@
+# Copyright 2025 The Sigstore Authors
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+name: Cross-version verify
+on:
+  push:
+    branches:
+      - main
+      - series/*
+  pull_request:
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  sign:
+    name: Sign
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: astral-sh/setup-uv@07a047e608db84b3d8c06cd9a7c7dcc9c355c18e # v10.3.2
+      - name: Fetch testing oidc token
+        run: |
+          curl --fail --retry 3 --output oidc-token.txt \
+            https://storage.googleapis.com/sigstore-conformance-testing-token/untrusted-testing-token.txt
+      - name: Sign
+        run: |
+          touch artifact
+          uv run python -m sigstore --staging sign --bundle artifact-staging-rekor2.sigstore.json --identity-token $(cat oidc-token.txt) --rekor-version=2 artifact
+          uv run python -m sigstore --staging sign --bundle artifact-staging-rekor1.sigstore.json --identity-token $(cat oidc-token.txt) --rekor-version=1 artifact
+          uv run python -m sigstore sign --bundle artifact-prod-rekor1.sigstore.json --identity-token $(cat oidc-token.txt) --rekor-version=1 artifact
+      - name: upload signature bundle
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: bundle
+          path: artifact*.sigstore.json
+          if-no-files-found: error
+          retention-days: 1
+  verify:
+    name: Verify with ${{ matrix.version }} on ${{ matrix.env }}
+    needs: [ sign ]
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false # Don't cancel other jobs if one fails
+      matrix:
+        # hand crafted list of old versions we care about
+        version: [ 3.5.6, 3.6.7, 4.0.0, 4.1.0, 4.2.0 ]
+        env: [ staging, prod ]
+        exclude:
+          # exclude staging for versions with https://github.com/sigstore/sigstore-python/issues/1656
+          - env: staging
+            version: 3.5.6
+          - env: staging
+            version: 4.0.0
+          - env: staging
+            version: 4.1.0
+
+    steps:
+      - uses: astral-sh/setup-uv@07a047e608db84b3d8c06cd9a7c7dcc9c355c18e # v10.3.2
+      - run: |
+          uv tool install --prerelease=allow sigstore==${{ matrix.version }}
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: bundle
+      - run: touch artifact
+      - name: Verify (Rekor v2)
+        # Rekor v2 is currently only available on staging, and only supported on sigstore-python 4.x
+        if: startsWith(matrix.version, '3.') != true && matrix.env == 'staging'
+        env:
+          ENV_OPT: ${{ matrix.env == 'staging' && '--staging' || '' }}
+          BUNDLE: artifact-${{matrix.env}}-rekor2.sigstore.json
+        run: |
+          sigstore $ENV_OPT verify identity --verbose \
+            --cert-identity "untrusted-sa@sigstore-conformance.iam.gserviceaccount.com" \
+            --cert-oidc-issuer "https://accounts.google.com" \
+            --bundle $BUNDLE \
+            artifact
+      - name: Verify (Rekor v1)
+        env:
+          ENV_OPT: ${{ matrix.env == 'staging' && '--staging' || '' }}
+          BUNDLE: artifact-${{matrix.env}}-rekor1.sigstore.json
+        run: |
+          sigstore $ENV_OPT verify identity --verbose \
+            --cert-identity "untrusted-sa@sigstore-conformance.iam.gserviceaccount.com" \
+            --cert-oidc-issuer "https://accounts.google.com" \
+            --bundle $BUNDLE \
+            artifact
