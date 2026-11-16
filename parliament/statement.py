@@ -829,6 +829,10 @@ class Statement:
 
         if not has_malformed_resource and effect == "Allow":
             actions_without_matching_resources = []
+            # Expanded actions (in stable order, deduplicated) that have
+            # resource-level constraints but are granted on a full resource
+            # ("*"). Actions that legitimately require "*" are excluded.
+            resource_star_actions = []
             # Ensure the required resources for each action exist
             # Iterate through each action
             for action_struct in expanded_actions:
@@ -869,17 +873,25 @@ class Statement:
 
                     # At least one resource has to match the action's required resources
                     match_found = False
+                    matched_by_star = False
                     for resource in resources:
-                        if resource == "*" and not self.resource_star:
-                            self.resource_star = True
-                            self.add_finding(
-                                "RESOURCE_STAR", location={"actions": actions},
-                            )
+                        if resource == "*":
                             match_found = True
+                            matched_by_star = True
                             continue
                         if is_arn_match(resource_type, arn_format, resource):
                             match_found = True
                             continue
+
+                    if matched_by_star:
+                        # This action has resource-level constraints, but the
+                        # statement grants it on "*". Record the expanded action
+                        # name once, preserving a stable order for reviewers.
+                        action_name = "{}:{}".format(
+                            action_struct["service"], action_struct["action"]
+                        )
+                        if action_name not in resource_star_actions:
+                            resource_star_actions.append(action_name)
 
                     if not match_found:
                         actions_without_matching_resources.append(
@@ -890,6 +902,11 @@ class Statement:
                                 "required_format": arn_format,
                             }
                         )
+            if resource_star_actions:
+                self.resource_star = True
+                self.add_finding(
+                    "RESOURCE_STAR", location={"actions": resource_star_actions},
+                )
             if actions_without_matching_resources:
                 self.add_finding(
                     "RESOURCE_MISMATCH",
