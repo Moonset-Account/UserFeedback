@@ -1,0 +1,50 @@
+# IntelliJ project folder
+.idea
+
+# Other dev-env folders and files
+.vagrant
+.vscode
+Vagrantfile
+Pipfile
+Pipfile.lock
+
+# setup.py-related folders and files
+build
+dist
+*.egg-info
+*.egg
+*.eggs
+
+# Compiled files
+*.pyc
+*.pyo
+
+# Logs
+*.log
+*.log.*
+
+# Tox testing
+.tox
+private/
+tmp/
+keys/
+secret/
+pyoidc*
+foo.*
+
+# Testing stuff
+.coverage
+.cache/
+.pytest_cache
+.mypy_cache
+
+# Dynamically created doc folders
+doc/_build
+!tests/data/keys
+
+# Remaining stuff
+oidc_example/op1/client_db.db
+oidc_example/op1/oc_config.py
+oidc_example/rp3/conf.py
+oidc_example/rp3/modules/
+update
