@@ -115,13 +115,9 @@ class RegistryHive:
         else:
             parts = []
 
-        realpath = []
         node = self._root
         for part in parts:
-            subkey = node.subkey(part)
-            realpath.append(subkey.name)
-
-            node = subkey
+            node = node.subkey(part)
 
         return node
 
@@ -241,15 +237,20 @@ class NamedKey:
 
     @property
     def path(self):
-        parts = [self.name]
-        data = self.hive.cell(self.nk.parent_key_offset)
-        parts.append(data.name)
+        # The path is expressed relative to the root key of this hive. The
+        # root key itself (flagged with HiveEntry) is the anchor and must not
+        # contribute its (often internal, e.g. "CMI-CreateHive{...}") name:
+        # including it produces a path that RegistryHive.open() cannot resolve
+        # and that leaks into the display path when the hive is mounted under
+        # another (virtual) root key.
+        parts = []
+        node = self
 
-        while data.nk.flags.HiveEntry != 1:
-            data = self.hive.cell(data.nk.parent_key_offset)
-            parts.append(data.name)
+        while not node.nk.flags.HiveEntry:
+            parts.append(node.name)
+            node = self.hive.cell(node.nk.parent_key_offset)
 
-        return "\\".join(list(reversed(parts)))
+        return "\\".join(reversed(parts))
 
     @property
     def timestamp(self):
