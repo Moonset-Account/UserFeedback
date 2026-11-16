@@ -43,8 +43,12 @@ def audit(policy: Policy) -> None:
     ]
 
     for stmt in policy.statements:
+        # Statements are not required to have a Condition element. Skip the
+        # ones that don't so the rest of the statements still get audited.
+        if "Condition" not in stmt.stmt:
+            continue
         conditions = make_list(stmt.stmt["Condition"])
-        
+
         for condition in conditions[0]:
             # The operator is the first element (ex. `StringLike`) and the condition_block follows it
             operator = condition[0]
@@ -55,5 +59,5 @@ def audit(policy: Policy) -> None:
                     policy.add_finding(
                         "SINGLE_VALUE_CONDITION_TOO_PERMISSIVE",
                         detail='Checking a single value conditional key against a set of values results in overly permissive policies.',
+                        location=("statement", stmt.stmt),
                     )
-                    print("match")
