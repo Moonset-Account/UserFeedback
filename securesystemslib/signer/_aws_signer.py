@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import hashlib
 import logging
 from urllib import parse
 
@@ -82,6 +83,9 @@ class AWSSigner(Signer):
         self._public_key = public_key
         self.client = boto3.client("kms")
         self.aws_algo = self.aws_algos[self.public_key.scheme]
+        # Hash algorithm of the signing scheme, used to pre-hash the payload
+        # before sending it to KMS as a digest (see ``sign``).
+        self.hash_algorithm = self.public_key.get_hash_algorithm_name()
 
     @property
     def public_key(self) -> SSlibKey:
@@ -187,8 +191,13 @@ class AWSSigner(Signer):
     def sign(self, payload: bytes) -> Signature:
         """Sign the payload with the AWS KMS key
 
-        This method sends the payload to AWS KMS, where it is signed using the specified
-        key and algorithm using the raw message type.
+        The payload is hashed locally with the hash algorithm of the signing
+        scheme, and the resulting digest is signed by AWS KMS using the
+        digest message type. This keeps request sizes small and independent
+        of the payload length: KMS rejects raw messages that exceed its size
+        limit, but accepts the fixed-length digest for any payload. The
+        signature can still be verified against the original payload because
+        verification applies the same hash.
 
         Arguments:
             payload (bytes): The payload to be signed.
@@ -199,11 +208,15 @@ class AWSSigner(Signer):
         Returns:
             Signature: A signature object containing the key ID and the signature.
         """
+        hasher = hashlib.new(self.hash_algorithm)
+        hasher.update(payload)
+        digest = hasher.digest()
+
         try:
             sign_request = self.client.sign(
                 KeyId=self.aws_key_id,
-                Message=payload,
-                MessageType="RAW",
+                Message=digest,
+                MessageType="DIGEST",
                 SigningAlgorithm=self.aws_algo,
             )
 

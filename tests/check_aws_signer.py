@@ -60,6 +60,16 @@ class TestAWSSigner(unittest.TestCase):
                 with self.assertRaises(UnverifiedSignatureError):
                     public_key.verify_signature(signature, b"NOT DATA")
 
+                # Test sign and verify with a payload larger than the AWS KMS
+                # raw message limit: the signer sends a digest instead.
+                large_payload = b"DATA" * 2048
+                large_signature = signer.sign(large_payload)
+                self.assertIsNone(
+                    public_key.verify_signature(large_signature, large_payload)
+                )
+                with self.assertRaises(UnverifiedSignatureError):
+                    public_key.verify_signature(large_signature, b"NOT DATA")
+
 
 if __name__ == "__main__":
     unittest.main(verbosity=1)
