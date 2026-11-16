@@ -276,7 +276,15 @@ def mutually_inclusive_alternation(node):
 
 
 def catastrophic(pattern):
-    subpattern = sre_parse.parse(pattern)
+    try:
+        subpattern = sre_parse.parse(pattern)
+    except sre_constants.error:
+        # The pattern can't be compiled (e.g. it's still being typed), so
+        # there's nothing to classify - let callers keep checking other
+        # nodes. Only swallow parser errors: unexpected internal exceptions
+        # should still surface so they can be debugged.
+        return False
+
     root = OpNode(None, ())
 
     build_op_tree(root, subpattern)
