@@ -773,6 +773,7 @@ class Statement:
 
         # Expand the actions from s3:Get* to s3:GetObject and others
         expanded_actions = []
+        has_unknown_action = False
         for action in actions:
 
             # Handle special case where all actions are allowed
@@ -787,13 +788,19 @@ class Statement:
                 self.add_finding(
                     "UNKNOWN_ACTION", detail=str(e), location=action,
                 )
-                return False
+                has_unknown_action = True
             except UnknownPrefixException as e:
                 self.add_finding("UNKNOWN_PREFIX", detail=str(e), location=action)
-                return False
+                has_unknown_action = True
             except Exception as e:
                 self.add_finding("EXCEPTION", detail=str(e), location=action)
-                return False
+                has_unknown_action = True
+
+        if has_unknown_action:
+            # The statement contains actions we do not recognize, so the
+            # expansion is incomplete. Do not use this partial expansion to
+            # make further judgements (ex. resource applicability).
+            return False
 
         # Check the resources are correct formatted correctly
         has_malformed_resource = False
