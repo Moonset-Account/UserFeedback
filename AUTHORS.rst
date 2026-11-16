@@ -1,0 +1,4 @@
+The following organizations or individuals have contributed to this repo:
+
+- nexB Inc.
+- Robert Bosch GmbH
