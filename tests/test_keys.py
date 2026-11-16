@@ -390,6 +390,45 @@ class KeysTests(unittest.TestCase):
             key_info['attributes'].native
         )
 
+    def test_rsapss_private_key_bit_size(self):
+        with open(os.path.join(fixtures_dir, 'keys/test-rsapss-der.key'), 'rb') as f:
+            pss_key_info = keys.PrivateKeyInfo.load(f.read())
+        with open(os.path.join(fixtures_dir, 'keys/test-pkcs8-der.key'), 'rb') as f:
+            rsa_key_info = keys.PrivateKeyInfo.load(f.read())
+
+        # The original algorithm identifier is preserved when reading
+        self.assertEqual('rsassa_pss', pss_key_info.algorithm)
+        self.assertEqual('rsa', rsa_key_info.algorithm)
+
+        # An RSASSA-PSS key is RSA-shaped, so its size must be computed the
+        # same way as a regular RSA key
+        self.assertIsInstance(pss_key_info.bit_size, int_types)
+        self.assertEqual(rsa_key_info.bit_size, pss_key_info.bit_size)
+        self.assertEqual(2048, pss_key_info.bit_size)
+        self.assertEqual(256, pss_key_info.byte_size)
+
+    def test_rsapss_private_key_wrap(self):
+        with open(os.path.join(fixtures_dir, 'keys/test-rsapss-der.key'), 'rb') as f:
+            pss_key_info = keys.PrivateKeyInfo.load(f.read())
+
+        rsa_private_key = pss_key_info['private_key'].parsed
+        self.assertIsInstance(rsa_private_key, keys.RSAPrivateKey)
+
+        # The wrap interface must accept the same key material through both
+        # algorithm names, while retaining its existing output convention
+        for algorithm in ('rsa', 'rsassa_pss'):
+            wrapped = keys.PrivateKeyInfo.wrap(rsa_private_key, algorithm)
+            self.assertEqual(algorithm, wrapped.algorithm)
+            self.assertEqual(
+                rsa_private_key['modulus'].native,
+                wrapped['private_key'].parsed['modulus'].native
+            )
+            self.assertEqual(2048, wrapped.bit_size)
+
+        # Invalid algorithm names must still be rejected
+        with self.assertRaises(ValueError):
+            keys.PrivateKeyInfo.wrap(rsa_private_key, 'dsa' + 'x')
+
     def test_parse_rsapss_public_key_info(self):
         with open(os.path.join(fixtures_dir, 'keys/test-public-rsapss-der.key'), 'rb') as f:
             key = keys.PublicKeyInfo.load(f.read())
@@ -412,6 +451,45 @@ class KeysTests(unittest.TestCase):
             65537,
             public_key['public_exponent'].native
         )
+
+    def test_rsapss_public_key_bit_size(self):
+        with open(os.path.join(fixtures_dir, 'keys/test-public-rsapss-der.key'), 'rb') as f:
+            pss_key = keys.PublicKeyInfo.load(f.read())
+        with open(os.path.join(fixtures_dir, 'keys/test-public-der.key'), 'rb') as f:
+            rsa_key = keys.PublicKeyInfo.load(f.read())
+
+        # The original algorithm identifier is preserved when reading
+        self.assertEqual('rsassa_pss', pss_key.algorithm)
+        self.assertEqual('rsa', rsa_key.algorithm)
+
+        # An RSASSA-PSS key is RSA-shaped, so its size must be computed the
+        # same way as a regular RSA key
+        self.assertIsInstance(pss_key.bit_size, int_types)
+        self.assertEqual(rsa_key.bit_size, pss_key.bit_size)
+        self.assertEqual(2048, pss_key.bit_size)
+        self.assertEqual(256, pss_key.byte_size)
+
+    def test_rsapss_public_key_wrap(self):
+        with open(os.path.join(fixtures_dir, 'keys/test-public-rsapss-der.key'), 'rb') as f:
+            pss_key = keys.PublicKeyInfo.load(f.read())
+
+        rsa_public_key = pss_key['public_key'].parsed
+        self.assertIsInstance(rsa_public_key, keys.RSAPublicKey)
+
+        # The wrap interface must accept the same key material through both
+        # algorithm names, while retaining its existing output convention
+        for algorithm in ('rsa', 'rsassa_pss'):
+            wrapped = keys.PublicKeyInfo.wrap(rsa_public_key, algorithm)
+            self.assertEqual(algorithm, wrapped.algorithm)
+            self.assertEqual(
+                rsa_public_key['modulus'].native,
+                wrapped['public_key'].parsed['modulus'].native
+            )
+            self.assertEqual(2048, wrapped.bit_size)
+
+        # Invalid algorithm names must still be rejected
+        with self.assertRaises(ValueError):
+            keys.PublicKeyInfo.wrap(rsa_public_key, 'ec')
 
     @staticmethod
     def key_sha1_hashes():

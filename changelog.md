@@ -1,5 +1,16 @@
 # changelog
 
+## Unreleased
+
+ - Fixed `keys.PrivateKeyInfo.bit_size` and `keys.PublicKeyInfo.bit_size`
+   raising an error for keys identified with the RSASSA-PSS algorithm OID.
+   Such keys contain regular RSA key material, so their size is now computed
+   from the RSA modulus just like an `rsa` key, while the original
+   `rsassa_pss` algorithm identifier is preserved when reading
+ - Extended `keys.PrivateKeyInfo.wrap()` and `keys.PublicKeyInfo.wrap()` to
+   accept `rsassa_pss` in addition to `rsa`, reusing the existing RSA wrap
+   convention for the same key material
+
 ## 1.5.0
 
  - Fix `tsp.TimeStampAndCRL` to be a `core.Sequence` instead of a
