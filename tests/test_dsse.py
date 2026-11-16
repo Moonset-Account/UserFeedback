@@ -106,6 +106,24 @@ class TestEnvelope(unittest.TestCase):
         self.assertEqual(hash(envelope_obj), hash(envelope_obj_2))
         self.assertEqual(len({envelope_obj, envelope_obj_2}), 1)
 
+    def test_envelope_hash_signature_order(self):
+        """Equal envelopes with reordered signatures must hash equally."""
+        signatures = {
+            keyid: Signature(keyid, "abcd", {"mapping": {"a": 1, "b": 2}})
+            for keyid in ["aa", "bb", "cc"]
+        }
+        envelope_obj = Envelope(b"payload", "http://example.com/Type", signatures)
+
+        reordered = {
+            keyid: Signature(keyid, "abcd", {"mapping": {"b": 2, "a": 1}})
+            for keyid in ["cc", "aa", "bb"]
+        }
+        envelope_obj_2 = Envelope(b"payload", "http://example.com/Type", reordered)
+
+        self.assertEqual(envelope_obj, envelope_obj_2)
+        self.assertEqual(hash(envelope_obj), hash(envelope_obj_2))
+        self.assertEqual(len({envelope_obj, envelope_obj_2}), 1)
+
     def test_preauthencoding(self):
         """Test envelope Pre-Auth-Encoding."""
 

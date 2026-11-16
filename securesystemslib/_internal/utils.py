@@ -2,6 +2,48 @@
 
 import base64
 import binascii
+from collections.abc import Hashable, Mapping
+from typing import Any
+
+
+def make_hashable(value: Any) -> Hashable:
+    """Return a hashable representation of ``value`` that follows ``==``.
+
+    The returned representation is for hashing only: it is not a serialization
+    format. Containers are converted recursively so that their comparison
+    semantics are kept: mappings and sets are unordered while lists and tuples
+    are ordered.
+
+    Scalars are returned as they are, so Python's own hash is used for them.
+    This matters because Python considers some scalar values equal even when
+    they have different JSON encodings: ``True``, ``1`` and ``1.0`` all compare
+    equal but serialize differently. Hashing a serialization (like JSON) could
+    therefore give two equal objects different hashes, breaking the hash
+    contract and allowing equal objects to coexist in a set.
+    """
+    if isinstance(value, Mapping):
+        return (
+            "mapping",
+            frozenset(
+                (make_hashable(key), make_hashable(item))
+                for key, item in value.items()
+            ),
+        )
+
+    if isinstance(value, list):
+        return ("list", tuple(make_hashable(item) for item in value))
+
+    if isinstance(value, tuple):
+        return ("tuple", tuple(make_hashable(item) for item in value))
+
+    if isinstance(value, (set, frozenset)):
+        return ("set", frozenset(make_hashable(item) for item in value))
+
+    # bytearray and memoryview compare equal to bytes but are not hashable.
+    if isinstance(value, (bytearray, memoryview)):
+        return bytes(value)
+
+    return value
 
 
 def b64enc(data: bytes) -> str:

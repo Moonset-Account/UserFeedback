@@ -92,6 +92,66 @@ class TestKey(unittest.TestCase):
         self.assertEqual(hash(key), hash(key_2))
         self.assertEqual(len({key, key_2}), 1)
 
+    def test_key_hash_reordered_mapping(self):
+        """Equal keys with reordered mappings must hash equally."""
+        keydict = {
+            "keytype": "ed25519",
+            "scheme": "ed25519",
+            "extra": {"a": 1, "b": [1, 2], "c": {"d": "e", "f": "g"}},
+            "keyval": {"public": "pubkeyval", "foo": "bar"},
+        }
+        reordered = {
+            "keytype": "ed25519",
+            "scheme": "ed25519",
+            "extra": {"c": {"f": "g", "d": "e"}, "b": [1, 2], "a": 1},
+            "keyval": {"foo": "bar", "public": "pubkeyval"},
+        }
+        key = Key.from_dict("aa", copy.deepcopy(keydict))
+        key_2 = Key.from_dict("aa", copy.deepcopy(reordered))
+
+        self.assertEqual(key, key_2)
+        self.assertEqual(hash(key), hash(key_2))
+        self.assertEqual(len({key, key_2}), 1)
+
+    def test_key_hash_changed_ordered_list(self):
+        """Ordered lists keep list comparison semantics in hashing."""
+        keydict = {
+            "keytype": "ed25519",
+            "scheme": "ed25519",
+            "extra": {"list": ["a", "b"]},
+            "keyval": {"public": "pubkeyval"},
+        }
+        changed = copy.deepcopy(keydict)
+        changed["extra"]["list"] = ["b", "a"]
+
+        key = Key.from_dict("aa", copy.deepcopy(keydict))
+        key_2 = Key.from_dict("aa", copy.deepcopy(changed))
+
+        # Lists are ordered: changed order means unequal objects that both
+        # stay in a set.
+        self.assertNotEqual(key, key_2)
+        self.assertEqual(len({key, key_2}), 2)
+
+    def test_key_hash_equal_scalars(self):
+        """Python-equal scalars must hash equally, whatever their encoding."""
+        values = [1, 1.0, True]
+        keys = []
+        for value in values:
+            keydict = {
+                "keytype": "ed25519",
+                "scheme": "ed25519",
+                "extra": {"value": value},
+                "keyval": {"public": "pubkeyval"},
+            }
+            keys.append(Key.from_dict("aa", keydict))
+
+        # All these keys are equal (Python equality), so they must share a
+        # hash and collapse into a single set member.
+        for key in keys[1:]:
+            self.assertEqual(keys[0], key)
+            self.assertEqual(hash(keys[0]), hash(key))
+        self.assertEqual(len(set(keys)), 1)
+
     def test_sslib_key_from_dict_invalid(self):
         """Test from_dict for invalid data"""
         invalid_dicts = [
@@ -483,6 +543,31 @@ class TestSigner(unittest.TestCase):
         # Equal signatures hash equally and collapse in a set.
         self.assertEqual(hash(sig_obj), hash(sig_obj_2))
         self.assertEqual(len({sig_obj, sig_obj_2}), 1)
+
+    def test_signature_hash_reordered_mapping(self):
+        """Equal signatures with reordered unrecognized fields hash equally."""
+        sig_obj = Signature("aa", "abcd", {"a": {"x": 1, "y": 2}, "b": [1, 2]})
+        sig_obj_2 = Signature("aa", "abcd", {"b": [1, 2], "a": {"y": 2, "x": 1}})
+
+        self.assertEqual(sig_obj, sig_obj_2)
+        self.assertEqual(hash(sig_obj), hash(sig_obj_2))
+        self.assertEqual(len({sig_obj, sig_obj_2}), 1)
+
+        # Ordered lists keep list comparison semantics in hashing.
+        sig_obj_3 = Signature("aa", "abcd", {"a": {"x": 1, "y": 2}, "b": [2, 1]})
+        self.assertNotEqual(sig_obj, sig_obj_3)
+        self.assertEqual(len({sig_obj, sig_obj_3}), 2)
+
+    def test_signature_hash_equal_scalars(self):
+        """Python-equal scalars must hash equally, whatever their encoding."""
+        sig_objs = [
+            Signature("aa", "abcd", {"value": value}) for value in [1, 1.0, True]
+        ]
+
+        for sig_obj in sig_objs[1:]:
+            self.assertEqual(sig_objs[0], sig_obj)
+            self.assertEqual(hash(sig_objs[0]), hash(sig_obj))
+        self.assertEqual(len(set(sig_objs)), 1)
 
 
 @unittest.skipIf(not have_gpg(), "gpg not found")
