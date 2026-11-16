@@ -26,6 +26,7 @@ from python_inspector.resolution import get_requirements_from_dependencies
 from python_inspector.resolution import get_requirements_from_python_manifest
 from python_inspector.resolution import is_valid_version
 from python_inspector.resolution import parse_reqs_from_setup_py_insecurely
+from python_inspector.utils import Candidate
 from python_inspector.utils_pypi import Environment
 from python_inspector.utils_pypi import PypiSimpleRepository
 from python_inspector.utils_pypi import get_current_indexes
@@ -194,6 +195,122 @@ def test_is_valid_version_with_no_specifier_and_pre_release():
     bad_versions = []
     identifier = "flask"
     assert is_valid_version(parsed_version, requirements, identifier, bad_versions)
+
+
+def test_is_valid_version_with_unpinned_and_pinned_pre_release():
+    parsed_version = packvers.version.parse("1.0.0b4")
+    requirements = {
+        "flask": [
+            Requirement("flask"),
+            Requirement("flask==1.0.0b4"),
+        ]
+    }
+    bad_versions = []
+    identifier = "flask"
+    assert is_valid_version(parsed_version, requirements, identifier, bad_versions)
+
+
+def test_is_valid_version_with_unpinned_and_conflicting_pinned_version():
+    parsed_version = packvers.version.parse("1.0.0b4")
+    requirements = {
+        "flask": [
+            Requirement("flask"),
+            Requirement("flask==2.1.2"),
+        ]
+    }
+    bad_versions = []
+    identifier = "flask"
+    assert not is_valid_version(parsed_version, requirements, identifier, bad_versions)
+
+
+def test_is_valid_version_with_unpinned_requirement_and_bad_version():
+    parsed_version = packvers.version.parse("1.0.0b4")
+    requirements = {"flask": [Requirement("flask")]}
+    bad_versions = [packvers.version.parse("1.0.0b4")]
+    identifier = "flask"
+    assert not is_valid_version(parsed_version, requirements, identifier, bad_versions)
+
+
+def test_is_valid_version_with_broad_constraint_and_stable_and_pre_release():
+    requirements = {"flask": [Requirement("flask>=1.0.0")]}
+    bad_versions = []
+    identifier = "flask"
+    assert is_valid_version(
+        packvers.version.parse("1.0.0"), requirements, identifier, bad_versions
+    )
+    # A broad constraint keeps the original pre-release behavior: it does not
+    # admit pre-releases on its own.
+    assert not is_valid_version(
+        packvers.version.parse("1.0.0b4"), requirements, identifier, bad_versions
+    )
+
+
+def test_get_candidates_prefers_stable_version_for_unpinned_requirement():
+    provider = PythonInputProvider()
+    candidates = list(
+        provider.get_candidates(
+            all_versions=["1.0.0", "2.0.0b1"],
+            requirements={"flask": [Requirement("flask")]},
+            identifier="flask",
+            bad_versions=[],
+            name="flask",
+            extras=set(),
+        )
+    )
+    assert [c.version for c in candidates] == [packvers.version.parse("1.0.0")]
+
+
+def test_get_candidates_keeps_pinned_pre_release_with_unpinned_requirement():
+    provider = PythonInputProvider()
+    candidates = list(
+        provider.get_candidates(
+            all_versions=["1.0.0", "2.0.0b1"],
+            requirements={"flask": [Requirement("flask"), Requirement("flask==2.0.0b1")]},
+            identifier="flask",
+            bad_versions=[],
+            name="flask",
+            extras=set(),
+        )
+    )
+    assert [c.version for c in candidates] == [packvers.version.parse("2.0.0b1")]
+
+
+def test_get_candidates_keeps_pre_release_when_no_stable_version_exists():
+    provider = PythonInputProvider()
+    candidates = list(
+        provider.get_candidates(
+            all_versions=["1.0.0b4"],
+            requirements={"flask": [Requirement("flask")]},
+            identifier="flask",
+            bad_versions=[],
+            name="flask",
+            extras=set(),
+        )
+    )
+    assert [c.version for c in candidates] == [packvers.version.parse("1.0.0b4")]
+
+
+def test_get_candidates_prefers_stable_version_for_broad_constraint():
+    provider = PythonInputProvider()
+    candidates = list(
+        provider.get_candidates(
+            all_versions=["1.0.0", "2.0.0b1"],
+            requirements={"flask": [Requirement("flask>=1.0.0b1")]},
+            identifier="flask",
+            bad_versions=[],
+            name="flask",
+            extras=set(),
+        )
+    )
+    # The broad constraint admits both versions, but the original priority of
+    # stable versions over pre-releases is preserved.
+    assert [c.version for c in candidates] == [packvers.version.parse("1.0.0")]
+
+
+def test_is_satisfied_by_unpinned_requirement_allows_pre_release_candidate():
+    provider = PythonInputProvider()
+    candidate = Candidate(name="flask", version=packvers.version.parse("1.0.0b4"), extras=set())
+    assert provider.is_satisfied_by(Requirement("flask"), candidate)
 
 
 def test_get_requirements_from_dependencies():

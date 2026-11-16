@@ -169,13 +169,27 @@ def is_valid_version(
 ) -> bool:
     """
     Return True if the parsed_version is valid for the given identifier.
+
+    A requirement without a version specifier does not constrain the version at
+    all and therefore cannot conflict with another requirement. Its empty
+    SpecifierSet rejects pre-release versions, so such a requirement must be
+    skipped explicitly: otherwise an unpinned requirement would make a
+    pre-release explicitly pinned by another requirement for the same package
+    look like a conflict.
+
+    Requirements with a specifier still constrain the version, so the excluded
+    ``bad_versions`` and genuinely conflicting ranges are still honored, and the
+    pre-release priority of broad constraints is unchanged.
     """
     if parsed_version in bad_versions:
         return False
-    if any(parsed_version not in r.specifier for r in requirements[identifier]):
-        if all(not r.specifier for r in requirements[identifier]):
-            return True
-        return False
+
+    for requirement in requirements[identifier]:
+        if not requirement.specifier:
+            continue
+        if parsed_version not in requirement.specifier:
+            return False
+
     return True
 
 
