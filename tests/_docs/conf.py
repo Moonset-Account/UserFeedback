@@ -1,0 +1,60 @@
+from __future__ import annotations
+
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from sphinx.application import Sphinx
+
+project = "dissect.target"
+
+extensions = [
+    "autoapi.extension",
+    "sphinx.ext.autodoc",
+    "sphinx.ext.autosectionlabel",
+    "sphinx.ext.doctest",
+    "sphinx.ext.napoleon",
+    "sphinx_argparse_cli",
+]
+
+exclude_patterns = []
+
+html_theme = "furo"
+
+autoapi_type = "python"
+autoapi_dirs = ["../../dissect/"]
+autoapi_ignore = ["*tests*", "*.tox*", "*venv*", "*examples*"]
+autoapi_python_use_implicit_namespaces = True
+autoapi_add_toctree_entry = False
+autoapi_root = "api"
+autoapi_options = [
+    "members",
+    "undoc-members",
+    "show-inheritance",
+    "show-module-summary",
+    "special-members",
+    "imported-members",
+]
+autoapi_keep_files = True
+autoapi_template_dir = "_templates/autoapi"
+
+autodoc_typehints = "signature"
+autodoc_member_order = "groupwise"
+
+autosectionlabel_prefix_document = True
+
+suppress_warnings = [
+    # https://github.com/readthedocs/sphinx-autoapi/issues/285
+    "autoapi.python_import_resolution",
+]
+
+
+def autoapi_skip_hook(app: Sphinx, what: str, name: str, obj: object, skip: bool, options: list[str]) -> bool:
+    # Do not skip OS modules in dissect.target (caught by `private-members`)
+    if name.endswith("._os") and what == "module":
+        skip = False
+    return skip
+
+
+def setup(sphinx: Sphinx) -> None:
+    if "autoapi.extension" in extensions:
+        sphinx.connect("autoapi-skip-member", autoapi_skip_hook)

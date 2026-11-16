@@ -1,0 +1,6 @@
+<![LOG[DNS detection failed with multi-line
+message.
+Some more details here.]LOG]!><time="10:13:29.9211136" date="12-2-2024"
+component="AgentExecutor" context="" type="1" thread="1" file="">
+<![LOG[Another entry, testing DD-MM-YYYY format and specific file.]LOG]!><time="11:00:00.000000" date="02-12-2024"
+component="AgentExecutorService" context="CTX" type="2" thread="2" file="ExplicitLogFile.log">

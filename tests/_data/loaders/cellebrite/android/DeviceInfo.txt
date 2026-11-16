@@ -1,0 +1,13 @@
+Date and time:28/07/2024 08:39:38 (-4)
+Device Model:Pixel 7a
+OS Version:14
+Chipset:GS201
+Security Patch Level:2024-01-05
+IMEI:354977438494370
+Device Bluetooth Name:null
+Encryption Type:FBE
+Battery Level:100%
+Vendor:Google
+Number Of Installed Applications:369
+Live encryption state:Hot
+Device owner:null
