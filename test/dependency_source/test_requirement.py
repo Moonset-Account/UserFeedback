@@ -520,6 +520,72 @@ def test_requirement_source_disable_pip_editable_skip(req_file):
 
     specs = list(source.collect())
     assert SkippedDependency(name="flask", skip_reason="requirement marked as editable") in specs
+    # Each skipped editable requirement must produce exactly one skip record.
+    assert len(specs) == 1
+
+
+def test_requirement_source_disable_pip_editable_skip_without_egg_fragment(req_file):
+    # An editable requirement without an `#egg=...` fragment has no parsed project name. With
+    # `--skip-editable` enabled it must still produce an identifiable skip record, named after the
+    # raw requirement line, instead of failing.
+    source = _init_requirement(
+        [(req_file(), "-e file:flask.py")],
+        disable_pip=True,
+        no_deps=True,
+        skip_editable=True,
+    )
+
+    specs = list(source.collect())
+    assert specs == [
+        SkippedDependency(
+            name="-e file:flask.py",
+            skip_reason="requirement marked as editable",
+        )
+    ]
+
+
+def test_requirement_source_skip_editable_in_hashed_requirements(req_file):
+    # An editable requirement can't carry a hash. In a hash-locked requirements file it must be
+    # skipped when `--skip-editable` is enabled rather than triggering the hash policy, while the
+    # genuinely pinned, hashed dependency is still collected and audited.
+    source = _init_requirement(
+        [
+            (
+                req_file(),
+                "-e file:flask.py\n"
+                "wheel==0.38.1 "
+                "--hash=sha256:7a95f9a8dc0924ef318bd55b616112c70903192f524d120acc614f59547a9e1f",
+            )
+        ],
+        disable_pip=True,
+        skip_editable=True,
+    )
+
+    specs = list(source.collect())
+    assert SkippedDependency(
+        name="-e file:flask.py",
+        skip_reason="requirement marked as editable",
+    ) in specs
+    assert ResolvedDependency(name="wheel", version=Version("0.38.1")) in specs
+
+
+def test_requirement_source_editable_still_hash_checked_without_skip(req_file):
+    # With `--skip-editable` disabled, the original rules still apply: an unhashed editable
+    # requirement in a hash-locked requirements file fails the hash policy.
+    source = _init_requirement(
+        [
+            (
+                req_file(),
+                "-e file:flask.py\n"
+                "wheel==0.38.1 "
+                "--hash=sha256:7a95f9a8dc0924ef318bd55b616112c70903192f524d120acc614f59547a9e1f",
+            )
+        ],
+        disable_pip=True,
+    )
+
+    with pytest.raises(DependencySourceError, match="does not contain a hash"):
+        list(source.collect())
 
 
 def test_requirement_source_disable_pip_duplicate_dependencies(req_file):

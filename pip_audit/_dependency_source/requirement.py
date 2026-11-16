@@ -300,6 +300,20 @@ class RequirementSource(DependencySource):
         """
         req_specifiers: dict[str, SpecifierSet] = {}
         for req in reqs:
+            if self._skip_editable and req.is_editable:
+                # Editable requirements are explicitly skipped by the user, so they must not be
+                # subject to the hash policy below: an editable install can't carry a hash, and a
+                # hash-locked requirements file would otherwise cause the whole audit to fail
+                # before any of the real, pinned dependencies could be checked.
+                #
+                # An editable requirement without an `#egg=...` fragment has no parsed project name
+                # (`req.req` is `None`), so fall back to the raw requirement line to keep the
+                # skipped record identifiable.
+                yield SkippedDependency(
+                    name=req.name or req.requirement_line.line,
+                    skip_reason="requirement marked as editable",
+                )
+                continue
             if not req.hash_options and require_hashes:
                 raise RequirementSourceError(f"requirement {req.dumps()} does not contain a hash")
             if req.req is None:
@@ -314,8 +328,6 @@ class RequirementSource(DependencySource):
                     skip_reason="could not deduce package version from URL requirement",
                 )
                 continue
-            if self._skip_editable and req.is_editable:
-                yield SkippedDependency(name=req.name, skip_reason="requirement marked as editable")
             if req.marker is not None and not req.marker.evaluate():
                 # TODO(ww): Remove this `no cover` pragma once we're 3.10+.
                 # See: https://github.com/nedbat/coveragepy/issues/198
