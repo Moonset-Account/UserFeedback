@@ -1,0 +1,2 @@
+0:0:0:0:0:0:0:1 - - [01/Jan/2026:13:37:01 +0000] "GET / HTTP/1.1" 200 1337 "-" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:148.0) Gecko/20100101 Firefox/148.0"
+1.2.3.4 - - [01/Jan/2026:13:37:02 +0000] "GET /foo HTTP/1.1" 404 1337 "http://127.0.0.1/bar" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:148.0) Gecko/20100101 Firefox/148.0"

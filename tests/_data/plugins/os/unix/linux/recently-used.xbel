@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xbel version="1.0"
+      xmlns:bookmark="http://www.freedesktop.org/standards/desktop-bookmarks"
+      xmlns:mime="http://www.freedesktop.org/standards/shared-mime-info"
+>
+  <bookmark href="file:///home/sjaak/.profile" added="2023-10-18T13:12:41.905276Z" modified="2023-10-18T13:14:09.483576Z" visited="2023-10-18T13:12:41.905277Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="text/plain"/>
+        <bookmark:groups>
+          <bookmark:group>gedit</bookmark:group>
+        </bookmark:groups>
+        <bookmark:applications>
+          <bookmark:application name="gedit" exec="&apos;gedit %u&apos;" modified="2023-10-18T13:14:09.483574Z" count="3"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/sjaak/.bash_history" added="2023-10-18T13:12:46.303487Z" modified="2023-10-18T13:12:49.590110Z" visited="2023-10-18T13:12:46.303488Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="text/plain"/>
+        <bookmark:groups>
+          <bookmark:group>gedit</bookmark:group>
+        </bookmark:groups>
+        <bookmark:applications>
+          <bookmark:application name="gedit" exec="&apos;gedit %u&apos;" modified="2023-10-18T13:12:49.590109Z" count="2"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/sjaak/.config/user-dirs.locale" added="2023-10-18T13:13:07.553754Z" modified="2023-10-18T13:13:07.553756Z" visited="2023-10-18T13:13:07.553754Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="text/plain"/>
+        <bookmark:groups>
+          <bookmark:group>gedit</bookmark:group>
+        </bookmark:groups>
+        <bookmark:applications>
+          <bookmark:application name="gedit" exec="&apos;gedit %u&apos;" modified="2023-10-18T13:13:07.553755Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/sjaak/.config/user-dirs.dirs" added="2023-10-18T13:13:13.239817Z" modified="2023-10-18T13:13:13.239820Z" visited="2023-10-18T13:13:13.239817Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="text/plain"/>
+        <bookmark:groups>
+          <bookmark:group>gedit</bookmark:group>
+        </bookmark:groups>
+        <bookmark:applications>
+          <bookmark:application name="gedit" exec="&apos;gedit %u&apos;" modified="2023-10-18T13:13:13.239819Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/sjaak/.config/gnome-initial-setup-done" added="2023-10-18T13:13:18.462009Z" modified="2023-10-18T13:13:18.462013Z" visited="2023-10-18T13:13:18.462010Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="text/plain"/>
+        <bookmark:groups>
+          <bookmark:group>gedit</bookmark:group>
+        </bookmark:groups>
+        <bookmark:applications>
+          <bookmark:application name="gedit" exec="&apos;gedit %u&apos;" modified="2023-10-18T13:13:18.462011Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/sjaak/.local/share/recently-used.xbel" added="2023-10-18T13:13:27.504345Z" modified="2023-10-18T13:13:27.504348Z" visited="2023-10-18T13:13:27.504345Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="application/x-xbel"/>
+	<bookmark:icon type="image/png" href="/some/nonexistent/path" name="dummy"/>
+	<bookmark:groups>
+          <bookmark:group>gedit</bookmark:group>
+        </bookmark:groups>
+        <bookmark:applications>
+          <bookmark:application name="gedit" exec="&apos;gedit %u&apos;" modified="2023-10-18T13:13:27.504347Z" count="1"/>
+        </bookmark:applications>
+	<bookmark:private/>
+        </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/sjaak/.lesshst" added="2023-10-27T14:17:53.062666Z" modified="2023-10-27T14:17:53.062670Z" visited="2023-10-27T14:17:53.062667Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="text/plain"/>
+        <bookmark:groups>
+          <bookmark:group>gedit</bookmark:group>
+        </bookmark:groups>
+        <bookmark:applications>
+          <bookmark:application name="gedit" exec="&apos;gedit %u&apos;" modified="2023-10-27T14:17:53.062668Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+</xbel>

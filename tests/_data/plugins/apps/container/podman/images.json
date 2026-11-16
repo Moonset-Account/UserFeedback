@@ -1,0 +1,126 @@
+[
+    {
+        "id": "4cad75abc83d5ca6ee22053d85850676eaef657ee9d723d7bef61179e1e1e485",
+        "digest": "sha256:09369da6b10306312cd908661320086bf87fbae1b6b0c49a1f50ba531fef2eab",
+        "names": [
+            "docker.io/library/nginx:latest"
+        ],
+        "names-history": [
+            "docker.io/library/nginx:latest"
+        ],
+        "layer": "0d94f170d5e6acd8f70abf3740359141b148d0bbde1c09eb6afc8103d02f9095",
+        "metadata": "{}",
+        "big-data-names": [
+            "sha256:4cad75abc83d5ca6ee22053d85850676eaef657ee9d723d7bef61179e1e1e485",
+            "manifest-sha256:09369da6b10306312cd908661320086bf87fbae1b6b0c49a1f50ba531fef2eab",
+            "manifest-sha256:b6653fca400812e81569f9be762ae315db685bc30b12ddcdc8616c63a227d3ca",
+            "manifest"
+        ],
+        "big-data-sizes": {
+            "manifest": 2295,
+            "manifest-sha256:09369da6b10306312cd908661320086bf87fbae1b6b0c49a1f50ba531fef2eab": 10272,
+            "manifest-sha256:b6653fca400812e81569f9be762ae315db685bc30b12ddcdc8616c63a227d3ca": 2295,
+            "sha256:4cad75abc83d5ca6ee22053d85850676eaef657ee9d723d7bef61179e1e1e485": 8582
+        },
+        "big-data-digests": {
+            "manifest": "sha256:b6653fca400812e81569f9be762ae315db685bc30b12ddcdc8616c63a227d3ca",
+            "manifest-sha256:09369da6b10306312cd908661320086bf87fbae1b6b0c49a1f50ba531fef2eab": "sha256:09369da6b10306312cd908661320086bf87fbae1b6b0c49a1f50ba531fef2eab",
+            "manifest-sha256:b6653fca400812e81569f9be762ae315db685bc30b12ddcdc8616c63a227d3ca": "sha256:b6653fca400812e81569f9be762ae315db685bc30b12ddcdc8616c63a227d3ca",
+            "sha256:4cad75abc83d5ca6ee22053d85850676eaef657ee9d723d7bef61179e1e1e485": "sha256:4cad75abc83d5ca6ee22053d85850676eaef657ee9d723d7bef61179e1e1e485"
+        },
+        "created": "2025-02-05T21:27:16Z"
+    },
+    {
+        "id": "aded1e1a5b3705116fa0a92ba074a5e0b0031647d9c315983ccba2ee5428ec8b",
+        "digest": "sha256:a8560b36e8b8210634f77d9f7f9efd7ffa463e380b75e2e74aff4511df3ef88c",
+        "names": [
+            "docker.io/library/alpine:latest"
+        ],
+        "names-history": [
+            "docker.io/library/alpine:latest"
+        ],
+        "layer": "08000c18d16dadf9553d747a58cf44023423a9ab010aab96cf263d2216b8b350",
+        "metadata": "{}",
+        "big-data-names": [
+            "sha256:aded1e1a5b3705116fa0a92ba074a5e0b0031647d9c315983ccba2ee5428ec8b",
+            "manifest-sha256:a8560b36e8b8210634f77d9f7f9efd7ffa463e380b75e2e74aff4511df3ef88c",
+            "manifest-sha256:1c4eef651f65e2f7daee7ee785882ac164b02b78fb74503052a26dc061c90474",
+            "manifest"
+        ],
+        "big-data-sizes": {
+            "manifest": 1022,
+            "manifest-sha256:1c4eef651f65e2f7daee7ee785882ac164b02b78fb74503052a26dc061c90474": 1022,
+            "manifest-sha256:a8560b36e8b8210634f77d9f7f9efd7ffa463e380b75e2e74aff4511df3ef88c": 9218,
+            "sha256:aded1e1a5b3705116fa0a92ba074a5e0b0031647d9c315983ccba2ee5428ec8b": 581
+        },
+        "big-data-digests": {
+            "manifest": "sha256:1c4eef651f65e2f7daee7ee785882ac164b02b78fb74503052a26dc061c90474",
+            "manifest-sha256:1c4eef651f65e2f7daee7ee785882ac164b02b78fb74503052a26dc061c90474": "sha256:1c4eef651f65e2f7daee7ee785882ac164b02b78fb74503052a26dc061c90474",
+            "manifest-sha256:a8560b36e8b8210634f77d9f7f9efd7ffa463e380b75e2e74aff4511df3ef88c": "sha256:a8560b36e8b8210634f77d9f7f9efd7ffa463e380b75e2e74aff4511df3ef88c",
+            "sha256:aded1e1a5b3705116fa0a92ba074a5e0b0031647d9c315983ccba2ee5428ec8b": "sha256:aded1e1a5b3705116fa0a92ba074a5e0b0031647d9c315983ccba2ee5428ec8b"
+        },
+        "created": "2025-02-14T03:28:36Z"
+    },
+    {
+        "id": "1fd9a3236e02e50084b18aff689d466641759f4e9e5fee930e194a605081be65",
+        "digest": "sha256:00cd074b40c4d99ff0c24540bdde0533ca3791edcdac0de36d6b9fb3260d89e2",
+        "names": [
+            "docker.io/library/debian:latest"
+        ],
+        "names-history": [
+            "docker.io/library/debian:latest"
+        ],
+        "layer": "f7f2b929d8a55112a2db1bc16fb8731045c9572b84d6dfbbdbd5dc6dd2bd9fe4",
+        "metadata": "{}",
+        "big-data-names": [
+            "sha256:1fd9a3236e02e50084b18aff689d466641759f4e9e5fee930e194a605081be65",
+            "manifest-sha256:00cd074b40c4d99ff0c24540bdde0533ca3791edcdac0de36d6b9fb3260d89e2",
+            "manifest-sha256:9258a75a7e4323c9e5562b361effc84ee747920116d8adfc98a465a5cdc9150e",
+            "manifest"
+        ],
+        "big-data-sizes": {
+            "manifest": 1021,
+            "manifest-sha256:00cd074b40c4d99ff0c24540bdde0533ca3791edcdac0de36d6b9fb3260d89e2": 8520,
+            "manifest-sha256:9258a75a7e4323c9e5562b361effc84ee747920116d8adfc98a465a5cdc9150e": 1021,
+            "sha256:1fd9a3236e02e50084b18aff689d466641759f4e9e5fee930e194a605081be65": 453
+        },
+        "big-data-digests": {
+            "manifest": "sha256:9258a75a7e4323c9e5562b361effc84ee747920116d8adfc98a465a5cdc9150e",
+            "manifest-sha256:00cd074b40c4d99ff0c24540bdde0533ca3791edcdac0de36d6b9fb3260d89e2": "sha256:00cd074b40c4d99ff0c24540bdde0533ca3791edcdac0de36d6b9fb3260d89e2",
+            "manifest-sha256:9258a75a7e4323c9e5562b361effc84ee747920116d8adfc98a465a5cdc9150e": "sha256:9258a75a7e4323c9e5562b361effc84ee747920116d8adfc98a465a5cdc9150e",
+            "sha256:1fd9a3236e02e50084b18aff689d466641759f4e9e5fee930e194a605081be65": "sha256:1fd9a3236e02e50084b18aff689d466641759f4e9e5fee930e194a605081be65"
+        },
+        "created": "2025-04-07T00:00:00Z"
+    },
+    {
+        "id": "602eb6fb314b5fafad376a32ab55194e535e533dec6552f82b70d7ac0e554b1c",
+        "digest": "sha256:1e622c5f073b4f6bfad6632f2616c7f59ef256e96fe78bf6a595d1dc4376ac02",
+        "names": [
+            "docker.io/library/ubuntu:latest"
+        ],
+        "names-history": [
+            "docker.io/library/ubuntu:latest"
+        ],
+        "layer": "3abdd8a5e7a8909e1509f1d36dcc8b85a0f95c68a69e6d86c6e9e3c1059d44b3",
+        "metadata": "{}",
+        "big-data-names": [
+            "sha256:602eb6fb314b5fafad376a32ab55194e535e533dec6552f82b70d7ac0e554b1c",
+            "manifest-sha256:1e622c5f073b4f6bfad6632f2616c7f59ef256e96fe78bf6a595d1dc4376ac02",
+            "manifest-sha256:f8b860e4f9036f2694571770da292642eebcc4c2ea0c70a1a9244c2a1d436cd9",
+            "manifest"
+        ],
+        "big-data-sizes": {
+            "manifest": 424,
+            "manifest-sha256:1e622c5f073b4f6bfad6632f2616c7f59ef256e96fe78bf6a595d1dc4376ac02": 6688,
+            "manifest-sha256:f8b860e4f9036f2694571770da292642eebcc4c2ea0c70a1a9244c2a1d436cd9": 424,
+            "sha256:602eb6fb314b5fafad376a32ab55194e535e533dec6552f82b70d7ac0e554b1c": 2297
+        },
+        "big-data-digests": {
+            "manifest": "sha256:f8b860e4f9036f2694571770da292642eebcc4c2ea0c70a1a9244c2a1d436cd9",
+            "manifest-sha256:1e622c5f073b4f6bfad6632f2616c7f59ef256e96fe78bf6a595d1dc4376ac02": "sha256:1e622c5f073b4f6bfad6632f2616c7f59ef256e96fe78bf6a595d1dc4376ac02",
+            "manifest-sha256:f8b860e4f9036f2694571770da292642eebcc4c2ea0c70a1a9244c2a1d436cd9": "sha256:f8b860e4f9036f2694571770da292642eebcc4c2ea0c70a1a9244c2a1d436cd9",
+            "sha256:602eb6fb314b5fafad376a32ab55194e535e533dec6552f82b70d7ac0e554b1c": "sha256:602eb6fb314b5fafad376a32ab55194e535e533dec6552f82b70d7ac0e554b1c"
+        },
+        "created": "2025-04-08T10:43:15.147460451Z"
+    }
+]

@@ -1,0 +1,14 @@
+[connection]
+interface-name=wlp2s0
+type=wifi
+
+[wifi]
+mode=infrastructure
+mtu=3
+ssid=ziggo
+
+[ipv4]
+method=auto
+
+[ipv6]
+method=auto
