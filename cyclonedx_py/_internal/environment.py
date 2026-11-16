@@ -27,7 +27,8 @@ from textwrap import dedent
 from typing import TYPE_CHECKING, Any, Dict, Iterable, List, Optional, Tuple
 
 from cyclonedx.model import Property
-from cyclonedx.model.component import Component, ComponentType
+from cyclonedx.model.component import Component, ComponentType, Evidence
+from cyclonedx.model.license import LicenseExpression
 from packageurl import PackageURL
 from packaging.requirements import Requirement
 
@@ -36,10 +37,14 @@ from .cli_common import add_argument_mc_type, add_argument_pyproject
 from .utils.cdx import licenses_fixup, make_bom
 from .utils.packaging import metadata2extrefs, metadata2licenses, normalize_packagename
 from .utils.pep610 import PackageSourceArchive, PackageSourceVcs, packagesource2extref, packagesource4dist
-from .utils.pep639 import dist2licenses as dist2licenses_pep639
+from .utils.pep639 import (
+    dist2declared_licenses as dist2declared_licenses_pep639,
+    dist2license_files as dist2license_files_pep639,
+)
 from .utils.pyproject import pyproject2component, pyproject2dependencies, pyproject_load
 
 if TYPE_CHECKING:  # pragma: no cover
+    from importlib.metadata import Distribution
     from logging import Logger
 
     from cyclonedx.model.bom import Bom
@@ -183,10 +188,7 @@ class EnvironmentBB(BomBuilder):
                 # path of dist-package on disc? naaa... a package may have multiple files/folders on disc
             )
             if self._pep639:
-                component.licenses.update(
-                    dist2licenses_pep639(dist,
-                                         self._gather_license_texts,
-                                         self._logger))
+                self.__component_merge_pep639_licenses(component, dist)
             del dist_meta, dist_name, dist_version
             self.__component_add_extref_and_purl(component, packagesource4dist(dist))
             all_components[normalize_packagename(component.name)] = (
@@ -229,6 +231,29 @@ class EnvironmentBB(BomBuilder):
                     ) for extra in req.extras
                 )
             bom.register_dependency(component, component_deps)
+
+    def __component_merge_pep639_licenses(self, component: 'Component', dist: 'Distribution') -> None:
+        # PEP 639 provides two kinds of license information:
+        # - `License-Expression`: a declared SPDX license expression
+        # - `License-File`: license text files shipped with the distribution
+        # The CycloneDX schema does not allow mixing an SPDX expression with license objects
+        # in a component's `licenses` field. Therefore, whenever an expression is present,
+        # the license files are attached as evidence instead - so that both sources
+        # stay available in the model and the emitted document is schema-conform.
+        component.licenses.update(
+            dist2declared_licenses_pep639(dist))
+        component.licenses = licenses_fixup(component.licenses)
+        if not self._gather_license_texts:
+            return
+        file_licenses = tuple(dist2license_files_pep639(dist, self._logger))
+        if not file_licenses:
+            return
+        if any(isinstance(license, LicenseExpression) for license in component.licenses):
+            evidence = component.evidence or Evidence()
+            evidence.licenses.update(file_licenses)
+            component.evidence = evidence
+        else:
+            component.licenses.update(file_licenses)
 
     def __component_add_extref_and_purl(self, component: 'Component',
                                         packagesource: Optional['PackageSource']) -> None:

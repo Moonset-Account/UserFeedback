@@ -43,6 +43,21 @@ def dist2licenses(
     gather_text: bool,
     logger: 'Logger'
 ) -> Generator['License', None, None]:
+    """
+    All license information according to PEP 639:
+    the declared licenses, followed by the license-file evidence.
+    """
+    yield from dist2declared_licenses(dist)
+    if gather_text:
+        yield from dist2license_files(dist, logger)
+
+
+def dist2declared_licenses(
+    dist: 'Distribution'
+) -> Generator['License', None, None]:
+    """
+    The declared licenses of a distribution, according to PEP 639.
+    """
     lfac = LicenseFactory()
     lack = LicenseAcknowledgement.DECLARED
     metadata = dist.metadata  # see https://packaging.python.org/en/latest/specifications/core-metadata/
@@ -50,31 +65,44 @@ def dist2licenses(
         # see spec: https://peps.python.org/pep-0639/#add-license-expression-field
         yield lfac.make_from_string(lexp,
                                     license_acknowledgement=lack)
-    if gather_text:
-        for mlfile in set(metadata.get_all('License-File', ())):
-            # see spec: https://peps.python.org/pep-0639/#add-license-file-field
-            # latest spec rev: https://discuss.python.org/t/pep-639-round-3-improving-license-clarity-with-better-package-metadata/53020  # noqa: E501
 
-            # per spec > license files are stored in the `.dist-info/licenses/` subdirectory of the produced wheel.
-            # but in practice, other locations are used, too.
-            content = dist.read_text(join('licenses', mlfile)) \
-                or dist.read_text(join('license_files', mlfile)) \
-                or dist.read_text(mlfile)
-            if content is None:  # pragma: no cover
-                logger.debug('Error: failed to read license file %r for dist %r',
-                             mlfile, metadata['Name'])
-                continue
-            encoding = None
-            content_type = guess_type(mlfile) or AttachedText.DEFAULT_CONTENT_TYPE
-            # per default, license files are human-readable texts.
-            if not content_type.startswith('text/'):
-                encoding = Encoding.BASE_64
-                content = b64encode(content.encode('utf-8')).decode('ascii')
-            yield DisjunctiveLicense(
-                name=f'declared license file: {mlfile}',
-                acknowledgement=lack,
-                text=AttachedText(
-                    content=content,
-                    encoding=encoding,
-                    content_type=content_type
-                ))
+
+def dist2license_files(
+    dist: 'Distribution',
+    logger: 'Logger'
+) -> Generator['DisjunctiveLicense', None, None]:
+    """
+    The license files of a distribution, according to PEP 639.
+
+    These are evidence for the declared licenses,
+    not license declarations themselves.
+    """
+    lack = LicenseAcknowledgement.DECLARED
+    metadata = dist.metadata  # see https://packaging.python.org/en/latest/specifications/core-metadata/
+    for mlfile in set(metadata.get_all('License-File', ())):
+        # see spec: https://peps.python.org/pep-0639/#add-license-file-field
+        # latest spec rev: https://discuss.python.org/t/pep-639-round-3-improving-license-clarity-with-better-package-metadata/53020  # noqa: E501
+
+        # per spec > license files are stored in the `.dist-info/licenses/` subdirectory of the produced wheel.
+        # but in practice, other locations are used, too.
+        content = dist.read_text(join('licenses', mlfile)) \
+            or dist.read_text(join('license_files', mlfile)) \
+            or dist.read_text(mlfile)
+        if content is None:  # pragma: no cover
+            logger.debug('Error: failed to read license file %r for dist %r',
+                         mlfile, metadata['Name'])
+            continue
+        encoding = None
+        content_type = guess_type(mlfile) or AttachedText.DEFAULT_CONTENT_TYPE
+        # per default, license files are human-readable texts.
+        if not content_type.startswith('text/'):
+            encoding = Encoding.BASE_64
+            content = b64encode(content.encode('utf-8')).decode('ascii')
+        yield DisjunctiveLicense(
+            name=f'declared license file: {mlfile}',
+            acknowledgement=lack,
+            text=AttachedText(
+                content=content,
+                encoding=encoding,
+                content_type=content_type
+            ))
