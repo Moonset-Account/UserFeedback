@@ -16,6 +16,7 @@ from dissect.target.plugin import Plugin, export
 
 if TYPE_CHECKING:
     from collections.abc import Iterator
+    from datetime import datetime
 
     from dissect.target.helpers.regutil import VirtualKey
 
@@ -132,7 +133,7 @@ class UsbPlugin(Plugin):
 
                     try:
                         timestamps = unpack_timestamps(usb_device.subkey("Properties"))
-                    except RegistryValueNotFoundError as e:
+                    except (RegistryKeyNotFoundError, RegistryValueNotFoundError) as e:
                         self.target.log.warning("Unable to parse USBSTOR registry properties for serial: %s", serial)
                         self.target.log.debug("", exc_info=e)
 
@@ -190,29 +191,46 @@ class UsbPlugin(Plugin):
                 pass
 
 
-def unpack_timestamps(usb_reg_properties: VirtualKey) -> dict[str, int]:
+def unpack_timestamps(usb_reg_properties: VirtualKey) -> dict[str, datetime | None]:
     """Unpack relevant Windows timestamps from the provided USB registry properties subkey.
+
+    A device does not necessarily have every timestamp (for example a device that was never
+    pulled out has no last removal date) and a timestamp can be stored either directly in a
+    version key's ``(Default)`` value or in its ``00000000`` subkey's ``Data`` value. Missing
+    properties, subkeys or values are returned as ``None`` instead of raising, so a device with
+    an incomplete history is still exported.
 
     Args:
         usb_reg_properties: A registry object with USB properties.
 
     Returns:
-        A dict containing parsed timestamps within passed registry object.
+        A dict containing parsed timestamps within passed registry object. Any timestamp that
+        could not be resolved is set to ``None``.
     """
-    usb_reg_properties = usb_reg_properties.subkey("{83da6326-97a6-4088-9453-a1923f573b29}")
+    try:
+        usb_reg_properties = usb_reg_properties.subkey("{83da6326-97a6-4088-9453-a1923f573b29}")
+    except RegistryKeyNotFoundError:
+        return {device_property: None for device_property in USB_DEVICE_PROPERTY_KEYS}
+
     timestamps = {}
 
     for device_property, usbstor_values in USB_DEVICE_PROPERTY_KEYS.items():
+        timestamps[device_property] = None
         for usb_val in usbstor_values:
-            if usb_val in [x.name for x in usb_reg_properties.subkeys()]:
+            try:
                 version_key = usb_reg_properties.subkey(usb_val)
-                if "00000000" in version_key.subkeys():
+            except RegistryKeyNotFoundError:
+                continue
+
+            try:
+                if any(subkey.name == "00000000" for subkey in version_key.subkeys()):
                     data_value = version_key.subkey("00000000").value("Data").value
                 else:
                     data_value = version_key.value("(Default)").value
                 timestamps[device_property] = wintimestamp(struct.unpack("<Q", data_value)[0])
                 break
-            timestamps[device_property] = None
+            except (RegistryKeyNotFoundError, RegistryValueNotFoundError, struct.error):
+                continue
     return timestamps
 
 
