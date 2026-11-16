@@ -15,6 +15,10 @@ export const DEFAULTS = {
   failOn: { local: 'none', ci: 'high', hook: 'none' },
   // The commit hook always fails on a new secret, whatever failOn.hook says.
   hookFailOnSecrets: true,
+  // An enabled scanner that ran, errored, and produced no usable findings fails CI by default
+  // (a silent crash must not look like a clean scan). Set true to tolerate tool errors; the
+  // report still names the failed tool and keeps whatever findings the other tools produced.
+  tolerateToolErrors: false,
   // Suppressions: [{ tool?, rule?, path?, reason, expires? (YYYY-MM-DD) }]
   suppress: [],
   semgrep: { configs: ['p/default'], extraArgs: [] },

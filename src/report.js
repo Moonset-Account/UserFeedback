@@ -2,7 +2,13 @@ const SEV_ICON = { critical: '🟥', high: '🟧', medium: '🟨', low: '🟦', 
 
 export function toMarkdown(r, { maxPerSection = 60 } = {}) {
   const L = [];
-  const verdict = r.ok ? '✅ pass' : `❌ fail (${r.blocking.length} blocking, threshold ${r.threshold})`;
+  const failedTools = (r.toolFailures || []).filter((t) => !t.tolerated);
+  const verdict = r.ok
+    ? '✅ pass'
+    : `❌ fail (${[
+        `${r.blocking.length} blocking, threshold ${r.threshold}`,
+        ...(failedTools.length ? [`tool error: ${failedTools.map((t) => t.tool).join(', ')}`] : []),
+      ].join('; ')})`;
   L.push(`## secscan ${r.secscanVersion} · ${r.mode} · ${verdict}`);
   L.push('');
   const ran = r.toolRuns.filter((t) => t.ran);
@@ -10,7 +16,11 @@ export function toMarkdown(r, { maxPerSection = 60 } = {}) {
   L.push(`Scanned ${r.detect.files} files in ${(r.ms / 1000).toFixed(1)}s. Tools: ${ran.map((t) => `${t.tool} ${t.version || ''}`.trim()).join(', ') || 'none'}.` +
     (skipped.length ? ` Skipped: ${skipped.map((t) => `${t.tool} (${t.reason})`).join('; ')}.` : ''));
   const errs = ran.filter((t) => t.error);
-  if (errs.length) L.push(`\n⚠️ Tool errors: ${errs.map((t) => `${t.tool}: ${t.error}`).join(' · ')}`);
+  if (errs.length) {
+    const tolerated = (r.toolFailures || []).some((t) => t.tolerated);
+    L.push(`\n⚠️ Tool errors${tolerated ? ' (tolerated: tolerateToolErrors is set)' : ''}: ${errs.map((t) => `${t.tool}: ${t.error}`).join(' · ')}`);
+    if (failedTools.length) L.push(`\n❌ ${failedTools.map((t) => t.tool).join(', ')} returned no usable findings, so this run cannot be called clean. Set \`tolerateToolErrors: true\` in .secscan.json to accept tool errors.`);
+  }
   L.push('');
   L.push('| | new | baseline | suppressed |');
   L.push('|---|---:|---:|---:|');
@@ -85,6 +95,11 @@ export function toText(r) {
     if (r.newFindings.length > 40) lines.push(`  …and ${r.newFindings.length - 40} more`);
   }
   for (const d of r.deps) for (const fl of d.flags || []) lines.push(`  DEP      ${fl.kind} ${fl.package}@${fl.version}: ${fl.detail}`);
+  for (const t of r.toolFailures || []) {
+    lines.push(t.tolerated
+      ? `  TOOL ERR ${t.tool}: ${t.error} (tolerated: tolerateToolErrors is set)`
+      : `  TOOL ERR ${t.tool}: ${t.error} — no usable findings, failing the run (set tolerateToolErrors: true to accept)`);
+  }
   if (r.blocking.length) lines.push(`\n${r.blocking.length} blocking finding(s) at threshold "${r.threshold}".`);
   return lines.join('\n');
 }

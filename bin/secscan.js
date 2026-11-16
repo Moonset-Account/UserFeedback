@@ -37,6 +37,11 @@ Scan options:
   --quiet              suppress progress on stderr
   --update-baseline    after the scan, write the baseline (same as baseline update)
 
+Config (.secscan.json):
+  tolerateToolErrors   default false: a scanner that ran, errored, and returned no usable
+                       findings fails CI. Set true to accept tool errors (the report still
+                       names the failed tool and keeps all findings).
+
 Environment:
   SECSCAN_TOOLS_DIR    where downloaded binaries live (default ~/.secscan/bin)
 `;

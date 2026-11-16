@@ -96,6 +96,16 @@ export async function runScan(root, {
   const blocking = newFindings.filter((f) => meetsThreshold(f.severity, threshold)
     || (mode === 'hook' && config.hookFailOnSecrets && f.category === 'secrets'));
 
+  // A scanner that was enabled, ran, errored, and produced no usable findings means "no
+  // results came back", not "no problems found". That fails CI unless the repo opted in to
+  // tolerating tool errors. Skipped tools (ran: false) never count as failures, and a tool
+  // that still returned findings is judged on those findings by the rules above.
+  const tolerateToolErrors = config.tolerateToolErrors === true;
+  const toolFailures = toolRuns
+    .filter((t) => t.ran && t.error && !t.count)
+    .map((t) => ({ tool: t.tool, error: t.error, tolerated: tolerateToolErrors }));
+  const toolFailureBlocks = mode === 'ci' && !tolerateToolErrors && toolFailures.length > 0;
+
   const toolVersions = Object.fromEntries(toolRuns.filter((t) => t.ran).map((t) => [t.tool, t.version]));
   return {
     secscanVersion: SECSCAN_VERSION,
@@ -103,6 +113,7 @@ export async function runScan(root, {
     detect: { languages: Object.fromEntries(detect.languages), lockfiles: Object.fromEntries(Object.entries(detect.lockfiles).map(([k, v]) => [k, v.length])), files: detect.fileCount },
     toolRuns, toolVersions,
     threshold,
+    toolFailures,
     counts: summarize(findings),
     findings,
     newFindings,
@@ -111,7 +122,7 @@ export async function runScan(root, {
     baseline: { exists: !!baseline.updatedAt, commit: baseline.commit, updatedAt: baseline.updatedAt, size: Object.keys(baseline.findings).length },
     deps,
     config,
-    ok: blocking.length === 0,
+    ok: blocking.length === 0 && !toolFailureBlocks,
   };
 }
 
