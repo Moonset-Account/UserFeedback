@@ -39,7 +39,6 @@ PKCS11_IMPORT_ERROR = None
 try:
     import pkcs11
     import pkcs11.util.ec
-    from pkcs11.exceptions import NoSuchKey, NoSuchToken
 except ImportError:
     PKCS11_IMPORT_ERROR = "'python-pkcs11' required"
 
@@ -121,28 +120,64 @@ class HSMSigner(Signer):
 
     @staticmethod
     def _find_token(token_label: str | None = None) -> pkcs11.Token:
-        """Return the PKCS#11 token that matches token_label."""
+        """Return the single PKCS#11 token that matches token_label.
+
+        Raises:
+            ValueError: PYKCS11LIB is not set, no token matches, or more than
+                one token matches.
+        """
         lib_path = os.environ.get("PYKCS11LIB")
         if not lib_path:
             raise ValueError("PYKCS11LIB environment variable must be set")
-        try:
-            return pkcs11.lib(lib_path).get_token(
-                token_label=token_label, token_flags=pkcs11.TokenFlag.TOKEN_INITIALIZED
+
+        tokens = list(
+            pkcs11.lib(lib_path).get_tokens(
+                token_label=token_label,
+                token_flags=pkcs11.TokenFlag.TOKEN_INITIALIZED,
             )
-        except NoSuchToken:
+        )
+        if not tokens:
             label_str = f" for label {token_label}" if token_label else ""
             raise ValueError(f"No PKCS#11 token found{label_str}")
+        if len(tokens) > 1:
+            label_str = f" with label {token_label}" if token_label else ""
+            raise ValueError(f"Multiple PKCS#11 tokens found{label_str}")
+        return tokens[0]
 
     @staticmethod
-    def _find_pub_key(session: pkcs11.Session, keyid: int) -> EllipticCurvePublicKey:
-        """Find ecdsa public key on HSM, return corresponding `cryptography` EC key."""
-        id_bytes = pkcs11.util.biginteger(keyid)
-        object_class = pkcs11.ObjectClass.PUBLIC_KEY
-        try:
-            pkcs11_key = session.get_key(object_class, pkcs11.KeyType.EC, id=id_bytes)
-        except NoSuchKey:
-            raise ValueError("could not find ECDSA key on the PKCS#11 token")
+    def _find_keys(
+        session: pkcs11.Session, object_class: pkcs11.ObjectClass, keyid: int
+    ) -> list:
+        """Return all EC keys of the given object class that match keyid."""
+        return list(
+            session.get_objects(
+                {
+                    pkcs11.Attribute.CLASS: object_class,
+                    pkcs11.Attribute.KEY_TYPE: pkcs11.KeyType.EC,
+                    pkcs11.Attribute.ID: pkcs11.util.biginteger(keyid),
+                }
+            )
+        )
 
+    @classmethod
+    def _find_pub_key(
+        cls, session: pkcs11.Session, keyid: int
+    ) -> EllipticCurvePublicKey:
+        """Find the unique ecdsa public key on HSM, return `cryptography` key.
+
+        Raises:
+            ValueError: No key matches, or more than one key matches.
+        """
+        keys = cls._find_keys(session, pkcs11.ObjectClass.PUBLIC_KEY, keyid)
+        if not keys:
+            raise ValueError("could not find ECDSA public key on the PKCS#11 token")
+        if len(keys) > 1:
+            raise ValueError(
+                f"found {len(keys)} ECDSA public keys on the PKCS#11 token, "
+                "expected exactly one"
+            )
+
+        pkcs11_key = keys[0]
         if not isinstance(pkcs11_key, pkcs11.PublicKey):
             raise AssertionError("PKCS key is not a public key")
         key = load_der_public_key(pkcs11.util.ec.encode_ec_public_key(pkcs11_key))
@@ -150,15 +185,25 @@ class HSMSigner(Signer):
             raise AssertionError("PKCS key is not an EC key")
         return key
 
-    @staticmethod
-    def _find_signing_key(session: pkcs11.Session, keyid: int) -> pkcs11.SignMixin:
-        """Find ecdsa signing key on HSM."""
-        id_bytes = pkcs11.util.biginteger(keyid)
-        object_class = pkcs11.ObjectClass.PRIVATE_KEY
-        try:
-            pkcs11_key = session.get_key(object_class, pkcs11.KeyType.EC, id=id_bytes)
-        except NoSuchKey:
+    @classmethod
+    def _find_signing_key(
+        cls, session: pkcs11.Session, keyid: int
+    ) -> pkcs11.SignMixin:
+        """Find the unique ecdsa signing key on HSM.
+
+        Raises:
+            ValueError: No key matches, or more than one key matches.
+        """
+        keys = cls._find_keys(session, pkcs11.ObjectClass.PRIVATE_KEY, keyid)
+        if not keys:
             raise ValueError("could not find ECDSA private key on the PKCS#11 token")
+        if len(keys) > 1:
+            raise ValueError(
+                f"found {len(keys)} ECDSA private keys on the PKCS#11 token, "
+                "expected exactly one"
+            )
+
+        pkcs11_key = keys[0]
         if not isinstance(pkcs11_key, pkcs11.SignMixin):
             raise AssertionError("Found private key cannot be used for signing")
         return pkcs11_key
@@ -188,7 +233,8 @@ class HSMSigner(Signer):
         Raises:
             UnsupportedLibraryError: ``python-pkcs11`` and ``cryptography``
                 libraries not found.
-            ValueError: A matching HSM device or key could not be found.
+            ValueError: A matching HSM device or key could not be found, or
+                multiple devices or keys match.
         """
         if CRYPTO_IMPORT_ERROR:
             raise UnsupportedLibraryError(CRYPTO_IMPORT_ERROR)
@@ -205,8 +251,12 @@ class HSMSigner(Signer):
         try:
             with token.open() as session:
                 pubkey = cls._find_pub_key(session, hsm_keyid)
-        except ValueError:
-            # key not found while unauthenticated: it may be set to CKA_PRIVATE
+        except ValueError as e:
+            # Key not found while unauthenticated: it may be set to CKA_PRIVATE,
+            # retry authenticated. Other lookup errors (e.g. multiple matching
+            # keys) are raised as-is.
+            if "could not find" not in str(e):
+                raise
             if secrets_handler is None:
                 raise ValueError(
                     "No keys found unauthenticated and no secrets handler provided"
@@ -252,7 +302,9 @@ class HSMSigner(Signer):
             payload: bytes to be signed.
 
         Raises:
-            ValueError: No compatible key for ``hsm_keyid`` found on HSM.
+            ValueError: No token matches ``token_label`` or multiple tokens
+                match it, or no compatible key for ``hsm_keyid`` found on HSM
+                or multiple keys match it.
 
         Returns:
             Signature.
