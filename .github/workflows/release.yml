@@ -1,0 +1,38 @@
+on:
+  release:
+    types:
+      - published
+
+name: release
+
+jobs:
+  pypi:
+    name: upload release to PyPI
+    runs-on: ubuntu-latest
+    environment: release
+
+    permissions:
+      # Used to authenticate to PyPI via OIDC.
+      id-token: write
+
+      # Used to attach signing artifacts to the published release.
+      contents: write
+
+    steps:
+    - uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6.0.0
+      with:
+        persist-credentials: false
+
+    - uses: actions/setup-python@e797f83bcb11b83ae66e0230d6156d7c80228e7c # v6.0.0
+      with:
+        python-version-file: pyproject.toml
+
+    - name: deps
+      run: python -m pip install -U build
+
+    - name: build
+      run: python -m build
+
+    - name: publish
+      uses: pypa/gh-action-pypi-publish@ed0c53931b1dc9bd32cbe73a98c7f6766f8a527e # v1.13.0
+
