@@ -1,0 +1,398 @@
+<1>Jul14 15:15:38.194 SM_03280[Network] [LAN-S][Server] client connected from 10.199.5.134 (2), 288
+<1>Jul14 15:15:38.194 SM_03280[Network] [LAN-S][0ABEC0FF] accepting, type 0, accept 3000, detect 15000, send 15000, recv 60000, 1026
+<1>Jul14 15:15:38.194 SM_03280[Network] [LAN-S][0ABEC0FF][Client-00A61400] create, v2.1.4.9, 16
+<1>Jul14 15:15:38.195 SM_03280[Network] [LAN-S][0ABEC0FF][Client-00A61400] accept, 200
+<1>Jul14 15:15:38.195 SM_03280[Network] [LAN-S][0ABEC0FF] accepted, 1034
+<1>Jul14 15:15:38.195 SM_03280[Network] [LAN-S][Server-0AAD3EA0] tcp client accepted, 163
+<1>Jul14 15:15:38.195 SM_03280[Network] *** client connected from 10.199.5.133, type 1 ***
+<1>Jul14 15:15:38.229 SM_03280[CtrlMgr] [LAN] Closing...
+<1>Jul14 15:15:38.230 SM_03280[CtrlMgr] [LAN][0ABEC0FF][Client-00A61400] release, 50
+<1>Jul14 15:15:38.230 SM_03280[CtrlMgr] [LAN] Closed
+<1>Jul14 15:15:38.310 SM_03280[Network] [LAN-S][Server] client connected from 10.199.5.134 (2), 288
+<1>Jul14 15:15:38.310 SM_03280[Network] [LAN-S][0ABEC6E7] accepting, type 0, accept 3000, detect 15000, send 15000, recv 60000, 1026
+<1>Jul14 15:15:38.310 SM_03280[Network] [LAN-S][0ABEC6E7][Client-00A61400] create, v2.1.4.9, 16
+<1>Jul14 15:15:38.316 SM_03280[Network] [LAN-S][0ABEC6E7][SSL] FIPS disabled, 397
+<1>Jul14 15:15:38.317 SM_03280[Network] [LAN-S][0ABEC6E7][SSL] TLS 1.1 Y, 1.2 Y, 1.3 N, 415
+<1>Jul14 15:15:38.340 SM_03280[Network] [LAN-S][0ABEC6E7][SSL] ssl version 0x0303, cipher ECDHE-RSA-AES256-GCM-SHA384, 490
+<1>Jul14 15:15:38.340 SM_03280[Network] [LAN-S][0ABEC6E7][Client-00A61400] accept, 200
+<1>Jul14 15:15:38.340 SM_03280[Network] [LAN-S][0ABEC6E7] accepted, 1034
+<1>Jul14 15:15:38.340 SM_03280[Network] [LAN-S][0ABEC6E7] start to handshake, 1046
+<1>Jul14 15:15:38.341 SM_03280[Network] [LAN-S][0ABEC6E7] send ready, 757
+<1>Jul14 15:15:38.341 SM_03280[Network] [LAN-S][Server-0AAD3EA0] ssl client accepted, 161
+<1>Jul14 15:15:38.342 SM_03280[Network] *** client connected from 10.199.5.133, type 2 ***
+<1>Jul14 15:15:38.342 SM_03280[CtrlMgr] [LAN][0ABEC6E7] start tlv receiver, 1343
+<1>Jul14 15:15:38.343 SM_03280[CtrlMgr] [LAN][0ABEC6E7][TLVR] start tlv receiver, 50
+<1>Jul14 15:15:38.350 SM_03280[Request] client feat opt:  0x00E3E336
+<1>Jul14 15:15:38.350 SM_03280[Request] client feat must: 0x00000000
+<1>Jul14 15:15:38.350 SM_03280[Request] ackWithJson enable [*]
+<1>Jul14 15:15:38.350 SM_03280[Request] disp name user user
+<1>Jul14 15:15:38.350 SM_03280[Request] file64 enable [*]
+<1>Jul14 15:15:38.350 SM_03280[Request] fileCP enable [*]
+<1>Jul14 15:15:38.350 SM_03280[Request] fileDrag enable [*]
+<1>Jul14 15:15:38.350 SM_03280[Request] show connection bubble [*]
+<1>Jul14 15:15:38.350 SM_03280[Request] src uuid 5662e69bc1c2f81e18604aa8fedc3f7dea74b96f
+<1>Jul14 15:15:38.350 SM_03280[Request] hardware acceleration enable [*]
+<1>Jul14 15:15:38.350 SM_03280[Request] xps printer disable [*]
+<1>Jul14 15:15:38.350 SM_03280[Request] pdf printer disable [*]
+<1>Jul14 15:15:38.350 SM_03280[Request] kdbInput2 enable [*]
+<0>Jul14 15:15:38.350 SM_03280[Request] Unknown format for perConfig
+<0>Jul14 15:15:38.350 SM_03280[Request] Unknown format for encodeProfile
+<1>Jul14 15:15:38.350 SM_03280[Request] MV type 1(0-0) [*]
+<1>Jul14 15:15:38.350 SM_03280[Request] featureOp 00010A4C
+<1>Jul14 15:15:38.351 SM_03280[Request] aggregated permission [*] 0000F019F
+<1>Jul14 15:15:38.351 SM_03280[Request] SRC initial remote control status:1
+<1>Jul14 15:15:38.351 SM_03280[Request] session_notification 00000004
+<1>Jul14 15:15:38.351 SM_03280[Request] show bubble notification[*]
+<1>Jul14 15:15:38.351 SM_03280[Auth-L] ReqPasswordType = 0x00000070
+<1>Jul14 15:15:38.351 SM_03280[Auth-L] AuthHash not match, reject client
+<1>Jul14 15:15:38.351 SM_03280[Auth-L] RMM match, accept client
+<1>Jul14 15:15:38.410 SM_03280[Auth-L] ok, client (DESKTOP-RP1VBOK) can connect to AV server
+<1>Jul14 15:15:38.411 SM_03280[Request] ackWithJson enable [*]
+<1>Jul14 15:15:38.411 SM_03280[Request] disp name user user
+<1>Jul14 15:15:38.411 SM_03280[Request] file64 enable [*]
+<1>Jul14 15:15:38.411 SM_03280[Request] fileCP enable [*]
+<1>Jul14 15:15:38.411 SM_03280[Request] fileDrag enable [*]
+<1>Jul14 15:15:38.411 SM_03280[Request] show connection bubble [*]
+<1>Jul14 15:15:38.411 SM_03280[Request] src uuid 5662e69bc1c2f81e18604aa8fedc3f7dea74b96f
+<1>Jul14 15:15:38.411 SM_03280[Request] hardware acceleration enable [*]
+<1>Jul14 15:15:38.411 SM_03280[Request] xps printer disable [*]
+<1>Jul14 15:15:38.411 SM_03280[Request] pdf printer disable [*]
+<1>Jul14 15:15:38.411 SM_03280[Request] kdbInput2 enable [*]
+<0>Jul14 15:15:38.411 SM_03280[Request] Unknown format for perConfig
+<0>Jul14 15:15:38.411 SM_03280[Request] Unknown format for encodeProfile
+<1>Jul14 15:15:38.411 SM_03280[Request] MV type 1(0-0) [*]
+<1>Jul14 15:15:38.411 SM_03280[Request] featureOp 00010A4C
+<1>Jul14 15:15:38.411 SM_03280[Request] aggregated permission [*] 0000F019F
+<1>Jul14 15:15:38.411 SM_03280[Request] SRC initial remote control status:1
+<1>Jul14 15:15:38.411 SM_03280[Request] session_notification 00000004
+<1>Jul14 15:15:38.411 SM_03280[Request] show bubble notification[*]
+<1>Jul14 15:15:38.412 SM_03280[CtrlMgr] Remote SK[RemoteMjUwNzE0IDE1OjE1OjM4], SI[1]
+<1>Jul14 15:15:38.412 SM_03280[CtrlMgr] Enable Audio Quality [*]
+<1>Jul14 15:15:38.412 SM_03280[CtrlMgr] Enable File transfer improv [*]
+<1>Jul14 15:15:38.412 SM_03280[CtrlMgr] Enable clipboard2 [*]
+<1>Jul14 15:15:38.412 SM_03280[CtrlMgr] Reply featureOp=0x00010848
+<1>Jul14 15:15:38.412 SM_03280[CtrlMgr] Reply session_notification=0x00000004
+<1>Jul14 15:15:38.412 SM_03280[Auth-L] using server resolution
+<1>Jul14 15:15:38.477 SM_03280[Auth-L] send server resolution: 0x0F000870 (3840 x 2160)
+<1>Jul14 15:15:38.477 SM_03280[Auth-L] accept=0 type=100
+<1>Jul14 15:15:38.527 SM_03280[ConCurr] [LAN][0ABEC6E7] start tlv receiver, 1343
+<1>Jul14 15:15:38.527 SM_03280[Environ] client (3840,2160), demanded (3840, 2160), v2c:Yes, ConnType:100
+<1>Jul14 15:15:38.529 SM_03280[ConCurr] [LAN][0ABEC6E7] start tlv callback thread, 0x00, 1630
+<1>Jul14 15:15:38.533 SM_03280[FTCnnel] QueryUserToken with WTS
+<1>Jul14 15:15:38.544 SF_05940[EnvCtrl] ManagerStart In
+<1>Jul14 15:15:38.557 SF_05940[Environ] DWM composition is enabled
+<1>Jul14 15:15:38.559 SF_05940[Environ] Init fps 15
+<1>Jul14 15:15:38.559 SF_05940[Environ] Sync fps 15
+<1>Jul14 15:15:38.559 SF_05940[Environ] client AV sync enable [*]
+<1>Jul14 15:15:38.559 SF_05940[Environ] client unicode key enable [*]
+<1>Jul14 15:15:38.559 SF_05940[Environ] command channel enable [*]
+<1>Jul14 15:15:38.559 SF_05940[Environ] data channel enable [*]
+<1>Jul14 15:15:38.559 SF_05940[Environ] data channel ack enable [*]
+<1>Jul14 15:15:38.559 SF_05940[Environ] clipboard enable [*]
+<1>Jul14 15:15:38.559 SF_05940[Environ] overlapping ack enable [*]
+<1>Jul14 15:15:38.559 SF_05940[Environ] lower bandwidth enable [*]
+<1>Jul14 15:15:38.559 SF_05940[Environ] file transfer enable [*]
+<1>Jul14 15:15:38.559 SF_05940[Environ] request permission enable [*]
+<1>Jul14 15:15:38.559 SF_05940[Environ] dynamic resolution enable [*]
+<1>Jul14 15:15:38.568 SF_05940[Environ] Primary display preferred mode (3840 x 2160)
+<2>Jul14 15:15:38.572 SF_05940[VideoCap] DXGI without WDDM info
+<1>Jul14 15:15:38.608 SF_05940[MediaMgr] detect video adapters, total 1
+<1>Jul14 15:15:38.608 SF_05940[MediaMgr] detect video adapters => 
+	01 - VMware SVGA 3D
+		Vendor ID: 0x15AD (Unknown)
+		Device ID: 0x0406
+		Dedicated VRAM: 4194304
+		Shared VRAM: 4290707456
+		Driver version: 9.17.7.4
+		Monitor:
+			01 - 
+				Pos: 0, 0
+				Size: 3840, 2160
+				Attached: Y
+				Display Frequency: 60
+
+<1>Jul14 15:15:38.631 SF_05940[BScreen] blank screen is disable
+<2>Jul14 15:15:38.632 SF_05940[MediaMgr] audio captor configure to dummy
+<1>Jul14 15:15:38.632 SF_05940[MediaMgr] Using audio captor: 15
+<1>Jul14 15:15:38.639 SF_05940[AudioEnc] FrameSize=960 BlockAlign=8
+<1>Jul14 15:15:38.639 SF_05940[MediaMgr] Using video captor: 20
+<1>Jul14 15:15:38.639 SF_05940[MediaMgr] Using video filter Ipp
+<1>Jul14 15:15:38.641 SF_05940[MediaMgr] Using video encoder: 5
+<2>Jul14 15:15:38.641 SF_05940[BObject] 'VideoReconfig' prior to front,same signal exist
+<1>Jul14 15:15:38.642 SF_05940[Network] 1st frame: ch(3), mode(2), intvl(10000), fps(0)
+<1>Jul14 15:15:38.642 SF_05940[SockMgr] socket close begin ...
+<1>Jul14 15:15:38.642 SF_05940[SockMgr] socket close end .....
+<1>Jul14 15:15:38.642 SF_05940[SockMgr] [SRF] FIPS-0, TLS11-1, TLS12-1, TLS13-0, IPv6-0
+<1>Jul14 15:15:38.642 SF_05940[SockMgr] [SRF][037CA06F][Client-03721230] create, v2.1.4.9, 16
+<1>Jul14 15:15:38.642 SF_05940[SockMgr] [SRF][037CA06F][Client-03721230] timeout 15000/60000, buffer 65535, 101
+<1>Jul14 15:15:38.644 SM_03280[Network] [SRF-S][Server] client connected from 127.0.0.1 (2), 288
+<1>Jul14 15:15:38.644 SM_03280[Network] [SRF-S][0ABEC63F] accepting, type 0, accept 86400000, detect 5000, send 15000, recv 60000, 1026
+<1>Jul14 15:15:38.644 SM_03280[Network] [SRF-S][0ABEC63F][Client-0AB82E58] create, v2.1.4.9, 16
+<1>Jul14 15:15:38.644 SF_05940[SockMgr] [SRF][037CA06F][SSL] FIPS disabled, 191
+<1>Jul14 15:15:38.654 SF_05940[SockMgr] [SRF][037CA06F][SSL] TLS 1.1 Y, 1.2 Y, 1.3 N, 209
+<1>Jul14 15:15:38.660 SM_03280[Network] [SRF-S][0ABEC63F][SSL] FIPS disabled, 397
+<1>Jul14 15:15:38.661 SM_03280[Network] [SRF-S][0ABEC63F][SSL] TLS 1.1 Y, 1.2 Y, 1.3 N, 415
+<1>Jul14 15:15:38.697 SM_03280[Network] [SRF-S][0ABEC63F][SSL] ssl version 0x0303, cipher ECDHE-RSA-AES256-GCM-SHA384, 490
+<1>Jul14 15:15:38.697 SM_03280[Network] [SRF-S][0ABEC63F][Client-0AB82E58] accept, 200
+<1>Jul14 15:15:38.697 SM_03280[Network] [SRF-S][0ABEC63F] accepted, 1034
+<1>Jul14 15:15:38.697 SM_03280[Network] [SRF-S][Server-00AD5130] ssl client accepted, 161
+<1>Jul14 15:15:38.697 SM_03280[Network] streamer data from 127.0.0.1, type 2
+<1>Jul14 15:15:38.698 SF_05940[SockMgr] [SRF][037CA06F][SSL] ssl version 0x0303, cipher ECDHE-RSA-AES256-GCM-SHA384, 281
+<1>Jul14 15:15:38.698 SF_05940[SockMgr] [SRF][037CA06F] ssl connected, 964
+<1>Jul14 15:15:38.698 SF_05940[SockMgr] [SRF][037CA06F] start tlv receiver, 1343
+<1>Jul14 15:15:38.699 SF_05940[Network] small conf: interval(10000), ping_en(500), ping_dis(300), db_en(60), db_en(50)
+<1>Jul14 15:15:38.699 SF_05940[Network] enable send small pkt
+<1>Jul14 15:15:38.699 SF_05940[SockMgr] [SRF][037CA06F][TLVR] start tlv receiver, 50
+<1>Jul14 15:15:38.705 SF_05940[Control] Kbd Input Change to:F0010809
+<1>Jul14 15:15:38.713 SF_05940[Environ] Display Device Name: \\.\DISPLAY1(0)
+<1>Jul14 15:15:38.714 SF_05940[Environ] current disp: Width(3840) Heigh(2160) Bpp(32) Freq(60) FixedOutput(0)
+<1>Jul14 15:15:38.714 SF_05940[Environ] using native resolution
+<1>Jul14 15:15:38.717 SF_05940[Environ] [Printer] Init PrintMgr for MS PDF
+<1>Jul14 15:15:38.719 SM_03280[Environ] SRF start session succ
+<1>Jul14 15:15:38.719 SM_03280[Request] AUTH: send ack back to client accept: 0
+<1>Jul14 15:15:38.732 SF_05940[Environ] update CurFPS to 61
+<0>Jul14 15:15:38.740 SM_03280[SecuIPC] invalid response data len
+<1>Jul14 15:15:38.749 SF_05940[Environ] Open SRApp sid:1 pid:1280 ret:1 (0)
+<1>Jul14 15:15:38.768 SM_03280[ConCurr] recv audio quality change, bitrate:64000, accept change.
+<2>Jul14 15:15:38.810 SF_05940[BObject] signal 'ToFileMgr' not found try pass event 58 to parent.
+<1>Jul14 15:15:38.820 SF_05940[Environ] Send FileStatus size:64 w:0 l:4 status:4 id:0
+<1>Jul14 15:15:38.821 SF_05940[TermInf] Init with send mode 0
+<1>Jul14 15:15:38.823 SF_05940[Environ] [SRFData-S] FIPS-0, TLS11-1, TLS12-1, TLS13-0, IPv6-0
+<1>Jul14 15:15:38.823 SF_05940[Environ] [SRFData-S][Server-0E62C248] create, v2.1.4.9, 11
+<1>Jul14 15:15:38.824 SF_05940[Environ] socket Data is running on port:3212...
+<1>Jul14 15:15:38.828 SF_05940[Network] wait Data accept..
+<1>Jul14 15:15:38.833 SF_05940[Control] Stylus mode(1)++
+<1>Jul14 15:15:38.844 SF_05940[CpBoard2] Open SRApp sid:-1 pid:7148 ret:1 (0)
+<1>Jul14 15:15:38.846 SF_05940[Environ] Create Manager MessageLoop OK!
+<1>Jul14 15:15:38.846 SF_05940[Environ] [CB] SetCB on init
+<1>Jul14 15:15:38.864 PB_05720[Banner] Got SRM_NOTIFY_SRAPPPB_SESSION_RECORDING_STATE. w:7005, l:1, data:0
+<1>Jul14 15:15:38.864 PB_05720[Banner]  + key(0, 1)
+<1>Jul14 15:15:38.944 AP_01280[UserApp] [vdm] listen to events = -4
+<1>Jul14 15:15:38.956 AP_01280[UserApp] [voa] started
+<1>Jul14 15:15:39.031 SF_05940[VideoCap] DXGIinit Device:\\.\DISPLAY1 (3840,2160) nRet=1
+<1>Jul14 15:15:39.031 SF_05940[VideoCap]          Border is (0,0)
+<1>Jul14 15:15:39.107 SF_05940[VideoCap] DXGIfree() nRet=1
+<1>Jul14 15:15:39.152 AP_01280[UserApp] [voa] set full rect, left:0 top:0 Width:3840 Height:2160
+<1>Jul14 15:15:39.152 AP_01280[UserApp] [voa] screenRect, x1:0, y1:0 x2:3840 y2:2160
+<1>Jul14 15:15:39.152 AP_01280[UserApp] [voa] Show anno(0)
+<1>Jul14 15:15:39.410 SF_05940[Environ] [SRFData-S][Server] client connected from 127.0.0.1 (2), 288
+<1>Jul14 15:15:39.410 SF_05940[Environ] [SRFData-S][037C9547] accepting, type 1, accept 86400000, detect 5000, send 15000, recv 60000, 1026
+<1>Jul14 15:15:39.411 SF_05940[Environ] [SRFData-S][037C9547][Client-13E5F9D8] create, v2.1.4.9, 16
+<1>Jul14 15:15:39.411 SF_05940[Environ] [SRFData-S][037C9547][Client-13E5F9D8] accept, 200
+<1>Jul14 15:15:39.411 SF_05940[Environ] [SRFData-S][037C9547] accepted, 1034
+<1>Jul14 15:15:39.411 SF_05940[Environ] [SRFData-S][Server-0E62C248] tcp client accepted, 163
+<1>Jul14 15:15:39.411 SF_05940[Network] Data data from 127.0.0.1
+<0>Jul14 15:15:39.412 SF_05940[CpBoard2] Clipboard2Handler start++
+<1>Jul14 15:15:39.412 SF_05940[Network] wait Data accept..
+<1>Jul14 15:15:39.461 SF_05940[VideoCap] DXGIinit Device:\\.\DISPLAY1 (3840,2160) nRet=1
+<1>Jul14 15:15:39.461 SF_05940[VideoCap]          Border is (0,0)
+<1>Jul14 15:15:39.572 SF_05940[Video] ResolutionChange 3840x2160
+<1>Jul14 15:15:39.572 SF_05940[Video] ResolutionDest 3840x2160
+<1>Jul14 15:15:39.620 SF_05940[Video] Change scale: src_w=3840 h=2160 dst_w=3840 h=2160 cur_w=3840 h=2160
+<1>Jul14 15:15:39.659 SF_05940[VideoEnc] EncoderUserConf Done: UseReg=0. Thread number=1.
+<1>Jul14 15:15:39.659 SF_05940[VideoEnc] ====================: Bitrate=5000 kbps, BufferSize=0
+<1>Jul14 15:15:39.659 SF_05940[VideoEnc] ====================: gop=1073741824,intraRefresh=0,deblocking=0,sliceMaxSz=10000
+<1>Jul14 15:15:39.871 SM_03280[ConCurr] src 1 add, currframe = 0, currack = 0
+<1>Jul14 15:15:39.893 SF_05940[VideoEnc] 13396972539890, frame size 1848796, f_idx = 0, f_type = 1
+<1>Jul14 15:15:39.928 SF_05940[VideoEnc] EncoderUserConf Done: UseReg=0. Thread number=1.
+<1>Jul14 15:15:39.928 SF_05940[VideoEnc] ====================: Bitrate=5000 kbps, BufferSize=0
+<1>Jul14 15:15:39.929 SF_05940[VideoEnc] ====================: gop=1073741824,intraRefresh=0,deblocking=0,sliceMaxSz=10000
+<1>Jul14 15:15:40.090 SM_03280[CtrlMgr] Check sesid srapppb:1=>srf:1
+<1>Jul14 15:15:40.101 PB_05720[Banner] Got client 1 spid SUPPORT
+<1>Jul14 15:15:40.102 SF_05940[Environ] Touch supported 8
+<1>Jul14 15:15:40.102 SF_05940[Environ] [swMode] Send request to client Request=1 Param=0 ret:64
+<1>Jul14 15:15:40.103 SF_05940[Network] got ping, clear timeout
+<1>Jul14 15:15:40.151 SF_05940[VideoEnc] 13396972540148, frame size 1848796, f_idx = 1, f_type = 1
+<1>Jul14 15:15:40.210 SM_03280[Network] [LAN-S][Server] client connected from 10.199.5.134 (2), 288
+<1>Jul14 15:15:40.210 SM_03280[Network] [LAN-S][0ABEC4EF] accepting, type 0, accept 3000, detect 15000, send 15000, recv 60000, 1026
+<1>Jul14 15:15:40.210 SM_03280[Network] [LAN-S][0ABEC4EF][Client-0AC92878] create, v2.1.4.9, 16
+<1>Jul14 15:15:40.221 SM_03280[Network] [LAN-S][0ABEC4EF][SSL] FIPS disabled, 397
+<1>Jul14 15:15:40.222 SM_03280[Network] [LAN-S][0ABEC4EF][SSL] TLS 1.1 Y, 1.2 Y, 1.3 N, 415
+<1>Jul14 15:15:40.271 SF_05940[VideoEnc] 13396972540268, frame size 17, f_idx = 2, f_type = 3
+<1>Jul14 15:15:40.322 SM_03280[Network] [LAN-S][0ABEC4EF][SSL] ssl version 0x0303, cipher ECDHE-RSA-AES256-GCM-SHA384, 490
+<1>Jul14 15:15:40.322 SM_03280[Network] [LAN-S][0ABEC4EF][Client-0AC92878] accept, 200
+<1>Jul14 15:15:40.322 SM_03280[Network] [LAN-S][0ABEC4EF] accepted, 1034
+<1>Jul14 15:15:40.322 SM_03280[Network] [LAN-S][0ABEC4EF] start to handshake, 1046
+<1>Jul14 15:15:40.323 SM_03280[Network] [LAN-S][0ABEC4EF] send ready, 757
+<1>Jul14 15:15:40.324 SM_03280[Network] [LAN-S][Server-0AAD3EA0] ssl client accepted, 161
+<1>Jul14 15:15:40.325 SM_03280[Network] *** client connected from 10.199.5.133, type 2 ***
+<1>Jul14 15:15:40.326 SM_03280[CtrlMgr] [LAN][0ABEC4EF] start tlv receiver, 1343
+<1>Jul14 15:15:40.327 SM_03280[CtrlMgr] [LAN][0ABEC4EF][TLVR] start tlv receiver, 50
+<1>Jul14 15:15:40.328 SM_03280[CtrlMgr] [LAN][0ABEC4EF] start tlv receiver, 1343
+<1>Jul14 15:15:40.328 SM_03280[CpBoard2] handle CB2 start
+<1>Jul14 15:15:40.331 AP_07148[UserApp] SRS supported compressed type[0x01], SRC used [0x01]
+<1>Jul14 15:15:40.352 SF_05940[VideoEnc] 13396972540337, frame size 308, f_idx = 3, f_type = 3
+<1>Jul14 15:15:40.470 SF_05940[VideoEnc] 13396972540468, frame size 2540, f_idx = 4, f_type = 3
+<1>Jul14 15:15:40.623 SF_05940[VideoCap] 13396972540623, frame ack
+<1>Jul14 15:15:40.749 SF_05940[VideoCap] 13396972540749, frame ack
+<1>Jul14 15:15:40.823 SM_03280[Backend] CMD:32 200(0):
+<1>Jul14 15:15:40.824 SM_03280[RMMmode] CMD:32 result:20200 type:3
+<1>Jul14 15:15:40.824 SM_03280[Session] session ID:1723635310 max:0 file:1 print:1 term:1 mon:0+0 mic:0
+<1>Jul14 15:15:40.892 SF_05940[Environ] Send FileStatus size:64 w:0 l:1 status:1 id:0
+<1>Jul14 15:15:40.892 SF_05940[Environ] Send CBStatus size:64 w:1 l:0
+<1>Jul14 15:15:40.892 SF_05940[TermInf] Enable with skip mode 1
+<1>Jul14 15:15:40.927 SM_03280[ConCurr] Send SessionID 1723635310 s:0
+<1>Jul14 15:15:40.939 SF_05940[Environ] Send FileTrans direction size:64 w:03 l:0 id:0
+<1>Jul14 15:15:40.955 SF_05940[Environ] Send Clipboard direction size:64 w:03 l:0 id:0
+<1>Jul14 15:15:40.971 SF_05940[VideoCap] 13396972540971, frame ack
+<0>Jul14 15:15:40.976 SM_03280[ConCurr] Notify json session info to SRChat failed
+<1>Jul14 15:15:40.989 SM_03280[CtrlMgr] Check sesid srapppb:1=>srf:1
+<1>Jul14 15:15:41.005 PB_05720[Banner] Got notification from SRM. w:7001, l:0
+<1>Jul14 15:15:41.005 PB_05720[Banner] Reg show banner:0
+<1>Jul14 15:15:41.006 PB_05720[Banner]  + key(0, 1)
+<1>Jul14 15:15:41.033 SF_05940[VideoCap] 13396972541031, frame ack
+<1>Jul14 15:15:41.034 SF_05940[Environ] Send FileStatus size:64 w:0 l:1 status:1 id:0
+<1>Jul14 15:15:41.041 SF_05940[Printer] try to mount MS PDF printer...
+<1>Jul14 15:15:41.128 PB_05720[Banner]  + key(0, 1)
+<1>Jul14 15:15:41.130 PB_05720[Banner] Got client 1 public IP 192.0.2.1
+<1>Jul14 15:15:41.244 SF_05940[VideoCap] 13396972541242, frame ack
+<1>Jul14 15:15:41.311 SF_05940[VideoCap] 13396972541302, frame ack
+<1>Jul14 15:15:41.927 SF_05940[TermInf] skip first single
+<2>Jul14 15:15:42.057 SF_05940[DrvUtil] mount pdf printer 0
+<2>Jul14 15:15:42.058 SF_05940[Printer] [3] device mount successful
+<1>Jul14 15:15:42.058 SF_05940[Environ] Send FileTrans direction size:64 w:03 l:0 id:0
+<1>Jul14 15:15:42.058 SF_05940[Environ] Send Clipboard direction size:64 w:03 l:0 id:0
+<1>Jul14 15:15:42.059 SF_05940[Environ] Send CBStatus size:64 w:1 l:0
+<1>Jul14 15:15:42.060 SF_05940[Printer] [3] PrintMgr Init with spooler API
+<0>Jul14 15:15:42.063 SF_05940[DrvUtil] failed to run xcvmonitor command 'DeletePort', port name:MsPdfPrint, err:170
+<1>Jul14 15:15:42.168 SF_05940[Printer] [3] print mode: 1 - 0
+<1>Jul14 15:15:51.425 SF_05940[MicPhone] status 5
+<1>Jul14 15:15:54.861 SF_05940[Overlap] PING:1 RTT:0.000000->65.474823 Num:6
+<1>Jul14 15:16:02.505 SF_05940[CliInfo] stop collect clientinfo ... 740
+<1>Jul14 15:16:04.905 SF_05940[Overlap] PING:1 RTT:65.474823->69.820221 Num:7
+<1>Jul14 15:16:04.905 SF_05940[Overlap] uppder bound Num:6 found
+<0>Jul14 15:16:26.540 SF_05940[PipeIPC] IPC WriteFile Fail...err:232...retry:0 rece:6 wp:6101
+<1>Jul14 15:16:26.551 AP_01280[UserApp] Got FileCP request
+<1>Jul14 15:16:26.615 AP_01280[UserApp] [CPF] paste data from [1] valid(1)
+<1>Jul14 15:16:40.368 AP_01280[UserApp] [CPF] paste data from [1] valid(1)
+<1>Jul14 15:16:44.876 AP_01280[UserApp] [CPF] paste end
+<1>Jul14 15:17:16.249 AP_01280[UserApp] Got FileCP request
+<1>Jul14 15:17:16.313 AP_01280[UserApp] [CPF] paste data from [1] valid(1)
+<1>Jul14 15:17:16.313 AP_01280[UserApp] [CPF] File data object release.
+<1>Jul14 15:17:30.649 AP_01280[UserApp] [CPF] paste data from [1] valid(1)
+<1>Jul14 15:17:30.660 AP_01280[UserApp] [FTCFile] OnFileRequest. [353841253][C:\Users\user\Desktop\NOTE.txt]
+<1>Jul14 15:17:30.730 SM_03280[Network] [LAN-S][Server] client connected from 10.199.5.134 (2), 288
+<1>Jul14 15:17:30.730 SM_03280[Network] [LAN-S][0ABEB91F] accepting, type 0, accept 3000, detect 15000, send 15000, recv 60000, 1026
+<1>Jul14 15:17:30.730 SM_03280[Network] [LAN-S][0ABEB91F][Client-0AA2EC28] create, v2.1.4.9, 16
+<1>Jul14 15:17:30.736 SM_03280[Network] [LAN-S][0ABEB91F][SSL] FIPS disabled, 397
+<1>Jul14 15:17:30.737 SM_03280[Network] [LAN-S][0ABEB91F][SSL] TLS 1.1 Y, 1.2 Y, 1.3 N, 415
+<1>Jul14 15:17:30.760 SM_03280[Network] [LAN-S][0ABEB91F][SSL] ssl version 0x0303, cipher ECDHE-RSA-AES256-GCM-SHA384, 490
+<1>Jul14 15:17:30.760 SM_03280[Network] [LAN-S][0ABEB91F][Client-0AA2EC28] accept, 200
+<1>Jul14 15:17:30.760 SM_03280[Network] [LAN-S][0ABEB91F] accepted, 1034
+<1>Jul14 15:17:30.760 SM_03280[Network] [LAN-S][0ABEB91F] start to handshake, 1046
+<1>Jul14 15:17:30.761 SM_03280[Network] [LAN-S][0ABEB91F] send ready, 757
+<1>Jul14 15:17:30.761 SM_03280[Network] [LAN-S][Server-0AAD3EA0] ssl client accepted, 161
+<1>Jul14 15:17:30.761 SM_03280[Network] *** client connected from 10.199.5.133, type 2 ***
+<1>Jul14 15:17:30.762 SM_03280[CtrlMgr] [LAN][0ABEB91F] start tlv receiver, 1343
+<1>Jul14 15:17:30.762 SM_03280[CtrlMgr] [LAN][0ABEB91F][TLVR] start tlv receiver, 50
+<1>Jul14 15:17:30.763 SM_03280[CtrlMgr] [LAN][0ABEB91F] start tlv receiver, 1343
+<1>Jul14 15:17:30.763 SM_03280[FTCnnel] handle FTC start
+<1>Jul14 15:17:30.764 SM_03280[File] FileStreamSendDataHandler run start
+<1>Jul14 15:17:30.764 SM_03280[FTCnnel] UploadRequestCP, fileID[353841253], filePath[], compresstyee[1]
+<1>Jul14 15:17:30.766 SM_03280[FTCnnel] OnUploadFileCPRequest 1, 1 =>{"fileID":"353841253","fileName":"NOTE.txt","fileSize":"34","remotesessionFTC":1,"request":"uploadFile"}
+<1>Jul14 15:17:30.771 SM_03280[IStream] Index file[353841253] not exist, write block[0]
+<1>Jul14 15:17:30.779 AP_01280[IStream] Found index file[353841253]
+<1>Jul14 15:17:30.779 SM_03280[FTCnnel] Got FTC cmd:[closeFile], ID:[353841253]
+<1>Jul14 15:17:30.779 SM_03280[FTCnnel] ????? FTC request close file=>{"fileID":"353841253","request":"closeFile"}
+
+<1>Jul14 15:17:30.785 SM_03280[FTCnnel] Finished FTC cmd:[closeFile], ID:[353841253]
+<1>Jul14 15:17:30.798 AP_01280[UserApp] [FTCFile] OnFileFinished. [1][353841253] rc(0)
+<1>Jul14 15:17:30.802 AP_01280[UserApp] [CPF] paste end
+<1>Jul14 15:17:31.569 SM_03280[Backend] CMD:32 200(0):
+<1>Jul14 15:17:31.570 SM_03280[Backend] CMD:32 result:20200
+<0>Jul14 15:17:31.931 SM_03280[PipeIPC] CreateFile for pipe \\.\pipe\PIPE_SRAPP_0 fail error=2
+<0>Jul14 15:17:32.048 SM_03280[SecuIPC] failed to send encryption info 6
+<1>Jul14 15:18:31.188 SF_05940[Environ] Recv disconnect from client:2
+<1>Jul14 15:18:31.189 SF_05940[Environ] Recv disconnect from client:5
+<1>Jul14 15:18:31.415 SF_05940[EnvCtrl] ManagerStop In
+<1>Jul14 15:18:31.415 SF_05940[EnvCtrl] Stop Begin
+<1>Jul14 15:18:31.423 SF_05940[IAPplug] stop handle IAP ... 10428
+<1>Jul14 15:18:31.447 SF_05940[Environ] exit SRF Data thread
+<0>Jul14 15:18:31.468 SF_05940[Network] tid[0]: 0x1BE05030 error
+<0>Jul14 15:18:31.468 SF_05940[Network] send video data error, -100, 0
+<0>Jul14 15:18:31.530 SF_05940[Control] recv input header fail -100
+<1>Jul14 15:18:31.530 SF_05940[Control] stop handle input ... 5040
+<1>Jul14 15:18:31.555 AP_01280[UserApp] [voa] ended
+<0>Jul14 15:18:31.580 SF_05940[Network] tid[0]: 0x1BE05030 error
+<0>Jul14 15:18:31.580 SF_05940[Network] send video data error, -100, 0
+<1>Jul14 15:18:31.612 SF_05940[AudioCap] stop capturing ... 10468
+<1>Jul14 15:18:31.646 SF_05940[AudioEnc] stop encoding ...
+<1>Jul14 15:18:31.647 SF_05940[VideoEnc] stop encoding ... 5584
+<0>Jul14 15:18:31.701 SM_03280[Session] [LAN][0ABEB91F][SSL] failed to recv data, block 1, result 0, ssl error 1, sys err 0x0A000126 (error:0A000126:SSL routines::unexpected eof while reading), wsa err 0x00000000, cnt 0, 708
+<0>Jul14 15:18:31.701 SM_03280[Session] [LAN][0ABEB91F][TLVR] failed to recv tlv header, -86, 64
+<1>Jul14 15:18:31.701 SM_03280[Session] [LAN][0ABEB91F][TLVR] stop tlv receiver, 1, 145
+<1>Jul14 15:18:31.701 SM_03280[Session] channel file-ftc socket disconnected
+<1>Jul14 15:18:31.713 SF_05940[Video] recv ack fail -1
+<0>Jul14 15:18:31.713 SM_03280[FTCnnel] FTC file stream: recv fail -100(0x0)
+<1>Jul14 15:18:31.714 SM_03280[File] FileStreamSendDataHandler run end
+<1>Jul14 15:18:31.715 SF_05940[VideoCap] fpDXGIfree()
+<1>Jul14 15:18:31.779 SM_03280[FTCnnel] handle FTC end
+<1>Jul14 15:18:31.779 SM_03280[CtrlMgr] failed to recv tlv header (iris), -93
+<1>Jul14 15:18:31.813 SF_05940[VideoCap] stop capturing ... 11256
+<1>Jul14 15:18:31.829 SF_05940[MediaMgr] stop handle media ... 2360
+<1>Jul14 15:18:31.962 SF_05940[Network] ping number is ... 167
+<1>Jul14 15:18:31.962 SF_05940[Network] stop detect small pkt ... 5036
+<1>Jul14 15:18:32.078 SF_05940[CursorT] stop cursor transport ... 4796
+<1>Jul14 15:18:32.195 SF_05940[BScreen] stop handle bscreen ... 10000
+<0>Jul14 15:18:32.212 SF_05940[Printer] [3] failed to wait thread
+<1>Jul14 15:18:32.216 SF_05940[Printer] [3] stop handle printer ... 10512
+<2>Jul14 15:18:33.287 SF_05940[DrvUtil] unmount pdf printer-0 0
+<2>Jul14 15:18:33.288 SF_05940[Printer] [3] unmount printer success
+<0>Jul14 15:18:33.305 SF_05940[Plugins] Data ch recv fail -100, 0
+<0>Jul14 15:18:33.306 SF_05940[Plugins] recv fail -100, 0
+<1>Jul14 15:18:33.306 SF_05940[Plugins] stop handle command ... 4448
+<0>Jul14 15:18:33.370 SF_05940[Control] recv penInput header fail -100
+<1>Jul14 15:18:33.386 SF_05940[Control] Stylus mode(1)--
+<1>Jul14 15:18:33.585 SF_05940[CpBoard2] [Clipboard2] Closing...
+<0>Jul14 15:18:33.587 AP_07148[CpBoard2] Tcp Error: -1
+<0>Jul14 15:18:33.587 SF_05940[CpBoard2] Clipboard2 Receiver recv stPacketHeader error:-85
+<1>Jul14 15:18:33.588 SF_05940[CpBoard2] Clipboard2 socket thread stop working
+<0>Jul14 15:18:33.589 AP_07148[CpBoard2] [APP] socket error, app exit
+<1>Jul14 15:18:33.590 SF_05940[CpBoard2] [Clipboard2][037C9547][Client-13E5F9D8] release, 50
+<1>Jul14 15:18:33.590 SF_05940[CpBoard2] [Clipboard2] Closed
+<1>Jul14 15:18:33.601 SF_05940[CpBoard2] SRAppClipboard2 stop done!
+<0>Jul14 15:18:33.618 SM_03280[CpBoard2] FTC file stream: recv fail -100(0x0)
+<0>Jul14 15:18:33.618 SF_05940[CpBoard2] Clipboard2 recv hdr fail -100(0x0)
+<1>Jul14 15:18:33.618 SF_05940[CpBoard2] Clipboard2 run end
+<1>Jul14 15:18:33.668 SF_05940[Environ] [SRFData-S][Server-0E62C248] release, 21
+<1>Jul14 15:18:33.668 SF_05940[SockMgr] socket close begin ...
+<1>Jul14 15:18:33.668 SF_05940[SockMgr] [SRF] Closing...
+<1>Jul14 15:18:33.672 SF_05940[SockMgr] [SRF][037CA06F][TLVR] stop tlv receiver, 0, 145
+<1>Jul14 15:18:33.682 SF_05940[SockMgr] [SRF][037CA06F][Client-03721230] release, 50
+<1>Jul14 15:18:33.682 SF_05940[SockMgr] [SRF] Closed
+<1>Jul14 15:18:33.682 SF_05940[SockMgr] socket close end .....
+<1>Jul14 15:18:33.684 SM_03280[CpBoard2] handle CB2 end
+<1>Jul14 15:18:33.684 SM_03280[CtrlMgr] failed to recv tlv header (iris), -93
+<1>Jul14 15:18:33.801 SF_05940[Environ] Manager MessageLoop Done! (1)
+<1>Jul14 15:18:33.802 SF_05940[EnvCtrl] ManagerStart Out
+<1>Jul14 15:18:33.816 SF_05940[DChannel] DHExpressway[251] clear items, queue size:[0]
+<1>Jul14 15:18:33.816 SF_05940[SockMgr] socket close begin ...
+<1>Jul14 15:18:33.816 SF_05940[SockMgr] socket close end .....
+<1>Jul14 15:18:33.816 SF_05940[EnvCtrl] Stop End
+<1>Jul14 15:18:33.816 SF_05940[EnvCtrl] ManagerStop Out
+<0>Jul14 15:18:33.818 SM_03280[ConCurr] [LAN][0ABEC6E7][SSL] failed to recv data, block 1, result 0, ssl error 1, sys err 0x0A000126 (error:0A000126:SSL routines::unexpected eof while reading), wsa err 0x00000000, cnt 0, 708
+<0>Jul14 15:18:33.818 SM_03280[ConCurr] [LAN][0ABEC6E7][TLVR] failed to recv tlv header, -86, 64
+<1>Jul14 15:18:33.818 SM_03280[ConCurr] [LAN][0ABEC6E7][TLVR] stop tlv receiver, 1, 145
+<1>Jul14 15:18:33.818 SM_03280[ConCurr] src 1 finish
+<0>Jul14 15:18:33.836 SM_03280[ConCurr] Notify json session info to SRChat failed
+<1>Jul14 15:18:33.841 SM_03280[CtrlMgr] Check sesid srapppb:1=>srf:1
+<1>Jul14 15:18:33.845 SM_03280[ConCurr] src 1 delete
+<1>Jul14 15:18:33.848 PB_05720[Banner] Got notification from SRM. w:7001, l:0
+<1>Jul14 15:18:33.849 PB_05720[Banner] Reg show banner:0
+<9>Jul14 15:18:33.849 PB_057202025-07-14 15:17:30		0.0 KB	Upload	Completed	SUPPORT (192.0.2.1)
+<1>Jul14 15:18:33.858 SM_03280[RMMmode] extend TTL (86400000)ms
+<1>Jul14 15:18:33.930 SF_05940[EnvCtrl] ManagerStop In
+<1>Jul14 15:18:33.930 SF_05940[EnvCtrl] Stop Begin
+<1>Jul14 15:18:33.930 SF_05940[EnvCtrl] Stop End Aleady Stopped
+<1>Jul14 15:18:33.930 SF_05940[EnvCtrl] ManagerStop Out
+<1>Jul14 15:18:33.964 SM_03280[RMMmode] extend TTL (86400000)ms
+<1>Jul14 15:18:33.965 SM_03280[Environ] IRISDoRun done...
+<1>Jul14 15:18:33.965 SM_03280[Redirect] RemoteUSBMgr stop done!
+<1>Jul14 15:18:34.520 SM_03280[Backend] CMD:32 200(0):
+<1>Jul14 15:18:34.520 SM_03280[RMMmode] CMD:32 result:20200 type:4
+<1>Jul14 15:18:34.520 SM_03280[Session] session ID:1723635310 max:0 file:0 print:1 term:1 mon:0+0 mic:0
+<1>Jul14 15:22:56.753 SM_03280[SecuIPC] role 1 replace role 7 encryption info
+<1>Jul14 15:22:56.879 SM_03280[RMMmode] Ignore the same code [hZCDFPhK75mJ]
+<1>Jul14 15:22:56.879 SM_03280[RMMmode] assign spwd ttl 86400sec
+<1>Jul14 15:22:56.879 SM_03280[RMMmode] assign spwd 61ec55bd77839eec425eaad275a397e46be6d33c4c6d9fa4963fcf8b292ec43d
+<1>Jul14 15:22:56.879 SM_03280[RMMmode] assign TTL (86400000)ms

@@ -1,0 +1,118 @@
+2025-07-17T13:59:35.415973664+00:00 stdout P [?2004h]0;root@350f9f5489ae: /root@350f9f5489ae:/# 
+2025-07-17T13:59:55.083124361+00:00 stdout P i
+2025-07-17T13:59:55.134273093+00:00 stdout P d
+2025-07-17T13:59:55.516060081+00:00 stdout F 
+2025-07-17T13:59:55.516060081+00:00 stdout P [?2004l
+2025-07-17T13:59:55.520500121+00:00 stdout F uid=0(root) gid=0(root) groups=0(root)
+2025-07-17T13:59:55.520710754+00:00 stdout P [?2004h]0;root@350f9f5489ae: /root@350f9f5489ae:/# 
+2025-07-17T13:59:55.899046561+00:00 stdout P w
+2025-07-17T13:59:56.081889251+00:00 stdout P h
+2025-07-17T13:59:56.155161358+00:00 stdout P o
+2025-07-17T13:59:56.314722397+00:00 stdout P a
+2025-07-17T13:59:56.397428372+00:00 stdout P m
+2025-07-17T13:59:56.781975204+00:00 stdout P i
+2025-07-17T13:59:57.027849560+00:00 stdout F 
+2025-07-17T13:59:57.027849560+00:00 stdout P [?2004l
+2025-07-17T13:59:57.030398453+00:00 stdout F root
+2025-07-17T13:59:57.030796737+00:00 stdout P [?2004h]0;root@350f9f5489ae: /root@350f9f5489ae:/# 
+2025-07-17T13:59:59.442978683+00:00 stdout P l
+2025-07-17T13:59:59.515176379+00:00 stdout P s
+2025-07-17T13:59:59.543224909+00:00 stdout P  
+2025-07-17T13:59:59.630977212+00:00 stdout P -
+2025-07-17T13:59:59.687043488+00:00 stdout P l
+2025-07-17T13:59:59.753727026+00:00 stdout P a
+2025-07-17T14:00:00.023127561+00:00 stdout P h
+2025-07-17T14:00:00.083791170+00:00 stdout P  
+2025-07-17T14:00:00.208632970+00:00 stdout P .
+2025-07-17T14:00:00.317529090+00:00 stdout F 
+2025-07-17T14:00:00.317529090+00:00 stdout P [?2004l
+2025-07-17T14:00:00.322087964+00:00 stdout F total 56K
+2025-07-17T14:00:00.322570242+00:00 stdout F dr-xr-xr-x   1 root   root    4.0K Jul 17 13:59 [0m[01;34m.[0m
+2025-07-17T14:00:00.322570242+00:00 stdout F dr-xr-xr-x   1 root   root    4.0K Jul 17 13:59 [01;34m..[0m
+2025-07-17T14:00:00.322570242+00:00 stdout F lrwxrwxrwx   1 root   root       7 Apr 22  2024 [01;36mbin[0m -> [01;34musr/bin[0m
+2025-07-17T14:00:00.322570242+00:00 stdout F drwxr-xr-x   2 root   root    4.0K Apr 22  2024 [01;34mboot[0m
+2025-07-17T14:00:00.322570242+00:00 stdout F drwxr-xr-x   5 root   root     360 Jul 17 13:59 [01;34mdev[0m
+2025-07-17T14:00:00.322570242+00:00 stdout F drwxr-xr-x   1 root   root    4.0K Jul 17 13:59 [01;34metc[0m
+2025-07-17T14:00:00.322570242+00:00 stdout F drwxr-xr-x   3 root   root    4.0K Jul 14 14:14 [01;34mhome[0m
+2025-07-17T14:00:00.322570242+00:00 stdout F lrwxrwxrwx   1 root   root       7 Apr 22  2024 [01;36mlib[0m -> [01;34musr/lib[0m
+2025-07-17T14:00:00.322570242+00:00 stdout F lrwxrwxrwx   1 root   root       9 Apr 22  2024 [01;36mlib64[0m -> [01;34musr/lib64[0m
+2025-07-17T14:00:00.322570242+00:00 stdout F drwxr-xr-x   2 root   root    4.0K Jul 14 14:08 [01;34mmedia[0m
+2025-07-17T14:00:00.322570242+00:00 stdout F drwxr-xr-x   2 root   root    4.0K Jul 14 14:08 [01;34mmnt[0m
+2025-07-17T14:00:00.322570242+00:00 stdout F drwxr-xr-x   2 root   root    4.0K Jul 14 14:08 [01;34mopt[0m
+2025-07-17T14:00:00.322570242+00:00 stdout F dr-xr-xr-x 278 nobody nogroup    0 Jul 17 13:59 [01;34mproc[0m
+2025-07-17T14:00:00.322570242+00:00 stdout F drwx------   2 root   root    4.0K Jul 14 14:14 [01;34mroot[0m
+2025-07-17T14:00:00.322570242+00:00 stdout F drwxr-xr-x   1 root   root    4.0K Jul 17 13:59 [01;34mrun[0m
+2025-07-17T14:00:00.322570242+00:00 stdout F lrwxrwxrwx   1 root   root       8 Apr 22  2024 [01;36msbin[0m -> [01;34musr/sbin[0m
+2025-07-17T14:00:00.322570242+00:00 stdout F drwxr-xr-x   2 root   root    4.0K Jul 14 14:08 [01;34msrv[0m
+2025-07-17T14:00:00.322570242+00:00 stdout F dr-xr-xr-x  13 nobody nogroup    0 Jul 17 13:59 [01;34msys[0m
+2025-07-17T14:00:00.322570242+00:00 stdout F drwxrwxrwt   2 root   root    4.0K Jul 14 14:14 [30;42mtmp[0m
+2025-07-17T14:00:00.322570242+00:00 stdout F drwxr-xr-x  12 root   root    4.0K Jul 14 14:08 [01;34musr[0m
+2025-07-17T14:00:00.322728942+00:00 stdout F drwxr-xr-x  11 root   root    4.0K Jul 14 14:14 [01;34mvar[0m
+2025-07-17T14:00:00.323896972+00:00 stdout P [?2004h]0;root@350f9f5489ae: /root@350f9f5489ae:/# 
+2025-07-17T14:00:00.995872375+00:00 stdout P c
+2025-07-17T14:00:01.129618256+00:00 stdout P a
+2025-07-17T14:00:01.273494459+00:00 stdout P t
+2025-07-17T14:00:01.314498537+00:00 stdout P  
+2025-07-17T14:00:01.378588131+00:00 stdout P /
+2025-07-17T14:00:01.486715383+00:00 stdout P e
+2025-07-17T14:00:01.570485742+00:00 stdout P t
+2025-07-17T14:00:01.772627659+00:00 stdout P c
+2025-07-17T14:00:01.828490553+00:00 stdout P /
+2025-07-17T14:00:02.079597668+00:00 stdout P p
+2025-07-17T14:00:02.147106710+00:00 stdout P a
+2025-07-17T14:00:02.208829941+00:00 stdout P s
+2025-07-17T14:00:02.411666153+00:00 stdout P s
+2025-07-17T14:00:02.508464335+00:00 stdout P w
+2025-07-17T14:00:02.566507036+00:00 stdout P d
+2025-07-17T14:00:02.847797699+00:00 stdout F 
+2025-07-17T14:00:02.847797699+00:00 stdout P [?2004l
+2025-07-17T14:00:02.851570644+00:00 stdout F root:x:0:0:root:/root:/bin/bash
+2025-07-17T14:00:02.851570644+00:00 stdout F daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin
+2025-07-17T14:00:02.851570644+00:00 stdout F bin:x:2:2:bin:/bin:/usr/sbin/nologin
+2025-07-17T14:00:02.851570644+00:00 stdout F sys:x:3:3:sys:/dev:/usr/sbin/nologin
+2025-07-17T14:00:02.851570644+00:00 stdout F sync:x:4:65534:sync:/bin:/bin/sync
+2025-07-17T14:00:02.851570644+00:00 stdout F games:x:5:60:games:/usr/games:/usr/sbin/nologin
+2025-07-17T14:00:02.851570644+00:00 stdout F man:x:6:12:man:/var/cache/man:/usr/sbin/nologin
+2025-07-17T14:00:02.851570644+00:00 stdout F lp:x:7:7:lp:/var/spool/lpd:/usr/sbin/nologin
+2025-07-17T14:00:02.851570644+00:00 stdout F mail:x:8:8:mail:/var/mail:/usr/sbin/nologin
+2025-07-17T14:00:02.851570644+00:00 stdout F news:x:9:9:news:/var/spool/news:/usr/sbin/nologin
+2025-07-17T14:00:02.851570644+00:00 stdout F uucp:x:10:10:uucp:/var/spool/uucp:/usr/sbin/nologin
+2025-07-17T14:00:02.851570644+00:00 stdout F proxy:x:13:13:proxy:/bin:/usr/sbin/nologin
+2025-07-17T14:00:02.851570644+00:00 stdout F www-data:x:33:33:www-data:/var/www:/usr/sbin/nologin
+2025-07-17T14:00:02.851570644+00:00 stdout F backup:x:34:34:backup:/var/backups:/usr/sbin/nologin
+2025-07-17T14:00:02.851570644+00:00 stdout F list:x:38:38:Mailing List Manager:/var/list:/usr/sbin/nologin
+2025-07-17T14:00:02.851570644+00:00 stdout F irc:x:39:39:ircd:/run/ircd:/usr/sbin/nologin
+2025-07-17T14:00:02.851570644+00:00 stdout F _apt:x:42:65534::/nonexistent:/usr/sbin/nologin
+2025-07-17T14:00:02.851570644+00:00 stdout F nobody:x:65534:65534:nobody:/nonexistent:/usr/sbin/nologin
+2025-07-17T14:00:02.851570644+00:00 stdout F ubuntu:x:1000:1000:Ubuntu:/home/ubuntu:/bin/bash
+2025-07-17T14:00:02.852245533+00:00 stdout P [?2004h]0;root@350f9f5489ae: /root@350f9f5489ae:/# 
+2025-07-17T14:00:04.907434758+00:00 stdout P e
+2025-07-17T14:00:04.988491800+00:00 stdout P c
+2025-07-17T14:00:05.033752160+00:00 stdout P h
+2025-07-17T14:00:05.102483066+00:00 stdout P o
+2025-07-17T14:00:05.219932174+00:00 stdout P  
+2025-07-17T14:00:05.798288014+00:00 stdout P "
+2025-07-17T14:00:07.175727323+00:00 stdout P h
+2025-07-17T14:00:07.250447408+00:00 stdout P i
+2025-07-17T14:00:07.376365661+00:00 stdout P d
+2025-07-17T14:00:07.485806089+00:00 stdout P d
+2025-07-17T14:00:07.624807121+00:00 stdout P e
+2025-07-17T14:00:07.696815233+00:00 stdout P n
+2025-07-17T14:00:08.190799829+00:00 stdout P  
+2025-07-17T14:00:08.334820796+00:00 stdout P  
+2025-07-17T14:00:08.467843199+00:00 stdout P  
+2025-07-17T14:00:08.605653981+00:00 stdout P  
+2025-07-17T14:00:08.752645486+00:00 stdout P  
+2025-07-17T14:00:08.908702794+00:00 stdout P  
+2025-07-17T14:00:09.229678116+00:00 stdout P h
+2025-07-17T14:00:09.327007795+00:00 stdout P e
+2025-07-17T14:00:09.526429053+00:00 stdout P l
+2025-07-17T14:00:09.657487401+00:00 stdout P l
+2025-07-17T14:00:09.806226580+00:00 stdout P o
+2025-07-17T14:00:10.314423081+00:00 stdout P !
+2025-07-17T14:00:10.658594195+00:00 stdout P "
+2025-07-17T14:00:10.986807169+00:00 stdout F 
+2025-07-17T14:00:10.986807169+00:00 stdout F [?2004lhello!
+2025-07-17T14:00:10.986807169+00:00 stdout P [?2004h]0;root@350f9f5489ae: /root@350f9f5489ae:/# 
+2025-07-17T14:01:32.504316662+00:00 stdout F [?2004l
+2025-07-17T14:01:32.504316662+00:00 stdout F exit

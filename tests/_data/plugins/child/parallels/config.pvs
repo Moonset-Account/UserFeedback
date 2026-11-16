@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ParallelsVirtualMachine>
+    <Identification>
+        <VmUuid>{12345678-1234-4321-ABCD-1234567890AB}</VmUuid>
+        <VmName>My VM</VmName>
+    </Identification>
+    <Hardware>
+        <CPU>
+            <Number>4</Number>
+            <VT-x>1</VT-x>
+            <AccelerationLevel>2</AccelerationLevel>
+        </CPU>
+        <Memory>
+            <RAMSize>8192</RAMSize> <!-- Memory in MB -->
+        </Memory>
+        <Video>
+            <VideoMemorySize>512</VideoMemorySize>
+            <Use3DAcceleration>1</Use3DAcceleration>
+        </Video>
+        <Network>
+            <Adapter>
+                <Enabled>1</Enabled>
+                <Type>Bridged</Type>
+                <MACAddress>001C42AABBCC</MACAddress>
+            </Adapter>
+        </Network>
+        <Disk>
+            <Image>
+                <ImageFile>Windows11.hdd</ImageFile>
+                <Size>512000</Size> <!-- Virtual disk size in MB -->
+            </Image>
+        </Disk>
+    </Hardware>
+    <Settings>
+        <StartupView>Window</StartupView>
+        <UseAutostart>0</UseAutostart>
+        <Sharing>
+            <SharedFolders>
+                <Enabled>1</Enabled>
+                <Folder>
+                    <Enabled>1</Enabled>
+                    <Path>/Users/myuser/Documents</Path>
+                    <ReadOnly>0</ReadOnly>
+                </Folder>
+            </SharedFolders>
+        </Sharing>
+    </Settings>
+</ParallelsVirtualMachine>

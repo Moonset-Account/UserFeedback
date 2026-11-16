@@ -1,0 +1,57 @@
+Beginning threat actions
+Start time:12-25-2017 16:30:45
+Threat Name:Worm:Win32/RandomName.X
+Threat ID:1000000001
+Action:quarantine
+Resource action complete:Quarantine
+Schema:file
+Path:\\?\C:\OS\Tasks\RandomTask1.job
+Threat ID:1000000001
+Resource refcount:1
+Result:0
+Resource action complete:Quarantine
+Schema:file
+Path:\\?\C:\OS\system32\randomfile.tmp->(UPX)
+Threat ID:1000000001
+Resource refcount:1
+Result:0
+Resource action complete:Quarantine
+Schema:taskscheduler
+Path:\\?\C:\OS\Tasks\RandomTask1.job
+Threat ID:1000000001
+Resource refcount:1
+Result:0
+Resource action complete:Quarantine
+Schema:containerfile
+Path:\\?\C:\OS\system32\randomfile.tmp
+Threat ID:1000000001
+Resource refcount:1
+Result:0
+File to act on SHA1:A1B2C3D4E5F67890A1B2C3D4E5F67890A1B2C3D4
+File cleaned/removed successfully
+File Name:C:\OS\Tasks\RandomTask1.job
+Resource action complete:Removal
+Schema:file
+Path:\\?\C:\OS\Tasks\RandomTask1.job
+Threat ID:1000000001
+Resource refcount:1
+Result:0
+File to act on SHA1:4E5F6789A1B2C3D0E4F56789A1B2C3D0E4F56789
+File cleaned/removed successfully
+File Name:C:\OS\system32\randomfile.tmp->(UPX)
+Resource action complete:Removal
+Schema:file
+Path:\\?\C:\OS\system32\randomfile.tmp->(UPX)
+Threat ID:1000000001
+Resource refcount:1
+Result:0
+Resource action complete:Removal
+Schema:taskscheduler
+Path:\\?\C:\OS\Tasks\RandomTask1.job
+Threat ID:1000000001
+Resource refcount:1
+Result:0
+Finished threat ID:1000000001
+Threat result:0
+Threat status flags:256
+Finished threat actions

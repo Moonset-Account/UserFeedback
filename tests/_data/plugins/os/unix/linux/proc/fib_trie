@@ -1,0 +1,198 @@
+Main:
+  +-- 0.0.0.0/0 5 2 19
+     |-- 0.0.0.0
+        /1 universe UNICAST
+        /0 universe UNICAST
+     +-- 8.0.0.0/5 2 0 2
+        |-- 10.0.0.0
+           /8 universe UNICAST
+        +-- 13.107.0.0/16 2 0 2
+           +-- 13.107.0.0/19 2 0 2
+              |-- 13.107.6.152
+                 /31 universe UNICAST
+              |-- 13.107.18.10
+                 /31 universe UNICAST
+           +-- 13.107.128.0/20 2 0 2
+              |-- 13.107.128.0
+                 /22 universe UNICAST
+              |-- 13.107.136.0
+                 /22 universe UNICAST
+     |-- 23.103.160.0
+        /20 universe UNICAST
+     +-- 40.96.0.0/12 2 0 1
+        |-- 40.96.0.0
+           /13 universe UNICAST
+        |-- 40.104.0.0
+           /15 universe UNICAST
+        |-- 40.108.128.0
+           /17 universe UNICAST
+     +-- 52.96.0.0/11 3 0 4
+        |-- 52.96.0.0
+           /14 universe UNICAST
+        |-- 52.104.0.0
+           /14 universe UNICAST
+        |-- 52.112.0.0
+           /14 universe UNICAST
+        |-- 52.122.0.0
+           /15 universe UNICAST
+     |-- 104.146.128.0
+        /17 universe UNICAST
+     +-- 127.0.0.0/8 2 0 2
+        +-- 127.0.0.0/31 1 0 0
+           |-- 127.0.0.0
+              /8 host LOCAL
+           |-- 127.0.0.1
+              /32 host LOCAL
+        |-- 127.255.255.255
+           /32 link BROADCAST
+     +-- 128.0.0.0/5 2 0 1
+        |-- 128.0.0.0
+           /1 universe UNICAST
+        |-- 131.253.33.215
+           /32 universe UNICAST
+        |-- 132.245.0.0
+           /16 universe UNICAST
+     +-- 150.171.32.0/20 2 0 2
+        |-- 150.171.32.0
+           /22 universe UNICAST
+        |-- 150.171.40.0
+           /22 universe UNICAST
+     +-- 172.16.0.0/15 3 1 5
+        +-- 172.16.0.0/18 2 1 2
+           +-- 172.16.9.0/24 2 0 2
+              +-- 172.16.9.0/27 2 0 2
+                 |-- 172.16.9.0
+                    /24 link UNICAST
+                 |-- 172.16.9.25
+                    /32 host LOCAL
+              |-- 172.16.9.255
+                 /32 link BROADCAST
+           +-- 172.16.48.0/20 2 0 2
+              |-- 172.16.49.0
+                 /24 universe UNICAST
+              +-- 172.16.58.0/24 2 0 2
+                 +-- 172.16.58.0/27 2 0 2
+                    |-- 172.16.58.0
+                       /24 link UNICAST
+                    |-- 172.16.58.20
+                       /32 host LOCAL
+                 |-- 172.16.58.255
+                    /32 link BROADCAST
+        +-- 172.17.0.0/31 1 0 0
+           |-- 172.17.0.0
+              /16 link UNICAST
+           |-- 172.17.0.1
+              /32 host LOCAL
+        |-- 172.17.255.255
+           /32 link BROADCAST
+     |-- 178.250.144.162
+        /32 universe UNICAST
+     +-- 192.168.122.0/24 2 0 2
+        +-- 192.168.122.0/31 1 0 0
+           |-- 192.168.122.0
+              /24 link UNICAST
+           |-- 192.168.122.1
+              /32 host LOCAL
+        |-- 192.168.122.255
+           /32 link BROADCAST
+     |-- 204.79.197.215
+        /32 universe UNICAST
+Local:
+  +-- 0.0.0.0/0 5 2 19
+     |-- 0.0.0.0
+        /1 universe UNICAST
+        /0 universe UNICAST
+     +-- 8.0.0.0/5 2 0 2
+        |-- 10.0.0.0
+           /8 universe UNICAST
+        +-- 13.107.0.0/16 2 0 2
+           +-- 13.107.0.0/19 2 0 2
+              |-- 13.107.6.152
+                 /31 universe UNICAST
+              |-- 13.107.18.10
+                 /31 universe UNICAST
+           +-- 13.107.128.0/20 2 0 2
+              |-- 13.107.128.0
+                 /22 universe UNICAST
+              |-- 13.107.136.0
+                 /22 universe UNICAST
+     |-- 23.103.160.0
+        /20 universe UNICAST
+     +-- 40.96.0.0/12 2 0 1
+        |-- 40.96.0.0
+           /13 universe UNICAST
+        |-- 40.104.0.0
+           /15 universe UNICAST
+        |-- 40.108.128.0
+           /17 universe UNICAST
+     +-- 52.96.0.0/11 3 0 4
+        |-- 52.96.0.0
+           /14 universe UNICAST
+        |-- 52.104.0.0
+           /14 universe UNICAST
+        |-- 52.112.0.0
+           /14 universe UNICAST
+        |-- 52.122.0.0
+           /15 universe UNICAST
+     |-- 104.146.128.0
+        /17 universe UNICAST
+     +-- 127.0.0.0/8 2 0 2
+        +-- 127.0.0.0/31 1 0 0
+           |-- 127.0.0.0
+              /8 host LOCAL
+           |-- 127.0.0.1
+              /32 host LOCAL
+        |-- 127.255.255.255
+           /32 link BROADCAST
+     +-- 128.0.0.0/5 2 0 1
+        |-- 128.0.0.0
+           /1 universe UNICAST
+        |-- 131.253.33.215
+           /32 universe UNICAST
+        |-- 132.245.0.0
+           /16 universe UNICAST
+     +-- 150.171.32.0/20 2 0 2
+        |-- 150.171.32.0
+           /22 universe UNICAST
+        |-- 150.171.40.0
+           /22 universe UNICAST
+     +-- 172.16.0.0/15 3 1 5
+        +-- 172.16.0.0/18 2 1 2
+           +-- 172.16.9.0/24 2 0 2
+              +-- 172.16.9.0/27 2 0 2
+                 |-- 172.16.9.0
+                    /24 link UNICAST
+                 |-- 172.16.9.25
+                    /32 host LOCAL
+              |-- 172.16.9.255
+                 /32 link BROADCAST
+           +-- 172.16.48.0/20 2 0 2
+              |-- 172.16.49.0
+                 /24 universe UNICAST
+              +-- 172.16.58.0/24 2 0 2
+                 +-- 172.16.58.0/27 2 0 2
+                    |-- 172.16.58.0
+                       /24 link UNICAST
+                    |-- 172.16.58.20
+                       /32 host LOCAL
+                 |-- 172.16.58.255
+                    /32 link BROADCAST
+        +-- 172.17.0.0/31 1 0 0
+           |-- 172.17.0.0
+              /16 link UNICAST
+           |-- 172.17.0.1
+              /32 host LOCAL
+        |-- 172.17.255.255
+           /32 link BROADCAST
+     |-- 178.250.144.162
+        /32 universe UNICAST
+     +-- 192.168.122.0/24 2 0 2
+        +-- 192.168.122.0/31 1 0 0
+           |-- 192.168.122.0
+              /24 link UNICAST
+           |-- 192.168.122.1
+              /32 host LOCAL
+        |-- 192.168.122.255
+           /32 link BROADCAST
+     |-- 204.79.197.215
+        /32 universe UNICAST

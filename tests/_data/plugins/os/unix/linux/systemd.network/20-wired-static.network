@@ -1,0 +1,10 @@
+[Match]
+Name=enp1s0
+MACAddress=ff::ee::dd::cc::bb::aa
+MACAddress=aa::bb::cc::dd::ee::ff
+
+[Network]
+Address=10.1.10.9/24
+Gateway=10.1.10.1
+DNS=10.1.10.1
+VLAN=eth0.100

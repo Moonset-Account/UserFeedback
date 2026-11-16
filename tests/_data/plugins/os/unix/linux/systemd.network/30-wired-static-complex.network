@@ -1,0 +1,26 @@
+[Match]
+Name=enp1s0
+Type=ether
+MACAddress=aa::bb::cc::dd::ee::ff ff::ee::dd::cc::bb::aa
+PermanentMACAddress=cc::ff::bb::aa::dd
+
+[Network]
+Address=10.1.10.9/16
+Address=10.1.9.10/24
+Gateway=10.1.6.3
+DNS=10.1.10.1
+DNS=10.1.10.2:9954
+DNS=[1111:2222::3333]:9953%ifname#example.com
+
+[Link]
+MACAddress=bb::aa::dd::cc::ff
+
+[Route]
+Gateway=10.1.10.2
+Gateway=_dhcp4
+
+[Route]
+Gateway=10.1.9.3
+Gateway=_ipv6ra
+
+
