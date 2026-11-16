@@ -23,6 +23,7 @@ from datetime import datetime
 
 import requests
 from rfc3161_client import (
+    PKIStatus,
     TimestampRequestBuilder,
     TimeStampResponse,
     decode_timestamp_response,
@@ -57,6 +58,33 @@ class TimestampError(Exception):
     """
     A generic error in the TimestampAuthority client.
     """
+
+
+class TimestampAuthorityError(TimestampError):
+    """
+    The Timestamp Authority returned a protocol-level (RFC 3161) refusal:
+    a `TimeStampResp` whose `PKIStatus` is neither `granted` nor
+    `grantedWithMods`, and which therefore contains no timestamp token.
+
+    TSAs commonly return these responses with an HTTP 200 status code, so
+    they cannot be detected at the transport layer. This error carries the
+    authority's `status` and human-readable `status_string` so that callers
+    can classify the refusal.
+    """
+
+    def __init__(self, status: int, status_string: list[str]) -> None:
+        self.status = status
+        self.status_string = status_string
+
+        try:
+            status_name = PKIStatus(status).name.lower()
+        except ValueError:
+            status_name = f"unknown ({status})"
+
+        reason = ", ".join(status_string) if status_string else "no reason given"
+        super().__init__(
+            f"Timestamp Authority refused the request (status={status_name}): {reason}"
+        )
 
 
 class TimestampAuthorityClient:
@@ -94,7 +122,9 @@ class TimestampAuthorityClient:
 
         request_timestamp() can be called from multiple threads.
 
-        Raises a TimestampError on failure.
+        Raises a TimestampError on failure, or a TimestampAuthorityError
+        (a TimestampError subclass) when the TSA returns a protocol-level
+        refusal.
         """
         # Build the timestamp request
         try:
@@ -127,5 +157,19 @@ class TimestampAuthorityClient:
         except ValueError as e:
             msg = f"invalid response: {e}"
             raise TimestampError(msg)
+
+        # A TSA may answer a well-formed request with a protocol-level
+        # refusal (RFC 3161 PKIStatus other than granted/grantedWithMods),
+        # typically still with an HTTP 200 status code. Such a response
+        # contains no timestamp token, so surface the refusal here rather
+        # than letting the caller fail later on the missing token.
+        if timestamp_response.status not in (
+            PKIStatus.GRANTED,
+            PKIStatus.GRANTED_WITH_MODS,
+        ):
+            raise TimestampAuthorityError(
+                status=timestamp_response.status,
+                status_string=timestamp_response.status_string,
+            )
 
         return timestamp_response
