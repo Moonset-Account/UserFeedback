@@ -70,6 +70,20 @@ class NODE_TYPES:
     BXML = 0x21
     WSTRINGARRAY = 0x81
 
+    # Array variant types are the matching scalar type OR'd with 0x80.
+    # Only the fixed-width scalar types have an array representation.
+    SIGNED_BYTEARRAY = 0x83
+    UNSIGNED_BYTEARRAY = 0x84
+    SIGNED_WORDARRAY = 0x85
+    UNSIGNED_WORDARRAY = 0x86
+    SIGNED_DWORDARRAY = 0x87
+    UNSIGNED_DWORDARRAY = 0x88
+    SIGNED_QWORDARRAY = 0x89
+    UNSIGNED_QWORDARRAY = 0x8A
+    FLOATARRAY = 0x8B
+    DOUBLEARRAY = 0x8C
+    BOOLEANARRAY = 0x8D
+
 
 node_dispatch_table = []  # updated at end of file
 node_readable_tokens = []  # updated at end of file
@@ -466,10 +480,21 @@ def get_variant_value(buf, offset, chunk, parent, type_, length=None):
         NODE_TYPES.HEX64: Hex64TypeNode,
         NODE_TYPES.BXML: BXmlTypeNode,
         NODE_TYPES.WSTRINGARRAY: WstringArrayTypeNode,
+        NODE_TYPES.SIGNED_BYTEARRAY: SignedByteArrayTypeNode,
+        NODE_TYPES.UNSIGNED_BYTEARRAY: UnsignedByteArrayTypeNode,
+        NODE_TYPES.SIGNED_WORDARRAY: SignedWordArrayTypeNode,
+        NODE_TYPES.UNSIGNED_WORDARRAY: UnsignedWordArrayTypeNode,
+        NODE_TYPES.SIGNED_DWORDARRAY: SignedDwordArrayTypeNode,
+        NODE_TYPES.UNSIGNED_DWORDARRAY: UnsignedDwordArrayTypeNode,
+        NODE_TYPES.SIGNED_QWORDARRAY: SignedQwordArrayTypeNode,
+        NODE_TYPES.UNSIGNED_QWORDARRAY: UnsignedQwordArrayTypeNode,
+        NODE_TYPES.FLOATARRAY: FloatArrayTypeNode,
+        NODE_TYPES.DOUBLEARRAY: DoubleArrayTypeNode,
+        NODE_TYPES.BOOLEANARRAY: BooleanArrayTypeNode,
     }
     try:
         TypeClass = types[type_]
-    except IndexError:
+    except KeyError:
         raise NotImplementedError("Type {} not implemented".format(type_))
     return TypeClass(buf, offset, chunk, parent, length=length)
 
@@ -1564,6 +1589,162 @@ class WstringArrayTypeNode(VariantTypeNode):
                 raise ParseException("Error parsing uneven substring of NULLs")
             binary = binary[len(frag) :]
         return "".join(acc)
+
+
+class ArrayTypeNode(VariantTypeNode):
+    """
+    Base class for the fixed-width array variant types.
+
+    An array variant is the matching scalar variant type OR'd with 0x80.
+    The on-disk value is the concatenation of the fixed-width scalar values,
+    so the number of elements is derived from the total value size.  Each
+    element is rendered using the representation of its scalar type, and the
+    original order is preserved.
+    """
+
+    # subclasses must provide the width, in bytes, of one element
+    element_width = 0
+    # subclasses must provide the VariantTypeNode subclass of one element
+    element_class = None
+
+    def __init__(self, buf, offset, chunk, parent, length=None):
+        super(ArrayTypeNode, self).__init__(buf, offset, chunk, parent, length=length)
+        if self._length is None:
+            # inline value: a WORD prefix holds the size of the binary payload
+            self.declare_field("word", "binary_length", 0x0)
+            self.declare_field("binary", "binary", length=self.binary_length())
+        else:
+            # substitution value: the descriptor supplies the payload size
+            self.declare_field("binary", "binary", 0x0, length=self._length)
+
+    def tag_length(self):
+        if self._length is None:
+            return 2 + self.binary_length()
+        return self._length
+
+    @memoize
+    def elements(self):
+        """
+        @return A list of scalar VariantTypeNode instances, one per element,
+          in the order they appear in the array.
+        """
+        ret = []
+        count = self.tag_length() // self.element_width
+        for i in range(count):
+            element_offset = i * self.element_width
+            ret.append(
+                self.element_class(
+                    self._buf,
+                    self.offset() + element_offset,
+                    self._chunk,
+                    self,
+                    length=self.element_width,
+                )
+            )
+        return ret
+
+    def string(self):
+        # match the rendering of the existing WstringArrayTypeNode
+        return "".join("<string>{}</string>\n".format(element.string()) for element in self.elements())
+
+
+class SignedByteArrayTypeNode(ArrayTypeNode):
+    """
+    Variant type 0x83.
+    """
+
+    element_width = 1
+    element_class = SignedByteTypeNode
+
+
+class UnsignedByteArrayTypeNode(ArrayTypeNode):
+    """
+    Variant type 0x84.
+    """
+
+    element_width = 1
+    element_class = UnsignedByteTypeNode
+
+
+class SignedWordArrayTypeNode(ArrayTypeNode):
+    """
+    Variant type 0x85.
+    """
+
+    element_width = 2
+    element_class = SignedWordTypeNode
+
+
+class UnsignedWordArrayTypeNode(ArrayTypeNode):
+    """
+    Variant type 0x86.
+    """
+
+    element_width = 2
+    element_class = UnsignedWordTypeNode
+
+
+class SignedDwordArrayTypeNode(ArrayTypeNode):
+    """
+    Variant type 0x87.
+    """
+
+    element_width = 4
+    element_class = SignedDwordTypeNode
+
+
+class UnsignedDwordArrayTypeNode(ArrayTypeNode):
+    """
+    Variant type 0x88.
+    """
+
+    element_width = 4
+    element_class = UnsignedDwordTypeNode
+
+
+class SignedQwordArrayTypeNode(ArrayTypeNode):
+    """
+    Variant type 0x89.
+    """
+
+    element_width = 8
+    element_class = SignedQwordTypeNode
+
+
+class UnsignedQwordArrayTypeNode(ArrayTypeNode):
+    """
+    Variant type 0x8A.
+    """
+
+    element_width = 8
+    element_class = UnsignedQwordTypeNode
+
+
+class FloatArrayTypeNode(ArrayTypeNode):
+    """
+    Variant type 0x8B.
+    """
+
+    element_width = 4
+    element_class = FloatTypeNode
+
+
+class DoubleArrayTypeNode(ArrayTypeNode):
+    """
+    Variant type 0x8C.
+    """
+
+    element_width = 8
+    element_class = DoubleTypeNode
+
+
+class BooleanArrayTypeNode(ArrayTypeNode):
+    """
+    Variant type 0x8D.
+    """
+
+    element_width = 4
+    element_class = BooleanTypeNode
 
 
 node_dispatch_table = [
