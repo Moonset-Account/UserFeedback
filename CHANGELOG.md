@@ -1,0 +1,32 @@
+# Changelog
+
+All notable changes to `coderisktools-scanner` are documented here.
+
+## [3.0.1] — 2026-07-20
+
+### Changed
+
+- refreshed the public package release metadata for the current Scanner flagship;
+- updated the documented registry inventory to 299 native, 267 line and 32 contextual detectors;
+- updated CI/CD coverage documentation to 73 policy detectors;
+- synchronized install examples for pre-commit and GitHub Actions with `v3.0.1`.
+
+### Security posture
+
+- local-first and offline by default;
+- no runtime telemetry;
+- no runtime dependencies;
+- bounded input handling;
+- redacted output by default;
+- no execution of target-project code;
+- synthetic fixtures only in the public repository.
+
+### Limitations
+
+A clean result is not proof that code is secure. Findings can include false positives and false negatives. This release is not a security audit, certification, compliance guarantee or legal opinion.
+
+## [3.0.0] — 2026-07-16
+
+First public GitHub release of the MIT-licensed CodeRiskTools Secret Scanner Engine.
+
+See the GitHub release notes and attached provenance files for the original 3.0.0 artifact record.
