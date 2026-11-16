@@ -1,0 +1,158 @@
+#!/usr/bin/env python3
+
+"""
+A wrapper to convert `sigstore-conformance` CLI protocol invocations to match `sigstore-python`.
+"""
+
+import json
+import os
+import sys
+from contextlib import suppress
+from pathlib import Path
+from tempfile import NamedTemporaryFile
+
+# The signing config in this trust_config is not used: it's just here
+# so the built trustconfig is complete
+trust_config = {
+    "mediaType": "application/vnd.dev.sigstore.clienttrustconfig.v0.1+json",
+    "signingConfig": {
+        "mediaType": "application/vnd.dev.sigstore.signingconfig.v0.2+json",
+        "caUrls": [{
+            "url": "https://fulcio.example.com",
+            "majorApiVersion": 1,
+            "operator": "",
+            "validFor": {"start": "1970-01-01T01:01:01Z"}
+        }],
+        "oidcUrls": [],
+        "rekorTlogUrls": [{
+            "url": "https://rekor.example.com",
+            "majorApiVersion": 1,
+            "operator": "",
+            "validFor": {"start": "1970-01-01T01:01:01Z"}
+        }],
+        "tsaUrls": [],
+        "rekorTlogConfig": {"selector": "ANY"},
+        "tsaConfig": {"selector": "ANY"},
+    },
+}
+
+SUBCMD_REPLACEMENTS = {
+    "sign-bundle": "sign",
+    "verify-bundle": "verify",
+}
+
+ARG_REPLACEMENTS = {
+    "--certificate-identity": "--cert-identity",
+    "--certificate-oidc-issuer": "--cert-oidc-issuer",
+}
+
+# Trim the script name.
+fixed_args = sys.argv[1:]
+
+# Substitute incompatible subcommands.
+subcmd = fixed_args[0]
+if subcmd in SUBCMD_REPLACEMENTS:
+    fixed_args[0] = SUBCMD_REPLACEMENTS[subcmd]
+
+# Build base command with optional staging argument
+command = ["sigstore"]
+if "--staging" in fixed_args:
+    command.append("--staging")
+    fixed_args.remove("--staging")
+
+# We may get "--trusted-root" and "--signing-config" as argument but sigstore-python
+# wants "--trust-config":
+trusted_root_path = None
+with suppress(ValueError):
+    i = fixed_args.index("--trusted-root")
+    trusted_root_path = fixed_args[i + 1]
+    fixed_args.pop(i)
+    fixed_args.pop(i)
+
+signing_config_path = None
+with suppress(ValueError):
+    i = fixed_args.index("--signing-config")
+    signing_config_path = fixed_args[i + 1]
+    fixed_args.pop(i)
+    fixed_args.pop(i)
+
+
+# If we did get a trustedroot, write a matching trustconfig into a temp file
+# Use given signingconfig if possible, otherwise use the fake one in template
+with NamedTemporaryFile(mode="wt") as temp_file:
+    if trusted_root_path is not None:
+        with open(trusted_root_path) as f:
+            trusted_root = json.load(f)
+        trust_config["trustedRoot"] = trusted_root
+        if signing_config_path is not None:
+            with open(signing_config_path) as f:
+                signing_config = json.load(f)
+            trust_config["signingConfig"] = signing_config
+
+        json.dump(trust_config, temp_file)
+        temp_file.flush()
+
+        command.extend(["--trust-config", temp_file.name])
+
+    # Fix-up the subcommand: the conformance suite uses `verify`, but
+    # `sigstore` requires `verify identity` for identity based verifications.
+    subcommand, *fixed_args = fixed_args
+    if subcommand == "sign":
+        if "--in-toto" in fixed_args:
+            # Handle DSSE signing via library call
+            fixed_args.remove("--in-toto")
+
+            from sigstore.dsse import Statement
+            from sigstore.models import ClientTrustConfig
+            from sigstore.oidc import IdentityToken
+            from sigstore.sign import SigningContext
+
+            identity_token = None
+            bundle_path = None
+            try:
+                i = fixed_args.index("--identity-token")
+                identity_token = fixed_args[i + 1]
+                i = fixed_args.index("--bundle")
+                bundle_path = fixed_args[i + 1]
+            except (ValueError, IndexError):
+                raise ValueError("Missing required arguments for DSSE signing")
+
+            # The statement is always the last argument in the protocol
+            input_file = fixed_args[-1]
+
+            # Direct library call
+            with open(input_file, "rb") as f:
+                statement_bytes = f.read()
+
+            statement = Statement(statement_bytes)
+
+            if trusted_root_path is not None:
+                trust_config_obj = ClientTrustConfig.from_json(Path(temp_file.name).read_text())
+            else:
+                trust_config_obj = ClientTrustConfig.production()
+                if "--staging" in sys.argv:
+                    trust_config_obj = ClientTrustConfig.staging()
+
+            context = SigningContext.from_trust_config(trust_config_obj)
+            token = IdentityToken(identity_token)
+
+            with context.signer(token) as signer:
+                bundle = signer.sign_dsse(statement)
+
+            with open(bundle_path, "w") as f:
+                f.write(bundle.to_json())
+
+            # Exit successfully after handling DSSE
+            sys.exit(0)
+        command.append("sign")
+    elif subcommand == "verify":
+        command.extend(["verify", "identity"])
+    else:
+        raise ValueError(f"unsupported subcommand: {subcommand}")
+
+    # Replace incompatible flags.
+    command.extend(
+        ARG_REPLACEMENTS[arg] if arg in ARG_REPLACEMENTS else arg for arg in fixed_args
+    )
+
+    os.execvp("sigstore", command)
