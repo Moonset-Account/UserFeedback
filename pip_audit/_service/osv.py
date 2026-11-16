@@ -132,7 +132,11 @@ class OsvService(VulnerabilityService):
                 pkg = affected["package"]
                 # We only care about PyPI versions
                 if pkg["name"] == spec.canonical_name and pkg["ecosystem"] == "PyPI":
-                    for ranges in affected["ranges"]:
+                    # The "ranges" key is optional: some OSV entries only list the
+                    # affected versions, without any range (and therefore without a
+                    # known fix). Treat those as having no fix versions instead of
+                    # failing the entire response.
+                    for ranges in affected.get("ranges") or []:
                         if ranges["type"] == "ECOSYSTEM":
                             # Filter out non-fix versions
                             fix_version_strs = [

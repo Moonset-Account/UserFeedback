@@ -8,6 +8,12 @@ All versions prior to 0.0.9 are untracked.
 
 ## [Unreleased]
 
+### Fixed
+
+* OSV advisories that only list affected versions, without any version ranges,
+  are no longer dropped (and no longer abort the rest of the response). They are
+  now reported with an empty set of fix versions.
+
 ## [2.10.0]
 
 ### Added

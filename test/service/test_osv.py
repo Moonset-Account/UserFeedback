@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import json
+
 import pretend  # type: ignore
 import pytest
 from packaging.version import Version
@@ -277,3 +279,132 @@ def test_osv_vuln_withdrawn(monkeypatch):
     assert logger.debug.calls == [
         pretend.call("OSV vuln entry 'fakeid' marked as withdrawn at some-datetime")
     ]
+
+
+def test_osv_vuln_affected_versions_only(monkeypatch):
+    # Some OSV entries list the affected versions without any ranges, i.e. without
+    # declaring a fix. Those entries should still be reported (with no fix versions),
+    # and they must not prevent later entries in the same response from being parsed.
+    payload = {
+        "vulns": [
+            {
+                "id": "PYSEC-2021-1",
+                "summary": "no known fix",
+                "affected": [
+                    {
+                        "package": {"name": "foo", "ecosystem": "PyPI"},
+                        "versions": ["1.0.0", "1.0.1"],
+                    }
+                ],
+            },
+            {
+                "id": "PYSEC-2021-2",
+                "summary": "fixed in 2.0.0",
+                "affected": [
+                    {
+                        "package": {"name": "foo", "ecosystem": "PyPI"},
+                        "ranges": [
+                            {
+                                "type": "ECOSYSTEM",
+                                "events": [{"introduced": "0"}, {"fixed": "2.0.0"}],
+                            }
+                        ],
+                    }
+                ],
+            },
+        ],
+    }
+
+    response = pretend.stub(raise_for_status=lambda: None, json=lambda: payload)
+    post = pretend.call_recorder(lambda *a, **kw: response)
+
+    osv = service.OsvService()
+    monkeypatch.setattr(osv.session, "post", post)
+
+    dep = service.ResolvedDependency("foo", Version("1.0.0"))
+    results = dict(osv.query_all(iter([dep])))
+
+    assert len(results) == 1
+    assert dep in results
+
+    vulns = results[dep]
+    assert len(vulns) == 2
+
+    assert vulns[0].id == "PYSEC-2021-1"
+    assert vulns[0].fix_versions == []
+
+    assert vulns[1].id == "PYSEC-2021-2"
+    assert vulns[1].fix_versions == [Version("2.0.0")]
+
+
+def test_osv_batch_fixed_unknown_and_no_vulns(monkeypatch):
+    # A single batch mixing a vuln with a fix, a vuln with an unknown fix, and a
+    # dependency with no findings. Fix versions must remain sorted, as before.
+    payloads = {
+        "foo": {
+            "vulns": [
+                {
+                    "id": "PYSEC-2021-1",
+                    "summary": "fixed",
+                    "affected": [
+                        {
+                            "package": {"name": "foo", "ecosystem": "PyPI"},
+                            "ranges": [
+                                {
+                                    "type": "ECOSYSTEM",
+                                    "events": [
+                                        {"introduced": "0"},
+                                        {"fixed": "2.0.0"},
+                                        {"fixed": "1.0.5"},
+                                    ],
+                                }
+                            ],
+                        }
+                    ],
+                }
+            ]
+        },
+        "bar": {
+            "vulns": [
+                {
+                    "id": "PYSEC-2021-2",
+                    "summary": "unknown fix",
+                    "affected": [
+                        {
+                            "package": {"name": "bar", "ecosystem": "PyPI"},
+                            "versions": ["1.0.0"],
+                        }
+                    ],
+                }
+            ]
+        },
+        "baz": {},
+    }
+
+    def post(url, **kwargs):
+        query = json.loads(kwargs["data"])
+        payload = payloads[query["package"]["name"]]
+        return pretend.stub(raise_for_status=lambda: None, json=lambda: payload)
+
+    osv = service.OsvService()
+    monkeypatch.setattr(osv.session, "post", post)
+
+    deps = [
+        service.ResolvedDependency("foo", Version("1.0.0")),
+        service.ResolvedDependency("bar", Version("1.0.0")),
+        service.ResolvedDependency("baz", Version("1.0.0")),
+    ]
+    results = dict(osv.query_all(iter(deps)))
+
+    assert len(results) == 3
+    assert all(dep in results for dep in deps)
+
+    foo_vulns = results[deps[0]]
+    assert len(foo_vulns) == 1
+    assert foo_vulns[0].fix_versions == [Version("1.0.5"), Version("2.0.0")]
+
+    bar_vulns = results[deps[1]]
+    assert len(bar_vulns) == 1
+    assert bar_vulns[0].fix_versions == []
+
+    assert results[deps[2]] == []
