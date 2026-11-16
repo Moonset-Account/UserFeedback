@@ -1,0 +1,42 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ["3.10", "3.11", "3.12", "3.13"]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6.3.0
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Install build backend and package
+        run: |
+          python -m pip install --disable-pip-version-check 'setuptools==80.9.0'
+          python -m pip install --disable-pip-version-check --no-deps --no-build-isolation .
+      - name: Unit tests
+        run: python -m unittest discover -s tests -p 'test_*.py' -v
+      - name: Compile
+        run: python -m compileall -q src tests
+      - name: Secret-safe repository scan
+        run: |
+          rm -rf build *.egg-info
+          secret-scanner scan --dir . --recursive --profile secrets-only --no-config-check --baseline .coderisktools-baseline.json --format json --output /tmp/coderisktools-self-scan.json
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        if: always()
+        with:
+          name: self-scan-${{ matrix.python }}
+          path: /tmp/coderisktools-self-scan.json
+          if-no-files-found: error
+          retention-days: 7

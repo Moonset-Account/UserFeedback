@@ -1,0 +1,7 @@
+- id: coderisktools-secret-scan
+  name: CodeRiskTools staged secret scan
+  description: Scan staged changes for secret-like values and risky configuration changes.
+  entry: secret-scanner scan --staged --profile balanced --format json
+  language: python
+  pass_filenames: false
+  stages: [pre-commit]
