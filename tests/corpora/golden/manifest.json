@@ -1,0 +1,4067 @@
+{
+  "cases": [
+    {
+      "case_id": "context-CRT-AI-009",
+      "expected_rule_ids": [
+        "CRT-AI-009"
+      ],
+      "filepath": "AGENTS.md",
+      "lines": [
+        [
+          10,
+          "<redacted:context-CRT-AI-009>"
+        ],
+        [
+          11,
+          "<redacted:context-CRT-AI-009>"
+        ],
+        [
+          12,
+          "<redacted:context-CRT-AI-009>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-AI-009>",
+      "type": "synthetic-context"
+    },
+    {
+      "case_id": "context-CRT-CI-009",
+      "expected_rule_ids": [
+        "CRT-CI-009"
+      ],
+      "filepath": ".github/workflows/*.yml",
+      "lines": [
+        [
+          10,
+          "<redacted:context-CRT-CI-009>"
+        ],
+        [
+          11,
+          "<redacted:context-CRT-CI-009>"
+        ],
+        [
+          12,
+          "<redacted:context-CRT-CI-009>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-CI-009>",
+      "type": "synthetic-context"
+    },
+    {
+      "case_id": "context-CRT-IAC-018",
+      "expected_rule_ids": [
+        "CRT-IAC-018"
+      ],
+      "filepath": "*.tf",
+      "lines": [
+        [
+          10,
+          "<redacted:context-CRT-IAC-018>"
+        ],
+        [
+          11,
+          "<redacted:context-CRT-IAC-018>"
+        ],
+        [
+          12,
+          "<redacted:context-CRT-IAC-018>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-IAC-018>",
+      "type": "synthetic-context"
+    },
+    {
+      "case_id": "context-CRT-IAC-019",
+      "expected_rule_ids": [
+        "CRT-IAC-019"
+      ],
+      "filepath": "k8s/*.yml",
+      "lines": [
+        [
+          10,
+          "<redacted:context-CRT-IAC-019>"
+        ],
+        [
+          11,
+          "<redacted:context-CRT-IAC-019>"
+        ],
+        [
+          12,
+          "<redacted:context-CRT-IAC-019>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-IAC-019>",
+      "type": "synthetic-context"
+    },
+    {
+      "case_id": "context-CRT-IAC-020",
+      "expected_rule_ids": [
+        "CRT-IAC-020"
+      ],
+      "filepath": "k8s/*.yml",
+      "lines": [
+        [
+          10,
+          "<redacted:context-CRT-IAC-020>"
+        ],
+        [
+          11,
+          "<redacted:context-CRT-IAC-020>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-IAC-020>",
+      "type": "synthetic-context"
+    },
+    {
+      "case_id": "context-CRT-IAC-021",
+      "expected_rule_ids": [
+        "CRT-IAC-021"
+      ],
+      "filepath": "*.tf",
+      "lines": [
+        [
+          10,
+          "<redacted:context-CRT-IAC-021>"
+        ],
+        [
+          11,
+          "<redacted:context-CRT-IAC-021>"
+        ],
+        [
+          12,
+          "<redacted:context-CRT-IAC-021>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-IAC-021>",
+      "type": "synthetic-context"
+    },
+    {
+      "case_id": "line-CRT-AI-001",
+      "expected_rule_ids": [
+        "CRT-AI-001"
+      ],
+      "filepath": "AGENTS.md",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-AI-001>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-AI-001>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-AI-002",
+      "expected_rule_ids": [
+        "CRT-AI-002"
+      ],
+      "filepath": "AGENTS.md",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-AI-002>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-AI-002>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-AI-003",
+      "expected_rule_ids": [
+        "CRT-AI-003"
+      ],
+      "filepath": "AGENTS.md",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-AI-003>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-AI-003>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-AI-004",
+      "expected_rule_ids": [
+        "CRT-AI-004"
+      ],
+      "filepath": "AGENTS.md",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-AI-004>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-AI-004>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-AI-005",
+      "expected_rule_ids": [
+        "CRT-AI-005"
+      ],
+      "filepath": "AGENTS.md",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-AI-005>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-AI-005>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-AI-006",
+      "expected_rule_ids": [
+        "CRT-AI-006"
+      ],
+      "filepath": "AGENTS.md",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-AI-006>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-AI-006>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-AI-007",
+      "expected_rule_ids": [
+        "CRT-AI-007"
+      ],
+      "filepath": "AGENTS.md",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-AI-007>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-AI-007>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-AI-008",
+      "expected_rule_ids": [
+        "CRT-AI-008"
+      ],
+      "filepath": "AGENTS.md",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-AI-008>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-AI-008>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-CI-001",
+      "expected_rule_ids": [
+        "CRT-CI-001"
+      ],
+      "filepath": ".github/workflows/*.yml",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-CI-001>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-CI-001>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-CI-002",
+      "expected_rule_ids": [
+        "CRT-CI-002"
+      ],
+      "filepath": ".github/workflows/*.yml",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-CI-002>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-CI-002>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-CI-003",
+      "expected_rule_ids": [
+        "CRT-CI-003"
+      ],
+      "filepath": ".github/workflows/*.yml",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-CI-003>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-CI-003>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-CI-004",
+      "expected_rule_ids": [
+        "CRT-CI-004"
+      ],
+      "filepath": ".github/workflows/*.yml",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-CI-004>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-CI-004>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-CI-005",
+      "expected_rule_ids": [
+        "CRT-CI-005"
+      ],
+      "filepath": ".gitlab-ci.yml",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-CI-005>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-CI-005>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-CI-006",
+      "expected_rule_ids": [
+        "CRT-CI-006"
+      ],
+      "filepath": ".gitlab-ci.yml",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-CI-006>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-CI-006>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-CI-007",
+      "expected_rule_ids": [
+        "CRT-CI-007"
+      ],
+      "filepath": ".github/workflows/*.yml",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-CI-007>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-CI-007>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-CI-008",
+      "expected_rule_ids": [
+        "CRT-CI-008"
+      ],
+      "filepath": ".gitlab-ci.yml",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-CI-008>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-CI-008>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-IAC-001",
+      "expected_rule_ids": [
+        "CRT-IAC-001"
+      ],
+      "filepath": "docker-compose.yml",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-IAC-001>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-IAC-001>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-IAC-002",
+      "expected_rule_ids": [
+        "CRT-IAC-002"
+      ],
+      "filepath": "Dockerfile",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-IAC-002>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-IAC-002>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-IAC-003",
+      "expected_rule_ids": [
+        "CRT-IAC-003"
+      ],
+      "filepath": "*.tf",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-IAC-003>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-IAC-003>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-IAC-004",
+      "expected_rule_ids": [
+        "CRT-IAC-004"
+      ],
+      "filepath": "k8s/*.yml",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-IAC-004>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-IAC-004>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-IAC-005",
+      "expected_rule_ids": [
+        "CRT-IAC-005"
+      ],
+      "filepath": "k8s/*.yml",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-IAC-005>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-IAC-005>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-IAC-006",
+      "expected_rule_ids": [
+        "CRT-IAC-006"
+      ],
+      "filepath": "nginx/*.conf",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-IAC-006>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-IAC-006>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-IAC-007",
+      "expected_rule_ids": [
+        "CRT-IAC-007"
+      ],
+      "filepath": "*.service",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-IAC-007>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-IAC-007>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-IAC-008",
+      "expected_rule_ids": [
+        "CRT-IAC-008"
+      ],
+      "filepath": "docker-compose.yml",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-IAC-008>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-IAC-008>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-IAC-009",
+      "expected_rule_ids": [
+        "CRT-IAC-009"
+      ],
+      "filepath": "k8s/*.yml",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-IAC-009>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-IAC-009>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-IAC-010",
+      "expected_rule_ids": [
+        "CRT-IAC-010"
+      ],
+      "filepath": "k8s/*.yml",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-IAC-010>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-IAC-010>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-IAC-011",
+      "expected_rule_ids": [
+        "CRT-IAC-011"
+      ],
+      "filepath": "*.tf",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-IAC-011>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-IAC-011>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-IAC-012",
+      "expected_rule_ids": [
+        "CRT-IAC-012"
+      ],
+      "filepath": "*.service",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-IAC-012>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-IAC-012>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-IAC-013",
+      "expected_rule_ids": [
+        "CRT-IAC-013"
+      ],
+      "filepath": "docker-compose.yml",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-IAC-013>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-IAC-013>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-IAC-014",
+      "expected_rule_ids": [
+        "CRT-IAC-014"
+      ],
+      "filepath": "docker-compose.yml",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-IAC-014>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-IAC-014>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-IAC-015",
+      "expected_rule_ids": [
+        "CRT-IAC-015"
+      ],
+      "filepath": "k8s/*.yml",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-IAC-015>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-IAC-015>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-IAC-016",
+      "expected_rule_ids": [
+        "CRT-IAC-016"
+      ],
+      "filepath": "k8s/*.yml",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-IAC-016>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-IAC-016>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-IAC-017",
+      "expected_rule_ids": [
+        "CRT-IAC-017"
+      ],
+      "filepath": "*.tf",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-IAC-017>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-IAC-017>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-001",
+      "expected_rule_ids": [
+        "CRT-SEC-001"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-001>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-001>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-002",
+      "expected_rule_ids": [
+        "CRT-SEC-002",
+        "CRT-SEC-019"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-002>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-002>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-003",
+      "expected_rule_ids": [
+        "CRT-SEC-003"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-003>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-003>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-004",
+      "expected_rule_ids": [
+        "CRT-SEC-004",
+        "CRT-SEC-016",
+        "CRT-SEC-019"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-004>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-004>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-005",
+      "expected_rule_ids": [
+        "CRT-SEC-005"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-005>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-005>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-006",
+      "expected_rule_ids": [
+        "CRT-SEC-006"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-006>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-006>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-007",
+      "expected_rule_ids": [
+        "CRT-SEC-007"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-007>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-007>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-008",
+      "expected_rule_ids": [
+        "CRT-SEC-008",
+        "CRT-SEC-015"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-008>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-008>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-009",
+      "expected_rule_ids": [
+        "CRT-SEC-009"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-009>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-009>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-010",
+      "expected_rule_ids": [
+        "CRT-SEC-010"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-010>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-010>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-011",
+      "expected_rule_ids": [
+        "CRT-SEC-011"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-011>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-011>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-012",
+      "expected_rule_ids": [
+        "CRT-SEC-012"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-012>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-012>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-013",
+      "expected_rule_ids": [
+        "CRT-SEC-013",
+        "CRT-SEC-017"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-013>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-013>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-014",
+      "expected_rule_ids": [
+        "CRT-SEC-014"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-014>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-014>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-015",
+      "expected_rule_ids": [
+        "CRT-SEC-015"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-015>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-015>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-016",
+      "expected_rule_ids": [
+        "CRT-SEC-016"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-016>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-016>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-017",
+      "expected_rule_ids": [
+        "CRT-SEC-017"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-017>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-017>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-018",
+      "expected_rule_ids": [
+        "CRT-SEC-018"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-018>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-018>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-019",
+      "expected_rule_ids": [
+        "CRT-SEC-017",
+        "CRT-SEC-019"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-019>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-019>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-020",
+      "expected_rule_ids": [
+        "CRT-SEC-020"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-020>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-020>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-021",
+      "expected_rule_ids": [
+        "CRT-SEC-021"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-021>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-021>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-022",
+      "expected_rule_ids": [
+        "CRT-SEC-022"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-022>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-022>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-023",
+      "expected_rule_ids": [
+        "CRT-SEC-023"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-023>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-023>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-024",
+      "expected_rule_ids": [
+        "CRT-SEC-024"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-024>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-024>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-025",
+      "expected_rule_ids": [
+        "CRT-SEC-025"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-025>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-025>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-026",
+      "expected_rule_ids": [
+        "CRT-SEC-026"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-026>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-026>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-027",
+      "expected_rule_ids": [
+        "CRT-SEC-027"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-027>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-027>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-028",
+      "expected_rule_ids": [
+        "CRT-SEC-028"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-028>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-028>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-029",
+      "expected_rule_ids": [
+        "CRT-SEC-029"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-029>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-029>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-030",
+      "expected_rule_ids": [
+        "CRT-SEC-030"
+      ],
+      "filepath": ".npmrc",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-030>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-030>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-031",
+      "expected_rule_ids": [
+        "CRT-SEC-031"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-031>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-031>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-032",
+      "expected_rule_ids": [
+        "CRT-SEC-032"
+      ],
+      "filepath": "*.env",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-032>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-032>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-033",
+      "expected_rule_ids": [
+        "CRT-SEC-033"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-033>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-033>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-034",
+      "expected_rule_ids": [
+        "CRT-SEC-034"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-034>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-034>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-035",
+      "expected_rule_ids": [
+        "CRT-SEC-035"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-035>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-035>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-036",
+      "expected_rule_ids": [
+        "CRT-SEC-036",
+        "CRT-SEC-178"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-036>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-036>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-037",
+      "expected_rule_ids": [
+        "CRT-SEC-037"
+      ],
+      "filepath": "*.env",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-037>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-037>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-038",
+      "expected_rule_ids": [
+        "CRT-SEC-038"
+      ],
+      "filepath": "*.env",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-038>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-038>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-039",
+      "expected_rule_ids": [
+        "CRT-SEC-039"
+      ],
+      "filepath": "*.env",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-039>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-039>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-040",
+      "expected_rule_ids": [
+        "CRT-SEC-040"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-040>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-040>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-041",
+      "expected_rule_ids": [
+        "CRT-SEC-041"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-041>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-041>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-042",
+      "expected_rule_ids": [
+        "CRT-SEC-042"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-042>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-042>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-043",
+      "expected_rule_ids": [
+        "CRT-SEC-043"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-043>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-043>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-044",
+      "expected_rule_ids": [
+        "CRT-SEC-044"
+      ],
+      "filepath": "*.env",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-044>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-044>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-045",
+      "expected_rule_ids": [
+        "CRT-SEC-045"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-045>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-045>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-046",
+      "expected_rule_ids": [
+        "CRT-SEC-046"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-046>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-046>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-047",
+      "expected_rule_ids": [
+        "CRT-SEC-047"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-047>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-047>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-048",
+      "expected_rule_ids": [
+        "CRT-SEC-048"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-048>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-048>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-049",
+      "expected_rule_ids": [
+        "CRT-SEC-049"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-049>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-049>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-050",
+      "expected_rule_ids": [
+        "CRT-SEC-050"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-050>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-050>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-051",
+      "expected_rule_ids": [
+        "CRT-SEC-051"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-051>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-051>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-052",
+      "expected_rule_ids": [
+        "CRT-SEC-052"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-052>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-052>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-053",
+      "expected_rule_ids": [
+        "CRT-SEC-053",
+        "CRT-SEC-152"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-053>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-053>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-054",
+      "expected_rule_ids": [
+        "CRT-SEC-054"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-054>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-054>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-055",
+      "expected_rule_ids": [
+        "CRT-SEC-055"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-055>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-055>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-056",
+      "expected_rule_ids": [
+        "CRT-SEC-056"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-056>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-056>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-057",
+      "expected_rule_ids": [
+        "CRT-SEC-057"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-057>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-057>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-058",
+      "expected_rule_ids": [
+        "CRT-SEC-058"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-058>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-058>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-059",
+      "expected_rule_ids": [
+        "CRT-SEC-059"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-059>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-059>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-060",
+      "expected_rule_ids": [
+        "CRT-SEC-060"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-060>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-060>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-061",
+      "expected_rule_ids": [
+        "CRT-SEC-061"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-061>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-061>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-062",
+      "expected_rule_ids": [
+        "CRT-SEC-062"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-062>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-062>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-063",
+      "expected_rule_ids": [
+        "CRT-SEC-063"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-063>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-063>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-064",
+      "expected_rule_ids": [
+        "CRT-SEC-064",
+        "CRT-SEC-173"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-064>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-064>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-065",
+      "expected_rule_ids": [
+        "CRT-SEC-065"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-065>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-065>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-066",
+      "expected_rule_ids": [
+        "CRT-SEC-066"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-066>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-066>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-067",
+      "expected_rule_ids": [
+        "CRT-SEC-067"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-067>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-067>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-068",
+      "expected_rule_ids": [
+        "CRT-SEC-068"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-068>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-068>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-069",
+      "expected_rule_ids": [
+        "CRT-SEC-069"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-069>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-069>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-070",
+      "expected_rule_ids": [
+        "CRT-SEC-070"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-070>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-070>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-071",
+      "expected_rule_ids": [
+        "CRT-SEC-071"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-071>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-071>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-072",
+      "expected_rule_ids": [
+        "CRT-SEC-072"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-072>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-072>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-073",
+      "expected_rule_ids": [
+        "CRT-SEC-073"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-073>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-073>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-074",
+      "expected_rule_ids": [
+        "CRT-SEC-074"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-074>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-074>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-075",
+      "expected_rule_ids": [
+        "CRT-SEC-075"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-075>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-075>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-076",
+      "expected_rule_ids": [
+        "CRT-SEC-076"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-076>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-076>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-077",
+      "expected_rule_ids": [
+        "CRT-SEC-077"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-077>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-077>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-078",
+      "expected_rule_ids": [
+        "CRT-SEC-078"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-078>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-078>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-079",
+      "expected_rule_ids": [
+        "CRT-SEC-079"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-079>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-079>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-080",
+      "expected_rule_ids": [
+        "CRT-SEC-080"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-080>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-080>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-081",
+      "expected_rule_ids": [
+        "CRT-SEC-081"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-081>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-081>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-082",
+      "expected_rule_ids": [
+        "CRT-SEC-082"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-082>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-082>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-083",
+      "expected_rule_ids": [
+        "CRT-SEC-083"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-083>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-083>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-084",
+      "expected_rule_ids": [
+        "CRT-SEC-084"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-084>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-084>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-085",
+      "expected_rule_ids": [
+        "CRT-SEC-085"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-085>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-085>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-086",
+      "expected_rule_ids": [
+        "CRT-SEC-086"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-086>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-086>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-087",
+      "expected_rule_ids": [
+        "CRT-SEC-087"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-087>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-087>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-088",
+      "expected_rule_ids": [
+        "CRT-SEC-088"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-088>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-088>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-089",
+      "expected_rule_ids": [
+        "CRT-SEC-089"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-089>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-089>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-090",
+      "expected_rule_ids": [
+        "CRT-SEC-090"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-090>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-090>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-091",
+      "expected_rule_ids": [
+        "CRT-SEC-091"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-091>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-091>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-092",
+      "expected_rule_ids": [
+        "CRT-SEC-092"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-092>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-092>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-093",
+      "expected_rule_ids": [
+        "CRT-SEC-093"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-093>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-093>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-094",
+      "expected_rule_ids": [
+        "CRT-SEC-094"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-094>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-094>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-095",
+      "expected_rule_ids": [
+        "CRT-SEC-095"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-095>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-095>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-096",
+      "expected_rule_ids": [
+        "CRT-SEC-096"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-096>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-096>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-097",
+      "expected_rule_ids": [
+        "CRT-SEC-097"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-097>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-097>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-098",
+      "expected_rule_ids": [
+        "CRT-SEC-098"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-098>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-098>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-099",
+      "expected_rule_ids": [
+        "CRT-SEC-099"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-099>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-099>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-100",
+      "expected_rule_ids": [
+        "CRT-SEC-100"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-100>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-100>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-101",
+      "expected_rule_ids": [
+        "CRT-SEC-101"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-101>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-101>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-102",
+      "expected_rule_ids": [
+        "CRT-SEC-102",
+        "CRT-SEC-179"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-102>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-102>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-103",
+      "expected_rule_ids": [
+        "CRT-SEC-103"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-103>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-103>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-104",
+      "expected_rule_ids": [
+        "CRT-SEC-104"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-104>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-104>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-105",
+      "expected_rule_ids": [
+        "CRT-SEC-105"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-105>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-105>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-106",
+      "expected_rule_ids": [
+        "CRT-SEC-106"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-106>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-106>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-107",
+      "expected_rule_ids": [
+        "CRT-SEC-107"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-107>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-107>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-108",
+      "expected_rule_ids": [
+        "CRT-SEC-108"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-108>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-108>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-109",
+      "expected_rule_ids": [
+        "CRT-SEC-109"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-109>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-109>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-110",
+      "expected_rule_ids": [
+        "CRT-SEC-110"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-110>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-110>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-111",
+      "expected_rule_ids": [
+        "CRT-SEC-111"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-111>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-111>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-112",
+      "expected_rule_ids": [
+        "CRT-SEC-112"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-112>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-112>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-113",
+      "expected_rule_ids": [
+        "CRT-SEC-113"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-113>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-113>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-114",
+      "expected_rule_ids": [
+        "CRT-SEC-114"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-114>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-114>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-115",
+      "expected_rule_ids": [
+        "CRT-SEC-115"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-115>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-115>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-116",
+      "expected_rule_ids": [
+        "CRT-SEC-116"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-116>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-116>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-117",
+      "expected_rule_ids": [
+        "CRT-SEC-117"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-117>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-117>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-118",
+      "expected_rule_ids": [
+        "CRT-SEC-118"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-118>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-118>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-119",
+      "expected_rule_ids": [
+        "CRT-SEC-119"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-119>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-119>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-120",
+      "expected_rule_ids": [
+        "CRT-SEC-120"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-120>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-120>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-121",
+      "expected_rule_ids": [
+        "CRT-SEC-121"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-121>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-121>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-122",
+      "expected_rule_ids": [
+        "CRT-SEC-122"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-122>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-122>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-123",
+      "expected_rule_ids": [
+        "CRT-SEC-123"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-123>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-123>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-124",
+      "expected_rule_ids": [
+        "CRT-SEC-124"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-124>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-124>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-125",
+      "expected_rule_ids": [
+        "CRT-SEC-125"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-125>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-125>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-126",
+      "expected_rule_ids": [
+        "CRT-SEC-126"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-126>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-126>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-127",
+      "expected_rule_ids": [
+        "CRT-SEC-127"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-127>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-127>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-128",
+      "expected_rule_ids": [
+        "CRT-SEC-128"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-128>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-128>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-129",
+      "expected_rule_ids": [
+        "CRT-SEC-129"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-129>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-129>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-130",
+      "expected_rule_ids": [
+        "CRT-SEC-130"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-130>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-130>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-131",
+      "expected_rule_ids": [
+        "CRT-SEC-131"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-131>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-131>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-132",
+      "expected_rule_ids": [
+        "CRT-SEC-132"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-132>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-132>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-133",
+      "expected_rule_ids": [
+        "CRT-SEC-133"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-133>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-133>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-134",
+      "expected_rule_ids": [
+        "CRT-SEC-134"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-134>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-134>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-135",
+      "expected_rule_ids": [
+        "CRT-SEC-135"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-135>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-135>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-136",
+      "expected_rule_ids": [
+        "CRT-SEC-136"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-136>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-136>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-137",
+      "expected_rule_ids": [
+        "CRT-SEC-137"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-137>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-137>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-138",
+      "expected_rule_ids": [
+        "CRT-SEC-138"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-138>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-138>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-139",
+      "expected_rule_ids": [
+        "CRT-SEC-139"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-139>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-139>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-141",
+      "expected_rule_ids": [
+        "CRT-SEC-141"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-141>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-141>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-142",
+      "expected_rule_ids": [
+        "CRT-SEC-142"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-142>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-142>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-143",
+      "expected_rule_ids": [
+        "CRT-SEC-143"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-143>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-143>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-144",
+      "expected_rule_ids": [
+        "CRT-SEC-144"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-144>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-144>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-145",
+      "expected_rule_ids": [
+        "CRT-SEC-145"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-145>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-145>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-146",
+      "expected_rule_ids": [
+        "CRT-SEC-146"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-146>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-146>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-147",
+      "expected_rule_ids": [
+        "CRT-SEC-147"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-147>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-147>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-148",
+      "expected_rule_ids": [
+        "CRT-SEC-148"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-148>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-148>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-149",
+      "expected_rule_ids": [
+        "CRT-SEC-149"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-149>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-149>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-150",
+      "expected_rule_ids": [
+        "CRT-SEC-150"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-150>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-150>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-151",
+      "expected_rule_ids": [
+        "CRT-SEC-151",
+        "CRT-SEC-173"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-151>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-151>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-152",
+      "expected_rule_ids": [
+        "CRT-SEC-152"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-152>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-152>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-153",
+      "expected_rule_ids": [
+        "CRT-SEC-153"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-153>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-153>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-154",
+      "expected_rule_ids": [
+        "CRT-SEC-154"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-154>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-154>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-155",
+      "expected_rule_ids": [
+        "CRT-SEC-155"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-155>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-155>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-156",
+      "expected_rule_ids": [
+        "CRT-SEC-156"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-156>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-156>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-157",
+      "expected_rule_ids": [
+        "CRT-SEC-157"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-157>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-157>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-158",
+      "expected_rule_ids": [
+        "CRT-SEC-158"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-158>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-158>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-159",
+      "expected_rule_ids": [
+        "CRT-SEC-159"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-159>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-159>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-160",
+      "expected_rule_ids": [
+        "CRT-SEC-160"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-160>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-160>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-161",
+      "expected_rule_ids": [
+        "CRT-SEC-161"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-161>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-161>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-162",
+      "expected_rule_ids": [
+        "CRT-SEC-162"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-162>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-162>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-163",
+      "expected_rule_ids": [
+        "CRT-SEC-163"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-163>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-163>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-164",
+      "expected_rule_ids": [
+        "CRT-SEC-164"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-164>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-164>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-165",
+      "expected_rule_ids": [
+        "CRT-SEC-165"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-165>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-165>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-166",
+      "expected_rule_ids": [
+        "CRT-SEC-166"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-166>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-166>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-167",
+      "expected_rule_ids": [
+        "CRT-SEC-167"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-167>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-167>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-168",
+      "expected_rule_ids": [
+        "CRT-SEC-168"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-168>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-168>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-169",
+      "expected_rule_ids": [
+        "CRT-SEC-169"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-169>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-169>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-170",
+      "expected_rule_ids": [
+        "CRT-SEC-170"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-170>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-170>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-171",
+      "expected_rule_ids": [
+        "CRT-SEC-171"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-171>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-171>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-172",
+      "expected_rule_ids": [
+        "CRT-SEC-172"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-172>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-172>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-173",
+      "expected_rule_ids": [
+        "CRT-SEC-173"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-173>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-173>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-174",
+      "expected_rule_ids": [
+        "CRT-SEC-174"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-174>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-174>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-175",
+      "expected_rule_ids": [
+        "CRT-SEC-175"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-175>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-175>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-176",
+      "expected_rule_ids": [
+        "CRT-SEC-176"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-176>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-176>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-177",
+      "expected_rule_ids": [
+        "CRT-SEC-177"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-177>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-177>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-178",
+      "expected_rule_ids": [
+        "CRT-SEC-178"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-178>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-178>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-179",
+      "expected_rule_ids": [
+        "CRT-SEC-179"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-179>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-179>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-180",
+      "expected_rule_ids": [
+        "CRT-SEC-180"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-180>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-180>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-181",
+      "expected_rule_ids": [
+        "CRT-SEC-181"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-181>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-181>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-182",
+      "expected_rule_ids": [
+        "CRT-SEC-182"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-182>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-182>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-183",
+      "expected_rule_ids": [
+        "CRT-SEC-183"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-183>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-183>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-184",
+      "expected_rule_ids": [
+        "CRT-SEC-184"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-184>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-184>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-185",
+      "expected_rule_ids": [
+        "CRT-SEC-185"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-185>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-185>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-186",
+      "expected_rule_ids": [
+        "CRT-SEC-186"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-186>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-186>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-187",
+      "expected_rule_ids": [
+        "CRT-SEC-187"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-187>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-187>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SEC-188",
+      "expected_rule_ids": [
+        "CRT-SEC-188"
+      ],
+      "filepath": "src/synthetic.py",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SEC-188>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SEC-188>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SUP-001",
+      "expected_rule_ids": [
+        "CRT-SUP-001"
+      ],
+      "filepath": "*.sh",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SUP-001>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SUP-001>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SUP-002",
+      "expected_rule_ids": [
+        "CRT-SUP-002"
+      ],
+      "filepath": "Dockerfile",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SUP-002>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SUP-002>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SUP-003",
+      "expected_rule_ids": [
+        "CRT-SUP-003"
+      ],
+      "filepath": "requirements*.txt",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SUP-003>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SUP-003>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SUP-004",
+      "expected_rule_ids": [
+        "CRT-SUP-002",
+        "CRT-SUP-004"
+      ],
+      "filepath": "Dockerfile",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SUP-004>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SUP-004>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SUP-005",
+      "expected_rule_ids": [
+        "CRT-SUP-005"
+      ],
+      "filepath": "requirements*.txt",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SUP-005>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SUP-005>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SUP-006",
+      "expected_rule_ids": [
+        "CRT-SUP-006"
+      ],
+      "filepath": ".npmrc",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SUP-006>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SUP-006>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SUP-007",
+      "expected_rule_ids": [
+        "CRT-SUP-007"
+      ],
+      "filepath": "requirements*.txt",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SUP-007>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SUP-007>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SUP-008",
+      "expected_rule_ids": [
+        "CRT-SUP-008"
+      ],
+      "filepath": ".npmrc",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SUP-008>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SUP-008>",
+      "type": "synthetic-line"
+    },
+    {
+      "case_id": "line-CRT-SUP-009",
+      "expected_rule_ids": [
+        "CRT-SUP-009"
+      ],
+      "filepath": "*.env",
+      "lines": [
+        [
+          1,
+          "<redacted:line-CRT-SUP-009>"
+        ]
+      ],
+      "provenance": "synthetic-registry-probe",
+      "redacted_evidence": "<redacted:CRT-SUP-009>",
+      "type": "synthetic-line"
+    }
+  ],
+  "counts": {
+    "covered": 235,
+    "expected_detectors": 235,
+    "unreachable": 0
+  },
+  "covered_detector_ids": [
+    "CRT-AI-001",
+    "CRT-AI-002",
+    "CRT-AI-003",
+    "CRT-AI-004",
+    "CRT-AI-005",
+    "CRT-AI-006",
+    "CRT-AI-007",
+    "CRT-AI-008",
+    "CRT-AI-009",
+    "CRT-CI-001",
+    "CRT-CI-002",
+    "CRT-CI-003",
+    "CRT-CI-004",
+    "CRT-CI-005",
+    "CRT-CI-006",
+    "CRT-CI-007",
+    "CRT-CI-008",
+    "CRT-CI-009",
+    "CRT-IAC-001",
+    "CRT-IAC-002",
+    "CRT-IAC-003",
+    "CRT-IAC-004",
+    "CRT-IAC-005",
+    "CRT-IAC-006",
+    "CRT-IAC-007",
+    "CRT-IAC-008",
+    "CRT-IAC-009",
+    "CRT-IAC-010",
+    "CRT-IAC-011",
+    "CRT-IAC-012",
+    "CRT-IAC-013",
+    "CRT-IAC-014",
+    "CRT-IAC-015",
+    "CRT-IAC-016",
+    "CRT-IAC-017",
+    "CRT-IAC-018",
+    "CRT-IAC-019",
+    "CRT-IAC-020",
+    "CRT-IAC-021",
+    "CRT-SEC-001",
+    "CRT-SEC-002",
+    "CRT-SEC-003",
+    "CRT-SEC-004",
+    "CRT-SEC-005",
+    "CRT-SEC-006",
+    "CRT-SEC-007",
+    "CRT-SEC-008",
+    "CRT-SEC-009",
+    "CRT-SEC-010",
+    "CRT-SEC-011",
+    "CRT-SEC-012",
+    "CRT-SEC-013",
+    "CRT-SEC-014",
+    "CRT-SEC-015",
+    "CRT-SEC-016",
+    "CRT-SEC-017",
+    "CRT-SEC-018",
+    "CRT-SEC-019",
+    "CRT-SEC-020",
+    "CRT-SEC-021",
+    "CRT-SEC-022",
+    "CRT-SEC-023",
+    "CRT-SEC-024",
+    "CRT-SEC-025",
+    "CRT-SEC-026",
+    "CRT-SEC-027",
+    "CRT-SEC-028",
+    "CRT-SEC-029",
+    "CRT-SEC-030",
+    "CRT-SEC-031",
+    "CRT-SEC-032",
+    "CRT-SEC-033",
+    "CRT-SEC-034",
+    "CRT-SEC-035",
+    "CRT-SEC-036",
+    "CRT-SEC-037",
+    "CRT-SEC-038",
+    "CRT-SEC-039",
+    "CRT-SEC-040",
+    "CRT-SEC-041",
+    "CRT-SEC-042",
+    "CRT-SEC-043",
+    "CRT-SEC-044",
+    "CRT-SEC-045",
+    "CRT-SEC-046",
+    "CRT-SEC-047",
+    "CRT-SEC-048",
+    "CRT-SEC-049",
+    "CRT-SEC-050",
+    "CRT-SEC-051",
+    "CRT-SEC-052",
+    "CRT-SEC-053",
+    "CRT-SEC-054",
+    "CRT-SEC-055",
+    "CRT-SEC-056",
+    "CRT-SEC-057",
+    "CRT-SEC-058",
+    "CRT-SEC-059",
+    "CRT-SEC-060",
+    "CRT-SEC-061",
+    "CRT-SEC-062",
+    "CRT-SEC-063",
+    "CRT-SEC-064",
+    "CRT-SEC-065",
+    "CRT-SEC-066",
+    "CRT-SEC-067",
+    "CRT-SEC-068",
+    "CRT-SEC-069",
+    "CRT-SEC-070",
+    "CRT-SEC-071",
+    "CRT-SEC-072",
+    "CRT-SEC-073",
+    "CRT-SEC-074",
+    "CRT-SEC-075",
+    "CRT-SEC-076",
+    "CRT-SEC-077",
+    "CRT-SEC-078",
+    "CRT-SEC-079",
+    "CRT-SEC-080",
+    "CRT-SEC-081",
+    "CRT-SEC-082",
+    "CRT-SEC-083",
+    "CRT-SEC-084",
+    "CRT-SEC-085",
+    "CRT-SEC-086",
+    "CRT-SEC-087",
+    "CRT-SEC-088",
+    "CRT-SEC-089",
+    "CRT-SEC-090",
+    "CRT-SEC-091",
+    "CRT-SEC-092",
+    "CRT-SEC-093",
+    "CRT-SEC-094",
+    "CRT-SEC-095",
+    "CRT-SEC-096",
+    "CRT-SEC-097",
+    "CRT-SEC-098",
+    "CRT-SEC-099",
+    "CRT-SEC-100",
+    "CRT-SEC-101",
+    "CRT-SEC-102",
+    "CRT-SEC-103",
+    "CRT-SEC-104",
+    "CRT-SEC-105",
+    "CRT-SEC-106",
+    "CRT-SEC-107",
+    "CRT-SEC-108",
+    "CRT-SEC-109",
+    "CRT-SEC-110",
+    "CRT-SEC-111",
+    "CRT-SEC-112",
+    "CRT-SEC-113",
+    "CRT-SEC-114",
+    "CRT-SEC-115",
+    "CRT-SEC-116",
+    "CRT-SEC-117",
+    "CRT-SEC-118",
+    "CRT-SEC-119",
+    "CRT-SEC-120",
+    "CRT-SEC-121",
+    "CRT-SEC-122",
+    "CRT-SEC-123",
+    "CRT-SEC-124",
+    "CRT-SEC-125",
+    "CRT-SEC-126",
+    "CRT-SEC-127",
+    "CRT-SEC-128",
+    "CRT-SEC-129",
+    "CRT-SEC-130",
+    "CRT-SEC-131",
+    "CRT-SEC-132",
+    "CRT-SEC-133",
+    "CRT-SEC-134",
+    "CRT-SEC-135",
+    "CRT-SEC-136",
+    "CRT-SEC-137",
+    "CRT-SEC-138",
+    "CRT-SEC-139",
+    "CRT-SEC-141",
+    "CRT-SEC-142",
+    "CRT-SEC-143",
+    "CRT-SEC-144",
+    "CRT-SEC-145",
+    "CRT-SEC-146",
+    "CRT-SEC-147",
+    "CRT-SEC-148",
+    "CRT-SEC-149",
+    "CRT-SEC-150",
+    "CRT-SEC-151",
+    "CRT-SEC-152",
+    "CRT-SEC-153",
+    "CRT-SEC-154",
+    "CRT-SEC-155",
+    "CRT-SEC-156",
+    "CRT-SEC-157",
+    "CRT-SEC-158",
+    "CRT-SEC-159",
+    "CRT-SEC-160",
+    "CRT-SEC-161",
+    "CRT-SEC-162",
+    "CRT-SEC-163",
+    "CRT-SEC-164",
+    "CRT-SEC-165",
+    "CRT-SEC-166",
+    "CRT-SEC-167",
+    "CRT-SEC-168",
+    "CRT-SEC-169",
+    "CRT-SEC-170",
+    "CRT-SEC-171",
+    "CRT-SEC-172",
+    "CRT-SEC-173",
+    "CRT-SEC-174",
+    "CRT-SEC-175",
+    "CRT-SEC-176",
+    "CRT-SEC-177",
+    "CRT-SEC-178",
+    "CRT-SEC-179",
+    "CRT-SEC-180",
+    "CRT-SEC-181",
+    "CRT-SEC-182",
+    "CRT-SEC-183",
+    "CRT-SEC-184",
+    "CRT-SEC-185",
+    "CRT-SEC-186",
+    "CRT-SEC-187",
+    "CRT-SEC-188",
+    "CRT-SUP-001",
+    "CRT-SUP-002",
+    "CRT-SUP-003",
+    "CRT-SUP-004",
+    "CRT-SUP-005",
+    "CRT-SUP-006",
+    "CRT-SUP-007",
+    "CRT-SUP-008",
+    "CRT-SUP-009"
+  ],
+  "fixture_sha256": "558a0454f5e5e46ef5479e2f793b3683843f4450c9ce5c32a31e6bc432073968",
+  "known_unreachable": [],
+  "schema": "coderisktools.golden-parity-corpus",
+  "source_commit": "3834c6843f2731d9768531624241c0025f43ccb4",
+  "version": 1
+}

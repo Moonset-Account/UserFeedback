@@ -1,0 +1,26 @@
+name: CodeRiskTools Secret Scanner
+description: Scan a pull-request diff for secret-like values and risky configuration changes without executing target code.
+author: CodeRiskTools
+branding:
+  icon: shield
+  color: green
+inputs:
+  profile:
+    description: Scanner profile (balanced, strict, or secrets-only)
+    required: false
+    default: balanced
+outputs:
+  report:
+    description: Absolute path to the redacted JSON report
+    value: ${{ steps.scan.outputs.report }}
+runs:
+  using: composite
+  steps:
+    - id: scan
+      shell: bash
+      env:
+        CRT_ACTION_PATH: ${{ github.action_path }}
+        CRT_PROFILE: ${{ inputs.profile }}
+        CRT_BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        CRT_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+      run: bash "${CRT_ACTION_PATH}/scripts/run-action.sh"
