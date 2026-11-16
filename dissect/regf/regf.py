@@ -473,18 +473,39 @@ def try_decode_sz(data):
             # NULL byte.
             return data.split(b"\x00")[0].decode("latin1")
 
-        if len(data) % 2 != 0:
-            data = data.ljust(len(data) + 1, b"\x00")
-
         # This will return the string utf-16-le decoded up until the first
-        # double NULL byte.
-        return data.split(b"\x00\x00")[0].decode("utf-16-le")
+        # NULL code unit (the terminating b"\x00\x00" at an even byte offset).
+        # A b"\x00\x00" combination at an odd byte offset is part of two
+        # adjacent characters and must not terminate the string, while any
+        # padding following the real terminator must not end up in the result.
+        return decode_terminated_wstring(data)
 
     except UnicodeDecodeError:
         # Last ditch effort, decode the whole bytestring as if it were utf-16,
         # any decoding errors, which incase of utf-16 will be invalid utf-16
         # surrogates, will be ignored.
         return data.decode("utf-16-le", "ignore").strip("\x00")
+
+
+def decode_terminated_wstring(data, encoding="utf-16-le"):
+    """Decode a UTF-16-LE string up to its terminating NULL code unit.
+
+    The terminator is a b"\\x00\\x00" sequence aligned on a code unit boundary
+    (an even byte offset). A b"\\x00\\x00" at an odd byte offset spans two
+    adjacent characters and is part of the string. Data after the terminator
+    is padding and is excluded from the result. If no terminator is present,
+    as can happen with legacy values, the entire bytestring is decoded.
+    """
+    if len(data) % 2 != 0:
+        data = data.ljust(len(data) + 1, b"\x00")
+
+    end = len(data)
+    for offset in range(0, len(data), 2):
+        if data[offset : offset + 2] == b"\x00\x00":
+            end = offset
+            break
+
+    return data[:end].decode(encoding)
 
 
 def parse_value(data_type: int, data: bytes) -> Union[int, str, list[str], bytes]:
