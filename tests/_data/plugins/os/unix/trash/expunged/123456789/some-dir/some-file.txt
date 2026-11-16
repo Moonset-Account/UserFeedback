@@ -1,0 +1,1 @@
+this file had permissions preventing the file manager from deleting this file.

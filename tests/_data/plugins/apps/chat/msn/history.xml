@@ -1,0 +1,353 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type='text/xsl' href='MessageLog.xsl'?>
+<Log FirstSessionID="1" LastSessionID="1">
+    <Message Date="4/1/2025" Time="1:37:02 PM" DateTime="2025-04-01T13:37Z" SessionID="1">
+        <From>
+            <User FriendlyName="morpheus@matrix.internal" />
+        </From>
+        <To>
+            <User FriendlyName="neo@matrix.internal" />
+        </To>
+        <Text Style="font-family:Comic Sans MS; color:#000000; ">At last.</Text>
+    </Message>
+
+    <Message Date="4/1/2025" Time="1:37:04 PM" DateTime="2025-04-01T13:37Z" SessionID="1">
+        <From>
+            <User FriendlyName="morpheus@matrix.internal" />
+        </From>
+        <To>
+            <User FriendlyName="neo@matrix.internal" />
+        </To>
+        <Text Style="font-family:Comic Sans MS; color:#000000; ">Welcome, Neo. As you no doubt have guessed, I am Morpheus.</Text>
+    </Message>
+
+    <Message Date="4/1/2025" Time="1:37:06 PM" DateTime="2025-04-01T13:37Z" SessionID="1">
+        <From>
+            <User FriendlyName="neo@matrix.internal" />
+        </From>
+        <To>
+            <User FriendlyName="morpheus@matrix.internal" />
+        </To>
+        <Text Style="font-family:Comic Sans MS; color:#000000; ">It's an honor.</Text>
+    </Message>
+
+    <Message Date="4/1/2025" Time="1:37:08 PM" DateTime="2025-04-01T13:37Z" SessionID="1">
+        <From>
+            <User FriendlyName="morpheus@matrix.internal" />
+        </From>
+        <To>
+            <User FriendlyName="neo@matrix.internal" />
+        </To>
+        <Text Style="font-family:Comic Sans MS; color:#000000; ">No, the honor is mine. Please. Come. Sit.</Text>
+    </Message>
+
+    <Message Date="4/1/2025" Time="1:37:10 PM" DateTime="2025-04-01T13:37Z" SessionID="1">
+        <From>
+            <User FriendlyName="morpheus@matrix.internal" />
+        </From>
+        <To>
+            <User FriendlyName="neo@matrix.internal" />
+        </To>
+        <Text Style="font-family:Comic Sans MS; color:#000000; ">I imagine, right now, you must be feeling a bit like Alice, tumbling down the rabbit hole?</Text>
+    </Message>
+
+    <Message Date="4/1/2025" Time="1:37:12 PM" DateTime="2025-04-01T13:37Z" SessionID="1">
+        <From>
+            <User FriendlyName="neo@matrix.internal" />
+        </From>
+        <To>
+            <User FriendlyName="morpheus@matrix.internal" />
+        </To>
+        <Text Style="font-family:Comic Sans MS; color:#000000; ">You could say that.</Text>
+    </Message>
+
+    <Message Date="4/1/2025" Time="1:37:14 PM" DateTime="2025-04-01T13:37Z" SessionID="1">
+        <From>
+            <User FriendlyName="morpheus@matrix.internal" />
+        </From>
+        <To>
+            <User FriendlyName="neo@matrix.internal" />
+        </To>
+        <Text Style="font-family:Comic Sans MS; color:#000000; ">I can see it in your eyes. You have the look of a man who accepts what he sees because he is expecting to wake up.</Text>
+    </Message>
+
+    <Message Date="4/1/2025" Time="1:37:16 PM" DateTime="2025-04-01T13:37Z" SessionID="1">
+        <From>
+            <User FriendlyName="morpheus@matrix.internal" />
+        </From>
+        <To>
+            <User FriendlyName="neo@matrix.internal" />
+        </To>
+        <Text Style="font-family:Comic Sans MS; color:#000000; ">Ironically, this is not far from the truth. But I'm getting ahead of myself. Can you tell me, Neo, why are you here?</Text>
+    </Message>
+
+    <Message Date="4/1/2025" Time="1:37:18 PM" DateTime="2025-04-01T13:37Z" SessionID="1">
+        <From>
+            <User FriendlyName="neo@matrix.internal" />
+        </From>
+        <To>
+            <User FriendlyName="morpheus@matrix.internal" />
+        </To>
+        <Text Style="font-family:Comic Sans MS; color:#000000; ">You're Morpheus. You're a legend. Most hackers would die to meet you.</Text>
+    </Message>
+
+    <Message Date="4/1/2025" Time="1:37:20 PM" DateTime="2025-04-01T13:37Z" SessionID="1">
+        <From>
+            <User FriendlyName="morpheus@matrix.internal" />
+        </From>
+        <To>
+            <User FriendlyName="neo@matrix.internal" />
+        </To>
+        <Text Style="font-family:Comic Sans MS; color:#000000; ">Yes. Thank you. But I think we both know there's more to it than that. Do you believe in fate, Neo?</Text>
+    </Message>
+
+    <Message Date="4/1/2025" Time="1:37:22 PM" DateTime="2025-04-01T13:37Z" SessionID="1">
+        <From>
+            <User FriendlyName="neo@matrix.internal" />
+        </From>
+        <To>
+            <User FriendlyName="morpheus@matrix.internal" />
+        </To>
+        <Text Style="font-family:Comic Sans MS; color:#000000; ">No.</Text>
+    </Message>
+
+    <Message Date="4/1/2025" Time="1:37:24 PM" DateTime="2025-04-01T13:37Z" SessionID="1">
+        <From>
+            <User FriendlyName="morpheus@matrix.internal" />
+        </From>
+        <To>
+            <User FriendlyName="neo@matrix.internal" />
+        </To>
+        <Text Style="font-family:Comic Sans MS; color:#000000; ">Why not?</Text>
+    </Message>
+
+    <Message Date="4/1/2025" Time="1:37:26 PM" DateTime="2025-04-01T13:37Z" SessionID="1">
+        <From>
+            <User FriendlyName="neo@matrix.internal" />
+        </From>
+        <To>
+            <User FriendlyName="morpheus@matrix.internal" />
+        </To>
+        <Text Style="font-family:Comic Sans MS; color:#000000; ">Because I don't like the idea that I'm not in control of my life.</Text>
+    </Message>
+
+    <Message Date="4/1/2025" Time="1:37:28 PM" DateTime="2025-04-01T13:37Z" SessionID="1">
+        <From>
+            <User FriendlyName="morpheus@matrix.internal" />
+        </From>
+        <To>
+            <User FriendlyName="neo@matrix.internal" />
+        </To>
+        <Text Style="font-family:Comic Sans MS; color:#000000; ">I know exactly what you mean.</Text>
+    </Message>
+
+    <Message Date="4/1/2025" Time="1:37:30 PM" DateTime="2025-04-01T13:37Z" SessionID="1">
+        <From>
+            <User FriendlyName="morpheus@matrix.internal" />
+        </From>
+        <To>
+            <User FriendlyName="neo@matrix.internal" />
+        </To>
+        <Text Style="font-family:Comic Sans MS; color:#000000; ">Let me tell you why you are here. You have come because you know something.</Text>
+    </Message>
+
+    <Message Date="4/1/2025" Time="1:37:32 PM" DateTime="2025-04-01T13:37Z" SessionID="1">
+        <From>
+            <User FriendlyName="morpheus@matrix.internal" />
+        </From>
+        <To>
+            <User FriendlyName="neo@matrix.internal" />
+        </To>
+        <Text Style="font-family:Comic Sans MS; color:#000000; ">What you know you can't explain but you feel it.</Text>
+    </Message>
+
+    <Message Date="4/1/2025" Time="1:37:34 PM" DateTime="2025-04-01T13:37Z" SessionID="1">
+        <From>
+            <User FriendlyName="morpheus@matrix.internal" />
+        </From>
+        <To>
+            <User FriendlyName="neo@matrix.internal" />
+        </To>
+        <Text Style="font-family:Comic Sans MS; color:#000000; ">You've felt it your whole life, felt that something is wrong with the world.</Text>
+    </Message>
+
+    <Message Date="4/1/2025" Time="1:37:36 PM" DateTime="2025-04-01T13:37Z" SessionID="1">
+        <From>
+            <User FriendlyName="morpheus@matrix.internal" />
+        </From>
+        <To>
+            <User FriendlyName="neo@matrix.internal" />
+        </To>
+        <Text Style="font-family:Comic Sans MS; color:#000000; ">You don't know what, but it's there like a splinter in your mind, driving you mad. It is this feeling that brought you to me.</Text>
+    </Message>
+
+    <Message Date="4/1/2025" Time="1:37:38 PM" DateTime="2025-04-01T13:37Z" SessionID="1">
+        <From>
+            <User FriendlyName="morpheus@matrix.internal" />
+        </From>
+        <To>
+            <User FriendlyName="neo@matrix.internal" />
+        </To>
+        <Text Style="font-family:Comic Sans MS; color:#000000; ">Do you know what I'm talking about?</Text>
+    </Message>
+
+    <Message Date="4/1/2025" Time="1:37:40 PM" DateTime="2025-04-01T13:37Z" SessionID="1">
+        <From>
+            <User FriendlyName="neo@matrix.internal" />
+        </From>
+        <To>
+            <User FriendlyName="morpheus@matrix.internal" />
+        </To>
+        <Text Style="font-family:Comic Sans MS; color:#000000; ">The Matrix?</Text>
+    </Message>
+
+    <Message Date="4/1/2025" Time="1:37:42 PM" DateTime="2025-04-01T13:37Z" SessionID="1">
+        <From>
+            <User FriendlyName="morpheus@matrix.internal" />
+        </From>
+        <To>
+            <User FriendlyName="neo@matrix.internal" />
+        </To>
+        <Text Style="font-family:Comic Sans MS; color:#000000; ">Do you want to know what it is?</Text>
+    </Message>
+
+    <Message Date="4/1/2025" Time="1:37:44 PM" DateTime="2025-04-01T13:37Z" SessionID="1">
+        <From>
+            <User FriendlyName="morpheus@matrix.internal" />
+        </From>
+        <To>
+            <User FriendlyName="neo@matrix.internal" />
+        </To>
+        <Text Style="font-family:Comic Sans MS; color:#000000; ">The Matrix is everywhere, it's all around us, here even in this room.</Text>
+    </Message>
+
+    <Message Date="4/1/2025" Time="1:37:46 PM" DateTime="2025-04-01T13:37Z" SessionID="1">
+        <From>
+            <User FriendlyName="morpheus@matrix.internal" />
+        </From>
+        <To>
+            <User FriendlyName="neo@matrix.internal" />
+        </To>
+        <Text Style="font-family:Comic Sans MS; color:#000000; ">You can see it out your window or on your television. You feel it when you go to work, or go to church or pay your taxes.</Text>
+    </Message>
+
+    <Message Date="4/1/2025" Time="1:37:48 PM" DateTime="2025-04-01T13:37Z" SessionID="1">
+        <From>
+            <User FriendlyName="morpheus@matrix.internal" />
+        </From>
+        <To>
+            <User FriendlyName="neo@matrix.internal" />
+        </To>
+        <Text Style="font-family:Comic Sans MS; color:#000000; ">It is the world that has been pulled over your eyes to blind you from the truth.</Text>
+    </Message>
+
+    <Message Date="4/1/2025" Time="1:37:50 PM" DateTime="2025-04-01T13:37Z" SessionID="1">
+        <From>
+            <User FriendlyName="neo@matrix.internal" />
+        </From>
+        <To>
+            <User FriendlyName="morpheus@matrix.internal" />
+        </To>
+        <Text Style="font-family:Comic Sans MS; color:#000000; ">What truth?</Text>
+    </Message>
+
+    <Message Date="4/1/2025" Time="1:37:52 PM" DateTime="2025-04-01T13:37Z" SessionID="1">
+        <From>
+            <User FriendlyName="morpheus@matrix.internal" />
+        </From>
+        <To>
+            <User FriendlyName="neo@matrix.internal" />
+        </To>
+        <Text Style="font-family:Comic Sans MS; color:#000000; ">That you are a slave, Neo. Like everyone else, you were born into bondage, kept inside a prison that you cannot smell, taste, or touch.</Text>
+    </Message>
+
+    <Message Date="4/1/2025" Time="1:37:54 PM" DateTime="2025-04-01T13:37Z" SessionID="1">
+        <From>
+            <User FriendlyName="morpheus@matrix.internal" />
+        </From>
+        <To>
+            <User FriendlyName="neo@matrix.internal" />
+        </To>
+        <Text Style="font-family:Comic Sans MS; color:#000000; ">A prison for your mind.</Text>
+    </Message>
+
+    <Message Date="4/1/2025" Time="1:37:56 PM" DateTime="2025-04-01T13:37Z" SessionID="1">
+        <From>
+            <User FriendlyName="morpheus@matrix.internal" />
+        </From>
+        <To>
+            <User FriendlyName="neo@matrix.internal" />
+        </To>
+        <Text Style="font-family:Comic Sans MS; color:#000000; ">Unfortunately, no one can be told what the Matrix is.</Text>
+    </Message>
+
+    <Message Date="4/1/2025" Time="1:37:58 PM" DateTime="2025-04-01T13:37Z" SessionID="1">
+        <From>
+            <User FriendlyName="morpheus@matrix.internal" />
+        </From>
+        <To>
+            <User FriendlyName="neo@matrix.internal" />
+        </To>
+        <Text Style="font-family:Comic Sans MS; color:#000000; ">You have to see it for yourself.</Text>
+    </Message>
+
+    <Message Date="4/1/2025" Time="1:38:00 PM" DateTime="2025-04-01T13:38Z" SessionID="1">
+        <From>
+            <User FriendlyName="morpheus@matrix.internal" />
+        </From>
+        <To>
+            <User FriendlyName="neo@matrix.internal" />
+        </To>
+        <Text Style="font-family:Comic Sans MS; color:#000000; ">This is your last chance. After this, there is no going back.</Text>
+    </Message>
+
+    <Message Date="4/1/2025" Time="1:38:02 PM" DateTime="2025-04-01T13:38Z" SessionID="1">
+        <From>
+            <User FriendlyName="morpheus@matrix.internal" />
+        </From>
+        <To>
+            <User FriendlyName="neo@matrix.internal" />
+        </To>
+        <Text Style="font-family:Comic Sans MS; color:#000000; ">You take the blue pill and the story ends.</Text>
+    </Message>
+
+    <Message Date="4/1/2025" Time="1:38:04 PM" DateTime="2025-04-01T13:38Z" SessionID="1">
+        <From>
+            <User FriendlyName="morpheus@matrix.internal" />
+        </From>
+        <To>
+            <User FriendlyName="neo@matrix.internal" />
+        </To>
+        <Text Style="font-family:Comic Sans MS; color:#000000; ">You wake in your bed and you believe whatever you want to believe.</Text>
+    </Message>
+
+    <Message Date="4/1/2025" Time="1:38:06 PM" DateTime="2025-04-01T13:38Z" SessionID="1">
+        <From>
+            <User FriendlyName="morpheus@matrix.internal" />
+        </From>
+        <To>
+            <User FriendlyName="neo@matrix.internal" />
+        </To>
+        <Text Style="font-family:Comic Sans MS; color:#000000; ">You take the red pill and you stay in Wonderland and I show you how deep the rabbit-hole goes.</Text>
+    </Message>
+
+    <Message Date="4/1/2025" Time="1:38:08 PM" DateTime="2025-04-01T13:38Z" SessionID="1">
+        <From>
+            <User FriendlyName="morpheus@matrix.internal" />
+        </From>
+        <To>
+            <User FriendlyName="neo@matrix.internal" />
+        </To>
+        <Text Style="font-family:Comic Sans MS; color:#000000; ">Remember that all I am offering is the truth. Nothing more.</Text>
+    </Message>
+
+    <Message Date="4/1/2025" Time="1:38:10 PM" DateTime="2025-04-01T13:38Z" SessionID="1">
+        <From>
+            <User FriendlyName="morpheus@matrix.internal" />
+        </From>
+        <To>
+            <User FriendlyName="neo@matrix.internal" />
+        </To>
+        <Text Style="font-family:Comic Sans MS; color:#000000; ">Follow me.</Text>
+    </Message>
+</Log>

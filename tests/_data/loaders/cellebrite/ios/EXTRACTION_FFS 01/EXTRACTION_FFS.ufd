@@ -1,0 +1,48 @@
+[DeviceInfo]
+DeviceModel=N104AP
+Model=iPhone 11
+OS=17.3 (21D50)
+Vendor=Apple
+
+[Dumps]
+FileDump=EXTRACTION_FFS.zip
+Keychain=EXTRACTION_FFS.zip
+
+[ExtractionStatus]
+ExtractionStatus=Success
+
+[FileDump]
+ExtractionMethod=iOS_Full_Filesystem
+Type=ZIP
+
+[General]
+AcquisitionTool=Inseyets UFED_Pro_Advanced
+ConnectionType=Cable No. Original cable
+Date=28/07/2024 16:23:49 (-4)
+Device=IPHONE
+EVS_ResourcesVersion=7.69.503
+EndTime=28/07/2024 17:09:26 (-4)
+ExtractionNameFromXML=iOS NG Extraction Module
+ExtractionType=FileSystem
+FullName=iPhone 11
+GUID=319713AB-E380-436F-8631-63409282E1DC
+InternalBuild=10.2.0.359
+MachineName=JOSH-LAPTOP
+Model=N104AP
+OS=17.3 (21D50)
+UfdVer=1.2
+UnitId=2145895554
+UserName=
+Vendor=Apple
+Version=10.2.0.359
+
+[Keychain]
+Type=ZIPfolder
+ZIPLogicalPath=extra/KeychainDump
+
+[SHA256]
+EXTRACTION_FFS.zip=7E603D016416A097FBE79704250130603AF2599990AB2E395E428DBF3B9014FA
+SummaryReport.pdf=92D4B5095D8A53D4FCAF27376EFAAC1945A881F7D12DFEACC673461845BB694A
+
+[Hash]
+HMAC=Lc4x9XuGZxD7J/mH0hpibfxbjkfbBEqnENIWBfh+5F8=

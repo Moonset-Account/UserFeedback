@@ -1,0 +1,88 @@
+****************************RTP Perf Log***************************
+RTP Start:05-04-2021 09:54:06
+Last Perf:05-04-2021 09:54:06
+First RTP Scan:05-04-2021 09:54:06
+Plugin States:  AV:2  AS:2  RTP:2  OA:2  BM:2
+Process Exclusions:
+  C:\ReportingServicesService.exe
+  C:\ReportingServicesService.exe
+Path Exclusions:
+  C:\Windows\Security\Database\*.chk
+  %windidr%\SoftwareDistribution\Datastore\*.*
+Ext Exclusions:
+  .DBF
+  .NDF
+  .RAR
+  .XML
+  .IDX
+  .BAK
+  .PDF
+  .BKP
+Worker Threads:
+  AM:14
+  Async:4
+Cache Flushes:
+  RTP:0
+System File Cache:
+  Hits:0
+  Misses:0
+BM Queue:0,0,0
+  Proc:0,0,0
+  File:0,0,0
+Plugin Queue:0,0,0
+  Threat:0,0,0
+  Susp:0,0,0
+  Unknown:0,0,0
+  Error:0,0,0
+Request Queue:2,2,0
+  SetEngine:1,1,0
+  SetState:1,1,0
+  SetUser:0,0,0
+  Config:0,0,0
+  ProcExcl:0,0,0
+  FilterReload:0,0,0
+  FilterUnload:0,0,0
+MpFilter:
+  Scans:0
+  Pending:0
+  RegSize:0
+  AsyncQNotif:0
+  AsyncQMissed:0
+  AsyncQTotalSent:0
+  AsyncQCurrent:0
+  BMFlags:8
+  ServiceMaj:0
+  ServiceMin:0
+  NumInstance:4
+  TotalStreamCon:3064
+  NTFS Cache Statistics (Instance Cache Type:GenericTable):
+   TotalMisses:7897
+   TotalHits:0
+   InstanceCacheInserts:8
+   InstanceCacheUpdates:0
+   InstanceCacheDeletes:0
+   InstanceCacheHits:0
+   InstanceCacheMisses:3268
+   InstanceCacheOverflows:0
+  CSVFS Cache Statistics (Instance Cache Type:GenericTable):
+   TotalMisses:0
+   TotalHits:0
+   InstanceCacheInserts:0
+   InstanceCacheUpdates:0
+   InstanceCacheDeletes:0
+   InstanceCacheHits:0
+   InstanceCacheMisses:0
+   InstanceCacheOverflows:0
+  REFS Cache Statistics (Instance Cache Type:GenericTable):
+   TotalMisses:0
+   TotalHits:0
+   InstanceCacheInserts:0
+   InstanceCacheUpdates:0
+   InstanceCacheDeletes:0
+   InstanceCacheHits:0
+   InstanceCacheMisses:0
+   InstanceCacheOverflows:0
+  SyncProcessCreateDuration:-1ms (0/0)
+   Success: 0, failures: 0 (last code: 0x0), timeouts: 0,  baddata: 0
+ 
+**************************END RTP Perf Log*************************

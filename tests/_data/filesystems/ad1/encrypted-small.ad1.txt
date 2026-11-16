@@ -1,0 +1,34 @@
+﻿Created By Exterro® FTK® Imager 4.7.3.81 
+
+Case Information: 
+Acquired using: ADI4.7.3.81
+Case Number: 
+Evidence Number: 
+Unique Description: 
+Examiner: 
+Notes: 
+
+--------------------------------------------------------------
+
+Information for C:\Users\user\Desktop\encrypted-small.ad1:
+[Custom Content Sources]
+ Data:C:\Users\user\Desktop\Data|*(Wildcard,Consider Case,Include Subdirectories)
+[Computed Hashes]
+ MD5 checksum:    ac263820e9b9b6f49b9c28bf91f7e1be
+ SHA1 checksum:   165a824e0e14fedde0544d1f0accb3ff2fba8ff9
+
+Image information:
+ Acquisition started:   Mon Dec  8 14:31:12 2025
+ Acquisition finished:  Mon Dec  8 14:31:12 2025
+ Segment list:
+  C:\Users\user\Desktop\encrypted-small.ad1
+  C:\Users\user\Desktop\encrypted-small.ad2
+  C:\Users\user\Desktop\encrypted-small.ad3
+ COMPUTED HASH :  ac263820e9b9b6f49b9c28bf91f7e1be
+ COMPUTED HASH :  165a824e0e14fedde0544d1f0accb3ff2fba8ff9
+
+Image Verification Results:
+ Verification started:  Mon Dec  8 14:31:12 2025
+ Verification finished: Mon Dec  8 14:31:12 2025
+ MD5 checksum:    ac263820e9b9b6f49b9c28bf91f7e1be : verified
+ SHA1 checksum:   165a824e0e14fedde0544d1f0accb3ff2fba8ff9 : verified

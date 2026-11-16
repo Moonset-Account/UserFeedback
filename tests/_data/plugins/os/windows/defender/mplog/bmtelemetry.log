@@ -1,0 +1,13 @@
+BEGIN BM telemetry
+GUID:{1D3E4F07-89AB-45C2-923D-E5F6789A1B2C}
+SignatureID:123456789012345
+SigSha:abcd1234ef567890abcd1234ef567890abcd1234
+ThreatLevel:0
+ProcessID:8453
+ProcessCreationTime:153846236598765432
+SessionID:3
+CreationTime:07-15-2024 11:45:22
+ImagePath:C:\OS\System32\servicehost.exe
+Taint Info:Friendly: Y; Reason: ; Modules: ; Parents: 
+Operations:None
+END BM telemetry

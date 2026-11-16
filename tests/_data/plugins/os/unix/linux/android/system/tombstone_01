@@ -1,0 +1,19 @@
+*** *** *** *** *** *** *** *** *** *** *** *** *** *** *** ***
+Build fingerprint: 'Android/android_version/android:16/1234/debug/version'
+Revision: '0'
+ABI: 'arm64'
+Timestamp: 2026-05-04 15:30:00.123456789+0000
+Process uptime: 10s
+Cmdline: dev.serwin.AnarchRE_3
+pid: 1337, tid: 314, name: .serwin.AnarchRE_3 >>> dev.serwin.AnarchRE_3 <<<
+uid: 10000
+signal 4 (SIGILL), code 0 (SI_USER from pid 67, uid 10000), fault addr --------
+    x0  ffffffffffffffff  x1  ffffffffffffffff  x2  ffffffffffffffff  x3  ffffffffffffffff
+    x4  ffffffffffffffff  x5  ffffffffffffffff  x6  ffffffffffffffff  x7  ffffffffffffffff
+    x8  ffffffffffffffff  x9  ffffffffffffffff  x10 ffffffffffffffff  x11 ffffffffffffffff
+    x12 ffffffffffffffff  x13 ffffffffffffffff  x14 ffffffffffffffff  x15 ffffffffffffffff
+    x16 ffffffffffffffff  x17 ffffffffffffffff  x18 ffffffffffffffff  x19 ffffffffffffffff
+    x20 ffffffffffffffff  x21 ffffffffffffffff  x22 ffffffffffffffff  x23 ffffffffffffffff
+    x24 ffffffffffffffff  x25 ffffffffffffffff  x26 ffffffffffffffff  x27 ffffffffffffffff
+    x28 ffffffffffffffff  x29 ffffffffffffffff
+    lr  ffffffffffffffff  sp  ffffffffffffffff  pc  ffffffffffffffff  pst ffffffffffffffff

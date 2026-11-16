@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>ClientIdentifier</key>
+	<data>
+	AVYMqLgTOw==
+	</data>
+	<key>IPAddress</key>
+	<string>192.168.1.190</string>
+	<key>LeaseLength</key>
+	<integer>43200</integer>
+	<key>LeaseStartDate</key>
+	<date>2025-12-24T21:48:49Z</date>
+	<key>NetworkID</key>
+	<string>203A2461-7946-4D63-98AF-F6F3CA645092</string>
+	<key>PacketData</key>
+	<data>
+	AgEGAAp9OjwABAAAAAAAAMCoAb7AqAEBAAAAAFYMqLgTOwAAAAAAAAAAAAAAAAAAAAAA
+	AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+	AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+	AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+	AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABjglNjNQEFNgTAqAEBMwQAAKjA
+	OgQAAFRgOwQAAJOoAQT///8AHATAqAH/AwTAqAEBBgTAqAEBDwNsYW7/AAAA
+	</data>
+	<key>RouterHardwareAddress</key>
+	<data>
+	xAQVi6WP
+	</data>
+	<key>RouterIPAddress</key>
+	<string>192.168.1.1</string>
+	<key>SSID</key>
+	<string>OpenWrt-5G</string>
+</dict>
+</plist>

@@ -1,0 +1,23 @@
+[connection]
+id=Ethernet gateway ui
+uuid=733bd757-cbc9-43ec-9b5f-8e81ff2f1ade
+type=ethernet
+interface-name=enp0s3
+timestamp=1730188794
+
+[ethernet]
+duplex=half
+mac-address=08:00:27:5B:4A:EB
+mtu=8
+speed=100
+
+[ipv4]
+address1=192.168.2.138/24,192.168.2.2
+address2=10.1.1.10/16
+dns=88.88.88.88;
+route=192.168.122.0/24,192.168.2.3
+method=manual
+
+[ipv6]
+route1=2001:4860:4860::/64,2620:52:0:2219:222:68ff:fe11:5403
+

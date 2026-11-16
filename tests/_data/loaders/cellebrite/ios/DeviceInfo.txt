@@ -1,0 +1,13 @@
+Date and time:28/07/2024 17:11:31 (-4)
+Device Model:iPhone 11 (N104AP)
+OS Version:iOS None
+Chipset:A13
+Security Patch Level:null
+Device Bluetooth Name:null
+Encryption Type:null
+Battery Level:null
+Vendor:Apple
+Number Of Installed Applications:null
+Live encryption state:Hot
+Device owner:This Is’s iPhone
+Device storage:Unavailable

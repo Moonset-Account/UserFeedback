@@ -1,0 +1,2 @@
+<![LOG[Another entry.]LOG]!><time="14:20:30.654321" date="2023-01-02" component="IntuneManagementExtension" context="Agent" type="2" thread="1002" file="IntuneManagementExtension.log">
+<![LOG[YYYY-MM-DD format test.]LOG]!><time="08:15:00" date="2023-03-05" component="IntuneManagementExtension" context="Policy" type="3" thread="1003" file="IntuneManagementExtension.log">

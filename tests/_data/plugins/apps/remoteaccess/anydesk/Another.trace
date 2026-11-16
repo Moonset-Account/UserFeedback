@@ -1,0 +1,425 @@
+ * * * * * * * * * * * * * * * * * *
+   info 2024-12-31 13:37:29.425      front   1234   1337                                  main - * AnyDesk Windows Startup *
+   info 2024-12-31 13:37:29.425      front   1234   1337                                  main - * Version 8.0.10 (release/win_8.0.10 8941b379f03505960bfba86d51b033e4f12eac4a)
+   info 2024-12-31 13:37:29.425      front   1234   1337                                  main - * Checksum 88978f95220cea3e5cd714ad3d984e5d
+   info 2024-12-31 13:37:29.425      front   1234   1337                                  main - * Build 20240424145318
+   info 2024-12-31 13:37:29.425      front   1234   1337                                  main - * Copyright (C) 2024 AnyDesk Software GmbH *
+   info 2024-12-31 13:37:29.425      front   1234   1337                                  main - 
+   info 2024-12-31 13:37:29.425      front   1234   1337                                  main - Command Line params: "C:\Users\user\Desktop\AnyDesk.exe" 
+   info 2024-12-31 13:37:29.425      front   1234   1337                                  main - Process started at 2024-12-31. PID 1234. OS is Windows 10 (64 bit)
+   info 2024-12-31 13:37:29.425      front   1234   1337                         impl_selector - using sse2 (intrinsics)
+   info 2024-12-31 13:37:29.425      front   1234   1337                                  main - Install status: not installed (<4)
+   info 2024-12-31 13:37:29.425      front   1234   1337          base.data.config_application - Adding GPO defaults layer.
+   info 2024-12-31 13:37:29.425      front   1234   1337          base.data.config_application - Adding GPO overrides layer.
+   info 2024-12-31 13:37:29.659      front   1234   1337                           gui.gui_app - DPI scaling: 1.00 / 1.00
+   info 2024-12-31 13:37:29.659      front   1234   1337                           gui.gui_app - Using std-resolution bitmaps.
+warning 2024-12-31 13:37:29.690      front   1234   1337                          account_info - Could not read account info from config.
+warning 2024-12-31 13:37:29.690      front   1234   1337                          account_info - 	1 times: Could not read account info from config.
+   info 2024-12-31 13:37:29.690      front   1234   1337                       base.signal.hub - 4 threads.
+   info 2024-12-31 13:37:29.706      front   1234   1337                            app.roster - Updating the jump list
+   info 2024-12-31 13:37:29.722      front   1234   1337                  os_win.jump_list_mgr - 0 items found
+   info 2024-12-31 13:37:29.784      front   1234   1337                          wgf.msg_loop - Waiting for events.
+   info 2024-12-31 13:37:29.784      front   1234   1337                      win_app.frontend - Frontend startup (not elevated).
+   info 2024-12-31 13:37:29.784      front   1234   1337                   fiber.ipc_namespace - Global: no
+   info 2024-12-31 13:37:29.784      front   1234   1337                      win_app.frontend - Logging the frontend in.
+   info 2024-12-31 13:37:29.784      front   1234   1337             app.named_process_starter - Spawning local service.
+warning 2024-12-31 13:37:29.800      front   1234   1337             app.named_process_starter - Starting control process in session 1.
+warning 2024-12-31 13:37:29.800      front   1234   1337             app.named_process_starter - Could not query the user token (1314).
+   info 2024-12-31 13:37:29.800      front   1234   1337             app.named_process_starter - Spawning process directly in current session 1.
+warning 2024-12-31 13:37:30.237      front   1234   1337                          account_info - Could not read account info from config.
+warning 2024-12-31 13:37:30.253      front   1234   1337                          account_info - 	3 times: Could not read account info from config.
+   info 2024-12-31 13:37:30.253      front   1234   1337                        gui.mainwindow - Main window created (standard mode).
+ * * * * * * * * * * * * * * * * * *
+   info 2024-12-31 13:37:31.534       lsvc   1234   1337                                  main - * AnyDesk Windows Startup *
+   info 2024-12-31 13:37:31.534       lsvc   1234   1337                                  main - * Version 8.0.10 (release/win_8.0.10 8941b379f03505960bfba86d51b033e4f12eac4a)
+   info 2024-12-31 13:37:31.534       lsvc   1234   1337                                  main - 
+   info 2024-12-31 13:37:31.534       lsvc   1234   1337                                  main - Command Line params: "C:\Users\user\Desktop\AnyDesk.exe" --local-service
+   info 2024-12-31 13:37:31.534       lsvc   1234   1337                                  main - Process started at 2024-12-31. PID 1234. OS is Windows 10 (64 bit)
+   info 2024-12-31 13:37:31.534       lsvc   1234   1337                         impl_selector - using sse2 (intrinsics)
+   info 2024-12-31 13:37:31.534       lsvc   1234   1337          base.data.config_application - Adding GPO defaults layer.
+   info 2024-12-31 13:37:31.534       lsvc   1234   1337          base.data.config_application - Adding GPO overrides layer.
+   info 2024-12-31 13:37:31.534       lsvc   1234   1337            permission_profile_manager - Migrating V0 -> V1
+ * * * * * * * * * * * * * * * * * *
+   info 2024-12-31 13:37:31.534      lctrl   1234   1337                                  main - * AnyDesk Windows Startup *
+   info 2024-12-31 13:37:31.534      lctrl   1234   1337                                  main - * Version 8.0.10 (release/win_8.0.10 8941b379f03505960bfba86d51b033e4f12eac4a)
+   info 2024-12-31 13:37:31.534      lctrl   1234   1337                                  main - 
+   info 2024-12-31 13:37:31.534      lctrl   1234   1337                                  main - Command Line params: "C:\Users\user\Desktop\AnyDesk.exe" --local-control
+   info 2024-12-31 13:37:31.534      lctrl   1234   1337                                  main - Process started at 2024-12-31. PID 1234. OS is Windows 10 (64 bit)
+   info 2024-12-31 13:37:31.534      lctrl   1234   1337                         impl_selector - using sse2 (intrinsics)
+   info 2024-12-31 13:37:31.534      lctrl   1234   1337          base.data.config_application - Adding GPO defaults layer.
+   info 2024-12-31 13:37:31.534      lctrl   1234   1337          base.data.config_application - Adding GPO overrides layer.
+   info 2024-12-31 13:37:31.550       lsvc   1234   1337                          wgf.msg_loop - Waiting for events.
+   info 2024-12-31 13:37:31.550       lsvc   1234   1337                                  lsvc - Starting the scheduler.
+   info 2024-12-31 13:37:31.550       lsvc   1234   1337                       fiber.scheduler - Spawning root fiber 1 'regcfg_watcher'.
+   info 2024-12-31 13:37:31.550      lctrl   1234   1337                           gui.gui_app - DPI scaling: 1.00 / 1.00
+   info 2024-12-31 13:37:31.550      lctrl   1234   1337                           gui.gui_app - Using std-resolution bitmaps.
+   info 2024-12-31 13:37:31.550       lsvc   1234   1337                       fiber.scheduler - Spawning root fiber 2.
+   info 2024-12-31 13:37:31.550       lsvc   1234   1337                       fiber.scheduler - Scheduler started.
+   info 2024-12-31 13:37:31.550       lsvc   1234   1337    1                   regcfg_watcher - Start watching registry config.
+   info 2024-12-31 13:37:31.550       lsvc   1234   1337    2                      app.service - Opening the IPC namespace.
+   info 2024-12-31 13:37:31.550       lsvc   1234   1337    2              fiber.ipc_namespace - Global: no
+   info 2024-12-31 13:37:31.550       lsvc   1234   1337    2                      app.service - Logging into the IPC namespace.
+   info 2024-12-31 13:37:31.550       lsvc   1234   1337    2                  fiber.scheduler - Spawning child fiber 3 (parent: 2).
+   info 2024-12-31 13:37:31.550       lsvc   1234   1337    2                  fiber.scheduler - Spawning child fiber 4 'notifications' (parent: 2).
+   info 2024-12-31 13:37:31.550       lsvc   1234   1337    2                  fiber.scheduler - Spawning child fiber 5 (parent: 2).
+   info 2024-12-31 13:37:31.550       lsvc   1234   1337    2                  fiber.scheduler - Spawning child fiber 6 'license_adapter' (parent: 2).
+   info 2024-12-31 13:37:31.550       lsvc   1234   1337    2                      app.service - Starting to supervise the IPC namespace.
+   info 2024-12-31 13:37:31.550       lsvc   1234   1337    2                      app.service - Starting the connector.
+   info 2024-12-31 13:37:31.550       lsvc   1234   1337    2            anynet.connection_mgr - Generating a new certificate and key.
+   info 2024-12-31 13:37:31.565      lctrl   1234   1337                       base.signal.hub - 1 threads.
+   info 2024-12-31 13:37:31.565      lctrl   1234   1337                       clipbrd.capture - Empty format set.
+   info 2024-12-31 13:37:31.565      lctrl   1234   1337                    app.tunnel_ft_comp - Ready.
+   info 2024-12-31 13:37:31.612      lctrl   1234   1337                        ad_app.control - Starting scheduler thread.
+   info 2024-12-31 13:37:31.612      lctrl   1234   1337                       fiber.scheduler - Scheduler started.
+   info 2024-12-31 13:37:31.815      lctrl   1234   1337                          wgf.msg_loop - Waiting for events.
+   info 2024-12-31 13:37:31.909      lctrl   1234   1337                        ad_app.control - Control startup.
+   info 2024-12-31 13:37:31.972      lctrl   1234   1337                        ad_app.control - Connecting to the service.
+   info 2024-12-31 13:37:31.972       lsvc   1234   1337    2            anynet.connection_mgr - 2 CA certificate(s) loaded.
+   info 2024-12-31 13:37:31.972       lsvc   1234   1337    2                  fiber.scheduler - Spawning root fiber 7 'connection_mgr'.
+   info 2024-12-31 13:37:31.972       lsvc   1234   1337    2                  fiber.scheduler - Spawning root fiber 8 'main_relay_conn'.
+   info 2024-12-31 13:37:31.972       lsvc   1234   1337    2                      app.service - Setting up the listen sockets.
+   info 2024-12-31 13:37:31.972       lsvc   1234   1337    2                  fiber.scheduler - Spawning root fiber 9.
+   info 2024-12-31 13:37:31.972       lsvc   1234   1337    2                      app.service - Service startup completed.
+   info 2024-12-31 13:37:31.972       lsvc   1234   1337    2            app.discovery_manager - Updated Discovery settings: repeat interval (1000), repeat limit (10), buffer interval (5000), port range (3)
+   info 2024-12-31 13:37:31.972       lsvc   1234   1337    2                   ad.wol_service - Starting WOL service.
+   info 2024-12-31 13:37:31.972       lsvc   1234   1337    2                  fiber.scheduler - Spawning child fiber 10 'wol_service' (parent: 2).
+   info 2024-12-31 13:37:31.972       lsvc   1234   1337    2                  fiber.scheduler - Spawning child fiber 11 'invitation_service' (parent: 2).
+   info 2024-12-31 13:37:31.972       lsvc   1234   1337    2                  fiber.scheduler - Spawning child fiber 12 'ancl' (parent: 2).
+   info 2024-12-31 13:37:31.972       lsvc   1234   1337    2                  fiber.scheduler - Spawning child fiber 13 'quiver_anynet_service' (parent: 2).
+   info 2024-12-31 13:37:31.972       lsvc   1234   1337    2                      app.service - Waiting for messages.
+   info 2024-12-31 13:37:31.972       lsvc   1234   1337    2                      app.service - Process start: 1234 (frontend).
+   info 2024-12-31 13:37:31.972       lsvc   1234   1337    2           anynet.relay_connector - Short timeouts enabled.
+   info 2024-12-31 13:37:31.972       lsvc   1234   1337    2                      app.service - Process start: 1234 (control:1).
+   info 2024-12-31 13:37:31.972       lsvc   1234   1337    7            anynet.connection_mgr - Starting connection manager fiber.
+   info 2024-12-31 13:37:31.972       lsvc   1234   1337    8           anynet.main_relay_conn - Starting main relay connection.
+   info 2024-12-31 13:37:31.987       lsvc   1234   1337    8                  fiber.scheduler - Spawning child fiber 14 'relay_connector' (parent: 8 'main_relay_conn').
+   info 2024-12-31 13:37:31.987       lsvc   1234   1337    9                anynet.any_socket - Listen fiber started.
+   info 2024-12-31 13:37:31.987      lctrl   1234   1337                        ad_app.control - Starting the printer_worker.
+   info 2024-12-31 13:37:32.003      lctrl   1234   1337                        ad_app.control - Starting reg config watcher.
+   info 2024-12-31 13:37:32.003      lctrl   1234   1337                       fiber.scheduler - Spawning root fiber 1 'regcfg_watcher'.
+   info 2024-12-31 13:37:32.003      lctrl   1234   1337    1                   regcfg_watcher - Start watching registry config.
+   info 2024-12-31 13:37:32.003      lctrl   1234   1337                    app.printer_worker - Waiting for commands.
+   info 2024-12-31 13:37:32.019       lsvc   1234   1337   10                      anynet.conn - Request before connect. Queueing.
+   info 2024-12-31 13:37:32.019       lsvc   1234   1337    2                      app.service - Received connectivity update (0).
+   info 2024-12-31 13:37:32.019       lsvc   1234   1337   14           anynet.relay_connector - Relay connector started.
+   info 2024-12-31 13:37:32.019       lsvc   1234   1337   14           anynet.relay_connector - Start proxy search.
+   info 2024-12-31 13:37:32.019       lsvc   1234   1337    2                      app.service - New IPC connection.
+   info 2024-12-31 13:37:32.019       lsvc   1234   1337    2                  fiber.scheduler - Spawning child fiber 15 'ipc_connection' (parent: 2).
+   info 2024-12-31 13:37:32.019       lsvc   1234   1337    2                      app.service - New IPC connection.
+   info 2024-12-31 13:37:32.019       lsvc   1234   1337    2                  fiber.scheduler - Spawning child fiber 16 'ipc_connection' (parent: 2).
+   info 2024-12-31 13:37:32.019       lsvc   1234   1337   15                      app.service - Creating an IPC accept socket.
+   info 2024-12-31 13:37:32.019       lsvc   1234   1337   15                      app.service - Connected to 1234 (frontend).
+   info 2024-12-31 13:37:32.019       lsvc   1234   1337   16                      app.service - Creating an IPC accept socket.
+   info 2024-12-31 13:37:32.019       lsvc   1234   1337   16                      app.service - Connected to 1234 (control:1).
+   info 2024-12-31 13:37:32.019       lsvc   1234   1337   15                      app.service - Process login detected.
+warning 2024-12-31 13:37:32.019       lsvc   1234   1337   15                      app.service - Unexpected message. packet_msg_t
+warning 2024-12-31 13:37:32.019       lsvc   1234   1337   16                      app.service - 	5 times: Unexpected message. packet_msg_t
+   info 2024-12-31 13:37:32.019       lsvc   1234   1337   16                      app.service - Process login detected.
+   info 2024-12-31 13:37:32.019       lsvc   1234   1337   15                  fiber.scheduler - Spawning child fiber 17 'account_adapter' (parent: 15 'ipc_connection').
+warning 2024-12-31 13:37:32.019       lsvc   1234   1337   16                      app.service - Unexpected message. settings_update_msg_t
+warning 2024-12-31 13:37:32.019      front   1234   1337                                   sif - Dropping out of date license response.
+warning 2024-12-31 13:37:32.019      front   1234   1337                                   sif - 	1 times: Dropping out of date license response.
+   info 2024-12-31 13:37:32.019      front   1234   1337                      win_app.frontend - Received process login response.
+warning 2024-12-31 13:37:32.019       lsvc   1234   1337   17                      app.service - 	5 times: Unexpected message. settings_update_msg_t
+   info 2024-12-31 13:37:32.019       lsvc   1234   1337   17                  account_adapter - Preparing quiver based account service for os-session 1
+   info 2024-12-31 13:37:32.019       lsvc   1234   1337   16                      app.service - Using existing control (1234).
+   info 2024-12-31 13:37:32.019      lctrl   1234   1337                        ad_app.control - Session count: (0, 0).
+   info 2024-12-31 13:37:32.019       lsvc   1234   1337   16                  fiber.scheduler - Spawning child fiber 18 'account_adapter' (parent: 16 'ipc_connection').
+   info 2024-12-31 13:37:32.019       lsvc   1234   1337   18                  account_adapter - Preparing quiver based account service for os-session 1
+warning 2024-12-31 13:37:32.034      front   1234   1337                          account_info - Could not read account info from config.
+   info 2024-12-31 13:37:32.034      front   1234   1337                    os_win.fs_sentinel - Observing C:\Users\Public\AccountPictures\S-1-5-21-1234567890-1234567890-1234567890-1000
+   info 2024-12-31 13:37:32.034      front   1234   1337                      win_app.frontend - Requesting Google Chrome compatibility check.
+   info 2024-12-31 13:37:32.065      front   1234   1337                      win_app.frontend - Frontend startup complete.
+   info 2024-12-31 13:37:32.097      lctrl   1234   1337                       clipbrd.capture - Setting new capture formats: text files.
+warning 2024-12-31 13:37:32.097      lctrl   1234   1337                          account_info - Could not read account info from config.
+warning 2024-12-31 13:37:32.097      lctrl   1234   1337                        ad_app.control - Dropping out of date license response.
+   info 2024-12-31 13:37:32.097       lsvc   1234   1337   18                      anynet.conn - Request before connect. Queueing.
+  error 2024-12-31 13:37:32.112      lctrl   1234   1337                     base.proxy_finder - Proxy resolution failed (00002f94).
+   info 2024-12-31 13:37:32.112      lctrl   1234   1337                        ad_app.control - Control startup finished.
+   info 2024-12-31 13:37:32.128       lsvc   1234   1337   14           anynet.relay_connector - Connecting to relay boot.net.anydesk.com (1/1)
+   info 2024-12-31 13:37:32.128       lsvc   1234   1337   14           anynet.relay_connector - Skipping connect method connect_proxy_443 (1/6) (no proxy found)
+   info 2024-12-31 13:37:32.128       lsvc   1234   1337   14           anynet.relay_connector - Skipping connect method connect_proxy_80 (2/6) (no proxy found)
+   info 2024-12-31 13:37:32.128       lsvc   1234   1337   14           anynet.relay_connector - Skipping connect method socks_proxy_443 (3/6) (no proxy found)
+  error 2024-12-31 13:37:32.128       lsvc   1234   1337                   anynet.dns_resolver - DNS name "boot.net.anydesk.com" couldn't be resolved (11001).
+  error 2024-12-31 13:37:32.128       lsvc   1234   1337   14                anynet.udp_socket - send failed (10051).
+  error 2024-12-31 13:37:32.128       lsvc   1234   1337   14                anynet.udp_socket - send failed (10047).
+  error 2024-12-31 13:37:32.128       lsvc   1234   1337   14              anynet.dns_resolver - Could not send packet.
+  error 2024-12-31 13:37:32.128       lsvc   1234   1337   14              anynet.dns_resolver - DNS name "boot.net.anydesk.com" couldn't be resolved (win32_11001, result_aborted).
+  error 2024-12-31 13:37:32.128       lsvc   1234   1337   14           anynet.relay_connector - Could not resolve DNS name boot.net.anydesk.com (anynet_no_dns_entry).
+  error 2024-12-31 13:37:32.128       lsvc   1234   1337   14           anynet.relay_connector - Connection failed (anynet_no_dns_entry)
+  error 2024-12-31 13:37:32.128       lsvc   1234   1337                   anynet.dns_resolver - DNS name "boot.net.anydesk.com" couldn't be resolved (11001).
+  error 2024-12-31 13:37:32.128       lsvc   1234   1337   14                anynet.udp_socket - send failed (10051).
+  error 2024-12-31 13:37:32.128       lsvc   1234   1337   14                anynet.udp_socket - send failed (10047).
+  error 2024-12-31 13:37:32.128       lsvc   1234   1337   14              anynet.dns_resolver - Could not send packet.
+  error 2024-12-31 13:37:32.128       lsvc   1234   1337   14              anynet.dns_resolver - DNS name "boot.net.anydesk.com" couldn't be resolved (win32_11001, result_aborted).
+  error 2024-12-31 13:37:32.128       lsvc   1234   1337   14           anynet.relay_connector - Could not resolve DNS name boot.net.anydesk.com (anynet_no_dns_entry).
+  error 2024-12-31 13:37:32.128       lsvc   1234   1337   14           anynet.relay_connector - Connection failed (anynet_no_dns_entry)
+  error 2024-12-31 13:37:32.128       lsvc   1234   1337                   anynet.dns_resolver - DNS name "boot.net.anydesk.com" couldn't be resolved (11001).
+  error 2024-12-31 13:37:32.128       lsvc   1234   1337   14                anynet.udp_socket - send failed (10051).
+  error 2024-12-31 13:37:32.128       lsvc   1234   1337   14                anynet.udp_socket - send failed (10047).
+  error 2024-12-31 13:37:32.128       lsvc   1234   1337   14              anynet.dns_resolver - Could not send packet.
+  error 2024-12-31 13:37:32.128       lsvc   1234   1337   14              anynet.dns_resolver - DNS name "boot.net.anydesk.com" couldn't be resolved (win32_11001, result_aborted).
+  error 2024-12-31 13:37:32.128       lsvc   1234   1337   14           anynet.relay_connector - Could not resolve DNS name boot.net.anydesk.com (anynet_no_dns_entry).
+  error 2024-12-31 13:37:32.128       lsvc   1234   1337   14           anynet.relay_connector - Connection failed (anynet_no_dns_entry)
+   info 2024-12-31 13:37:32.128       lsvc   1234   1337   14           anynet.relay_connector - Could not establish a connection. Switching to boot relays.
+   info 2024-12-31 13:37:32.128       lsvc   1234   1337   14           anynet.relay_connector - Waiting for 4295 msecs.
+   info 2024-12-31 13:37:32.190      front   1234   1337                      win_app.frontend - Disallowing Google Chrome offer (no permission: 0x00000000 & 0x00000001).
+   info 2024-12-31 13:37:32.347      front   1234   1337                     base.monitor_info - Monitors found: 1
+   info 2024-12-31 13:37:32.628      lctrl   1234   1337                           ad_app.tray - Created the icon.
+   info 2024-12-31 13:37:36.440       lsvc   1234   1337   14           anynet.relay_connector - Start proxy search.
+   info 2024-12-31 13:37:36.440       lsvc   1234   1337   14                base.proxy_finder - Skipping search. Next search in 55578 ms.
+   info 2024-12-31 13:37:36.440       lsvc   1234   1337   14           anynet.relay_connector - Connecting to relay boot.net.anydesk.com (1/1)
+   info 2024-12-31 13:37:36.440       lsvc   1234   1337   14           anynet.relay_connector - Skipping connect method connect_proxy_443 (1/6) (no proxy found)
+   info 2024-12-31 13:37:36.440       lsvc   1234   1337   14           anynet.relay_connector - Skipping connect method connect_proxy_80 (2/6) (no proxy found)
+   info 2024-12-31 13:37:36.440       lsvc   1234   1337   14           anynet.relay_connector - Skipping connect method socks_proxy_443 (3/6) (no proxy found)
+  error 2024-12-31 13:37:36.440       lsvc   1234   1337                   anynet.dns_resolver - DNS name "boot.net.anydesk.com" couldn't be resolved (11001).
+  error 2024-12-31 13:37:36.456       lsvc   1234   1337   14                anynet.udp_socket - send failed (10051).
+  error 2024-12-31 13:37:36.456       lsvc   1234   1337   14                anynet.udp_socket - send failed (10047).
+  error 2024-12-31 13:37:36.456       lsvc   1234   1337   14              anynet.dns_resolver - Could not send packet.
+  error 2024-12-31 13:37:36.456       lsvc   1234   1337   14              anynet.dns_resolver - DNS name "boot.net.anydesk.com" couldn't be resolved (win32_11001, result_aborted).
+  error 2024-12-31 13:37:36.456       lsvc   1234   1337   14           anynet.relay_connector - Could not resolve DNS name boot.net.anydesk.com (anynet_no_dns_entry).
+  error 2024-12-31 13:37:36.456       lsvc   1234   1337   14           anynet.relay_connector - Connection failed (anynet_no_dns_entry)
+  error 2024-12-31 13:37:36.456       lsvc   1234   1337                   anynet.dns_resolver - DNS name "boot.net.anydesk.com" couldn't be resolved (11001).
+  error 2024-12-31 13:37:36.456       lsvc   1234   1337   14                anynet.udp_socket - send failed (10051).
+  error 2024-12-31 13:37:36.456       lsvc   1234   1337   14                anynet.udp_socket - send failed (10047).
+  error 2024-12-31 13:37:36.456       lsvc   1234   1337   14              anynet.dns_resolver - Could not send packet.
+  error 2024-12-31 13:37:36.456       lsvc   1234   1337   14              anynet.dns_resolver - DNS name "boot.net.anydesk.com" couldn't be resolved (win32_11001, result_aborted).
+  error 2024-12-31 13:37:36.456       lsvc   1234   1337   14           anynet.relay_connector - Could not resolve DNS name boot.net.anydesk.com (anynet_no_dns_entry).
+  error 2024-12-31 13:37:36.456       lsvc   1234   1337   14           anynet.relay_connector - Connection failed (anynet_no_dns_entry)
+  error 2024-12-31 13:37:36.456       lsvc   1234   1337                   anynet.dns_resolver - DNS name "boot.net.anydesk.com" couldn't be resolved (11001).
+  error 2024-12-31 13:37:36.456       lsvc   1234   1337   14                anynet.udp_socket - send failed (10051).
+  error 2024-12-31 13:37:36.456       lsvc   1234   1337   14                anynet.udp_socket - send failed (10047).
+  error 2024-12-31 13:37:36.456       lsvc   1234   1337   14              anynet.dns_resolver - Could not send packet.
+  error 2024-12-31 13:37:36.456       lsvc   1234   1337   14              anynet.dns_resolver - DNS name "boot.net.anydesk.com" couldn't be resolved (win32_11001, result_aborted).
+  error 2024-12-31 13:37:36.456       lsvc   1234   1337   14           anynet.relay_connector - Could not resolve DNS name boot.net.anydesk.com (anynet_no_dns_entry).
+  error 2024-12-31 13:37:36.456       lsvc   1234   1337   14           anynet.relay_connector - Connection failed (anynet_no_dns_entry)
+   info 2024-12-31 13:37:36.456       lsvc   1234   1337   14           anynet.relay_connector - Could not establish a connection. Switching to boot relays.
+   info 2024-12-31 13:37:36.456       lsvc   1234   1337   14           anynet.relay_connector - Waiting for 16711 msecs.
+warning 2024-12-31 13:37:42.034       lsvc   1234   1337   10                      anynet.conn - Request timeout.
+  error 2024-12-31 13:37:42.034       lsvc   1234   1337   10                   ad.wol_service - Could not update WOL information about this machine. WOL might not work. (result_timeout)
+warning 2024-12-31 13:37:52.112       lsvc   1234   1337   18                      anynet.conn - Request timeout.
+  error 2024-12-31 13:37:52.112       lsvc   1234   1337   18          account_relay_interface - Could not obtain login info. (result_timeout)
+   info 2024-12-31 13:37:52.112       lsvc   1234   1337   18                      app.service - Account: 1; 
+   info 2024-12-31 13:37:52.112       lsvc   1234   1337    2                      app.service - Account backend service status changed (0->2)
+   info 2024-12-31 13:37:53.175       lsvc   1234   1337   14           anynet.relay_connector - Start proxy search.
+   info 2024-12-31 13:37:53.175       lsvc   1234   1337   14                base.proxy_finder - Skipping search. Next search in 38843 ms.
+   info 2024-12-31 13:37:53.175       lsvc   1234   1337   14           anynet.relay_connector - Connecting to relay boot.net.anydesk.com (1/1)
+   info 2024-12-31 13:37:53.175       lsvc   1234   1337   14           anynet.relay_connector - Skipping connect method connect_proxy_443 (1/6) (no proxy found)
+   info 2024-12-31 13:37:53.175       lsvc   1234   1337   14           anynet.relay_connector - Skipping connect method connect_proxy_80 (2/6) (no proxy found)
+   info 2024-12-31 13:37:53.175       lsvc   1234   1337   14           anynet.relay_connector - Skipping connect method socks_proxy_443 (3/6) (no proxy found)
+  error 2024-12-31 13:37:53.175       lsvc   1234   1337                   anynet.dns_resolver - DNS name "boot.net.anydesk.com" couldn't be resolved (11001).
+  error 2024-12-31 13:37:53.175       lsvc   1234   1337   14                anynet.udp_socket - send failed (10051).
+  error 2024-12-31 13:37:53.175       lsvc   1234   1337   14                anynet.udp_socket - send failed (10047).
+  error 2024-12-31 13:37:53.175       lsvc   1234   1337   14              anynet.dns_resolver - Could not send packet.
+  error 2024-12-31 13:37:53.175       lsvc   1234   1337   14              anynet.dns_resolver - DNS name "boot.net.anydesk.com" couldn't be resolved (win32_11001, result_aborted).
+  error 2024-12-31 13:37:53.175       lsvc   1234   1337   14           anynet.relay_connector - Could not resolve DNS name boot.net.anydesk.com (anynet_no_dns_entry).
+  error 2024-12-31 13:37:53.175       lsvc   1234   1337   14           anynet.relay_connector - Connection failed (anynet_no_dns_entry)
+  error 2024-12-31 13:37:53.175       lsvc   1234   1337                   anynet.dns_resolver - DNS name "boot.net.anydesk.com" couldn't be resolved (11001).
+  error 2024-12-31 13:37:53.175       lsvc   1234   1337   14                anynet.udp_socket - send failed (10051).
+  error 2024-12-31 13:37:53.175       lsvc   1234   1337   14                anynet.udp_socket - send failed (10047).
+  error 2024-12-31 13:37:53.175       lsvc   1234   1337   14              anynet.dns_resolver - Could not send packet.
+  error 2024-12-31 13:37:53.175       lsvc   1234   1337   14              anynet.dns_resolver - DNS name "boot.net.anydesk.com" couldn't be resolved (win32_11001, result_aborted).
+  error 2024-12-31 13:37:53.175       lsvc   1234   1337   14           anynet.relay_connector - Could not resolve DNS name boot.net.anydesk.com (anynet_no_dns_entry).
+  error 2024-12-31 13:37:53.175       lsvc   1234   1337   14           anynet.relay_connector - Connection failed (anynet_no_dns_entry)
+  error 2024-12-31 13:37:53.175       lsvc   1234   1337                   anynet.dns_resolver - DNS name "boot.net.anydesk.com" couldn't be resolved (11001).
+  error 2024-12-31 13:37:53.175       lsvc   1234   1337   14                anynet.udp_socket - send failed (10051).
+  error 2024-12-31 13:37:53.175       lsvc   1234   1337   14                anynet.udp_socket - send failed (10047).
+  error 2024-12-31 13:37:53.175       lsvc   1234   1337   14              anynet.dns_resolver - Could not send packet.
+  error 2024-12-31 13:37:53.175       lsvc   1234   1337   14              anynet.dns_resolver - DNS name "boot.net.anydesk.com" couldn't be resolved (win32_11001, result_aborted).
+  error 2024-12-31 13:37:53.175       lsvc   1234   1337   14           anynet.relay_connector - Could not resolve DNS name boot.net.anydesk.com (anynet_no_dns_entry).
+  error 2024-12-31 13:37:53.175       lsvc   1234   1337   14           anynet.relay_connector - Connection failed (anynet_no_dns_entry)
+   info 2024-12-31 13:37:53.175       lsvc   1234   1337   14           anynet.relay_connector - Could not establish a connection. Switching to boot relays.
+   info 2024-12-31 13:37:53.175       lsvc   1234   1337   14           anynet.relay_connector - Waiting for 52688 msecs.
+   info 2024-12-31 13:38:00.878      front   1234   1337                      win_app.frontend - Disallowing Google Chrome offer (no permission: 0x00000000 & 0x00000001).
+   info 2024-12-31 13:38:45.894       lsvc   1234   1337   14           anynet.relay_connector - Start proxy search.
+   info 2024-12-31 13:38:45.894       lsvc   1234   1337    2                      app.service - Forwarding proxy search to the existing control.
+   info 2024-12-31 13:38:45.894      lctrl   1234   1337                        ad_app.control - Received proxy search request.
+  error 2024-12-31 13:38:45.909      lctrl   1234   1337                     base.proxy_finder - Proxy resolution failed (00002f94).
+   info 2024-12-31 13:38:46.003       lsvc   1234   1337   14           anynet.relay_connector - Connecting to relay boot.net.anydesk.com (1/1)
+   info 2024-12-31 13:38:46.003       lsvc   1234   1337   14           anynet.relay_connector - Skipping connect method connect_proxy_443 (1/6) (no proxy found)
+   info 2024-12-31 13:38:46.003       lsvc   1234   1337   14           anynet.relay_connector - Skipping connect method connect_proxy_80 (2/6) (no proxy found)
+   info 2024-12-31 13:38:46.003       lsvc   1234   1337   14           anynet.relay_connector - Skipping connect method socks_proxy_443 (3/6) (no proxy found)
+  error 2024-12-31 13:38:46.003       lsvc   1234   1337                   anynet.dns_resolver - DNS name "boot.net.anydesk.com" couldn't be resolved (11001).
+  error 2024-12-31 13:38:46.003       lsvc   1234   1337   14                anynet.udp_socket - send failed (10051).
+  error 2024-12-31 13:38:46.003       lsvc   1234   1337   14                anynet.udp_socket - send failed (10047).
+  error 2024-12-31 13:38:46.003       lsvc   1234   1337   14              anynet.dns_resolver - Could not send packet.
+  error 2024-12-31 13:38:46.003       lsvc   1234   1337   14              anynet.dns_resolver - DNS name "boot.net.anydesk.com" couldn't be resolved (win32_11001, result_aborted).
+  error 2024-12-31 13:38:46.003       lsvc   1234   1337   14           anynet.relay_connector - Could not resolve DNS name boot.net.anydesk.com (anynet_no_dns_entry).
+  error 2024-12-31 13:38:46.003       lsvc   1234   1337   14           anynet.relay_connector - Connection failed (anynet_no_dns_entry)
+  error 2024-12-31 13:38:46.003       lsvc   1234   1337                   anynet.dns_resolver - DNS name "boot.net.anydesk.com" couldn't be resolved (11001).
+  error 2024-12-31 13:38:46.003       lsvc   1234   1337   14                anynet.udp_socket - send failed (10051).
+  error 2024-12-31 13:38:46.003       lsvc   1234   1337   14                anynet.udp_socket - send failed (10047).
+  error 2024-12-31 13:38:46.003       lsvc   1234   1337   14              anynet.dns_resolver - Could not send packet.
+  error 2024-12-31 13:38:46.003       lsvc   1234   1337   14              anynet.dns_resolver - DNS name "boot.net.anydesk.com" couldn't be resolved (win32_11001, result_aborted).
+  error 2024-12-31 13:38:46.003       lsvc   1234   1337   14           anynet.relay_connector - Could not resolve DNS name boot.net.anydesk.com (anynet_no_dns_entry).
+  error 2024-12-31 13:38:46.003       lsvc   1234   1337   14           anynet.relay_connector - Connection failed (anynet_no_dns_entry)
+  error 2024-12-31 13:38:46.003       lsvc   1234   1337                   anynet.dns_resolver - DNS name "boot.net.anydesk.com" couldn't be resolved (11001).
+  error 2024-12-31 13:38:46.019       lsvc   1234   1337   14                anynet.udp_socket - send failed (10051).
+  error 2024-12-31 13:38:46.019       lsvc   1234   1337   14                anynet.udp_socket - send failed (10047).
+  error 2024-12-31 13:38:46.019       lsvc   1234   1337   14              anynet.dns_resolver - Could not send packet.
+  error 2024-12-31 13:38:46.019       lsvc   1234   1337   14              anynet.dns_resolver - DNS name "boot.net.anydesk.com" couldn't be resolved (win32_11001, result_aborted).
+  error 2024-12-31 13:38:46.019       lsvc   1234   1337   14           anynet.relay_connector - Could not resolve DNS name boot.net.anydesk.com (anynet_no_dns_entry).
+  error 2024-12-31 13:38:46.019       lsvc   1234   1337   14           anynet.relay_connector - Connection failed (anynet_no_dns_entry)
+   info 2024-12-31 13:38:46.019       lsvc   1234   1337   14           anynet.relay_connector - Could not establish a connection. Switching to boot relays.
+   info 2024-12-31 13:38:46.019       lsvc   1234   1337   14           anynet.relay_connector - Waiting for 55087 msecs.
+   info 2024-12-31 13:39:06.144      front   1234   1337                     gui.install_panel - Updating user consent for telemetry to: Opt out
+   info 2024-12-31 13:39:06.159      front   1234   1337                 installation.launcher - Starting installation of AnyDesk.
+   info 2024-12-31 13:39:06.175      front   1234   1337                      os_win.start_uac - Opening UAC dialog.
+   info 2024-12-31 13:39:06.175      front   1234   1337                      os_win.start_uac - line: "C:\Users\user\Desktop\AnyDesk.exe" --install "C:\Program Files (x86)\AnyDesk"  --start-with-win --create-shortcuts --create-taskbar-icon --create-desktop-icon --install-driver:mirror --install-driver:printer --update-main --svc-conf "C:\Users\user\AppData\Roaming\AnyDesk\service.conf"  --sys-conf "C:\Users\user\AppData\Roaming\AnyDesk\system.conf" 
+ * * * * * * * * * * * * * * * * * *
+   info 2024-12-31 13:39:08.1337  installer   1234   1337                                  main - * AnyDesk Windows Startup *
+   info 2024-12-31 13:39:08.1337  installer   1234   1337                                  main - * Version 8.0.10 (release/win_8.0.10 8941b379f03505960bfba86d51b033e4f12eac4a)
+   info 2024-12-31 13:39:08.1337  installer   1234   1337                                  main - 
+   info 2024-12-31 13:39:08.1337  installer   1234   1337                                  main - Command Line params: "C:\Users\user\Desktop\AnyDesk.exe" --install "C:\Program Files (x86)\AnyDesk"  --start-with-win --create-shortcuts --create-taskbar-icon --create-desktop-icon --install-driver:mirror --install-driver:printer --update-main --svc-conf "C:\Users\user\AppData\Roaming\AnyDesk\service.conf"  --sys-conf "C:\Users\user\AppData\Roaming\AnyDesk\system.conf" 
+   info 2024-12-31 13:39:08.1337  installer   1234   1337                                  main - Process started at 2024-12-31. PID 1234. OS is Windows 10 (64 bit)
+   info 2024-12-31 13:39:08.1337  installer   1234   1337                         impl_selector - using sse2 (intrinsics)
+   info 2024-12-31 13:39:08.540  installer   1234   1337          base.data.config_application - Adding GPO defaults layer.
+   info 2024-12-31 13:39:08.540  installer   1234   1337          base.data.config_application - Adding GPO overrides layer.
+   info 2024-12-31 13:39:08.540  installer   1234   1337                       base.signal.hub - 1 threads.
+   info 2024-12-31 13:39:08.540  installer   1234   1337                        app.cmdline_if - Command line interface startup.
+  error 2024-12-31 13:39:08.540  installer   1234   1337                      base.ipc.section - Couldn't open the SHM 'Global\ad_8010_gsystem_shm' (2).
+warning 2024-12-31 13:39:08.540  installer   1234   1337                       config_provider - Overwrite of existing config layer is not allowed. (1)
+warning 2024-12-31 13:39:08.540  installer   1234   1337                       config_provider - Overwrite of existing config layer is not allowed. (12)
+   info 2024-12-31 13:39:08.540       lsvc   1234   1337    2                      app.service - Process start: 1234 (frontend).
+   info 2024-12-31 13:39:08.540  installer   1234   1337                        app.cmdline_if - Adding GPO defaults layer.
+warning 2024-12-31 13:39:08.540  installer   1234   1337                       config_provider - Overwrite of existing config layer is not allowed. (3)
+   info 2024-12-31 13:39:08.540  installer   1234   1337                        app.cmdline_if - Adding GPO overrides layer.
+warning 2024-12-31 13:39:08.540  installer   1234   1337                       config_provider - Overwrite of existing config layer is not allowed. (9)
+warning 2024-12-31 13:39:08.540  installer   1234   1337                       config_provider - Overwrite of existing config layer is not allowed. (7)
+   info 2024-12-31 13:39:08.540       lsvc   1234   1337    2                      app.service - New IPC connection.
+   info 2024-12-31 13:39:08.540       lsvc   1234   1337    2                  fiber.scheduler - Spawning child fiber 19 'ipc_connection' (parent: 2).
+   info 2024-12-31 13:39:08.540       lsvc   1234   1337   19                      app.service - Creating an IPC accept socket.
+   info 2024-12-31 13:39:08.540       lsvc   1234   1337   19                      app.service - Connected to 1234 (frontend).
+   info 2024-12-31 13:39:08.540       lsvc   1234   1337   19                      app.service - Process login detected.
+warning 2024-12-31 13:39:08.555  installer   1234   1337                                   sif - Dropping out of date license response.
+  error 2024-12-31 13:39:08.555  installer   1234   1337              base.prot.packet_factory - Invalid packet received (type=70, 1 bytes).
+  error 2024-12-31 13:39:08.555  installer   1234   1337                        hub_ipc_socket - IPC packet deserialization failed.
+   info 2024-12-31 13:39:08.555  installer   1234   1337                        app.cmdline_if - Command line interface shutdown.
+   info 2024-12-31 13:39:08.555  installer   1234   1337              base.prot.job_dispatcher - 0 undelivered packets.
+   info 2024-12-31 13:39:08.555       lsvc   1234   1337   19                  fiber.scheduler - Spawning child fiber 20 'account_adapter' (parent: 19 'ipc_connection').
+   info 2024-12-31 13:39:08.571       lsvc   1234   1337   20                  account_adapter - Preparing quiver based account service for os-session 1
+   info 2024-12-31 13:39:08.571       lsvc   1234   1337    2                      app.service - Process stop: 1234.
+   info 2024-12-31 13:39:08.571       lsvc   1234   1337   19                      app.service - IPC socket closed.
+   info 2024-12-31 13:39:08.571       lsvc   1234   1337                       fiber.scheduler - Fiber 19 'ipc_connection' (parent: 2) requested quit of fiber 20 'account_adapter' (parent: 19 'ipc_connection').
+   info 2024-12-31 13:39:08.571       lsvc   1234   1337   20                      fiber.fiber - Received quit.
+   info 2024-12-31 13:39:08.571       lsvc   1234   1337                       fiber.scheduler - Fiber 20 'account_adapter' (parent: 19 'ipc_connection') terminated.
+   info 2024-12-31 13:39:08.587       lsvc   1234   1337   19                      app.service - Fiber exit (ipc).
+   info 2024-12-31 13:39:08.587       lsvc   1234   1337                       fiber.scheduler - Fiber 19 'ipc_connection' (parent: 2) terminated.
+warning 2024-12-31 13:39:09.540  installer   1234   1337                            terminator - Found a hanging anydesk process. Killing.
+   info 2024-12-31 13:39:09.540  installer   1234   1337                            terminator - Killing pid 1234
+warning 2024-12-31 13:39:09.555       lsvc   1234   1337                   fiber.ipc_namespace - Zombie process detected (1234). Fixing the state.
+   info 2024-12-31 13:39:09.555       lsvc   1234   1337    2                      app.service - Process stop: 1234.
+   info 2024-12-31 13:39:09.555       lsvc   1234   1337    2           anynet.relay_connector - Short timeouts disabled.
+   info 2024-12-31 13:39:09.555       lsvc   1234   1337   15                      app.service - IPC socket closed.
+   info 2024-12-31 13:39:09.555       lsvc   1234   1337                       fiber.scheduler - Fiber 15 'ipc_connection' (parent: 2) requested quit of fiber 17 'account_adapter' (parent: 15 'ipc_connection').
+   info 2024-12-31 13:39:09.555       lsvc   1234   1337   17                      fiber.fiber - Received quit.
+   info 2024-12-31 13:39:09.555       lsvc   1234   1337                       fiber.scheduler - Fiber 17 'account_adapter' (parent: 15 'ipc_connection') terminated.
+   info 2024-12-31 13:39:09.555       lsvc   1234   1337   15                      app.service - Fiber exit (ipc).
+   info 2024-12-31 13:39:09.555       lsvc   1234   1337                       fiber.scheduler - Fiber 15 'ipc_connection' (parent: 2) terminated.
+   info 2024-12-31 13:39:09.555  installer   1234   1337                            terminator - Terminated 1234.
+   info 2024-12-31 13:39:09.571  installer   1234   1337                            terminator - Killing pid 1234
+   info 2024-12-31 13:39:09.571  installer   1234   1337                            terminator - Terminated 1234.
+   info 2024-12-31 13:39:09.571  installer   1234   1337                            terminator - Killing pid 1234
+   info 2024-12-31 13:39:09.602  installer   1234   1337                            terminator - Terminated 1234.
+warning 2024-12-31 13:39:09.602  installer   1234   1337                            terminator - All clear!
+   info 2024-12-31 13:39:09.602  installer   1234   1337                   installer.installer - Installing AnyDesk on this computer (1/0).
+   info 2024-12-31 13:39:09.602  installer   1234   1337            installation.svc_installer - Stopping the service.
+   info 2024-12-31 13:39:09.602  installer   1234   1337            installation.svc_installer - Old service is not running.
+   info 2024-12-31 13:39:09.602  installer   1234   1337            installation.svc_installer - Stopping the volatile service.
+   info 2024-12-31 13:39:09.602  installer   1234   1337            installation.svc_installer - Old service is not running.
+   info 2024-12-31 13:39:09.852  installer   1234   1337            installation.svc_installer - Uninstalling the service.
+   info 2024-12-31 13:39:09.852  installer   1234   1337            installation.svc_installer - Old service is not installed.
+   info 2024-12-31 13:39:09.852  installer   1234   1337            installation.svc_installer - Installing the service.
+   info 2024-12-31 13:39:09.852  installer   1234   1337            installation.svc_installer - The service has been installed ("C:\Program Files (x86)\AnyDesk\AnyDesk.exe" --service).
+   info 2024-12-31 13:39:09.852  installer   1234   1337                   installer.installer - Copying the settings (new installation).
+   info 2024-12-31 13:39:10.071  installer   1234   1337                   installer.installer - Install status: not installed (<4)
+   info 2024-12-31 13:39:10.087  installer   1234   1337                   installer.installer - Updating configuration for auto-update (0, main).
+  error 2024-12-31 13:39:10.118  installer   1234   1337                      base.ipc.section - Couldn't open the SHM 'Local\ad_8010_lsystem_shm' (2).
+   info 2024-12-31 13:39:10.118  installer   1234   1337            installation.svc_installer - Starting the service.
+   info 2024-12-31 13:39:10.618  installer   1234   1337            installation.svc_installer - Service started.
+   info 2024-12-31 13:39:10.618  installer   1234   1337            installation.svc_installer - Waiting for service.
+   info 2024-12-31 13:39:10.743  installer   1234   1337            installation.svc_installer - The service is running.
+   info 2024-12-31 13:39:11.134  installer   1234   1337                  installation.printer - Creating directory 'C:\Users\user\AppData\Roaming\AnyDesk\printer_driver\'.
+   info 2024-12-31 13:39:11.337  installer   1234   1337                  installation.printer - Executing 'rundll32 printui.dll, PrintUIEntry /if /b "AnyDesk Printer" /f "C:\Users\user\AppData\Roaming\AnyDesk\printer_driver\AnyDeskPrintDriver.inf" /r "AD_Port" /m "AnyDesk v4 Printer Driver"'.
+   info 2024-12-31 13:39:11.1337  installer   1234   1337                   installer.installer - Installation finished.
+   info 2024-12-31 13:39:11.1337  installer   1234   1337                                  main - Terminated (0).
+ * * * * * * * * * * * * * * * * * *
+   info 2024-12-31 13:39:11.680       ctrl   1234   1337                                  main - * AnyDesk Windows Startup *
+   info 2024-12-31 13:39:11.680       ctrl   1234   1337                                  main - * Version 8.0.10 (release/win_8.0.10 8941b379f03505960bfba86d51b033e4f12eac4a)
+   info 2024-12-31 13:39:11.680       ctrl   1234   1337                                  main - 
+   info 2024-12-31 13:39:11.680       ctrl   1234   1337                                  main - Command Line params: "C:\Program Files (x86)\AnyDesk\AnyDesk.exe"  --control
+   info 2024-12-31 13:39:11.680       ctrl   1234   1337                                  main - Process started at 2024-12-31. PID 1234. OS is Windows 10 (64 bit)
+   info 2024-12-31 13:39:11.680       ctrl   1234   1337                         impl_selector - using sse2 (intrinsics)
+   info 2024-12-31 13:39:11.680       ctrl   1234   1337          base.data.config_application - Adding GPO defaults layer.
+   info 2024-12-31 13:39:11.680       ctrl   1234   1337          base.data.config_application - Adding GPO overrides layer.
+   info 2024-12-31 13:39:11.727       ctrl   1234   1337                           gui.gui_app - DPI scaling: 1.00 / 1.00
+   info 2024-12-31 13:39:11.727       ctrl   1234   1337                           gui.gui_app - Using std-resolution bitmaps.
+   info 2024-12-31 13:39:11.743       ctrl   1234   1337                       base.signal.hub - 1 threads.
+   info 2024-12-31 13:39:11.743       ctrl   1234   1337                       clipbrd.capture - Empty format set.
+   info 2024-12-31 13:39:11.743       ctrl   1234   1337                    app.tunnel_ft_comp - Ready.
+   info 2024-12-31 13:39:11.805       ctrl   1234   1337                        ad_app.control - Starting scheduler thread.
+   info 2024-12-31 13:39:11.805       ctrl   1234   1337                       fiber.scheduler - Scheduler started.
+   info 2024-12-31 13:39:11.805       ctrl   1234   1337                          wgf.msg_loop - Waiting for events.
+   info 2024-12-31 13:39:11.805       ctrl   1234    1337                        ad_app.control - Control startup.
+   info 2024-12-31 13:39:11.805       ctrl   1234    1337                        ad_app.control - Connecting to the service.
+   info 2024-12-31 13:39:11.821       ctrl   1234    1337                        ad_app.control - Starting the printer_worker.
+   info 2024-12-31 13:39:11.821       ctrl   1234   1337                        ad_app.control - Session count: (0, 0).
+   info 2024-12-31 13:39:11.837       ctrl   1234    1337                        ad_app.control - Starting reg config watcher.
+   info 2024-12-31 13:39:11.837       ctrl   1234    1337                       fiber.scheduler - Spawning root fiber 1 'regcfg_watcher'.
+   info 2024-12-31 13:39:11.837       ctrl   1234   1337    1                   regcfg_watcher - Start watching registry config.
+   info 2024-12-31 13:39:11.837       ctrl   1234   1337                    app.printer_worker - Waiting for commands.
+   info 2024-12-31 13:39:11.837       ctrl   1234    1337                       clipbrd.capture - Setting new capture formats: text files.
+warning 2024-12-31 13:39:11.837       ctrl   1234    1337                        ad_app.control - Dropping out of date license response.
+  error 2024-12-31 13:39:11.852       ctrl   1234    1337                     base.proxy_finder - Proxy resolution failed (00002f94).
+   info 2024-12-31 13:39:11.852       ctrl   1234    1337                        ad_app.control - Control startup finished.
+ * * * * * * * * * * * * * * * * * *
+   info 2024-12-31 13:39:11.962      front   1234   1337                                  main - * AnyDesk Windows Startup *
+   info 2024-12-31 13:39:11.962      front   1234   1337                                  main - * Version 8.0.10 (release/win_8.0.10 8941b379f03505960bfba86d51b033e4f12eac4a)
+   info 2024-12-31 13:39:11.962      front   1234   1337                                  main - * Checksum 88978f95220cea3e5cd714ad3d984e5d
+   info 2024-12-31 13:39:11.962      front   1234   1337                                  main - * Build 20240424145318
+   info 2024-12-31 13:39:11.962      front   1234   1337                                  main - * Copyright (C) 2024 AnyDesk Software GmbH *
+   info 2024-12-31 13:39:11.962      front   1234   1337                                  main - 
+   info 2024-12-31 13:39:11.962      front   1234   1337                                  main - * Client ID  (no alias)
+   info 2024-12-31 13:39:11.962      front   1234   1337                                  main - 
+   info 2024-12-31 13:39:11.962      front   1234   1337                                  main - Command Line params: "C:\Program Files (x86)\AnyDesk\AnyDesk.exe"   --new-install
+   info 2024-12-31 13:39:11.962      front   1234   1337                                  main - Process started at 2024-12-31. PID 1234. OS is Windows 10 (64 bit)
+   info 2024-12-31 13:39:11.962      front   1234   1337                         impl_selector - using sse2 (intrinsics)
+   info 2024-12-31 13:39:11.962      front   1234   1337                                  main - Install status: same version (>=4)
+   info 2024-12-31 13:39:11.962      front   1234   1337          base.data.config_application - Adding GPO defaults layer.
+   info 2024-12-31 13:39:11.962      front   1234   1337          base.data.config_application - Adding GPO overrides layer.
+   info 2024-12-31 13:39:11.977      front   1234   1337                           gui.gui_app - DPI scaling: 1.00 / 1.00
+   info 2024-12-31 13:39:11.977      front   1234   1337                           gui.gui_app - Using std-resolution bitmaps.
+   info 2024-12-31 13:39:11.993      front   1234   1337                       base.signal.hub - 4 threads.
+   info 2024-12-31 13:39:12.009      front   1234   1337                            app.roster - Updating the jump list
+   info 2024-12-31 13:39:12.009      front   1234   1337                  os_win.jump_list_mgr - 0 items found
+   info 2024-12-31 13:39:12.055      front   1234   1337                          wgf.msg_loop - Waiting for events.
+   info 2024-12-31 13:39:12.055      front   1234   1337                      win_app.frontend - Frontend startup (not elevated).
+   info 2024-12-31 13:39:12.055      front   1234   1337                      win_app.frontend - Logging the frontend in.
+   info 2024-12-31 13:39:12.071      front   1234   1337             app.named_process_starter - Using existing control (1234).
+warning 2024-12-31 13:39:12.087      front   1234   1337                                   sif - Dropping out of date license response.
+   info 2024-12-31 13:39:12.118      front   1234   1337                        gui.mainwindow - Main window created (standard mode).
+warning 2024-12-31 13:39:12.196      front   1234   1337                                   sif - Dropping out of date license response.
+   info 2024-12-31 13:39:12.196      front   1234   1337                      win_app.frontend - Received process login response.
+   info 2024-12-31 13:39:12.196      front   1234   1337                    os_win.fs_sentinel - Observing C:\Users\Public\AccountPictures\S-1-5-21-1234567890-1234567890-1234567890-1000
+   info 2024-12-31 13:39:12.196      front   1234   1337                      win_app.frontend - Requesting Google Chrome compatibility check.
+   info 2024-12-31 13:39:12.196      front   1234   1337                      win_app.frontend - Frontend startup complete.
+   info 2024-12-31 13:39:12.305      front   1234   1337                      win_app.frontend - Disallowing Google Chrome offer (no permission: 0x00000000 & 0x00000001).
+   info 2024-12-31 13:39:12.399      front   1234   1337                     base.monitor_info - Monitors found: 1
+   info 2024-12-31 13:39:12.821       ctrl   1234   1337                           ad_app.tray - Created the icon.
+   info 2024-12-31 13:39:39.665      front   1234   1337                          wgf.msg_loop - Received quit message.
+   info 2024-12-31 13:39:39.665      front   1234   1337                      win_app.frontend - Frontend is shutting down.
+   info 2024-12-31 13:39:40.384      front   1234   1337                    os_win.fs_sentinel - Stopped to watch C:\Users\Public\AccountPictures\S-1-5-21-1234567890-1234567890-1234567890-1000
+   info 2024-12-31 13:39:40.384      front   1234   1337                      win_app.frontend - Frontend shutdown.
+   info 2024-12-31 13:39:40.384      front   1234   1337                            app.roster - Updating the jump list
+   info 2024-12-31 13:39:40.384      front   1234   1337                  os_win.jump_list_mgr - 0 items found
+   info 2024-12-31 13:39:40.399      front   1234   1337                            app.roster - Updating the jump list
+   info 2024-12-31 13:39:40.399      front   1234   1337                  os_win.jump_list_mgr - 0 items found
+   info 2024-12-31 13:39:40.399      front   1234   1337                      win_app.frontend - Terminating.
+   info 2024-12-31 13:39:40.399      front   1234   1337                      win_app.frontend - Frontend terminated.
+   info 2024-12-31 13:39:40.415      front   1234   1337              base.prot.job_dispatcher - 0 undelivered packets.
+   info 2024-12-31 13:39:40.415      front   1234   1337                                  main - Terminated (0).
+  error 2024-12-31 13:39:49.774       ctrl   1234   1337                     base.proxy_finder - Proxy resolution failed (00002f94).
+   info 2024-12-31 13:40:20.888       ctrl   1234   1337                        ad_app.control - Received proxy search request.
+  error 2024-12-31 13:40:20.891       ctrl   1234   1337                     base.proxy_finder - Proxy resolution failed (00002f94).
+   info 2024-12-31 13:41:39.612       ctrl   1234   1337                        ad_app.control - Received new license info. (free-1, 67).
+   info 2024-12-31 13:41:41.709       ctrl   1234   1337                        ad_app.control - Received new license info. (free-1, 29).

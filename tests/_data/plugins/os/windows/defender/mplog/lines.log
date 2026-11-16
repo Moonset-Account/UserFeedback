@@ -1,0 +1,10 @@
+2024-07-13T14:42:19.659Z ProcessImageName: randomapp.exe, Pid: 5832, TotalTime: 1398, Count: 22, MaxTime: 398, MaxTimeFile: \Device\HarddiskVolume2\Users\user123\AppData\Local\Temp\TEMP001.tmp, EstimatedImpact: 4%
+2023-01-20T08:45:40.321Z Engine:command line reported as lowfi: C:\OS\System32\cfg.exe(reg add HKLM\SYSTEM\OtherControlSet\Control\SecurityOptions\SecurityModule /v RandomFlag /t REG_DWORD /d 0 /f)
+2023-01-27T15:33:07.698Z DETECTION_ADD#1 HackTool:MSIL/RndGen!MD5 file:C:\Users\user987\Documents\executable.exe PropBag [length: 0, data: (null)]
+2023-01-27T15:33:07.698Z Engine:command line reported as threat: C:\Users\user987\Documents\executable.exe
+2023-01-27T15:33:07.698Z DETECTIONEVENT MPSOURCE_REALTIME HackTool:MSIL/RndGen!MD5 file:C:\Users\user987\Documents\executable.exe
+2024-08-17T17:35:22.614Z [Exclusion] C:\example.txt -> example.txt
+2024-07-13T14:38:15.272Z [Mini-filter] Unsuccessful scan status(#2): \Device\HarddiskVolume2\Users\userdefault\AppData\Local\Packages\MicrosoftBrowser.Default_cw5n8h2txyuma\LocalState\ANWebView\Default\Popular URLs. Process: (unknown), Status: 0xc000004a, State: 0, ScanRequest #16891, FileId: 0x200000002c4b5, Reason: OnAccess, IoStatusBlockForNewFile: 0x3, DesiredAccess:0x0, FileAttributes:0x20, ScanAttributes:0x10, AccessStateFlags:0x802, BackingFileInfo: 0x0, 0x0, 0x0:0\0x0:0
+2024-07-13T14:38:15.272Z [Mini-filter] Blocked file: \Device\HarddiskVolume2\Users\userdefault\AppData\Local\Packages\MicrosoftBrowser.Default_cw5n8h2txyuma\LocalState\ANWebView\Default\Popular URLs. Process: (unknown), Status: 0xc000004a, State: 0, ScanRequest #16891, FileId: 0x200000002c4b5, Reason: OnAccess, IoStatusBlockForNewFile: 0x3, DesiredAccess:0x0, FileAttributes:0x20, ScanAttributes:0x10, AccessStateFlags:0x802, BackingFileInfo: 0x0, 0x0, 0x0:0\0x0:0
+2024-09-05T10:21:39.417Z Engine: EMS scan for process: sysproc pid: 2820, sigseq: 0x1, sendMemoryScanReport: 1, source: 4
+2024-09-03T18:12:05.364Z Engine:Setting original file name "RandomData0123_static.dll" for "c:\os\winsxs\x64_default-app-service_31bf3856ad364e35_10.0.29999.9999_none_fakef123456789a\randomdata0123.dll", hr=0x1
