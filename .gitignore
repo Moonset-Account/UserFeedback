@@ -1,0 +1,4 @@
+node_modules/
+.secscan/out/
+*.log
+fixtures/**/node_modules/

@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "adapters": { "sighthound": "auto", "semgrep": "auto", "npm-audit": "auto", "osv-scanner": "auto", "gitleaks": "auto" },
+  "exclude": ["**/node_modules/**", "fixtures/**", "tests/samples/**"],
+  "failOn": { "local": "none", "ci": "high", "hook": "none" },
+  "suppress": [
+    { "tool": "sighthound", "rule": "path-traversal", "path": "src/**", "reason": "paths come from the repo root, config and the pinned tools manifest, never from a request; sink-only pattern hits" },
+    { "tool": "sighthound", "rule": "path-traversal", "path": "bin/**", "reason": "CLI paths from the operator's own arguments" },
+    { "tool": "sighthound", "rule": "ssrf", "path": "src/tools.js", "reason": "download URLs are hard-coded in tools.json and the payload is SHA-256 verified" },
+    { "tool": "sighthound", "rule": "object-property-injection", "path": "bin/**", "reason": "CLI flag parsing into a plain object; keys are the operator's own flags" }
+  ],
+  "semgrep": { "configs": ["p/default", "p/javascript", "p/nodejs", "p/secrets", "p/owasp-top-ten"] }
+}

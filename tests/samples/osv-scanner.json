@@ -1,0 +1,423 @@
+{
+  "results": [
+    {
+      "source": {
+        "path": "package-lock.json",
+        "type": "lockfile"
+      },
+      "packages": [
+        {
+          "package": {
+            "name": "body-parser",
+            "version": "1.19.0",
+            "ecosystem": "npm"
+          },
+          "groups": [
+            {
+              "ids": [
+                "GHSA-qwcr-r2fm-qrc7"
+              ],
+              "aliases": [
+                "CVE-2024-45590",
+                "GHSA-qwcr-r2fm-qrc7"
+              ],
+              "max_severity": "8.7"
+            },
+            {
+              "ids": [
+                "GHSA-v422-hmwv-36x6"
+              ],
+              "aliases": [
+                "CVE-2026-12590",
+                "GHSA-v422-hmwv-36x6"
+              ],
+              "max_severity": "3.7"
+            }
+          ],
+          "vulnerabilities": [
+            {
+              "affected": [
+                {
+                  "database_specific": {
+                    "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2024/09/GHSA-qwcr-r2fm-qrc7/GHSA-qwcr-r2fm-qrc7.json"
+                  },
+                  "package": {
+                    "ecosystem": "npm",
+                    "name": "body-parser",
+                    "purl": "pkg:npm/body-parser"
+                  },
+                  "ranges": [
+                    {
+                      "events": [
+                        {
+                          "introduced": "0"
+                        },
+                        {
+                          "fixed": "1.20.3"
+                        }
+                      ],
+                      "type": "SEMVER"
+                    }
+                  ]
+                }
+              ],
+              "aliases": [
+                "CVE-2024-45590"
+              ],
+              "database_specific": {
+                "cwe_ids": [
+                  "CWE-405"
+                ],
+                "github_reviewed": true,
+                "github_reviewed_at": "2024-09-10T15:52:39Z",
+                "nvd_published_at": "2024-09-10T16:15:21Z",
+                "severity": "HIGH"
+              },
+              "id": "GHSA-qwcr-r2fm-qrc7",
+              "modified": "2026-09-10T03:50:18.292199548Z",
+              "published": "2024-09-10T15:52:39Z",
+              "schema_version": "1.9.0",
+              "severity": [
+                {
+                  "score": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+                  "type": "CVSS_V3"
+                },
+                {
+                  "score": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:N/VI:N/VA:H/SC:N/SI:N/SA:N",
+                  "type": "CVSS_V4"
+                }
+              ],
+              "summary": "body-parser vulnerable to denial of service when url encoding is enabled"
+            },
+            {
+              "affected": [
+                {
+                  "database_specific": {
+                    "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2026/07/GHSA-v422-hmwv-36x6/GHSA-v422-hmwv-36x6.json"
+                  },
+                  "package": {
+                    "ecosystem": "npm",
+                    "name": "body-parser",
+                    "purl": "pkg:npm/body-parser"
+                  },
+                  "ranges": [
+                    {
+                      "events": [
+                        {
+                          "introduced": "0"
+                        },
+                        {
+                          "fixed": "1.20.6"
+                        }
+                      ],
+                      "type": "SEMVER"
+                    }
+                  ]
+                },
+                {
+                  "database_specific": {
+                    "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2026/07/GHSA-v422-hmwv-36x6/GHSA-v422-hmwv-36x6.json"
+                  },
+                  "package": {
+                    "ecosystem": "npm",
+                    "name": "body-parser",
+                    "purl": "pkg:npm/body-parser"
+                  },
+                  "ranges": [
+                    {
+                      "events": [
+                        {
+                          "introduced": "2.0.0"
+                        },
+                        {
+                          "fixed": "2.3.0"
+                        }
+                      ],
+                      "type": "SEMVER"
+                    }
+                  ]
+                }
+              ],
+              "aliases": [
+                "CVE-2026-12590"
+              ],
+              "database_specific": {
+                "cwe_ids": [
+                  "CWE-770"
+                ],
+                "github_reviewed": true,
+                "github_reviewed_at": "2026-07-20T23:23:26Z",
+                "nvd_published_at": "2026-07-09T11:16:24Z",
+                "severity": "LOW"
+              },
+              "id": "GHSA-v422-hmwv-36x6",
+              "modified": "2026-09-10T03:50:53.014509971Z",
+              "published": "2026-07-20T23:23:26Z",
+              "schema_version": "1.9.0",
+              "severity": [
+                {
+                  "score": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:N/A:L",
+                  "type": "CVSS_V3"
+                }
+              ],
+              "summary": "body-parser vulnerable to denial of service when invalid limit value silently disables size enforcement"
+            }
+          ]
+        },
+        {
+          "package": {
+            "name": "cookie",
+            "version": "0.4.0",
+            "ecosystem": "npm"
+          },
+          "groups": [
+            {
+              "ids": [
+                "GHSA-pxg6-pf52-xh8x"
+              ],
+              "aliases": [
+                "CVE-2024-47764",
+                "GHSA-pxg6-pf52-xh8x"
+              ],
+              "max_severity": ""
+            }
+          ],
+          "vulnerabilities": [
+            {
+              "affected": [
+                {
+                  "database_specific": {
+                    "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2024/10/GHSA-pxg6-pf52-xh8x/GHSA-pxg6-pf52-xh8x.json"
+                  },
+                  "package": {
+                    "ecosystem": "npm",
+                    "name": "cookie",
+                    "purl": "pkg:npm/cookie"
+                  },
+                  "ranges": [
+                    {
+                      "events": [
+                        {
+                          "introduced": "0"
+                        },
+                        {
+                          "fixed": "0.7.0"
+                        }
+                      ],
+                      "type": "SEMVER"
+                    }
+                  ]
+                }
+              ],
+              "aliases": [
+                "CVE-2024-47764"
+              ],
+              "database_specific": {
+                "cwe_ids": [
+                  "CWE-74"
+                ],
+                "github_reviewed": true,
+                "github_reviewed_at": "2024-10-04T20:31:00Z",
+                "nvd_published_at": null,
+                "severity": "LOW"
+              },
+              "id": "GHSA-pxg6-pf52-xh8x",
+              "modified": "2026-09-10T03:50:19.898971417Z",
+              "published": "2024-10-04T20:31:00Z",
+              "schema_version": "1.9.0",
+              "summary": "cookie accepts cookie name, path, and domain with out of bounds characters"
+            }
+          ]
+        },
+        {
+          "package": {
+            "name": "express",
+            "version": "4.17.1",
+            "ecosystem": "npm"
+          },
+          "groups": [
+            {
+              "ids": [
+                "GHSA-qw6h-vgh9-j6wx"
+              ],
+              "aliases": [
+                "CVE-2024-43796",
+                "GHSA-qw6h-vgh9-j6wx"
+              ],
+              "max_severity": "5.0"
+            },
+            {
+              "ids": [
+                "GHSA-rv95-896h-c2vc"
+              ],
+              "aliases": [
+                "CVE-2024-29041",
+                "GHSA-rv95-896h-c2vc"
+              ],
+              "max_severity": "6.1"
+            }
+          ],
+          "vulnerabilities": [
+            {
+              "affected": [
+                {
+                  "database_specific": {
+                    "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2024/09/GHSA-qw6h-vgh9-j6wx/GHSA-qw6h-vgh9-j6wx.json"
+                  },
+                  "package": {
+                    "ecosystem": "npm",
+                    "name": "express",
+                    "purl": "pkg:npm/express"
+                  },
+                  "ranges": [
+                    {
+                      "events": [
+                        {
+                          "introduced": "0"
+                        },
+                        {
+                          "fixed": "4.20.0"
+                        }
+                      ],
+                      "type": "SEMVER"
+                    }
+                  ]
+                },
+                {
+                  "database_specific": {
+                    "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2024/09/GHSA-qw6h-vgh9-j6wx/GHSA-qw6h-vgh9-j6wx.json"
+                  },
+                  "package": {
+                    "ecosystem": "npm",
+                    "name": "express",
+                    "purl": "pkg:npm/express"
+                  },
+                  "ranges": [
+                    {
+                      "events": [
+                        {
+                          "introduced": "5.0.0-alpha.1"
+                        },
+                        {
+                          "fixed": "5.0.0"
+                        }
+                      ],
+                      "type": "SEMVER"
+                    }
+                  ]
+                }
+              ],
+              "aliases": [
+                "CVE-2024-43796"
+              ],
+              "database_specific": {
+                "cwe_ids": [
+                  "CWE-79"
+                ],
+                "github_reviewed": true,
+                "github_reviewed_at": "2024-09-10T19:41:04Z",
+                "nvd_published_at": "2024-09-10T15:15:17Z",
+                "severity": "LOW"
+              },
+              "id": "GHSA-qw6h-vgh9-j6wx",
+              "modified": "2026-09-10T03:50:18.298562940Z",
+              "published": "2024-09-10T19:41:04Z",
+              "schema_version": "1.9.0",
+              "severity": [
+                {
+                  "score": "CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:U/C:L/I:L/A:L",
+                  "type": "CVSS_V3"
+                },
+                {
+                  "score": "CVSS:4.0/AV:N/AC:L/AT:P/PR:N/UI:P/VC:N/VI:N/VA:N/SC:L/SI:L/SA:L",
+                  "type": "CVSS_V4"
+                }
+              ],
+              "summary": "express vulnerable to XSS via response.redirect()"
+            },
+            {
+              "affected": [
+                {
+                  "database_specific": {
+                    "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2024/03/GHSA-rv95-896h-c2vc/GHSA-rv95-896h-c2vc.json"
+                  },
+                  "package": {
+                    "ecosystem": "npm",
+                    "name": "express",
+                    "purl": "pkg:npm/express"
+                  },
+                  "ranges": [
+                    {
+                      "events": [
+                        {
+                          "introduced": "0"
+                        },
+                        {
+                          "fixed": "4.19.2"
+                        }
+                      ],
+                      "type": "SEMVER"
+                    }
+                  ]
+                },
+                {
+                  "database_specific": {
+                    "source": "https://github.com/github/advisory-database/blob/main/advisories/github-reviewed/2024/03/GHSA-rv95-896h-c2vc/GHSA-rv95-896h-c2vc.json"
+                  },
+                  "package": {
+                    "ecosystem": "npm",
+                    "name": "express",
+                    "purl": "pkg:npm/express"
+                  },
+                  "ranges": [
+                    {
+                      "events": [
+                        {
+                          "introduced": "5.0.0-alpha.1"
+                        },
+                        {
+                          "fixed": "5.0.0-beta.3"
+                        }
+                      ],
+                      "type": "SEMVER"
+                    }
+                  ]
+                }
+              ],
+              "aliases": [
+                "CVE-2024-29041"
+              ],
+              "database_specific": {
+                "cwe_ids": [
+                  "CWE-1286",
+                  "CWE-601"
+                ],
+                "github_reviewed": true,
+                "github_reviewed_at": "2024-03-25T19:40:26Z",
+                "nvd_published_at": "2024-03-25T21:15:46Z",
+                "severity": "MODERATE"
+              },
+              "id": "GHSA-rv95-896h-c2vc",
+              "modified": "2026-09-10T03:50:10.750068508Z",
+              "published": "2024-03-25T19:40:26Z",
+              "schema_version": "1.9.0",
+              "severity": [
+                {
+                  "score": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:C/C:L/I:L/A:N",
+                  "type": "CVSS_V3"
+                }
+              ],
+              "summary": "Express.js Open Redirect in malformed URLs"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "experimental_config": {
+    "licenses": {
+      "summary": false,
+      "allowlist": null
+    }
+  }
+}

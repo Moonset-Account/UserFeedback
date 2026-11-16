@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "createdAt": "2026-09-15T05:07:30.540Z",
+  "updatedAt": "2026-09-15T05:08:51.026Z",
+  "commit": null,
+  "tools": {
+    "sighthound": "0.1.1",
+    "gitleaks": "8.30.1"
+  },
+  "findings": {}
+}

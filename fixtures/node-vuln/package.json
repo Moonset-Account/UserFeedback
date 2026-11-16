@@ -1,0 +1,13 @@
+{
+  "name": "secscan-fixture-node-vuln",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Synthetic vulnerable fixture for secscan tests. Pinned to versions with known advisories on purpose.",
+  "type": "module",
+  "dependencies": {
+    "express": "4.17.1",
+    "lodash": "4.17.20",
+    "minimist": "1.2.5",
+    "mysql": "2.18.1"
+  }
+}

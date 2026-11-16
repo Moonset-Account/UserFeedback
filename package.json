@@ -1,0 +1,16 @@
+{
+  "name": "@zapai/secscan",
+  "version": "0.2.2",
+  "description": "Repo-agnostic security scan: SAST, secrets and supply-chain findings merged into SARIF with fingerprinted baselines, a Claude Code plugin, and a reusable GitHub Actions workflow.",
+  "license": "MIT",
+  "type": "module",
+  "bin": { "secscan": "bin/secscan.js" },
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "test": "node --test tests/*.test.js",
+    "lint": "node --check bin/secscan.js && for f in src/*.js src/adapters/*.js; do node --check $f || exit 1; done"
+  },
+  "files": ["bin", "src", "tools.json", "README.md", "LICENSE"],
+  "repository": { "type": "git", "url": "https://github.com/zapai-inc/secscan.git" },
+  "keywords": ["security", "sast", "sarif", "secrets", "supply-chain", "semgrep", "sighthound", "gitleaks", "osv"]
+}

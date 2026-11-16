@@ -1,0 +1,176 @@
+[
+  {
+    "file": "app.js",
+    "line": 43,
+    "column": 19,
+    "end_line": 43,
+    "end_column": 39,
+    "function": "eval",
+    "finding_type": "Code Injection",
+    "snippet": "eval(req.query.expr)",
+    "severity": "Critical",
+    "confidence": "High",
+    "description": "User-controlled input passed to a dynamic code evaluation sink",
+    "cwe_id": "cwe-94",
+    "source_info": {
+      "source_type": "Query Parameter",
+      "location": "Line 43",
+      "context": "global"
+    },
+    "sink_info": {
+      "sink_type": "General Sink",
+      "function_name": "eval",
+      "location": "Line 43",
+      "variable": "eval"
+    },
+    "tags": [
+      "injection",
+      "code",
+      "backend",
+      "cwe-94"
+    ]
+  },
+  {
+    "file": "app.js",
+    "line": 24,
+    "column": 19,
+    "end_line": 24,
+    "end_column": 39,
+    "function": "fetch",
+    "finding_type": "SSRF",
+    "snippet": "fetch(req.query.url)",
+    "severity": "High",
+    "confidence": "High",
+    "description": "Caller-controlled URL passed to an outbound HTTP request",
+    "cwe_id": "cwe-918",
+    "source_info": {
+      "source_type": "Query Parameter",
+      "location": "Line 24",
+      "context": "global"
+    },
+    "sink_info": {
+      "sink_type": "General Sink",
+      "function_name": "fetch",
+      "location": "Line 24",
+      "variable": "fetch"
+    },
+    "tags": [
+      "ssrf",
+      "backend",
+      "cwe-918"
+    ]
+  },
+  {
+    "file": "app.js",
+    "line": 14,
+    "column": 3,
+    "end_line": 14,
+    "end_column": 67,
+    "function": "exec",
+    "finding_type": "Command Injection",
+    "snippet": "exec('ping -c 1 ' + req.query.host, (err, out) => res.send(out))",
+    "severity": "Critical",
+    "confidence": "High",
+    "description": "Untrusted data passed to a shell command execution sink",
+    "cwe_id": "cwe-78",
+    "source_info": {
+      "source_type": "Query Parameter",
+      "location": "Line 14",
+      "context": "global"
+    },
+    "sink_info": {
+      "sink_type": "Command Execution",
+      "function_name": "exec",
+      "location": "Line 14",
+      "variable": "exec"
+    },
+    "tags": [
+      "injection",
+      "command",
+      "backend",
+      "cwe-78"
+    ]
+  },
+  {
+    "file": "app.js",
+    "line": 35,
+    "column": 1,
+    "end_line": 39,
+    "end_column": 4,
+    "function": "",
+    "finding_type": "Object Property Injection",
+    "snippet": "app.post('/prefs', express.json(), (req, res) => {\n  const prefs = {};\n  for (const [k, v] of Object.entries(req.body)) prefs[k] = v;\n  res.json(prefs);\n});",
+    "severity": "High",
+    "confidence": "Medium",
+    "description": "Attacker-controlled key assigned to an object can pollute the prototype chain",
+    "cwe_id": "cwe-1321",
+    "sink_info": {
+      "sink_type": "General Sink",
+      "function_name": "",
+      "location": "Line 35",
+      "variable": "app"
+    },
+    "tags": [
+      "object-injection",
+      "prototype",
+      "backend",
+      "cwe-1321"
+    ]
+  },
+  {
+    "file": "app.js",
+    "line": 37,
+    "column": 50,
+    "end_line": 37,
+    "end_column": 63,
+    "function": "prefs",
+    "finding_type": "Object Property Injection",
+    "snippet": "prefs[k] = v;",
+    "severity": "High",
+    "confidence": "Medium",
+    "description": "Attacker-controlled key assigned to an object can pollute the prototype chain",
+    "cwe_id": "cwe-1321",
+    "sink_info": {
+      "sink_type": "General Sink",
+      "function_name": "prefs",
+      "location": "Line 37",
+      "variable": "prefs"
+    },
+    "tags": [
+      "object-injection",
+      "prototype",
+      "backend",
+      "cwe-1321"
+    ]
+  },
+  {
+    "file": "app.js",
+    "line": 42,
+    "column": 0,
+    "end_line": 42,
+    "end_column": 0,
+    "function": "global",
+    "finding_type": "DOM-based XSS",
+    "snippet": "app.get('/calc', (req, res) => {\n  res.send(String(eval(req.query.expr)));\n});",
+    "severity": "High",
+    "confidence": "High",
+    "description": "User input flows to dangerous DOM manipulation without sanitization",
+    "cwe_id": "cwe-79",
+    "source_info": {
+      "source_type": "*.text",
+      "location": ".\\app.js:23",
+      "context": "async (req, res) => {\n  const r = await fetch(req.query.url);\n  res.send(await r.text());\n}"
+    },
+    "sink_info": {
+      "sink_type": "eval(",
+      "function_name": "global",
+      "location": ".\\app.js:42",
+      "variable": "res"
+    },
+    "tags": [
+      "taint_analysis",
+      "data_flow",
+      "xss"
+    ]
+  }
+]

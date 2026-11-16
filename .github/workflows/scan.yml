@@ -1,0 +1,141 @@
+# Reusable workflow. Call it from any repo:
+#
+#   jobs:
+#     security:
+#       uses: zapai-inc/secscan/.github/workflows/scan.yml@v0.2.2
+#       permissions:
+#         contents: read
+#         pull-requests: write     # for the PR comment; drop it and set comment: false otherwise
+#
+# The caller's repo is checked out; secscan itself is checked out at the same ref as this file.
+# Thresholds, adapters and suppressions come from the caller's .secscan.json; the committed
+# .secscan/baseline.json decides what counts as new.
+
+name: secscan
+
+on:
+  workflow_call:
+    inputs:
+      secscan-ref:
+        description: secscan git ref to run (defaults to the ref this workflow was called at)
+        type: string
+        default: ''
+      fail-on:
+        description: override the CI threshold (critical|high|medium|low|info|none)
+        type: string
+        default: ''
+      only:
+        description: comma-separated adapters to run (default all that apply)
+        type: string
+        default: ''
+      semgrep:
+        description: install and run Semgrep CE
+        type: boolean
+        default: true
+      pip-audit:
+        description: install and run pip-audit for pinned requirements files
+        type: boolean
+        default: true
+      sighthound:
+        description: build (cached) and run Sighthound
+        type: boolean
+        default: true
+      comment:
+        description: post the report as a PR comment
+        type: boolean
+        default: true
+      working-directory:
+        description: subdirectory to scan
+        type: string
+        default: '.'
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout caller
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0        # full history for gitleaks and for --changed diffs
+
+      - name: checkout secscan
+        uses: actions/checkout@v4
+        with:
+          repository: zapai-inc/secscan
+          ref: ${{ inputs.secscan-ref || github.job_workflow_sha }}
+          path: .secscan-tool
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: semgrep
+        if: inputs.semgrep
+        run: |
+          pip install --quiet "$(node -p "require('./.secscan-tool/tools.json').semgrep.pip")"
+          semgrep --version
+
+      - name: pip-audit
+        if: inputs.pip-audit
+        run: |
+          pip install --quiet "$(node -p "require('./.secscan-tool/tools.json')['pip-audit'].pip")"
+          pip-audit --version
+
+      - name: cache sighthound
+        if: inputs.sighthound
+        id: sh-cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.cargo/bin/sighthound
+          key: sighthound-${{ hashFiles('.secscan-tool/tools.json') }}-${{ runner.os }}
+
+      - name: build sighthound
+        if: inputs.sighthound && steps.sh-cache.outputs.cache-hit != 'true'
+        run: |
+          TAG="$(node -p "require('./.secscan-tool/tools.json').sighthound.version")"
+          cargo install --locked --git https://github.com/Corgea/Sighthound --tag "$TAG" sighthound \
+            || cargo install --git https://github.com/Corgea/Sighthound --tag "$TAG" sighthound
+
+      - name: pinned binaries
+        run: node .secscan-tool/bin/secscan.js tools install && node .secscan-tool/bin/secscan.js tools status
+
+      - name: scan
+        id: scan
+        working-directory: ${{ inputs.working-directory }}
+        run: |
+          set +e
+          mkdir -p "$GITHUB_WORKSPACE/secscan-out"
+          ARGS=(scan --ci --quiet --out "$GITHUB_WORKSPACE/secscan-out")
+          [ -n "${{ inputs.fail-on }}" ] && ARGS+=(--fail-on "${{ inputs.fail-on }}")
+          [ -n "${{ inputs.only }}" ] && ARGS+=(--only "${{ inputs.only }}")
+          node "$GITHUB_WORKSPACE/.secscan-tool/bin/secscan.js" "${ARGS[@]}" > "$GITHUB_WORKSPACE/secscan-out/stdout.md"
+          echo "status=$?" >> "$GITHUB_OUTPUT"
+          cat "$GITHUB_WORKSPACE/secscan-out/report.md" >> "$GITHUB_STEP_SUMMARY"
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: secscan-report
+          path: secscan-out/
+
+      - name: PR comment
+        if: inputs.comment && github.event_name == 'pull_request'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          MARK="<!-- secscan-report -->"
+          BODY="$(printf '%s\n' "$MARK" && cat secscan-out/report.md)"
+          PR=${{ github.event.pull_request.number }}
+          EXISTING=$(gh api "repos/${{ github.repository }}/issues/$PR/comments" --paginate --jq ".[] | select(.body | startswith(\"$MARK\")) | .id" | head -1)
+          if [ -n "$EXISTING" ]; then
+            gh api -X PATCH "repos/${{ github.repository }}/issues/comments/$EXISTING" -f body="$BODY" > /dev/null
+          else
+            gh pr comment "$PR" --body "$BODY"
+          fi
+
+      - name: verdict
+        run: |
+          if [ "${{ steps.scan.outputs.status }}" != "0" ]; then
+            echo "::error::secscan found new findings at or above the threshold. See the job summary."
+            exit 1
+          fi

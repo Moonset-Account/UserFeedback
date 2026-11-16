@@ -1,0 +1,5 @@
+# Synthetic fixture for secscan tests. Pinned to versions with known advisories on purpose.
+flask==2.0.0
+requests==2.25.0
+pyyaml==5.3.1
+jinja2==2.11.2
