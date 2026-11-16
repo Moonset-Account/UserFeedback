@@ -321,8 +321,10 @@ def parse_mru_key(target: Target, key: RegistryKey, record: TargetRecordDescript
         if value.name == "MRUList":
             continue
 
+        # Values not referenced by the MRUList still exist, but their order is unknown
+        entry_index = mrulist.index(value.name) if mrulist and value.name in mrulist else None
+
         if record == LastVisitedMRURecord:
-            entry_index = mrulist.index(value.name) if mrulist else None
             values = read_wstrings(value.value)
 
             yield record(
@@ -335,7 +337,6 @@ def parse_mru_key(target: Target, key: RegistryKey, record: TargetRecordDescript
                 _key=key,
             )
         else:
-            entry_index = mrulist.index(value.name) if mrulist else None
             entry_value = value.value
 
             yield record(
@@ -364,7 +365,14 @@ def parse_mru_ex_key(target: Target, key: RegistryKey, record: TargetRecordDescr
         if value.name == "MRUListEx":
             continue
 
-        entry_index = mrulist_ex.index(int(value.name))
+        # Values not referenced by the MRUListEx still exist, but their order is unknown
+        entry_index = None
+        if mrulist_ex is not None:
+            try:
+                entry_index = mrulist_ex.index(int(value.name))
+            except ValueError:
+                pass
+
         if record != OpenSaveMRURecord:
             path = next(read_wstrings(value.value))
             bag = value.value[len(path) + 2 :]

@@ -22,6 +22,8 @@ def target_win_mru(target_win_users: Target) -> Target:
     run_key.add_value("MRUList", VirtualValue(user_hive, "MRUList", "ba"))
     run_key.add_value("a", VirtualValue(user_hive, "a", "cmd\\1"))
     run_key.add_value("b", VirtualValue(user_hive, "b", "\\\\mfs\\1"))
+    # value "c" is not referenced by the MRUList, its order is unknown
+    run_key.add_value("c", VirtualValue(user_hive, "c", "whoami\\1"))
 
     # RecentDocs
     recentdocs_key = VirtualKey(user_hive, "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\RecentDocs")
@@ -40,6 +42,8 @@ def target_win_mru(target_win_users: Target) -> Target:
         "64002e006c006e006b00000026000000"
     )
     recentdocs_key.add_value("0", VirtualValue(user_hive, "0", recentdocs_value))
+    # value "1" is not referenced by the MRUListEx, its order is unknown
+    recentdocs_key.add_value("1", VirtualValue(user_hive, "1", recentdocs_value))
 
     # OpenSaveMRU
     opensave_key = VirtualKey(
@@ -203,8 +207,8 @@ def test_mru_plugin(target_win_mru: Target) -> None:
     mstsc = list(target_win_mru.mru.mstsc())
     msoffice = list(target_win_mru.mru.msoffice())
 
-    assert len(run) == 2
-    assert len(recentdocs) == 1
+    assert len(run) == 3
+    assert len(recentdocs) == 2
     assert len(opensave) == 6
     # test if opensave_pidl_key is correctly resolved
     assert opensave[4].value == "My Computer\\Z:\\Web Optimizer.zip"
@@ -218,4 +222,11 @@ def test_mru_plugin(target_win_mru: Target) -> None:
     assert len(mstsc) == 3
     assert len(msoffice) == 6
 
-    assert len(list(target_win_mru.mru())) == 26
+    # values referenced by the MRUList(Ex) keep their known index
+    assert sorted(r.index for r in run if r.index is not None) == [0, 1]
+    assert [r.index for r in recentdocs if r.index is not None] == [0]
+    # values not referenced by the MRUList(Ex) are still exported, with an unknown order
+    assert [r.value for r in run if r.index is None] == ["whoami\\1"]
+    assert [r.value for r in recentdocs if r.index is None] == ["Untitled - Notepad.pdf"]
+
+    assert len(list(target_win_mru.mru())) == 28
