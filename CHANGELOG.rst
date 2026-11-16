@@ -4,6 +4,27 @@ Changelog
 Versions are year-based with a strict backward-compatibility policy.
 The third digit is only for regressions.
 
+26.4.1 (UNRELEASED)
+-------------------
+
+Backward-incompatible changes:
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Deprecations:
+^^^^^^^^^^^^^
+
+Changes:
+^^^^^^^^
+
+- Fixed exception attribution for ``OpenSSL.SSL`` callbacks: when several
+  ``Connection`` objects share a ``Context``, an exception raised by a
+  Python callback (verify, ALPN select, OCSP, or DTLS cookie callback) is
+  now reported by the connection whose callback raised it, instead of
+  leaking into other connections using the same ``Context``. Exceptions
+  from verify callbacks installed with ``Connection.set_verify`` are now
+  propagated to that connection's caller as well.
+
+
 26.4.0 (2026-08-01)
 -------------------
 

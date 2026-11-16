@@ -2400,6 +2400,180 @@ class TestApplicationLayerProtoNegotiation:
         assert select_args == [(server, [b"http/1.1", b"spdy/2"])]
 
 
+class TestCallbackExceptionAttribution:
+    """
+    Exceptions raised by Python callbacks are attributed to the
+    `Connection` whose callback raised them, even when several connections
+    share a single `Context`.
+    """
+
+    @staticmethod
+    def _pump(src: Connection, dst: Connection) -> None:
+        """
+        Move all pending bytes from *src*'s outgoing memory BIO to *dst*'s
+        incoming memory BIO.
+        """
+        while True:
+            try:
+                data = src.bio_read(4096)
+            except WantReadError:
+                break
+            dst.bio_write(data)
+
+    @staticmethod
+    def _server_context() -> Context:
+        context = Context(SSLv23_METHOD)
+        context.use_privatekey(load_privatekey(FILETYPE_PEM, server_key_pem))
+        context.use_certificate(
+            load_certificate(FILETYPE_PEM, server_cert_pem)
+        )
+        return context
+
+    def test_verify_callback_exception_stays_on_failing_connection(
+        self,
+    ) -> None:
+        """
+        Two client connections share a `Context` with a verify callback. If
+        the callback raises for one of them, that connection reports the
+        exception, the other connection's handshake is unaffected, and the
+        failing connection does not raise the stale exception again.
+        """
+        client_context = Context(SSLv23_METHOD)
+
+        failing: list[Connection] = []
+
+        def verify_callback(
+            conn: Connection, cert: X509, errnum: int, depth: int, ok: int
+        ) -> bool:
+            if conn in failing:
+                raise Exception("silly verify failure")
+            return True
+
+        client_context.set_verify(VERIFY_PEER, verify_callback)
+
+        good_client = Connection(client_context, None)
+        good_server = Connection(self._server_context(), None)
+        bad_client = Connection(client_context, None)
+        bad_server = Connection(self._server_context(), None)
+        failing.append(bad_client)
+
+        good_client.set_connect_state()
+        good_server.set_accept_state()
+        bad_client.set_connect_state()
+        bad_server.set_accept_state()
+
+        # Drive the failing pair, interleaved with the good pair's
+        # existence, far enough to run the verify callback.
+        with contextlib.suppress(WantReadError):
+            bad_client.do_handshake()
+        self._pump(bad_client, bad_server)
+        with contextlib.suppress(WantReadError):
+            bad_server.do_handshake()
+        self._pump(bad_server, bad_client)
+        with pytest.raises(Exception, match="silly verify failure"):
+            bad_client.do_handshake()
+
+        # The other connection sharing the same client Context is not
+        # affected by the failure and completes its handshake normally.
+        handshake_in_memory(good_client, good_server)
+        good_client.send(b"hello")
+        self._pump(good_client, good_server)
+        assert good_server.recv(1024) == b"hello"
+
+        # The failing connection does not raise the stale exception again
+        # on subsequent operations.
+        try:
+            bad_client.do_handshake()
+        except Exception as e:
+            assert "silly verify failure" not in str(e)
+
+    def test_connection_set_verify_callback_exception_reported(self) -> None:
+        """
+        A verify callback set directly on a `Connection` (overriding the
+        `Context`) that raises has its exception reported by that
+        connection's handshake.
+        """
+        server = Connection(self._server_context(), None)
+        server.set_accept_state()
+
+        client = Connection(Context(SSLv23_METHOD), None)
+        client.set_connect_state()
+
+        def verify_callback(
+            conn: Connection, cert: X509, errnum: int, depth: int, ok: int
+        ) -> bool:
+            raise Exception("silly verify failure")
+
+        client.set_verify(VERIFY_PEER, verify_callback)
+
+        with contextlib.suppress(WantReadError):
+            client.do_handshake()
+        self._pump(client, server)
+        with contextlib.suppress(WantReadError):
+            server.do_handshake()
+        self._pump(server, client)
+        with pytest.raises(Exception, match="silly verify failure"):
+            client.do_handshake()
+
+    def test_alpn_select_callback_exception_stays_on_failing_connection(
+        self,
+    ) -> None:
+        """
+        Two server connections share a `Context` with an ALPN select
+        callback. If the callback raises for one of them, that connection
+        reports the exception while the other connection, driven in
+        interleaved order, negotiates normally.
+        """
+        server_context = self._server_context()
+
+        failing: list[Connection] = []
+
+        def select(conn: Connection, protos: list[bytes]) -> bytes:
+            if conn in failing:
+                raise Exception("silly alpn failure")
+            return protos[0]
+
+        server_context.set_alpn_select_callback(select)
+
+        good_server = Connection(server_context, None)
+        bad_server = Connection(server_context, None)
+        failing.append(bad_server)
+
+        def client_connection() -> Connection:
+            context = Context(SSLv23_METHOD)
+            context.set_alpn_protos([b"http/1.1"])
+            client = Connection(context, None)
+            client.set_connect_state()
+            return client
+
+        good_client = client_connection()
+        bad_client = client_connection()
+
+        good_server.set_accept_state()
+        bad_server.set_accept_state()
+
+        # Drive the failing pair far enough to run the ALPN select
+        # callback.
+        with contextlib.suppress(WantReadError):
+            bad_client.do_handshake()
+        self._pump(bad_client, bad_server)
+        with pytest.raises(Exception, match="silly alpn failure"):
+            bad_server.do_handshake()
+
+        # The other connection sharing the same server Context negotiates
+        # ALPN normally.
+        handshake_in_memory(good_client, good_server)
+        assert good_client.get_alpn_proto_negotiated() == b"http/1.1"
+        assert good_server.get_alpn_proto_negotiated() == b"http/1.1"
+
+        # The failing connection does not raise the stale exception again
+        # on subsequent operations.
+        try:
+            bad_server.do_handshake()
+        except Exception as e:
+            assert "silly alpn failure" not in str(e)
+
+
 class TestSession:
     """
     Unit tests for :py:obj:`OpenSSL.SSL.Session`.

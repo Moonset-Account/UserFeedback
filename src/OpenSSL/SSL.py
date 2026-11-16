@@ -520,7 +520,11 @@ class _VerifyHelper(_CallbackExceptionHelper):
                     connection, cert, error_number, error_depth, ok
                 )
             except Exception as e:
-                self._problems.append(e)
+                # Attribute the exception to the connection the callback was
+                # invoked for, so that it is reported by that connection's
+                # methods and cannot leak to other connections sharing this
+                # Context.
+                (connection._verify_helper or self)._problems.append(e)
                 return 0
             else:
                 if result:
@@ -544,9 +548,8 @@ class _ALPNSelectHelper(_CallbackExceptionHelper):
 
         @wraps(callback)
         def wrapper(ssl, out, outlen, in_, inlen, arg):  # type: ignore[no-untyped-def]
+            conn = Connection._reverse_mapping[ssl]
             try:
-                conn = Connection._reverse_mapping[ssl]
-
                 # The string passed to us is made up of multiple
                 # length-prefixed bytestrings. We need to split that into a
                 # list.
@@ -583,7 +586,9 @@ class _ALPNSelectHelper(_CallbackExceptionHelper):
                     return _lib.SSL_TLSEXT_ERR_NOACK
                 return _lib.SSL_TLSEXT_ERR_OK
             except Exception as e:
-                self._problems.append(e)
+                # Attribute the exception to the connection the callback was
+                # invoked for (see _VerifyHelper for details).
+                (conn._alpn_select_helper or self)._problems.append(e)
                 return _lib.SSL_TLSEXT_ERR_ALERT_FATAL
 
         self.callback = _ffi.callback(
@@ -622,9 +627,8 @@ class _OCSPServerCallbackHelper(_CallbackExceptionHelper):
 
         @wraps(callback)
         def wrapper(ssl, cdata):  # type: ignore[no-untyped-def]
+            conn = Connection._reverse_mapping[ssl]
             try:
-                conn = Connection._reverse_mapping[ssl]
-
                 # Extract the data if any was provided.
                 if cdata != _ffi.NULL:
                     data = _ffi.from_handle(cdata)
@@ -656,7 +660,9 @@ class _OCSPServerCallbackHelper(_CallbackExceptionHelper):
 
                 return 0
             except Exception as e:
-                self._problems.append(e)
+                # Attribute the exception to the connection the callback was
+                # invoked for (see _VerifyHelper for details).
+                (conn._ocsp_helper or self)._problems.append(e)
                 return 2  # SSL_TLSEXT_ERR_ALERT_FATAL
 
         self.callback = _ffi.callback("int (*)(SSL *, void *)", wrapper)
@@ -689,9 +695,8 @@ class _OCSPClientCallbackHelper(_CallbackExceptionHelper):
 
         @wraps(callback)
         def wrapper(ssl, cdata):  # type: ignore[no-untyped-def]
+            conn = Connection._reverse_mapping[ssl]
             try:
-                conn = Connection._reverse_mapping[ssl]
-
                 # Extract the data if any was provided.
                 if cdata != _ffi.NULL:
                     data = _ffi.from_handle(cdata)
@@ -714,7 +719,9 @@ class _OCSPClientCallbackHelper(_CallbackExceptionHelper):
                 return int(bool(valid))
 
             except Exception as e:
-                self._problems.append(e)
+                # Attribute the exception to the connection the callback was
+                # invoked for (see _VerifyHelper for details).
+                (conn._ocsp_helper or self)._problems.append(e)
                 # Return negative value if an exception is hit.
                 return -1
 
@@ -729,8 +736,8 @@ class _CookieGenerateCallbackHelper(_CallbackExceptionHelper):
 
         @wraps(callback)
         def wrapper(ssl, out, outlen):  # type: ignore[no-untyped-def]
+            conn = Connection._reverse_mapping[ssl]
             try:
-                conn = Connection._reverse_mapping[ssl]
                 cookie = callback(conn)
                 if len(cookie) > max_cookie_len:
                     raise ValueError(
@@ -741,7 +748,9 @@ class _CookieGenerateCallbackHelper(_CallbackExceptionHelper):
                 outlen[0] = len(cookie)
                 return 1
             except Exception as e:
-                self._problems.append(e)
+                # Attribute the exception to the connection the callback was
+                # invoked for (see _VerifyHelper for details).
+                (conn._cookie_generate_helper or self)._problems.append(e)
                 # "a zero return value can be used to abort the handshake"
                 return 0
 
@@ -757,11 +766,13 @@ class _CookieVerifyCallbackHelper(_CallbackExceptionHelper):
 
         @wraps(callback)
         def wrapper(ssl, c_cookie, cookie_len):  # type: ignore[no-untyped-def]
+            conn = Connection._reverse_mapping[ssl]
             try:
-                conn = Connection._reverse_mapping[ssl]
                 return callback(conn, bytes(c_cookie[0:cookie_len]))
             except Exception as e:
-                self._problems.append(e)
+                # Attribute the exception to the connection the callback was
+                # invoked for (see _VerifyHelper for details).
+                (conn._cookie_verify_helper or self)._problems.append(e)
                 return 0
 
         self.callback = _ffi.callback(
@@ -2006,12 +2017,30 @@ class Connection:
         # Reference the verify_callback of the Context. This ensures that if
         # set_verify is called again after the SSL object has been created we
         # do not point to a dangling reference
-        self._verify_helper = context._verify_helper
         self._verify_callback = context._verify_callback
 
-        # And likewise for the cookie callbacks
-        self._cookie_generate_helper = context._cookie_generate_helper
-        self._cookie_verify_helper = context._cookie_verify_helper
+        # Each connection gets its own callback exception helpers.  The ffi
+        # callbacks themselves are registered on (and kept alive by) the
+        # Context, which may be shared by many connections; but the
+        # exceptions they capture are routed to the connection the callback
+        # was invoked for (via Connection._reverse_mapping).  This keeps one
+        # connection's callback failure from being reported by another
+        # connection's methods.
+        self._verify_helper: _CallbackExceptionHelper | None = (
+            _CallbackExceptionHelper()
+        )
+        self._alpn_select_helper: _CallbackExceptionHelper | None = (
+            _CallbackExceptionHelper()
+        )
+        self._ocsp_helper: _CallbackExceptionHelper | None = (
+            _CallbackExceptionHelper()
+        )
+        self._cookie_generate_helper: _CallbackExceptionHelper | None = (
+            _CallbackExceptionHelper()
+        )
+        self._cookie_verify_helper: _CallbackExceptionHelper | None = (
+            _CallbackExceptionHelper()
+        )
 
         self._reverse_mapping[self._ssl] = self
 
@@ -2047,12 +2076,15 @@ class Connection:
             return getattr(self._socket, name)
 
     def _raise_ssl_error(self, ssl: Any, result: int) -> None:
-        if self._context._verify_helper is not None:
-            self._context._verify_helper.raise_if_problem()
-        if self._context._alpn_select_helper is not None:
-            self._context._alpn_select_helper.raise_if_problem()
-        if self._context._ocsp_helper is not None:
-            self._context._ocsp_helper.raise_if_problem()
+        # Callback exceptions are raised from this connection's own helpers,
+        # never from the (possibly shared) Context's, so that an exception is
+        # only reported by the connection whose callback raised it.
+        if self._verify_helper is not None:
+            self._verify_helper.raise_if_problem()
+        if self._alpn_select_helper is not None:
+            self._alpn_select_helper.raise_if_problem()
+        if self._ocsp_helper is not None:
+            self._ocsp_helper.raise_if_problem()
 
         error = _lib.SSL_get_error(ssl, result)
         if error == _lib.SSL_ERROR_WANT_READ:
