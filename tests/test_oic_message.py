@@ -62,7 +62,81 @@ def _eq(l1, l2):
 def test_openidschema():
     inp = '{"middle_name":null, "updated_at":"20170328081544", "sub":"abc", "birthdate": null}'
     ois = OpenIDSchema().from_json(inp)
-    assert ois.verify() is False
+    # Null values for optional claims are allowed and must not make the
+    # verification fail, just like omitted or empty string values.
+    assert ois.verify() is True
+    assert ois["middle_name"] is None
+    assert ois["birthdate"] is None
+
+
+@pytest.mark.parametrize(
+    "claims",
+    [
+        {"sub": "abc"},
+        {"sub": "abc", "middle_name": ""},
+        {"sub": "abc", "middle_name": None},
+        {"sub": "abc", "middle_name": None, "email": None, "birthdate": None},
+    ],
+)
+def test_openidschema_optional_nullable_claims(claims):
+    # Omitting an optional claim, sending it as an empty string or as null
+    # must all be treated as "not provided" and verify successfully.
+    ois = OpenIDSchema(**claims)
+    assert ois.verify() is True
+
+
+def test_openidschema_null_in_json():
+    # The same must hold when the null values arrive in a JSON response,
+    # e.g. from an OP that serializes unfilled profile claims as null.
+    inp = '{"sub":"abc", "middle_name":null, "email":null, "phone_number":""}'
+    ois = OpenIDSchema().from_json(inp)
+    assert ois.verify() is True
+    assert ois["middle_name"] is None
+    assert ois["email"] is None
+    # Empty strings are dropped while parsing, exactly as before.
+    assert "phone_number" not in ois
+
+
+def test_openidschema_preserves_values():
+    # Real values, including boolean false and extension claims, are kept.
+    ois = OpenIDSchema(
+        sub="abc",
+        birthdate="1980-01-01",
+        email_verified=False,
+        phone_number_verified=False,
+        **{"https://idp.example.com/extension": "value"}
+    )
+    assert ois.verify() is True
+    assert ois["birthdate"] == "1980-01-01"
+    assert ois["email_verified"] is False
+    assert ois["phone_number_verified"] is False
+    assert ois["https://idp.example.com/extension"] == "value"
+
+
+def test_openidschema_missing_required_claim():
+    # A missing required identity claim still fails verification even when
+    # only optional null claims are present.
+    with pytest.raises(MissingRequiredAttribute):
+        OpenIDSchema(middle_name=None).verify()
+
+
+def test_openidschema_wrong_type_non_null_value():
+    # A non-null value of the wrong type still takes the failure path.
+    with pytest.raises(MessageException):
+        OpenIDSchema(sub="abc", email_verified="Sure")
+    with pytest.raises(MessageException):
+        OpenIDSchema(sub="abc", middle_name=True)
+
+
+def test_openidschema_bad_birthdate():
+    with pytest.raises(VerificationError):
+        OpenIDSchema(sub="abc", birthdate="not-a-date").verify()
+
+
+def test_openidschema_null_birthdate_skips_format_check():
+    # A null birthdate must not be run through the date format validation.
+    ois = OpenIDSchema(sub="abc", birthdate=None)
+    assert ois.verify() is True
 
 
 @pytest.mark.parametrize(

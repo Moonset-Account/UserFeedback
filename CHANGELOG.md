@@ -12,6 +12,10 @@ The format is based on the [KeepAChangeLog] project.
 
 ### Fixed
 - [#826], [#829] Fixed RP-Initiated Logout To Accept id_token_hint
+- Fixed `OpenIDSchema` verification failing when an optional profile claim was
+  provided as `null`; omitted, empty string and `null` values are now treated
+  consistently as "not provided", while required claims and non-null values of
+  the wrong type still fail verification
 
 ## Removed
 
