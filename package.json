@@ -1,0 +1,14 @@
+{
+  "name": "csp3-script-decision",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "CSP3 per-policy script enforcement decision library with local verification harness",
+  "scripts": {
+    "list": "node tools/local_verify.mjs --list",
+    "verify": "node tools/local_verify.mjs --case C01,C02,C03,C04"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
