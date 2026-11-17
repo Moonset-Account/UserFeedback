@@ -1,0 +1,47 @@
+{
+  "case": "C04",
+  "description": "缺少写前证据（既有文件无登记类 pre_category）单列 unknown；同一路径出现两个不同 file_id 是身份冲突，不按路径归并；发现附最小支持事件集合，集合内每个事件都不可去除。",
+  "policy": {
+    "window_seconds": 60.0,
+    "min_documents": 2,
+    "min_distinct_dirs": 2,
+    "high_entropy_threshold": 7.5,
+    "registered_categories": ["document", "office", "pdf"],
+    "unknown_category": "unknown",
+    "archive_categories": ["archive"]
+  },
+  "events": [
+    {"seq": 1, "ts": 0, "etype": "spawn", "pid": "P1", "ppid": "P0", "gen": 1},
+
+    {"seq": 2, "ts": 2, "etype": "open", "file_id": "F1", "path": "/d1/a.docx", "pid": "P1", "gen": 1},
+    {"seq": 3, "ts": 5, "etype": "write", "file_id": "F1", "path": "/d1/a.docx", "pid": "P1", "gen": 1,
+     "pre_category": "document", "post_category": "unknown", "entropy": {"low": 7.8, "high": 8.0}},
+    {"seq": 4, "ts": 8, "etype": "close", "file_id": "F1", "path": "/d1/a.docx", "pid": "P1", "gen": 1,
+     "post_category": "unknown", "entropy": {"low": 7.8, "high": 8.0}},
+
+    {"seq": 5, "ts": 12, "etype": "open", "file_id": "F2", "path": "/d2/b.docx", "pid": "P1", "gen": 1},
+    {"seq": 6, "ts": 15, "etype": "write", "file_id": "F2", "path": "/d2/b.docx", "pid": "P1", "gen": 1,
+     "pre_category": "office", "post_category": "unknown", "entropy": {"low": 7.9, "high": 8.1}},
+    {"seq": 7, "ts": 18, "etype": "close", "file_id": "F2", "path": "/d2/b.docx", "pid": "P1", "gen": 1,
+     "post_category": "unknown", "entropy": {"low": 7.9, "high": 8.1}},
+
+    {"seq": 8, "ts": 22, "etype": "open", "file_id": "F3", "path": "/d1/c.docx", "pid": "P1", "gen": 1},
+    {"seq": 9, "ts": 25, "etype": "write", "file_id": "F3", "path": "/d1/c.docx", "pid": "P1", "gen": 1,
+     "pre_category": null, "post_category": "unknown", "entropy": {"low": 7.7, "high": 7.9}},
+    {"seq": 10, "ts": 28, "etype": "close", "file_id": "F3", "path": "/d1/c.docx", "pid": "P1", "gen": 1,
+     "post_category": "unknown", "entropy": {"low": 7.7, "high": 7.9}},
+
+    {"seq": 11, "ts": 32, "etype": "open", "file_id": "F4", "path": "/d2/conflict.docx", "pid": "P1", "gen": 1},
+    {"seq": 12, "ts": 35, "etype": "write", "file_id": "F4", "path": "/d2/conflict.docx", "pid": "P1", "gen": 1,
+     "pre_category": "document", "post_category": "unknown", "entropy": {"low": 7.8, "high": 8.0}},
+    {"seq": 13, "ts": 38, "etype": "close", "file_id": "F4", "path": "/d2/conflict.docx", "pid": "P1", "gen": 1,
+     "post_category": "unknown", "entropy": {"low": 7.8, "high": 8.0}},
+    {"seq": 14, "ts": 45, "etype": "open", "file_id": "F5", "path": "/d2/conflict.docx", "pid": "P1", "gen": 1},
+    {"seq": 15, "ts": 48, "etype": "write", "file_id": "F5", "path": "/d2/conflict.docx", "pid": "P1", "gen": 1,
+     "pre_category": null, "post_category": "unknown", "entropy": {"low": 7.6, "high": 7.8}},
+    {"seq": 16, "ts": 52, "etype": "close", "file_id": "F5", "path": "/d2/conflict.docx", "pid": "P1", "gen": 1,
+     "post_category": "unknown", "entropy": {"low": 7.6, "high": 7.8}},
+
+    {"seq": 17, "ts": 100, "etype": "watermark"}
+  ]
+}

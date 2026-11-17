@@ -1,0 +1,50 @@
+{
+  "case": "C02",
+  "description": "只有关闭后确认从登记类别变为高熵未知才计风险；低熵未知不计；未关闭不计；新建压缩归档且保留源文档不计原文档改写；归档源文档本身保持登记类别。",
+  "policy": {
+    "window_seconds": 120.0,
+    "min_documents": 2,
+    "min_distinct_dirs": 1,
+    "high_entropy_threshold": 7.5,
+    "registered_categories": ["document", "office", "pdf"],
+    "unknown_category": "unknown",
+    "archive_categories": ["archive"],
+    "archive_path_suffixes": [".zip", ".tar", ".gz", ".7z", ".rar"]
+  },
+  "events": [
+    {"seq": 1, "ts": 0, "etype": "spawn", "pid": "P1", "ppid": "P0", "gen": 1},
+
+    {"seq": 2, "ts": 2, "etype": "open", "file_id": "F1", "path": "/d/a.docx", "pid": "P1", "gen": 1},
+    {"seq": 3, "ts": 5, "etype": "write", "file_id": "F1", "path": "/d/a.docx", "pid": "P1", "gen": 1,
+     "pre_category": "document", "post_category": "unknown", "entropy": {"low": 7.9, "high": 8.2}},
+    {"seq": 4, "ts": 8, "etype": "close", "file_id": "F1", "path": "/d/a.docx", "pid": "P1", "gen": 1,
+     "post_category": "unknown", "entropy": {"low": 7.9, "high": 8.2}},
+
+    {"seq": 5, "ts": 12, "etype": "open", "file_id": "F2", "path": "/d/b.docx", "pid": "P1", "gen": 1},
+    {"seq": 6, "ts": 15, "etype": "write", "file_id": "F2", "path": "/d/b.docx", "pid": "P1", "gen": 1,
+     "pre_category": "document", "post_category": "unknown", "entropy": {"low": 5.1, "high": 6.0}},
+    {"seq": 7, "ts": 18, "etype": "close", "file_id": "F2", "path": "/d/b.docx", "pid": "P1", "gen": 1,
+     "post_category": "unknown", "entropy": {"low": 5.1, "high": 6.0}},
+
+    {"seq": 8, "ts": 22, "etype": "open", "file_id": "F3", "path": "/d/c.docx", "pid": "P1", "gen": 1},
+    {"seq": 9, "ts": 25, "etype": "write", "file_id": "F3", "path": "/d/c.docx", "pid": "P1", "gen": 1,
+     "pre_category": "document", "post_category": "unknown", "entropy": {"low": 7.7, "high": 8.0}},
+
+    {"seq": 10, "ts": 30, "etype": "open", "file_id": "F4", "path": "/d/d.pdf", "pid": "P1", "gen": 1},
+    {"seq": 11, "ts": 35, "etype": "write", "file_id": "F4", "path": "/d/d.pdf", "pid": "P1", "gen": 1,
+     "pre_category": "pdf", "post_category": "unknown", "entropy": {"low": 7.6, "high": 7.9}},
+    {"seq": 12, "ts": 38, "etype": "close", "file_id": "F4", "path": "/d/d.pdf", "pid": "P1", "gen": 1,
+     "post_category": "unknown", "entropy": {"low": 7.6, "high": 7.9}},
+
+    {"seq": 13, "ts": 45, "etype": "open", "file_id": "F5", "path": "/d/src.docx", "pid": "P1", "gen": 1},
+    {"seq": 14, "ts": 46, "etype": "close", "file_id": "F5", "path": "/d/src.docx", "pid": "P1", "gen": 1,
+     "post_category": "document", "entropy": {"low": 3.0, "high": 4.0}},
+    {"seq": 15, "ts": 50, "etype": "write", "file_id": "F6", "path": "/d/backup.zip", "pid": "P1", "gen": 1,
+     "new_file": true, "archived_source": "F5",
+     "pre_category": null, "post_category": "archive", "entropy": {"low": 7.95, "high": 7.99}},
+    {"seq": 16, "ts": 55, "etype": "close", "file_id": "F6", "path": "/d/backup.zip", "pid": "P1", "gen": 1,
+     "post_category": "archive", "entropy": {"low": 7.95, "high": 7.99}},
+
+    {"seq": 17, "ts": 200, "etype": "watermark"}
+  ]
+}
