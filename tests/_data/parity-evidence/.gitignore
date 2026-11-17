@@ -1,0 +1,6 @@
+# Runtime evidence produced by the vulnerability-handling parity verification
+# (tests/parity + tools/local_verify.py). Contents are regenerated on every
+# run and only contain synthetic fixture data; do not commit them.
+*
+!.gitignore
+!.gitkeep

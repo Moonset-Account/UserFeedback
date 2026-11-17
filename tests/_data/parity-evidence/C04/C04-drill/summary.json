@@ -1,0 +1,16 @@
+{
+  "case_id": "C04-drill",
+  "diff_fields": [
+    "Vulnerability.affects",
+    "Vulnerability.analysis.responses",
+    "Vulnerability.analysis.state"
+  ],
+  "failures": [],
+  "renders": [
+    {
+      "json_bytes": 1906,
+      "schema_version": "1.6",
+      "xml_bytes": 2209
+    }
+  ]
+}

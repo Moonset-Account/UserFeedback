@@ -1,0 +1,68 @@
+<?xml version="1.0" ?>
+<bom xmlns="http://cyclonedx.org/schema/bom/1.6" serialNumber="urn:uuid:1ec69168-4942-4243-a333-2728136ea13a" version="1">
+  <metadata>
+    <timestamp>2026-11-17T23:37:33.402535+00:00</timestamp>
+  </metadata>
+  <components>
+    <component type="library" bom-ref="parity-component-alpha">
+      <name>lib-alpha</name>
+      <version>2.0.0</version>
+    </component>
+    <component type="library" bom-ref="parity-component-beta">
+      <name>lib-beta</name>
+      <version>7.1.0</version>
+    </component>
+  </components>
+  <dependencies>
+    <dependency ref="parity-component-alpha"/>
+    <dependency ref="parity-component-beta"/>
+  </dependencies>
+  <vulnerabilities>
+    <vulnerability bom-ref="parity-vuln-explicit">
+      <id>CVE-2026-9001</id>
+      <analysis>
+        <state>not_affected</state>
+        <justification>code_not_present</justification>
+        <responses>
+          <response>update</response>
+          <response>workaround_available</response>
+        </responses>
+        <detail>synthetic analysis detail for parity tests</detail>
+        <firstIssued>2026-01-02T03:04:05.678000+05:30</firstIssued>
+        <lastUpdated>2026-06-07T08:09:10-03:00</lastUpdated>
+      </analysis>
+      <affects>
+        <target>
+          <ref>parity-component-alpha</ref>
+          <versions>
+            <version>
+              <version>1.0.0</version>
+              <status>unaffected</status>
+            </version>
+            <version>
+              <range>vers:py/&gt;=2.0.0|&lt;3.0.0</range>
+              <status>affected</status>
+            </version>
+            <version>
+              <range>vers:py/&gt;=4.0.0</range>
+              <status>unknown</status>
+            </version>
+          </versions>
+        </target>
+        <target>
+          <ref>parity-component-beta</ref>
+          <versions>
+            <version>
+              <version>7.1.0</version>
+              <status>affected</status>
+            </version>
+            <version>
+              <range>vers:py/&lt;9.0.0</range>
+              <status>affected</status>
+            </version>
+          </versions>
+        </target>
+      </affects>
+    </vulnerability>
+  </vulnerabilities>
+</bom>

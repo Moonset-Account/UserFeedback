@@ -1,0 +1,81 @@
+{
+  "components": [
+    {
+      "bom-ref": "parity-component-alpha",
+      "name": "lib-alpha",
+      "type": "library",
+      "version": "2.0.0"
+    },
+    {
+      "bom-ref": "parity-component-beta",
+      "name": "lib-beta",
+      "type": "library",
+      "version": "7.1.0"
+    }
+  ],
+  "dependencies": [
+    {
+      "ref": "parity-component-alpha"
+    },
+    {
+      "ref": "parity-component-beta"
+    }
+  ],
+  "metadata": {
+    "timestamp": "2026-11-17T23:37:33.402535+00:00"
+  },
+  "serialNumber": "urn:uuid:1ec69168-4942-4243-a333-2728136ea13a",
+  "version": 1,
+  "vulnerabilities": [
+    {
+      "affects": [
+        {
+          "ref": "parity-component-alpha",
+          "versions": [
+            {
+              "status": "unaffected",
+              "version": "1.0.0"
+            },
+            {
+              "range": "vers:py/>=2.0.0|<3.0.0",
+              "status": "affected"
+            },
+            {
+              "range": "vers:py/>=4.0.0",
+              "status": "unknown"
+            }
+          ]
+        },
+        {
+          "ref": "parity-component-beta",
+          "versions": [
+            {
+              "status": "affected",
+              "version": "7.1.0"
+            },
+            {
+              "range": "vers:py/<9.0.0",
+              "status": "affected"
+            }
+          ]
+        }
+      ],
+      "analysis": {
+        "detail": "synthetic analysis detail for parity tests",
+        "firstIssued": "2026-01-02T03:04:05.678000+05:30",
+        "justification": "code_not_present",
+        "lastUpdated": "2026-06-07T08:09:10-03:00",
+        "response": [
+          "update",
+          "workaround_available"
+        ],
+        "state": "not_affected"
+      },
+      "bom-ref": "parity-vuln-explicit",
+      "id": "CVE-2026-9001"
+    }
+  ],
+  "$schema": "http://cyclonedx.org/schema/bom-1.6.schema.json",
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.6"
+}

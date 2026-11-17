@@ -1,0 +1,29 @@
+{
+  "1.6": [
+    {
+      "detail": null,
+      "expected": "exploitable",
+      "field": "Vulnerability.analysis.state",
+      "kind": "value",
+      "observed": "not_affected"
+    },
+    {
+      "detail": "present in JSON projection, absent from XML projection",
+      "expected": [
+        "update"
+      ],
+      "field": "Vulnerability.analysis.responses",
+      "kind": "missing",
+      "observed": null
+    },
+    {
+      "detail": "present in JSON projection, absent from XML projection",
+      "expected": [
+        "parity-component-beta"
+      ],
+      "field": "Vulnerability.affects",
+      "kind": "missing",
+      "observed": null
+    }
+  ]
+}
