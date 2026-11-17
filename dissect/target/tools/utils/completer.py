@@ -243,10 +243,16 @@ class QuotedPathCompleter(Completer):
             if not path:
                 return cwd
 
-            resolved = path if path.startswith("/") else posixpath.join(str(cwd), path)
+            target_path = self._make_path(path)
+            # Interpret absoluteness against the target filesystem instead of the host
+            # operating system, so that drive-letter paths (e.g. C:\evidence or C:/evidence)
+            # are resolved from the target root instead of the forensic working directory.
+            if target_path.is_absolute():
+                resolved = target_path
+            else:
+                resolved = cwd.joinpath(path)
             # TargetPath may keep literal '..' segments; normalize first so completion lists the intended directory.
-            normalized = posixpath.normpath(resolved)
-            return self._make_path(normalized)
+            return self._make_path(posixpath.normpath(str(resolved)))
 
         p = self._make_path(path)
         if not p.is_absolute():

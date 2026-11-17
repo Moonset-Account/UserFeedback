@@ -18,6 +18,7 @@ from unittest.mock import MagicMock, call, mock_open, patch
 import pytest
 
 from dissect.target.containers.raw import RawContainer
+from dissect.target.filesystem import VirtualFilesystem
 from dissect.target.helpers.fsutil import normalize
 from dissect.target.target import Target
 from dissect.target.tools.shell import (
@@ -1073,6 +1074,111 @@ def test_target_cli_tar_unknown_path(tmp_path: Path, capsys: pytest.CaptureFixtu
     captured = capsys.readouterr()
     assert captured.err == "tar: missing.txt: No such file or directory\n"
     assert outpath.is_file()
+
+
+def _make_windows_evidence_target() -> Target:
+    """Build a virtual Windows-style target with evidence files and same-named files in different directories."""
+    target = Target()
+    vfs = VirtualFilesystem(case_sensitive=False, sep="\\")
+    vfs.map_file_fh("evidence/a.txt", BytesIO(b"absolute-a"))
+    vfs.map_file_fh("evidence/sub/notes.txt", BytesIO(b"evidence-notes"))
+    vfs.map_file_fh("work/notes.txt", BytesIO(b"work-notes"))
+    vfs.makedirs("empty")
+
+    target.filesystems.add(vfs)
+    target.fs.mount("/", vfs)
+    target.fs.mount("c:", vfs)
+    return target
+
+
+def test_target_cli_tar_windows_drive_absolute_path(tmp_path: Path, capsys: pytest.CaptureFixture) -> None:
+    """Drive-letter absolute paths must be interpreted against the target filesystem on non-Windows hosts."""
+    target = _make_windows_evidence_target()
+    cli = TargetCli(target)
+
+    outpath = tmp_path / "out.tar"
+    cli.onecmd(f'tar -cf {outpath.as_posix()} "C:\\evidence\\a.txt"')
+    capsys.readouterr()
+
+    assert outpath.is_file()
+    with tarfile.open(outpath, "r:*") as tar:
+        members = tar.getnames()
+        assert members == ["c:/evidence/a.txt"]
+        assert tar.extractfile(members[0]).read() == b"absolute-a"
+
+
+def test_target_cli_tar_windows_forward_slash_drive_path(tmp_path: Path) -> None:
+    """Drive-letter paths using forward slashes must also resolve as target-absolute paths."""
+    target = _make_windows_evidence_target()
+    cli = TargetCli(target)
+
+    outpath = tmp_path / "out.tar"
+    cli.onecmd(f"tar -cf {outpath.as_posix()} C:/evidence/a.txt")
+
+    assert outpath.is_file()
+    with tarfile.open(outpath, "r:*") as tar:
+        assert tar.getnames() == ["c:/evidence/a.txt"]
+
+
+def test_target_cli_tar_windows_relative_path_from_cwd(tmp_path: Path) -> None:
+    """Relative target paths must resolve from the current forensic directory and keep portable member names."""
+    target = _make_windows_evidence_target()
+    cli = TargetCli(target)
+    cli.onecmd('cd "C:\\evidence"')
+
+    outpath = tmp_path / "out.tar"
+    cli.onecmd(f"tar -cf {outpath.as_posix()} a.txt")
+
+    assert outpath.is_file()
+    with tarfile.open(outpath, "r:*") as tar:
+        assert tar.getnames() == ["a.txt"]
+        assert tar.extractfile("a.txt").read() == b"absolute-a"
+
+
+def test_target_cli_tar_windows_same_named_files_in_different_dirs(tmp_path: Path) -> None:
+    """Same-named files in different directories must both be archived with their distinct member names."""
+    target = _make_windows_evidence_target()
+    cli = TargetCli(target)
+
+    outpath = tmp_path / "out.tar"
+    cmd = f'tar -cf {outpath.as_posix()} "C:\\evidence\\sub\\notes.txt" "C:\\work\\notes.txt"'
+    cli.onecmd(cmd)
+
+    assert outpath.is_file()
+    with tarfile.open(outpath, "r:*") as tar:
+        members = sorted(tar.getnames())
+        assert members == ["c:/evidence/sub/notes.txt", "c:/work/notes.txt"]
+        assert tar.extractfile("c:/evidence/sub/notes.txt").read() == b"evidence-notes"
+        assert tar.extractfile("c:/work/notes.txt").read() == b"work-notes"
+
+
+def test_target_cli_tar_continues_when_selected_evidence_disappears(
+    tmp_path: Path, capsys: pytest.CaptureFixture
+) -> None:
+    """A selected item that no longer exists at read time must report the reason and archive the remaining items."""
+    target = _make_windows_evidence_target()
+    cli = TargetCli(target)
+
+    outpath = tmp_path / "out.tar"
+
+    # The entry still shows up during path resolution and stat(), but reading its contents fails,
+    # mimicking evidence that disappears between selection and extraction.
+    missing_entry = target.fs.get("c:/evidence/a.txt")
+
+    def broken_open() -> IO:
+        raise FileNotFoundError("c:/evidence/a.txt")
+
+    with patch.object(type(missing_entry), "open", autospec=True, side_effect=broken_open):
+        cli.onecmd(f'tar -cvf {outpath.as_posix()} "C:\\evidence\\a.txt" "C:\\work\\notes.txt"')
+
+    captured = capsys.readouterr()
+    assert "c:/evidence/a.txt" in captured.err
+    assert "c:/work/notes.txt" in captured.err
+
+    assert outpath.is_file()
+    with tarfile.open(outpath, "r:*") as tar:
+        assert tar.getnames() == ["c:/work/notes.txt"]
+        assert tar.extractfile("c:/work/notes.txt").read() == b"work-notes"
 
 
 def test_target_cli_unsupported_plugin(monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture) -> None:

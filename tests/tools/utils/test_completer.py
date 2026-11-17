@@ -12,6 +12,7 @@ pytest.importorskip("prompt_toolkit")
 from prompt_toolkit.completion import CompleteEvent
 from prompt_toolkit.document import Document
 
+from dissect.target.filesystem import VirtualFilesystem
 from dissect.target.target import Target
 from dissect.target.tools.shell import TargetCli, TargetCmdCompleter
 from dissect.target.tools.utils.completer import (
@@ -165,6 +166,75 @@ def test_target_path_completion_respects_target_cwd(target_bare: Target) -> None
     completions = _get_completion_texts(completer, 'cat "rep<TAB>')
 
     assert completions == ['"report one.txt"']
+
+
+def _make_windows_completion_target() -> Target:
+    """Build a virtual Windows-style target for drive-letter completion tests."""
+    target = Target()
+    vfs = VirtualFilesystem(case_sensitive=False, sep="\\")
+    vfs.makedirs("evidence")
+    vfs.map_file_fh("evidence/a.txt", BytesIO(b"x"))
+    vfs.makedirs("evidence/sub")
+    vfs.map_file_fh("evidence/sub/notes.txt", BytesIO(b"x"))
+    vfs.makedirs("work")
+    vfs.map_file_fh("work/notes.txt", BytesIO(b"x"))
+
+    target.filesystems.add(vfs)
+    target.fs.mount("/", vfs)
+    target.fs.mount("c:", vfs)
+    return target
+
+
+def test_target_path_completion_windows_drive_absolute_path() -> None:
+    """Drive-letter paths must complete against the target root, not the target working directory."""
+    target = _make_windows_completion_target()
+    cli = SimpleNamespace(cwd=target.fs.path("C:/work"))
+    completer = QuotedPathCompleter(cli=cli, target=target)
+
+    completions = set(_get_completion_texts(completer, "cat C:/evid<TAB>"))
+    assert completions == {"C:/evidence/"}
+
+    completions = set(_get_completion_texts(completer, "cat C:/evidence/<TAB>"))
+    assert completions == {"C:/evidence/a.txt", "C:/evidence/sub/"}
+
+
+def test_target_path_completion_windows_drive_with_backslashes() -> None:
+    """A backslash-separated drive-letter path must not be resolved against the target working directory."""
+    target = _make_windows_completion_target()
+    cli = SimpleNamespace(cwd=target.fs.path("C:\\work"))
+    completer = QuotedPathCompleter(cli=cli, target=target)
+
+    # Only the drive-letter prefix is typed, so completion must list the target root entries
+    # instead of treating "C:" as a relative path inside C:\work.
+    completions = set(_get_completion_texts(completer, "cat C:\\<TAB>"))
+    assert "C:\\evidence/" in completions or "C:/evidence/" in completions
+    assert "C:\\work/" in completions or "C:/work/" in completions
+
+
+def test_target_path_completion_windows_relative_path_from_cwd() -> None:
+    """Relative paths must still complete from the target working directory."""
+    target = _make_windows_completion_target()
+    cli = SimpleNamespace(cwd=target.fs.path("C:/evidence"))
+    completer = QuotedPathCompleter(cli=cli, target=target)
+
+    completions = set(_get_completion_texts(completer, "cat a.t<TAB>"))
+    assert completions == {"a.txt"}
+
+    completions = set(_get_completion_texts(completer, "cat sub/<TAB>"))
+    assert completions == {"sub/notes.txt"}
+
+
+def test_target_path_completion_windows_same_named_files_distinct_dirs() -> None:
+    """Completing same-named files in different directories must list the entry from the requested directory only."""
+    target = _make_windows_completion_target()
+    cli = SimpleNamespace(cwd=target.fs.path("C:/"))
+    completer = QuotedPathCompleter(cli=cli, target=target)
+
+    completions = set(_get_completion_texts(completer, "cat C:/evidence/sub/<TAB>"))
+    assert completions == {"C:/evidence/sub/notes.txt"}
+
+    completions = set(_get_completion_texts(completer, "cat C:/work/<TAB>"))
+    assert completions == {"C:/work/notes.txt"}
 
 
 def test_target_path_completion_handles_escaped_spaces(target_bare: Target) -> None:
