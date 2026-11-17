@@ -10,6 +10,9 @@ from pip_audit._service import (
     VulnerabilityResult,
 )
 
+from test._fix_state_cases import run_c01, run_c02, run_c03, run_c04
+from test._fix_state_model import CheckRecorder
+
 
 def test_fix(vuln_service):
     dep = ResolvedDependency(name="foo", version=Version("0.5.0"))
@@ -72,3 +75,43 @@ def test_fix_resolution_impossible(vuln_service):
         "vulnerability fake-id",
     )
     assert fix_versions[0].is_skipped()
+
+
+def test_fix_state_model_c01_eliminate_current_then_check_new_candidates():
+    # C01: an independent finite-catalog state model verifies that the
+    # production loop first eliminates every current vulnerability and then
+    # keeps polling the service on newly discovered vulnerable candidates.
+    recorder = CheckRecorder(raise_on_fail=True)
+    run_c01(recorder)
+    assert recorder.failed == 0
+    assert recorder.passed > 0
+
+
+def test_fix_state_model_c02_prereleases_interleaving_dead_ends_skips():
+    # C02: prerelease ordering, interleaved multi-vulnerability progress,
+    # missing higher candidates, skipped dependencies and clean dependencies.
+    recorder = CheckRecorder(raise_on_fail=True)
+    run_c02(recorder)
+    assert recorder.failed == 0
+    assert recorder.passed > 0
+
+
+def test_fix_state_model_c03_query_order_stopping_and_state_isolation():
+    # C03: every service query moves strictly upwards, querying stops once a
+    # version is clean and per-dependency suggestions/state stay isolated.
+    recorder = CheckRecorder(raise_on_fail=True)
+    run_c03(recorder)
+    assert recorder.failed == 0
+    assert recorder.passed > 0
+
+
+def test_fix_state_model_c04_generated_chains_and_divergence_reduction():
+    # C04: deterministically generated short version chains are reduced
+    # without changing version ordering or converting a missing-candidate
+    # skip into a service error; suggestions, reasons and call evidence are
+    # all recorded and no package is installed or modified.
+    recorder = CheckRecorder(raise_on_fail=True)
+    run_c04(recorder)
+    assert recorder.failed == 0
+    assert recorder.passed > 0
+
