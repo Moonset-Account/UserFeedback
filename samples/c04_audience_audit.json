@@ -1,0 +1,130 @@
+{
+  "caseId": "C04",
+  "title": "必要 audience 对比：多余暴露、用途不符、信息不足；只读挂载仍可读",
+  "pod": {
+    "metadata": {"name": "pod-c04"},
+    "spec": {
+      "serviceAccountName": "audit-sa",
+      "automountServiceAccountToken": false,
+      "volumes": [
+        {
+          "name": "worker-token",
+          "projected": {
+            "sources": [
+              {
+                "serviceAccountToken": {
+                  "path": "token",
+                  "audience": ["worker.aud", "admin.aud"],
+                  "expirationSeconds": 1800
+                }
+              }
+            ]
+          }
+        },
+        {
+          "name": "batch-token",
+          "projected": {
+            "sources": [
+              {
+                "serviceAccountToken": {
+                  "path": "token",
+                  "audience": ["batch.aud"],
+                  "expirationSeconds": 1800
+                }
+              }
+            ]
+          }
+        },
+        {
+          "name": "rogue-token",
+          "projected": {
+            "sources": [
+              {
+                "serviceAccountToken": {
+                  "path": "token",
+                  "audience": ["rogue.aud"],
+                  "expirationSeconds": 3600
+                }
+              }
+            ]
+          }
+        },
+        {
+          "name": "quiet-token",
+          "projected": {
+            "sources": [
+              {
+                "serviceAccountToken": {
+                  "path": "token",
+                  "audience": ["quiet.aud"],
+                  "expirationSeconds": 1800
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "containers": [
+        {
+          "name": "worker",
+          "image": "registry.local/worker:1",
+          "volumeMounts": [
+            {"name": "worker-token", "mountPath": "/var/secrets/worker", "readOnly": true}
+          ]
+        },
+        {
+          "name": "batch",
+          "image": "registry.local/batch:1",
+          "volumeMounts": [
+            {"name": "batch-token", "mountPath": "/var/secrets/batch", "readOnly": false}
+          ]
+        },
+        {
+          "name": "lone",
+          "image": "registry.local/lone:1",
+          "volumeMounts": [
+            {"name": "rogue-token", "mountPath": "/var/secrets/rogue", "readOnly": true}
+          ]
+        },
+        {
+          "name": "unlisted",
+          "image": "registry.local/unlisted:1",
+          "volumeMounts": [
+            {"name": "quiet-token", "mountPath": "/var/secrets/quiet", "readOnly": true}
+          ]
+        },
+        {
+          "name": "kube-app",
+          "image": "registry.local/kube-app:1"
+        }
+      ]
+    }
+  },
+  "serviceAccount": {
+    "metadata": {"name": "audit-sa"}
+  },
+  "admissionMutations": [],
+  "tokenRegistry": {
+    "worker-token:token": {"purpose": "worker-jobs"},
+    "batch-token:token": {"purpose": "other-batch-purpose"},
+    "quiet-token:token": {"purpose": "quiet-maintenance"}
+  },
+  "containerRequirements": {
+    "worker": {
+      "requiredAudiences": ["worker.aud"],
+      "declaredPurpose": "worker-jobs"
+    },
+    "batch": {
+      "requiredAudiences": ["batch.aud"],
+      "declaredPurpose": "batch-jobs"
+    },
+    "lone": {
+      "requiredAudiences": ["rogue.aud"],
+      "declaredPurpose": "rogue-integration"
+    },
+    "kube-app": {
+      "requiredAudiences": ["kubernetes.default.svc"],
+      "declaredPurpose": "kube-api"
+    }
+  }
+}

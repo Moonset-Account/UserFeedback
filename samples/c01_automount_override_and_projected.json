@@ -1,0 +1,69 @@
+{
+  "caseId": "C01",
+  "title": "Pod 覆盖 ServiceAccount 自动挂载；显式 projected token 走独立路径",
+  "pod": {
+    "metadata": {"name": "pod-c01"},
+    "spec": {
+      "serviceAccountName": "app-sa",
+      "automountServiceAccountToken": false,
+      "volumes": [
+        {
+          "name": "explicit-api-token",
+          "projected": {
+            "sources": [
+              {
+                "serviceAccountToken": {
+                  "path": "token",
+                  "audience": ["https://api.example.internal"],
+                  "expirationSeconds": 1800
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "initContainers": [
+        {"name": "init-setup", "image": "registry.local/init:1"}
+      ],
+      "containers": [
+        {
+          "name": "app",
+          "image": "registry.local/app:1",
+          "volumeMounts": [
+            {
+              "name": "explicit-api-token",
+              "mountPath": "/var/run/secrets/api",
+              "readOnly": true
+            }
+          ]
+        },
+        {"name": "sidecar-no-mount", "image": "registry.local/sidecar:1"}
+      ]
+    }
+  },
+  "serviceAccount": {
+    "metadata": {"name": "app-sa"},
+    "automountServiceAccountToken": true
+  },
+  "admissionMutations": [],
+  "tokenRegistry": {
+    "explicit-api-token:token": {
+      "purpose": "call-internal-api",
+      "note": "显式投射给 app 容器访问内部 API"
+    }
+  },
+  "containerRequirements": {
+    "app": {
+      "requiredAudiences": ["https://api.example.internal"],
+      "declaredPurpose": "call-internal-api"
+    },
+    "init-setup": {
+      "requiredAudiences": ["kubernetes.default.svc"],
+      "declaredPurpose": "kube-api-bootstrap"
+    },
+    "sidecar-no-mount": {
+      "requiredAudiences": ["kubernetes.default.svc"],
+      "declaredPurpose": "kube-api-poll"
+    }
+  }
+}

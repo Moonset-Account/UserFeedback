@@ -1,0 +1,81 @@
+{
+  "caseId": "C03",
+  "title": "初始化/普通/临时容器独立结果；共享卷只被部分容器挂载",
+  "pod": {
+    "metadata": {"name": "pod-c03"},
+    "spec": {
+      "serviceAccountName": "multi-sa",
+      "automountServiceAccountToken": false,
+      "volumes": [
+        {
+          "name": "shared-billing-token",
+          "projected": {
+            "sources": [
+              {
+                "serviceAccountToken": {
+                  "path": "billing",
+                  "audience": ["billing.example"],
+                  "expirationSeconds": 2400
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "initContainers": [
+        {
+          "name": "init-migrator",
+          "image": "registry.local/init:1",
+          "volumeMounts": [
+            {"name": "shared-billing-token", "mountPath": "/var/secrets/billing", "readOnly": true}
+          ]
+        }
+      ],
+      "containers": [
+        {
+          "name": "app-a",
+          "image": "registry.local/app-a:1",
+          "volumeMounts": [
+            {"name": "shared-billing-token", "mountPath": "/var/secrets/billing", "readOnly": true}
+          ]
+        },
+        {
+          "name": "app-b",
+          "image": "registry.local/app-b:1"
+        }
+      ],
+      "ephemeralContainers": [
+        {
+          "name": "debug-shell",
+          "image": "registry.local/debug:1"
+        }
+      ]
+    }
+  },
+  "serviceAccount": {
+    "metadata": {"name": "multi-sa"},
+    "automountServiceAccountToken": false
+  },
+  "admissionMutations": [],
+  "tokenRegistry": {
+    "shared-billing-token:billing": {"purpose": "billing-read"}
+  },
+  "containerRequirements": {
+    "init-migrator": {
+      "requiredAudiences": ["billing.example"],
+      "declaredPurpose": "billing-read"
+    },
+    "app-a": {
+      "requiredAudiences": ["billing.example"],
+      "declaredPurpose": "billing-read"
+    },
+    "app-b": {
+      "requiredAudiences": ["billing.example"],
+      "declaredPurpose": "billing-read"
+    },
+    "debug-shell": {
+      "requiredAudiences": ["debug.audience"],
+      "declaredPurpose": "interactive-debug"
+    }
+  }
+}

@@ -1,0 +1,107 @@
+{
+  "caseId": "C02",
+  "title": "按准入修改顺序计算最终卷与挂载，并追溯每个生效字段来源",
+  "pod": {
+    "metadata": {"name": "pod-c02"},
+    "spec": {
+      "serviceAccountName": "workload-sa",
+      "automountServiceAccountToken": false,
+      "volumes": [
+        {
+          "name": "old-token",
+          "projected": {
+            "sources": [
+              {
+                "serviceAccountToken": {
+                  "path": "token",
+                  "audience": ["aud-old"],
+                  "expirationSeconds": 600
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "containers": [
+        {
+          "name": "main",
+          "image": "registry.local/main:1",
+          "volumeMounts": [
+            {"name": "old-token", "mountPath": "/etc/secrets/old", "readOnly": false}
+          ]
+        }
+      ]
+    }
+  },
+  "serviceAccount": {
+    "metadata": {"name": "workload-sa"}
+  },
+  "admissionMutations": [
+    {
+      "id": "mut-1-add-injected",
+      "op": "addVolume",
+      "volume": {
+        "name": "injected-token",
+        "projected": {
+          "sources": [
+            {
+              "serviceAccountToken": {
+                "path": "token",
+                "audience": ["aud-injected"],
+                "expirationSeconds": 900
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "mut-2-rename-old",
+      "op": "renameVolume",
+      "from": "old-token",
+      "to": "renamed-token"
+    },
+    {
+      "id": "mut-3-patch-renamed",
+      "op": "patchVolume",
+      "volumeName": "renamed-token",
+      "patch": {
+        "projected": {
+          "sources": [
+            {
+              "serviceAccountToken": {
+                "path": "token",
+                "audience": ["aud-renamed"],
+                "expirationSeconds": 1200
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "mut-4-set-mounts",
+      "op": "setVolumeMounts",
+      "container": "main",
+      "volumeMounts": [
+        {"name": "renamed-token", "mountPath": "/etc/secrets/renamed", "readOnly": true},
+        {"name": "injected-token", "mountPath": "/etc/secrets/injected", "readOnly": true}
+      ]
+    },
+    {
+      "id": "mut-5-remove-injected",
+      "op": "removeVolume",
+      "volumeName": "injected-token"
+    }
+  ],
+  "tokenRegistry": {
+    "renamed-token:token": {"purpose": "renamed-workload-auth"},
+    "injected-token:token": {"purpose": "admission-injected-auth"}
+  },
+  "containerRequirements": {
+    "main": {
+      "requiredAudiences": ["aud-renamed"],
+      "declaredPurpose": "renamed-workload-auth"
+    }
+  }
+}
