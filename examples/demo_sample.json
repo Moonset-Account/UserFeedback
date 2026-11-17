@@ -1,0 +1,118 @@
+{
+  "records": [
+    {
+      "rid": "r_root",
+      "fields": {
+        "title": "root-record"
+      },
+      "specs": [
+        {
+          "name": "title",
+          "kind": "string",
+          "min_length": 4,
+          "optional": false
+        }
+      ]
+    },
+    {
+      "rid": "r_extra",
+      "fields": {
+        "title": "extra-context-record",
+        "note": "noise"
+      },
+      "specs": [
+        {
+          "name": "title",
+          "kind": "string",
+          "min_length": 4,
+          "optional": false
+        },
+        {
+          "name": "note",
+          "kind": "string",
+          "min_length": 0,
+          "optional": true
+        }
+      ]
+    },
+    {
+      "rid": "r_target",
+      "fields": {
+        "payload": "structured-trigger-payload"
+      },
+      "specs": [
+        {
+          "name": "payload",
+          "kind": "string",
+          "min_length": 4,
+          "optional": false
+        }
+      ]
+    },
+    {
+      "rid": "r_mid",
+      "fields": {
+        "name": "middle",
+        "ref": "r_target"
+      },
+      "specs": [
+        {
+          "name": "name",
+          "kind": "string",
+          "min_length": 3,
+          "optional": false
+        },
+        {
+          "name": "ref",
+          "kind": "reference",
+          "min_length": 0,
+          "optional": false
+        }
+      ]
+    },
+    {
+      "rid": "r_leaf",
+      "fields": {
+        "name": "leaf",
+        "refs": [
+          "r_mid"
+        ]
+      },
+      "specs": [
+        {
+          "name": "name",
+          "kind": "string",
+          "min_length": 2,
+          "optional": false
+        },
+        {
+          "name": "refs",
+          "kind": "references",
+          "min_length": 0,
+          "optional": false
+        }
+      ]
+    },
+    {
+      "rid": "r_optional",
+      "fields": {
+        "name": "opty",
+        "comment": "removable-comment"
+      },
+      "specs": [
+        {
+          "name": "name",
+          "kind": "string",
+          "min_length": 2,
+          "optional": false
+        },
+        {
+          "name": "comment",
+          "kind": "string",
+          "min_length": 0,
+          "optional": true
+        }
+      ]
+    }
+  ]
+}
