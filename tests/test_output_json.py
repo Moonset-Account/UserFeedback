@@ -18,6 +18,7 @@
 
 import re
 from collections.abc import Callable
+from json import loads as json_loads
 from typing import Any
 from unittest import TestCase
 from unittest.mock import Mock, patch
@@ -34,7 +35,10 @@ from cyclonedx.exception.model import (
 )
 from cyclonedx.exception.output import FormatNotSupportedException
 from cyclonedx.model.bom import Bom
+from cyclonedx.model.component import Component
+from cyclonedx.model.dependency import Dependency
 from cyclonedx.output.json import BY_SCHEMA_VERSION, Json
+from cyclonedx.output.xml import BY_SCHEMA_VERSION as XML_BY_SCHEMA_VERSION
 from cyclonedx.schema import OutputFormat, SchemaVersion
 from cyclonedx.validation.json import JsonStrictValidator
 from tests import SnapshotMixin, is_valid_for_schema_version, mksname
@@ -104,6 +108,79 @@ class TestOutputJson(TestCase, SnapshotMixin):
         found = re.findall(r'"bom-ref":\s*"(.*?)"', output)
         self.assertEqual(nr_bomrefs, len(found))
         self.assertCountEqual(set(found), found, 'expected unique items')
+
+
+def _get_bom_with_shared_sub_dependency() -> Bom:
+    """a small graph with a shared sub-dependency,
+    declared in a scattered way - multiple entries for the same ref"""
+    root = Component(name='root', version='1.0.0', bom_ref='root')
+    comp_b = Component(name='b', version='1.0.0', bom_ref='b')
+    comp_c = Component(name='c', version='1.0.0', bom_ref='c')
+    comp_d = Component(name='d', version='1.0.0', bom_ref='d')
+    bom = Bom(components=[comp_b, comp_c, comp_d])
+    bom.metadata.component = root
+    # scattered declarations of the same ref, sharing the sub-dependency `c`
+    bom.dependencies = [
+        Dependency(ref=root.bom_ref,
+                   dependencies=[Dependency(ref=comp_b.bom_ref), Dependency(ref=comp_c.bom_ref)]),
+        Dependency(ref=root.bom_ref,
+                   dependencies=[Dependency(ref=comp_c.bom_ref), Dependency(ref=comp_d.bom_ref)]),
+        Dependency(ref=comp_b.bom_ref),
+        Dependency(ref=comp_c.bom_ref),
+        Dependency(ref=comp_d.bom_ref),
+    ]
+    return bom
+
+
+@ddt
+class TestOutputJsonDependencies(TestCase):
+
+    @idata(*(sv for sv in SchemaVersion if sv not in UNSUPPORTED_SV))
+    def test_dependencies_of_same_ref_are_merged(self, sv: SchemaVersion) -> None:
+        bom = _get_bom_with_shared_sub_dependency()
+        dependencies = json_loads(BY_SCHEMA_VERSION[sv](bom).output_as_string())['dependencies']
+        # all edges that belong to the same ref are kept together in a single entry
+        root_entries = [d for d in dependencies if d['ref'] == 'root']
+        self.assertEqual(1, len(root_entries), dependencies)
+        self.assertEqual(['b', 'c', 'd'], root_entries[0]['dependsOn'])
+        # no edge was lost, and each relation appears only once
+        all_edges = [(d['ref'], t) for d in dependencies for t in d.get('dependsOn', [])]
+        self.assertEqual([('root', 'b'), ('root', 'c'), ('root', 'd')], all_edges)
+
+    def test_sequential_exports_from_same_bom(self) -> None:
+        bom = _get_bom_with_shared_sub_dependency()
+        # structural snapshot of the model, to prove later that it was not mutated
+        model_dependencies_before = [
+            (d.ref.value, sorted(map(str, d.dependencies_as_bom_refs())))
+            for d in bom.dependencies
+        ]
+
+        # export different formats/versions one after another, from the very same input object
+        json_v14 = json_loads(BY_SCHEMA_VERSION[SchemaVersion.V1_4](bom).output_as_string())
+        xml_v14 = XML_BY_SCHEMA_VERSION[SchemaVersion.V1_4](bom).output_as_string()
+        json_v15 = json_loads(BY_SCHEMA_VERSION[SchemaVersion.V1_5](bom).output_as_string())
+
+        # each JSON output got its own complete result
+        for json_doc in (json_v14, json_v15):
+            root_entries = [d for d in json_doc['dependencies'] if d['ref'] == 'root']
+            self.assertEqual(1, len(root_entries), json_doc['dependencies'])
+            self.assertEqual(['b', 'c', 'd'], root_entries[0]['dependsOn'])
+
+        # the XML output still carries all edges
+        self.assertEqual(2, len(re.findall(r'<dependency ref="root">', xml_v14)))
+        for edge in ('b', 'c', 'd'):
+            self.assertIn(f'<dependency ref="{edge}"/>', xml_v14)
+
+        # the original model content is still intact and usable
+        model_dependencies_after = [
+            (d.ref.value, sorted(map(str, d.dependencies_as_bom_refs())))
+            for d in bom.dependencies
+        ]
+        self.assertEqual(model_dependencies_before, model_dependencies_after)
+        self.assertEqual(
+            {'b', 'c', 'd'},
+            {str(r) for d in bom.dependencies if d.ref.value == 'root'
+             for r in d.dependencies_as_bom_refs()})
 
 
 @ddt

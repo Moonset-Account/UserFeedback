@@ -40,6 +40,47 @@ if TYPE_CHECKING:  # pragma: no cover
     from ..model.bom import Bom
 
 
+def _merge_dependencies(dependencies: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """Merge ``dependencies`` entries that share the same ``ref``.
+
+    The data model allows dependencies to be declared in a scattered way --
+    multiple entries for the same ``ref``, each carrying a subset of the outgoing edges.
+    In the flat JSON structure, all edges that belong to the same ``ref`` must be kept
+    together in a single entry, and duplicate relations must appear only once.
+
+    The entries are plain data as produced by the serializer --
+    the original model is left untouched.
+
+    THIS FUNCTION IS NON-PUBLIC API
+    """
+    merged: list[dict[str, Any]] = []
+    entry_by_ref: dict[Any, dict[str, Any]] = {}
+    for dependency in dependencies:
+        ref = dependency.get('ref')
+        entry = entry_by_ref.get(ref)
+        if ref is None or entry is None:
+            # first (or unmergeable) entry for this ref - keep it as-is,
+            # just make sure its own relations are unique
+            merged.append(dependency)
+            if ref is not None:
+                entry_by_ref[ref] = dependency
+            depends_on = dependency.get('dependsOn')
+            if depends_on is not None:
+                dependency['dependsOn'] = list(dict.fromkeys(depends_on))
+        else:
+            # scattered declaration of an already-seen ref -
+            # keep its edges in the first entry, each relation only once
+            depends_on = dependency.get('dependsOn')
+            if depends_on:
+                kept_depends_on = entry.setdefault('dependsOn', [])
+                seen = set(kept_depends_on)
+                for target in depends_on:
+                    if target not in seen:
+                        kept_depends_on.append(target)
+                        seen.add(target)
+    return merged
+
+
 class Json(BaseOutput, BaseSchemaVersion):
 
     def __init__(self, bom: 'Bom') -> None:
@@ -75,6 +116,10 @@ class Json(BaseOutput, BaseSchemaVersion):
             bom_json: dict[str, Any] = json_loads(
                 bom.as_json(  # type:ignore[attr-defined]
                     view_=_view))
+        if 'dependencies' in bom_json:
+            # the model may hold scattered declarations for the same ref,
+            # but JSON's flat structure must keep all their edges together - deduplicated
+            bom_json['dependencies'] = _merge_dependencies(bom_json['dependencies'])
         bom_json.update(_json_core)
         self._bom_json = bom_json
         self.generated = True
