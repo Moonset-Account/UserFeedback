@@ -1,0 +1,57 @@
+{
+  "case_id": "C02",
+  "title": "Inheritable flag flips between launch begin and commit",
+  "seed": "synthetic-c02-v1",
+  "description": "Three parent handles change inheritable flags inside the launch window: one gains inheritance after begin, one loses it before the snapshot, one is stable inheritable. The trusted snapshot at seq 9 fixes the actual inheritance; replay evaluated at commit time would reach the wrong answer.",
+  "policy": {
+    "per_child": {
+      "300": {
+        "allowed_categories": ["file", "pipe", "mutex"],
+        "allowed_rights": ["READ", "WRITE"]
+      }
+    },
+    "default": {
+      "allowed_categories": [],
+      "allowed_rights": []
+    }
+  },
+  "events": [
+    {"seq": 1, "type": "process_generation", "pid": 100, "generation": 1, "image": "parent-synthetic"},
+    {"seq": 2, "type": "process_generation", "pid": 300, "generation": 1, "image": "child-synthetic"},
+    {"seq": 3, "type": "handle_open", "pid": 100, "process_generation": 1, "handle_value": 320, "object_id": "obj-file-F", "object_name": "C:\\synthetic\\config.txt", "object_category": "file", "granted_access": 1, "inheritable": false},
+    {"seq": 4, "type": "handle_open", "pid": 100, "process_generation": 1, "handle_value": 328, "object_id": "obj-pipe-P", "object_name": "\\\\.\\pipe\\synthetic-pipe", "object_category": "pipe", "granted_access": 3, "inheritable": true},
+    {"seq": 5, "type": "handle_open", "pid": 100, "process_generation": 1, "handle_value": 336, "object_id": "obj-registry-R", "object_name": "HKLM\\synthetic\\secrets", "object_category": "registry", "granted_access": 1, "inheritable": true},
+    {"seq": 6, "type": "handle_open", "pid": 100, "process_generation": 1, "handle_value": 344, "object_id": "obj-mutex-M", "object_name": "Global\\synthetic-mutex", "object_category": "mutex", "granted_access": 3, "inheritable": true},
+    {"seq": 7, "type": "launch_begin", "launch_id": "L2A", "parent_pid": 100, "parent_generation": 1, "child_pid": 300, "child_generation": 1, "inheritance_mode": "default", "snapshot_seq": 9},
+    {"seq": 8, "type": "handle_flag_update", "pid": 100, "process_generation": 1, "handle_value": 320, "inheritable": true},
+    {"seq": 10, "type": "handle_flag_update", "pid": 100, "process_generation": 1, "handle_value": 336, "inheritable": false},
+    {"seq": 11, "type": "launch_commit", "launch_id": "L2A", "parent_pid": 100, "parent_generation": 1, "child_pid": 300, "child_generation": 1, "snapshot_seq": 9}
+  ],
+  "snapshots": [
+    {
+      "snapshot_seq": 9,
+      "launch_id": "L2A",
+      "collector": "trusted-synthetic-collector",
+      "child_pid": 300,
+      "child_generation": 1,
+      "handles": [
+        {"handle_value": 320, "object_id": "obj-file-F", "object_name": "C:\\synthetic\\config.txt", "object_category": "file", "granted_access": 1},
+        {"handle_value": 328, "object_id": "obj-pipe-P", "object_name": "\\\\.\\pipe\\synthetic-pipe", "object_category": "pipe", "granted_access": 3},
+        {"handle_value": 344, "object_id": "obj-mutex-M", "object_name": "Global\\synthetic-mutex", "object_category": "mutex", "granted_access": 3}
+      ]
+    }
+  ],
+  "launches": [
+    {
+      "launch_id": "L2A",
+      "parent_pid": 100,
+      "parent_generation": 1,
+      "child_pid": 300,
+      "child_generation": 1,
+      "begin_seq": 7,
+      "commit_seq": 11,
+      "inheritance_mode": "default",
+      "snapshot_seq": 9
+    }
+  ]
+}

@@ -1,0 +1,73 @@
+{
+  "case_id": "C04",
+  "title": "Missing snapshot and gapped event stream",
+  "seed": "synthetic-c04-v1",
+  "description": "Two launches with incomplete evidence. L4A has no trusted snapshot: only the cross-process duplicate targeting the child is confirmed; the inheritable token stays unverified. L4B has a snapshot but a sequence gap (seq 12 missing) inside the launch window: the snapshot-confirmed file is confirmed, while the registry handle whose flag history crosses the gap stays unverified rather than being ruled out.",
+  "policy": {
+    "per_child": {
+      "500": {
+        "allowed_categories": ["file"],
+        "allowed_rights": ["READ"]
+      },
+      "510": {
+        "allowed_categories": ["file", "registry"],
+        "allowed_rights": ["READ"]
+      }
+    },
+    "default": {
+      "allowed_categories": [],
+      "allowed_rights": []
+    }
+  },
+  "events": [
+    {"seq": 1, "type": "process_generation", "pid": 100, "generation": 1, "image": "parent-synthetic"},
+    {"seq": 2, "type": "process_generation", "pid": 500, "generation": 1, "image": "child-no-snapshot-synthetic"},
+    {"seq": 3, "type": "handle_open", "pid": 100, "process_generation": 1, "handle_value": 600, "object_id": "obj-token-T4", "object_name": "synthetic-token-4", "object_category": "token", "granted_access": 3, "inheritable": true},
+    {"seq": 4, "type": "handle_open", "pid": 100, "process_generation": 1, "handle_value": 608, "object_id": "obj-vault-V", "object_name": "synthetic-secret-vault", "object_category": "vault", "granted_access": 3, "inheritable": false},
+    {"seq": 5, "type": "launch_begin", "launch_id": "L4A", "parent_pid": 100, "parent_generation": 1, "child_pid": 500, "child_generation": 1, "inheritance_mode": "default", "snapshot_seq": 7},
+    {"seq": 6, "type": "handle_duplicate", "source_pid": 100, "source_process_generation": 1, "source_handle_value": 608, "target_pid": 500, "target_process_generation": 1, "target_handle_value": 768, "granted_access": 1, "inheritable": false},
+    {"seq": 8, "type": "launch_commit", "launch_id": "L4A", "parent_pid": 100, "parent_generation": 1, "child_pid": 500, "child_generation": 1, "snapshot_seq": 7},
+    {"seq": 9, "type": "process_generation", "pid": 510, "generation": 1, "image": "child-gapped-synthetic"},
+    {"seq": 10, "type": "handle_open", "pid": 100, "process_generation": 1, "handle_value": 616, "object_id": "obj-file-G", "object_name": "C:\\synthetic\\audit.log", "object_category": "file", "granted_access": 1, "inheritable": true},
+    {"seq": 11, "type": "handle_open", "pid": 100, "process_generation": 1, "handle_value": 624, "object_id": "obj-registry-G", "object_name": "HKLM\\synthetic\\credentials", "object_category": "registry", "granted_access": 1, "inheritable": true},
+    {"seq": 12, "type": "handle_flag_update", "pid": 100, "process_generation": 1, "handle_value": 616, "inheritable": true},
+    {"seq": 13, "type": "launch_begin", "launch_id": "L4B", "parent_pid": 100, "parent_generation": 1, "child_pid": 510, "child_generation": 1, "inheritance_mode": "default", "snapshot_seq": 15},
+    {"seq": 16, "type": "launch_commit", "launch_id": "L4B", "parent_pid": 100, "parent_generation": 1, "child_pid": 510, "child_generation": 1, "snapshot_seq": 15}
+  ],
+  "snapshots": [
+    {
+      "snapshot_seq": 15,
+      "launch_id": "L4B",
+      "collector": "trusted-synthetic-collector",
+      "child_pid": 510,
+      "child_generation": 1,
+      "handles": [
+        {"handle_value": 616, "object_id": "obj-file-G", "object_name": "C:\\synthetic\\audit.log", "object_category": "file", "granted_access": 1}
+      ]
+    }
+  ],
+  "launches": [
+    {
+      "launch_id": "L4A",
+      "parent_pid": 100,
+      "parent_generation": 1,
+      "child_pid": 500,
+      "child_generation": 1,
+      "begin_seq": 5,
+      "commit_seq": 8,
+      "inheritance_mode": "default",
+      "snapshot_seq": 7
+    },
+    {
+      "launch_id": "L4B",
+      "parent_pid": 100,
+      "parent_generation": 1,
+      "child_pid": 510,
+      "child_generation": 1,
+      "begin_seq": 13,
+      "commit_seq": 16,
+      "inheritance_mode": "default",
+      "snapshot_seq": 15
+    }
+  ]
+}
