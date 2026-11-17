@@ -1,0 +1,47 @@
+{
+  "version": 1,
+  "types": {
+    "t_void": {"params": [], "results": []}
+  },
+  "functions": {
+    "f_e1": {"type": "t_void", "kind": "local"},
+    "f_e2": {"type": "t_void", "kind": "local"},
+    "f_shared": {"type": "t_void", "kind": "local"},
+    "f_ring1": {"type": "t_void", "kind": "local"},
+    "f_ring2": {"type": "t_void", "kind": "local"},
+    "f_setup1": {"type": "t_void", "kind": "local"},
+    "f_setup2": {"type": "t_void", "kind": "local"},
+    "h_a": {"type": "t_void", "kind": "import", "module": "env", "name": "a"},
+    "h_b": {"type": "t_void", "kind": "import", "module": "env", "name": "b"}
+  },
+  "capabilities": {
+    "h_a": ["cap.a"],
+    "h_b": ["cap.b"]
+  },
+  "direct_calls": [
+    {"caller": "f_e1", "callee": "f_setup1", "site": "f_e1@4"},
+    {"caller": "f_e1", "callee": "f_shared", "site": "f_e1@6"},
+    {"caller": "f_e2", "callee": "f_setup2", "site": "f_e2@4"},
+    {"caller": "f_e2", "callee": "f_shared", "site": "f_e2@6"},
+    {"caller": "f_e2", "callee": "h_b", "site": "f_e2@9"},
+    {"caller": "f_shared", "callee": "h_a", "site": "f_shared@3"},
+    {"caller": "f_shared", "callee": "f_ring1", "site": "f_shared@7"},
+    {"caller": "f_ring1", "callee": "f_ring2", "site": "f_ring1@3"},
+    {"caller": "f_ring2", "callee": "f_ring1", "site": "f_ring2@3"}
+  ],
+  "indirect_calls": [
+    {"caller": "f_ring2", "table": "tab", "expected_type": "t_void", "site": "f_ring2@11"}
+  ],
+  "tables": {
+    "tab": {"externally_writable": false, "initial": [null]}
+  },
+  "element_updates": [
+    {"table": "tab", "index": 0, "function": "h_a", "at": "f_setup1@2"},
+    {"table": "tab", "index": 0, "function": "h_b", "at": "f_setup2@2"},
+    {"table": "tab", "index": 0, "function": "h_a", "at": "f_setup2@5"}
+  ],
+  "entries": [
+    {"name": "e1", "function": "f_e1", "allowed_capabilities": ["cap.a"]},
+    {"name": "e2", "function": "f_e2", "allowed_capabilities": ["cap.a", "cap.b"]}
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "version": 1,
+  "types": {
+    "t_void": {"params": [], "results": []},
+    "t_void_alias": {"params": [], "results": []},
+    "t_i32": {"params": ["i32"], "results": []}
+  },
+  "functions": {
+    "f_main": {"type": "t_void", "kind": "local"},
+    "f_dispatch": {"type": "t_void", "kind": "local"},
+    "h_log": {"type": "t_void", "kind": "import", "module": "env", "name": "log"},
+    "h_net_send": {"type": "t_void_alias", "kind": "import", "module": "env", "name": "net_send"},
+    "h_crypto_sign": {"type": "t_i32", "kind": "import", "module": "env", "name": "crypto_sign"}
+  },
+  "capabilities": {
+    "h_log": ["log"],
+    "h_net_send": ["net.send"],
+    "h_crypto_sign": ["crypto.sign"]
+  },
+  "direct_calls": [
+    {"caller": "f_main", "callee": "h_log", "site": "f_main@10"},
+    {"caller": "f_main", "callee": "f_dispatch", "site": "f_main@14"}
+  ],
+  "indirect_calls": [
+    {"caller": "f_dispatch", "table": "tab", "expected_type": "t_void", "site": "f_dispatch@22"}
+  ],
+  "tables": {
+    "tab": {"externally_writable": false, "initial": ["h_net_send", "h_crypto_sign"]}
+  },
+  "element_updates": [],
+  "entries": [
+    {"name": "main", "function": "f_main", "allowed_capabilities": ["log", "net.send"]}
+  ]
+}

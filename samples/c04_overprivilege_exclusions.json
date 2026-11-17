@@ -1,0 +1,39 @@
+{
+  "version": 1,
+  "types": {
+    "t_void": {"params": [], "results": []},
+    "t_i32": {"params": ["i32"], "results": []}
+  },
+  "functions": {
+    "f_main": {"type": "t_void", "kind": "local"},
+    "f_helper": {"type": "t_void", "kind": "local"},
+    "f_orphan": {"type": "t_void", "kind": "local"},
+    "h_ui": {"type": "t_void", "kind": "import", "module": "env", "name": "ui_render"},
+    "h_shell": {"type": "t_void", "kind": "import", "module": "env", "name": "shell_exec"},
+    "h_vault": {"type": "t_i32", "kind": "import", "module": "env", "name": "vault_read"},
+    "h_format": {"type": "t_void", "kind": "import", "module": "env", "name": "disk_format"}
+  },
+  "capabilities": {
+    "h_ui": ["ui"],
+    "h_shell": ["shell.exec"],
+    "h_vault": ["vault.read"],
+    "h_format": ["disk.format"]
+  },
+  "direct_calls": [
+    {"caller": "f_main", "callee": "h_ui", "site": "f_main@6"},
+    {"caller": "f_main", "callee": "f_helper", "site": "f_main@9"},
+    {"caller": "f_helper", "callee": "h_shell", "site": "f_helper@4"}
+  ],
+  "indirect_calls": [
+    {"caller": "f_main", "table": "tab", "expected_type": "t_void", "site": "f_main@20"}
+  ],
+  "tables": {
+    "tab": {"externally_writable": false, "initial": ["h_vault", null]}
+  },
+  "element_updates": [
+    {"table": "tab", "index": 1, "function": "h_format", "at": "f_orphan@2"}
+  ],
+  "entries": [
+    {"name": "main", "function": "f_main", "allowed_capabilities": ["ui"]}
+  ]
+}

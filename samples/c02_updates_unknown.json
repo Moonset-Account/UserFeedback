@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "types": {
+    "t_void": {"params": [], "results": []},
+    "t_i32": {"params": ["i32"], "results": []}
+  },
+  "functions": {
+    "f_main": {"type": "t_void", "kind": "local"},
+    "f_setup": {"type": "t_void", "kind": "local"},
+    "f_orphan": {"type": "t_void", "kind": "local"},
+    "h_read": {"type": "t_void", "kind": "import", "module": "env", "name": "read"},
+    "h_write": {"type": "t_void", "kind": "import", "module": "env", "name": "write"},
+    "h_admin": {"type": "t_void", "kind": "import", "module": "env", "name": "admin"},
+    "h_odd": {"type": "t_i32", "kind": "import", "module": "env", "name": "odd"}
+  },
+  "capabilities": {
+    "h_read": ["fs.read"],
+    "h_write": ["fs.write"],
+    "h_admin": ["admin"],
+    "h_odd": ["odd"]
+  },
+  "direct_calls": [
+    {"caller": "f_main", "callee": "f_setup", "site": "f_main@8"}
+  ],
+  "indirect_calls": [
+    {"caller": "f_main", "table": "tabA", "expected_type": "t_void", "site": "f_main@30"},
+    {"caller": "f_main", "table": "tabB", "expected_type": "t_void", "site": "f_main@40"}
+  ],
+  "tables": {
+    "tabA": {"externally_writable": false, "initial": ["h_read", null, null]},
+    "tabB": {"externally_writable": true, "initial": []}
+  },
+  "element_updates": [
+    {"table": "tabA", "index": 1, "function": "h_write", "at": "f_setup@5"},
+    {"table": "tabA", "index": 2, "function": "h_odd", "at": "f_setup@9"},
+    {"table": "tabA", "index": 1, "function": "h_admin", "at": "f_orphan@3"}
+  ],
+  "entries": [
+    {"name": "main", "function": "f_main", "allowed_capabilities": ["fs.read", "fs.write"]}
+  ]
+}
