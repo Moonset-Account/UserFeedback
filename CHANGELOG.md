@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Cache namespace results and minimize kwarg checks by grouping similar rules - ~500% speed up ([#18](https://github.com/dlint-py/dlint/issues/18))
 
 ### Fixed
+- The `Flake8Extension` now honors flake8's `--select`, `--ignore`,
+  `--extend-select`, and `--extend-ignore` options before visiting the AST,
+  so linters (including external `dlint_plugin_` plugins) that will not
+  report no longer execute their visitors
 - The `--print-dlint-linters` flag on Windows ([#17](https://github.com/dlint-py/dlint/issues/17))
 
 ## [0.10.1] - 2020-01-21
