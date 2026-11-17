@@ -6,6 +6,7 @@
 from __future__ import annotations
 
 import builtins
+import contextlib
 import datetime
 import os
 import sys
@@ -809,6 +810,69 @@ class TestRefresh(unittest.TestCase):
 
         expected_calls = [("root", 4), ("timestamp", None)]
         self.assertListEqual(self.sim.fetch_tracker.metadata, expected_calls)
+
+    def test_root_cache_when_symlink_not_possible(self) -> None:
+        """Test root cache when os.symlink() is not permitted.
+
+        Simulates two environments in separate cache directories: one
+        where symlinking root.json works and one where it is denied
+        (e.g. Windows without symlink privilege). After a "restart"
+        (new Updater without bootstrap bytes), both caches must load
+        the same verified current root, and the versioned root files
+        must remain available for existing workflows.
+        """
+        # Make a new root version available so refresh rotates the root
+        self.sim.root.version += 1
+        self.sim.publish_root()
+
+        cached_roots: dict[str, bytes] = {}
+        environments = [("symlink", True), ("no-symlink", False)]
+        for name, symlink_allowed in environments:
+            metadata_dir = os.path.join(self.temp_dir.name, name)
+            os.makedirs(metadata_dir)
+
+            if symlink_allowed:
+                symlink_denied: contextlib.AbstractContextManager[
+                    object
+                ] = contextlib.nullcontext()
+            else:
+                symlink_denied = patch.object(
+                    os,
+                    "symlink",
+                    side_effect=OSError("privilege not held"),
+                )
+
+            with symlink_denied:
+                updater = Updater(
+                    metadata_dir,
+                    "https://example.com/metadata/",
+                    fetcher=self.sim,
+                    bootstrap=self.sim.signed_roots[0],
+                )
+                updater.refresh()
+
+                # "Restart": new Updater loads the cached current root
+                Updater(
+                    metadata_dir,
+                    "https://example.com/metadata/",
+                    fetcher=self.sim,
+                    bootstrap=None,
+                )
+
+            root_json = os.path.join(metadata_dir, "root.json")
+            self.assertEqual(os.path.islink(root_json), symlink_allowed)
+            with open(root_json, "rb") as f:
+                cached_roots[name] = f.read()
+
+            # Versioned root file must still exist for existing workflows
+            versioned = os.path.join(
+                metadata_dir, "root_history", "2.root.json"
+            )
+            with open(versioned, "rb") as f:
+                self.assertEqual(f.read(), cached_roots[name])
+
+        # Both environments cache and load the same verified root
+        self.assertEqual(cached_roots["symlink"], cached_roots["no-symlink"])
 
     def test_expired_metadata(self) -> None:
         """Verifies that expired local timestamp/snapshot can be used for

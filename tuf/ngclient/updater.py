@@ -363,13 +363,25 @@ class Updater:
             raise e
 
     def _update_root_symlink(self) -> None:
-        """Symlink root.json to current trusted root version in root_history/"""
+        """Link root.json to current trusted root version in root_history/
+
+        Use a symlink when possible: on platforms where symlinks are not
+        available (e.g. Windows without the required privilege), fall back
+        to copying the already verified and persisted root version file.
+        """
         linkname = os.path.join(self._dir, "root.json")
         version = self._trusted_set.root.version
         current = os.path.join("root_history", f"{version}.root.json")
         with contextlib.suppress(FileNotFoundError):
             os.remove(linkname)
-        os.symlink(current, linkname)
+        try:
+            os.symlink(current, linkname)
+        except OSError as e:
+            # Symlinks may be unavailable (e.g. Windows without
+            # SeCreateSymbolicLinkPrivilege): copy the verified
+            # versioned root file instead.
+            logger.debug("Failed to symlink root.json: %s: copying", e)
+            shutil.copyfile(os.path.join(self._dir, current), linkname)
 
     def _load_root(self) -> None:
         """Load root metadata.
