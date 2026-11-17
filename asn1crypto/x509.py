@@ -31,6 +31,7 @@ from ._types import type_name, str_cls, bytes_to_list
 from .algos import AlgorithmIdentifier, AnyAlgorithmIdentifier, DigestAlgorithm, SignedDigestAlgorithm
 from .core import (
     Any,
+    Asn1Value,
     BitString,
     BMPString,
     Boolean,
@@ -978,6 +979,15 @@ class Name(Choice):
     _sha1 = None
     _sha256 = None
 
+    # Attribute types that are defined as a DirectoryString, but where
+    # RFC 5280 mandates a PrintableString value instead of honoring the
+    # regular encoding selection (UTF8String/PrintableString).
+    _printable_string_attributes = set([
+        'dn_qualifier',
+        'country_name',
+        'serial_number',
+    ])
+
     @classmethod
     def build(cls, name_dict, use_printable=False):
         """
@@ -1015,20 +1025,42 @@ class Name(Choice):
 
         for attribute_name, attribute_value in name_dict.items():
             attribute_name = NameType.map(attribute_name)
-            if attribute_name == 'email_address':
-                value = EmailAddress(attribute_value)
-            elif attribute_name == 'domain_component':
-                value = DNSName(attribute_value)
-            elif attribute_name in set(['dn_qualifier', 'country_name', 'serial_number']):
-                value = DirectoryString(
-                    name='printable_string',
-                    value=PrintableString(attribute_value)
-                )
-            else:
+            value_spec = NameTypeAndValue._oid_specs.get(attribute_name)
+
+            # If the value is already an ASN.1 object of the proper type for
+            # this attribute, retain it as-is so round-tripping a parsed Name
+            # through build() preserves the original encoding.
+            if isinstance(attribute_value, Asn1Value) and cls._value_matches_spec(
+                value_spec, attribute_value
+            ):
+                value = attribute_value
+
+            elif value_spec is None:
+                # Unrecognized OIDs are treated as regular directory strings
+                # using the requested encoding option.
                 value = DirectoryString(
                     name=encoding_name,
                     value=encoding_class(attribute_value)
                 )
+
+            elif value_spec is DirectoryString:
+                if attribute_name in cls._printable_string_attributes:
+                    value = DirectoryString(
+                        name='printable_string',
+                        value=PrintableString(attribute_value)
+                    )
+                else:
+                    value = DirectoryString(
+                        name=encoding_name,
+                        value=encoding_class(attribute_value)
+                    )
+
+            else:
+                # Special attributes are encoded with the ASN.1 type assigned
+                # to their OID, e.g. telephone_number as PrintableString,
+                # unique_identifier as OctetBitString, domain_component as
+                # DNSName, the TPM attributes as UTF8String, etc.
+                value = value_spec(attribute_value)
 
             rdns.append(RelativeDistinguishedName([
                 NameTypeAndValue({
@@ -1038,6 +1070,39 @@ class Name(Choice):
             ]))
 
         return cls(name='', value=RDNSequence(rdns))
+
+    @staticmethod
+    def _value_matches_spec(value_spec, attribute_value):
+        """
+        Checks if an ASN.1 object passed as an attribute value already has the
+        type registered for the attribute OID in
+        NameTypeAndValue._oid_specs, so that build() can retain the original
+        encoding instead of re-wrapping the value.
+
+        :param value_spec:
+            The Asn1Value subclass registered for the OID, or None for
+            unrecognized OIDs
+
+        :param attribute_value:
+            The Asn1Value object provided for the attribute
+
+        :return:
+            A boolean
+        """
+
+        if value_spec is None:
+            return isinstance(attribute_value, DirectoryString)
+
+        if value_spec is DirectoryString:
+            return isinstance(attribute_value, DirectoryString)
+
+        # unique_identifier is specified as an OctetBitString, but parsers
+        # may produce a BitString for values that include unused bits - both
+        # share the bit string tag and are valid for this OID.
+        if value_spec is OctetBitString:
+            return isinstance(attribute_value, (OctetBitString, BitString))
+
+        return isinstance(attribute_value, value_spec)
 
     @property
     def hashable(self):

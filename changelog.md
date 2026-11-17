@@ -2,6 +2,15 @@
 
 ## 1.5.1
 
+ - Fixed `x509.Name.build()` to encode special name attributes using the
+   ASN.1 type registered for their OID in `NameTypeAndValue._oid_specs`,
+   instead of wrapping every non-email/domain-component attribute in a
+   `DirectoryString`. Attributes such as `telephone_number` are now encoded
+   as `PrintableString`, `unique_identifier` as `OctetBitString` and the TPM
+   attributes as `UTF8String`, matching how parsed names are represented.
+   Values already provided as a correctly-typed ASN.1 object are retained
+   unchanged, so encoding, decoding and rebuilding a mixed name produces
+   stable attributes and DER output.
  - Handle RSASSA-PSS in `keys.PrivateKeyInfo.bit_size` and
    `keys.PublicKeyInfo.bit_size`
  - Handle RSASSA-PSS in `keys.PrivateKeyInfo.wrap` and

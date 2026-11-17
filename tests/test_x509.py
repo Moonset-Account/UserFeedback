@@ -6,6 +6,7 @@ import sys
 import os
 from datetime import datetime
 
+from asn1crypto._ordereddict import OrderedDict
 from asn1crypto import x509, core, pem, util
 
 from .unittest_data import data_decorator, data
@@ -465,6 +466,117 @@ class X509Tests(unittest.TestCase):
         )
         self.assertIsInstance(printable_name.chosen[2][0]['value'].chosen, core.PrintableString)
         self.assertEqual('common_name', printable_name.chosen[2][0]['type'].native)
+
+    def test_build_name_special_attribute_types(self):
+        name = x509.Name.build({
+            'common_name': 'Will Bond',
+            'country_name': 'US',
+            'serial_number': 'ABC123',
+            'dn_qualifier': 'qualifier',
+            'telephone_number': '+15551234567',
+            'domain_component': 'example',
+            'email_address': 'will@example.com',
+            'tpm_manufacturer': 'TPM Vendor',
+            'unique_identifier': b'\x01\x02\x03',
+        })
+
+        value_types = {}
+        for rdn in name.chosen:
+            type_val = rdn[0]
+            value = type_val['value']
+            if isinstance(value, core.Choice):
+                value = value.chosen
+            value_types[type_val['type'].native] = type(value)
+
+        # Regular directory strings default to UTF8String
+        self.assertIs(core.UTF8String, value_types['common_name'])
+        # RFC 5280 mandates PrintableString for these directory string attrs
+        self.assertIs(core.PrintableString, value_types['country_name'])
+        self.assertIs(core.PrintableString, value_types['serial_number'])
+        self.assertIs(core.PrintableString, value_types['dn_qualifier'])
+        # Special OID-typed attributes use their registered ASN.1 type
+        self.assertIs(core.PrintableString, value_types['telephone_number'])
+        self.assertIs(x509.DNSName, value_types['domain_component'])
+        self.assertIs(x509.EmailAddress, value_types['email_address'])
+        self.assertIs(core.UTF8String, value_types['tpm_manufacturer'])
+        self.assertIs(core.OctetBitString, value_types['unique_identifier'])
+
+        # use_printable must not override the OID-specific special types
+        printable_name = x509.Name.build(
+            {
+                'common_name': 'Will Bond',
+                'telephone_number': '+15551234567',
+                'tpm_manufacturer': 'TPM Vendor',
+                'domain_component': 'example',
+            },
+            use_printable=True
+        )
+        printable_types = {}
+        for rdn in printable_name.chosen:
+            type_val = rdn[0]
+            value = type_val['value']
+            if isinstance(value, core.Choice):
+                value = value.chosen
+            printable_types[type_val['type'].native] = type(value)
+        self.assertIs(core.PrintableString, printable_types['common_name'])
+        self.assertIs(core.PrintableString, printable_types['telephone_number'])
+        self.assertIs(core.UTF8String, printable_types['tpm_manufacturer'])
+        self.assertIs(x509.DNSName, printable_types['domain_component'])
+
+    def test_build_name_round_trip_stable(self):
+        name_dict = {
+            'common_name': 'Will Bond',
+            'country_name': 'US',
+            'serial_number': 'ABC123',
+            'dn_qualifier': 'qualifier',
+            'telephone_number': '+15551234567',
+            'domain_component': 'example',
+            'email_address': 'will@example.com',
+            'tpm_manufacturer': 'TPM Vendor',
+            'unique_identifier': b'\x01\x02\x03',
+        }
+
+        original = x509.Name.build(name_dict)
+        original_der = original.dump()
+
+        # Decode and rebuild from the native (string/byte) representation -
+        # the same attribute set, values and encoding must come back.
+        decoded = x509.Name.load(original_der)
+        rebuilt = x509.Name.build(decoded.native)
+        self.assertEqual(original_der, rebuilt.dump())
+        self.assertEqual(decoded.native, rebuilt.native)
+
+        # Rebuilding directly from the parsed ASN.1 value objects must also
+        # preserve the original encoding.
+        object_dict = OrderedDict()
+        for rdn in decoded.chosen:
+            type_val = rdn[0]
+            object_dict[type_val['type'].native] = type_val['value']
+        rebuilt_from_objects = x509.Name.build(object_dict)
+        self.assertEqual(original_der, rebuilt_from_objects.dump())
+
+        # Repeated encode/decode/rebuild cycles must stay stable.
+        for _ in range(3):
+            decoded = x509.Name.load(original_der)
+            self.assertEqual(original_der, x509.Name.build(decoded.native).dump())
+
+    def test_build_name_preserves_pre_encoded_values(self):
+        # Values already encoded as the correct ASN.1 type are retained, even
+        # when they use a DirectoryString alternative other than the default.
+        bmp_value = x509.DirectoryString(
+            name='bmp_string',
+            value=core.BMPString('Will Bond')
+        )
+        name = x509.Name.build({'common_name': bmp_value})
+        self.assertIs(bmp_value, name.chosen[0][0]['value'])
+
+        telephone = core.PrintableString('+15551234567')
+        name = x509.Name.build({'telephone_number': telephone})
+        self.assertIs(telephone, name.chosen[0][0]['value'])
+
+        bit_string = core.OctetBitString(b'\x01\x02\x03')
+        name = x509.Name.build({'unique_identifier': bit_string})
+        self.assertIs(bit_string, name.chosen[0][0]['value'])
 
     def test_v1_cert(self):
         cert = self._load_cert('chromium/ndn.ca.crt')
