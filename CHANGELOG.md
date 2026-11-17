@@ -20,6 +20,14 @@ All versions prior to 0.0.9 are untracked.
   `--vulnerability-service=esms`
   ([#903](https://github.com/pypa/pip-audit/pull/903)).
 
+### Fixed
+
+* The CycloneDX JSON and XML outputs now link each vulnerability to the
+  actual affected component via an `affects` reference to the component's
+  BOM ref, so findings remain traceable to the correct component version
+  when multiple components share a name or an advisory affects more than
+  one component.
+
 ## [2.9.0]
 
 ### Added

@@ -11,7 +11,7 @@ from typing import cast
 from cyclonedx import output
 from cyclonedx.model.bom import Bom
 from cyclonedx.model.component import Component
-from cyclonedx.model.vulnerability import Vulnerability
+from cyclonedx.model.vulnerability import Vulnerability, VulnerabilityAffects
 
 import pip_audit._fix as fix
 import pip_audit._service as service
@@ -37,7 +37,17 @@ def _pip_audit_result_to_bom(
         c = Component(name=dep.name, version=str(dep.version))
         for vuln in vulns:
             vulnerabilities.append(
-                Vulnerability(id=vuln.id, description=vuln.description, recommendation="Upgrade")
+                Vulnerability(
+                    id=vuln.id,
+                    description=vuln.description,
+                    recommendation="Upgrade",
+                    # Link the vulnerability back to the actual component
+                    # (including its version) via the component's BOM ref.
+                    # Without this, consumers have no way of telling which
+                    # affected component a finding belongs to, which is
+                    # ambiguous when multiple components share a name.
+                    affects=[VulnerabilityAffects(ref=c.bom_ref)],
+                )
             )
 
         components.append(c)
