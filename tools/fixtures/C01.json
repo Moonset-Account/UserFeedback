@@ -1,0 +1,71 @@
+{
+  "id": "C01-same-name-different-commit",
+  "schema_version": 1,
+  "triggers": [
+    {"id": "tr-main", "source": "production"},
+    {"id": "tr-fork", "source": "external_contribution"}
+  ],
+  "jobs": [
+    {
+      "id": "build-prod",
+      "triggers": ["tr-main"],
+      "actions": [
+        {
+          "type": "produce",
+          "artifact": {"name": "app-bundle", "commit": "prod-aaa111"}
+        }
+      ]
+    },
+    {
+      "id": "build-fork",
+      "triggers": ["tr-fork"],
+      "actions": [
+        {
+          "type": "produce",
+          "artifact": {"name": "app-bundle", "commit": "fork-ccc999"}
+        }
+      ]
+    },
+    {
+      "id": "fetch-pinned",
+      "triggers": ["tr-main"],
+      "needs": ["build-prod"],
+      "actions": [
+        {
+          "type": "download",
+          "pinned": true,
+          "producer_job": "build-prod",
+          "producer_commit": "prod-aaa111",
+          "artifact": {"name": "app-bundle", "commit": "prod-aaa111"}
+        }
+      ]
+    },
+    {
+      "id": "fetch-unpinned",
+      "triggers": ["tr-fork"],
+      "needs": ["build-fork"],
+      "actions": [
+        {
+          "type": "download",
+          "pinned": false,
+          "artifact": {"name": "app-bundle", "commit": "fork-ccc999"}
+        }
+      ]
+    },
+    {
+      "id": "release",
+      "is_release": true,
+      "triggers": ["tr-main", "tr-fork"],
+      "needs": [
+        {"job": "fetch-pinned", "if": "lane-pinned"},
+        {"job": "fetch-unpinned", "if": "lane-unpinned"}
+      ],
+      "conditions": ["lane-pinned", "lane-unpinned"],
+      "sensitive_inputs": [
+        {"type": "artifact", "name": "app-bundle", "commit": "prod-aaa111"},
+        {"type": "artifact", "name": "app-bundle", "commit": "fork-ccc999"}
+      ],
+      "actions": []
+    }
+  ]
+}

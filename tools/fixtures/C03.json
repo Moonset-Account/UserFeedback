@@ -1,0 +1,72 @@
+{
+  "id": "C03-approval-without-pinned-source",
+  "schema_version": 1,
+  "triggers": [
+    {"id": "tr-main", "source": "production"},
+    {"id": "tr-fork", "source": "external_contribution"}
+  ],
+  "jobs": [
+    {
+      "id": "build-prod",
+      "triggers": ["tr-main"],
+      "actions": [
+        {
+          "type": "produce",
+          "artifact": {"name": "installer", "commit": "prod-eee333"}
+        }
+      ]
+    },
+    {
+      "id": "fetch-pinned",
+      "triggers": ["tr-main"],
+      "needs": ["build-prod"],
+      "actions": [
+        {
+          "type": "download",
+          "pinned": true,
+          "producer_job": "build-prod",
+          "producer_commit": "prod-eee333",
+          "artifact": {"name": "installer", "commit": "prod-eee333"}
+        }
+      ]
+    },
+    {
+      "id": "release-pinned",
+      "is_release": true,
+      "triggers": ["tr-main"],
+      "needs": ["fetch-pinned"],
+      "actions": [],
+      "sensitive_inputs": [
+        {"type": "artifact", "name": "installer", "commit": "prod-eee333"}
+      ]
+    },
+    {
+      "id": "fetch-unpinned",
+      "triggers": ["tr-fork"],
+      "actions": [
+        {
+          "type": "download",
+          "pinned": false,
+          "artifact": {"name": "installer", "commit": "external-fff444"}
+        }
+      ]
+    },
+    {
+      "id": "manual-gate",
+      "triggers": ["tr-fork"],
+      "needs": ["fetch-unpinned"],
+      "requires_approval": true,
+      "actions": []
+    },
+    {
+      "id": "release-approved",
+      "is_release": true,
+      "triggers": ["tr-fork"],
+      "needs": ["manual-gate"],
+      "actions": [],
+      "sensitive_inputs": [
+        {"type": "artifact", "name": "installer", "commit": "external-fff444"}
+      ]
+    }
+  ]
+}

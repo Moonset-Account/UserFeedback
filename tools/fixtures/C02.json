@@ -1,0 +1,56 @@
+{
+  "id": "C02-shared-cache-multiple-writers",
+  "schema_version": 1,
+  "triggers": [
+    {"id": "tr-main", "source": "production"},
+    {"id": "tr-fork", "source": "external_contribution"}
+  ],
+  "jobs": [
+    {
+      "id": "build-prod",
+      "triggers": ["tr-main"],
+      "actions": [
+        {
+          "type": "produce",
+          "artifact": {"name": "prod-build", "commit": "prod-bbb222"}
+        },
+        {
+          "type": "cache_write",
+          "cache_key": "shared:build-output:v1",
+          "from": [{"type": "artifact", "name": "prod-build", "commit": "prod-bbb222"}]
+        }
+      ]
+    },
+    {
+      "id": "pr-build",
+      "triggers": ["tr-fork"],
+      "actions": [
+        {
+          "type": "produce",
+          "artifact": {"name": "pr-build", "commit": "fork-ddd888"}
+        },
+        {
+          "type": "cache_write",
+          "cache_key": "shared:build-output:v1",
+          "from": [{"type": "artifact", "name": "pr-build", "commit": "fork-ddd888"}]
+        }
+      ]
+    },
+    {
+      "id": "release",
+      "is_release": true,
+      "triggers": ["tr-main"],
+      "needs": ["build-prod"],
+      "actions": [
+        {
+          "type": "cache_read",
+          "cache_key": "shared:build-output:v1",
+          "into": {"name": "staged-bundle", "commit": "release-staging"}
+        }
+      ],
+      "sensitive_inputs": [
+        {"type": "artifact", "name": "staged-bundle", "commit": "release-staging"}
+      ]
+    }
+  ]
+}

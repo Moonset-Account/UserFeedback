@@ -1,0 +1,61 @@
+{
+  "id": "C04-branches-and-missing-dynamic-definition",
+  "schema_version": 1,
+  "triggers": [
+    {"id": "tr-main", "source": "production"}
+  ],
+  "dynamic_missing": [
+    {
+      "ref": "matrix-build",
+      "reason": "dynamic job matrix is generated at runtime from an external config; definition unavailable at analysis time"
+    }
+  ],
+  "jobs": [
+    {
+      "id": "build-prod",
+      "triggers": ["tr-main"],
+      "actions": [
+        {
+          "type": "produce",
+          "artifact": {"name": "core-lib", "commit": "prod-000111"}
+        }
+      ]
+    },
+    {
+      "id": "fetch-pinned",
+      "triggers": ["tr-main"],
+      "needs": ["build-prod"],
+      "actions": [
+        {
+          "type": "download",
+          "pinned": true,
+          "producer_job": "build-prod",
+          "producer_commit": "prod-000111",
+          "artifact": {"name": "core-lib", "commit": "prod-000111"}
+        }
+      ]
+    },
+    {
+      "id": "release-known",
+      "is_release": true,
+      "triggers": ["tr-main"],
+      "needs": [{"job": "fetch-pinned", "if": "branch-known"}],
+      "conditions": ["branch-known"],
+      "actions": [],
+      "sensitive_inputs": [
+        {"type": "artifact", "name": "core-lib", "commit": "prod-000111"}
+      ]
+    },
+    {
+      "id": "release-unknown",
+      "is_release": true,
+      "triggers": ["tr-main"],
+      "needs": [{"job": "matrix-build", "if": "branch-dynamic"}],
+      "conditions": ["branch-dynamic"],
+      "actions": [],
+      "sensitive_inputs": [
+        {"type": "artifact", "name": "matrix-output", "commit": "dynamic"}
+      ]
+    }
+  ]
+}
