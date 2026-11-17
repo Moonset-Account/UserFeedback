@@ -1,0 +1,61 @@
+{
+  "description": "C02: 作用域、生态、注册表参与身份，不得按显示名合并",
+  "confusables": {
+    "а": { "skeleton": "a", "name": "CYRILLIC SMALL LETTER A" },
+    "е": { "skeleton": "e", "name": "CYRILLIC SMALL LETTER IE" },
+    "о": { "skeleton": "o", "name": "CYRILLIC SMALL LETTER O" },
+    "р": { "skeleton": "p", "name": "CYRILLIC SMALL LETTER ER" }
+  },
+  "normalization": {
+    "npm": {
+      "id": "npm-scoped",
+      "steps": [
+        { "op": "scope", "mode": "keep" },
+        { "op": "case-fold" }
+      ]
+    },
+    "pypi": {
+      "id": "pypi-flat",
+      "steps": [
+        { "op": "case-fold" },
+        { "op": "strip-separators", "chars": ["-", "_", "."] }
+      ]
+    }
+  },
+  "directory": [
+    { "ecosystem": "npm", "name": "@acme/logger", "path": "packages/npm/acme-logger" },
+    { "ecosystem": "npm", "name": "@vendor/logger", "path": "packages/npm/vendor-logger" },
+    { "ecosystem": "npm", "name": "Logger", "path": "packages/npm/logger-unscoped" },
+    { "ecosystem": "pypi", "name": "logger", "path": "packages/pypi/logger" }
+  ],
+  "registries": [
+    { "id": "npm-internal", "ecosystem": "npm", "external": false, "packages": ["@acme/logger", "@vendor/logger", "Logger"] },
+    { "id": "npm-public", "ecosystem": "npm", "external": true, "packages": ["@acme/logger"] },
+    { "id": "pypi-internal", "ecosystem": "pypi", "external": false, "packages": ["logger"] },
+    { "id": "pypi-public", "ecosystem": "pypi", "external": true, "packages": ["logger"] }
+  ],
+  "scenarios": [
+    {
+      "id": "scope-is-identity",
+      "registryPriority": {
+        "npm": ["npm-internal", "npm-public"],
+        "pypi": ["pypi-internal", "pypi-public"]
+      },
+      "declarations": [
+        { "id": "s1", "ecosystem": "npm", "spec": "@vendor/logger" },
+        { "id": "s2", "ecosystem": "npm", "spec": "Logger" }
+      ]
+    },
+    {
+      "id": "ecosystem-and-registry-identity",
+      "registryPriority": {
+        "npm": ["npm-public", "npm-internal"],
+        "pypi": ["pypi-public", "pypi-internal"]
+      },
+      "declarations": [
+        { "id": "s3", "ecosystem": "pypi", "spec": "logger" },
+        { "id": "s4", "ecosystem": "npm", "spec": "@acme/logger" }
+      ]
+    }
+  ]
+}

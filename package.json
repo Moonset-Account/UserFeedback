@@ -1,0 +1,24 @@
+{
+  "name": "internal-dependency-review",
+  "version": "1.0.0",
+  "description": "审查内部包迁入统一仓库后的依赖声明，区分名称相近提示与可被错误解析的混淆阻断",
+  "type": "module",
+  "main": "src/index.js",
+  "exports": {
+    ".": "./src/index.js",
+    "./analyzer": "./src/analyzer.js",
+    "./normalization": "./src/normalization.js",
+    "./skeleton": "./src/skeleton.js",
+    "./directory": "./src/directory.js",
+    "./rules": "./src/rules.js"
+  },
+  "scripts": {
+    "verify": "node tools/local_verify.mjs",
+    "test": "node tools/local_verify.mjs --case C01 --case C02 --case C03 --case C04"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "license": "UNLICENSED",
+  "private": true
+}

@@ -1,0 +1,98 @@
+{
+  "description": "C04: 重复目录项、冲突规范化配置与规则先后次序，检查诊断与结论变化",
+  "confusables": {
+    "а": { "skeleton": "a", "name": "CYRILLIC SMALL LETTER A" },
+    "е": { "skeleton": "e", "name": "CYRILLIC SMALL LETTER IE" },
+    "о": { "skeleton": "o", "name": "CYRILLIC SMALL LETTER O" },
+    "р": { "skeleton": "p", "name": "CYRILLIC SMALL LETTER ER" }
+  },
+  "normalization": {
+    "npm": [
+      {
+        "id": "npm-drop-scope-first",
+        "steps": [
+          { "op": "scope", "mode": "drop" },
+          { "op": "case-fold" },
+          { "op": "strip-separators", "chars": ["-", "_"] }
+        ]
+      },
+      {
+        "id": "npm-keep-scope-first",
+        "steps": [
+          { "op": "scope", "mode": "keep" },
+          { "op": "case-fold" },
+          { "op": "strip-separators", "chars": ["-", "_"] }
+        ]
+      }
+    ],
+    "pypi": [
+      {
+        "id": "pypi-fold-then-strip",
+        "steps": [
+          { "op": "case-fold" },
+          { "op": "strip-separators", "chars": ["-", "_", "."] }
+        ]
+      },
+      {
+        "id": "pypi-strip-then-fold",
+        "steps": [
+          { "op": "strip-separators", "chars": ["-", "_", "."] },
+          { "op": "case-fold" }
+        ]
+      }
+    ],
+    "maven": [
+      {
+        "id": "maven-contradictory-scope",
+        "steps": [
+          { "op": "scope", "mode": "keep" },
+          { "op": "scope", "mode": "drop" },
+          { "op": "case-fold" }
+        ]
+      }
+    ]
+  },
+  "directory": [
+    { "ecosystem": "npm", "name": "@acme/metrics-lib", "path": "packages/npm/metrics-lib/a" },
+    { "ecosystem": "npm", "name": "@acme/metrics-lib", "path": "packages/npm/metrics-lib/b" },
+    { "ecosystem": "npm", "name": "metrics-lib", "path": "packages/npm/metrics-lib-unscoped" },
+    { "ecosystem": "pypi", "name": "ml-toolkit", "path": "packages/pypi/ml-toolkit" }
+  ],
+  "registries": [
+    { "id": "npm-internal", "ecosystem": "npm", "external": false, "packages": ["@acme/metrics-lib", "metrics-lib"] },
+    { "id": "npm-public", "ecosystem": "npm", "external": true, "packages": ["metrics-lib"] },
+    { "id": "pypi-internal", "ecosystem": "pypi", "external": false, "packages": ["ml-toolkit"] },
+    { "id": "pypi-public", "ecosystem": "pypi", "external": true, "packages": ["ml-toolkit"] },
+    { "id": "maven-internal", "ecosystem": "maven", "external": false, "packages": ["commons:io"] }
+  ],
+  "scenarios": [
+    {
+      "id": "npm-conflict-public-first",
+      "registryPriority": { "npm": ["npm-public", "npm-internal"] },
+      "declarations": [
+        { "id": "m1", "ecosystem": "npm", "spec": "@acme/metrics-lib" }
+      ]
+    },
+    {
+      "id": "npm-conflict-internal-first",
+      "registryPriority": { "npm": ["npm-internal", "npm-public"] },
+      "declarations": [
+        { "id": "m2", "ecosystem": "npm", "spec": "@acme/metrics-lib" }
+      ]
+    },
+    {
+      "id": "pypi-order-invariant",
+      "registryPriority": { "pypi": ["pypi-public", "pypi-internal"] },
+      "declarations": [
+        { "id": "m3", "ecosystem": "pypi", "spec": "ml-toolkit" }
+      ]
+    },
+    {
+      "id": "maven-contradiction",
+      "registryPriority": { "maven": ["maven-internal"] },
+      "declarations": [
+        { "id": "m4", "ecosystem": "maven", "spec": "commons:io" }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "description": "C03: 本地混淆映射核对混淆骨架、字符位置与具体解析路径",
+  "confusables": {
+    "а": { "skeleton": "a", "name": "CYRILLIC SMALL LETTER A" },
+    "е": { "skeleton": "e", "name": "CYRILLIC SMALL LETTER IE" },
+    "о": { "skeleton": "o", "name": "CYRILLIC SMALL LETTER O" },
+    "р": { "skeleton": "p", "name": "CYRILLIC SMALL LETTER ER" },
+    "с": { "skeleton": "c", "name": "CYRILLIC SMALL LETTER ES" },
+    "х": { "skeleton": "x", "name": "CYRILLIC SMALL LETTER HA" }
+  },
+  "normalization": {
+    "npm": {
+      "id": "npm-standard",
+      "steps": [
+        { "op": "scope", "mode": "keep" },
+        { "op": "case-fold" },
+        { "op": "strip-separators", "chars": ["-", "_", "."] }
+      ]
+    }
+  },
+  "directory": [
+    { "ecosystem": "npm", "name": "payroll-sdk", "path": "packages/npm/payroll-sdk" },
+    { "ecosystem": "npm", "name": "cache-client", "path": "packages/npm/cache-client" }
+  ],
+  "registries": [
+    { "id": "npm-internal", "ecosystem": "npm", "external": false, "packages": ["payroll-sdk", "cache-client", "payrоll-sdk", "сache-client"] },
+    { "id": "npm-public", "ecosystem": "npm", "external": true, "packages": ["payrоll-sdk", "сache-client"] }
+  ],
+  "registryPriority": { "npm": ["npm-public", "npm-internal"] },
+  "declarations": [
+    { "id": "cyr-block", "ecosystem": "npm", "spec": "payrоll-sdk" },
+    { "id": "cyr-block-2", "ecosystem": "npm", "spec": "сache-client" }
+  ],
+  "hintScenario": {
+    "registryPriority": { "npm": ["npm-internal", "npm-public"] },
+    "declarations": [
+      { "id": "cyr-hint", "ecosystem": "npm", "spec": "payrоll-sdk" }
+    ]
+  },
+  "expectedPositions": {
+    "payrоll-sdk": 4,
+    "сache-client": 0
+  }
+}

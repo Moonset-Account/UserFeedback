@@ -1,0 +1,51 @@
+{
+  "description": "C01: 按生态解析顺序与注册表优先级求实际候选，区分相似提示与可错误解析的阻断",
+  "confusables": {
+    "а": { "skeleton": "a", "name": "CYRILLIC SMALL LETTER A" },
+    "е": { "skeleton": "e", "name": "CYRILLIC SMALL LETTER IE" },
+    "о": { "skeleton": "o", "name": "CYRILLIC SMALL LETTER O" },
+    "р": { "skeleton": "p", "name": "CYRILLIC SMALL LETTER ER" },
+    "с": { "skeleton": "c", "name": "CYRILLIC SMALL LETTER ES" },
+    "х": { "skeleton": "x", "name": "CYRILLIC SMALL LETTER HA" },
+    "．": { "skeleton": ".", "name": "FULLWIDTH FULL STOP" },
+    "－": { "skeleton": "-", "name": "FULLWIDTH HYPHEN-MINUS" }
+  },
+  "normalization": {
+    "npm": {
+      "id": "npm-standard",
+      "steps": [
+        { "op": "scope", "mode": "keep" },
+        { "op": "case-fold" },
+        { "op": "strip-separators", "chars": ["-", "_", "."] }
+      ]
+    }
+  },
+  "directory": [
+    { "ecosystem": "npm", "name": "payroll-sdk", "path": "packages/npm/payroll-sdk" },
+    { "ecosystem": "npm", "name": "billing-core", "path": "packages/npm/billing-core" }
+  ],
+  "registries": [
+    { "id": "npm-internal", "ecosystem": "npm", "external": false, "packages": ["payroll-sdk", "billing-core"] },
+    { "id": "npm-public", "ecosystem": "npm", "external": true, "packages": ["payrollsdk", "payroll-sdk", "data-pipeline"] }
+  ],
+  "scenarios": [
+    {
+      "id": "internal-first",
+      "registryPriority": { "npm": ["npm-internal", "npm-public"] },
+      "declarations": [
+        { "id": "d1", "ecosystem": "npm", "spec": "payroll-sdk" },
+        { "id": "d2", "ecosystem": "npm", "spec": "payrollsdk" },
+        { "id": "d3", "ecosystem": "npm", "spec": "data-pipeline" }
+      ]
+    },
+    {
+      "id": "public-first",
+      "registryPriority": { "npm": ["npm-public", "npm-internal"] },
+      "declarations": [
+        { "id": "d1", "ecosystem": "npm", "spec": "payroll-sdk" },
+        { "id": "d2", "ecosystem": "npm", "spec": "payrollsdk" },
+        { "id": "d3", "ecosystem": "npm", "spec": "data-pipeline" }
+      ]
+    }
+  ]
+}
