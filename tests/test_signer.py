@@ -11,6 +11,10 @@ from pathlib import Path
 from typing import Any
 
 from cryptography.hazmat.primitives.serialization import (
+    Encoding,
+    NoEncryption,
+    PrivateFormat,
+    PublicFormat,
     load_pem_private_key,
     load_pem_public_key,
 )
@@ -797,6 +801,155 @@ class TestCryptoSigner(unittest.TestCase):
                     "CryptoSigner private key does not match public key",
                 ):
                     CryptoSigner(signer._private_key, other_signer.public_key)
+
+    @staticmethod
+    def _pem_variants(pem: str) -> list[str]:
+        """Return PEM strings for the same key with cosmetic differences."""
+        return [
+            pem,
+            pem.replace("\n", "\r\n"),  # CRLF line endings
+            pem.rstrip("\n"),  # missing trailing newline
+            pem + "\n",  # extra trailing newline
+            pem.replace("\n", "\r\n").rstrip("\r\n"),  # CRLF without final break
+            "\n" + pem,  # leading blank line
+        ]
+
+    def test_init_accepts_reformatted_matching_public_pem(self):
+        """Same public key with different PEM line endings/newlines matches.
+
+        The public key in external custody records may be a PEM that only
+        differs from the library-generated PEM in wrapping or line endings.
+        Such representations parse to the same key and must be accepted.
+        """
+        generators = [
+            CryptoSigner.generate_rsa,
+            CryptoSigner.generate_ecdsa,
+            CryptoSigner.generate_ed25519,
+            CryptoSigner.generate_mldsa,
+        ]
+        for generate in generators:
+            signer = generate()
+            pem = signer._private_key.public_key().public_bytes(
+                encoding=Encoding.PEM,
+                format=PublicFormat.SubjectPublicKeyInfo,
+            ).decode()
+
+            for variant in self._pem_variants(pem):
+                with self.subTest(generator=generate.__name__, variant=variant[:20]):
+                    # a keyid/scheme chosen by the caller must be preserved
+                    public_key = SSlibKey(
+                        "caller-keyid",
+                        signer.public_key.keytype,
+                        signer.public_key.scheme,
+                        {"public": variant},
+                    )
+                    matched = CryptoSigner(signer._private_key, public_key)
+                    self.assertIs(matched.public_key, public_key)
+                    self.assertEqual(matched.public_key.keyid, "caller-keyid")
+                    self.assertEqual(
+                        matched.public_key.scheme, signer.public_key.scheme
+                    )
+                    # the re-formatted key value must not be silently rewritten
+                    self.assertEqual(matched.public_key.keyval["public"], variant)
+
+    def test_init_rejects_reformatted_foreign_public_pem(self):
+        """A well-formed PEM of a different key pair still fails."""
+        generators = [
+            CryptoSigner.generate_rsa,
+            CryptoSigner.generate_ecdsa,
+            CryptoSigner.generate_ed25519,
+            CryptoSigner.generate_mldsa,
+        ]
+        for generate in generators:
+            signer = generate()
+            other = generate()
+            pem = other._private_key.public_key().public_bytes(
+                encoding=Encoding.PEM,
+                format=PublicFormat.SubjectPublicKeyInfo,
+            ).decode()
+
+            for variant in self._pem_variants(pem):
+                with self.subTest(generator=generate.__name__):
+                    public_key = SSlibKey(
+                        "caller-keyid",
+                        signer.public_key.keytype,
+                        signer.public_key.scheme,
+                        {"public": variant},
+                    )
+                    with self.assertRaises(KeyMismatchError):
+                        CryptoSigner(signer._private_key, public_key)
+
+    def test_init_matching_pem_for_all_pem_keytypes(self):
+        """Reformatted matching PEM works for every PEM-stored key type.
+
+        Covers the key types shipped in the test data: rsa, ecdsa on all
+        three curves, and all ML-DSA parameter sets.
+        """
+        for name, private_key in self.keys.items():
+            pem = private_key.public_key().public_bytes(
+                encoding=Encoding.PEM,
+                format=PublicFormat.SubjectPublicKeyInfo,
+            ).decode()
+            for variant in self._pem_variants(pem):
+                with self.subTest(name=name):
+                    public_key = SSlibKey(
+                        "caller-keyid",
+                        self.expected_keytypes[name],
+                        self.schemes[name][0],
+                        {"public": variant},
+                    )
+                    signer = CryptoSigner(private_key, public_key)
+                    self.assertEqual(signer.public_key.keyid, "caller-keyid")
+                    self.assertEqual(
+                        signer.public_key.scheme, self.schemes[name][0]
+                    )
+                    sig = signer.sign(b"DATA")
+                    public_key.verify_signature(sig, b"DATA")
+
+    def test_init_malformed_public_key_raises_value_error(self):
+        """A public key value that cannot be parsed is rejected."""
+        signer = CryptoSigner.generate_rsa()
+        public_key = SSlibKey(
+            "caller-keyid",
+            signer.public_key.keytype,
+            signer.public_key.scheme,
+            {"public": "not a pem"},
+        )
+        with self.assertRaises(ValueError):
+            CryptoSigner(signer._private_key, public_key)
+
+    def test_from_priv_key_uri_with_reformatted_public_pem(self):
+        """Loading via file2 URI accepts a re-wrapped matching public PEM."""
+        for name in ["rsa", "ecdsa", "mldsa65"]:
+            private_key = self.keys[name]
+            pem = private_key.public_key().public_bytes(
+                encoding=Encoding.PEM,
+                format=PublicFormat.SubjectPublicKeyInfo,
+            ).decode()
+            variant = pem.replace("\n", "\r\n")
+            public_key = SSlibKey(
+                "caller-keyid",
+                self.expected_keytypes[name],
+                self.schemes[name][0],
+                {"public": variant},
+            )
+            with tempfile.TemporaryDirectory() as tempdir:
+                priv_key_path = os.path.join(tempdir, "privkey.pem")
+                with open(priv_key_path, "wb") as f:
+                    f.write(
+                        private_key.private_bytes(
+                            encoding=Encoding.PEM,
+                            format=PrivateFormat.PKCS8,
+                            encryption_algorithm=NoEncryption(),
+                        )
+                    )
+                with self.subTest(name=name):
+                    signer = Signer.from_priv_key_uri(
+                        f"file2:{priv_key_path}", public_key
+                    )
+                    self.assertEqual(signer.public_key.keyid, "caller-keyid")
+                    sig = signer.sign(b"DATA")
+                    public_key.verify_signature(sig, b"DATA")
 
     def test_sign(self):
         for name, private_key in self.keys.items():

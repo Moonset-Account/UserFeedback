@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+### Fixed
+
+* `CryptoSigner`: Accept public keys whose PEM representation only differs in
+  line endings, line wrapping or a trailing newline from the private key's
+  public key, while still rejecting valid representations of a different key
+
 ## 1.5.0
 
 ### Added

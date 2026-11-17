@@ -79,6 +79,7 @@ try:
         Encoding,
         NoEncryption,
         PrivateFormat,
+        PublicFormat,
         load_pem_private_key,
     )
 
@@ -143,6 +144,28 @@ def _get_rsa_padding(name: str, hash_algorithm: HashAlgorithm) -> AsymmetricPadd
         padding = PKCS1v15()
 
     return padding
+
+
+def _public_key_matches(
+    private_key: PrivateKeyTypes, public_key: SSlibKey
+) -> bool:
+    """Return whether ``public_key`` is the public half of ``private_key``.
+
+    The comparison is done on the canonical DER encoding of the
+    SubjectPublicKeyInfo instead of the stored key value string: this way PEM
+    representations of the same key which only differ in line endings, line
+    wrapping or a trailing newline are accepted, while a valid representation
+    of a different key still fails.
+    """
+    expected = private_key.public_key().public_bytes(
+        encoding=Encoding.DER,
+        format=PublicFormat.SubjectPublicKeyInfo,
+    )
+    actual = public_key._crypto_key().public_bytes(
+        encoding=Encoding.DER,
+        format=PublicFormat.SubjectPublicKeyInfo,
+    )
+    return expected == actual
 
 
 class CryptoSigner(Signer):
@@ -244,8 +267,7 @@ class CryptoSigner(Signer):
                 f"unsupported public key {public_key.keytype}/{public_key.scheme}"
             )
 
-        derived_public_key = SSlibKey.from_crypto(private_key.public_key())
-        if derived_public_key.keyval != public_key.keyval:
+        if not _public_key_matches(private_key, public_key):
             raise KeyMismatchError("CryptoSigner private key does not match public key")
 
         self._private_key = private_key
