@@ -69,13 +69,14 @@ class PackageSourceArchive(PackageSource):
     @classmethod
     def from_data(cls, url: str, subdirectory: Optional[str],
                   info: Dict[str, Any]) -> 'PackageSourceArchive':
-        if 'hashes' in info:
-            hashes = info['hashes']
-        elif 'hash' in info:
-            hash_parts = str(info['hash']).split('=', maxsplit=1)
-            hashes = {hash_parts[0]: hash_parts[1]}
-        else:
-            hashes = None
+        hashes = info.get('hashes')
+        if hashes is None and 'hash' in info:
+            # legacy/deprecated format: a single "<algorithm>=<value>" string
+            hash_alg, _, hash_value = str(info['hash']).partition('=')
+            if hash_alg and hash_value:
+                hashes = {hash_alg: hash_value}
+            # else: invalid legacy hash -- just drop the unusable checksum,
+            # but keep the package's source URL and subdirectory.
         return cls(url, subdirectory, hashes)
 
 
