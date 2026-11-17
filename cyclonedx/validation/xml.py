@@ -20,6 +20,7 @@ __all__ = ['XmlValidator', 'XmlValidationError']
 
 from abc import ABC
 from collections.abc import Iterable
+from pathlib import Path
 from typing import TYPE_CHECKING, Literal, Optional, Union, overload
 
 from ..exception import MissingOptionalDependencyException
@@ -125,7 +126,15 @@ class _BaseXmlValidator(BaseSchemabasedValidator, ABC):
                 schema_file = self._schema_file
                 if schema_file is None:
                     raise NotImplementedError('missing schema file')
-                self.__validator = XMLSchema(file=schema_file)
+                # lxml/libxml2 treats the `file` argument as a URI, not as a
+                # plain filesystem path. Paths containing URI-significant chars
+                # (e.g. `#` or spaces) would therefore fail to load, and
+                # relative `schemaLocation` references could not be resolved.
+                # Pass an absolute, percent-encoded `file://` URI instead, so
+                # the main schema and its sibling references stay resolvable
+                # regardless of the installation path. See also:
+                # https://lxml.de/validation.html#xmlschema
+                self.__validator = XMLSchema(file=Path(schema_file).resolve().as_uri())
             return self.__validator
 
 

@@ -18,13 +18,16 @@
 from collections.abc import Generator
 from glob import iglob
 from itertools import chain
-from os.path import join
+from os.path import basename, dirname, join
+from shutil import copytree
+from tempfile import TemporaryDirectory
 from unittest import TestCase
 
 from ddt import ddt, idata, unpack
 
 from cyclonedx.exception import MissingOptionalDependencyException
 from cyclonedx.schema import OutputFormat, SchemaVersion
+from cyclonedx.schema import _res as schema_res
 from cyclonedx.validation.xml import XmlValidator
 from tests import OWN_DATA_DIRECTORY, SCHEMA_TESTDATA_DIRECTORY, DpTuple
 
@@ -111,3 +114,65 @@ class TestXmlValidator(TestCase):
         self.assertGreater(len(validation_errors), 0)
         for validation_error in validation_errors:
             self.assertIsNotNone(validation_error.data)
+
+
+@ddt
+class TestXmlValidatorRelocatedSchema(TestCase):
+    """The bundled schemas may be located in a directory whose name contains
+    URI-significant characters such as `#` and spaces.
+
+    lxml/libxml2 interprets ``XMLSchema(file=...)`` as a URI rather than a
+    plain filesystem path. The local main schema and its relative sibling
+    references (e.g. the ``spdx.SNAPSHOT.xsd`` imported via
+    ``schemaLocation``) therefore have to be loaded through a proper
+    ``file://`` URI, so validation keeps working regardless of the path.
+    """
+
+    @idata(sv for sv in SchemaVersion if sv not in UNSUPPORTED_SCHEMA_VERSIONS)
+    def test_schema_loads_from_plain_and_special_paths(self, schema_version: SchemaVersion) -> None:
+        try:
+            from lxml.etree import XMLSchema  # noqa: F401
+        except ImportError:
+            self.skipTest('lxml is not installed')
+        version = schema_version.to_version()
+        valid_files = sorted(iglob(join(SCHEMA_TESTDATA_DIRECTORY, version, 'valid-*.xml')))
+        invalid_files = sorted(iglob(join(SCHEMA_TESTDATA_DIRECTORY, version, 'invalid-*.xml')))
+        if not valid_files:
+            self.skipTest(f'no valid xml test data for schema version {version}')
+        with open(valid_files[0], encoding='utf-8') as fh:
+            valid_bom = fh.read()
+        invalid_bom = None
+        if invalid_files:
+            with open(invalid_files[0], encoding='utf-8') as fh:
+                invalid_bom = fh.read()
+        original_schema_file = schema_res.BOM_XML[schema_version]
+
+        # the second name contains a hash sign AND spaces, which break raw
+        # URI parsing in libxml2
+        for location in ('plain-directory', 'release #1 (final copy)'):
+            with self.subTest(location=location, schema_version=version), \
+                    TemporaryDirectory(prefix='cyclonedx-relocated-') as tmp:
+                res_dir = join(tmp, location, '_res')
+                # copy the whole resource directory, so the main schema and
+                # its relative sibling references are relocated together
+                copytree(dirname(original_schema_file), res_dir)
+                relocated_schema_file = join(res_dir, basename(original_schema_file))
+
+                # point the validator's schema lookup at the relocated copy
+                schema_res.BOM_XML[schema_version] = relocated_schema_file
+                try:
+                    validator = XmlValidator(schema_version)
+                    self.assertEqual(validator._schema_file, relocated_schema_file)
+
+                    # legal BOM: must validate without error, proving the main
+                    # schema and its relative sibling references loaded
+                    self.assertIsNone(validator.validate_str(valid_bom))
+
+                    # structurally illegal BOM: must report a normal validation
+                    # error instead of raising a schema-loading exception
+                    if invalid_bom is not None:
+                        error = validator.validate_str(invalid_bom)
+                        self.assertIsNotNone(error)
+                        self.assertIsNotNone(error.data)
+                finally:
+                    schema_res.BOM_XML[schema_version] = original_schema_file
