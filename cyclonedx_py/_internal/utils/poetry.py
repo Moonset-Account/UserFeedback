@@ -96,7 +96,13 @@ def poetry2dependencies(poetry: Dict[str, Any]) -> Generator['Requirement', None
         )
     ):
         req = Requirement(name)
-        if isinstance(spec, dict) and 'extras' in spec:
-            req.extras = set(spec['extras'])
+        # a dependency may be declared as a plain string, a table, or a list of strings/tables
+        # (multiple constraints dependencies) -- see
+        # https://python-poetry.org/docs/dependency-specification/#multiple-constraints-dependencies
+        specs = spec if isinstance(spec, list) else [spec]
+        req.extras = set(chain.from_iterable(
+            s['extras'] for s in specs
+            if isinstance(s, dict) and 'extras' in s
+        ))
         # add other optional properties as soon as they were needed
         yield req

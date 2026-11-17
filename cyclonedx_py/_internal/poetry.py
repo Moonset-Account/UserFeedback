@@ -294,7 +294,6 @@ class PoetryBB(BomBuilder):
         for group_name in use_groups:
             for dep_name, dep_spec in po_cfg['group'][group_name].get('dependencies', {}).items():
                 dep_name = normalize_packagename(dep_name)
-                dep_spec = dep_spec if isinstance(dep_spec, dict) else {'version': dep_spec}
                 self._logger.debug('root-component depends on %s', dep_name)
                 if dep_name == 'python':
                     continue  # skip python constraint
@@ -302,18 +301,51 @@ class PoetryBB(BomBuilder):
                 if lock_entries is None:
                     self._logger.warning('skip unlocked dependency: %s', dep_name)
                     continue
-                if dep_spec.get('optional') and dep_name not in use_extras_dep_names:
+                # Poetry allows to declare the very same dependency multiple times, e.g. to pin
+                # different constraints per Python version. Such declarations may be a plain string,
+                # a single table or a list of strings/tables.
+                # see https://python-poetry.org/docs/dependency-specification/#multiple-constraints-dependencies
+                dep_constraints = self._normalize_dep_specs(dep_spec)
+                # As soon as a single declaration makes the package required, it must not be skipped
+                # just because another declaration of the same package is optional.
+                is_optional = all(bool(dc.get('optional')) for dc in dep_constraints)
+                if is_optional and dep_name not in use_extras_dep_names:
                     self._logger.debug('skip optional unused dependency: %s', dep_name)
                     continue
+                # merge the extras of all effective declarations, so that overlapping declarations
+                # do not cause the package to be added without its requested extras
+                dep_extras = frozenset(chain.from_iterable(
+                    dc.get('extras', ()) for dc in dep_constraints
+                ))
                 for lock_entry in lock_entries:
                     lock_entry.component.properties.add(Property(
                         name=PropertyName.PoetryGroup.value,
                         value=group_name
                     ))
                     root_d.dependencies.add(Dependency(lock_entry.component.bom_ref))
-                    self.__add_dep(bom, lock_entry, dep_spec.get('extras', ()), lock_data)
+                    # lock entries of the same package are shared: do not add overlapping
+                    # declarations as duplicate components/dependencies
+                    self.__add_dep(bom, lock_entry, dep_extras, lock_data)
 
         return bom
+
+    @staticmethod
+    def _normalize_dep_specs(dep_spec: Any) -> List['T_NameDict']:
+        """Normalize a Poetry dependency specification into a list of table-shaped declarations.
+
+        Poetry accepts a plain version string, a single table or a list of strings/tables for a
+        dependency name. The lock file only keeps the resolved packages, therefore the actual
+        constraint values are irrelevant here -- only the structural flags (``optional``,
+        ``extras`` and similar) of each declaration are needed.
+        """
+        if isinstance(dep_spec, list):
+            return [
+                dc if isinstance(dc, dict) else {'version': dc}
+                for dc in dep_spec
+            ]
+        if isinstance(dep_spec, dict):
+            return [dep_spec]
+        return [{'version': dep_spec}]
 
     def __add_dep(self, bom: 'Bom', lock_entry: _LockEntry, use_extras: Iterable[str], lock_data: 'T_LockData') -> None:
         if lock_entry.added2bom:
