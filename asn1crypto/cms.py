@@ -728,6 +728,12 @@ class RecipientKeyIdentifier(Sequence):
         ('date', GeneralizedTime, {'optional': True}),
         ('other', OtherKeyAttribute, {'optional': True}),
     ]
+    # The S/MIME attributes historically used the ASN.1 camelCase spelling for
+    # this field; accept it as an alias of the normalized snake_case name so
+    # both the CMS and S/MIME entry points encode the same structure.
+    _field_aliases = {
+        'subjectKeyIdentifier': 'subject_key_identifier',
+    }
 
 
 class KeyAgreementRecipientIdentifier(Choice):
@@ -927,14 +933,6 @@ class CompressedData(Sequence):
                 raise SystemError('The zlib module is not available')
             self._decompressed = zlib.decompress(self['encap_content_info']['content'].native)
         return self._decompressed
-
-
-class RecipientKeyIdentifier(Sequence):
-    _fields = [
-        ('subjectKeyIdentifier', OctetString),
-        ('date', GeneralizedTime, {'optional': True}),
-        ('other', OtherKeyAttribute, {'optional': True}),
-    ]
 
 
 class SMIMEEncryptionKeyPreference(Choice):

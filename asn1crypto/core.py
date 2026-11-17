@@ -3358,6 +3358,12 @@ class Sequence(Asn1Value):
     # string of the method name on self to call to get the spec for that field
     _spec_callbacks = None
 
+    # A dict that maps alternate (historical) unicode string field names to the
+    # canonical field names from _fields. Allows old and normalized spellings
+    # of a field name to both be accepted while the structure encoded stays
+    # the same.
+    _field_aliases = None
+
     # A dict that maps unicode string field names to an index in _fields
     _field_map = None
 
@@ -3409,6 +3415,13 @@ class Sequence(Asn1Value):
                 # OID-based specs. Otherwise sometimes the value would be processed
                 # before the OID field, resulting in invalid value object creation.
                 if self._fields:
+                    if self._field_aliases:
+                        # Translate any aliased field names to the canonical
+                        # field names used in _fields
+                        value = dict(
+                            (self._field_aliases.get(key, key), field_value)
+                            for key, field_value in value.items()
+                        )
                     keys = [info[0] for info in self._fields]
                     unused_keys = set(value.keys())
                 else:
@@ -3711,6 +3724,11 @@ class Sequence(Asn1Value):
                 cls._fields[index] = field
             cls._field_map[field[0]] = index
             cls._field_ids.append(_build_id_tuple(field[2], field[1]))
+
+        if cls._field_aliases:
+            for alias, field_name in cls._field_aliases.items():
+                if field_name in cls._field_map and alias not in cls._field_map:
+                    cls._field_map[alias] = cls._field_map[field_name]
 
         if cls._oid_pair is not None:
             cls._oid_nums = (cls._field_map[cls._oid_pair[0]], cls._field_map[cls._oid_pair[1]])
