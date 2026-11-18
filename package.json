@@ -1,0 +1,17 @@
+{
+  "name": "workload-identity-adjudicator",
+  "version": "1.0.0",
+  "description": "Local adjudicator for workload identity issuance requests, binding boot measurements, scheduling leases and service identity registrations.",
+  "type": "module",
+  "main": "src/index.mjs",
+  "exports": {
+    ".": "./src/index.mjs"
+  },
+  "scripts": {
+    "test": "node --test tests/adjudicator.test.mjs"
+  },
+  "engines": {
+    "node": ">=24"
+  },
+  "license": "UNLICENSED"
+}
