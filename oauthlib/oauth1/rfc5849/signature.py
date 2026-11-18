@@ -321,6 +321,16 @@ def collect_parameters(uri_query='', body=None, headers=None,
     return unescaped_params
 
 
+#: Maximum number of entries memoised by :func:`normalize_parameters`.
+#:
+#: The memo table is created per call and discarded when the call returns, so
+#: no parameter (and in particular no credential fragment) is retained across
+#: requests.  The cap also means a request with many distinct parameters
+#: cannot grow the table without bound; once it is full, further distinct
+#: strings are simply encoded again.
+ESCAPE_CACHE_LIMIT = 256
+
+
 def normalize_parameters(params) -> str:
     """
     Calculate the normalized request parameters.
@@ -330,6 +340,11 @@ def normalize_parameters(params) -> str:
 
     The rules for parameter normalization are defined in `section 3.4.1.3.2`_ of
     RFC 5849.
+
+    ``params`` may be any iterable of ``(name, value)`` pairs, including a
+    one-shot iterator: it is consumed exactly once.  Repeated names and empty
+    values are kept, and each name/value is percent-encoded *before* sorting,
+    as required by the RFC.
 
     .. _`Sec 3.4.1.3.2`: https://tools.ietf.org/html/rfc5849#section-3.4.1.3.2
     """
@@ -342,23 +357,63 @@ def normalize_parameters(params) -> str:
     # 1.  First, the name and value of each parameter are encoded
     #     (`Section 3.6`_).
     #
+    # Encoded results are memoised for the duration of this call only.  This
+    # avoids re-encoding the same repeated field names/values (a common shape
+    # for form submissions) while keeping memory bounded and leaving no
+    # cross-request state behind.  Once ``ESCAPE_CACHE_LIMIT`` distinct
+    # strings have been seen the lookup is bypassed entirely, so an input of
+    # all-unique parameters does not pay an unbounded per-item cache cost.
+    #
+    # Non-``str`` names/values are passed straight to ``utils.escape`` so its
+    # existing ``ValueError`` contract is preserved.
+    #
     # .. _`Section 3.6`: https://tools.ietf.org/html/rfc5849#section-3.6
-    key_values = [(utils.escape(k), utils.escape(v)) for k, v in params]
+    escape = utils.escape
+    cache = {}
+    key_values = []
+    append = key_values.append
+    for k, v in params:
+        if len(cache) < ESCAPE_CACHE_LIMIT:
+            if type(k) is str:
+                ek = cache.get(k)
+                if ek is None:
+                    ek = escape(k)
+                    cache[k] = ek
+            else:
+                ek = escape(k)
+            if type(v) is str:
+                ev = cache.get(v)
+                if ev is None:
+                    ev = escape(v)
+                    cache[v] = ev
+            else:
+                ev = escape(v)
+        else:
+            ek = escape(k)
+            ev = escape(v)
+        append((ek, ev))
 
     # 2.  The parameters are sorted by name, using ascending byte value
     #     ordering.  If two or more parameters share the same name, they
     #     are sorted by their value.
+    #
+    # All encoded strings are ASCII, so tuple ordering on Python strings is
+    # the required ascending byte value ordering.
     key_values.sort()
 
     # 3.  The name of each parameter is concatenated to its corresponding
     #     value using an "=" character (ASCII code 61) as a separator, even
     #     if the value is empty.
-    parameter_parts = ['{}={}'.format(k, v) for k, v in key_values]
-
+    #
     # 4.  The sorted name/value pairs are concatenated together into a
     #     single string by using an "&" character (ASCII code 38) as
     #     separator.
-    return '&'.join(parameter_parts)
+    #
+    # The formatted pairs overwrite the tuple list in place, so the extra
+    # intermediate list of ``name=value`` strings is never materialised.
+    for i, (k, v) in enumerate(key_values):
+        key_values[i] = f'{k}={v}'
+    return '&'.join(key_values)
 
 
 # ==== Common functions for HMAC-based signature methods =========
