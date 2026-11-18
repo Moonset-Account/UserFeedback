@@ -1,0 +1,11 @@
+{
+  "name": "takeover-coordinator",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "端点防护代理升级时的观测源接管协调模块",
+  "main": "src/takeover-coordinator.mjs",
+  "scripts": {
+    "test": "node --test"
+  }
+}
