@@ -1,0 +1,21 @@
+{
+  "messages": ["m", "m2"],
+  "entry": "u0",
+  "nodes": {
+    "u0": { "kind": "unknownCall", "api": "extension.fetch", "target": "u", "next": "c1u" },
+    "c1u": { "kind": "call", "api": "extension.openTab", "args": { "payload": "u" }, "require": { "origin": "https://app.example", "source": "winA" }, "next": "rO" },
+    "rO": { "kind": "read", "target": "o", "object": "m", "field": "origin", "next": "cO" },
+    "cO": { "kind": "checkOrigin", "value": "o", "expected": "https://app.example", "pass": "rS", "fail": "end" },
+    "rS": { "kind": "read", "target": "s", "object": "m", "field": "source", "next": "cS" },
+    "cS": { "kind": "checkSource", "value": "s", "expected": "winA", "pass": "rD", "fail": "end" },
+    "rD": { "kind": "read", "target": "d", "object": "m", "field": "data", "next": "c2p" },
+    "c2p": { "kind": "call", "api": "extension.openTab", "args": { "payload": "d" }, "require": { "origin": "https://app.example", "source": "winA" }, "next": "rD2" },
+    "rD2": { "kind": "read", "target": "d2", "object": "m2", "field": "data", "next": "c3v" },
+    "c3v": { "kind": "call", "api": "extension.openTab", "args": { "payload": "d2" }, "require": { "origin": "https://other.example", "source": "winB" }, "next": "br2" },
+    "br2": { "kind": "branch", "cond": "d", "true": "uq", "false": "rq" },
+    "uq": { "kind": "unknownCall", "api": "extension.fetch", "target": "u2", "next": "c4x" },
+    "rq": { "kind": "read", "target": "u2", "object": "m", "field": "data", "next": "c4x" },
+    "c4x": { "kind": "call", "api": "extension.openTab", "args": { "payload": "u2" }, "require": { "origin": "https://app.example", "source": "winA" }, "next": "end" },
+    "end": { "kind": "nop", "next": null }
+  }
+}

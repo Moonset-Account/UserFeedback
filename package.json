@@ -1,0 +1,11 @@
+{
+  "name": "ext-msg-origin-source-analyzer",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "浏览器扩展消息处理器的 origin/source 来源检查静态分析库（本地合成数据，无外部依赖）",
+  "scripts": {
+    "verify": "node tools/local_verify.mjs",
+    "analyze": "node tools/analyze.mjs"
+  }
+}

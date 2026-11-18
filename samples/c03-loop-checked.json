@@ -1,0 +1,17 @@
+{
+  "messages": ["m"],
+  "entry": "rO",
+  "nodes": {
+    "rO": { "kind": "read", "target": "o", "object": "m", "field": "origin", "next": "cO" },
+    "cO": { "kind": "checkOrigin", "value": "o", "expected": "https://app.example", "pass": "rS", "fail": "end" },
+    "rS": { "kind": "read", "target": "s", "object": "m", "field": "source", "next": "cS" },
+    "cS": { "kind": "checkSource", "value": "s", "expected": "winA", "pass": "init", "fail": "end" },
+    "init": { "kind": "read", "target": "x", "object": "m", "field": "tag", "next": "head" },
+    "head": { "kind": "branch", "cond": "x", "true": "body", "false": "rD" },
+    "body": { "kind": "merge", "target": "obj", "base": "m", "overrides": { "stamp": "x" }, "next": "back" },
+    "back": { "kind": "read", "target": "x", "object": "obj", "field": "stamp", "next": "head" },
+    "rD": { "kind": "read", "target": "d", "object": "m", "field": "data", "next": "call" },
+    "call": { "kind": "call", "api": "extension.openTab", "args": { "payload": "d" }, "require": { "origin": "https://app.example", "source": "winA" }, "next": "end" },
+    "end": { "kind": "nop", "next": null }
+  }
+}

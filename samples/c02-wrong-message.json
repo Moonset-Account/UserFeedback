@@ -1,0 +1,13 @@
+{
+  "messages": ["m1", "m2"],
+  "entry": "rO2",
+  "nodes": {
+    "rO2": { "kind": "read", "target": "o2", "object": "m2", "field": "origin", "next": "cO2" },
+    "cO2": { "kind": "checkOrigin", "value": "o2", "expected": "https://m2.example", "pass": "rS2", "fail": "end" },
+    "rS2": { "kind": "read", "target": "s2", "object": "m2", "field": "source", "next": "cS2" },
+    "cS2": { "kind": "checkSource", "value": "s2", "expected": "win2", "pass": "rD1", "fail": "end" },
+    "rD1": { "kind": "read", "target": "d1", "object": "m1", "field": "data", "next": "call" },
+    "call": { "kind": "call", "api": "extension.openTab", "args": { "payload": "d1" }, "require": { "origin": "https://app.example", "source": "winA" }, "next": "end" },
+    "end": { "kind": "nop", "next": null }
+  }
+}
