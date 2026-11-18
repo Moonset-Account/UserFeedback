@@ -1,0 +1,11 @@
+{
+  "name": "gateway-client-address-resolver",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "网关客户端地址解析：基于可信代理链从连接对端逐跳核对",
+  "main": "index.mjs",
+  "scripts": {
+    "test": "node --test tests/*.test.mjs"
+  }
+}
