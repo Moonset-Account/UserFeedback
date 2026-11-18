@@ -1,0 +1,60 @@
+{
+  "window": {
+    "start": "2026-11-01T00:00:00Z",
+    "end": "2026-11-11T00:00:00Z"
+  },
+  "as_of": "2026-11-05T12:00:00Z",
+  "environments": ["prod-eu", "staging"],
+  "quotas": [
+    {"env_id": "prod-eu", "control_id": "C-01", "max_open_duration": "PT12H"},
+    {"env_id": "staging", "control_id": "C-02", "max_open_duration": "P1D"}
+  ],
+  "exemptions": [
+    {
+      "exemption_id": "EX-1",
+      "env_id": "prod-eu",
+      "control_id": "C-01",
+      "effective_start": "2026-11-02T00:00:00Z",
+      "effective_end": "2026-11-02T12:00:00Z"
+    },
+    {
+      "exemption_id": "EX-2",
+      "env_id": "prod-eu",
+      "control_id": "C-01",
+      "effective_start": "2026-11-03T00:00:00Z",
+      "effective_end": "2026-11-04T00:00:00Z"
+    },
+    {
+      "exemption_id": "EX-3",
+      "env_id": "prod-eu",
+      "control_id": "C-01",
+      "effective_start": "2026-11-05T00:00:00Z",
+      "effective_end": "2026-11-10T00:00:00Z"
+    }
+  ],
+  "events": [
+    {"event_id": "EV-1", "exemption_id": "EX-1", "env_id": "prod-eu", "control_id": "C-01", "action": "OPEN", "occurred_at": "2026-11-02T01:00:00Z"},
+    {"event_id": "EV-2", "exemption_id": "EX-1", "env_id": "prod-eu", "control_id": "C-01", "action": "CLOSE", "occurred_at": "2026-11-02T05:00:00Z"},
+    {"event_id": "EV-3", "exemption_id": "EX-2", "env_id": "prod-eu", "control_id": "C-01", "action": "OPEN", "occurred_at": "2026-11-03T00:00:00Z"},
+    {"event_id": "EV-4", "exemption_id": "EX-2", "env_id": "prod-eu", "control_id": "C-01", "action": "CLOSE", "occurred_at": "2026-11-03T02:00:00Z"},
+    {"event_id": "EV-5", "exemption_id": "EX-3", "env_id": "prod-eu", "control_id": "C-01", "action": "OPEN", "occurred_at": "2026-11-05T08:00:00Z"}
+  ],
+  "applications": [
+    {
+      "application_id": "APP-OK",
+      "env_id": "prod-eu",
+      "control_id": "C-01",
+      "projected_intervals": [
+        {"start": "2026-11-06T00:00:00Z", "end": "2026-11-06T01:00:00Z"}
+      ]
+    },
+    {
+      "application_id": "APP-OVER",
+      "env_id": "prod-eu",
+      "control_id": "C-01",
+      "projected_intervals": [
+        {"start": "2026-11-06T00:00:00Z", "end": "2026-11-06T03:00:00Z"}
+      ]
+    }
+  ]
+}

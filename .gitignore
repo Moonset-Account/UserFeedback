@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+.venv/
+.test_output.txt
+.demo_*.json
+tests/_tmp_*/
