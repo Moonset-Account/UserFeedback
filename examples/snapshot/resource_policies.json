@@ -1,0 +1,43 @@
+{
+  "policies": [
+    {
+      "bucket": "media-bucket",
+      "statements": [
+        {
+          "id": "anon-read-assets",
+          "effect": "Allow",
+          "principal": "*",
+          "actions": ["s3:GetObject"],
+          "resources": ["media-bucket/assets/public/*"]
+        },
+        {
+          "id": "cdn-read-all",
+          "effect": "Allow",
+          "principal": {"type": "service", "service": "cdn-distribution", "endpoint": "cdn-dist-1"},
+          "actions": ["s3:GetObject"],
+          "resources": ["media-bucket/*"]
+        },
+        {
+          "id": "partner-ip-allow",
+          "effect": "Allow",
+          "principal": "*",
+          "actions": ["s3:GetObject"],
+          "resources": ["media-bucket/assets/partner/*"],
+          "condition": {"attributes": ["aws:SourceIp"]}
+        }
+      ]
+    },
+    {
+      "bucket": "logs-bucket",
+      "statements": [
+        {
+          "id": "anon-read-logs",
+          "effect": "Allow",
+          "principal": "*",
+          "actions": ["s3:GetObject"],
+          "resources": ["logs-bucket/*"]
+        }
+      ]
+    }
+  ]
+}

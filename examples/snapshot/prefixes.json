@@ -1,0 +1,7 @@
+{
+  "prefixes": [
+    "media-bucket/assets/",
+    "media-bucket/private/",
+    "logs-bucket/"
+  ]
+}

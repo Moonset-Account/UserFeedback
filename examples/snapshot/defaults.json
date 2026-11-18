@@ -1,0 +1,8 @@
+{
+  "inherited": {"block_public_access": true},
+  "overrides": {
+    "media-bucket": {"block_public_access": false}
+  },
+  "approved_distribution_endpoints": ["cdn-dist-1"],
+  "known_attributes": ["aws:PrincipalOrgID"]
+}

@@ -1,0 +1,11 @@
+{
+  "statements": [
+    {
+      "id": "org-deny-anon-logs",
+      "effect": "Deny",
+      "principal": "*",
+      "actions": ["s3:GetObject"],
+      "resources": ["logs-bucket/*"]
+    }
+  ]
+}
