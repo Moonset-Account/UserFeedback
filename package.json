@@ -1,0 +1,17 @@
+{
+  "name": "local-config-distributor",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "本地机密配置发放模块：版本化配置、实例/代次登记、读取租约、紧急撤销与最小化审计",
+  "main": "src/config-distributor.mjs",
+  "exports": {
+    ".": "./src/config-distributor.mjs"
+  },
+  "scripts": {
+    "test": "node --test tests/*.test.mjs"
+  },
+  "engines": {
+    "node": ">=24.15.0"
+  }
+}
