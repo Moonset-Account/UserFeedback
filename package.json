@@ -1,0 +1,17 @@
+{
+  "name": "pre-execution-gate",
+  "version": "1.0.0",
+  "description": "分批升级场景下的执行前门禁：对齐审批侧与执行侧对同一请求的结构化解析结果",
+  "type": "module",
+  "main": "src/index.js",
+  "exports": {
+    ".": "./src/index.js"
+  },
+  "scripts": {
+    "test": "node --test \"tests/**/*.test.mjs\""
+  },
+  "engines": {
+    "node": ">=24"
+  },
+  "license": "UNLICENSED"
+}
