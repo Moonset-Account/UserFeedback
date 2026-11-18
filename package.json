@@ -1,0 +1,14 @@
+{
+  "name": "nac-policy-module",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "网络准入模块：按设备标识与当前接入会话输出正常/隔离/待核验策略",
+  "main": "src/nac.mjs",
+  "scripts": {
+    "test": "node --test \"tests/*.test.mjs\""
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
