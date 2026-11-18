@@ -1,0 +1,20 @@
+{
+  "message_id": "msg-direct-001",
+  "sender_domain": "example.com",
+  "local_evidence": [
+    {
+      "method": "dkim",
+      "result": "pass",
+      "auth_domain": "example.com",
+      "source": "local"
+    },
+    {
+      "method": "spf",
+      "result": "fail",
+      "auth_domain": "example.net",
+      "source": "local"
+    }
+  ],
+  "upstream_evidence": [],
+  "forward_hops": []
+}

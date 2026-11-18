@@ -1,0 +1,27 @@
+{
+  "trusted_forwarders": ["relay-a", "relay-b"],
+  "org_registry": {
+    "co.uk": "example.co.uk"
+  },
+  "domain_policies": [
+    {
+      "domain": "example.com",
+      "policy": "reject",
+      "spf_alignment": "relaxed",
+      "dkim_alignment": "relaxed",
+      "subdomain_policy": "quarantine"
+    },
+    {
+      "domain": "monitor.example.org",
+      "policy": "none",
+      "spf_alignment": "strict",
+      "dkim_alignment": "strict"
+    },
+    {
+      "domain": "example.co.uk",
+      "policy": "quarantine",
+      "spf_alignment": "relaxed",
+      "dkim_alignment": "relaxed"
+    }
+  ]
+}

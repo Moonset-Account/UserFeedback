@@ -1,0 +1,47 @@
+{
+  "config": {
+    "trusted_forwarders": ["relay-a", "relay-b"],
+    "org_registry": {"co.uk": "example.co.uk"},
+    "domain_policies": [
+      {
+        "domain": "example.com",
+        "policy": "reject",
+        "spf_alignment": "relaxed",
+        "dkim_alignment": "relaxed",
+        "subdomain_policy": "quarantine"
+      }
+    ]
+  },
+  "message": {
+    "message_id": "msg-fwd-002",
+    "sender_domain": "example.com",
+    "local_evidence": [
+      {
+        "method": "spf",
+        "result": "fail",
+        "auth_domain": "example.com",
+        "source": "local"
+      }
+    ],
+    "upstream_evidence": [
+      {
+        "method": "dkim",
+        "result": "pass",
+        "auth_domain": "example.com",
+        "source": "upstream",
+        "message_id": "msg-fwd-002"
+      },
+      {
+        "method": "dkim",
+        "result": "pass",
+        "auth_domain": "other.example",
+        "source": "upstream",
+        "message_id": "msg-other-999"
+      }
+    ],
+    "forward_hops": [
+      {"service": "relay-a", "trusted": true},
+      {"service": "relay-b", "trusted": true}
+    ]
+  }
+}
