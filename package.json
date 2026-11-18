@@ -1,0 +1,13 @@
+{
+  "name": "login-discovery",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "组织邮箱域登录发现模块：归属解析、冲突暂停、过渡窗口成员登记路由、邀请绑定与回执校验",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "test": "node --test"
+  }
+}
