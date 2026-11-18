@@ -3,6 +3,26 @@ def audit(policy):
     permissions_on_other_users(policy, actions)
 
 
+def precise_recheck(policy, role_arns, principal_attributes=None, step_conditions=None):
+    """
+    Optional precise re-check for the AttachRolePolicy/PutRolePolicy +
+    sts:AssumeRole escalation combinations.
+
+    Unlike the default set-based audit above, this evaluates, for each
+    concrete role ARN given by the caller, whether the *same* role can be
+    both modified and assumed under the supplied principal attributes and
+    per-step request condition values.  See parliament.privesc_precheck for
+    the exact semantics.  The result only covers the given identity policy
+    and context; it says nothing about role trust policies or organization
+    policies.
+    """
+    from ..privesc_precheck import precise_recheck as _precise_recheck
+
+    return _precise_recheck(
+        policy, role_arns, principal_attributes, step_conditions
+    )
+
+
 # Categories based on https://know.bishopfox.com/blog/5-privesc-attack-vectors-in-aws
 
 

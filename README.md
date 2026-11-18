@@ -274,3 +274,82 @@ The IAM data is obtained from scraping the docs [here](https://docs.aws.amazon.c
 - [tf-parliament](https://github.com/rdkls/tf-parliament): Runs Parliament against terraform files
 - [iam-lint](https://github.com/xen0l/iam-lint): Github action for linting AWS IAM policy documents 
 - [Paco](https://paco-cloud.io): Cloud orchestration tool that integrates Parliament as a library to verify a project's IAM Policies and warns about findings.
+
+# Optional precise re-check for privilege escalation (AttachRolePolicy/PutRolePolicy + AssumeRole)
+
+The community privilege-escalation auditor collapses allowed actions into a set,
+so it cannot tell whether "modify a role" and "assume a role" land on the same
+role. `parliament/privesc_precheck.py` adds an optional precise re-check, also
+exposed as `parliament.community_auditors.privilege_escalation.precise_recheck`.
+The default `audit(policy)` interface is unchanged.
+
+## API
+
+```python
+from parliament import analyze_policy_string
+from parliament.community_auditors import privilege_escalation
+
+policy = analyze_policy_string(policy_str)
+result = privilege_escalation.precise_recheck(
+    policy,
+    role_arns=["arn:aws:iam::111122223333:role/RoleA"],   # finite concrete roles
+    principal_attributes={"aws:PrincipalType": "User"},   # fixed principal attrs
+    step_conditions={                                      # per-step request values
+        "modify": {"aws:RequestedRegion": "us-east-1"},
+        "assume": {},
+    },
+)
+```
+
+`precise_recheck(policy, role_arns, principal_attributes=None, step_conditions=None)`
+returns `{"roles": {arn: {"status": ..., "steps": {...}}}, "scope": ...}`:
+
+- Per role `status`: `supported` (identity policy allows both steps on this
+  role), `blocked` (explicit or implicit deny on a step), or `undetermined`.
+- Per step (`modify` = iam:AttachRolePolicy/PutRolePolicy, `assume` =
+  sts:AssumeRole): `verdict` plus `allow` / `deny` / `unknown` statement
+  sources (Sid, or `Statement[i]` when no Sid), and per-action detail.
+- `scope`: a reminder that the result covers only the given identity policy
+  and context — not role trust policies, SCPs, permissions boundaries, or
+  session policies — so `supported` is not a full exploitability conclusion.
+
+Semantics: Action/Resource use the existing `*` glob matching; conditions
+support `StringEquals`, `Bool`, `Null` (values of one key are OR-ed, keys and
+operators are AND-ed, missing keys fail StringEquals/Bool and count as absent
+for Null). An applicable explicit Deny wins. Unsupported condition operators,
+`NotAction`, and `NotResource` are kept as `unknown` — never treated as
+unconditional allows and never dropped; a determinate deny is not washed out
+by unrelated unknowns, and a possibly-applicable unknown Deny is not masked by
+a known Allow.
+
+## Local verification
+
+```
+.venv/bin/python tools/local_verify.py --list
+.venv/bin/python tools/local_verify.py --case C01            # single case
+.venv/bin/python tools/local_verify.py --case all            # all cases
+```
+
+Each case prints one JSON record (case id, assertion count, passed/failed/
+skipped, synthetic sample, per-assertion expected/observed) and the process
+exits non-zero on any failure, unknown case, or zero-assertion case. All
+samples are synthetic (docs-style account `111122223333`); no credentials or
+real account data are used. Cases: C01 per-role two-step association (no
+cross-role splicing), C02 star matching and StringEquals/Bool/Null with
+OR/AND/missing-key semantics, C03 explicit-Deny precedence and
+unknown-condition/NotAction/NotResource three-valued handling, C04 per-role
+per-step statement sources and default-interface compatibility.
+
+## Uncovered boundaries
+
+- Only `StringEquals`, `Bool`, `Null` conditions are evaluated; every other
+  operator (including `*IfExists` and `ForAnyValue:`/`ForAllValues:` variants)
+  yields `unknown` for the affected statement.
+- `NotAction`/`NotResource` are only used to exclude statements that
+  definitely cannot apply; otherwise they stay `unknown`.
+- Condition values are compared literally; IAM policy variables
+  (ex. `${aws:username}`) are not resolved.
+- Malformed statements (missing Action/Resource elements) are skipped here and
+  reported by the linter's own findings instead.
+- The result says nothing about role trust policies, SCPs, permissions
+  boundaries, resource policies, or session policies.
