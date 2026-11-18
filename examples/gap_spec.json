@@ -1,0 +1,21 @@
+{
+  "buffer": {
+    "size": 32,
+    "fields": [
+      {"name": "hdr", "offset": 0, "size": 8},
+      {"name": "body", "offset": 12, "size": 12},
+      {"name": "tail", "offset": 24, "size": 8}
+    ]
+  },
+  "entry": "entry",
+  "nodes": [
+    {"id": "entry", "ops": [], "succ": ["zero_all", "write_fields"]},
+    {"id": "zero_all", "ops": [{"op": "zero_buffer"}], "succ": ["merge"]},
+    {"id": "write_fields", "ops": [
+      {"op": "write_field", "field": "hdr"},
+      {"op": "write_field", "field": "body"},
+      {"op": "write_field", "field": "tail"}
+    ], "succ": ["merge"]},
+    {"id": "merge", "ops": [{"op": "copy", "offset": 0, "length": 32}], "succ": []}
+  ]
+}
