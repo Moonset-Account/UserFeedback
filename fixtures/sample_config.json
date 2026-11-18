@@ -1,0 +1,157 @@
+{
+  "versions": [
+    {"name": "v1", "order": 1},
+    {"name": "v2", "order": 2},
+    {"name": "v3", "order": 3},
+    {"name": "v4", "order": 4}
+  ],
+  "version_defaults": {
+    "v1": {"unknown_fields": "reject", "extra_validation": true},
+    "v2": {"unknown_fields": "reject", "extra_validation": true},
+    "v3": {"unknown_fields": null, "extra_validation": null},
+    "v4": {"unknown_fields": "drop", "extra_validation": false}
+  },
+  "layers": [
+    {"name": "base", "priority": 10},
+    {"name": "service", "priority": 20},
+    {"name": "global", "priority": 30}
+  ],
+  "message_types": [
+    {
+      "name": "OrderEvent",
+      "required_unknown_field_policy": "reject",
+      "allowed_policies": ["reject", "drop"],
+      "require_extra_validation": true
+    },
+    {
+      "name": "MetricsEvent",
+      "required_unknown_field_policy": null,
+      "allowed_policies": ["preserve", "reject", "drop"],
+      "require_extra_validation": false
+    }
+  ],
+  "endpoints": [
+    {
+      "name": "producer-old",
+      "role": "producer",
+      "min_version": "v1",
+      "max_version": "v2",
+      "settings": [
+        {
+          "layer": "base",
+          "version": null,
+          "message_type": null,
+          "values": {"unknown_fields": "reject", "extra_validation": true}
+        }
+      ]
+    },
+    {
+      "name": "consumer-old",
+      "role": "consumer",
+      "min_version": "v1",
+      "max_version": "v2",
+      "settings": [
+        {
+          "layer": "base",
+          "version": null,
+          "message_type": null,
+          "values": {"unknown_fields": "reject", "extra_validation": null}
+        },
+        {
+          "layer": "base",
+          "version": null,
+          "message_type": null,
+          "values": {"unknown_fields": null}
+        }
+      ]
+    },
+    {
+      "name": "producer-new",
+      "role": "producer",
+      "min_version": "v2",
+      "max_version": "v4",
+      "settings": [
+        {
+          "layer": "base",
+          "version": null,
+          "message_type": null,
+          "values": {"unknown_fields": "reject", "extra_validation": true}
+        },
+        {
+          "layer": "service",
+          "version": "v3",
+          "message_type": "OrderEvent",
+          "values": {"unknown_fields": "preserve"}
+        }
+      ]
+    },
+    {
+      "name": "consumer-strict",
+      "role": "consumer",
+      "min_version": "v2",
+      "max_version": "v4",
+      "settings": [
+        {
+          "layer": "service",
+          "version": "v4",
+          "message_type": "OrderEvent",
+          "values": {"unknown_fields": "drop"}
+        },
+        {
+          "layer": "global",
+          "version": null,
+          "message_type": null,
+          "values": {"extra_validation": true}
+        }
+      ]
+    },
+    {
+      "name": "consumer-future",
+      "role": "consumer",
+      "min_version": "v4",
+      "max_version": "v4",
+      "settings": [
+        {
+          "layer": "base",
+          "version": null,
+          "message_type": null,
+          "values": {"unknown_fields": "reject", "extra_validation": false}
+        }
+      ]
+    },
+    {
+      "name": "consumer-loose",
+      "role": "consumer",
+      "min_version": "v3",
+      "max_version": "v4",
+      "settings": []
+    }
+  ],
+  "pairs": [
+    {
+      "producer": "producer-old",
+      "consumer": "consumer-old",
+      "message_types": ["OrderEvent", "MetricsEvent"]
+    },
+    {
+      "producer": "producer-new",
+      "consumer": "consumer-strict",
+      "message_types": ["OrderEvent"]
+    },
+    {
+      "producer": "producer-new",
+      "consumer": "consumer-future",
+      "message_types": ["OrderEvent"]
+    },
+    {
+      "producer": "producer-new",
+      "consumer": "consumer-loose",
+      "message_types": ["OrderEvent"]
+    },
+    {
+      "producer": "producer-old",
+      "consumer": "consumer-future",
+      "message_types": ["MetricsEvent"]
+    }
+  ]
+}
