@@ -3,8 +3,11 @@ from __future__ import annotations
 import logging
 import os
 import struct
+import threading
+from collections import OrderedDict
 from functools import cached_property, lru_cache
 from io import BytesIO
+from itertools import count
 from typing import TYPE_CHECKING, BinaryIO, TypeAlias
 
 from dissect.util.ts import wintimestamp
@@ -31,7 +34,7 @@ from dissect.regf.exceptions import (
 )
 
 if TYPE_CHECKING:
-    from collections.abc import Iterator
+    from collections.abc import Callable, Iterator
     from datetime import datetime
 
 log = logging.getLogger(__name__)
@@ -43,16 +46,190 @@ CellType: TypeAlias = "IndexLeaf | FastLeaf | HashLeaf | IndexRoot | KeyNode | K
 STABLE = 0
 VOLATILE = 1
 
+_hive_ids = count(1)
+
+
+class CellCache:
+    """A shared cache for raw registry cell payload bytes.
+
+    A single ``CellCache`` can be passed to :class:`RegistryHive` instances that are read together,
+    e.g. a SYSTEM, SOFTWARE and NTUSER hive from the same acquisition. It lets the caller put a
+    total byte budget on the raw cell payloads that are kept around for reuse.
+
+    Only the raw cell payload (the bytes after the 4-byte cell size) is cached. Parsed ``Cell``
+    objects, the per-hive ``lru_cache`` of parsed cells, and any data already held by the caller are
+    outside of this budget. The budget is therefore *not* a limit on the memory usage of the whole
+    process; it only bounds the sum of the cached raw payload bytes.
+
+    Entries are keyed by hive identity, the hive's current acquisition version, a generation
+    counter and the cell offset/length. Two hives - or two acquisitions of the same hive - can
+    therefore never accidentally share bytes for the same offset. The cache is evicted in LRU
+    order. A single cell payload larger than the whole budget is read directly and not retained.
+    Failed or incomplete reads are never stored.
+
+    Releasing a hive only drops that hive's entries; entries of other hives stay intact. No file
+    handles are opened or closed by this class.
+    """
+
+    def __init__(self, budget: int):
+        if not isinstance(budget, int):
+            raise TypeError("budget must be an integer number of bytes")
+        if budget < 0:
+            raise ValueError("budget must be non-negative")
+
+        self.budget = budget
+        self._entries: OrderedDict[tuple, bytes] = OrderedDict()
+        self._resident = 0
+        self._lock = threading.RLock()
+        self._hits = 0
+        self._misses = 0
+        self._evictions = 0
+        self._oversized = 0
+        self._failed_reads = 0
+        self._short_reads = 0
+        self._payload_bytes_fetched = 0
+
+    def __len__(self) -> int:
+        with self._lock:
+            return len(self._entries)
+
+    def __contains__(self, key: tuple) -> bool:
+        with self._lock:
+            return key in self._entries
+
+    @property
+    def resident_bytes(self) -> int:
+        """The sum of the raw payload bytes currently retained."""
+        with self._lock:
+            return self._resident
+
+    def fetch(self, key: tuple, reader: Callable[[], bytes], length: int) -> bytes:
+        """Return cached bytes for ``key`` or call ``reader`` and cache a complete payload.
+
+        ``reader`` is called without the cache lock held. If it raises, the exception propagates
+        and nothing is cached. A short read is returned to the caller unchanged (matching the
+        behaviour of a plain file read) but is not cached as if it were valid data.
+        """
+        with self._lock:
+            if (data := self._entries.get(key)) is not None:
+                self._entries.move_to_end(key)
+                self._hits += 1
+                return data
+            self._misses += 1
+
+        try:
+            data = reader()
+        except BaseException:
+            with self._lock:
+                self._failed_reads += 1
+            raise
+
+        with self._lock:
+            self._payload_bytes_fetched += len(data)
+            if length > 0 and len(data) != length:
+                self._short_reads += 1
+
+        # Empty payloads and short reads are not cached: the latter commonly means the underlying
+        # read failed or the cell is truncated, and must not be turned into a cached empty value.
+        if length > 0 and len(data) == length:
+            self.put(key, data)
+
+        return data
+
+    def put(self, key: tuple, data: bytes) -> bool:
+        """Store ``data`` for ``key``, evicting LRU entries as needed. Returns whether it was kept."""
+        size = len(data)
+        with self._lock:
+            if key in self._entries:
+                return True
+
+            # Empty payloads carry no reusable bytes; caching them would only grow metadata.
+            if size == 0:
+                return False
+
+            if size > self.budget:
+                self._oversized += 1
+                return False
+
+            while self._resident + size > self.budget and self._entries:
+                _, old = self._entries.popitem(last=False)
+                self._resident -= len(old)
+                self._evictions += 1
+
+            self._entries[key] = data
+            self._resident += size
+            return True
+
+    def release(self, hive) -> int:
+        """Drop all entries belonging to ``hive`` (a :class:`RegistryHive` or a hive id).
+
+        Entries of other hives are left untouched. Returns the number of entries removed.
+        """
+        hive_id = getattr(hive, "_cache_id", hive)
+
+        with self._lock:
+            keys = [key for key in self._entries if key[0] == hive_id]
+            for key in keys:
+                self._resident -= len(self._entries.pop(key))
+
+            return len(keys)
+
+    def clear(self) -> None:
+        with self._lock:
+            self._entries.clear()
+            self._resident = 0
+
+    def stats(self) -> dict[str, int]:
+        """Return a snapshot of cache counters, useful for read-reuse and eviction checks."""
+        with self._lock:
+            return {
+                "budget": self.budget,
+                "entries": len(self._entries),
+                "resident_bytes": self._resident,
+                "hits": self._hits,
+                "misses": self._misses,
+                "evictions": self._evictions,
+                "oversized": self._oversized,
+                "failed_reads": self._failed_reads,
+                "short_reads": self._short_reads,
+                "payload_bytes_fetched": self._payload_bytes_fetched,
+            }
+
 
 class RegistryHive:
-    def __init__(self, fh: BinaryIO):
+    def __init__(
+        self,
+        fh: BinaryIO,
+        *,
+        cache: CellCache | None = None,
+        collection_version: object | None = None,
+    ):
         self.fh = fh
+
+        # The shared cache and the identity/version state used for its keys. The default path
+        # (no cache) behaves exactly like it did before this option existed.
+        self.cache = cache
+        self._cache_id = next(_hive_ids)
+        self._cache_generation = 0
 
         self.fh.seek(0)
         data = self.fh.read(len(c_regf._HBASE_BLOCK))
         self.header = c_regf._HBASE_BLOCK(data)
         self.version = self.header.Minor
         self.filename = self.header.FileName.rstrip("\x00")
+
+        if collection_version is None:
+            # Default acquisition version: enough header state to tell a re-collected hive apart
+            # from the one this instance was originally opened on.
+            collection_version = (
+                self.header.Sequence1,
+                self.header.Sequence2,
+                self.header.TimeStamp,
+                self.header.Length,
+                self.header.CheckSum,
+            )
+        hash(collection_version)  # fail early on unusable version tokens
+        self._collection_version = collection_version
 
         self.dirty = xor32_crc(data[:508]) == self.header.CheckSum
         if self.dirty:
@@ -78,11 +255,41 @@ class RegistryHive:
 
         self.cell = lru_cache(4096)(self.cell)
 
+    @property
+    def collection_version(self) -> object:
+        return self._collection_version
+
+    def set_collection_version(self, version: object) -> None:
+        """Mark a new acquisition version for cache keys.
+
+        Payload bytes cached for this hive under the previous version are dropped, so a later read
+        of the same offset cannot return bytes from the old acquisition. Other hives sharing the
+        cache are unaffected and no file handle is touched.
+
+        This method scopes the *raw payload cache* only. Parsed ``Cell`` objects memoised on this
+        instance (``root()``, ``KeyNode._cache``, the per-hive ``lru_cache``) are not rebuilt; if the
+        underlying bytes changed, construct a new :class:`RegistryHive` instead.
+        """
+        hash(version)
+        self._collection_version = version
+        self._cache_generation += 1
+        if self.cache is not None:
+            self.cache.release(self)
+
+    def release_cache(self) -> int:
+        """Drop this hive's entries from the shared cache, leaving other hives intact."""
+        if self.cache is None:
+            return 0
+        return self.cache.release(self)
+
     def root(self) -> KeyNode:
         return self._root
 
     def cell(self, offset: int) -> CellType:
         return self.parse_cell_data(self.cell_data(offset))
+
+    def _cache_key(self, offset: int, length: int) -> tuple:
+        return (self._cache_id, self._collection_version, self._cache_generation, offset, length)
 
     def _cell_data(self, offset: int) -> tuple[bool, bytes]:
         self.fh.seek(self._hbin_offset + offset)
@@ -92,7 +299,22 @@ class RegistryHive:
             size = -size
             allocated = True
 
-        return allocated, self.fh.read(size - 4)
+        length = size - 4
+        if self.cache is None or length <= 0:
+            return allocated, self.fh.read(length)
+
+        # Only the payload itself is cached; the size header is still read on every lookup so that
+        # truncated cells and allocation state are always observed from the underlying handle.
+        def read_payload() -> bytes:
+            self.fh.seek(self._hbin_offset + offset + 4)
+            return self.fh.read(length)
+
+        data = self.cache.fetch(self._cache_key(offset, length), read_payload, length)
+        if len(data) == length:
+            # Leave the handle positioned as if the payload had been read from the file, whether it
+            # came from the cache or not. A short read already left the handle at end-of-file.
+            self.fh.seek(self._hbin_offset + offset + 4 + length)
+        return allocated, data
 
     def cell_data(self, offset: int) -> bytes:
         _, data = self._cell_data(offset)

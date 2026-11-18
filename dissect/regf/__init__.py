@@ -5,9 +5,10 @@ from dissect.regf.exceptions import (
     RegistryKeyNotFoundError,
     RegistryValueNotFoundError,
 )
-from dissect.regf.regf import RegistryHive
+from dissect.regf.regf import CellCache, RegistryHive
 
 __all__ = [
+    "CellCache",
     "Error",
     "RegistryHive",
     "RegistryKeyNotFoundError",
