@@ -1,0 +1,24 @@
+{
+  "events": [
+    {"type": "clock_read", "id": "r1", "source": "monotonic", "value": 1000, "unit": "ms", "generation": 1},
+    {"type": "deadline_compute", "id": "d1", "base": "r1", "duration": 500, "duration_unit": "ms"},
+    {"type": "clock_read", "id": "r2", "source": "monotonic", "value": 2, "unit": "s", "generation": 1},
+    {"type": "compare", "id": "c-ok", "deadline": "d1", "now": "r2"},
+
+    {"type": "clock_read", "id": "r3", "source": "wall", "value": 1700000000000, "unit": "ms", "generation": 1},
+    {"type": "deadline_compute", "id": "d2", "base": "r3", "duration": 60, "duration_unit": "s"},
+    {"type": "compare", "id": "c-cross-domain", "deadline": "d2", "now": "r2"},
+
+    {"type": "save", "id": "s1", "target": "d1", "generation": 1},
+    {"type": "restore", "id": "rst1", "saved": "s1", "generation": 2},
+    {"type": "clock_read", "id": "r4", "source": "monotonic", "value": 5400, "unit": "ms", "generation": 2},
+    {"type": "compare", "id": "c-stale-no-proof", "deadline": "rst1", "now": "r4"},
+
+    {"type": "baseline_proof", "id": "p1", "from_generation": 1, "to_generation": 2, "offset": 4200, "unit": "ms"},
+    {"type": "compare", "id": "c-stale-with-proof", "deadline": "rst1", "now": "r4"},
+
+    {"type": "clock_read", "id": "r5", "source": null, "value": 9999, "unit": "ms", "generation": 2},
+    {"type": "deadline_compute", "id": "d3", "base": "r5", "duration": 10, "duration_unit": "ms"},
+    {"type": "compare", "id": "c-unlabeled", "deadline": "d3", "now": "r4"}
+  ]
+}
