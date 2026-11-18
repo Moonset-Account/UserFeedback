@@ -1,0 +1,981 @@
+{
+  "tool": "tools/local_verify.py",
+  "cases": [
+    {
+      "case": "C01",
+      "assertions": {
+        "passed": 21,
+        "failed": 0,
+        "skipped": 0,
+        "total": 21
+      },
+      "status": "passed",
+      "scenarios": [
+        {
+          "name": "c01_unrelated_keyid_is_never_called",
+          "description": "Unrelated keyid is skipped without verify_signature calls; rejecting match yields unmet threshold",
+          "assertions": {
+            "passed": 7,
+            "failed": 0,
+            "skipped": 0,
+            "total": 7
+          },
+          "failures": [],
+          "seed": {
+            "signature_keyids": [
+              "a",
+              "b"
+            ],
+            "keys": [
+              {
+                "label": "x-unrelated",
+                "keyid": "x",
+                "accept_sigs": [
+                  "a"
+                ],
+                "fail_with": "UnverifiedSignatureError"
+              },
+              {
+                "label": "b-rejects",
+                "keyid": "b",
+                "accept_sigs": [],
+                "fail_with": "UnverifiedSignatureError"
+              }
+            ],
+            "threshold": 1
+          },
+          "expected": {
+            "unrelated_call_count": 0,
+            "matching_calls": [
+              "b"
+            ],
+            "error": "VerificationError Found: 0, Expected 1"
+          },
+          "observed": {
+            "unrelated_call_count": 0,
+            "matching_calls": [
+              "b"
+            ],
+            "call_log": [
+              {
+                "key": "b-rejects",
+                "keyid": "b",
+                "signature": "b",
+                "outcome": "rejected"
+              }
+            ]
+          },
+          "status": "passed"
+        },
+        {
+          "name": "c01_unique_keyid_count_not_candidate_objects",
+          "description": "Acceptance counts unique keyids, not candidate objects",
+          "assertions": {
+            "passed": 7,
+            "failed": 0,
+            "skipped": 0,
+            "total": 7
+          },
+          "failures": [],
+          "seed": {
+            "signature_keyids": [
+              "a"
+            ],
+            "keys": [
+              {
+                "label": "a-first",
+                "keyid": "a",
+                "accept_sigs": [
+                  "a"
+                ],
+                "fail_with": "UnverifiedSignatureError"
+              },
+              {
+                "label": "a-second",
+                "keyid": "a",
+                "accept_sigs": [
+                  "a"
+                ],
+                "fail_with": "UnverifiedSignatureError"
+              },
+              {
+                "label": "a-first-t2",
+                "keyid": "a",
+                "accept_sigs": [
+                  "a"
+                ],
+                "fail_with": "UnverifiedSignatureError"
+              },
+              {
+                "label": "a-second-t2",
+                "keyid": "a",
+                "accept_sigs": [
+                  "a"
+                ],
+                "fail_with": "UnverifiedSignatureError"
+              }
+            ],
+            "thresholds": [
+              1,
+              2
+            ]
+          },
+          "expected": {
+            "accepted_at_threshold_1": [
+              "a"
+            ],
+            "first_calls": [
+              "a"
+            ],
+            "second_calls": [],
+            "threshold_2_error": "VerificationError Found: 1, Expected 2"
+          },
+          "observed": {
+            "accepted_at_threshold_1": [
+              "a"
+            ],
+            "first_calls": [
+              "a"
+            ],
+            "second_calls": [],
+            "call_log": [
+              {
+                "key": "a-first",
+                "keyid": "a",
+                "signature": "a",
+                "outcome": "accepted"
+              }
+            ]
+          },
+          "status": "passed"
+        },
+        {
+          "name": "c01_threshold_validation",
+          "description": "Zero/negative threshold and threshold above key count raise ValueError before signature iteration",
+          "assertions": {
+            "passed": 7,
+            "failed": 0,
+            "skipped": 0,
+            "total": 7
+          },
+          "failures": [],
+          "seed": {
+            "signature_keyids": [
+              "a"
+            ],
+            "keys": [
+              {
+                "label": "a-ok",
+                "keyid": "a",
+                "accept_sigs": [
+                  "a"
+                ],
+                "fail_with": "UnverifiedSignatureError"
+              }
+            ],
+            "thresholds": [
+              0,
+              -3,
+              2
+            ],
+            "key_count": 1
+          },
+          "expected": {
+            "zero_or_negative": "ValueError Threshold must be greater than 0",
+            "keys_below_threshold": "ValueError Number of keys can't be less than threshold",
+            "verify_signature_calls": 0
+          },
+          "observed": {
+            "verify_signature_calls": 0,
+            "call_log": []
+          },
+          "status": "passed"
+        }
+      ]
+    },
+    {
+      "case": "C02",
+      "assertions": {
+        "passed": 20,
+        "failed": 0,
+        "skipped": 0,
+        "total": 20
+      },
+      "status": "passed",
+      "scenarios": [
+        {
+          "name": "c02_failover_to_later_candidate",
+          "description": "Same keyid candidates: first fails, later succeeds; order swap",
+          "assertions": {
+            "passed": 6,
+            "failed": 0,
+            "skipped": 0,
+            "total": 6
+          },
+          "failures": [],
+          "seed": {
+            "signature_keyids": [
+              "a"
+            ],
+            "keys": [
+              {
+                "label": "a-bad",
+                "keyid": "a",
+                "accept_sigs": [],
+                "fail_with": "UnverifiedSignatureError"
+              },
+              {
+                "label": "a-good",
+                "keyid": "a",
+                "accept_sigs": [
+                  "a"
+                ],
+                "fail_with": "UnverifiedSignatureError"
+              },
+              {
+                "label": "a-bad-2",
+                "keyid": "a",
+                "accept_sigs": [],
+                "fail_with": "UnverifiedSignatureError"
+              },
+              {
+                "label": "a-good-2",
+                "keyid": "a",
+                "accept_sigs": [
+                  "a"
+                ],
+                "fail_with": "UnverifiedSignatureError"
+              }
+            ],
+            "candidate_orders": [
+              [
+                "a-bad",
+                "a-good"
+              ],
+              [
+                "a-good-2",
+                "a-bad-2"
+              ]
+            ]
+          },
+          "expected": {
+            "first_order_calls": [
+              [
+                "a-bad",
+                "a",
+                "rejected"
+              ],
+              [
+                "a-good",
+                "a",
+                "accepted"
+              ]
+            ],
+            "second_order_bad_calls": 0
+          },
+          "observed": {
+            "first_order_log": [
+              {
+                "key": "a-bad",
+                "keyid": "a",
+                "signature": "a",
+                "outcome": "rejected"
+              },
+              {
+                "key": "a-good",
+                "keyid": "a",
+                "signature": "a",
+                "outcome": "accepted"
+              }
+            ],
+            "second_order_log": [
+              {
+                "key": "a-good-2",
+                "keyid": "a",
+                "signature": "a",
+                "outcome": "accepted"
+              }
+            ]
+          },
+          "status": "passed"
+        },
+        {
+          "name": "c02_all_candidates_fail",
+          "description": "All same-keyid candidates are tried and rejection is terminal",
+          "assertions": {
+            "passed": 5,
+            "failed": 0,
+            "skipped": 0,
+            "total": 5
+          },
+          "failures": [],
+          "seed": {
+            "signature_keyids": [
+              "a"
+            ],
+            "keys": [
+              {
+                "label": "a-fail-1",
+                "keyid": "a",
+                "accept_sigs": [],
+                "fail_with": "UnverifiedSignatureError"
+              },
+              {
+                "label": "a-fail-2",
+                "keyid": "a",
+                "accept_sigs": [],
+                "fail_with": "UnverifiedSignatureError"
+              }
+            ],
+            "threshold": 1
+          },
+          "expected": {
+            "calls_per_candidate": [
+              "a",
+              "a"
+            ],
+            "accepted": []
+          },
+          "observed": {
+            "call_log": [
+              {
+                "key": "a-fail-1",
+                "keyid": "a",
+                "signature": "a",
+                "outcome": "rejected"
+              },
+              {
+                "key": "a-fail-2",
+                "keyid": "a",
+                "signature": "a",
+                "outcome": "rejected"
+              }
+            ],
+            "first_calls": [
+              "a"
+            ],
+            "second_calls": [
+              "a"
+            ]
+          },
+          "status": "passed"
+        },
+        {
+          "name": "c02_duplicate_candidate_object",
+          "description": "Repeated candidate object is invoked once and counted once",
+          "assertions": {
+            "passed": 4,
+            "failed": 0,
+            "skipped": 0,
+            "total": 4
+          },
+          "failures": [],
+          "seed": {
+            "signature_keyids": [
+              "a"
+            ],
+            "keys": [
+              {
+                "label": "a-dup",
+                "keyid": "a",
+                "accept_sigs": [
+                  "a"
+                ],
+                "fail_with": "UnverifiedSignatureError"
+              },
+              {
+                "label": "a-dup-t2",
+                "keyid": "a",
+                "accept_sigs": [
+                  "a"
+                ],
+                "fail_with": "UnverifiedSignatureError"
+              }
+            ],
+            "candidate_list": [
+              "a-dup",
+              "a-dup"
+            ],
+            "thresholds": [
+              1,
+              2
+            ]
+          },
+          "expected": {
+            "accepted_at_threshold_1": 1,
+            "verify_signature_invocations": 1,
+            "threshold_2_error": "VerificationError Found: 1, Expected 2"
+          },
+          "observed": {
+            "accepted_at_threshold_1": 1,
+            "verify_signature_invocations": 1,
+            "call_log": [
+              {
+                "key": "a-dup",
+                "keyid": "a",
+                "signature": "a",
+                "outcome": "accepted"
+              }
+            ]
+          },
+          "status": "passed"
+        },
+        {
+          "name": "c02_signature_insertion_order",
+          "description": "Signature insertion order drives processing on direct and serialized build paths",
+          "assertions": {
+            "passed": 5,
+            "failed": 0,
+            "skipped": 0,
+            "total": 5
+          },
+          "failures": [],
+          "seed": {
+            "direct_order": [
+              "a",
+              "b",
+              "c"
+            ],
+            "reversed_order": [
+              "c",
+              "b",
+              "a"
+            ],
+            "keys": [
+              {
+                "label": "key-a",
+                "keyid": "a",
+                "accept_sigs": [
+                  "a"
+                ],
+                "fail_with": "UnverifiedSignatureError"
+              },
+              {
+                "label": "key-b",
+                "keyid": "b",
+                "accept_sigs": [
+                  "b"
+                ],
+                "fail_with": "UnverifiedSignatureError"
+              },
+              {
+                "label": "key-c",
+                "keyid": "c",
+                "accept_sigs": [
+                  "c"
+                ],
+                "fail_with": "UnverifiedSignatureError"
+              },
+              {
+                "label": "rev-c",
+                "keyid": "c",
+                "accept_sigs": [
+                  "c"
+                ],
+                "fail_with": "UnverifiedSignatureError"
+              },
+              {
+                "label": "rev-b",
+                "keyid": "b",
+                "accept_sigs": [
+                  "b"
+                ],
+                "fail_with": "UnverifiedSignatureError"
+              },
+              {
+                "label": "rev-a",
+                "keyid": "a",
+                "accept_sigs": [
+                  "a"
+                ],
+                "fail_with": "UnverifiedSignatureError"
+              }
+            ],
+            "threshold": 2
+          },
+          "expected": {
+            "direct_call_order": [
+              "key-a",
+              "key-b"
+            ],
+            "reversed_call_order": [
+              "rev-c",
+              "rev-b"
+            ]
+          },
+          "observed": {
+            "direct_call_order": [
+              "key-a",
+              "key-b"
+            ],
+            "reversed_call_order": [
+              "rev-c",
+              "rev-b"
+            ]
+          },
+          "status": "passed"
+        }
+      ]
+    },
+    {
+      "case": "C03",
+      "assertions": {
+        "passed": 25,
+        "failed": 0,
+        "skipped": 0,
+        "total": 25
+      },
+      "status": "passed",
+      "scenarios": [
+        {
+          "name": "c03_stop_position_at_threshold",
+          "description": "Outer loop stops at the signature reaching the threshold",
+          "assertions": {
+            "passed": 8,
+            "failed": 0,
+            "skipped": 0,
+            "total": 8
+          },
+          "failures": [],
+          "seed": {
+            "signature_keyids": [
+              "a",
+              "b",
+              "c",
+              "d"
+            ],
+            "thresholds": [
+              3,
+              1,
+              4
+            ],
+            "candidate_keys_per_trial": "fresh per trial, one key per keyid"
+          },
+          "expected": {
+            "threshold_3_accepted": [
+              "a",
+              "b",
+              "c"
+            ],
+            "threshold_3_d_calls": 0,
+            "threshold_1_accepted": [
+              "a"
+            ],
+            "threshold_1_later_calls": [
+              0,
+              0,
+              0
+            ],
+            "threshold_4_accepted_count": 4,
+            "threshold_4_calls_per_key": [
+              1,
+              1,
+              1,
+              1
+            ]
+          },
+          "observed": {
+            "threshold_3_accepted": [
+              "a",
+              "b",
+              "c"
+            ],
+            "threshold_3_d_calls": 0,
+            "threshold_1_accepted": [
+              "a"
+            ],
+            "threshold_1_later_calls": [
+              0,
+              0,
+              0
+            ],
+            "threshold_4_accepted_count": 4,
+            "threshold_4_calls_per_key": [
+              1,
+              1,
+              1,
+              1
+            ],
+            "threshold_3_call_log": [
+              {
+                "key": "t3-a",
+                "keyid": "a",
+                "signature": "a",
+                "outcome": "accepted"
+              },
+              {
+                "key": "t3-b",
+                "keyid": "b",
+                "signature": "b",
+                "outcome": "accepted"
+              },
+              {
+                "key": "t3-c",
+                "keyid": "c",
+                "signature": "c",
+                "outcome": "accepted"
+              }
+            ],
+            "gap_call_log": [
+              {
+                "key": "x-a",
+                "keyid": "a",
+                "signature": "a",
+                "outcome": "accepted"
+              },
+              {
+                "key": "x-b",
+                "keyid": "b",
+                "signature": "b",
+                "outcome": "accepted"
+              }
+            ]
+          },
+          "status": "passed"
+        },
+        {
+          "name": "c03_exception_types",
+          "description": "Swallowed UnverifiedSignatureError, propagated RuntimeError and unmet-threshold VerificationError contract",
+          "assertions": {
+            "passed": 8,
+            "failed": 0,
+            "skipped": 0,
+            "total": 8
+          },
+          "failures": [],
+          "seed": {
+            "signature_keyids": [
+              "a"
+            ],
+            "keys": [
+              {
+                "label": "a-unverified",
+                "keyid": "a",
+                "accept_sigs": [],
+                "fail_with": "UnverifiedSignatureError"
+              },
+              {
+                "label": "a-accept",
+                "keyid": "a",
+                "accept_sigs": [
+                  "a"
+                ],
+                "fail_with": "UnverifiedSignatureError"
+              },
+              {
+                "label": "a-verification-error",
+                "keyid": "a",
+                "accept_sigs": [],
+                "fail_with": "VerificationError"
+              },
+              {
+                "label": "a-runtime-error",
+                "keyid": "a",
+                "accept_sigs": [],
+                "fail_with": "RuntimeError"
+              }
+            ]
+          },
+          "expected": {
+            "swallowed": "UnverifiedSignatureError",
+            "also_swallowed": "VerificationError (subclass)",
+            "propagated": "RuntimeError",
+            "unmet_message": "Accepted signatures do not match threshold, Found: 0, Expected 1"
+          },
+          "observed": {
+            "rejecting_outcomes": [
+              "rejected"
+            ],
+            "call_log": [
+              {
+                "key": "a-unverified",
+                "keyid": "a",
+                "signature": "a",
+                "outcome": "rejected"
+              },
+              {
+                "key": "a-accept",
+                "keyid": "a",
+                "signature": "a",
+                "outcome": "accepted"
+              },
+              {
+                "key": "a-verification-error",
+                "keyid": "a",
+                "signature": "a",
+                "outcome": "rejected"
+              },
+              {
+                "key": "a-runtime-error",
+                "keyid": "a",
+                "signature": "a",
+                "outcome": "rejected"
+              }
+            ],
+            "propagated_type": "RuntimeError"
+          },
+          "status": "passed"
+        },
+        {
+          "name": "c03_independent_inputs_per_trial",
+          "description": "Deep-copied per-trial inputs; consumed-dict reuse raises KeyError",
+          "assertions": {
+            "passed": 9,
+            "failed": 0,
+            "skipped": 0,
+            "total": 9
+          },
+          "failures": [],
+          "seed": {
+            "template_signature_keyids": [
+              "a",
+              "b"
+            ],
+            "keys": [
+              {
+                "label": "indep-a",
+                "keyid": "a",
+                "accept_sigs": [
+                  "a"
+                ],
+                "fail_with": "UnverifiedSignatureError"
+              },
+              {
+                "label": "indep-b",
+                "keyid": "b",
+                "accept_sigs": [
+                  "b"
+                ],
+                "fail_with": "UnverifiedSignatureError"
+              }
+            ],
+            "threshold": 2,
+            "trials": 2
+          },
+          "expected": {
+            "accepted_per_trial": [
+              "a",
+              "b"
+            ],
+            "reused_consumed_dict": "KeyError",
+            "template_replayable": true
+          },
+          "observed": {
+            "trial_1_accepted": [
+              "a",
+              "b"
+            ],
+            "trial_2_accepted": [
+              "a",
+              "b"
+            ],
+            "call_log": [
+              {
+                "key": "indep-a",
+                "keyid": "a",
+                "signature": "a",
+                "outcome": "accepted"
+              },
+              {
+                "key": "indep-a",
+                "keyid": "a",
+                "signature": "a",
+                "outcome": "accepted"
+              },
+              {
+                "key": "indep-b",
+                "keyid": "b",
+                "signature": "b",
+                "outcome": "accepted"
+              },
+              {
+                "key": "indep-b",
+                "keyid": "b",
+                "signature": "b",
+                "outcome": "accepted"
+              }
+            ],
+            "pae_hex": "44535345763120323920687474703a2f2f6578616d706c652e636f6d2f48656c6c6f576f726c642031312068656c6c6f20776f726c64"
+          },
+          "status": "passed"
+        }
+      ]
+    },
+    {
+      "case": "C04",
+      "assertions": {
+        "passed": 16,
+        "failed": 0,
+        "skipped": 0,
+        "total": 16
+      },
+      "status": "passed",
+      "scenarios": [
+        {
+          "name": "c04_real_key_roundtrip",
+          "description": "RSA/ECDSA/Ed25519 genuine signatures verify, incl. dict round trip",
+          "assertions": {
+            "passed": 3,
+            "failed": 0,
+            "skipped": 0,
+            "total": 3
+          },
+          "failures": [],
+          "seed": {
+            "real_keys": [
+              {
+                "keytype": "rsa",
+                "scheme": "rsassa-pss-sha256",
+                "keyid": "2f685fa7546f...(truncated)"
+              },
+              {
+                "keytype": "ecdsa",
+                "scheme": "ecdsa-sha2-nistp256",
+                "keyid": "50d7e110ad65...(truncated)"
+              },
+              {
+                "keytype": "ed25519",
+                "scheme": "ed25519",
+                "keyid": "c6d8bf2e4f48...(truncated)"
+              }
+            ],
+            "thresholds": [
+              3,
+              2
+            ]
+          },
+          "expected": {
+            "accepted_keyids": "all three signer keyids",
+            "threshold_2_count": 2,
+            "round_trip_verifiable": true
+          },
+          "observed": {
+            "accepted_count": 3,
+            "accepted_keyid_prefixes": [
+              "2f685fa7546f...(truncated)",
+              "50d7e110ad65...(truncated)",
+              "c6d8bf2e4f48...(truncated)"
+            ],
+            "round_trip_accepted_count": 3
+          },
+          "status": "passed"
+        },
+        {
+          "name": "c04_modified_payload_fails",
+          "description": "Payload change invalidates signatures, untouched copy verifies",
+          "assertions": {
+            "passed": 3,
+            "failed": 0,
+            "skipped": 0,
+            "total": 3
+          },
+          "failures": [],
+          "seed": {
+            "original_payload": "hello world",
+            "tampered_payload": "tampered payload",
+            "threshold": 1
+          },
+          "expected": {
+            "tampered": "VerificationError",
+            "restored_accepted": 1
+          },
+          "observed": {
+            "tampered_exception": "VerificationError",
+            "restored_accepted": 1
+          },
+          "status": "passed"
+        },
+        {
+          "name": "c04_modified_payload_type_fails",
+          "description": "payload_type change alters PAE and invalidates signatures",
+          "assertions": {
+            "passed": 3,
+            "failed": 0,
+            "skipped": 0,
+            "total": 3
+          },
+          "failures": [],
+          "seed": {
+            "keytype": "ed25519",
+            "original_payload_type": "http://example.com/HelloWorld",
+            "tampered_payload_type": "http://example.com/Evil"
+          },
+          "expected": {
+            "tampered": "VerificationError",
+            "pae_changed": true
+          },
+          "observed": {
+            "original_pae_hex": "44535345763120323920687474703a2f2f6578616d706c652e636f6d2f48656c6c6f576f726c642031312068656c6c6f20776f726c64",
+            "tampered_pae_hex": "44535345763120323320687474703a2f2f6578616d706c652e636f6d2f4576696c2031312068656c6c6f20776f726c64",
+            "restored_accepted": [
+              "c6d8bf2e4f48...(truncated)"
+            ]
+          },
+          "status": "passed"
+        },
+        {
+          "name": "c04_tampered_signature_fails",
+          "description": "Bit-flipped and swapped signature bytes fail verification",
+          "assertions": {
+            "passed": 3,
+            "failed": 0,
+            "skipped": 0,
+            "total": 3
+          },
+          "failures": [],
+          "seed": {
+            "victim_keyid": "c6d8bf2e4f48...(truncated)",
+            "mutations": [
+              "bit-flip first signature byte",
+              "rsa signature swap"
+            ]
+          },
+          "expected": {
+            "tampered": "VerificationError",
+            "restored_accepted": 1
+          },
+          "observed": {
+            "restored_accepted": [
+              "c6d8bf2e4f48...(truncated)"
+            ]
+          },
+          "status": "passed"
+        },
+        {
+          "name": "c04_same_keyid_different_key_material",
+          "description": "Matching keyid with foreign key material does not verify",
+          "assertions": {
+            "passed": 4,
+            "failed": 0,
+            "skipped": 0,
+            "total": 4
+          },
+          "failures": [],
+          "seed": {
+            "keytype": "ed25519",
+            "advertised_keyid": "f9f113a79a38...(truncated)",
+            "generated_keys": 2
+          },
+          "expected": {
+            "spoof_result": "VerificationError",
+            "genuine_result": "accepted"
+          },
+          "observed": {
+            "spoof_keyid": "f9f113a79a38...(truncated)",
+            "genuine_accepted": [
+              "f9f113a79a38...(truncated)"
+            ]
+          },
+          "status": "passed"
+        }
+      ]
+    }
+  ],
+  "totals": {
+    "passed": 82,
+    "failed": 0,
+    "skipped": 0,
+    "total": 82
+  },
+  "status": "passed"
+}

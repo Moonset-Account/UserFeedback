@@ -10,7 +10,28 @@ from securesystemslib.dsse import Envelope
 from securesystemslib.exceptions import VerificationError
 from securesystemslib.signer import CryptoSigner, Signature
 
+from tests.dsse_threshold_support import SCENARIOS, Checker
+
 PEMS_DIR = Path(__file__).parent / "data" / "pems"
+
+
+class UnittestChecker(Checker):
+    """Adapt the shared scenario assertions to unittest's TestCase API."""
+
+    def __init__(self, test_case: unittest.TestCase):
+        self._test_case = test_case
+
+    def assert_equal(self, actual, expected, msg):
+        self._test_case.assertEqual(actual, expected, msg)
+
+    def assert_true(self, value, msg):
+        self._test_case.assertTrue(value, msg)
+
+    def assert_in(self, member, container, msg):
+        self._test_case.assertIn(member, container, msg)
+
+    def assert_raises(self, exception, msg):
+        return self._test_case.assertRaises(exception, msg=msg)
 
 
 class TestEnvelope(unittest.TestCase):
@@ -156,6 +177,32 @@ class TestEnvelope(unittest.TestCase):
         duplicate_keys = key_list + key_list
         with self.assertRaises(VerificationError):
             envelope_obj.verify(duplicate_keys, 4)  # 3 unique keys, threshold 4.
+
+
+def _make_test(case_id, scenario):
+    """Create a bound unittest method running one shared threshold scenario."""
+
+    def test_scenario(self):
+        result = scenario.func(UnittestChecker(self))
+        # The scenario itself carries all assertions; expose evidence on the
+        # test instance for debugging without changing the shared contract.
+        self.assertEqual(result.name, scenario.name)
+
+    test_scenario.__doc__ = f"{case_id} {scenario.description}"
+    return test_scenario
+
+
+# One TestCase per case group; methods are generated from the shared registry
+# so unittest and tools/local_verify.py execute identical scenario code.
+for _case_id, _scenarios in SCENARIOS.items():
+    _attrs = {}
+    for _scenario in _scenarios:
+        _attrs[f"test_{_scenario.name}"] = _make_test(_case_id, _scenario)
+    globals()[f"TestThreshold{_case_id}"] = type(
+        f"TestThreshold{_case_id}",
+        (unittest.TestCase,),
+        _attrs,
+    )
 
 
 # Run the unit tests.
