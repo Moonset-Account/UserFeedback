@@ -1,0 +1,13 @@
+{
+  "name": "import-coordinator",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "托管系统密钥材料导入协调模块：用途一致性、竞争裁决、待核验状态与重试延续",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "test": "node --test \"tests/*.test.mjs\""
+  }
+}
