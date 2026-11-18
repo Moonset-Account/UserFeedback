@@ -1,0 +1,58 @@
+{
+  "configs": [
+    {"id": "cfg-realtime", "enables": ["realtime", "on-access"]},
+    {"id": "cfg-manual", "enables": ["manual"]}
+  ],
+  "exclusive_groups": [["scan-mode", "restore-mode"]],
+  "streams": [
+    {
+      "id": "stop-object",
+      "phase": "quarantine",
+      "mode": "stop-mode",
+      "conditions": ["realtime"],
+      "steps": [
+        {"op": "acquire", "lock": "obj-table", "mode": "write"},
+        {"op": "acquire", "lock": "quarantine-log", "mode": "write"},
+        {"op": "cancel", "releases": ["obj-table", "quarantine-log"]},
+        {"op": "release", "lock": "quarantine-log"},
+        {"op": "release", "lock": "obj-table"}
+      ]
+    },
+    {
+      "id": "recover-object",
+      "phase": "recovery",
+      "mode": "recover-mode",
+      "conditions": ["realtime"],
+      "steps": [
+        {"op": "acquire", "lock": "quarantine-log", "mode": "write"},
+        {"op": "acquire", "lock": "obj-table", "mode": "write"},
+        {"op": "release", "lock": "obj-table"},
+        {"op": "release", "lock": "quarantine-log"}
+      ]
+    },
+    {
+      "id": "scan-stop",
+      "phase": "quarantine",
+      "mode": "scan-mode",
+      "conditions": ["manual"],
+      "steps": [
+        {"op": "acquire", "lock": "obj-table", "mode": "write"},
+        {"op": "acquire", "lock": "quarantine-log", "mode": "write"},
+        {"op": "release", "lock": "quarantine-log"},
+        {"op": "release", "lock": "obj-table"}
+      ]
+    },
+    {
+      "id": "restore-object",
+      "phase": "recovery",
+      "mode": "restore-mode",
+      "conditions": ["manual"],
+      "steps": [
+        {"op": "acquire", "lock": "quarantine-log", "mode": "write"},
+        {"op": "acquire", "lock": "obj-table", "mode": "write"},
+        {"op": "release", "lock": "obj-table"},
+        {"op": "release", "lock": "quarantine-log"}
+      ]
+    }
+  ]
+}
