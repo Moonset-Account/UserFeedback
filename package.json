@@ -1,0 +1,14 @@
+{
+  "name": "advisory-release-gate",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "安全通告放行模块：按受影响产品、修复版本确认、受控收件范围与公开时间生成可发送通告",
+  "main": "src/registry.js",
+  "scripts": {
+    "test": "node --test tests/*.test.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
