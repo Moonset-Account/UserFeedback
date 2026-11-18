@@ -1,0 +1,130 @@
+{
+  "summary": {
+    "compliant": 1,
+    "pending_remediation": 1,
+    "noncompliant": 0,
+    "no_snapshot": 0,
+    "skipped": 1,
+    "total": 3
+  },
+  "services": [
+    {
+      "name": "collector",
+      "canonical_name": "collector",
+      "status": "compliant",
+      "low_privilege_required": true,
+      "has_snapshot": true,
+      "snapshot_service": "collector-prod",
+      "aliases": [
+        "collector-legacy",
+        "collector-prod"
+      ],
+      "resolved": {
+        "user": "svc_collector",
+        "group": "svcgrp",
+        "write_paths": [
+          "/var/app/shared",
+          "/var/app/collector",
+          "/var/app/legacy"
+        ],
+        "forbidden_identities": [
+          "root",
+          "bin"
+        ],
+        "low_privilege_required": true,
+        "description": "旧启动别名，追加自身写入目录",
+        "layer_chain": [
+          "collector",
+          "collector-legacy"
+        ]
+      },
+      "findings": []
+    },
+    {
+      "name": "agent",
+      "canonical_name": "agent",
+      "status": "pending_remediation",
+      "low_privilege_required": true,
+      "has_snapshot": true,
+      "snapshot_service": "agent",
+      "aliases": [],
+      "resolved": {
+        "user": "svc_agent",
+        "group": "svcgrp",
+        "write_paths": [
+          "/srv/agent"
+        ],
+        "forbidden_identities": [
+          "root"
+        ],
+        "low_privilege_required": true,
+        "description": "",
+        "layer_chain": [
+          "agent"
+        ]
+      },
+      "findings": [
+        {
+          "check": "startup_identity",
+          "source": "runtime",
+          "severity": "critical",
+          "message": "进程实际启动用户 'root' 与配置要求 'svc_agent' 不一致",
+          "expected": "svc_agent",
+          "actual": "root",
+          "detail": {
+            "field": "user"
+          }
+        },
+        {
+          "check": "startup_identity",
+          "source": "runtime",
+          "severity": "high",
+          "message": "进程实际启动组 'daemon' 与配置要求 'svcgrp' 不一致",
+          "expected": "svcgrp",
+          "actual": "daemon",
+          "detail": {
+            "field": "group"
+          }
+        },
+        {
+          "check": "privilege_inheritance",
+          "source": "runtime",
+          "severity": "critical",
+          "message": "进程实测身份 'root' 命中禁止的高权限身份，存在权限继承风险",
+          "expected": [
+            "Administrator",
+            "SYSTEM",
+            "root"
+          ],
+          "actual": "root",
+          "detail": {}
+        }
+      ]
+    },
+    {
+      "name": "housekeeping",
+      "canonical_name": "housekeeping",
+      "status": "skipped",
+      "low_privilege_required": false,
+      "has_snapshot": false,
+      "snapshot_service": null,
+      "aliases": [],
+      "resolved": {
+        "user": "root",
+        "group": "svcgrp",
+        "write_paths": [
+          "/var/app/shared"
+        ],
+        "forbidden_identities": [
+          "root"
+        ],
+        "low_privilege_required": false,
+        "description": "",
+        "layer_chain": [
+          "housekeeping"
+        ]
+      },
+      "findings": []
+    }
+  ]
+}

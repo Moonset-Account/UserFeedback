@@ -1,0 +1,69 @@
+{
+  "platform_defaults": {
+    "user": "svcplat",
+    "group": "svcgrp",
+    "write_paths": ["/var/app/shared"],
+    "forbidden_identities": ["root"],
+    "low_privilege_required": true
+  },
+  "service_defs": [
+    {
+      "name": "collector",
+      "user": "svc_collector",
+      "group": "svcgrp",
+      "write_paths": ["/var/app/collector"],
+      "forbidden_identities": ["bin"],
+      "aliases": ["collector-prod"]
+    },
+    {
+      "name": "collector-legacy",
+      "alias_of": "collector",
+      "description": "旧启动别名，追加自身写入目录"
+    },
+    {
+      "name": "agent",
+      "user": "svc_agent",
+      "write_paths": ["/var/app/agent"]
+    },
+    {
+      "name": "housekeeping",
+      "user": "root",
+      "low_privilege_required": false
+    }
+  ],
+  "overlays": [
+    {
+      "target": "collector-legacy",
+      "write_paths": {
+        "op": "merge",
+        "items": ["/var/app/legacy"]
+      }
+    },
+    {
+      "target": "agent",
+      "write_paths": {
+        "op": "replace",
+        "items": ["/srv/agent"]
+      }
+    }
+  ],
+  "snapshots": [
+    {
+      "service": "collector-prod",
+      "user": "svc_collector",
+      "group": "svcgrp",
+      "pid": 4101,
+      "actual_write_paths": [
+        "/var/app/collector/2026/data.log",
+        "/var/app/legacy/migrate.log"
+      ]
+    },
+    {
+      "service": "agent",
+      "user": "root",
+      "group": "daemon",
+      "pid": 4102,
+      "actual_write_paths": ["/srv/agent/state.db"]
+    }
+  ]
+}
