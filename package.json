@@ -1,0 +1,15 @@
+{
+  "name": "first-report-adjudication",
+  "version": "1.0.0",
+  "description": "首报裁决模块：保密报告先存证、窗口内揭示，按存证轮次裁决优先权",
+  "type": "module",
+  "main": "src/index.mjs",
+  "scripts": {
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=24"
+  },
+  "license": "UNLICENSED",
+  "private": true
+}
