@@ -1,0 +1,26 @@
+{
+  "initial": {
+    "objects": {
+      "root": "dir",
+      "proj": "dir",
+      "proj/src": "dir",
+      "archive": "dir"
+    },
+    "entries": [
+      {"dir": "root", "name": "proj", "id": "proj"},
+      {"dir": "proj", "name": "src", "id": "proj/src"},
+      {"dir": "proj/src", "name": "main.c", "id": "f-main"},
+      {"dir": "proj/src", "name": "util.c", "id": "f-util"},
+      {"dir": "root", "name": "archive", "id": "archive"}
+    ]
+  },
+  "events": [
+    {"op": "link", "dir": "archive", "name": "main.c", "id": "f-main"},
+    {"op": "rename", "from": {"dir": "root", "name": "proj"},
+                     "to": {"dir": "root", "name": "current"}},
+    {"op": "exchange", "a": {"dir": "root", "name": "current"},
+                       "b": {"dir": "root", "name": "archive"}},
+    {"op": "rename", "from": {"dir": "root", "name": "current"},
+                     "to": {"dir": "root", "name": "frozen"}}
+  ]
+}
