@@ -1,0 +1,16 @@
+{
+  "name": "retractable-bigram-ledger",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Retractable local bigram candidate ledger for managed terminals",
+  "type": "module",
+  "exports": {
+    ".": "./src/bigram-ledger.js"
+  },
+  "scripts": {
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=24"
+  }
+}
