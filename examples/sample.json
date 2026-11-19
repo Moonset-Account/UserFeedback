@@ -1,0 +1,25 @@
+{
+  "observations": [
+    {"id": "obs-1", "indicator": "ind-1", "source": "sensor-a"},
+    {"id": "obs-2", "indicator": "ind-1", "source": "sensor-b"},
+    {"id": "obs-3", "indicator": "ind-1", "source": "sensor-c"},
+    {"id": "obs-4", "indicator": "ind-1", "source": "sensor-d"},
+    {"id": "obs-5", "indicator": "ind-2", "source": "sensor-a"}
+  ],
+  "advisories": [
+    {"id": "adv-1", "indicator": "ind-1", "direction": "malicious",
+     "evidence_groups": [["obs-1"]]},
+    {"id": "adv-2", "indicator": "ind-1", "direction": "malicious",
+     "evidence_groups": [["adv-3"]]},
+    {"id": "adv-3", "indicator": "ind-1", "direction": "malicious",
+     "evidence_groups": [["obs-2"]]},
+    {"id": "adv-4", "indicator": "ind-1", "direction": "benign",
+     "evidence_groups": [["obs-3"]]},
+    {"id": "adv-5", "indicator": "ind-1", "direction": "benign",
+     "evidence_groups": [["obs-4"]]},
+    {"id": "adv-6", "indicator": "ind-2", "direction": "malicious",
+     "evidence_groups": [["adv-7"]]},
+    {"id": "adv-7", "indicator": "ind-2", "direction": "malicious",
+     "evidence_groups": [["adv-6"]]}
+  ]
+}
