@@ -1,0 +1,14 @@
+{
+  "entry": "n0",
+  "nodes": [
+    {"id": "n0", "type": "snapshot", "var": "a", "artifact": "lib", "version": "1", "next": "n1"},
+    {"id": "n1", "type": "verify", "var": "a", "task": "t1", "next": "n2"},
+    {"id": "n2", "type": "branch", "task": "t1", "true_next": "n6", "false_next": "n3"},
+
+    {"id": "n3", "type": "snapshot", "var": "a", "artifact": "lib", "version": "2", "next": "n4"},
+    {"id": "n4", "type": "verify", "var": "a", "task": "t2", "next": "n5"},
+    {"id": "n5", "type": "branch", "task": "t2", "true_next": "n6"},
+
+    {"id": "n6", "type": "publish", "var": "a"}
+  ]
+}
