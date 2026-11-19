@@ -1,0 +1,14 @@
+{
+  "name": "shared-write-check",
+  "version": "1.0.0",
+  "description": "Verify that a host object graph and the copy intended for a lower-privilege plugin share no writable object identity.",
+  "type": "module",
+  "main": "src/shared-write-check.mjs",
+  "exports": {
+    ".": "./src/shared-write-check.mjs"
+  },
+  "scripts": {
+    "test": "node --test 'tests/**/*.test.mjs'"
+  },
+  "license": "MIT"
+}
