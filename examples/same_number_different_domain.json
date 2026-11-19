@@ -1,0 +1,41 @@
+{
+  "ports": [
+    {
+      "device": "SW1",
+      "port": "ge0/24",
+      "native_vlan": 1,
+      "tagged_ingress_vlans": [10],
+      "egress": {"1": "untag", "10": {"tag": 10}},
+      "description": "VLAN 10 here is the RED isolation domain"
+    },
+    {
+      "device": "SW1",
+      "port": "ge0/1",
+      "native_vlan": 10,
+      "tagged_ingress_vlans": [],
+      "egress": {"10": "untag"}
+    },
+    {
+      "device": "SW2",
+      "port": "ge0/24",
+      "native_vlan": 1,
+      "tagged_ingress_vlans": [10],
+      "egress": {"1": "untag", "10": {"tag": 10}},
+      "description": "Same numeric VLAN 10, but here it is BLUE"
+    },
+    {
+      "device": "SW2",
+      "port": "ge0/2",
+      "native_vlan": 555,
+      "tagged_ingress_vlans": [],
+      "egress": {"555": "untag"},
+      "description": "The real RED peer domain, not reachable over this trunk"
+    }
+  ],
+  "links": [
+    ["SW1", "ge0/24", "SW2", "ge0/24"]
+  ],
+  "domain_pairs": [
+    [["SW1", 10], ["SW2", 555]]
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "ports": [
+    {
+      "device": "SW1",
+      "port": "ge0/24",
+      "native_vlan": 99,
+      "tagged_ingress_vlans": [110, 20],
+      "egress": {"99": "untag", "10": {"tag": 110}, "20": {"tag": 20}},
+      "description": "trunk to SW2; local vlan10 is translated onto wire tag 110"
+    },
+    {
+      "device": "SW1",
+      "port": "ge0/1",
+      "native_vlan": 10,
+      "tagged_ingress_vlans": [],
+      "egress": {"10": "untag"},
+      "description": "RED access edge"
+    },
+    {
+      "device": "SW2",
+      "port": "ge0/24",
+      "native_vlan": 99,
+      "tagged_ingress_vlans": [110, 20],
+      "egress": {"99": "untag", "110": {"tag": 110}, "20": {"tag": 20}}
+    },
+    {
+      "device": "SW2",
+      "port": "ge0/1",
+      "native_vlan": 110,
+      "tagged_ingress_vlans": [],
+      "egress": {"110": "untag"},
+      "description": "RED access edge (local vlan number differs from SW1)"
+    }
+  ],
+  "links": [
+    ["SW1", "ge0/24", "SW2", "ge0/24"]
+  ],
+  "domain_pairs": [
+    [["SW1", 10], ["SW2", 110]],
+    [["SW1", 20], ["SW2", 20]],
+    [["SW1", 99], ["SW2", 99]]
+  ]
+}
