@@ -1,0 +1,119 @@
+{
+  "format": "docredact/1",
+  "objects": {
+    "txt_head": {
+      "kind": "text",
+      "text": "内部公告：代号「曙光」将于周五发布",
+      "speech": [
+        {
+          "start": 0,
+          "end": 4,
+          "utterance": "内部公告"
+        },
+        {
+          "start": 5,
+          "end": 11,
+          "utterance": "代号曙光"
+        }
+      ]
+    },
+    "txt_copy": {
+      "kind": "text",
+      "text": "Project Aurora launches in Q3. Owner: alice@example.com",
+      "speech": [
+        {
+          "start": 0,
+          "end": 14,
+          "utterance": "Project Aurora"
+        },
+        {
+          "start": 15,
+          "end": 30,
+          "utterance": "launches in Q3."
+        },
+        {
+          "start": 31,
+          "end": 38,
+          "utterance": "Owner"
+        },
+        {
+          "start": 38,
+          "end": 55,
+          "utterance": "alice at example dot com"
+        }
+      ]
+    },
+    "txt_secret": {
+      "kind": "text",
+      "text": "董事会密钥：ALPHA-9",
+      "speech": []
+    },
+    "txt_orphan": {
+      "kind": "text",
+      "text": "未挂载的草稿：backup@example.com",
+      "speech": []
+    },
+    "inst_head": {
+      "kind": "instance",
+      "ref": "txt_head"
+    },
+    "inst_copy": {
+      "kind": "instance",
+      "ref": "txt_copy"
+    },
+    "inst_secret": {
+      "kind": "instance",
+      "ref": "txt_secret"
+    },
+    "sec_shared": {
+      "kind": "container",
+      "children": {
+        "lead": "inst_head",
+        "body": "inst_copy"
+      }
+    },
+    "pg1": {
+      "kind": "container",
+      "children": {
+        "top": "inst_head",
+        "main": "sec_shared"
+      }
+    },
+    "pg2": {
+      "kind": "container",
+      "children": {
+        "main": "sec_shared"
+      }
+    },
+    "pg3": {
+      "kind": "container",
+      "children": {
+        "duplicate": "sec_shared"
+      }
+    },
+    "pg_secret": {
+      "kind": "container",
+      "children": {
+        "lock": "inst_secret"
+      }
+    }
+  },
+  "pages": {
+    "p1": {
+      "root": "pg1",
+      "public": true
+    },
+    "p2": {
+      "root": "pg2",
+      "public": true
+    },
+    "p3": {
+      "root": "pg3",
+      "public": true
+    },
+    "secret": {
+      "root": "pg_secret",
+      "public": false
+    }
+  }
+}
