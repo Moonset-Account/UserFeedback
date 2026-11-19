@@ -1,0 +1,10 @@
+{
+  "name": "pairing-session",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "会议显示屏与手机的配对会话模块（短码 + 高熵轮询凭据）",
+  "scripts": {
+    "test": "node --test"
+  }
+}
