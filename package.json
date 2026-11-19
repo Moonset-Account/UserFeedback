@@ -1,0 +1,15 @@
+{
+  "name": "scram-sha256-tls-exporter-auth",
+  "version": "1.0.0",
+  "description": "Two-phase SCRAM-SHA-256 / SCRAM-SHA-256-PLUS (tls-exporter over TLS 1.3) authentication library with shared-session worker semantics",
+  "private": true,
+  "type": "commonjs",
+  "engines": {
+    "node": ">=24.15.0"
+  },
+  "main": "index.js",
+  "scripts": {
+    "test": "node --test tests/"
+  },
+  "license": "UNLICENSED"
+}

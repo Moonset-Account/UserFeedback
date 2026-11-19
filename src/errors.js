@@ -1,0 +1,27 @@
+'use strict';
+
+// 认证过程中所有可预期的拒绝都以 ScramError 抛出，
+// code 为稳定的机器可读错误码，message 面向日志与排障。
+
+class ScramError extends Error {
+  constructor(code, message) {
+    super(message);
+    this.name = 'ScramError';
+    this.code = code;
+  }
+}
+
+const CODES = {
+  INVALID_MESSAGE: 'INVALID_MESSAGE',
+  UNKNOWN_ACCOUNT: 'UNKNOWN_ACCOUNT',
+  UNKNOWN_CHALLENGE: 'UNKNOWN_CHALLENGE',
+  CHALLENGE_COMPLETED: 'CHALLENGE_COMPLETED',
+  CHANNEL_BINDING_MISMATCH: 'CHANNEL_BINDING_MISMATCH',
+  CHANNEL_BINDING_REQUIRED: 'CHANNEL_BINDING_REQUIRED',
+  CHANNEL_BINDING_UNSUPPORTED: 'CHANNEL_BINDING_UNSUPPORTED',
+  STALE_CREDENTIAL_VERSION: 'STALE_CREDENTIAL_VERSION',
+  INVALID_PROOF: 'INVALID_PROOF',
+  CONNECTION_MISMATCH: 'CONNECTION_MISMATCH',
+};
+
+module.exports = { ScramError, CODES };
