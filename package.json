@@ -1,0 +1,14 @@
+{
+  "name": "random-bytes-provider",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Injected random byte provider layer with per-generation readiness for the credential issuer",
+  "scripts": {
+    "test": "node --test \"tests/*.test.mjs\"",
+    "test:mutation": "node scripts/mutation-check.mjs"
+  },
+  "engines": {
+    "node": ">=24.0.0"
+  }
+}
