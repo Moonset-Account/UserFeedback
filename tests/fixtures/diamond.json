@@ -1,0 +1,78 @@
+{
+  "callers": ["billing", "analytics", "support", "auditor"],
+  "interfaces": [
+    {
+      "name": "IProfileSource",
+      "public": true,
+      "methods": {
+        "generate": {
+          "billing": ["id", "email", "plan"],
+          "analytics": ["id", "plan"],
+          "support": ["id", "email"]
+        }
+      }
+    },
+    {
+      "name": "IReadOnlyProfile",
+      "public": true,
+      "extends": ["IProfileSource"],
+      "methods": {
+        "generate": {
+          "billing": ["id", "plan"],
+          "analytics": ["id"],
+          "support": ["id"]
+        }
+      }
+    },
+    {
+      "name": "IAuditedProfile",
+      "public": true,
+      "extends": ["IProfileSource"],
+      "methods": {
+        "generate": {
+          "billing": ["id", "plan", "email"],
+          "analytics": ["id", "plan"],
+          "support": ["id", "email"],
+          "auditor": ["id", "audit_log"]
+        }
+      }
+    },
+    {
+      "name": "IDiamondProfile",
+      "public": true,
+      "extends": ["IReadOnlyProfile", "IAuditedProfile"]
+    }
+  ],
+  "implementations": [
+    {
+      "name": "SafeProfileGenerator",
+      "implements": ["IDiamondProfile"],
+      "methods": {
+        "generate": {
+          "accepts": ["billing", "analytics", "support", "auditor"],
+          "returns": {
+            "billing": ["id", "plan"],
+            "analytics": ["id"],
+            "support": ["id"],
+            "auditor": ["id"]
+          }
+        }
+      }
+    },
+    {
+      "name": "LeakyProfileGenerator",
+      "implements": ["IDiamondProfile"],
+      "methods": {
+        "generate": {
+          "accepts": ["billing", "analytics", "support", "auditor"],
+          "returns": {
+            "billing": ["id", "plan", "email"],
+            "analytics": ["id", "plan"],
+            "support": ["id", "email"],
+            "auditor": ["id", "audit_log"]
+          }
+        }
+      }
+    }
+  ]
+}
