@@ -1,0 +1,14 @@
+{
+  "name": "secure-paper-output-controller",
+  "version": "1.0.0",
+  "description": "保密出纸控制器：把双面成像记录、出纸传感器记录与取件授权核到同一张纸后才开格",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "main": "src/index.js",
+  "scripts": {
+    "test": "node --test 'tests/**/*.test.mjs'"
+  }
+}
