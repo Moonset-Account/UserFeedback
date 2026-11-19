@@ -1,0 +1,169 @@
+{
+  "routes": [
+    {
+      "name": "legacy-direct-to-approval",
+      "note": "Ordinary display name renumbered as approval; both relays are blind to the field, so the legacy bytes ride through untouched.",
+      "origin": {
+        "version": "v1",
+        "fields": {
+          "1": {"encoding": "normal", "meaning": "request_id"},
+          "7": {"encoding": "normal", "meaning": "display_name"}
+        }
+      },
+      "destination": {
+        "version": "v2",
+        "fields": {
+          "1": {"encoding": "normal", "meaning": "request_id"},
+          "7": {"encoding": "normal", "meaning": "approval_decision"}
+        }
+      },
+      "hops": [
+        {"hop": "edge-relay", "unknown_bytes": "preserved"},
+        {"hop": "core-relay", "unknown_bytes": "preserved"}
+      ]
+    },
+    {
+      "name": "core-severs-and-rebuilds",
+      "note": "The edge relay carries the old bytes, the core relay decodes field 7, drops the legacy value and rebuilds it from the trusted approval service.",
+      "origin": {
+        "version": "v1",
+        "fields": {
+          "1": {"encoding": "normal", "meaning": "request_id"},
+          "7": {"encoding": "normal", "meaning": "display_name"}
+        }
+      },
+      "destination": {
+        "version": "v2",
+        "fields": {
+          "1": {"encoding": "normal", "meaning": "request_id"},
+          "7": {"encoding": "normal", "meaning": "approval_decision"}
+        }
+      },
+      "hops": [
+        {"hop": "edge-relay", "unknown_bytes": "preserved"},
+        {
+          "hop": "core-relay",
+          "known_numbers": [1, 7],
+          "regenerate": [7],
+          "rebuilt_from": {"7": "trusted"}
+        }
+      ]
+    },
+    {
+      "name": "edge-severs-core-rebuilds",
+      "note": "Severing and rebuilding are split across two hops: the edge relay drops field 7 outright, the core relay then writes it from a trusted input.",
+      "origin": {
+        "version": "v1",
+        "fields": {
+          "1": {"encoding": "normal", "meaning": "request_id"},
+          "7": {"encoding": "normal", "meaning": "display_name"}
+        }
+      },
+      "destination": {
+        "version": "v2",
+        "fields": {
+          "1": {"encoding": "normal", "meaning": "request_id"},
+          "7": {"encoding": "normal", "meaning": "approval_decision"}
+        }
+      },
+      "hops": [
+        {"hop": "edge-relay", "drop": [7]},
+        {"hop": "core-relay", "regenerate": [7], "rebuilt_from": {"7": "trusted"}}
+      ]
+    },
+    {
+      "name": "blind-relay-appends-trusted-copy",
+      "note": "The core relay is trusted but cannot decode field 7, so regenerating only appends a second copy beside the legacy bytes.",
+      "origin": {
+        "version": "v1",
+        "fields": {"7": {"encoding": "normal", "meaning": "display_name"}}
+      },
+      "destination": {
+        "version": "v2",
+        "fields": {"7": {"encoding": "normal", "meaning": "approval_decision"}}
+      },
+      "hops": [
+        {
+          "hop": "core-relay",
+          "regenerate": [7],
+          "rebuilt_from": {"7": "trusted"}
+        }
+      ]
+    },
+    {
+      "name": "three-versions-promoted-in-the-middle",
+      "note": "Field 5 is ordinary in v1, becomes approval in v2 and is retired in v3. The destination is clean, but consumers pinned to v2 are not.",
+      "origin": {
+        "version": "v1",
+        "fields": {
+          "5": {"encoding": "normal", "meaning": "summary"},
+          "9": {"encoding": "normal", "meaning": "request_id"}
+        }
+      },
+      "destination": {
+        "version": "v3",
+        "fields": {"9": {"encoding": "normal", "meaning": "request_id"}}
+      },
+      "timeline": [
+        {
+          "version": "v1",
+          "fields": {
+            "5": {"encoding": "normal", "meaning": "summary"},
+            "9": {"encoding": "normal", "meaning": "request_id"}
+          }
+        },
+        {
+          "version": "v2",
+          "fields": {
+            "5": {"encoding": "normal", "meaning": "approval_scope"},
+            "9": {"encoding": "normal", "meaning": "request_id"}
+          }
+        },
+        {
+          "version": "v3",
+          "fields": {"9": {"encoding": "normal", "meaning": "request_id"}}
+        }
+      ],
+      "hops": [{"hop": "relay", "unknown_bytes": "preserved"}]
+    },
+    {
+      "name": "number-retired-then-reused",
+      "note": "Field 8 disappears in v2 and comes back in v3 with an approval meaning; the number was previously addressable by every legacy writer.",
+      "origin": {
+        "version": "v1",
+        "fields": {
+          "8": {"encoding": "normal", "meaning": "attachment_ref"},
+          "2": {"encoding": "normal", "meaning": "request_id"}
+        }
+      },
+      "destination": {
+        "version": "v3",
+        "fields": {
+          "2": {"encoding": "normal", "meaning": "request_id"},
+          "8": {"encoding": "normal", "meaning": "approval_decision"}
+        }
+      },
+      "timeline": [
+        {
+          "version": "v1",
+          "fields": {
+            "8": {"encoding": "normal", "meaning": "attachment_ref"},
+            "2": {"encoding": "normal", "meaning": "request_id"}
+          }
+        },
+        {
+          "version": "v2",
+          "fields": {"2": {"encoding": "normal", "meaning": "request_id"}}
+        },
+        {
+          "version": "v3",
+          "fields": {
+            "2": {"encoding": "normal", "meaning": "request_id"},
+            "8": {"encoding": "normal", "meaning": "approval_decision"}
+          }
+        }
+      ],
+      "hops": [{"hop": "relay"}]
+    }
+  ]
+}
