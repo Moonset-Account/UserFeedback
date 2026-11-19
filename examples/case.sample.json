@@ -1,0 +1,55 @@
+{
+  "file_name": "deleted_evidence.dat",
+  "file_size": 36,
+  "cluster_size": 16,
+  "deletion_time": 1000,
+  "acquisition_time": 2000,
+  "cluster_chain": [
+    101,
+    202,
+    303
+  ],
+  "chunks": [
+    {
+      "physical_cluster": 101,
+      "status": "ok",
+      "data": "MDEyMzQ1Njc4OWFiY2RlZg=="
+    },
+    {
+      "physical_cluster": 202,
+      "status": "ok",
+      "data": "RkVEQ0JBOTg3NjU0MzIxMA=="
+    },
+    {
+      "physical_cluster": 303,
+      "status": "ok",
+      "data": "V1gjI3BhZGRpbmctZGF0YQ=="
+    }
+  ],
+  "allocations": [
+    {
+      "physical_cluster": 202,
+      "start_time": 1200,
+      "end_time": 1500,
+      "object_id": "obj-42",
+      "event_id": "EV-ALLOC-202"
+    }
+  ],
+  "overwrites": [
+    {
+      "physical_cluster": 303,
+      "phy_start": 2,
+      "phy_end": 4,
+      "time": 1700,
+      "event_id": "EV-OW-303"
+    },
+    {
+      "physical_cluster": 101,
+      "phy_start": 0,
+      "phy_end": 1,
+      "time": 900,
+      "event_id": "EV-OW-OLD"
+    }
+  ],
+  "record_gaps": []
+}
