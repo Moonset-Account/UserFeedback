@@ -1,0 +1,17 @@
+{
+  "name": "config-center-kernel",
+  "version": "0.1.0",
+  "private": true,
+  "description": "In-memory configuration center kernel with revisioned snapshots, transactional delta history and prefix subscriptions.",
+  "type": "module",
+  "main": "src/index.js",
+  "exports": {
+    ".": "./src/index.js"
+  },
+  "scripts": {
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
