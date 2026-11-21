@@ -1,0 +1,14 @@
+{
+  "name": "duplex-byte-relay",
+  "version": "1.0.0",
+  "private": true,
+  "description": "双向双工字节流中继：分方向待写缓冲上限、背压、半关闭与硬断开上报",
+  "type": "module",
+  "main": "src/duplex-relay.js",
+  "scripts": {
+    "test": "node --test tests/"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
