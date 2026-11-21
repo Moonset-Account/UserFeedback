@@ -1,0 +1,13 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cpu-sampler"
+version = "1.0.0"
+description = "CPU sampling profiler with module-version-aware symbolisation"
+requires-python = ">=3.10"
+dependencies = []
+
+[tool.setuptools]
+packages = ["cpu_sampler"]
