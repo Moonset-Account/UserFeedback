@@ -1,0 +1,13 @@
+[package]
+name = "jump-relaxer"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.95.0"
+publish = false
+description = "Exact layout/relaxation for a small stream of fixed bytes, labels, zero alignment and short/long relative jumps"
+
+[lib]
+name = "jump_relaxer"
+path = "src/lib.rs"
+
+[dependencies]

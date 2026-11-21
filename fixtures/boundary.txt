@@ -1,0 +1,15 @@
+# Boundary case: a short jump at each inclusive displacement limit, and the
+# first jump that misses by one.
+#
+# Final layout: J0 is short and reaches exactly +127 (its target is 127
+# bytes after the end of the instruction); J1 is short and reaches exactly
+# -128; J2 would need -133 and therefore must be long, so this minimum is
+# unique.
+jump fwd
+zeros 127
+label fwd
+zeros 40
+label back
+zeros 126
+jump back
+jump back

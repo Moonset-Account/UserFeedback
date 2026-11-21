@@ -1,0 +1,8 @@
+# Normal case: a short forward jump, a short backward jump, an alignment.
+bytes 90 90 90 90 90 90 90 90
+label top
+align 16
+jump bottom
+bytes cc cc
+label bottom
+jump top

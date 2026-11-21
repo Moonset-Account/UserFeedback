@@ -1,0 +1,7 @@
+# A saving swallowed by alignment: both jumps sit behind an 8-byte
+# alignment, so making the first jump long costs exactly the bytes that the
+# alignment would otherwise pad.  The tie-break must still choose short.
+jump target
+align 8
+jump target
+label target
