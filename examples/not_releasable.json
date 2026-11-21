@@ -1,0 +1,19 @@
+{
+  "deadline": 100,
+  "steps": [
+    {
+      "name": "migrate-primary",
+      "duration": 10,
+      "window": [0, 100],
+      "rollback_duration": 10,
+      "duty_window": [0, 20]
+    },
+    {
+      "name": "promote-replica",
+      "duration": 10,
+      "window": [80, 100],
+      "rollback_duration": 5,
+      "duty_window": [0, 200]
+    }
+  ]
+}

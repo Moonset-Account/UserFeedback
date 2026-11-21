@@ -1,0 +1,19 @@
+{
+  "deadline": 100,
+  "steps": [
+    {
+      "name": "apply-schema",
+      "duration": 10,
+      "window": [0, 100],
+      "rollback_duration": 5,
+      "duty_window": [0, 200]
+    },
+    {
+      "name": "flip-traffic",
+      "duration": 15,
+      "window": [0, 100],
+      "rollback_duration": 8,
+      "duty_window": [0, 200]
+    }
+  ]
+}
