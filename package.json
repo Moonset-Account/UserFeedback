@@ -1,0 +1,13 @@
+{
+  "name": "slot-migration-routing",
+  "version": "1.0.0",
+  "description": "路由模型：散列槽在源节点 A 与目标节点 B 之间逐键原子搬迁期间的一次性 ASK 重定向、TRYAGAIN 暂缓与切换后的永久 MOVED 重定向",
+  "type": "module",
+  "engines": {
+    "node": "24.15.0"
+  },
+  "scripts": {
+    "test": "node --test tests/*.test.mjs"
+  },
+  "license": "MIT"
+}
