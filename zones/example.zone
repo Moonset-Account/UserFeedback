@@ -1,0 +1,31 @@
+; Synthetic fixture for the local authoritative kernel.  No network involved.
+$ORIGIN example.
+$TTL 300
+
+@               IN  NS    ns1.example.
+@               IN  A     192.0.2.1
+@               IN  AAAA  2001:db8::1
+@               IN  TXT   "apex"
+
+ns1             IN  A     192.0.2.53
+
+; Ordinary exact-match data at several depths.
+www             IN  A     192.0.2.10
+www             IN  AAAA  2001:db8::10
+www             IN  TXT   "hello" "world"
+only-a          IN  A     192.0.2.11
+
+; Empty non-terminal: "a.b.example." exists only through its descendants.
+a.b             IN  A     192.0.2.20
+c.b             IN  A     192.0.2.21
+
+; Wildcards.  *.example. is the fallback; *.b.example. covers depth-2 names.
+*               IN  A     192.0.2.99
+*               IN  TXT   "wild"
+
+; Delegation to a child zone; everything at or below is a referral.
+child           IN  NS    ns1.child.example.
+child           IN  NS    ns2.child.example.
+
+; A deeper delegation to exercise closest-cut selection.
+deep.sub        IN  NS    ns1.deep.sub.example.
