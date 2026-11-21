@@ -1,0 +1,15 @@
+{
+  "inputs": [
+    {"type": "object", "name": "main.o",
+     "defines": ["main"], "undefs": ["foo"]},
+    {"type": "group", "archives": [
+      {"type": "archive", "name": "liba.a", "members": [
+        {"name": "a1.o", "defines": ["foo"], "undefs": ["bar"]},
+        {"name": "a2.o", "defines": ["baz"], "undefs": []}
+      ]},
+      {"type": "archive", "name": "libb.a", "members": [
+        {"name": "b1.o", "defines": ["bar"], "undefs": ["baz"]}
+      ]}
+    ]}
+  ]
+}
