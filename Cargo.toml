@@ -1,0 +1,16 @@
+[package]
+name = "partitioned-sum"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.95"
+description = "Exact, partitionable, serializable binary64 summation state"
+license = "MIT OR Apache-2.0"
+
+[lib]
+path = "src/lib.rs"
+
+[[test]]
+name = "sum_state"
+path = "tests/sum_state.rs"
+
+[dependencies]
