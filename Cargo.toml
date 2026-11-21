@@ -1,0 +1,12 @@
+[package]
+name = "parallel-copy"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.95.0"
+description = "Expand a parallel copy into legal sequential moves on a register/stack machine"
+
+[lib]
+path = "src/lib.rs"
+
+[profile.release]
+panic = "abort"
