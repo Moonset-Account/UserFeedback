@@ -1,0 +1,4 @@
+{"partition":"a","time":0,"value":10}
+{"partition":"a","time":1,"value":2}
+{"partition":"a","time":1,"value":4}
+{"partition":"a","time":3,"value":8}
