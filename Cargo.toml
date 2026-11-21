@@ -1,0 +1,13 @@
+[package]
+name = "retained-index"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.95.0"
+description = "Dominator-tree based retained-memory index for heap object graphs"
+license = "MIT"
+
+[lib]
+path = "src/lib.rs"
+
+[profile.release]
+opt-level = 3
