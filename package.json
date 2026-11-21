@@ -1,0 +1,11 @@
+{
+  "name": "cri-log-decoder",
+  "version": "1.0.0",
+  "description": "容器运行时 CRI 日志片段重组解码组件",
+  "type": "module",
+  "main": "src/log-decoder.mjs",
+  "exports": "./src/log-decoder.mjs",
+  "scripts": {
+    "test": "node --test \"tests/*.test.mjs\""
+  }
+}
