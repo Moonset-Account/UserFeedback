@@ -1,0 +1,17 @@
+{
+  "name": "pipelined-response-reader",
+  "version": "1.0.0",
+  "description": "Incremental HTTP/1.1 response reader for pipelined HEAD/GET requests",
+  "type": "module",
+  "main": "src/http-response-reader.mjs",
+  "exports": {
+    ".": "./src/http-response-reader.mjs"
+  },
+  "engines": {
+    "node": ">=24.15.0"
+  },
+  "scripts": {
+    "test": "node --test \"tests/*.test.mjs\""
+  },
+  "license": "MIT"
+}
