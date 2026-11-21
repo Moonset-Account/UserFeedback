@@ -1,0 +1,13 @@
+{
+  "name": "dag-saga-orchestrator",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Event-sourced DAG saga orchestrator with exactly-once compensation and restart replay",
+  "type": "module",
+  "engines": {
+    "node": "24.15.0"
+  },
+  "scripts": {
+    "test": "node --test \"tests/*.test.mjs\""
+  }
+}
