@@ -1,0 +1,14 @@
+{
+  "name": "open-loop-load-generator",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Open-loop load generator with a hookable local mock backend, bounded concurrency slots and a bounded wait queue.",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "node --test tests/"
+  },
+  "engines": {
+    "node": ">=24"
+  }
+}
