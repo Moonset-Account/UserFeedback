@@ -1,0 +1,13 @@
+{
+  "name": "hierarchical-event-bus",
+  "version": "1.0.0",
+  "description": "本地事件总线：点分层级主题、* 单层匹配、# 多层匹配、普通订阅者与共享组投递",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "test": "node --test tests/"
+  }
+}
