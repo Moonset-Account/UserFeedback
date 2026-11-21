@@ -1,0 +1,9 @@
+[package]
+name = "cow-snapshot-volume"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.95.0"
+description = "Copy-on-write snapshot volumes with byte-level I/O, range zeroing and block-aligned overlay revert"
+license = "MIT OR Apache-2.0"
+
+[dependencies]
