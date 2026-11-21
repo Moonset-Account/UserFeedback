@@ -1,0 +1,13 @@
+{
+  "name": "coverage-gate",
+  "version": "1.0.0",
+  "private": true,
+  "description": "基于逐行差异与分片覆盖记录的新版本覆盖准入模块（仅 Node.js 标准库）",
+  "type": "module",
+  "engines": {
+    "node": ">=24.15.0"
+  },
+  "scripts": {
+    "test": "node --test \"tests/**/*.test.mjs\""
+  }
+}
