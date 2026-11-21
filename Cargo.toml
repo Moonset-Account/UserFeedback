@@ -1,0 +1,13 @@
+[package]
+name = "causal-dispatch"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.95"
+description = "Deterministic causal dispatch for messages converging from multiple sources"
+license = "MIT OR Apache-2.0"
+
+[dependencies]
+
+[lib]
+name = "causal_dispatch"
+path = "src/lib.rs"
