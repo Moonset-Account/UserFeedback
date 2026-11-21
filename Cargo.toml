@@ -1,0 +1,9 @@
+[package]
+name = "bplus_tree_index"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.95.0"
+description = "Paged B+ tree index over (integer key, row id) tuples with no third-party dependencies"
+
+[lib]
+path = "src/lib.rs"
