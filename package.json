@@ -1,0 +1,15 @@
+{
+  "name": "co-owned-resource-model",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Repeatedly applicable co-owned resource model with per-leaf field ownership",
+  "exports": "./src/resource-model.mjs",
+  "main": "./src/resource-model.mjs",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "test": "node --test"
+  }
+}
