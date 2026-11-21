@@ -1,0 +1,14 @@
+{
+  "label": {
+    "A": "router A",
+    "B": "router B"
+  },
+  "old": {
+    "A": "B",
+    "B": "OUT"
+  },
+  "new": {
+    "A": "OUT",
+    "B": "A"
+  }
+}

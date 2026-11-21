@@ -1,0 +1,17 @@
+{
+  "label": {
+    "A": "access router, currently behind B",
+    "B": "mid router, currently behind C",
+    "C": "edge router, goes directly to egress"
+  },
+  "old": {
+    "A": "B",
+    "B": "C",
+    "C": "OUT"
+  },
+  "new": {
+    "A": "OUT",
+    "B": "A",
+    "C": "B"
+  }
+}
