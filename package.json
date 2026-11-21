@@ -1,0 +1,14 @@
+{
+  "name": "columnar-expression-executor",
+  "version": "1.0.0",
+  "description": "Batch columnar expression executor with CASE, SQL three-valued AND/OR, integer comparisons and truncating integer division",
+  "type": "module",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "node --test 'tests/**/*.test.mjs'"
+  },
+  "engines": {
+    "node": ">=24"
+  },
+  "license": "UNLICENSED"
+}
