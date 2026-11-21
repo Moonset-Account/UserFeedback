@@ -1,0 +1,13 @@
+{
+  "name": "adapter-hotswap",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Hot-swappable adapter versions with pinned per-session weight generations",
+  "engines": {
+    "node": ">=24.15.0"
+  },
+  "scripts": {
+    "test": "node --test"
+  }
+}
