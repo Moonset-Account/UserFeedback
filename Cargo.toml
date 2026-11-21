@@ -1,0 +1,14 @@
+[package]
+name = "dns_authoritative_encoder"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.95.0"
+description = "Offline DNS authoritative response wire-format encoder with name compression and byte-budget enforcement"
+license = "MIT"
+
+[lib]
+path = "src/lib.rs"
+
+[profile.test]
+# 仅使用标准库，保持默认优化设置；无任何第三方依赖
+opt-level = 0
