@@ -1,0 +1,11 @@
+[package]
+name = "ephemeron-compactor"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.95"
+description = "Ephemeron-aware compacting garbage collector for a slot-addressed object heap"
+license = "MIT OR Apache-2.0"
+
+[workspace]
+
+[dependencies]
