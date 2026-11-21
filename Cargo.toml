@@ -1,0 +1,12 @@
+[package]
+name = "row-not-in"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.95.0"
+
+[lib]
+name = "row_not_in"
+path = "src/lib.rs"
+
+# 仅使用 Rust 标准库，无任何第三方依赖。
+[dependencies]
