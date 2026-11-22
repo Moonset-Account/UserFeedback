@@ -1,0 +1,13 @@
+{
+  "name": "inference-compile-cache",
+  "version": "1.0.0",
+  "description": "Compilation cache layer for an inference service with shape guards, request coalescing, pinning/eviction and model-version switching.",
+  "type": "module",
+  "private": true,
+  "engines": {
+    "node": "24.15.0"
+  },
+  "scripts": {
+    "test": "node --test tests/guards.test.mjs tests/compiler.test.mjs tests/cache.test.mjs"
+  }
+}
