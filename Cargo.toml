@@ -1,0 +1,17 @@
+[package]
+name = "rngflow"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.95.0"
+description = "可重算、可确认点恢复的计数器模式随机流分配器（纯标准库）"
+license = "MIT"
+
+[lib]
+path = "src/lib.rs"
+
+[dependencies]
+
+[dev-dependencies]
+
+[profile.release]
+panic = "unwind"
