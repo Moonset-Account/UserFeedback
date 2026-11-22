@@ -1,0 +1,11 @@
+[package]
+name = "membership-commit"
+version = "0.1.0"
+edition = "2024"
+description = "可重放的 Raft 联合共识（joint consensus）日志提交判定器"
+
+[lib]
+path = "src/lib.rs"
+
+# 纯标准库实现，不引入任何第三方依赖
+[dependencies]
