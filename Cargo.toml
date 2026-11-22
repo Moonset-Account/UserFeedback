@@ -1,0 +1,13 @@
+[package]
+name = "retransmit-state"
+version = "0.1.0"
+edition = "2021"
+description = "发送端重传状态机：独立包号空间、按流字节区间的重传与迟到确认处理"
+
+[lib]
+path = "src/lib.rs"
+
+# 仅使用 Rust 1.95.0 标准库，不引入任何第三方依赖。
+[dependencies]
+
+[dev-dependencies]
