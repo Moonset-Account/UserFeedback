@@ -1,0 +1,8 @@
+[package]
+name = "shm-wait-queue"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.95.0"
+description = "User-space model of a shared-memory wait queue (multi-location futex-style wait/wake/requeue with object generations)"
+
+[dependencies]
