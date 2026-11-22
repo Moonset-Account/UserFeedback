@@ -1,0 +1,12 @@
+[package]
+name = "hotkey_full_outer_join"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.95.0"
+
+[lib]
+name = "hotkey_full_outer_join"
+path = "src/lib.rs"
+
+# 纯标准库实现，无任何第三方依赖，可直接 cargo test --offline。
+[dependencies]
