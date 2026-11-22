@@ -1,0 +1,16 @@
+[package]
+name = "namespace-fs"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.95.0"
+description = "In-memory file-system namespace model with hard links, atomic directory entry swap and a recoverable write-ahead journal"
+
+[lib]
+name = "namespace_fs"
+path = "src/lib.rs"
+
+[profile.dev]
+opt-level = 0
+
+# 无任何第三方依赖，仅使用 Rust 1.95.0 标准库。
+[dependencies]
