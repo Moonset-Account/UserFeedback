@@ -1,0 +1,8 @@
+[package]
+name = "bitmap-interval-filter"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.95.0"
+description = "Compressed bitmap-interval operator for filtering column batches with three-valued logic"
+
+[dependencies]
