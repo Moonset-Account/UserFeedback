@@ -1,0 +1,14 @@
+{
+  "name": "dual-path-replay",
+  "version": "1.0.0",
+  "description": "双路（基线/候选）请求回放模拟器：共享初次到达安排，独立尊重会话依赖、并发上限与重试政策",
+  "type": "module",
+  "engines": {
+    "node": "24.15.0"
+  },
+  "scripts": {
+    "test": "node --test 'tests/**/*.test.mjs'",
+    "example": "node examples/headline-scenario.mjs"
+  },
+  "license": "UNLICENSED"
+}
