@@ -1,0 +1,7 @@
+# Python bytecode and local coverage artifacts
+__pycache__/
+*.py[cod]
+.coverage
+.coverage.*
+htmlcov/
+*.egg-info/
