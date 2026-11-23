@@ -1,0 +1,7 @@
+[package]
+name = "cow-gc"
+version = "0.1.0"
+edition = "2021"
+description = "Copy-on-write storage block reclamation module (std-only)"
+
+[dependencies]
