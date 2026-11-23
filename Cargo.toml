@@ -1,0 +1,11 @@
+[package]
+name = "section-folder"
+version = "0.1.0"
+edition = "2021"
+description = "Read-only section folding, layout and relocation diagnostics without third-party dependencies"
+
+[lib]
+path = "src/lib.rs"
+
+[profile.test]
+opt-level = 0
