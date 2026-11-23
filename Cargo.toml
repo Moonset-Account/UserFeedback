@@ -1,0 +1,7 @@
+[package]
+name = "online-partition-exchange"
+version = "0.1.0"
+edition = "2021"
+description = "Online partition exchange for a range-partitioned relational table (std only)"
+
+[dependencies]
