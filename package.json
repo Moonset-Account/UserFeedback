@@ -1,0 +1,13 @@
+{
+  "name": "edge-cache-conditional-revalidation",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Edge cache with ETag/Vary based conditional revalidation, request coalescing and stale failure handling",
+  "engines": {
+    "node": "24.15.0"
+  },
+  "scripts": {
+    "test": "node --test tests/*.test.mjs"
+  }
+}
