@@ -1,0 +1,7 @@
+[package]
+name = "paged-kv-cache"
+version = "0.1.0"
+edition = "2021"
+description = "Paged KV-cache manager for inference serving: prefix reuse, copy-on-write partial pages, bounded page pool with eviction"
+
+[dependencies]
