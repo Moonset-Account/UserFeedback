@@ -1,0 +1,13 @@
+{
+  "name": "federated-query-executor",
+  "version": "0.1.0",
+  "description": "Federated query planning and execution over small service field graphs, with composite extraction keys, alias-aware scatter, null-hierarchy error propagation, and revision-vector checkpoint/resume.",
+  "type": "module",
+  "private": true,
+  "engines": {
+    "node": "24.15.0"
+  },
+  "scripts": {
+    "test": "node --test"
+  }
+}
