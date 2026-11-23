@@ -1,0 +1,13 @@
+{
+  "name": "generation-aware-connection-pool",
+  "version": "1.0.0",
+  "description": "Generation-aware connection pool with per-request deadlines, queueing and controllable clock/discovery/connect callbacks",
+  "type": "module",
+  "engines": {
+    "node": "24.15.0"
+  },
+  "scripts": {
+    "test": "node --test tests/clock.test.mjs tests/pool-normal.test.mjs tests/pool-deadline.test.mjs tests/pool-generation.test.mjs tests/pool-edge.test.mjs"
+  },
+  "license": "MIT"
+}
