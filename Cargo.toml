@@ -1,0 +1,12 @@
+[package]
+name = "logical-decoder"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.95.0"
+description = "Logical replication log decoder with interleaved transaction fragments, versioned schemas and batch acknowledgements"
+
+[lib]
+name = "logical_decoder"
+path = "src/lib.rs"
+
+[dependencies]
