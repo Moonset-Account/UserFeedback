@@ -1,0 +1,7 @@
+[package]
+name = "stackwalk"
+version = "0.1.0"
+edition = "2021"
+description = "Synthetic stack unwinder: registers, segmented stack memory, compact unwind table, async event frames"
+
+[dependencies]
