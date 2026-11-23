@@ -1,0 +1,16 @@
+[package]
+name = "mirror-recovery"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.95.0"
+description = "Partition-scoped source-offset recovery when failing over between source log A and its mirror B"
+license = "MIT"
+
+[lib]
+name = "mirror_recovery"
+path = "src/lib.rs"
+
+# 无任何第三方依赖，仅使用 Rust 1.95.0 标准库，支持 cargo test --offline。
+[dependencies]
+
+[dev-dependencies]
