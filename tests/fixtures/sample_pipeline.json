@@ -1,0 +1,54 @@
+{
+  "name": "fixture-pipeline",
+  "home_region": "cn-east",
+  "data_types": ["order", "audit"],
+  "approvals": {
+    "order": ["cn-east", "cn-north"],
+    "audit": ["cn-east"]
+  },
+  "actions": {
+    "edge_forward": {"persists": false, "description": "边缘节点纯转发"}
+  },
+  "pipeline": {
+    "id": "entry",
+    "step": "api-gateway",
+    "action": "forward",
+    "next": {
+      "id": "cache",
+      "step": "cache",
+      "action": "cache_write",
+      "on": {
+        "cache_down": {
+          "id": "cache_dr",
+          "step": "cache-failover",
+          "action": "cache_write",
+          "region": "cn-north",
+          "next": {
+            "id": "dr_relay",
+            "step": "dr-relay",
+            "action": "edge_forward",
+            "region": "us-west"
+          }
+        }
+      },
+      "next": {
+        "id": "async_logger",
+        "step": "async-log",
+        "action": "async_log",
+        "next": {
+          "id": "dr_replica",
+          "step": "dr-replica",
+          "action": "replicate",
+          "on": {
+            "regional_outage": {
+              "id": "dr_replica_overseas",
+              "step": "dr-replica-overseas",
+              "action": "replicate",
+              "region": "eu-central"
+            }
+          }
+        }
+      }
+    }
+  }
+}
