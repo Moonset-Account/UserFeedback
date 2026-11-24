@@ -1,0 +1,783 @@
+{
+  "schema_version": "adaptive-plan-1.0",
+  "status": "optimal",
+  "materialization_allowed": true,
+  "objective": {
+    "worst_total_cost": 161,
+    "sum_of_scenario_total_costs": 268,
+    "scenario_total_costs": {
+      "small-A": 107,
+      "small-C": 161
+    }
+  },
+  "root_node": "root",
+  "nodes": {
+    "n1": {
+      "id": "n1",
+      "scenarios": [
+        "small-A",
+        "small-C"
+      ],
+      "state": {
+        "frontier": [
+          {
+            "subset": "A",
+            "mask": 1,
+            "materialized": false,
+            "ordering": [],
+            "memory_limit": 100000,
+            "reuse_order": true
+          },
+          {
+            "subset": "B",
+            "mask": 2,
+            "materialized": false,
+            "ordering": [],
+            "memory_limit": 100000,
+            "reuse_order": true
+          },
+          {
+            "subset": "C",
+            "mask": 4,
+            "materialized": false,
+            "ordering": [],
+            "memory_limit": 100000,
+            "reuse_order": true
+          }
+        ]
+      },
+      "future_cost_sum_from_here": 268,
+      "kind": "decision",
+      "action": {
+        "kind": "materialize",
+        "label": "materialize_and_observe(B)",
+        "total_cost": {
+          "small-A": 2,
+          "small-C": 20
+        },
+        "required_memory": {
+          "small-A": 2,
+          "small-C": 20
+        },
+        "memory_limit": 100000,
+        "subset": "B",
+        "mask": 2,
+        "observation": "row_count"
+      },
+      "next_node": null,
+      "branches": [
+        {
+          "observed_rows": 2,
+          "scenarios": [
+            "small-A"
+          ],
+          "next_node": "n2"
+        },
+        {
+          "observed_rows": 20,
+          "scenarios": [
+            "small-C"
+          ],
+          "next_node": "n5"
+        }
+      ]
+    },
+    "n2": {
+      "id": "n2",
+      "scenarios": [
+        "small-A"
+      ],
+      "state": {
+        "frontier": [
+          {
+            "subset": "A",
+            "mask": 1,
+            "materialized": false,
+            "ordering": [],
+            "memory_limit": 100000,
+            "reuse_order": true
+          },
+          {
+            "subset": "B",
+            "mask": 2,
+            "materialized": true,
+            "ordering": [],
+            "memory_limit": 100000,
+            "reuse_order": true
+          },
+          {
+            "subset": "C",
+            "mask": 4,
+            "materialized": false,
+            "ordering": [],
+            "memory_limit": 100000,
+            "reuse_order": true
+          }
+        ]
+      },
+      "future_cost_sum_from_here": 105,
+      "kind": "decision",
+      "action": {
+        "kind": "join",
+        "label": "hash_join(A, B) via AB -> A+B",
+        "total_cost": {
+          "small-A": 3
+        },
+        "required_memory": {
+          "small-A": 3
+        },
+        "memory_limit": 100000,
+        "algorithm": "hash",
+        "edge_id": "AB",
+        "left_subset": "A",
+        "right_subset": "B",
+        "output_subset": "A+B",
+        "left_mask": 1,
+        "right_mask": 2,
+        "output_mask": 3,
+        "sort_left_required": false,
+        "sort_right_required": false,
+        "reused_existing_order": {
+          "left": true,
+          "right": true
+        },
+        "join_cost": {
+          "small-A": 3
+        },
+        "join_memory": {
+          "small-A": 3
+        },
+        "sort_left_cost": {
+          "small-A": 0
+        },
+        "sort_right_cost": {
+          "small-A": 0
+        }
+      },
+      "next_node": "n3",
+      "branches": []
+    },
+    "n3": {
+      "id": "n3",
+      "scenarios": [
+        "small-A"
+      ],
+      "state": {
+        "frontier": [
+          {
+            "subset": "A+B",
+            "mask": 3,
+            "materialized": false,
+            "ordering": [],
+            "memory_limit": 100000,
+            "reuse_order": true
+          },
+          {
+            "subset": "C",
+            "mask": 4,
+            "materialized": false,
+            "ordering": [],
+            "memory_limit": 100000,
+            "reuse_order": true
+          }
+        ]
+      },
+      "future_cost_sum_from_here": 102,
+      "kind": "decision",
+      "action": {
+        "kind": "join",
+        "label": "hash_join(A+B, C) via BC -> A+B+C",
+        "total_cost": {
+          "small-A": 102
+        },
+        "required_memory": {
+          "small-A": 102
+        },
+        "memory_limit": 100000,
+        "algorithm": "hash",
+        "edge_id": "BC",
+        "left_subset": "A+B",
+        "right_subset": "C",
+        "output_subset": "A+B+C",
+        "left_mask": 3,
+        "right_mask": 4,
+        "output_mask": 7,
+        "sort_left_required": false,
+        "sort_right_required": false,
+        "reused_existing_order": {
+          "left": true,
+          "right": true
+        },
+        "join_cost": {
+          "small-A": 102
+        },
+        "join_memory": {
+          "small-A": 102
+        },
+        "sort_left_cost": {
+          "small-A": 0
+        },
+        "sort_right_cost": {
+          "small-A": 0
+        }
+      },
+      "next_node": "n4",
+      "branches": []
+    },
+    "n4": {
+      "id": "n4",
+      "scenarios": [
+        "small-A"
+      ],
+      "state": {
+        "frontier": [
+          {
+            "subset": "A+B+C",
+            "mask": 7,
+            "materialized": false,
+            "ordering": [],
+            "memory_limit": 100000,
+            "reuse_order": true
+          }
+        ]
+      },
+      "future_cost_sum_from_here": 0,
+      "kind": "terminal",
+      "action": null
+    },
+    "n5": {
+      "id": "n5",
+      "scenarios": [
+        "small-C"
+      ],
+      "state": {
+        "frontier": [
+          {
+            "subset": "A",
+            "mask": 1,
+            "materialized": false,
+            "ordering": [],
+            "memory_limit": 100000,
+            "reuse_order": true
+          },
+          {
+            "subset": "B",
+            "mask": 2,
+            "materialized": true,
+            "ordering": [],
+            "memory_limit": 100000,
+            "reuse_order": true
+          },
+          {
+            "subset": "C",
+            "mask": 4,
+            "materialized": false,
+            "ordering": [],
+            "memory_limit": 100000,
+            "reuse_order": true
+          }
+        ]
+      },
+      "future_cost_sum_from_here": 141,
+      "kind": "decision",
+      "action": {
+        "kind": "join",
+        "label": "hash_join(B, C) via BC -> B+C",
+        "total_cost": {
+          "small-C": 21
+        },
+        "required_memory": {
+          "small-C": 21
+        },
+        "memory_limit": 100000,
+        "algorithm": "hash",
+        "edge_id": "BC",
+        "left_subset": "B",
+        "right_subset": "C",
+        "output_subset": "B+C",
+        "left_mask": 2,
+        "right_mask": 4,
+        "output_mask": 6,
+        "sort_left_required": false,
+        "sort_right_required": false,
+        "reused_existing_order": {
+          "left": true,
+          "right": true
+        },
+        "join_cost": {
+          "small-C": 21
+        },
+        "join_memory": {
+          "small-C": 21
+        },
+        "sort_left_cost": {
+          "small-C": 0
+        },
+        "sort_right_cost": {
+          "small-C": 0
+        }
+      },
+      "next_node": "n6",
+      "branches": []
+    },
+    "n6": {
+      "id": "n6",
+      "scenarios": [
+        "small-C"
+      ],
+      "state": {
+        "frontier": [
+          {
+            "subset": "A",
+            "mask": 1,
+            "materialized": false,
+            "ordering": [],
+            "memory_limit": 100000,
+            "reuse_order": true
+          },
+          {
+            "subset": "B+C",
+            "mask": 6,
+            "materialized": false,
+            "ordering": [],
+            "memory_limit": 100000,
+            "reuse_order": true
+          }
+        ]
+      },
+      "future_cost_sum_from_here": 120,
+      "kind": "decision",
+      "action": {
+        "kind": "join",
+        "label": "hash_join(A, B+C) via AB -> A+B+C",
+        "total_cost": {
+          "small-C": 120
+        },
+        "required_memory": {
+          "small-C": 120
+        },
+        "memory_limit": 100000,
+        "algorithm": "hash",
+        "edge_id": "AB",
+        "left_subset": "A",
+        "right_subset": "B+C",
+        "output_subset": "A+B+C",
+        "left_mask": 1,
+        "right_mask": 6,
+        "output_mask": 7,
+        "sort_left_required": false,
+        "sort_right_required": false,
+        "reused_existing_order": {
+          "left": true,
+          "right": true
+        },
+        "join_cost": {
+          "small-C": 120
+        },
+        "join_memory": {
+          "small-C": 120
+        },
+        "sort_left_cost": {
+          "small-C": 0
+        },
+        "sort_right_cost": {
+          "small-C": 0
+        }
+      },
+      "next_node": "n7",
+      "branches": []
+    },
+    "n7": {
+      "id": "n7",
+      "scenarios": [
+        "small-C"
+      ],
+      "state": {
+        "frontier": [
+          {
+            "subset": "A+B+C",
+            "mask": 7,
+            "materialized": false,
+            "ordering": [],
+            "memory_limit": 100000,
+            "reuse_order": true
+          }
+        ]
+      },
+      "future_cost_sum_from_here": 0,
+      "kind": "terminal",
+      "action": null
+    },
+    "root": {
+      "id": "root",
+      "kind": "root",
+      "branches": [
+        {
+          "signature": "no-initial-observation",
+          "observations": [],
+          "scenarios": [
+            "small-A",
+            "small-C"
+          ],
+          "next_node": "n1"
+        }
+      ]
+    }
+  },
+  "paths": {
+    "small-A": [
+      {
+        "step": 1,
+        "kind": "materialize",
+        "label": "materialize_and_observe(B)",
+        "node_id": "n1",
+        "action": {
+          "kind": "materialize",
+          "label": "materialize_and_observe(B)",
+          "total_cost": {
+            "small-A": 2,
+            "small-C": 20
+          },
+          "required_memory": {
+            "small-A": 2,
+            "small-C": 20
+          },
+          "memory_limit": 100000,
+          "subset": "B",
+          "mask": 2,
+          "observation": "row_count"
+        },
+        "cost": 2,
+        "cumulative_cost": 2,
+        "actual_output_rows_offline": null,
+        "observed_rows": 2,
+        "next_node_id": "n2",
+        "observations_so_far": [
+          {
+            "stage": "materialize",
+            "subset": "B",
+            "observed_rows": 2
+          }
+        ]
+      },
+      {
+        "step": 2,
+        "kind": "join",
+        "label": "hash_join(A, B) via AB -> A+B",
+        "node_id": "n2",
+        "action": {
+          "kind": "join",
+          "label": "hash_join(A, B) via AB -> A+B",
+          "total_cost": {
+            "small-A": 3
+          },
+          "required_memory": {
+            "small-A": 3
+          },
+          "memory_limit": 100000,
+          "algorithm": "hash",
+          "edge_id": "AB",
+          "left_subset": "A",
+          "right_subset": "B",
+          "output_subset": "A+B",
+          "left_mask": 1,
+          "right_mask": 2,
+          "output_mask": 3,
+          "sort_left_required": false,
+          "sort_right_required": false,
+          "reused_existing_order": {
+            "left": true,
+            "right": true
+          },
+          "join_cost": {
+            "small-A": 3
+          },
+          "join_memory": {
+            "small-A": 3
+          },
+          "sort_left_cost": {
+            "small-A": 0
+          },
+          "sort_right_cost": {
+            "small-A": 0
+          }
+        },
+        "cost": 3,
+        "cumulative_cost": 5,
+        "actual_output_rows_offline": 2,
+        "observed_rows": null,
+        "next_node_id": "n3",
+        "observations_so_far": [
+          {
+            "stage": "materialize",
+            "subset": "B",
+            "observed_rows": 2
+          }
+        ]
+      },
+      {
+        "step": 3,
+        "kind": "join",
+        "label": "hash_join(A+B, C) via BC -> A+B+C",
+        "node_id": "n3",
+        "action": {
+          "kind": "join",
+          "label": "hash_join(A+B, C) via BC -> A+B+C",
+          "total_cost": {
+            "small-A": 102
+          },
+          "required_memory": {
+            "small-A": 102
+          },
+          "memory_limit": 100000,
+          "algorithm": "hash",
+          "edge_id": "BC",
+          "left_subset": "A+B",
+          "right_subset": "C",
+          "output_subset": "A+B+C",
+          "left_mask": 3,
+          "right_mask": 4,
+          "output_mask": 7,
+          "sort_left_required": false,
+          "sort_right_required": false,
+          "reused_existing_order": {
+            "left": true,
+            "right": true
+          },
+          "join_cost": {
+            "small-A": 102
+          },
+          "join_memory": {
+            "small-A": 102
+          },
+          "sort_left_cost": {
+            "small-A": 0
+          },
+          "sort_right_cost": {
+            "small-A": 0
+          }
+        },
+        "cost": 102,
+        "cumulative_cost": 107,
+        "actual_output_rows_offline": 200,
+        "observed_rows": null,
+        "next_node_id": "n4",
+        "observations_so_far": [
+          {
+            "stage": "materialize",
+            "subset": "B",
+            "observed_rows": 2
+          }
+        ]
+      },
+      {
+        "step": 4,
+        "kind": "terminal",
+        "node_id": "n4",
+        "subset": "A+B+C",
+        "cumulative_cost": 107
+      }
+    ],
+    "small-C": [
+      {
+        "step": 1,
+        "kind": "materialize",
+        "label": "materialize_and_observe(B)",
+        "node_id": "n1",
+        "action": {
+          "kind": "materialize",
+          "label": "materialize_and_observe(B)",
+          "total_cost": {
+            "small-A": 2,
+            "small-C": 20
+          },
+          "required_memory": {
+            "small-A": 2,
+            "small-C": 20
+          },
+          "memory_limit": 100000,
+          "subset": "B",
+          "mask": 2,
+          "observation": "row_count"
+        },
+        "cost": 20,
+        "cumulative_cost": 20,
+        "actual_output_rows_offline": null,
+        "observed_rows": 20,
+        "next_node_id": "n5",
+        "observations_so_far": [
+          {
+            "stage": "materialize",
+            "subset": "B",
+            "observed_rows": 20
+          }
+        ]
+      },
+      {
+        "step": 2,
+        "kind": "join",
+        "label": "hash_join(B, C) via BC -> B+C",
+        "node_id": "n5",
+        "action": {
+          "kind": "join",
+          "label": "hash_join(B, C) via BC -> B+C",
+          "total_cost": {
+            "small-C": 21
+          },
+          "required_memory": {
+            "small-C": 21
+          },
+          "memory_limit": 100000,
+          "algorithm": "hash",
+          "edge_id": "BC",
+          "left_subset": "B",
+          "right_subset": "C",
+          "output_subset": "B+C",
+          "left_mask": 2,
+          "right_mask": 4,
+          "output_mask": 6,
+          "sort_left_required": false,
+          "sort_right_required": false,
+          "reused_existing_order": {
+            "left": true,
+            "right": true
+          },
+          "join_cost": {
+            "small-C": 21
+          },
+          "join_memory": {
+            "small-C": 21
+          },
+          "sort_left_cost": {
+            "small-C": 0
+          },
+          "sort_right_cost": {
+            "small-C": 0
+          }
+        },
+        "cost": 21,
+        "cumulative_cost": 41,
+        "actual_output_rows_offline": 20,
+        "observed_rows": null,
+        "next_node_id": "n6",
+        "observations_so_far": [
+          {
+            "stage": "materialize",
+            "subset": "B",
+            "observed_rows": 20
+          }
+        ]
+      },
+      {
+        "step": 3,
+        "kind": "join",
+        "label": "hash_join(A, B+C) via AB -> A+B+C",
+        "node_id": "n6",
+        "action": {
+          "kind": "join",
+          "label": "hash_join(A, B+C) via AB -> A+B+C",
+          "total_cost": {
+            "small-C": 120
+          },
+          "required_memory": {
+            "small-C": 120
+          },
+          "memory_limit": 100000,
+          "algorithm": "hash",
+          "edge_id": "AB",
+          "left_subset": "A",
+          "right_subset": "B+C",
+          "output_subset": "A+B+C",
+          "left_mask": 1,
+          "right_mask": 6,
+          "output_mask": 7,
+          "sort_left_required": false,
+          "sort_right_required": false,
+          "reused_existing_order": {
+            "left": true,
+            "right": true
+          },
+          "join_cost": {
+            "small-C": 120
+          },
+          "join_memory": {
+            "small-C": 120
+          },
+          "sort_left_cost": {
+            "small-C": 0
+          },
+          "sort_right_cost": {
+            "small-C": 0
+          }
+        },
+        "cost": 120,
+        "cumulative_cost": 161,
+        "actual_output_rows_offline": 2000,
+        "observed_rows": null,
+        "next_node_id": "n7",
+        "observations_so_far": [
+          {
+            "stage": "materialize",
+            "subset": "B",
+            "observed_rows": 20
+          }
+        ]
+      },
+      {
+        "step": 4,
+        "kind": "terminal",
+        "node_id": "n7",
+        "subset": "A+B+C",
+        "cumulative_cost": 161
+      }
+    ]
+  },
+  "switches": {
+    "small-A": [
+      {
+        "after_step": 1,
+        "location": "after_materialization",
+        "node_id": "n1",
+        "subset": "B",
+        "observed_rows": 2,
+        "causes_switch": true,
+        "selected_next_node": "n2",
+        "branches": [
+          {
+            "observed_rows": 2,
+            "next_node": "n2",
+            "next_action": "hash_join(A, B) via AB -> A+B"
+          },
+          {
+            "observed_rows": 20,
+            "next_node": "n5",
+            "next_action": "hash_join(B, C) via BC -> B+C"
+          }
+        ]
+      }
+    ],
+    "small-C": [
+      {
+        "after_step": 1,
+        "location": "after_materialization",
+        "node_id": "n1",
+        "subset": "B",
+        "observed_rows": 20,
+        "causes_switch": true,
+        "selected_next_node": "n5",
+        "branches": [
+          {
+            "observed_rows": 2,
+            "next_node": "n2",
+            "next_action": "hash_join(A, B) via AB -> A+B"
+          },
+          {
+            "observed_rows": 20,
+            "next_node": "n5",
+            "next_action": "hash_join(B, C) via BC -> B+C"
+          }
+        ]
+      }
+    ]
+  }
+}

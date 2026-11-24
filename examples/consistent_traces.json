@@ -1,0 +1,14 @@
+{
+  "small-A": [
+    {"action": "materialize B", "subset": "B", "observed_rows": 2},
+    {"action": "hash AB first"}
+  ],
+  "small-A-twin": [
+    {"action": "materialize B", "subset": "B", "observed_rows": 2},
+    {"action": "hash AB first"}
+  ],
+  "small-C": [
+    {"action": "materialize B", "subset": "B", "observed_rows": 20},
+    {"action": "hash BC first"}
+  ]
+}

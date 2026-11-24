@@ -1,0 +1,8 @@
+{
+  "small-A": [
+    {"action": "hash AB first"}
+  ],
+  "small-C": [
+    {"action": "hash BC first"}
+  ]
+}
