@@ -1,0 +1,12 @@
+[package]
+name = "persistent-miniheap"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.95.0"
+
+[lib]
+name = "persistent_miniheap"
+path = "src/lib.rs"
+
+[profile.test]
+opt-level = 1
