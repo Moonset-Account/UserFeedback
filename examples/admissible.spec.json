@@ -1,0 +1,38 @@
+{
+  "domain": {
+    "status": ["new", "approved", "denied"],
+    "owner": ["none", "alice"],
+    "notified": ["no", "yes"]
+  },
+  "hooks": [
+    {
+      "id": "approve",
+      "when": { "kind": "eq", "field": "status", "value": "new" },
+      "action": { "kind": "set", "field": "status", "value": "approved" }
+    },
+    {
+      "id": "assign",
+      "when": { "kind": "eq", "field": "status", "value": "approved" },
+      "action": { "kind": "set", "field": "owner", "value": "alice" }
+    },
+    {
+      "id": "notify",
+      "when": {
+        "kind": "all",
+        "of": [
+          { "kind": "eq", "field": "owner", "value": "alice" },
+          { "kind": "eq", "field": "notified", "value": "no" }
+        ]
+      },
+      "action": { "kind": "set", "field": "notified", "value": "yes" }
+    }
+  ],
+  "accept": {
+    "kind": "all",
+    "of": [
+      { "kind": "eq", "field": "status", "value": "approved" },
+      { "kind": "eq", "field": "owner", "value": "alice" },
+      { "kind": "eq", "field": "notified", "value": "yes" }
+    ]
+  }
+}

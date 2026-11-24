@@ -1,0 +1,18 @@
+{
+  "domain": {
+    "x": ["a", "b"]
+  },
+  "hooks": [
+    {
+      "id": "toB",
+      "when": { "kind": "eq", "field": "x", "value": "a" },
+      "action": { "kind": "set", "field": "x", "value": "b" }
+    },
+    {
+      "id": "toA",
+      "when": { "kind": "eq", "field": "x", "value": "b" },
+      "action": { "kind": "set", "field": "x", "value": "a" }
+    }
+  ],
+  "accept": { "kind": "eq", "field": "x", "value": "a" }
+}
