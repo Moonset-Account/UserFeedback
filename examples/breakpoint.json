@@ -1,0 +1,6 @@
+{
+  "statuses": {"compile-a": "ended", "compile-b": "running", "package": "pending"},
+  "frozen_inputs": {"compile-b": [1]},
+  "published": {"base": 1, "artifact": "a1", "report": "from-a"},
+  "lock_holders": {"gcc": "compile-b"}
+}

@@ -1,0 +1,38 @@
+{
+  "initial_values": {"base": 1},
+  "outputs_of_interest": ["report"],
+  "steps": [
+    {
+      "name": "compile-a",
+      "reads": ["base"],
+      "deps": [],
+      "lock": "gcc",
+      "table": [
+        {"when": [1], "publish": {"artifact": "a1", "report": "from-a"}},
+        {"when": [2], "publish": {"artifact": "a2", "report": "from-a"}}
+      ]
+    },
+    {
+      "name": "compile-b",
+      "reads": ["base"],
+      "deps": [],
+      "lock": "gcc",
+      "table": [
+        {"when": [1], "publish": {"artifact": "b1", "report": "from-b"}},
+        {"when": [2], "publish": {"artifact": "b2", "report": "from-b"}}
+      ]
+    },
+    {
+      "name": "package",
+      "reads": ["artifact"],
+      "deps": [],
+      "table": [
+        {"when": ["a1"], "publish": {"report": "packed-a1"}},
+        {"when": ["a2"], "publish": {"report": "packed-a2"}},
+        {"when": ["b1"], "publish": {"report": "packed-b1"}},
+        {"when": ["b2"], "publish": {"report": "packed-b2"}},
+        {"when": [{"$unset": true}], "publish": {"report": "packed-empty"}}
+      ]
+    }
+  ]
+}
