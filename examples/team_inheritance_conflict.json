@@ -1,0 +1,55 @@
+{
+  "batch_id": "B-TEAM-INHERITANCE",
+  "roles": {
+    "entry-clerk": ["payment_account:enter"],
+    "account-approver": ["payment_account:approve"]
+  },
+  "existing_grants": [
+    {
+      "id": "personal-entry",
+      "user_id": "u-2002",
+      "role_id": "entry-clerk",
+      "project_id": "prj-finance",
+      "valid_from": "2026-01-01",
+      "valid_to": "2026-12-31"
+    }
+  ],
+  "revocations": [
+    {
+      "user_id": "u-2002",
+      "role_id": "entry-clerk",
+      "project_id": "prj-finance",
+      "source_type": "direct"
+    }
+  ],
+  "grants": [
+    {
+      "id": "enable-approval",
+      "batch_item_id": "ticket-7788",
+      "user_id": "u-2002",
+      "role_id": "account-approver",
+      "project_id": "prj-finance",
+      "valid_from": "2026-03-01",
+      "valid_to": "2026-09-30"
+    }
+  ],
+  "team_grants": [
+    {
+      "id": "team-entry-source",
+      "team_id": "team-finance-ops",
+      "role_id": "entry-clerk",
+      "project_id": "prj-finance",
+      "valid_from": "2026-01-01",
+      "valid_to": "2026-12-31"
+    }
+  ],
+  "team_memberships": [
+    {
+      "id": "membership-u2002",
+      "user_id": "u-2002",
+      "team_id": "team-finance-ops",
+      "valid_from": "2026-01-01",
+      "valid_to": "2026-12-31"
+    }
+  ]
+}

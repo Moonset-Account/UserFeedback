@@ -1,0 +1,30 @@
+{
+  "batch_id": "B-CLEAR-REPLACEMENT",
+  "roles": {
+    "payment-entry": ["payment_account:enter"],
+    "payment-approver": ["payment_account:approve"]
+  },
+  "existing_grants": [
+    {
+      "id": "g-old-entry",
+      "user_id": "u-1001",
+      "role_id": "payment-entry",
+      "project_id": "prj-alpha",
+      "valid_from": "2026-01-01T00:00:00Z",
+      "valid_to": "2026-12-31T23:59:59Z"
+    }
+  ],
+  "revocations": [
+    {"op": "revoke", "grant_id": "g-old-entry"}
+  ],
+  "grants": [
+    {
+      "id": "g-new-approval",
+      "user_id": "u-1001",
+      "role_id": "payment-approver",
+      "project_id": "prj-alpha",
+      "valid_from": "2026-02-01T00:00:00Z",
+      "valid_to": "2027-01-31T23:59:59Z"
+    }
+  ]
+}
