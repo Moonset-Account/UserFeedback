@@ -1,0 +1,110 @@
+{
+  "submission": {
+    "record_id": "investigator-statement",
+    "version": "3",
+    "title": "合成调查员陈述（无真实数据）",
+    "paragraphs": [
+      "调查员引言：以下段落用于验证开示核查。",
+      "引用林访谈第一段：程序说明。",
+      "引用林访谈第二段，其中嵌套风险备忘录第一段。",
+      "引用林访谈第三段：尚未批准公开。",
+      "调查员过渡段。",
+      "周访谈第一段。",
+      "周访谈第二段，同时对应董事会纪要第一段。",
+      "周访谈第三段，同时对应董事会纪要第二段（未批准）。",
+      "董事会纪要第三段。",
+      "调查员结尾。",
+      "引用一份未提供的工资表版本。"
+    ],
+    "citations": [
+      {
+        "citation_id": "statement-to-lin",
+        "holder_range": [2, 4],
+        "source": "interview-lin@2",
+        "source_range": [1, 3]
+      },
+      {
+        "citation_id": "statement-to-zhou",
+        "holder_range": [6, 8],
+        "source": "interview-zhou@1",
+        "source_range": [1, 3]
+      },
+      {
+        "citation_id": "statement-to-board",
+        "holder_range": [7, 9],
+        "source": "board-minutes@1",
+        "source_range": [1, 3]
+      },
+      {
+        "citation_id": "statement-to-missing-payroll",
+        "holder_range": 11,
+        "source": "payroll-register@9",
+        "source_range": [4, 5]
+      }
+    ]
+  },
+  "records": [
+    {
+      "record_id": "interview-lin",
+      "version": "2",
+      "kind": "interview",
+      "paragraphs": [
+        "林访谈实际使用的第二版第一段。",
+        "林访谈第二版第二段，引用风险备忘录。",
+        "林访谈第二版第三段，包含未公开内容。"
+      ],
+      "citations": [
+        {
+          "citation_id": "lin-to-risk-memo",
+          "holder_range": 2,
+          "source": "risk-memo@1",
+          "source_range": 1
+        }
+      ]
+    },
+    {
+      "record_id": "risk-memo",
+      "version": "1",
+      "kind": "material",
+      "paragraphs": ["风险备忘录第一段，已单独批准。"]
+    },
+    {
+      "record_id": "interview-zhou",
+      "version": "1",
+      "kind": "interview",
+      "paragraphs": ["周访谈第一段。", "周访谈第二段。", "周访谈第三段。"]
+    },
+    {
+      "record_id": "board-minutes",
+      "version": "1",
+      "kind": "material",
+      "paragraphs": ["纪要第一段。", "纪要第二段未批准。", "纪要第三段。"]
+    }
+  ],
+  "approvals": [
+    {
+      "record_id": "interview-lin",
+      "version": "2",
+      "approved_ranges": [[1, 2]],
+      "approval_id": "lin-v2-approval"
+    },
+    {
+      "record_id": "risk-memo",
+      "version": "1",
+      "approved_ranges": [1],
+      "approval_id": "risk-approval"
+    },
+    {
+      "record_id": "interview-zhou",
+      "version": "1",
+      "approved_ranges": [[1, 3]],
+      "approval_id": "zhou-approval"
+    },
+    {
+      "record_id": "board-minutes",
+      "version": "1",
+      "approved_ranges": [1, 3],
+      "approval_id": "board-partial-approval"
+    }
+  ]
+}
