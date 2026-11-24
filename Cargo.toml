@@ -1,0 +1,13 @@
+[package]
+name = "row_pattern_recognizer"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.95.0"
+description = "Streaming row pattern recognition (SQL MATCH_RECOGNIZE style) over partition-ordered input"
+
+[lib]
+name = "row_pattern_recognizer"
+path = "src/lib.rs"
+
+[profile.test]
+opt-level = 1
