@@ -1,0 +1,48 @@
+{
+  "target_service": "shared-report-sa",
+  "project": "proj-apollo",
+  "requested_interval": {
+    "start": "2026-03-01T00:00:00Z",
+    "end": "2026-06-01T00:00:00Z"
+  },
+  "identity_links": [
+    {
+      "person_id": "person-alice",
+      "identities": [
+        {"directory": "corp", "subject": "alice"},
+        {"directory": "partner-portal", "subject": "alice@partner.test"}
+      ]
+    },
+    {"person_id": "person-bob", "directory": "corp", "subject": "bob"},
+    {"person_id": "person-carol", "directory": "partner-portal", "subject": "carol@partner.test"}
+  ],
+  "approvals": [
+    {
+      "id": "bo-2026-001",
+      "type": "business_owner",
+      "identity": {"directory": "corp", "subject": "alice"},
+      "valid_from": "2026-03-01T00:00:00Z",
+      "valid_until": "2026-06-01T00:00:00Z",
+      "project": "proj-apollo",
+      "service": "shared-report-sa"
+    },
+    {
+      "id": "ac-2026-007",
+      "type": "account_custodian",
+      "identity": {"directory": "corp", "subject": "bob"},
+      "valid_from": "2026-03-01T00:00:00Z",
+      "valid_until": "2026-04-15T12:00:00Z",
+      "project": "proj-apollo",
+      "service": "shared-report-sa"
+    },
+    {
+      "id": "ac-2026-009",
+      "type": "custodian",
+      "identity": {"directory": "partner-portal", "subject": "carol@partner.test"},
+      "valid_from": "2026-04-15T12:00:00Z",
+      "valid_until": "2026-06-01T00:00:00Z",
+      "project": "proj-apollo",
+      "service": "shared-report-sa"
+    }
+  ]
+}

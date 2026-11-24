@@ -1,0 +1,37 @@
+{
+  "target_service": "shared-report-sa",
+  "project": "proj-apollo",
+  "requested_interval": {
+    "start": "2026-03-01",
+    "end": "2026-06-01"
+  },
+  "identity_links": [
+    {
+      "person_id": "person-dana",
+      "identities": [
+        "corp:dana",
+        "partner-portal:dana@partner.test"
+      ]
+    }
+  ],
+  "approvals": [
+    {
+      "id": "bo-dana-corp",
+      "type": "business_owner",
+      "identity": "corp:dana",
+      "valid_from": "2026-03-01",
+      "valid_to": "2026-05-31",
+      "project": "proj-apollo",
+      "service": "shared-report-sa"
+    },
+    {
+      "id": "bo-dana-partner",
+      "type": "business_owner",
+      "identity": "partner-portal:dana@partner.test",
+      "valid_from": "2026-03-15",
+      "valid_to": "2026-05-15",
+      "project": "proj-apollo",
+      "service": "shared-report-sa"
+    }
+  ]
+}
