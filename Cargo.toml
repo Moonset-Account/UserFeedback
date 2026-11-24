@@ -1,0 +1,18 @@
+[package]
+name = "local-compaction"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.95.0"
+description = "Local compaction library for ordered key-value segments with list appends and range tombstones"
+license = "MIT"
+
+[lib]
+name = "local_compaction"
+path = "src/lib.rs"
+
+[[example]]
+name = "replay_fixture"
+path = "examples/replay_fixture.rs"
+
+[profile.test]
+opt-level = 1
