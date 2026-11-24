@@ -1,0 +1,43 @@
+{
+  "page_size": 4096,
+  "first_position": 1,
+  "expected_sources": ["collector-a", "collector-b"],
+  "receipts": [
+    {
+      "position": 1,
+      "source": "collector-a",
+      "receipt_id": "receipt-a-1",
+      "processes": [
+        {
+          "pid": "A",
+          "mappings": [
+            {"mapping_id": "a1", "start": 65536, "end": 73728},
+            {"mapping_id": "a2", "start": 131072, "end": 135168}
+          ],
+          "pages": [
+            {"mapping_id": "a1", "vaddr": 65536, "pfn": 10, "reuse_id": 1},
+            {"mapping_id": "a1", "vaddr": 69632, "pfn": 20, "reuse_id": 1},
+            {"mapping_id": "a2", "vaddr": 131072, "pfn": 10, "reuse_id": 1}
+          ]
+        }
+      ]
+    },
+    {
+      "position": 1,
+      "source": "collector-b",
+      "receipt_id": "receipt-b-1",
+      "processes": [
+        {
+          "pid": "B",
+          "mappings": [
+            {"mapping_id": "b1", "start": 196608, "end": 204800}
+          ],
+          "pages": [
+            {"mapping_id": "b1", "vaddr": 196608, "pfn": 20, "reuse_id": 1},
+            {"mapping_id": "b1", "vaddr": 200704, "pfn": 30, "reuse_id": 1}
+          ]
+        }
+      ]
+    }
+  ]
+}

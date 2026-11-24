@@ -1,0 +1,28 @@
+{
+  "page_size": 4096,
+  "first_position": 1,
+  "expected_positions": [1, 2, 3, 4],
+  "receipts": [
+    {
+      "position": 2,
+      "source": "collector",
+      "events": [
+        {"kind": "resident", "pid": "B", "pfn": 5, "reuse_id": 2}
+      ]
+    },
+    {
+      "position": 1,
+      "source": "collector",
+      "events": [
+        {"kind": "resident", "pid": "A", "pfn": 5, "reuse_id": 1}
+      ]
+    },
+    {
+      "position": 3,
+      "source": "collector",
+      "events": [
+        {"kind": "revoke", "pfn": 5, "reuse_id": 1}
+      ]
+    }
+  ]
+}
