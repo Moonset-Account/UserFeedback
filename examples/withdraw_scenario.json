@@ -1,0 +1,35 @@
+{
+  "domains": ["corp", "edge-a", "edge-b", "dc"],
+  "next_hops": [
+    {"domain": "corp", "next_hop": "nh-primary", "peer_domain": "edge-a"},
+    {"domain": "corp", "next_hop": "nh-backup", "peer_domain": "edge-b"},
+    {"domain": "edge-a", "next_hop": "nh-dc", "peer_domain": "dc"},
+    {"domain": "edge-b", "next_hop": "nh-dc", "peer_domain": "dc"},
+    {"domain": "dc", "next_hop": "nh-local", "peer_domain": "dc"}
+  ],
+  "grants": [
+    {
+      "transit_domain": "edge-a",
+      "from_domain": "corp",
+      "to_domain": "dc",
+      "direction": "bidirectional"
+    }
+  ],
+  "routes": [
+    {"route_id": "corp-ded-1", "domain": "corp", "prefix": "10.10.1.0/24", "next_hop": "nh-primary", "metric": 50},
+    {"route_id": "corp-bkp-1", "domain": "corp", "prefix": "10.10.0.0/16", "next_hop": "nh-backup", "metric": 200},
+    {"route_id": "corp-ded-2", "domain": "corp", "prefix": "10.10.2.0/24", "next_hop": "nh-primary", "metric": 50},
+    {"route_id": "edge-a-dc", "domain": "edge-a", "prefix": "10.10.0.0/16", "next_hop": "nh-dc", "metric": 100},
+    {"route_id": "edge-b-dc", "domain": "edge-b", "prefix": "10.10.0.0/16", "next_hop": "nh-dc", "metric": 100},
+    {"route_id": "dc-local", "domain": "dc", "prefix": "10.10.0.0/16", "next_hop": "nh-local", "metric": 100}
+  ],
+  "probes": [
+    {"probe_id": "probe-seg-1", "origin_domain": "corp", "target": "10.10.1.0/24"},
+    {"probe_id": "probe-seg-2", "origin_domain": "corp", "target": "10.10.2.0/24"}
+  ],
+  "changes": [
+    {"change_id": "chg-withdraw-ded-1", "action": "withdraw", "domain": "corp", "route_id": "corp-ded-1"},
+    {"change_id": "chg-restore-ded-1", "action": "add", "domain": "corp", "route_id": "corp-ded-1",
+     "route": {"route_id": "corp-ded-1", "domain": "corp", "prefix": "10.10.1.0/24", "next_hop": "nh-primary", "metric": 50}}
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "domains": ["corp", "edge-a", "dc"],
+  "next_hops": [
+    {"domain": "corp", "next_hop": "nh-primary", "peer_domain": "edge-a"},
+    {"domain": "edge-a", "next_hop": "nh-dc", "peer_domain": "dc"},
+    {"domain": "dc", "next_hop": "nh-local", "peer_domain": "dc"}
+  ],
+  "grants": [
+    {
+      "transit_domain": "edge-a",
+      "from_domain": "corp",
+      "to_domain": "dc",
+      "direction": "bidirectional"
+    }
+  ],
+  "routes": [
+    {"route_id": "corp-1", "domain": "corp", "prefix": "10.10.0.0/16", "next_hop": "nh-primary", "metric": 100},
+    {"route_id": "edge-1", "domain": "edge-a", "prefix": "10.10.0.0/16", "next_hop": "nh-dc", "metric": 100},
+    {"route_id": "dc-1", "domain": "dc", "prefix": "10.10.0.0/16", "next_hop": "nh-local", "metric": 100}
+  ],
+  "probes": [
+    {"probe_id": "p1", "origin_domain": "corp", "target": "10.10.5.0/24"}
+  ],
+  "changes": []
+}
