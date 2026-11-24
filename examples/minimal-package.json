@@ -1,0 +1,23 @@
+{
+  "name": "minimal-synthetic-extension",
+  "version": "0.1.0",
+  "variants": [
+    {
+      "id": "chrome",
+      "browser": "chrome",
+      "resources": [
+        {
+          "name": "core.js",
+          "features": ["core"],
+          "permissions": ["storage"],
+          "sites": ["https://example.com/*"]
+        }
+      ],
+      "approval": {
+        "features": ["core"],
+        "permissions": ["storage"],
+        "sites": ["https://example.com/*"]
+      }
+    }
+  ]
+}

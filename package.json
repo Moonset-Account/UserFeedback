@@ -1,0 +1,22 @@
+{
+  "name": "extension-release-review",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Dependency-free browser-extension package manifest and authorization scope reviewer.",
+  "type": "module",
+  "main": "src/index.js",
+  "exports": {
+    ".": "./src/index.js"
+  },
+  "engines": {
+    "node": ">=24.15.0"
+  },
+  "scripts": {
+    "test": "node --test tests/*.test.mjs",
+    "review": "node src/cli.mjs"
+  },
+  "bin": {
+    "extension-review": "src/cli.mjs"
+  },
+  "license": "UNLICENSED"
+}
