@@ -1,0 +1,226 @@
+import { test } from 'node:test';
+import assert from 'node:assert/strict';
+import {
+  CONFIRM_OUTCOME,
+  RETURN_OUTCOME,
+  STATUS,
+  createBindingFlow,
+} from '../src/binding-flow.mjs';
+
+function makeFlow(overrides = {}) {
+  let clock = 1_000;
+  let bindingSeq = 0;
+  const flow = createBindingFlow({
+    now: () => {
+      clock += 1;
+      return clock;
+    },
+    generateBindingId: () => `bind-${++bindingSeq}`,
+    ...overrides,
+  });
+  return { flow, now: () => clock };
+}
+
+test('a single tab binds its local profile to the verified enterprise identity', () => {
+  const { flow } = makeFlow();
+
+  const started = flow.startBinding({
+    registrationId: 'reg-1',
+    tabId: 'tab-a',
+    localProfileId: 'profile-work',
+    issuer: 'https://idp.example.com/tenant-a',
+  });
+
+  assert.equal(started.created, true);
+  assert.equal(started.registration.status, STATUS.PENDING_IDENTITY);
+  assert.equal(started.registration.tabId, 'tab-a');
+  assert.equal(started.registration.localProfileId, 'profile-work');
+  assert.equal(started.registration.issuer, 'https://idp.example.com/tenant-a');
+  assert.equal(started.registration.identity, null);
+
+  const returned = flow.receiveIdentityReturn({
+    registrationId: 'reg-1',
+    issuer: 'https://idp.example.com/tenant-a',
+    subject: 'subject-42',
+    eventId: 'evt-1',
+  });
+
+  assert.equal(returned.outcome, RETURN_OUTCOME.ACCEPTED);
+  assert.equal(returned.registration.status, STATUS.AWAITING_CONFIRMATION);
+  assert.equal(returned.registration.identity.subject, 'subject-42');
+  assert.equal(returned.registration.binding, null);
+
+  const confirmed = flow.confirmBinding({ registrationId: 'reg-1', tabId: 'tab-a' });
+
+  assert.equal(confirmed.outcome, CONFIRM_OUTCOME.BOUND);
+  assert.equal(confirmed.binding.bindingId, 'bind-1');
+  assert.equal(confirmed.binding.issuer, 'https://idp.example.com/tenant-a');
+  assert.equal(confirmed.binding.subject, 'subject-42');
+  assert.equal(confirmed.binding.localProfileId, 'profile-work');
+  assert.equal(confirmed.registration.status, STATUS.BOUND);
+  assert.equal(confirmed.registration.binding.bindingId, 'bind-1');
+
+  assert.deepEqual(
+    flow.getBindingForIdentity({
+      issuer: 'https://idp.example.com/tenant-a',
+      subject: 'subject-42',
+    }),
+    confirmed.binding,
+  );
+});
+
+test('confirmation requires a verified identity return first', () => {
+  const { flow } = makeFlow();
+  flow.startBinding({
+    registrationId: 'reg-1',
+    tabId: 'tab-a',
+    localProfileId: 'profile-work',
+    issuer: 'idp',
+  });
+
+  assert.throws(
+    () => flow.confirmBinding({ registrationId: 'reg-1', tabId: 'tab-a' }),
+    (error) => error.code === 'IDENTITY_NOT_READY',
+  );
+  assert.equal(flow.getRegistration('reg-1').status, STATUS.PENDING_IDENTITY);
+});
+
+test('only the initiating tab may confirm or cancel its registration', () => {
+  const { flow } = makeFlow();
+  flow.startBinding({
+    registrationId: 'reg-1',
+    tabId: 'tab-a',
+    localProfileId: 'profile-work',
+    issuer: 'idp',
+  });
+  flow.receiveIdentityReturn({
+    registrationId: 'reg-1',
+    issuer: 'idp',
+    subject: 'subject-1',
+  });
+
+  assert.throws(
+    () => flow.confirmBinding({ registrationId: 'reg-1', tabId: 'tab-b' }),
+    (error) => error.code === 'TAB_MISMATCH',
+  );
+  assert.throws(
+    () => flow.cancelBinding({ registrationId: 'reg-1', tabId: 'tab-b' }),
+    (error) => error.code === 'TAB_MISMATCH',
+  );
+  assert.equal(flow.getRegistration('reg-1').status, STATUS.AWAITING_CONFIRMATION);
+});
+
+test('the identity return must come from the enterprise identity source chosen at start', () => {
+  const { flow } = makeFlow();
+  flow.startBinding({
+    registrationId: 'reg-1',
+    tabId: 'tab-a',
+    localProfileId: 'profile-work',
+    issuer: 'idp-a',
+  });
+
+  assert.throws(
+    () => flow.receiveIdentityReturn({
+      registrationId: 'reg-1',
+      issuer: 'idp-b',
+      subject: 'subject-1',
+    }),
+    (error) => error.code === 'ISSUER_MISMATCH',
+  );
+  assert.equal(flow.getRegistration('reg-1').status, STATUS.PENDING_IDENTITY);
+  assert.equal(flow.getRegistration('reg-1').identity, null);
+});
+
+test('the same registration id cannot be reused with different registration details', () => {
+  const { flow } = makeFlow();
+  flow.startBinding({
+    registrationId: 'reg-1',
+    tabId: 'tab-a',
+    localProfileId: 'profile-work',
+    issuer: 'idp',
+  });
+
+  const repeated = flow.startBinding({
+    registrationId: 'reg-1',
+    tabId: 'tab-a',
+    localProfileId: 'profile-work',
+    issuer: 'idp',
+  });
+  assert.equal(repeated.created, false);
+  assert.equal(repeated.registration.status, STATUS.PENDING_IDENTITY);
+
+  assert.throws(
+    () => flow.startBinding({
+      registrationId: 'reg-1',
+      tabId: 'tab-a',
+      localProfileId: 'profile-other',
+      issuer: 'idp',
+    }),
+    (error) => error.code === 'REGISTRATION_ID_CONFLICT',
+  );
+});
+
+test('a registration id can be supplied by the caller or generated by the flow', () => {
+  const { flow } = makeFlow();
+  const started = flow.startBinding({
+    tabId: 'tab-a',
+    localProfileId: 'profile-work',
+    issuer: 'idp',
+  });
+
+  assert.equal(typeof started.registration.registrationId, 'string');
+  assert.ok(started.registration.registrationId.length > 0);
+  assert.equal(flow.getRegistration(started.registration.registrationId).tabId, 'tab-a');
+});
+
+test('invalid arguments are rejected without changing flow state', () => {
+  const { flow } = makeFlow();
+
+  assert.throws(() => flow.startBinding({ tabId: '', localProfileId: 'p', issuer: 'i' }),
+    (error) => error.code === 'INVALID_ARGUMENT');
+  assert.throws(() => flow.startBinding({ tabId: 't', localProfileId: '  ', issuer: 'i' }),
+    (error) => error.code === 'INVALID_ARGUMENT');
+  assert.throws(() => flow.startBinding({ tabId: 't', localProfileId: 'p', issuer: undefined }),
+    (error) => error.code === 'INVALID_ARGUMENT');
+  assert.throws(() => flow.startBinding(null),
+    (error) => error.code === 'INVALID_ARGUMENT');
+  assert.throws(() => flow.startBinding(['tab-a']),
+    (error) => error.code === 'INVALID_ARGUMENT');
+  assert.throws(
+    () => flow.startBinding({ tabId: 't', localProfileId: 'p', issuer: 'i', registrationId: 42 }),
+    (error) => error.code === 'INVALID_ARGUMENT',
+  );
+  assert.equal(flow.getRegistration('missing'), undefined);
+  assert.equal(flow.listRegistrations().length, 0);
+
+  // A return for an unknown registration is held for a not-yet-started
+  // registration (out-of-order delivery), it is not an error and it creates no
+  // registration by itself.
+  const held = flow.receiveIdentityReturn({ registrationId: 'missing', issuer: 'idp', subject: 's' });
+  assert.equal(held.outcome, 'deferred');
+  assert.equal(flow.getRegistration('missing'), undefined);
+
+  assert.throws(
+    () => flow.confirmBinding({ registrationId: 'missing', tabId: 'tab-a' }),
+    (error) => error.code === 'UNKNOWN_REGISTRATION',
+  );
+  assert.throws(
+    () => flow.cancelBinding({ registrationId: 'missing', tabId: 'tab-a' }),
+    (error) => error.code === 'UNKNOWN_REGISTRATION',
+  );
+});
+
+test('registration views are immutable snapshots', () => {
+  const { flow } = makeFlow();
+  flow.startBinding({
+    registrationId: 'reg-1',
+    tabId: 'tab-a',
+    localProfileId: 'profile-work',
+    issuer: 'idp',
+  });
+  const view = flow.getRegistration('reg-1');
+  assert.throws(() => {
+    view.status = STATUS.BOUND;
+  }, TypeError);
+  assert.equal(flow.getRegistration('reg-1').status, STATUS.PENDING_IDENTITY);
+});

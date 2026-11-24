@@ -1,0 +1,14 @@
+{
+  "name": "enterprise-identity-binding-flow",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Tab-scoped enterprise identity binding flow with race, replay and cancellation handling.",
+  "type": "module",
+  "engines": {
+    "node": ">=24.0.0"
+  },
+  "main": "src/binding-flow.mjs",
+  "scripts": {
+    "test": "node --test tests/*.test.mjs"
+  }
+}
