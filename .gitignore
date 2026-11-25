@@ -1,0 +1,6 @@
+/.exceptall-segments/
+/.exceptall-tmp/
+/exceptall-test-*/
+/exceptall-default-*/
+*.test
+*.out
