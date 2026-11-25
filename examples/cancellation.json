@@ -1,0 +1,22 @@
+{
+  "format": "info-flow-checker/v1",
+  "circuit": {
+    "name": "secret_cancellation",
+    "inputs": ["p", "s"],
+    "nodes": [
+      {"id": "not_s", "op": "not", "args": ["s"]},
+      {"id": "left", "op": "and", "args": ["s", "p"]},
+      {"id": "right", "op": "and", "args": ["not_s", "p"]},
+      {"id": "decision", "op": "or", "args": ["left", "right"]}
+    ],
+    "outputs": {
+      "decision": "decision"
+    }
+  },
+  "policy": {
+    "public_inputs": ["p"],
+    "secret_inputs": ["s"],
+    "summary_outputs": [],
+    "external_outputs": ["decision"]
+  }
+}
