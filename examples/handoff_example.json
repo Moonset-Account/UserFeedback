@@ -1,0 +1,74 @@
+{
+  "handoff_at": "2026-03-01T12:00:00Z",
+  "devices": [
+    {
+      "device_id": "LAPTOP-01",
+      "handoff_at": "2026-03-01T12:00:00Z",
+      "current_layout_version": 2
+    }
+  ],
+  "layouts": [
+    {
+      "device_id": "LAPTOP-01",
+      "version": 1,
+      "valid_from": "2026-01-01T00:00:00Z",
+      "valid_to": "2026-02-01T00:00:00Z",
+      "partitions": [
+        {
+          "volume_name": "Data",
+          "volume_instance_id": "vol-old",
+          "start": 0,
+          "end": 1000,
+          "unit": "MiB"
+        }
+      ]
+    },
+    {
+      "device_id": "LAPTOP-01",
+      "version": 2,
+      "valid_from": "2026-02-01T00:00:00Z",
+      "partitions": [
+        {
+          "volume_name": "Data",
+          "volume_instance_id": "vol-new",
+          "start": 0,
+          "end": 2000,
+          "unit": "MiB",
+          "encryption_policy": {"policy_id": "POL-DATA", "required": true}
+        }
+      ]
+    }
+  ],
+  "receipts": [
+    {
+      "receipt_id": "R-OLD-1",
+      "device_id": "LAPTOP-01",
+      "volume_instance_id": "vol-old",
+      "start": 0,
+      "end": 1000,
+      "status": "confirmed",
+      "effective_at": "2026-01-10T00:00:00Z",
+      "received_at": "2026-01-10T00:01:00Z"
+    },
+    {
+      "receipt_id": "R-NEW-PART",
+      "device_id": "LAPTOP-01",
+      "volume_instance_id": "vol-new",
+      "start": 0,
+      "end": 1200,
+      "status": "confirmed",
+      "effective_at": "2026-02-20T00:00:00Z",
+      "received_at": "2026-02-20T00:01:00Z"
+    },
+    {
+      "receipt_id": "R-NEW-LATE",
+      "device_id": "LAPTOP-01",
+      "volume_instance_id": "vol-new",
+      "start": 1200,
+      "end": 2000,
+      "status": "confirmed",
+      "effective_at": "2026-03-01T11:59:00Z",
+      "received_at": "2026-03-01T12:01:00Z"
+    }
+  ]
+}
