@@ -1,0 +1,16 @@
+{
+  "people": [
+    {"id": "A", "management_line": "L1"},
+    {"id": "B", "management_line": "L2"},
+    {"id": "C", "management_line": "L3"},
+    {"id": "D", "management_line": "L4"}
+  ],
+  "slots": [
+    {"id": "k1:a", "key_id": "k1", "seat": "a"},
+    {"id": "k1:b", "key_id": "k1", "seat": "b"}
+  ],
+  "rounds": [
+    {"id": "r1", "required_slots": ["k1:a", "k1:b"]},
+    {"id": "r2", "required_slots": ["k1:a", "k1:b"]}
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "people": [
+    {"id": "A", "management_line": "L1", "available_rounds": ["r1"]},
+    {"id": "B", "management_line": "L2", "available_rounds": ["r1"]},
+    {"id": "C", "management_line": "L3", "available_rounds": ["r2"]},
+    {"id": "D", "management_line": "L4", "available_rounds": ["r2"]}
+  ],
+  "proxy_pairs": [
+    ["A", "C"],
+    ["B", "D"]
+  ],
+  "slots": [
+    {"id": "k:a", "key_id": "offline-key-1", "seat": "a"},
+    {"id": "k:b", "key_id": "offline-key-1", "seat": "b"}
+  ],
+  "rounds": [
+    {"id": "r1", "required_slots": ["k:a", "k:b"]},
+    {"id": "r2", "required_slots": ["k:a", "k:b"]}
+  ]
+}
