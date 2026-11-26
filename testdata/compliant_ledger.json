@@ -1,0 +1,79 @@
+{
+  "generations": [
+    {"generation": 1, "note": "normal clock generation"},
+    {"generation": 2, "resync": true, "note": "post-resynchronisation generation"}
+  ],
+  "template": {
+    "slot_indexes": [0, 1, 2]
+  },
+  "policies": [
+    {
+      "direction": "out",
+      "allowed_lengths": [0, 128, 256],
+      "max_padding_bytes": 64,
+      "epoch_padding_budget_bytes": 128
+    },
+    {
+      "direction": "in",
+      "allowed_lengths": [0, 64, 512],
+      "max_padding_bytes": 32
+    }
+  ],
+  "records": [
+    {
+      "generation": 1,
+      "slot": 0,
+      "direction": "out",
+      "record_id": "out-g1-s0",
+      "observed_visible_bytes": 128,
+      "real_bytes": 100,
+      "padding_bytes": 28,
+      "padding_allocations": [
+        {"id": "pad-out-g1-s0", "bytes": 28}
+      ]
+    },
+    {
+      "generation": 1,
+      "slot": 2,
+      "direction": "out",
+      "record_id": "out-g1-s2-reissue",
+      "observed_visible_bytes": 128,
+      "real_bytes": 100,
+      "padding_bytes": 28,
+      "reissued_chunk_ids": ["chunk-001"],
+      "padding_allocations": [
+        {"id": "pad-out-g1-s2", "bytes": 28}
+      ]
+    },
+    {
+      "generation": 2,
+      "slot": 0,
+      "direction": "out",
+      "record_id": "out-g2-s0-after-resync",
+      "observed_visible_bytes": 128,
+      "real_bytes": 100,
+      "padding_bytes": 28,
+      "padding_allocations": [
+        {"id": "pad-out-g2-s0-distinct", "bytes": 28}
+      ]
+    }
+  ],
+  "delayed_chunks": [
+    {
+      "chunk_id": "chunk-001",
+      "bytes": 100,
+      "origin": {"generation": 1, "slot": 0, "direction": "out"},
+      "reissue": {"generation": 1, "slot": 2, "direction": "out"},
+      "claimed_receipt_id": "receipt-001"
+    }
+  ],
+  "receipts": [
+    {
+      "id": "receipt-001",
+      "chunk_id": "chunk-001",
+      "bytes": 100,
+      "origin": {"generation": 1, "slot": 0, "direction": "out"},
+      "reissue": {"generation": 1, "slot": 2, "direction": "out"}
+    }
+  ]
+}
