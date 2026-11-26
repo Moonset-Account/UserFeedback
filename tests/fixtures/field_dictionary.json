@@ -1,0 +1,73 @@
+{
+  "format": "deid-gateway-dictionary/1",
+  "description": "Synthetic field dictionary for UID-17195 verification",
+  "fields": {
+    "00020010": {
+      "keyword": "TransferSyntaxUID",
+      "vr": "UI",
+      "role": "encoding_constant"
+    },
+    "00080016": {
+      "keyword": "SOPClassUID",
+      "vr": "UI",
+      "role": "constant"
+    },
+    "00080018": {
+      "keyword": "SOPInstanceUID",
+      "vr": "UI",
+      "role": "identifier"
+    },
+    "0020000D": {
+      "keyword": "StudyInstanceUID",
+      "vr": "UI",
+      "role": "identifier"
+    },
+    "0020000E": {
+      "keyword": "SeriesInstanceUID",
+      "vr": "UI",
+      "role": "identifier"
+    },
+    "00200052": {
+      "keyword": "FrameOfReferenceUID",
+      "vr": "UI",
+      "role": "identifier"
+    },
+    "00081110": {
+      "keyword": "ReferencedStudySequence",
+      "vr": "SQ"
+    },
+    "00081115": {
+      "keyword": "ReferencedSeriesSequence",
+      "vr": "SQ"
+    },
+    "00081140": {
+      "keyword": "ReferencedImageSequence",
+      "vr": "SQ"
+    },
+    "00081150": {
+      "keyword": "ReferencedSOPClassUID",
+      "vr": "UI",
+      "role": "constant"
+    },
+    "00081155": {
+      "keyword": "ReferencedSOPInstanceUID",
+      "vr": "UI",
+      "role": "reference"
+    },
+    "00191020": {
+      "keyword": "ApprovedSiteCode",
+      "vr": "LO",
+      "private": true,
+      "approved": true
+    }
+  },
+  "approved_private": [
+    "00191020",
+    "ApprovedSiteCode"
+  ],
+  "registered_constants": [
+    "1.2.840.10008.5.1.4.1.1.2",
+    "1.2.840.10008.5.1.4.1.1.481.3",
+    "1.2.840.10008.3.1.2.3.1"
+  ]
+}

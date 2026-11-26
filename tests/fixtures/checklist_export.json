@@ -1,0 +1,24 @@
+{
+  "checklistId": "CHK-20261127-01",
+  "studyInstanceUID": "1.2.826.0.1.3680043.9.7195.100",
+  "seriesInstanceUID": "1.2.826.0.1.3680043.9.7195.200",
+  "frameOfReferenceUID": "1.2.826.0.1.3680043.9.7195.250",
+  "transferSyntaxUID": "1.2.840.10008.1.2.1",
+  "annotation": {
+    "annotationSOPInstanceUID": "1.2.826.0.1.3680043.9.7195.4001",
+    "format": "DICOM-RT-ANN-JSON"
+  },
+  "reviews": [
+    {
+      "reviewer": "synthetic-reviewer-1",
+      "referencedSOPInstanceUID": "1.2.826.0.1.3680043.9.7195.3001",
+      "result": "accepted"
+    },
+    {
+      "reviewer": "synthetic-reviewer-2",
+      "referencedSOPInstanceUID": "1.2.826.0.1.3680043.9.7195.3002",
+      "result": "follow-up"
+    }
+  ],
+  "clientGuid": "0c2f8c9a-1234-5678-9abc-def012345678"
+}
