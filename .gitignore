@@ -1,0 +1,7 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+.crash-tmp/
+*.tmp
+.DS_Store
