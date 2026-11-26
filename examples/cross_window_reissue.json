@@ -1,0 +1,52 @@
+{
+  "window_width": 10,
+  "window_origin": 0,
+  "exhaustion_at": 25,
+  "default_clock_bounds": 0.02,
+  "events": [
+    {
+      "event_id": "lost-arr",
+      "kind": "arrival",
+      "timestamp": 2.0,
+      "request_id": "lost-1",
+      "true_timestamp": 2.0
+    },
+    {
+      "event_id": "cross-arr",
+      "kind": "arrival",
+      "timestamp": 9.0,
+      "lineage_id": "cross",
+      "count": 4,
+      "true_timestamp": 9.0
+    },
+    {
+      "event_id": "cross-limit",
+      "kind": "rate_limited",
+      "timestamp": 9.5,
+      "lineage_id": "cross",
+      "count": 4
+    },
+    {
+      "event_id": "cross-rr",
+      "kind": "reissue",
+      "timestamp": 10.5,
+      "lineage_id": "cross",
+      "batch_id": "recovery-next-window",
+      "count": 4
+    },
+    {
+      "event_id": "cross-done",
+      "kind": "completion",
+      "timestamp": 14.0,
+      "lineage_id": "cross",
+      "count": 3
+    },
+    {
+      "event_id": "cross-wd",
+      "kind": "withdrawal",
+      "timestamp": 15.0,
+      "lineage_id": "cross",
+      "count": 1
+    }
+  ]
+}
