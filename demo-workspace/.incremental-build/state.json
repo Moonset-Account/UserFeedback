@@ -1,0 +1,86 @@
+{
+  "files": {
+    "build/config.h": {
+      "exists": true,
+      "fingerprint": "sha256:2927411c824931aef8fba3d9e8afb6c7a240553be50f34d8b6199e585af24098",
+      "revision": 3
+    },
+    "build/main.o": {
+      "exists": true,
+      "fingerprint": "sha256:340feae1a33c212886125d293bdad67dee7c1d426f04ecc7a1ea6380036cf016",
+      "revision": 2
+    },
+    "src/config.h": {
+      "exists": false,
+      "fingerprint": "",
+      "revision": 0
+    },
+    "src/main.c": {
+      "exists": true,
+      "fingerprint": "sha256:bed58c3270e7a5e1443697d65704ae6b42fe3a94c0cdc0a97d6db2769ad7138e",
+      "revision": 2
+    },
+    "templates/config.h.in": {
+      "exists": true,
+      "fingerprint": "sha256:4050c883257aee8305e617ffd601de00ed1337760b9f49783162ca6dc2964c1c",
+      "revision": 3
+    }
+  },
+  "schema_version": 1,
+  "steps": {
+    "compile": {
+      "declared_outputs": [
+        "build/main.o"
+      ],
+      "depends_on": [],
+      "dynamic_inputs": {},
+      "last_error": null,
+      "last_status": "succeeded",
+      "outputs": {
+        "build/main.o": {
+          "exists": true,
+          "fingerprint": "sha256:340feae1a33c212886125d293bdad67dee7c1d426f04ecc7a1ea6380036cf016",
+          "revision": 2
+        }
+      },
+      "run_count": 2,
+      "static_dependencies": [
+        "src/main.c"
+      ],
+      "static_inputs": {
+        "src/main.c": {
+          "exists": true,
+          "fingerprint": "sha256:bed58c3270e7a5e1443697d65704ae6b42fe3a94c0cdc0a97d6db2769ad7138e",
+          "revision": 2
+        }
+      }
+    },
+    "generate_header": {
+      "declared_outputs": [
+        "build/config.h"
+      ],
+      "depends_on": [],
+      "dynamic_inputs": {},
+      "last_error": null,
+      "last_status": "succeeded",
+      "outputs": {
+        "build/config.h": {
+          "exists": true,
+          "fingerprint": "sha256:2927411c824931aef8fba3d9e8afb6c7a240553be50f34d8b6199e585af24098",
+          "revision": 3
+        }
+      },
+      "run_count": 3,
+      "static_dependencies": [
+        "templates/config.h.in"
+      ],
+      "static_inputs": {
+        "templates/config.h.in": {
+          "exists": true,
+          "fingerprint": "sha256:4050c883257aee8305e617ffd601de00ed1337760b9f49783162ca6dc2964c1c",
+          "revision": 3
+        }
+      }
+    }
+  }
+}
