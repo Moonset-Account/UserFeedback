@@ -1,0 +1,50 @@
+{
+  "current_tenant_id": "acme",
+  "caches": {
+    "shared-cache": {},
+    "tenant-private": {
+      "exclusive_to_current_tenant": true
+    },
+    "acme-only": {
+      "exclusive_tenant": "acme"
+    }
+  },
+  "normalizers": {
+    "canonical_key": {
+      "mode": "preserve"
+    },
+    "one_way_digest": {
+      "mode": "erase"
+    }
+  },
+  "functions": {
+    "forward": {
+      "params": ["key"],
+      "body": [
+        {
+          "id": "recursive-choice",
+          "kind": "if",
+          "then": [
+            {"id": "recursive-forward", "kind": "return", "value": {"kind": "call", "callee": "forward", "args": [{"kind": "var", "name": "key"}]}}
+          ],
+          "else": [
+            {"id": "base-forward", "kind": "return", "value": {"kind": "var", "name": "key"}}
+          ]
+        }
+      ]
+    },
+    "main": {
+      "body": [
+        {"id": "safe-key", "kind": "assign", "target": "tenant_key", "value": {"kind": "tuple", "elements": [{"kind": "tenant"}, {"kind": "literal", "value": "order-42"}]}},
+        {"id": "safe-forward", "kind": "assign", "target": "forwarded", "value": {"kind": "call", "callee": "forward", "args": [{"kind": "var", "name": "tenant_key"}]}},
+        {"id": "read-safe", "kind": "cache_read", "cache": "shared-cache", "key": {"kind": "var", "name": "forwarded"}},
+
+        {"id": "digested", "kind": "assign", "target": "digest_key", "value": {"kind": "call", "callee": "one_way_digest", "args": [{"kind": "var", "name": "tenant_key"}]}},
+        {"id": "write-erased", "kind": "cache_write", "cache": "shared-cache", "key": {"kind": "var", "name": "digest_key"}},
+
+        {"id": "read-private", "kind": "cache_read", "cache": "tenant-private", "key": {"kind": "literal", "value": "local-id"}}
+      ]
+    }
+  },
+  "entrypoints": ["main"]
+}
