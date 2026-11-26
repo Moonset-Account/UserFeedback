@@ -1,0 +1,73 @@
+{
+  "max_delay": 10,
+  "key_group": "duty-handover-2026-11",
+  "transcript": {
+    "validated": true,
+    "session_id": "handover-synthetic-001",
+    "prior_windows": [
+      {"id": "sender-intake", "side": "sender", "key_group": "duty-handover-2026-11"},
+      {"id": "receiver-intake", "side": "receiver", "key_group": "duty-handover-2026-11"}
+    ],
+    "commitments": [
+      {
+        "id": "send-commitment",
+        "subject": "send",
+        "key_group": "duty-handover-2026-11",
+        "window_id": "sender-intake",
+        "interval": [1, 3]
+      },
+      {
+        "id": "receive-commitment",
+        "subject": "receive",
+        "key_group": "duty-handover-2026-11",
+        "window_id": "receiver-intake",
+        "interval": [7, 9]
+      }
+    ],
+    "recoveries": [
+      {
+        "id": "recovery-1",
+        "inherits": {
+          "sender": ["sender-intake"],
+          "receiver": ["receiver-intake"]
+        }
+      }
+    ],
+    "supplemental_evidence": [
+      {
+        "id": "backup-clock",
+        "source": "local-backup-clock",
+        "commitment_id": "send-commitment",
+        "interval": [2, 3]
+      }
+    ]
+  },
+  "sender": {
+    "observed_at": 2,
+    "clock_error": 1,
+    "windows": [
+      {
+        "id": "sender-intake",
+        "start": 0,
+        "end": 6,
+        "key_group": "duty-handover-2026-11",
+        "inherited": true,
+        "recovery_id": "recovery-1"
+      }
+    ]
+  },
+  "receiver": {
+    "observed_at": 8,
+    "clock_error": 1,
+    "windows": [
+      {
+        "id": "receiver-intake",
+        "start": 6,
+        "end": 12,
+        "key_group": "duty-handover-2026-11",
+        "inherited": true,
+        "recovery_id": "recovery-1"
+      }
+    ]
+  }
+}
