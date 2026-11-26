@@ -1,0 +1,288 @@
+{
+  "logical": {
+    "devices": [
+      {
+        "id": "bridge-0",
+        "type": "rs485-bridge",
+        "stable": true,
+        "interfaces": [
+          {
+            "name": "j1",
+            "kind": "rs485",
+            "role": "peer"
+          },
+          {
+            "name": "j2",
+            "kind": "rs485",
+            "role": "peer"
+          }
+        ]
+      },
+      {
+        "id": "alpha-meter",
+        "type": "power-meter",
+        "location": "rack-1/j1/far",
+        "interfaces": [
+          {
+            "name": "up",
+            "kind": "rs485",
+            "role": "upstream"
+          },
+          {
+            "name": "down",
+            "kind": "rs485",
+            "role": "downstream"
+          }
+        ]
+      },
+      {
+        "id": "alpha-valve",
+        "type": "ball-valve",
+        "location": "rack-1/j1/near",
+        "interfaces": [
+          {
+            "name": "up",
+            "kind": "rs485",
+            "role": "upstream"
+          },
+          {
+            "name": "down",
+            "kind": "rs485",
+            "role": "downstream"
+          }
+        ]
+      },
+      {
+        "id": "beta-meter",
+        "type": "power-meter",
+        "location": "rack-2/j2/near",
+        "interfaces": [
+          {
+            "name": "up",
+            "kind": "rs485",
+            "role": "upstream"
+          },
+          {
+            "name": "down",
+            "kind": "rs485",
+            "role": "downstream"
+          }
+        ]
+      },
+      {
+        "id": "beta-valve",
+        "type": "ball-valve",
+        "location": "rack-2/j2/far",
+        "interfaces": [
+          {
+            "name": "up",
+            "kind": "rs485",
+            "role": "upstream"
+          },
+          {
+            "name": "down",
+            "kind": "rs485",
+            "role": "downstream"
+          }
+        ]
+      }
+    ],
+    "connections": [
+      {
+        "a": "bridge-0:j1",
+        "b": "alpha-meter:up",
+        "kind": "rs485"
+      },
+      {
+        "a": "alpha-meter:down",
+        "b": "alpha-valve:up",
+        "kind": "rs485"
+      },
+      {
+        "a": "bridge-0:j2",
+        "b": "beta-meter:up",
+        "kind": "rs485"
+      },
+      {
+        "a": "beta-meter:down",
+        "b": "beta-valve:up",
+        "kind": "rs485"
+      }
+    ],
+    "segments": [
+      {
+        "id": "alpha",
+        "devices": [
+          "alpha-meter",
+          "alpha-valve"
+        ],
+        "reversible": true,
+        "first_interface": "up",
+        "last_interface": "down"
+      },
+      {
+        "id": "beta",
+        "devices": [
+          "beta-meter",
+          "beta-valve"
+        ],
+        "reversible": true,
+        "first_interface": "up",
+        "last_interface": "down"
+      }
+    ]
+  },
+  "observed": {
+    "devices": [
+      {
+        "id": "bridge-0",
+        "type": "rs485-bridge",
+        "stable": true,
+        "interfaces": [
+          {
+            "name": "j1",
+            "kind": "rs485",
+            "role": "peer"
+          },
+          {
+            "name": "j2",
+            "kind": "rs485",
+            "role": "peer"
+          }
+        ]
+      },
+      {
+        "id": "ttyUSB0",
+        "type": "ball-valve",
+        "location": "rack-1/j1/near",
+        "interfaces": [
+          {
+            "name": "up",
+            "kind": "rs485",
+            "role": "upstream"
+          },
+          {
+            "name": "down",
+            "kind": "rs485",
+            "role": "downstream"
+          }
+        ]
+      },
+      {
+        "id": "ttyUSB1",
+        "type": "power-meter",
+        "location": "rack-1/j1/far",
+        "interfaces": [
+          {
+            "name": "up",
+            "kind": "rs485",
+            "role": "upstream"
+          },
+          {
+            "name": "down",
+            "kind": "rs485",
+            "role": "downstream"
+          }
+        ]
+      },
+      {
+        "id": "ttyUSB2",
+        "type": "power-meter",
+        "location": "rack-2/j2/near",
+        "interfaces": [
+          {
+            "name": "up",
+            "kind": "rs485",
+            "role": "upstream"
+          },
+          {
+            "name": "down",
+            "kind": "rs485",
+            "role": "downstream"
+          }
+        ]
+      },
+      {
+        "id": "ttyUSB3",
+        "type": "ball-valve",
+        "location": "rack-2/j2/far",
+        "interfaces": [
+          {
+            "name": "up",
+            "kind": "rs485",
+            "role": "upstream"
+          },
+          {
+            "name": "down",
+            "kind": "rs485",
+            "role": "downstream"
+          }
+        ]
+      }
+    ],
+    "connections": [
+      {
+        "a": "bridge-0:j1",
+        "b": "ttyUSB0:up",
+        "kind": "rs485"
+      },
+      {
+        "a": "ttyUSB0:down",
+        "b": "ttyUSB1:up",
+        "kind": "rs485"
+      },
+      {
+        "a": "bridge-0:j2",
+        "b": "ttyUSB2:up",
+        "kind": "rs485"
+      },
+      {
+        "a": "ttyUSB2:down",
+        "b": "ttyUSB3:up",
+        "kind": "rs485"
+      }
+    ],
+    "segments": [
+      {
+        "id": "observed-j1",
+        "devices": [
+          "ttyUSB0",
+          "ttyUSB1"
+        ],
+        "reversible": false
+      },
+      {
+        "id": "observed-j2",
+        "devices": [
+          "ttyUSB2",
+          "ttyUSB3"
+        ],
+        "reversible": false
+      }
+    ]
+  },
+  "bridges": [
+    {
+      "id": "BRIDGE-ALPHA-J1",
+      "bridge_port": "bridge-0:j1",
+      "segment": "alpha",
+      "end": "first",
+      "interface": "up",
+      "kind": "rs485",
+      "allow_reverse": true
+    },
+    {
+      "id": "BRIDGE-BETA-J2",
+      "bridge_port": "bridge-0:j2",
+      "segment": "beta",
+      "end": "first",
+      "interface": "up",
+      "kind": "rs485",
+      "allow_reverse": true
+    }
+  ],
+  "exclusive_locations": [
+    "rack-1/j1/near",
+    "rack-2/j2/near"
+  ]
+}
