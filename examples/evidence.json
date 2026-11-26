@@ -1,0 +1,5 @@
+{
+  "max_segments": 64,
+  "max_depth": {"limit": 4, "source": "signed-manifest:package-depth"},
+  "max_fanout": 2
+}

@@ -1,0 +1,55 @@
+{
+  "id": "import-root",
+  "op": "seq",
+  "pos": "archive-metadata.json#/operations",
+  "steps": [
+    {
+      "op": "alloc",
+      "id": "shared-manifest",
+      "pos": "archive-metadata.json#/operations/0",
+      "bytes": 4096,
+      "records": 1,
+      "share": "manifest"
+    },
+    {
+      "op": "branch",
+      "id": "expansion-mode",
+      "pos": "archive-metadata.json#/operations/1",
+      "arms": [
+        {
+          "name": "segmented",
+          "node": {
+            "op": "segments",
+            "id": "segmented",
+            "pos": "archive-metadata.json#/operations/1/segmented",
+            "count": {"evidence": "max_segments"},
+            "body": {
+              "op": "seq",
+              "steps": [
+                {"op": "ref", "share": "manifest", "bytes": 4096},
+                {"op": "alloc", "bytes": 512, "records": 1}
+              ]
+            }
+          }
+        },
+        {
+          "name": "nested-package",
+          "node": {
+            "op": "recurse",
+            "id": "nested",
+            "pos": "archive-metadata.json#/operations/1/nested",
+            "depth": {"evidence": "max_depth"},
+            "fan_out": {"evidence": "max_fanout"},
+            "body": {"op": "alloc", "bytes": 1024, "records": 1}
+          }
+        }
+      ]
+    },
+    {
+      "op": "ref",
+      "id": "anonymous-tail",
+      "pos": "archive-metadata.json#/operations/2",
+      "bytes": 256
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "id": "fixture-root",
+  "op": "seq",
+  "pos": "fixture:simple_graph.json#root",
+  "steps": [
+    {"op": "alloc", "id": "header", "bytes": 20, "records": 1, "share": "header"},
+    {
+      "op": "segments",
+      "id": "segment-expansion",
+      "count": {"evidence": "fixture_segments"},
+      "body": {"op": "alloc", "id": "segment-object", "bytes": 10, "records": 1}
+    }
+  ]
+}
