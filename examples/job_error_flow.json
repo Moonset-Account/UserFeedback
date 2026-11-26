@@ -1,0 +1,49 @@
+{
+  "entry": "start",
+  "nodes": [
+    {"id": "start", "type": "start"},
+    {
+      "id": "read_failure",
+      "type": "raise",
+      "code": "E_IO",
+      "diagnostics": [
+        {"id": "diag.input.path", "source": "input-validator"}
+      ]
+    },
+    {
+      "id": "wrap_job",
+      "type": "wrap",
+      "code": "E_JOB",
+      "public": true,
+      "diagnostics": ["diag.job.id"]
+    },
+    {
+      "id": "error_exit",
+      "type": "response",
+      "kind": "error",
+      "permitted_fields": ["code", "diagnostics", "cause"]
+    },
+    {
+      "id": "recover",
+      "type": "recover",
+      "diagnostics": ["diag.recovery.id"]
+    },
+    {
+      "id": "ok_exit",
+      "type": "response",
+      "kind": "normal",
+      "permitted_fields": ["status", "diagnostics"],
+      "fields": {
+        "status": {"literal": "recovered"},
+        "diagnostics": "@diagnostics"
+      }
+    }
+  ],
+  "edges": [
+    ["start", "read_failure"],
+    {"from": "read_failure", "to": "wrap_job", "branch": "error"},
+    {"from": "wrap_job", "to": "error_exit", "branch": "error"},
+    {"from": "read_failure", "to": "recover", "branch": "error"},
+    {"from": "recover", "to": "ok_exit", "branch": "normal"}
+  ]
+}
