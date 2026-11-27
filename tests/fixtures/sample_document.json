@@ -1,0 +1,54 @@
+{
+  "revisions": [
+    {"revision_id": "r0", "start": 0, "end": 100},
+    {"revision_id": "r1", "start": 100, "end": 200},
+    {"revision_id": "r2", "start": 200, "end": 300},
+    {"revision_id": "r3", "start": 300, "end": 400}
+  ],
+  "objects": [
+    {"object_id": "P", "revision_id": "r0", "digest": "d-P"},
+    {"object_id": "C1", "revision_id": "r0", "digest": "d-C1-v0"},
+    {"object_id": "F", "revision_id": "r0", "digest": "d-F"},
+    {"object_id": "V1", "revision_id": "r0", "digest": "d-V1-empty"},
+    {"object_id": "SIG1", "revision_id": "r1", "digest": "d-SIG1"},
+    {"object_id": "V1", "revision_id": "r2", "digest": "d-V1-filled"},
+    {"object_id": "C1", "revision_id": "r3", "digest": "d-C1-tampered"}
+  ],
+  "references": [
+    {
+      "source_id": "P",
+      "target_id": "C1",
+      "kind": "body",
+      "added_in": "r0",
+      "removed_in": null,
+      "field_name": null
+    },
+    {
+      "source_id": "P",
+      "target_id": "F",
+      "kind": "field",
+      "added_in": "r0",
+      "removed_in": null,
+      "field_name": "f1"
+    },
+    {
+      "source_id": "F",
+      "target_id": "V1",
+      "kind": "field",
+      "added_in": "r0",
+      "removed_in": null,
+      "field_name": "f1"
+    }
+  ],
+  "signatures": [
+    {
+      "signature_id": "S1",
+      "revision_id": "r1",
+      "byte_range": [100, 180],
+      "signature_object_id": "SIG1",
+      "sig_type": "certifying",
+      "allowed_fields": ["f1"]
+    }
+  ],
+  "page_root_ids": ["P"]
+}
