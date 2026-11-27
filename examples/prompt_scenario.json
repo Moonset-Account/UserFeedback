@@ -1,0 +1,29 @@
+{
+  "_comment": "The situation from the task: `prove-name` is cheapest on c2 (name only, weight 1). `prove-address` can only use the c1 bundle (weight 2). Presented together, the cheapest total is the single c1 bundle (weight 2) rather than c2.g1 plus c1.g1 (weight 3).",
+  "attribute_weights": {
+    "name": 1,
+    "address": 1
+  },
+  "credentials": [
+    {
+      "id": "c1",
+      "issuer": "civil-registry",
+      "holder": "alice",
+      "groups": [
+        { "id": "c1.g1", "attributes": ["name", "address"] }
+      ]
+    },
+    {
+      "id": "c2",
+      "issuer": "civil-registry",
+      "holder": "alice",
+      "groups": [
+        { "id": "c2.g1", "attributes": ["name"] }
+      ]
+    }
+  ],
+  "conditions": [
+    { "id": "prove-name", "alternatives": [["name"]] },
+    { "id": "prove-address", "alternatives": [["address"]] }
+  ]
+}

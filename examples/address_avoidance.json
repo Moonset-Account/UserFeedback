@@ -1,0 +1,44 @@
+{
+  "attribute_weights": {
+    "name": 1,
+    "address": 4,
+    "birthdate": 1,
+    "nationality": 1
+  },
+  "credentials": [
+    {
+      "id": "c1",
+      "issuer": "civil-registry",
+      "holder": "alice",
+      "groups": [
+        { "id": "c1.name", "attributes": ["name"] }
+      ]
+    },
+    {
+      "id": "c2",
+      "issuer": "civil-registry",
+      "holder": "alice",
+      "groups": [
+        { "id": "c2.address-bundle", "attributes": ["name", "address"] }
+      ]
+    },
+    {
+      "id": "c3",
+      "issuer": "civil-registry",
+      "holder": "alice",
+      "groups": [
+        { "id": "c3.birth", "attributes": ["name", "birthdate"] }
+      ]
+    }
+  ],
+  "conditions": [
+    {
+      "id": "prove-name",
+      "alternatives": [["name"]]
+    },
+    {
+      "id": "prove-birthdate",
+      "alternatives": [["birthdate"]]
+    }
+  ]
+}
